@@ -52,7 +52,7 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-4030620241128001",
     "dayjs": "^1.11.13",
     "hy-app": "^0.3.1",
-    "pinia": "^3.0.3",
+    "pinia": "^2.3.1",
     "pinia-plugin-unistorage": "^0.1.2",
     "vue": "^3.4.21",
     "vue-i18n": "^9.1.9"
