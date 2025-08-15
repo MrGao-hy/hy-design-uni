@@ -1,0 +1,41 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+
+@include b(text) {
+  @include flex(row);
+  align-items: center;
+  flex-wrap: nowrap;
+  color: $hy-text-color;
+
+  &__price {
+    font-size: 14px;
+    color: $hy-text-color--grey;
+  }
+
+  &__value {
+    font-size: 14px;
+    @include flex;
+    flex-wrap: wrap;
+    // flex: 1;
+    text-overflow: ellipsis;
+    align-items: center;
+
+    /*链接*/
+    &--link {
+      text-decoration: underline;
+      color: $hy-primary;
+    }
+
+    @include themeColor(primary, "", transparent, $hy-primary);
+    @include themeColor(warning, "", transparent, $hy-warning);
+    @include themeColor(success, "", transparent, $hy-success);
+    @include themeColor(info, "", transparent, $hy-info);
+    @include themeColor(error, "", transparent, $hy-error);
+    @include themeColor(main, "", "", $hy-text-color);
+    @include themeColor(content, "", "", $hy-text-color--grey);
+    @include themeColor(tips, "", "",$hy-text-color--grey);
+    @include themeColor(light, "", "", $hy-border-color-light);
+
+  }
+}

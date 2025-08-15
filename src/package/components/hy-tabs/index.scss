@@ -1,0 +1,70 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(tabs) {
+  &__wrapper {
+    @include flex;
+    align-items: center;
+
+    &__scroll-view-wrapper {
+      flex: 1;
+      /* #ifndef APP-NVUE */
+      overflow: auto hidden;
+      /* #endif */
+    }
+
+    &__scroll-view {
+      @include flex;
+      flex: 1;
+    }
+
+    &__nav {
+      @include flex;
+      position: relative;
+
+      &__item {
+        height: 44px;
+        padding: 0 11px;
+        @include flex;
+        align-items: center;
+        justify-content: center;
+        /* #ifdef H5 */
+        cursor: pointer;
+        /* #endif */
+
+        &--disabled {
+          /* #ifdef H5 */
+          cursor: not-allowed;
+          /* #endif */
+        }
+
+        &--active {
+          .hy-tabs__wrapper__nav__item--text {
+            color: $hy-text-color;
+          }
+        }
+
+        &--text {
+          font-size: 15px;
+          color: $hy-text-color;
+          white-space: nowrap;
+
+          &--disabled {
+            color: $hy-background--disabled !important;
+          }
+        }
+      }
+
+      &__line {
+        height: 3px;
+        background: $hy-primary;
+        width: 30px;
+        position: absolute;
+        bottom: 2px;
+        border-radius: $hy-border-radius-semicircle;
+        transition-property: transform;
+        transition-duration: 300ms;
+      }
+    }
+  }
+}

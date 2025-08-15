@@ -1,0 +1,25 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(empty) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: $hy-background;
+  &__description {
+    width: 70%;
+    text-align: center;
+    margin-top: $hy-border-margin-padding-base;
+    color: $hy-text-color--grey;
+  }
+
+  &__button {
+    margin-top: 100rpx;
+  }
+}

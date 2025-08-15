@@ -1,0 +1,264 @@
+@use "../../theme.scss";
+@import "config";
+@import "function";
+
+
+@mixin b($block) {
+  $B: $namespace + '-' + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+/* 加上-- */
+@mixin m($modifier) {
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector +
+      $selector +
+      $modifier-separator +
+      $unit +
+      ','};
+  }
+
+  @at-root {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}
+
+/* 定义元素（e）__，对于伪类，会自动将 e 嵌套在 伪类 底下 */
+@mixin e($element...) {
+  $selector: &;
+  $selectors: "";
+
+  @if containsPseudo($selector) {
+    @each $item in $element {
+      $selectors: #{$selectors + "." + $B + $element-separator + $item + ","};
+    }
+
+    @at-root {
+      #{$selector} {
+        #{$selectors} {
+          @content;
+        }
+      }
+    }
+  }
+
+  @else {
+    @each $item in $element {
+      $selectors: #{$selectors + $selector + $element-separator + $item + ","};
+    }
+
+    @at-root {
+      #{$selectors} {
+        @content;
+      }
+    }
+  }
+}
+
+
+/* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
+@mixin edeep($element...) {
+  $selector: &;
+  $selectors: "";
+
+  @if containsPseudo($selector) {
+    @each $item in $element {
+      $selectors: #{$selectors + "." + $B + $element-separator + $item + ","};
+    }
+
+    @at-root {
+      #{$selector} {
+        :deep() {
+          #{$selectors} {
+            @content;
+          }
+        }
+      }
+    }
+  }
+
+  @else {
+    @each $item in $element {
+      $selectors: #{$selectors + $selector + $element-separator + $item + ","};
+    }
+
+    @at-root {
+      :deep() {
+        #{$selectors} {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+/* 状态，生成 is-$state 类名 */
+@mixin is($states...) {
+  @at-root {
+    @each $state in $states {
+      &.#{$state-prefix + $state} {
+        @content;
+      }
+    }
+  }
+}
+/* 添加伪类元素 */
+@mixin pseudo($pseudo) {
+  @at-root #{&}#{':#{$pseudo}'} {
+    @content;
+  }
+}
+
+@mixin themeColor($type, $bg-color: transparent, $border-color: transparent, $color: #FFFFFF) {
+  @include m($type) {
+    background-color: $bg-color;
+    border: 1px solid $border-color;
+    color: $color;
+
+    :deep() {
+      @include b(icon) {
+        color: $color;
+      }
+    }
+  }
+}
+
+/**
+  * 圆角形状
+  * @param $shape circle-半圆形，square-方形带圆角
+*/
+@mixin borderRadio($shape) {
+  @include m($shape) {
+    @if $shape == circle {
+      border-radius:  theme.$hy-border-radius-semicircle;
+    }
+    @else {
+      border-radius: theme.$hy-border-radius-sm;
+    }
+  }
+}
+
+/**
+  * 正方形实现尖角样式，适用于背景不透明情况
+  * @param $size 正方形边长
+  * @param $bg 正方形背景颜色
+  * @param $z-index z-index属性值，不得大于外部包裹器
+  * @param $box-shadow 阴影
+*/
+@mixin squareArrow($size, $bg, $z-index, $box-shadow) {
+  @include e(arrow) {
+    position: absolute;
+    width: $size;
+    height: $size;
+    z-index: $z-index;
+  }
+
+  @include e(arrow-down) {
+    transform: translateX(-50%);
+    bottom: 0;
+
+    &:after {
+      content: "";
+      width: $size;
+      height: $size;
+      background-color: $bg;
+      position: absolute;
+      left: 0;
+      bottom: calc(-1 * $size / 2);
+      transform: rotateZ(45deg);
+      box-shadow: $box-shadow;
+    }
+  }
+
+  @include e(arrow-up) {
+    transform: translateX(-50%);
+    top: 0;
+
+    &:after {
+      content: "";
+      width: $size;
+      height: $size;
+      background-color: $bg;
+      position: absolute;
+      left: 0;
+      top: calc(-1 * $size / 2);
+      transform: rotateZ(45deg);
+      box-shadow: $box-shadow;
+    }
+  }
+
+  @include e(arrow-left) {
+    transform: translateY(-50%);
+    left: 0;
+
+    &:after {
+      content: "";
+      width: $size;
+      height: $size;
+      background-color: $bg;
+      position: absolute;
+      left: calc(-1 * $size / 2);
+      top: 0;
+      transform: rotateZ(45deg);
+      box-shadow: $box-shadow;
+    }
+  }
+
+  @include e(arrow-right) {
+    transform: translateY(-50%);
+    right: 0;
+
+    &:after {
+      content: "";
+      width: $size;
+      height: $size;
+      background-color: $bg;
+      position: absolute;
+      right: calc(-1 * $size / 2);
+      top: 0;
+      transform: rotateZ(45deg);
+      box-shadow: $box-shadow;
+    }
+  }
+}
+
+
+/* flex布局 */
+@mixin flex($direction: row) {
+  /* #ifndef APP-NVUE */
+  display: flex;
+  /* #endif */
+  flex-direction: $direction;
+}
+
+/* 几行出现省略号 */
+@mixin line-feed($line: 1) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 单行超出隐藏 */
+@mixin lineEllipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 多行超出隐藏 */
+@mixin multiEllipsis($lineNumber: 3) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lineNumber;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

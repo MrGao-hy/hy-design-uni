@@ -1,0 +1,16 @@
+{
+  "name": "hy-app",
+  "version": "0.3.0",
+  "description": "添加分离式表单组件",
+  "main": "./index.ts",
+  "private": false,
+  "scripts": {},
+  "keywords": [
+    "华玥组件库",
+    "ui组件库",
+    "暗黑模式"
+  ],
+  "web-types": "./web-types.json",
+  "author": "gaoxianhua",
+  "license": "MIT"
+}

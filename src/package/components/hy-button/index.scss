@@ -1,0 +1,87 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+
+@include b(button){
+  height: 40px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  @include flex;
+  /* #ifndef APP-NVUE */
+  box-sizing: border-box;
+  /* #endif */
+  flex-direction: row;
+
+  &__text {
+    font-size: 15px;
+  }
+
+  &__loading-text {
+    font-size: 15px;
+    margin-left: 4px;
+  }
+
+  @include m(large) {
+    /* #ifndef APP-NVUE */
+    width: 100%;
+    /* #endif */
+    height: 50px;
+    padding: 0 15px;
+  }
+
+  @include m(medium) {
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  @include m(small) {
+    /* #ifndef APP-NVUE */
+    min-width: 60px;
+    /* #endif */
+    height: 30px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  @include m(mini) {
+    height: 22px;
+    font-size: 10px;
+    /* #ifndef APP-NVUE */
+    min-width: 50px;
+    /* #endif */
+    padding: 0 8px;
+  }
+
+  @include m(disabled) {
+    opacity: 0.5;
+  }
+
+  @include themeColor(info,  $hy-info, $hy-info);
+  @include themeColor(success,  $hy-success, $hy-success);
+  @include themeColor(primary,  $hy-primary, $hy-primary);
+  @include themeColor(error, $hy-error, $hy-error);
+  @include themeColor(warning, $hy-warning, $hy-warning);
+
+  @include themeColor(info__plain, transparent, $hy-info, $hy-info);
+  @include themeColor(success__plain, transparent, $hy-success, $hy-success);
+  @include themeColor(primary__plain, transparent, $hy-primary, $hy-primary);
+  @include themeColor(error__plain, transparent, $hy-error, $hy-error);
+  @include themeColor(warning__plain, transparent, $hy-warning, $hy-warning);
+
+
+
+  @include m(block) {
+    @include flex;
+    width: 100%;
+  }
+
+  @include borderRadio(circle);
+  @include borderRadio(square);
+
+
+  @include m(hairline) {
+    border-width: 0.5px;
+  }
+}

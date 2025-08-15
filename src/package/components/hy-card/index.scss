@@ -1,0 +1,48 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+
+@include b(card) {
+  position: relative;
+  overflow: hidden;
+  font-size: 28rpx;
+  background-color: $hy-background--container;
+  box-sizing: border-box;
+
+  &-full {
+    // 如果是与屏幕之间不留空隙，应该设置左右边距为0
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+  }
+
+  &--border:after {
+    border-radius: 16rpx;
+  }
+
+  &__head {
+    &--flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &--left {
+      display: flex;
+
+      &__thumb {
+        margin-right: 16rpx;
+      }
+
+      &__title {
+        max-width: 400rpx;
+        @include lineEllipsis;
+      }
+    }
+
+    &--right {
+      color: $hy-text-color--grey;
+      margin-left: 6rpx;
+    }
+  }
+}

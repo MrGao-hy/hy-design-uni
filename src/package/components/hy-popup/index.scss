@@ -1,0 +1,60 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(popup) {
+  flex: 1;
+
+  &__content {
+    background-color: $hy-background--container;
+    position: relative;
+
+    &--round-top {
+      border-radius: 0 0 $hy-border-radius-lg $hy-border-radius-lg;
+    }
+
+    &--round-left {
+      border-radius: 0 $hy-border-radius-lg $hy-border-radius-lg 0;
+    }
+
+    &--round-right {
+      border-radius: $hy-border-radius-lg 0 0 $hy-border-radius-lg;
+    }
+
+    &--round-bottom {
+      border-radius: $hy-border-radius-lg $hy-border-radius-lg 0 0;
+    }
+
+    &--round-center {
+      border-radius: $hy-border-radius-lg;
+    }
+
+    &__close {
+      position: absolute;
+
+      &--hover {
+        opacity: 0.4;
+      }
+    }
+
+    &__close--top-left {
+      top: $hy-border-margin-padding-lg;
+      left: $hy-border-margin-padding-lg;
+    }
+
+    &__close--top-right {
+      top: $hy-border-margin-padding-lg;
+      right: $hy-border-margin-padding-lg;
+    }
+
+    &__close--bottom-left {
+      bottom: $hy-border-margin-padding-lg;
+      left: $hy-border-margin-padding-lg;
+    }
+
+    &__close--bottom-right {
+      right: $hy-border-margin-padding-lg;
+      bottom: $hy-border-margin-padding-lg;
+    }
+  }
+}

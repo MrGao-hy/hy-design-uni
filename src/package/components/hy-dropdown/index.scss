@@ -1,0 +1,20 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(dropdown) {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: $hy-background;
+  box-sizing: border-box;
+}
+
+/**
+* 兼容小程序端
+*/
+/* #ifdef MP-WEIXIN */
+:deep(hy-dropdown-item) {
+  flex: 1;
+  width: 0;
+}
+/* #endif */

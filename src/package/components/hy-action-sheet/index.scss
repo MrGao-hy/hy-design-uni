@@ -1,0 +1,128 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+
+@include b(action-sheet) {
+  padding-bottom: 1px;
+  font-size: $hy-font-size-base;
+  width: calc(100vw - 20px);
+
+
+  @include e(actions) {
+    padding: $hy-border-margin-padding-base 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  @include e(action) {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    color: $hy-text-color;
+    font-size: $hy-font-size-base;
+    text-align: center;
+    border-radius: 0;
+    background: transparent;
+    outline: none;
+    padding: 0;
+
+    @include m(disabled) {
+      color: $hy-text-color--disabled;
+      cursor: not-allowed;
+    }
+
+    @include m(loading) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: initial;
+    }
+  }
+
+  @include e(name) {
+    display: inline-block;
+  }
+
+  @include e(subname) {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: $hy-font-size-sm;
+    color: $hy-text-color--grey;
+  }
+
+  /* 取消按钮 */
+  @include edeep(cancel) {
+    color: $hy-text-color;
+    width: calc(100% - 48px);
+    background: $hy-background--track;
+    margin: 0 auto 24px;
+    border: none;
+  }
+
+  /* 头部 */
+  @include e(header) {
+    position: relative;
+    line-height: 44px;
+    font-weight: 700;
+    padding: $hy-border-margin-padding-base $hy-border-margin-padding-base 0;
+  }
+
+  @include edeep(close) {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    background-color: rgba(128, 128, 128, 0.25);
+    border-radius: $hy-border-radius-circle;
+    padding: $hy-border-margin-padding-sm;
+  }
+
+  /* 面板样式 */
+  @include e(panels) {
+    height: 160rpx;
+    width: 100%;
+    overflow-y: hidden;
+
+    &:first-of-type {
+      margin-top: 10px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 12px;
+    }
+  }
+
+  @include e(panels-content) {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  @include e(panel) {
+    width: 140rpx;
+    flex: 0 0 auto;
+    display: inline-block;
+    padding: $hy-border-margin-padding-sm $hy-border-margin-padding-base;
+  }
+
+  @include e(panel-img) {
+    display: block;
+    width: $hy-img-size-base;
+    height: $hy-img-size-base;
+    margin: 0 auto 7px;
+    border-radius: $hy-border-radius-base;
+  }
+
+  @include e(panel-title) {
+    font-size: $hy-font-size-sm;
+    text-align: center;
+    @include lineEllipsis;
+  }
+}
+
+/* 去除原生按钮边框 */
+button:after {
+  border: none;
+}

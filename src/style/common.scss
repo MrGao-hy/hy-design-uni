@@ -1,0 +1,71 @@
+@import "~@/package/theme.scss";
+@import "~@/package/libs/css/mixin.scss";
+.hy-title {
+  padding: $hy-border-margin-padding-base;
+  color: $hy-info;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 18px;
+    background: $hy-primary;
+    border-radius: $hy-border-radius-semicircle;
+  }
+}
+.hy-flex {
+  display: flex;
+  justify-content: space-around;
+}
+.hy-container {
+  flex-wrap: wrap;
+  padding: 30px $hy-border-margin-padding-base;
+  border-radius: $hy-border-radius-base;
+  background-color: $hy-background--container;
+}
+
+.hy-margin {
+  padding: 10px 0 20px;
+}
+
+.hy-setting__box {
+  background-color: $hy-background--container;
+  border: $hy-border-line;
+  box-shadow: $hy-box-shadow;
+  margin: 120px $hy-border-margin-padding-base 0;
+  border-radius: $hy-border-radius-base;
+  padding: $hy-border-margin-padding-lg;
+}
+
+.hy-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+
+}
+.hy-gap {
+  display: grid;
+  gap: 15px;
+}
+.hy-page2 {
+  box-sizing: border-box;
+  width: 100%;
+  /* #ifdef H5 */
+  height: calc(100vh - 44px);
+  /* #endif */
+  /* #ifndef H5 */
+  height: 100vh;
+  /* #endif */
+  overflow: auto;
+}
+
+/* 暗色主题 */
+@include b(theme--dark){
+  @include b(container) {
+    background-color: $hy-background--container;
+  }
+}

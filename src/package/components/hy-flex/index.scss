@@ -1,0 +1,8 @@
+@use "../../libs/css/mixin.scss" as *;
+@include b(flex) {
+  box-sizing: border-box;
+
+  @include m(vertical) {
+    flex-direction: column;
+  }
+}

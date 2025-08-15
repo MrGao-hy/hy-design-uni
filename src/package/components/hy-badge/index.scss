@@ -1,0 +1,50 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+$hy-badge-dot-size: 8px !default;
+$hy-badge-text-font-size: 11px !default;
+
+
+
+@include b(badge) {
+  border-radius: 100px;
+  @include flex;
+  line-height: $hy-badge-text-font-size;
+  text-align: center;
+  font-size: $hy-badge-text-font-size;
+  z-index: 999;
+
+  @include m(dot) {
+    height: $hy-badge-dot-size;
+    width: $hy-badge-dot-size;
+  }
+
+  @include m(inverted) {
+    font-size: 13px;
+  }
+
+  @include m(not-dot) {
+    padding: 2px 5px;
+  }
+
+  @include m(horn) {
+    border-bottom-left-radius: 0;
+  }
+
+  /* 主题色 */
+  @include themeColor(primary, $hy-primary);
+  @include themeColor(primary--inverted, "", transparent, $hy-primary);
+
+  @include themeColor(error, $hy-error);
+  @include themeColor(error--inverted, "", transparent, $hy-error);
+
+  @include themeColor(success, $hy-success);
+  @include themeColor(success--inverted, "", transparent, $hy-success);
+
+  @include themeColor(warning, $hy-warning);
+  @include themeColor(warning--inverted, "", transparent, $hy-warning);
+
+  @include themeColor(info, $hy-info);
+  @include themeColor(info--inverted, "", transparent, $hy-info);
+
+}

@@ -1,0 +1,43 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+@include b(image) {
+  position: relative;
+  transition: opacity 0.5s ease-in-out;
+  width: 250px;
+  height: 200px;
+
+  @include e(url) {
+    width: 100%;
+    height: 100%;
+  }
+  @include e(indistinct) {
+    position: relative;
+    @include pseudo(after) {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2); /* 半透明背景 */
+      backdrop-filter: blur(6px); /* 磨砂效果 */
+      filter: blur(6px);
+      -webkit-filter: blur(6px); /* 兼容 iOS */
+      z-index: 999;
+    }
+  }
+
+  @include e(loading, error) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $hy-background--empty;
+    color: $hy-text-color--grey;
+  }
+}

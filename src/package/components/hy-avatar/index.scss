@@ -1,0 +1,45 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+@include b(avatar) {
+  @include flex;
+  align-items: center;
+  justify-content: center;
+
+  @include m(circle) {
+    border-radius: $hy-border-radius-circle;
+  }
+
+  @include m(square) {
+    border-radius: $hy-border-margin-padding-sm;
+  }
+
+  @include m(small) {
+    width: $hy-avatar-size-sm;
+    height: $hy-avatar-size-sm;
+  }
+
+  @include m(medium) {
+    width: $hy-avatar-size-base;
+    height: $hy-avatar-size-base;
+  }
+
+  @include m(large) {
+    width: $hy-avatar-size-lg;
+    height: $hy-avatar-size-lg;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+
+    @include m(circle) {
+      border-radius: $hy-border-radius-circle;
+      overflow: hidden;
+    }
+
+    @include m(square) {
+      border-radius: $hy-border-margin-padding-sm;
+    }
+  }
+}

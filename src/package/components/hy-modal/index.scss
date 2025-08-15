@@ -1,0 +1,99 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(modal) {
+  max-width: 650rpx;
+  border-radius: $hy-border-radius-base;
+  overflow: hidden;
+
+  /* 标题 */
+  &__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: $hy-font-size-base;
+    font-weight: bold;
+    color: $hy-text-color;
+    text-align: center;
+    padding-top: 25px;
+  }
+
+  /* 内容 */
+  &__content {
+    padding: 20px;
+    @include flex;
+    justify-content: center;
+
+    &__text {
+      font-size: $hy-font-size-sm;
+      color: $hy-text-color--grey;
+      flex: 1;
+      text-align: center;
+    }
+  }
+
+  /* 底部按钮 */
+  &__button {
+    /* 两个按钮的样式 */
+    &-exact {
+      view:first-child {
+        margin-right: $hy-border-margin-padding-lg;
+      }
+      &--reverse {
+        view:last-child {
+          margin-right: $hy-border-margin-padding-lg;
+        }
+      }
+    }
+
+
+    &-group {
+      @include flex;
+      padding: 20px;
+
+      /* 自定义底部按钮 */
+      &--confirm-button {
+        flex-direction: column;
+        padding: 0 25px 15px;
+      }
+
+
+      &__wrapper {
+        flex: 1;
+        @include flex;
+        justify-content: center;
+        align-items: center;
+        height: 43px;
+        border-radius: $hy-border-radius-semicircle;
+
+        /* 确认 */
+        &--confirm {
+          background-color: $hy-primary;
+          &-text {
+            color: #FFFFFF;
+          }
+        }
+
+        /* 取消 */
+        &--cancel {
+          //background-color: $hy-background--empty;
+          background-color: $hy-background--empty;
+
+          &-text {
+            color: $hy-text-color;
+          }
+        }
+
+        &--hover {
+          opacity: 0.7;
+        }
+
+        &__text {
+          font-size: 16px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

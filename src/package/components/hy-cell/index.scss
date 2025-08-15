@@ -1,0 +1,136 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+
+@include b(cell) {
+  flex: 1;
+
+  /*标题*/
+  @include m(title) {
+    padding: $hy-border-margin-padding-lg $hy-border-margin-padding-base;
+    &__vertical {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 51%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 20px;
+        background: $hy-primary;
+        border-radius: $hy-border-radius-semicircle;
+      }
+    }
+    &__text {
+      font-size: $hy-font-size-lg;
+    }
+  }
+
+  /*row内容*/
+  &__body {
+    /* #ifndef APP-NVUE */
+    box-sizing: border-box;
+    /* #endif */
+    font-size: $hy-font-size-base;
+    align-items: center;
+    border-radius: $hy-border-margin-padding-sm;
+    overflow: hidden;
+
+    &--container {
+      @include flex(row);
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      background-color: $hy-background--container;
+
+      /* 大 */
+      &__large {
+        font-size: $hy-font-size-lg;
+        padding: 35rpx;
+        line-height: 25px;
+      }
+
+      /* 默认 */
+      &__medium {
+        font-size: $hy-font-size-base;
+        padding: 30rpx;
+        line-height: 20px;
+      }
+
+      /* 小 */
+      &__small {
+        font-size: $hy-font-size-sm;
+        padding: 25rpx;
+        line-height: 15px;
+      }
+
+      /*点击状态*/
+      &__clickable {
+        background-color: $hy-background--hover;
+      }
+
+      &__content {
+        @include flex(row);
+        /*左边icon*/
+        &-icon {
+          @include flex;
+          align-items: center;
+          margin-right: 10px;
+        }
+        /*行头部*/
+        &-title {
+          margin-right: $hy-border-margin-padding-sm;
+          flex: 33rpx;
+          display: flex;
+          flex-direction: column;
+
+          /*sub值*/
+          &--sub {
+            margin-top: $hy-border-margin-padding-sm;
+            color: $hy-text-color--grey;
+          }
+        }
+      }
+
+      /*cell值*/
+      &__center {
+        @include flex;
+        max-width: 90%;
+        flex: 1;
+        &__value {
+          line-height: 24px;
+          color: $hy-text-color--grey;
+          margin-right: $hy-border-margin-padding-sm;
+        }
+      }
+
+      /*右边icon*/
+      &__right-icon {
+        transition: transform 0.3s;
+        :deep(.hy-icon) {
+          color: $hy-text-color--3;
+        }
+
+        &--up {
+          transform: rotate(-90deg);
+        }
+
+        &--left {
+          transform: rotate(180deg);
+        }
+
+        &--down {
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+
+  @include m(disabled) {
+    color: $hy-text-color--disabled;
+    /* #ifndef APP-NVUE */
+    cursor: not-allowed;
+    /* #endif */
+  }
+}

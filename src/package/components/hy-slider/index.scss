@@ -1,0 +1,82 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(slider) {
+  position: relative;
+  @include flex;
+  align-items: center;
+
+  &__native {
+    flex: 1;
+  }
+
+  &-inner {
+    flex: 1;
+    @include flex(column);
+    position: relative;
+    border-radius: $hy-border-radius-semicircle;
+    padding: $hy-border-margin-padding-base $hy-border-margin-padding-lg;
+    justify-content: center;
+  }
+
+  &__show-value {
+    margin: $hy-border-margin-padding-base $hy-border-margin-padding-lg $hy-border-margin-padding-base 0;
+  }
+
+  &__show-range-value {
+    padding-top: 2px;
+    font-size: 12px;
+    line-height: 12px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &__base {
+    background-color: $hy-background--empty;
+    border-radius: $hy-border-radius-semicircle;
+  }
+
+  /* #ifndef APP-NVUE */
+  &-inner:before {
+    position: absolute;
+    right: 0;
+    left: 0;
+    content: "";
+    top: -8px;
+    bottom: -8px;
+    z-index: -1;
+  }
+  /* #endif */
+
+  &__gap {
+    position: relative;
+    border-radius: $hy-border-radius-semicircle;
+    transition: width 0.2s;
+    background-color: $hy-primary;
+    &-0 {
+      background-color: $hy-background--empty;
+    }
+  }
+
+  &__button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    background-color: $hy-background--3;
+    transform: scale(0.9);
+    /* #ifdef H5 */
+    cursor: pointer;
+    /* #endif */
+  }
+
+  &__button-wrap {
+    position: absolute;
+    // transform: translate3d(50%, -50%, 0);
+  }
+
+  @include m(disabled) {
+    opacity: 0.5;
+  }
+}

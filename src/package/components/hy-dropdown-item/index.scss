@@ -1,0 +1,112 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(dropdown-item) {
+  &__header {
+    width: 100%;
+    height: 100%;
+    padding: $hy-border-margin-padding-base;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30rpx;
+    white-space: nowrap;
+    text-align: center;
+    position: relative;
+    z-index: 999;
+    background-color: $hy-background--container;
+    color: $hy-icon-color;
+
+    @include is(active) {
+      color: $hy-primary;
+      :deep(.hy-icon) {
+        color: $hy-primary;
+      }
+    }
+  }
+
+  &__main {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0);
+
+    &--container {
+      background-color: $hy-background--container;
+      min-height: 200rpx;
+      position: absolute;
+      top: -100%;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-sizing: border-box;
+      &.visible {
+        animation: visibleAnimaFrames 0.5s forwards;
+      }
+
+      &.hidden {
+        animation: hiddenAnimaFrames 0.5s forwards;
+      }
+      &__list {
+        width: 100%;
+        padding: 0 35rpx;
+        box-sizing: border-box;
+        &-item {
+          width: 100%;
+          padding: 30rpx 0;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+
+          @include is(active) {
+            color: $hy-primary;
+            :deep(.hy-icon) {
+              color: $hy-primary;
+            }
+          }
+
+          &:not(:last-of-type) {
+            border-bottom: $hy-border-line;
+          }
+
+          &--label {
+            font-size: 30rpx;
+            flex: 1;
+            width: 0;
+            margin-right: 40rpx;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*打开动画*/
+@keyframes visibleAnimaFrames {
+  0% {
+    top: -100%;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+/*关闭动画*/
+@keyframes hiddenAnimaFrames {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -100%;
+  }
+}

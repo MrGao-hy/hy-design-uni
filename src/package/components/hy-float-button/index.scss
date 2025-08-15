@@ -1,0 +1,73 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(float-button) {
+  position: relative;
+  background-color: $hy-primary;
+  color: #FFFFFF;
+  &__circle {
+    border-radius: $hy-border-radius-semicircle;
+  }
+
+  &__square {
+    border-radius: $hy-border-radius-sm;
+  }
+
+  &__shadow {
+    box-shadow: $hy-box-shadow;
+  }
+
+  &__animation {
+    animation: floatAnimation 2s ease-in-out infinite;
+    @keyframes floatAnimation {
+      0%,
+      100% {
+        transform: translateY(0); /* 初始位置 */
+      }
+      50% {
+        transform: translateY(-20px); /* 上浮20像素 */
+      }
+    }
+  }
+
+  &__container {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    @include flex(column);
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s ease;
+    background-color: $hy-primary;
+    :deep(.hy-icon) {
+      color: #FFFFFF;
+    }
+  }
+
+  &__menus {
+    position: absolute;
+    z-index: -1;
+    overflow: hidden;
+    max-height: 250px;
+    box-sizing: border-box;
+    background-color: $hy-primary;
+    &--item {
+      font-size: 28rpx;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &--circle {
+      border-radius: $hy-border-radius-semicircle;
+    }
+
+    &--square {
+      border-radius: $hy-border-radius-sm;
+    }
+  }
+}

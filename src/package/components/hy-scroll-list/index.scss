@@ -1,0 +1,43 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+/* 暗色主题 */
+@include b(theme){
+  @include m(dark) {
+
+  }
+}
+
+@include b(scroll-list) {
+  padding-bottom: $hy-border-margin-padding-base;
+
+  &__scroll-view {
+    @include flex;
+    // 缺少会在enable-flex模式下高度异常
+    align-items: flex-start;
+    :deep(.uni-scroll-view-content) {
+      @include flex;
+    }
+  }
+
+  &__indicator {
+    @include flex;
+    justify-content: center;
+    margin-top: $hy-border-margin-padding-lg;
+
+    &__line {
+      width: 60px;
+      height: 4px;
+      border-radius: $hy-border-radius-semicircle;
+      overflow: hidden;
+      background-color: $hy-background--empty;
+
+      &__bar {
+        width: 20px;
+        height: 4px;
+        border-radius: $hy-border-radius-semicircle;
+        background-color: $hy-primary;
+      }
+    }
+  }
+}

@@ -1,0 +1,154 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+/* 暗色主题 */
+@include b(theme){
+  @include m(dark) {
+    @include b(warn) {
+      &--error--light {
+        background-color: rgba(250, 53, 52, 0.3);
+      }
+      &--success--light {
+        background-color: rgba(25, 190, 107, 0.3);
+      }
+      &--warning--light {
+        background-color: rgba(255, 153, 0, 0.3);
+      }
+      &--info--light {
+        background-color: rgba(144, 147, 153, 0.3);
+      }
+    }
+  }
+}
+
+@include b(warn) {
+  position: relative;
+  background-color: $hy-primary;
+  padding: $hy-border-margin-padding-base;
+  @include flex(row);
+  align-items: center;
+  border-radius: $hy-border-radius-sm;
+
+  &--primary--dark {
+    background-color: $hy-primary;
+  }
+
+  &--primary--light {
+    background-color: $hy-primary-light;
+    .hy-warn__icon--left {
+      :deep(.hy-icon) {
+        color: $hy-primary;
+      }
+    }
+  }
+
+  &--error--dark {
+    background-color: $hy-error;
+  }
+
+  &--error--light {
+    background-color: $hy-error-light;
+    .hy-warn__icon--left {
+      :deep(.hy-icon) {
+        color: $hy-error;
+      }
+    }
+  }
+
+  &--success--dark {
+    background-color: $hy-success;
+  }
+
+  &--success--light {
+    background-color: $hy-success-light;
+    .hy-warn__icon--left {
+      :deep(.hy-icon) {
+        color: $hy-success;
+      }
+    }
+  }
+
+  &--warning--dark {
+    background-color: $hy-warning;
+  }
+
+  &--warning--light {
+    background-color: $hy-warning-light;
+    .hy-warn__icon--left {
+      :deep(.hy-icon) {
+        color: $hy-warning;
+      }
+    }
+  }
+
+  &--info--dark {
+    background-color: $hy-info;
+  }
+
+  &--info--light {
+    background-color: $hy-info-light;
+    .hy-warn__icon--left {
+      :deep(.hy-icon) {
+        color: $hy-info;
+      }
+    }
+  }
+
+  &__icon {
+    margin-right: $hy-border-margin-padding-sm;
+  }
+
+  &__content {
+    @include flex(column);
+    flex: 1;
+
+    &__title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    &__desc {
+      font-size: 14px;
+      flex-wrap: wrap;
+      color: #fff;
+    }
+  }
+
+  &__title--dark,
+  &__desc--dark {
+    color: #ffffff;
+  }
+
+  &__text--primary--light,
+  &__text--primary--light {
+    color: $hy-primary;
+  }
+
+  &__text--success--light,
+  &__text--success--light {
+    color: $hy-success;
+  }
+
+  &__text--warning--light,
+  &__text--warning--light {
+    color: $hy-warning;
+  }
+
+  &__text--error--light,
+  &__text--error--light {
+    color: $hy-error;
+  }
+
+  &__text--info--light,
+  &__text--info--light {
+    color: $hy-info;
+  }
+
+  &__close {
+    position: absolute;
+    top: 11px;
+    right: 10px;
+  }
+}

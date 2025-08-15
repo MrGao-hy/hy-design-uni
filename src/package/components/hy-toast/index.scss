@@ -1,0 +1,60 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+@include b(toast){
+  &__content {
+    @include flex;
+    padding: 12px 20px;
+    border-radius: 4px;
+    background-color: #585858;
+    color: #ffffff;
+    align-items: center;
+    /* #ifndef APP-NVUE */
+    max-width: 600rpx;
+    /* #endif */
+    position: relative;
+
+    &--loading {
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    &__text {
+      color: #ffffff;
+      font-size: 15px;
+      line-height: 15px;
+
+      &--default {
+        color: #ffffff;
+      }
+
+      &--error {
+        color: $hy-error;
+      }
+
+      &--primary {
+        color: $hy-primary;
+      }
+
+      &--success {
+        color: $hy-success;
+      }
+
+      &--warning {
+        color: $hy-warning;
+      }
+    }
+  }
+
+  @include themeColor(success, $hy-success-light, #bef5c8, $hy-success);
+  @include themeColor(primary, $hy-primary-light, rgb(215, 234, 254), $hy-primary);
+  @include themeColor(error, $hy-error-light, #fde2e2, $hy-error);
+  @include themeColor(warning, $hy-warning-light, #faecd8, $hy-warning);
+  @include themeColor(info, $hy-info-light, $hy-info, $hy-info);
+
+
+  @include m(default)  {
+    color: #ffffff;
+    background-color: #585858;
+  }
+}

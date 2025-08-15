@@ -1,0 +1,117 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(tag){
+  border-style: solid;
+  @include flex;
+  align-items: center;
+  &__wrapper {
+    @include flex;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  /*禁用*/
+  @include themeColor(disabled, $hy-background--disabled, $hy-text-color--disabled,
+$hy-background--disabled);
+
+  /*圆角*/
+  @include borderRadio(circle);
+  @include borderRadio(square);
+
+  &__icon {
+    margin-right: $hy-border-margin-padding-sm;
+  }
+
+  &__text {
+    &--small {
+      font-size: $hy-font-size-sm;
+      line-height: $hy-font-size-sm;
+    }
+
+    &--medium {
+      font-size: $hy-font-size-base;
+      line-height: $hy-font-size-base;
+    }
+
+    &--large {
+      font-size: $hy-font-size-lg;
+      line-height: $hy-font-size-lg;
+    }
+  }
+
+  &--small {
+    height: 22px;
+    line-height: 22px;
+    padding: 0 $hy-border-margin-padding-sm;
+  }
+
+  &--medium {
+    height: 26px;
+    line-height: 26px;
+    padding: 0 $hy-border-margin-padding-base;
+  }
+
+  &--large {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 15px;
+  }
+
+
+  /* 主题色 */
+  @include themeColor(primary, $hy-primary, $hy-primary, #FFFFFF);
+  @include themeColor(error, $hy-error, $hy-error, #FFFFFF);
+  @include themeColor(warning, $hy-warning, $hy-warning, #FFFFFF);
+  @include themeColor(success, $hy-success, $hy-success, #FFFFFF);
+  @include themeColor(info, $hy-info, $hy-info, #FFFFFF);
+
+  /* 主题色镂空 */
+  @include themeColor(primary--plain, transparent, $hy-primary, $hy-primary);
+  @include themeColor(error--plain, transparent, $hy-error, $hy-error);
+  @include themeColor(warning--plain, transparent, $hy-warning, $hy-warning);
+  @include themeColor(success--plain, transparent, $hy-success, $hy-success);
+  @include themeColor(info--plain, transparent, $hy-info, $hy-info);
+
+  /* 主题色镂空带背景色 */
+  @include themeColor(primary--plain__fill, $hy-primary-light, $hy-primary, $hy-primary);
+  @include themeColor(error--plain__fill, $hy-error-light, $hy-error, $hy-error);
+  @include themeColor(warning--plain__fill, $hy-warning-light, $hy-warning, $hy-warning);
+  @include themeColor(success--plain__fill, $hy-success-light, $hy-success, $hy-success);
+  @include themeColor(info--plain__fill, $hy-info-light, $hy-info, $hy-info);
+
+  /* 关闭按钮 */
+  &__close {
+    position: absolute;
+    z-index: 999;
+    top: 10px;
+    right: 10px;
+    border-radius: $hy-border-radius-semicircle;
+    background-color: #c6c7cb;
+    @include flex(row);
+    align-items: center;
+    justify-content: center;
+    /* #ifndef APP-NVUE */
+    transform: scale(0.6) translate(80%, -80%);
+    /* #endif */
+    /* #ifdef APP-NVUE */
+    transform: scale(0.6) translate(50%, -50%);
+    /* #endif */
+
+    &--small {
+      width: 18px;
+      height: 18px;
+    }
+
+    &--medium {
+      width: 22px;
+      height: 22px;
+    }
+
+    &--large {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

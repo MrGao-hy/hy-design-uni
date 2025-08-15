@@ -1,0 +1,67 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(navbar) {
+  @include m(fixed) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 11;
+  }
+
+  &__content {
+    @include flex(row);
+    align-items: center;
+    height: 44px;
+    background-color: $hy-background;
+    position: relative;
+    justify-content: center;
+
+    &__left,
+    &__right {
+      padding: 0 13px;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      @include flex(row);
+      align-items: center;
+    }
+
+    &__left {
+      left: 0;
+
+      &--hover {
+        opacity: 0.7;
+      }
+
+      &__text {
+        font-size: 15px;
+        margin-left: 3px;
+      }
+    }
+
+    &__center {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      &--title {
+        font-size: $hy-font-size-base;
+      }
+      &--sub {
+        font-size: $hy-font-size-sm;
+        color: $hy-text-color--grey;
+      }
+    }
+
+    &__right {
+      right: 0;
+
+      &__text {
+        font-size: 15px;
+        margin-left: 3px;
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(price) {
+  font-size: 32rpx;
+  font-weight: 500;
+  margin-top: 5px;
+}

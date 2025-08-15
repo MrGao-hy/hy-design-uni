@@ -1,0 +1,58 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(menu) {
+  max-width: 260rpx;
+  background-color: $hy-background--track;
+
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding: $hy-border-margin-padding-lg $hy-border-margin-padding-base;
+    //min-height: $-sidebar-item-height;
+    box-sizing: border-box;
+
+    &:active {
+      background-color: $hy-background--hover;
+    }
+
+    @include m(active) {
+      font-weight: 600;
+      background: $hy-background--active;
+      color: $hy-primary;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 4px;
+        height: 15px;
+        background: $hy-primary;
+        transform: translateY(-50%);
+        border-radius: $hy-border-radius-semicircle;
+      }
+
+      &:active {
+        background-color: transparent;
+      }
+    }
+    @include m(title) {
+      margin-left: 10rpx;
+      font-size: $hy-font-size-base;
+      line-height: $hy-font-size-base;
+      @include lineEllipsis;
+      position: relative;
+    }
+    @include m(disabled) {
+      color: $hy-text-color--disabled;
+      background-color: $hy-background--disabled;
+      cursor: not-allowed;
+
+    }
+
+  }
+}

@@ -1,0 +1,88 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(swiper) {
+  @include flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  &__wrapper {
+    flex: 1;
+
+    :deep(.uni-swiper-wrapper) {
+      background-color: $hy-background;
+    }
+
+    &__item {
+      flex: 1;
+
+      &__wrapper {
+        @include flex;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s;
+        flex: 1;
+
+
+        &__image {
+          flex: 1;
+        }
+
+        &__video {
+          flex: 1;
+        }
+
+        &__title {
+          position: absolute;
+          background-color: rgba(0, 0, 0, 0.3);
+          bottom: 0;
+          left: 0;
+          right: 0;
+          font-size: 28rpx;
+          padding: $hy-border-margin-padding-sm $hy-border-margin-padding-lg;
+          color: #ffffff;
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  &__indicator {
+    position: absolute;
+    bottom: $hy-border-margin-padding-sm;
+  }
+}
+
+
+@include b(swiper-indicator) {
+  &__wrapper {
+    @include flex;
+
+    &--line {
+      border-radius: 100px;
+      height: 4px;
+
+      &__bar {
+        width: 22px;
+        height: 4px;
+        border-radius: $hy-border-radius-semicircle;
+        background-color: #ffffff;
+        transition: transform 0.3s;
+      }
+    }
+
+    &__dot {
+      width: 5px;
+      height: 5px;
+      border-radius: $hy-border-radius-semicircle;
+      margin: 0 $hy-border-margin-padding-sm;
+
+      &--active {
+        width: 12px;
+      }
+    }
+  }
+}

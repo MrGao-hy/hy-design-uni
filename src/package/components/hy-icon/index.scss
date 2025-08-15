@@ -1,0 +1,88 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../public/font/iconfont.css" as *;
+@use "../../theme.scss" as *;
+
+
+@include b(icon) {
+  /* #ifndef APP-NVUE */
+  display: flex;
+  /* #endif */
+  align-items: center;
+  color: $hy-icon-color;
+
+  @include m(left) {
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+
+  @include m(right) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  @include m(top) {
+    flex-direction: column-reverse;
+    justify-content: center;
+  }
+
+  @include m(bottom) {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__icon {
+    position: relative;
+    @include flex;
+    align-items: center;
+    vertical-align: -100%;
+
+    &--primary {
+      color: $hy-primary;
+    }
+
+    &--success {
+      color: $hy-success;
+    }
+
+    &--error {
+      color: $hy-error;
+    }
+
+    &--warning {
+      color: $hy-warning;
+    }
+
+    &--info {
+      color: $hy-info;
+    }
+  }
+
+  &__img {
+    /* #ifndef APP-NVUE */
+    height: auto;
+    will-change: transform;
+    /* #endif */
+  }
+
+  &__label {
+    @include lineEllipsis;
+    /* #ifndef APP-NVUE */
+    line-height: 1;
+    /* #endif */
+    color: $hy-text-color--grey;
+    font-size: $hy-font-size-sm;
+    max-width: 150rpx;
+  }
+}
+@include b(rotate) {
+  animation: hy-rotate 1s infinite linear;
+  @keyframes hy-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}

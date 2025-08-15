@@ -1,0 +1,17 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+
+@include b(config-provider) {
+  box-sizing: border-box;
+  width: 100%;
+  /* #ifdef H5 */
+  height: calc(100vh - 44px);
+  /* #endif */
+  /* #ifndef H5 */
+  height: 100vh;
+  /* #endif */
+  overflow: auto;
+  background-color: $hy-background;
+  color: $hy-text-color;
+}

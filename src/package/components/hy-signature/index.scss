@@ -1,0 +1,29 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(signature) {
+  @include e(content) {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    background: $hy-background--3;
+    border-radius: $hy-border-radius-base;
+    border: $hy-border-line;
+  }
+
+  @include e(content-canvas) {
+    width: 100%;
+  }
+
+
+  @include e(footer) {
+    margin-top: $hy-border-margin-padding-base;
+    justify-content: flex-end;
+    display: flex;
+
+    :deep(.hy-button) {
+      margin-left: $hy-border-margin-padding-base;
+    }
+  }
+}

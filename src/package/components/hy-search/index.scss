@@ -1,0 +1,84 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+$hy-search-close-size: 20px !default;
+
+/* #ifdef H5 */
+// iOS15在H5下，hx的某些版本，input type=search时，会多了一个搜索图标，进行移除
+[type="search"]::-webkit-search-decoration {
+  display: none;
+}
+/* #endif */
+
+@include b(search) {
+  @include flex(row);
+  align-items: center;
+  flex: 1;
+
+  &__content {
+    @include flex;
+    align-items: center;
+    padding: 0 $hy-border-margin-padding-lg;
+    flex: 1;
+    justify-content: space-between;
+    border-width: 1px;
+    border-color: transparent;
+    border-style: solid;
+    overflow: hidden;
+    background-color: $hy-background--empty;
+
+    &__icon {
+      @include flex;
+      align-items: center;
+    }
+
+    &__label {
+      color: $hy-text-color;
+      font-size: $hy-font-size-base;
+      margin: 0 4px;
+    }
+
+    /*清除icon样式*/
+    &__close {
+      width: $hy-search-close-size;
+      height: $hy-search-close-size;
+      border-radius: $hy-border-radius-circle;
+      background-color: $hy-background--track;
+      @include flex(row);
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.82);
+    }
+
+    /*输入框样式*/
+    &__input {
+      flex: 1;
+      font-size: $hy-font-size-base;
+      line-height: 1;
+      margin: 0 $hy-border-margin-padding-sm;
+      color: $hy-text-color;
+
+      &--placeholder {
+        color: $hy-text-color--placeholder;
+      }
+    }
+  }
+
+  &__action {
+    font-size: $hy-font-size-base;
+    color: $hy-text-color;
+    width: 0;
+    overflow: hidden;
+    transition-property: width;
+    transition-duration: 0.3s;
+    /* #ifndef APP-NVUE */
+    white-space: nowrap;
+    /* #endif */
+    text-align: center;
+
+    &--active {
+      width: 40px;
+      margin-left: $hy-border-margin-padding-sm;
+    }
+  }
+}

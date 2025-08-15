@@ -1,0 +1,38 @@
+@use "../../theme.scss" as *;
+.hy-border__bottom {
+  border-bottom: $hy-border-line;
+}
+
+.hy-border {
+  border: $hy-border-line;
+}
+
+.hy-border__top {
+  border-top: $hy-border-line;
+}
+
+.hy-page {
+  padding: $hy-border-margin-padding-base;
+  box-sizing: border-box;
+  width: 100%;
+  /* #ifdef H5 */
+  height: calc(100vh - 44px);
+  /* #endif */
+  /* #ifndef H5 */
+  height: 100vh;
+  /* #endif */
+  overflow: auto;
+}
+
+/* 解决滚动时候出现滚动条 */
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+  display:none;
+}
+
+/* 去除原生按钮边框 */
+button:after {
+  border: none;
+}

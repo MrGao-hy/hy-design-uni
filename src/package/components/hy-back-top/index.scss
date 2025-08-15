@@ -1,0 +1,17 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+@include b(back-top) {
+  @include flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  justify-content: center;
+  background-color: $hy-background--3;
+
+  &__tips {
+    font-size: 12px;
+    transform: scale(0.8);
+  }
+}

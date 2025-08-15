@@ -1,0 +1,29 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(virtual-container) {
+  padding: 0 $hy-border-margin-padding-base;
+  box-sizing: border-box;
+
+  &__list {
+    overflow-anchor: none;
+    &--item {
+      box-sizing: border-box;
+    }
+
+    &--left {
+      margin-right: $hy-border-margin-padding-base;
+    }
+    &--box {
+      box-sizing: border-box;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      &-item {
+        box-sizing: border-box;
+        position: relative;
+        overflow: hidden;
+      }
+    }
+  }
+}

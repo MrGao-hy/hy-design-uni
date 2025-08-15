@@ -1,0 +1,80 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(picker) {
+  position: relative;
+  &-input {
+    position: relative;
+    .input-cover {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+    }
+  }
+
+  &__title {
+    @include flex();
+    justify-content: space-between;
+    padding: $hy-border-margin-padding-lg;
+    &--center {
+      font-size: $hy-font-size-base;
+      color: $hy-text-color--grey;
+    }
+
+    &--right {
+      color: $hy-primary;
+    }
+  }
+
+  @include m(view) {
+    &__column {
+      @include flex;
+      flex: 1;
+      justify-content: center;
+
+      :deep(.uni-picker-view-indicator) {
+        background: $hy-background--hover;
+      }
+
+      &__item {
+        @include flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        text-align: center;
+        /* #ifndef APP-NVUE */
+        display: block;
+        /* #endif */
+
+        &--disabled {
+          /* #ifndef APP-NVUE */
+          cursor: not-allowed;
+          /* #endif */
+          opacity: 0.35;
+        }
+      }
+    }
+
+    :deep(.hy-picker--view__mask) {
+      background-image: none;
+    }
+  }
+
+  @include m(loading) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    @include flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.87);
+    z-index: 1000;
+  }
+}

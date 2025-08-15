@@ -1,0 +1,160 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(steps) {
+  @include flex;
+
+  &--column {
+    flex-direction: column;
+  }
+
+  &--row {
+    flex-direction: row;
+    flex: 1;
+    /* #ifdef MP */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    /* #endif */
+  }
+
+  &-item {
+    flex: 1;
+    @include flex;
+
+    &--row {
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    &--column {
+      position: relative;
+      flex-direction: row;
+      justify-content: flex-start;
+      padding-bottom: 5px;
+    }
+
+    &__wrapper {
+      @include flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background-color: transparent;
+      border-radius: $hy-border-radius-semicircle;
+
+      /* 选择 */
+      &.process {
+        background-color: $hy-primary;
+      }
+
+      /* 已完成 */
+      &.finish {
+       border: 1px solid $hy-primary;
+        :deep(.hy-icon) {
+          color: $hy-primary;
+        }
+      }
+
+      &--column {
+        width: 20px;
+        height: 20px;
+      }
+
+      &--row {
+        width: 20px;
+        height: 20px;
+      }
+
+      /* 点形状 */
+      &--dot {
+        &__item {
+          width: 10px;
+          height: 10px;
+          border-radius: $hy-border-radius-circle;
+          background-color: $hy-info;
+          border: none;
+        }
+        &__finish {
+          background-color: $hy-primary;
+        }
+        &__process {
+          background-color: $hy-primary;
+        }
+      }
+
+      &__circle {
+        width: 20px;
+        height: 20px;
+        /* #ifndef APP-NVUE */
+        box-sizing: border-box;
+        flex-shrink: 0;
+        /* #endif */
+        border-radius: $hy-border-radius-semicircle;
+        border: $hy-border-line;
+        @include flex(row);
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s;
+
+        &__text {
+          color: $hy-text-color--grey;
+          font-size: 11px;
+          @include flex(row);
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          line-height: 11px;
+        }
+      }
+    }
+
+    &__content {
+      @include flex;
+      flex: 1;
+      &__title--active {
+        color: $hy-primary;
+      }
+
+      &--row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      &--column {
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-left: $hy-border-margin-padding-sm;
+        min-height: 60px;
+      }
+    }
+
+    /* 线条样式 */
+    &__line {
+      position: absolute;
+      background: $hy-border-color;
+
+      &.finish {
+        background-color: $hy-primary;
+      }
+      &.process {
+        background-color: $hy-primary;
+      }
+      &.error {
+        background-color: $hy-error;
+      }
+      &.wait {
+        background-color: $hy-info;
+      }
+
+      &--row {
+        top: $hy-border-margin-padding-base;
+        height: 1px;
+      }
+
+      &--column {
+        width: 1px;
+        left: $hy-border-margin-padding-base;
+      }
+    }
+  }
+}

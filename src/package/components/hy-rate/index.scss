@@ -1,0 +1,28 @@
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(rate) {
+  @include flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  /* #ifndef APP-NVUE */
+  touch-action: none;
+  /* #endif */
+
+  &__content {
+    @include flex;
+
+    &__item {
+      position: relative;
+
+      &__icon-wrap {
+        &--half {
+          position: absolute;
+          overflow: hidden;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+}

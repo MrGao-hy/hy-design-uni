@@ -1,0 +1,83 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(notice) {
+  @include flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-bar {
+    overflow: hidden;
+    padding: 9px 12px;
+    flex: 1;
+    background-color: #FFF6C8;
+    color: $hy-warning;
+    border-radius: $hy-border-radius-sm;
+  }
+
+  &__left-icon {
+    align-items: center;
+    margin-right: 5px;
+    :deep(.hy-icon) {
+      color: $hy-warning;
+    }
+  }
+
+  &__right-icon {
+    margin-left: 5px;
+    align-items: center;
+  }
+
+  &__content {
+    text-align: right;
+    flex: 1;
+    @include flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+
+    &__text {
+      font-size: 14px;
+      color: $hy-warning;
+      /* #ifndef APP-NVUE */
+      // 这一句很重要，为了能让滚动左右连接起来
+      padding-left: 100%;
+      word-break: keep-all;
+      white-space: nowrap;
+      animation: hy-loop-animation 10s linear infinite both;
+      /* #endif */
+      @include flex(row);
+      line-height: 100%;
+    }
+  }
+
+  &__swiper {
+    height: 16px;
+    @include flex;
+    align-items: center;
+    flex: 1;
+
+    &__item {
+      @include flex;
+      align-items: center;
+      overflow: hidden;
+
+      &__text {
+        font-size: 14px;
+        color: $hy-warning;
+      }
+    }
+  }
+}
+
+/* #ifndef APP-NVUE */
+@keyframes hy-loop-animation {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+/* #endif */

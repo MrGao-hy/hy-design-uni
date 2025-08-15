@@ -1,0 +1,11 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(count-to) {
+  /* #ifndef APP-NVUE */
+  display: inline-flex;
+  /* #endif */
+  text-align: center;
+  color: $hy-text-color;
+}

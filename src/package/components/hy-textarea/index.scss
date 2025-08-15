@@ -1,0 +1,44 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(textarea) {
+  border-radius: $hy-border-radius-sm;
+  position: relative;
+  @include flex;
+  flex: 1;
+  padding: $hy-border-margin-padding-sm;
+
+  @include m(field) {
+    min-height: 50rpx;
+    max-height: 200rpx;
+  }
+
+  @include m(radius) {
+    border-radius: $hy-border-radius-sm;
+  }
+
+  @include m(no-radius) {
+    border-radius: $hy-border-radius-no;
+  }
+
+  @include m(disabled) {
+    background-color: $hy-background--disabled;
+    color: $hy-text-color--disabled;
+  }
+
+  @include m(field) {
+    flex: 1;
+    font-size: 15px;
+    width: 100%;
+  }
+
+  @include m(count) {
+    position: absolute;
+    right: 5px;
+    bottom: 2px;
+    font-size: 12px;
+    background-color: $hy-background--3;
+    padding: 1px 4px;
+    border-radius: $hy-border-radius-sm;
+  }
+}

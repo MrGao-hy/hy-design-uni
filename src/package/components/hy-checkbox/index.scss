@@ -1,0 +1,101 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+@include b(checkbox) {
+  /* #ifndef APP-NVUE */
+  @include flex(row);
+  /* #endif */
+  overflow: hidden;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+
+  &-group {
+    &--row {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
+      flex-flow: row wrap;
+    }
+
+    &--column {
+      @include flex(column);
+    }
+  }
+
+  &-label--left {
+    flex-direction: row;
+  }
+
+  &-label--right {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  &__icon-wrap {
+    /* #ifndef APP-NVUE */
+    box-sizing: border-box;
+    // nvue下，border-color过渡有问题
+    transition-property: border-color, background-color, color;
+    transition-duration: 0.2s;
+    /* #endif */
+    @include flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    text-align: center;
+    margin-right: $hy-border-margin-padding-sm;
+    border: $hy-border-line;
+
+    /* #ifdef MP-TOUTIAO */
+    // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
+    &__icon {
+      line-height: 0;
+    }
+
+    /* #endif */
+
+    @include m(circle) {
+      border-radius: 50%;
+    }
+
+    @include m(square) {
+      border-radius: 3px;
+    }
+
+    @include m(checked) {
+      color: #FFFFFF;
+      background-color: $hy-primary;
+      border-color: $hy-primary;
+    }
+
+    @include m(disabled) {
+      background-color: $hy-text-color--disabled;
+      :deep(.hy-icon) {
+        display: none;
+      }
+    }
+
+    @include m([disabled--checked]){
+      background-color: $hy-primary;
+      border-color: $hy-primary;
+      opacity: 0.5;
+      :deep(.hy-icon) {
+        display: block;
+      }
+    }
+  }
+
+  &__label-wrap {
+    /* #ifndef APP-NVUE */
+    word-wrap: break-word;
+    /* #endif */
+    font-size: $hy-font-size-base;
+    margin-right: $hy-border-margin-padding-sm;
+
+    @include m(disabled) {
+      color: $hy-text-color--disabled;
+    }
+  }
+}

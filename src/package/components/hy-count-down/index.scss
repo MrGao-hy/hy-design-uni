@@ -1,0 +1,9 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+@include b(count-down) {
+  &__text {
+    font-size: 15px;
+    line-height: 22px;
+  }
+}

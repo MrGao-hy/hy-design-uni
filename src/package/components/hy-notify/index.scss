@@ -1,0 +1,25 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(notify) {
+  padding: $hy-border-margin-padding-base;
+
+  @include m(wrapper) {
+    @include flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+    &__text {
+      font-size: $hy-font-size-base;
+      text-align: center;
+    }
+  }
+
+  @include themeColor(primary, $hy-primary);
+  @include themeColor(success, $hy-success);
+  @include themeColor(error, $hy-error);
+  @include themeColor(warning, $hy-warning);
+  @include themeColor(info, $hy-info);
+}

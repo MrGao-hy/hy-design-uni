@@ -1,0 +1,88 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+
+@include b(subsection) {
+  @include flex;
+  position: relative;
+  overflow: hidden;
+  /* #ifndef APP-NVUE */
+  width: 100%;
+  box-sizing: border-box;
+  /* #endif */
+
+  @include m(button) {
+    height: 35px;
+    background-color: $hy-background--3;
+    padding: 3px;
+    border-radius: $hy-border-radius-sm;
+    align-items: stretch;
+
+    &__bar {
+      background-color: $hy-background--container !important;
+      border-radius: $hy-border-radius-sm;
+    }
+  }
+
+  @include m(subsection) {
+    height: 32px;
+  }
+
+  &__bar {
+    position: absolute;
+    /* #ifndef APP-NVUE */
+    transition-property: transform, color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    /* #endif */
+    background-color: $hy-primary;
+
+    @include m(first) {
+      border-radius: $hy-border-radius-sm 0 0 $hy-border-radius-sm;
+    }
+
+    @include m(center) {
+      border-radius: 0;
+    }
+
+    @include m(last) {
+      border-radius: 0 $hy-border-radius-sm $hy-border-radius-sm 0;
+    }
+  }
+
+  &__item {
+    @include flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    // vue环境下，需要设置相对定位，因为滑块为绝对定位，item需要在滑块的上面
+    position: relative;
+
+    @include m(subsection) {
+      border: 1px solid $hy-primary;
+    }
+
+    &--no-border-right {
+      border-right-width: 0 !important;
+    }
+
+    @include m(first) {
+      border-top-left-radius: $hy-border-radius-sm;
+      border-bottom-left-radius: $hy-border-radius-sm;
+    }
+
+    @include m(last) {
+      border-top-right-radius: $hy-border-radius-sm;
+      border-bottom-right-radius: $hy-border-radius-sm;
+    }
+
+    &__text {
+      font-size: 12px;
+      line-height: 14px;
+      @include flex;
+      align-items: center;
+      transition-property: color;
+      transition-duration: 0.3s;
+    }
+  }
+}

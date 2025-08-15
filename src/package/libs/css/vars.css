@@ -1,0 +1,59 @@
+.hy-theme--light {
+  --hy-warning--light: #fdf6ec;
+
+  --hy-text-color: #000000;
+  --hy-text-color--2: #67676c;
+  --hy-text-color--3: #929295;
+  --hy-text-color--4: rgba(0, 0, 0, 0.1);
+  --hy-icon-color: #999;
+  --hy-text-color--grey: #67676c;
+  --hy-text-color--placeholder: rgba(0, 0, 0, 0.25);
+  --hy-text-color--disabled: rgba(0, 0, 0, 0.25);
+
+  --hy-background: #f8f8f8;
+  --hy-background--2: #FFFFFF;
+  --hy-background--3: rgb(238, 238, 239);
+  --hy-background--track: #F6F6F6;
+  --hy-background--container: #FFFFFF;
+  --hy-background--disabled: rgba(0, 0, 0, 0.04);
+  --hy-background--empty: #F3F3F3;
+  --hy-background--hover: rgba(0,0,0,0.05);
+  --hy-background--active: #FFFFFF;
+  --hy-background--close:  #f0f0f0;
+
+  --hy-border-line: 1rpx solid #e8e8e8;
+  --hy-border-color: #c2c2c4;
+  --hy-border-color--2: #c9cacc;
+}
+
+.hy-theme--dark {
+  --hy-warning--light: rgba(255, 153, 0, 0.3);
+  --hy-theme--light: rgba(41, 121, 255, 0.3);
+  --hy-success--light: rgba(25, 190, 107, 0.3);
+  --hy-error--light: rgba(250, 53, 52, 0.3);
+  --hy-info--light: rgba(144, 147, 153, 0.3);
+
+  --hy-text-color: #ffffff;
+  --hy-text-color-2: #98989f;
+  --hy-text-color-3: #6a6a71;
+  --hy-text-color--4: rgba(255, 255, 255, 0.1);
+  --hy-icon-color: #FFFFFF;
+  --hy-text-color--grey: #98989f;
+  --hy-text-color--placeholder: rgba(255, 255, 255, 0.25);
+  --hy-text-color--disabled: rgba(255, 255, 255, 0.25);
+
+  --hy-background: #1b1b1f;
+  --hy-background--2: #161616;
+  --hy-background--3: #646566;
+  --hy-background--track: #3A3A44;
+  --hy-background--container: #242424;
+  --hy-background--disabled: rgba(255, 255, 255, 0.08);
+  --hy-background--empty: #3A3A44;
+  --hy-background--hover: rgba(255,255,255,0.2);
+  --hy-background--active: #000000;
+  --hy-background--close:  #323233;
+
+  --hy-border-line: 1rpx solid #3c3f44;
+  --hy-border-color: #3c3f44;
+  --hy-border-color--2: #FFFFFF;
+}

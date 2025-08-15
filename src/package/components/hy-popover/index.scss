@@ -1,0 +1,83 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+$z-index: 998;
+
+@include b(popover) {
+  position: relative;
+  display: inline-block;
+
+  @include edeep(icon) {
+    vertical-align: middle;
+    font-size: 18px;
+    margin-right: 5px;
+  }
+
+  /* 菜单 */
+  @include e(menu-inner) {
+    position: relative;
+    padding: 20rpx 0;
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) {
+      border-bottom: $hy-border-line;
+    }
+  }
+
+  @include e(menu) {
+    display: inline-block;
+    padding: 0 $hy-border-margin-padding-base;
+    white-space: nowrap;
+    z-index: $z-index;
+    position: relative;
+    background-color: $hy-background--container;
+    border-radius: $hy-border-radius-sm;
+  }
+
+  @include edeep(pos) {
+    position: absolute;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    text-align: center;
+    min-height: 36px;
+    z-index: $z-index;
+    transition: opacity 0.2s;
+    box-shadow: $hy-box-shadow;
+    border-radius: $hy-border-radius-sm;
+  }
+
+
+  @include e(hidden) {
+    left: -220vw;
+    visibility: hidden;
+  }
+
+  @include e(container) {
+    position: relative;
+    border-radius: $hy-border-radius-sm;
+  }
+
+  @include e(inner) {
+    position: relative;
+    padding: $hy-border-margin-padding-base;
+    line-height: 22px;
+    z-index: $z-index;
+    background-color: $hy-background--container;
+    border-radius: $hy-border-radius-sm;
+    box-sizing: content-box;
+    width: 200px;
+  }
+
+
+  @include edeep(close-icon) {
+    font-size: 12px;
+    position: absolute;
+    right: -10px;
+    top: -7px;
+    padding: 10px;
+    z-index: $z-index;
+  }
+
+  @include squareArrow(6px, $hy-background--container, $z-index, $hy-box-shadow);
+}

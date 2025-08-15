@@ -1,0 +1,65 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+/* 暗色主题 */
+//@include b(theme){
+//  @include m(dark) {
+//    @include b(switch) {
+//      color: $hy-dark-color;
+//      @include m(container) {
+//        background-color: $hy-dark-background--track;
+//      }
+//      @include m(node) {
+//        background-color: $hy-dark-background--container;
+//      }
+//      @include m(bg) {
+//        background-color: $hy-dark-background--track;
+//      }
+//    }
+//  }
+//}
+
+@include b(switch) {
+  @include flex(row);
+  /* #ifndef APP-NVUE */
+  box-sizing: border-box;
+  /* #endif */
+  background-color: $hy-background--3;
+  position: relative;
+  border-radius: $hy-border-radius-semicircle;
+  transition: background-color 0.4s;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  justify-content: flex-end;
+  align-items: center;
+  // 由于weex为阿里逗着玩的KPI项目，导致bug奇多，这必须要写这一行，
+  // 否则在iOS上，点击页面任意地方，都会触发switch的点击事件
+  overflow: hidden;
+  @include m(active){
+    background: $hy-primary;
+  }
+
+  @include m(node) {
+    @include flex(row);
+    align-items: center;
+    justify-content: center;
+    background-color: $hy-background--container;
+    border-radius: $hy-border-radius-semicircle;
+    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.25);
+    transition-property: transform;
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.3, 1.05, 0.4, 1.05);
+  }
+
+  @include m(bg) {
+    position: absolute;
+    border-radius: $hy-border-radius-semicircle;
+    background-color: $hy-background--3;
+    transition-property: transform;
+    transition-duration: 0.4s;
+    transition-timing-function: ease;
+  }
+
+  @include m(disabled) {
+    opacity: 0.6;
+  }
+}

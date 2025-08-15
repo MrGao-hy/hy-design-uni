@@ -1,0 +1,39 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+@include b(line-progress) {
+  align-items: stretch;
+  position: relative;
+  @include flex(row);
+  flex: 1;
+  overflow: hidden;
+  border-radius: $hy-border-radius-semicircle;
+
+  &__background {
+    background-color: $hy-background--empty;
+    border-radius: $hy-border-radius-semicircle;
+    flex: 1;
+  }
+
+  &__line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    align-items: center;
+    @include flex(row);
+    color: #ffffff;
+    border-radius: $hy-border-radius-semicircle;
+    transition: width 0.5s ease;
+    justify-content: flex-end;
+    background-color: $hy-primary;
+  }
+
+  &__text {
+    font-size: 10px;
+    color: #ffffff;
+    margin-bottom: 1px;
+    margin-right: 5px;
+    transform: scale(0.8);
+  }
+}

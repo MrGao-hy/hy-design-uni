@@ -1,0 +1,41 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(form-item) {
+  display: flex;
+  margin-bottom: 16px;
+
+  @include m(left) {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  @include m(top) {
+    flex-direction: column;
+  }
+
+  @include e(label) {
+    position: relative;
+    padding-right: 8px;
+    font-size: 14px;
+    color: $hy-text-color;
+    line-height: 2.5;
+
+    @include m(required) {
+      color: #ff4d4f;
+      margin-right: 2px;
+    }
+  }
+
+  @include e(content) {
+    flex: 1;
+    min-width: 0;
+  }
+
+  @include e(error) {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #ff4d4f;
+    line-height: 1.5;
+  }
+}

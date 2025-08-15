@@ -1,0 +1,169 @@
+@use "../../theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(tabBar) {
+  height: 135rpx;
+  z-index: 999;
+  position: fixed;
+  bottom: 0;
+  @include m(placeholder) {
+    height: 135rpx;
+    position: relative;
+    bottom: 0;
+  }
+
+  @include m(box) {
+    margin-top: 15rpx;
+    position: relative;
+    width: 100vw;
+    height: 120rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15rpx 15rpx 0 0;
+    padding: 0 20rpx;
+    /* #ifndef APP-PLUS-NVUE */
+    box-sizing: border-box;
+    /* #endif */
+    background-color: $hy-background--container;
+  }
+  @include m(container) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20rpx;
+    &__item {
+      position: relative;
+      width: 100rpx;
+      height: 70rpx;
+      z-index: 1;
+
+      /* #ifndef APP-PLUS-NVUE */
+      &:nth-child(1).is-active ~ .hy-tabBar--indicator {
+        transform: var(--num);
+      }
+
+      &:nth-child(2).is-active ~ .hy-tabBar--indicator {
+        transform: var(--num);
+      }
+
+      &:nth-child(3).is-active ~ .hy-tabBar--indicator {
+        transform: var(--num);
+      }
+
+      &:nth-child(4).is-active ~ .hy-tabBar--indicator {
+        transform: var(--num);
+      }
+
+      &:nth-child(5).is-active ~ .hy-tabBar--indicator {
+        transform: var(--num);
+      }
+      /* #endif */
+
+      &--bar {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        font-weight: 500;
+        .icon {
+          /* #ifndef APP-PLUS-NVUE */
+          transition: 0.5s;
+          /* #endif */
+          position: relative;
+        }
+        .text {
+          position: absolute;
+          font-weight: 400;
+          font-size: 0.75em;
+          /* #ifndef APP-PLUS-NVUE */
+          letter-spacing: 0.05em;
+          transition: 0.5s;
+          /* #endif */
+          transform: translateY(20px) scale(0);
+        }
+        .circle {
+          position: absolute;
+          /* #ifndef APP-PLUS-NVUE */
+          display: block;
+          /* #endif */
+          width: 75rpx;
+          height: 75rpx;
+          background: transparent;
+          border-radius: 50%;
+          border: 3rpx solid #fff;
+          transform: translateY(-70rpx) scale(0);
+        }
+      }
+
+      @include is(active) {
+        @include b(tabBar--container__item--bar) {
+          .icon {
+            transform: translate(2rpx, -56rpx);
+            :deep(.hy-icon) {
+              color: #FFFFFF;
+            }
+          }
+          .text {
+            opacity: 1;
+            transform: translateY(20rpx);
+          }
+          .circle {
+            /* #ifndef APP-PLUS-NVUE */
+            margin: 0 auto;
+            transition: 0.5s;
+            /* #endif */
+            transition-delay: 0.5s;
+            transform: translate(2rpx, -56rpx) scale(1);
+          }
+        }
+      }
+    }
+  }
+
+  @include m(indicator) {
+    position: absolute;
+    top: -59%;
+    left: 30rpx;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $hy-primary;
+    /* #ifndef APP-PLUS-NVUE */
+    transition: 0.5s;
+    /* #endif */
+
+    @include pseudo(before) {
+      /* #ifndef APP-PLUS-NVUE */
+      content: "";
+      /* #endif */
+      position: absolute;
+      top: 59%;
+      left: -45rpx;
+      width: 50rpx;
+      height: 40rpx;
+      background: transparent;
+      border-top-right-radius: 20px;
+    }
+
+    @include pseudo(after) {
+      /* #ifndef APP-PLUS-NVUE */
+      content: "";
+      /* #endif */
+      position: absolute;
+      top: 58%;
+      right: -49rpx;
+      width: 50rpx;
+      height: 40rpx;
+      background: transparent;
+      border-top-left-radius: 40rpx;
+    }
+  }
+}

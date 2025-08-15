@@ -1,0 +1,16 @@
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(waterfall) {
+  @include flex;
+  flex-direction: row;
+  align-items: flex-start;
+  &__column {
+    @include flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    /* #ifndef APP-NVUE */
+    height: 100%;
+    /* #endif */
+  }
+}

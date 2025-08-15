@@ -1,0 +1,147 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../theme.scss" as *;
+
+$hy-upload-image-width: 80px !default;
+$hy-upload-text-font-size: 11px !default;
+
+
+@include b(upload) {
+  @include flex(column);
+  flex: 1;
+
+  &__wrap {
+    @include flex;
+    flex-wrap: wrap;
+    flex: 1;
+
+    &__preview {
+      border-radius: 2px;
+      margin: 0 8px 8px 0;
+      position: relative;
+      overflow: hidden;
+      @include flex;
+
+      &__image {
+        width: $hy-upload-image-width;
+        height: $hy-upload-image-width;
+      }
+
+      &__other {
+        width: $hy-upload-image-width;
+        height: $hy-upload-image-width;
+        background-color: rgb(242, 242, 242);
+        flex: 1;
+        @include flex(column);
+        justify-content: center;
+        align-items: center;
+
+        &__text {
+          font-size: $hy-upload-text-font-size;
+          color: $hy-text-color--grey;
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+
+  &__deletable {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgb(55, 55, 55);
+    height: 14px;
+    width: 14px;
+    @include flex;
+    border-bottom-left-radius: 100px;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+
+    &__icon {
+      position: absolute;
+      transform: scale(0.7);
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &__success {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    @include flex;
+    // 由于weex(nvue)为阿里巴巴的KPI(部门业绩考核)的laji产物，不支持css绘制三角形
+    // 所以在nvue下使用图片，非nvue下使用css实现
+    /* #ifndef APP-NVUE */
+    border-style: solid;
+    border-color: transparent $hy-success $hy-success transparent;
+    border-width: 9px;
+    align-items: center;
+    justify-content: center;
+    /* #endif */
+
+    &__icon {
+      /* #ifndef APP-NVUE */
+      position: absolute;
+      transform: scale(0.7);
+      bottom: -10px;
+      right: -10px;
+      /* #endif */
+      /* #ifdef APP-NVUE */
+      width: 16px;
+      height: 16px;
+      /* #endif */
+    }
+  }
+
+  &__button {
+    @include flex(column);
+    align-items: center;
+    justify-content: center;
+    width: $hy-upload-image-width;
+    height: $hy-upload-image-width;
+    background-color: $hy-background--empty;
+    border-radius: 2px;
+    margin: 0 8px 8px 0;
+    /* #ifndef APP-NVUE */
+    box-sizing: border-box;
+    /* #endif */
+
+    &__text {
+      font-size: $hy-upload-text-font-size;
+      color: $hy-text-color--grey;
+      margin-top: 2px;
+    }
+
+    &--hover {
+      background-color: $hy-background--hover;
+    }
+
+    &--disabled {
+      opacity: 0.5;
+    }
+  }
+}
+
+.material-sent {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 10;
+
+  .select-tips {
+    width: 70%;
+    height: 10rpx;
+    margin-bottom: 12rpx;
+  }
+
+  .tips-text {
+    font-size: 12px;
+    color: $hy-primary;
+  }
+}
