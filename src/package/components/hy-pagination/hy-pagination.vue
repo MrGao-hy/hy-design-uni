@@ -1,5 +1,9 @@
 <template>
-  <view class="hy-pagination" :style="customStyle" v-if="!(hideIfOnePage && totalPageNum === 1)">
+  <view
+    class="hy-pagination"
+    :style="customStyle"
+    v-if="!(hideIfOnePage && totalPageNum === 1)"
+  >
     <view class="hy-pagination__content">
       <hy-button
         :plain="modelValue > 1"
@@ -14,7 +18,9 @@
         <hy-icon
           v-else
           :class="`hy-pagination__left hy-pagination__icon ${
-            modelValue <= 1 ? 'hy-pagination__nav--disabled' : 'hy-pagination__nav--active'
+            modelValue <= 1
+              ? 'hy-pagination__nav--disabled'
+              : 'hy-pagination__nav--active'
           }`"
           :name="IconConfig.LEFT"
         ></hy-icon>
@@ -54,29 +60,29 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-pagination',
+  name: "hy-pagination",
   options: {
     virtualHost: true,
     addGlobalClass: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script lang="ts" setup>
-import { ref, toRefs, watch } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { IPaginationEmits } from './typing'
-import { IconConfig } from '../../config'
+import { ref, watch } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { IPaginationEmits } from "./typing";
+import { IconConfig } from "../../config";
 // 组件
-import HyIcon from '../hy-icon/hy-icon.vue'
-import HyButton from '../hy-button/hy-button.vue'
+import HyIcon from "../hy-icon/hy-icon.vue";
+import HyButton from "../hy-button/hy-button.vue";
 
 /**
  * 当数据量过多时，使用分页分解数据。
  * @displayName hy-pagination
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
@@ -113,12 +119,12 @@ const props = defineProps({
   /** 上一页文本 */
   prevText: {
     type: String,
-    default: '上一页',
+    default: "上一页",
   },
   /** 下一页文本 */
   nextText: {
     type: String,
-    default: '下一页',
+    default: "下一页",
   },
   /** 总页数只有一页时是否隐藏 */
   hideIfOnePage: {
@@ -129,57 +135,56 @@ const props = defineProps({
   customStyle: {
     type: Object as PropType<CSSProperties>,
   },
-})
-const { pageSize, totalPage } = toRefs(props)
-const emit = defineEmits<IPaginationEmits>()
+});
+const emit = defineEmits<IPaginationEmits>();
 
-const totalPageNum = ref<number>(0) // 总页数
+const totalPageNum = ref<number>(0); // 总页数
 
 watch(
-  () => totalPage.value,
+  () => props.totalPage,
   (newValue) => {
     if (!totalPageNum.value && newValue) {
-      totalPageNum.value = totalPageNum.value
+      totalPageNum.value = totalPageNum.value;
     }
   },
   { immediate: true, deep: true },
-)
+);
 
 watch(
   () => props.total,
   () => {
-    updateTotalPage()
+    updateTotalPage();
   },
   { immediate: true, deep: true },
-)
+);
 
 /**
  * @description 加数
  * */
 const add = () => {
-  const { modelValue } = props
+  const { modelValue } = props;
   if (modelValue > totalPageNum.value - 1) {
-    return
+    return;
   }
-  emit('change', { value: modelValue + 1 })
-  emit('update:modelValue', modelValue + 1)
-}
+  emit("change", { value: modelValue + 1 });
+  emit("update:modelValue", modelValue + 1);
+};
 
 const sub = () => {
-  const { modelValue } = props
+  const { modelValue } = props;
   if (modelValue < 2) {
-    return
+    return;
   }
-  emit('change', { value: modelValue - 1 })
-  emit('update:modelValue', modelValue - 1)
-}
+  emit("change", { value: modelValue - 1 });
+  emit("update:modelValue", modelValue - 1);
+};
 
 function updateTotalPage() {
-  const { total, pageSize } = props
-  totalPageNum.value = Math.ceil(total / pageSize)
+  const { total, pageSize } = props;
+  totalPageNum.value = Math.ceil(total / pageSize);
 }
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

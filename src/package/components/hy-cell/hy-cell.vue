@@ -9,7 +9,10 @@
         <text class="hy-cell--title__text">{{ title }}</text>
       </slot>
     </view>
-    <view class="hy-cell__body" :style="{ 'border-radius': addUnit(borderRadius) }">
+    <view
+      class="hy-cell__body"
+      :style="{ 'border-radius': addUnit(borderRadius) }"
+    >
       <!-- @slot 整体插槽 -->
       <slot>
         <template v-for="(item, i) in list" :key="i">
@@ -18,18 +21,24 @@
             :hover-class="containerClass(item)"
             :hover-stay-time="250"
             :style="{
-              borderBottom: border && i !== list.length - 1 ? '1rpx solid #c8c7cc66' : '',
+              borderBottom:
+                border && i !== list.length - 1 ? '1rpx solid #c8c7cc66' : '',
             }"
             @tap="clickHandler($event, item, i)"
           >
             <view class="hy-cell__body--container__content">
-              <view class="hy-cell__body--container__content-icon">
+              <view
+                v-if="item?.icon?.name || $slots.icon"
+                class="hy-cell__body--container__content-icon"
+              >
                 <!-- @slot 图标插槽 -->
                 <slot name="icon" :icon="item?.icon">
                   <HyIcon
                     :size="iconSize"
                     :name="item?.icon?.name"
-                    :color="disabled || item?.disabled ? '#c0c0c0' : item?.icon?.color"
+                    :color="
+                      disabled || item?.disabled ? '#c0c0c0' : item?.icon?.color
+                    "
                     :bold="item?.icon?.bold"
                     :customPrefix="item?.icon?.customPrefix"
                     :imgMode="item?.icon?.imgMode"
@@ -48,7 +57,9 @@
                 <slot name="cell-title" :title="item?.title">
                   <text
                     class="hy-cell__body--container__content-title--text"
-                    :class="[(disabled || item?.disabled) && 'hy-cell--disabled']"
+                    :class="[
+                      (disabled || item?.disabled) && 'hy-cell--disabled',
+                    ]"
                   >
                     {{ item?.title }}
                   </text>
@@ -68,7 +79,11 @@
               class="hy-cell__body--container__center"
               :style="{
                 justifyContent:
-                  arrange === 'left' ? 'flex-start' : arrange === 'right' ? 'flex-end' : 'center',
+                  arrange === 'left'
+                    ? 'flex-start'
+                    : arrange === 'right'
+                      ? 'flex-end'
+                      : 'center',
               }"
             >
               <!-- @slot 值内容插槽 -->
@@ -91,21 +106,27 @@
               <!-- @slot 右边按钮插槽 -->
               <slot name="right-icon" :icon="item?.rightIcon || rightIcon">
                 <HyIcon
-                  :name="item?.rightIcon?.name || rightIcon?.name || IconConfig.RIGHT"
+                  :name="
+                    item?.rightIcon?.name || rightIcon?.name || IconConfig.RIGHT
+                  "
                   :color="
                     disabled || item?.disabled
                       ? '#c0c0c0'
                       : item?.rightIcon?.color || rightIcon?.color
                   "
                   :bold="item?.rightIcon?.bold || rightIcon?.bold"
-                  :customPrefix="item?.rightIcon?.customPrefix || rightIcon?.customPrefix"
+                  :customPrefix="
+                    item?.rightIcon?.customPrefix || rightIcon?.customPrefix
+                  "
                   :imgMode="item?.rightIcon?.imgMode || rightIcon?.imgMode"
                   :width="item?.rightIcon?.width || rightIcon?.width"
                   :height="item?.rightIcon?.height || rightIcon?.height"
                   :top="item?.rightIcon?.top || rightIcon?.name"
                   :stop="item?.rightIcon?.stop || rightIcon?.stop"
                   :round="item?.rightIcon?.round || rightIcon?.round"
-                  :customStyle="item?.rightIcon?.customStyle || rightIcon?.customStyle"
+                  :customStyle="
+                    item?.rightIcon?.customStyle || rightIcon?.customStyle
+                  "
                 ></HyIcon>
               </slot>
             </view>
@@ -121,31 +142,30 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-cell',
+  name: "hy-cell",
   options: {
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { ICellEmits } from './typing'
-import type { CellContentVo } from './typing'
-import { IconConfig } from '../../config'
-import { addUnit } from '../../utils'
-
+import { computed } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { ICellEmits } from "./typing";
+import type { CellContentVo } from "./typing";
+import { IconConfig } from "../../config";
+import { addUnit } from "../../utils";
 // 组件
-import HyIcon from '../hy-icon/hy-icon.vue'
-import type HyIconProps from '../hy-icon/typing'
+import HyIcon from "../hy-icon/hy-icon.vue";
+import type HyIconProps from "../hy-icon/typing";
 
 /**
  * cell单元格一般用于一组列表的情况，比如个人中心页，设置页等
  * @displayName hy-cell
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
@@ -170,7 +190,7 @@ const props = defineProps({
   /** 圆角 */
   borderRadius: {
     type: [String, Number],
-    default: '5px',
+    default: "5px",
   },
   /** 是否禁用cell */
   disabled: {
@@ -188,7 +208,7 @@ const props = defineProps({
    * */
   size: {
     type: [String, Number],
-    default: 'medium',
+    default: "medium",
   },
   /** 右侧的内容 */
   value: String,
@@ -198,7 +218,7 @@ const props = defineProps({
    * */
   arrange: {
     type: String,
-    default: 'right',
+    default: "right",
   },
   /** cell列表数据 */
   rightIcon: {
@@ -210,13 +230,12 @@ const props = defineProps({
    * */
   arrowDirection: {
     type: String,
-    default: 'right',
+    default: "right",
   },
   /** 定义需要用到的外部样式 */
   customStyle: Object as PropType<CSSProperties>,
-})
-const { size, disabled, clickable, borderRadius } = toRefs(props)
-const emit = defineEmits<ICellEmits>()
+});
+const emit = defineEmits<ICellEmits>();
 
 /**
  * @description 计算什么时候出现点击状态
@@ -224,45 +243,48 @@ const emit = defineEmits<ICellEmits>()
 const containerClass = computed(() => {
   return (temp: CellContentVo): string => {
     return [
-      !disabled.value &&
+      !props.disabled &&
         !temp?.disabled &&
-        clickable.value &&
-        'hy-cell__body--container__clickable',
+        props.clickable &&
+        "hy-cell__body--container__clickable",
     ]
       .filter(Boolean)
-      .join()
-  }
-})
+      .join();
+  };
+});
 const ItemClass = computed(() => {
-  return ['hy-cell__body--container', `hy-cell__body--container__${size.value}`]
-})
+  return [
+    "hy-cell__body--container",
+    `hy-cell__body--container__${props.size}`,
+  ];
+});
 
 const iconSize = computed(() => {
-  switch (size.value) {
-    case 'large':
-      return 25
-    case 'medium':
-      return 20
-    case 'small':
-      return 15
+  switch (props.size) {
+    case "large":
+      return 25;
+    case "medium":
+      return 20;
+    case "small":
+      return 15;
   }
-})
+});
 
 /**
  * @description 点击cell
  * */
 const clickHandler = (e: Event, temp: CellContentVo, index: number) => {
-  if (disabled.value) return
-  emit('click', temp, index)
+  if (props.disabled) return;
+  emit("click", temp, index);
   if (temp?.url) {
     uni.navigateTo({
       url: temp.url,
-    })
+    });
   }
-  e.stopPropagation()
-}
+  e.stopPropagation();
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

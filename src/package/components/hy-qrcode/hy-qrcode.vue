@@ -22,35 +22,35 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-qrcode',
+  name: "hy-qrcode",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { getCurrentInstance, toRefs, ref, onMounted } from 'vue'
-import type { IQrcodeEmits } from './typing'
-import QRCode from './qrcode.js'
-import { addUnit, error } from '../../utils'
+import { getCurrentInstance, toRefs, ref, onMounted } from "vue";
+import type { IQrcodeEmits } from "./typing";
+import QRCode from "./qrcode.js";
+import { addUnit, error } from "../../utils";
 // 组件
-import HyLoading from '../hy-loading/hy-loading.vue'
+import HyLoading from "../hy-loading/hy-loading.vue";
 
 /**
  * 根据提供的字符串前端JS生成二维码展示
  * @displayName hy-qrcode
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
   /** 实例ID字符串(如果有多个二维码组件必须设置不一样的cid) */
   cid: {
     type: String,
-    default: 'hy-qrcode-canvas' + Math.random().toString(),
+    default: "hy-qrcode-canvas" + Math.random().toString(),
   },
   /** 二维码大小 */
   size: {
@@ -67,17 +67,17 @@ const props = defineProps({
   /** 二维码背景色 */
   background: {
     type: String,
-    default: '#ffffff',
+    default: "#ffffff",
   },
   /** 二维码颜色 */
   foreground: {
     type: String,
-    default: '#000000',
+    default: "#000000",
   },
   /** 定位角点颜色 */
   pdGround: {
     type: String,
-    default: '#000000',
+    default: "#000000",
   },
   /** 是否是自定义组件 */
   usingComponents: {
@@ -104,36 +104,35 @@ const props = defineProps({
   /** 加载中提示语 */
   loadingText: {
     type: String,
-    default: '二维码生成中',
+    default: "二维码生成中",
   },
   /** 是否预览 */
   allowPreview: {
     type: Boolean,
     default: false,
   },
-})
-const { text, allowPreview } = toRefs(props)
-const emit = defineEmits<IQrcodeEmits>()
+});
+const emit = defineEmits<IQrcodeEmits>();
 
-const instance = getCurrentInstance()
-const loading = ref(false)
-const qrcode = ref('')
-const result = ref('')
+const instance = getCurrentInstance();
+const loading = ref(false);
+const qrcode = ref("");
+const result = ref("");
 
 onMounted(() => {
-  initQrCode()
-})
+  initQrCode();
+});
 
 const initQrCode = () => {
-  if (text.value) {
-    loading.value = true
+  if (props.text) {
+    loading.value = true;
     qrcode.value = new QRCode({
       context: instance, // 上下文环境
       canvasId: props.cid, // canvas-id
       usingComponents: props.usingComponents, // 是否是自定义组件
       showLoading: false, // 是否显示loading
       loadingText: props.loadingText, // loading文字
-      text: text.value, // 生成内容
+      text: props.text, // 生成内容
       size: props.size, // 二维码大小
       background: props.background, // 背景色
       foreground: props.foreground, // 前景色
@@ -143,67 +142,67 @@ const initQrCode = () => {
       imageSize: props.iconSize, // 二维码图标大小
       cbResult: function (res: any) {
         // 生成二维码的回调
-        _result(res)
+        _result(res);
       },
-    })
+    });
   } else {
-    error('二维码内容不能为空')
+    error("二维码内容不能为空");
   }
-}
+};
 
 const _result = (res: any) => {
-  loading.value = false
-  result.value = res
-  emit('result', res)
-}
+  loading.value = false;
+  result.value = res;
+  emit("result", res);
+};
 
 const _saveCode = () => {
-  if (result.value != '') {
+  if (result.value != "") {
     uni.saveImageToPhotosAlbum({
       filePath: result.value,
       success: function () {
         uni.showToast({
-          title: '二维码保存成功',
-          icon: 'success',
+          title: "二维码保存成功",
+          icon: "success",
           duration: 2000,
-        })
+        });
       },
-    })
+    });
   }
-}
+};
 /**
  * @description 预览
  * */
 const preview = (e: Event) => {
   // 预览图片
   // console.log(this.result)
-  if (allowPreview.value) {
+  if (props.allowPreview) {
     uni.previewImage({
       urls: [result.value],
       longPressActions: {
-        itemList: ['保存二维码图片'],
+        itemList: ["保存二维码图片"],
         success: function (data) {
           // console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
           switch (data.tapIndex) {
             case 0:
-              _saveCode()
-              break
+              _saveCode();
+              break;
           }
         },
         fail: function (err) {
-          console.error(err.errMsg)
+          console.error(err.errMsg);
         },
       },
-    })
+    });
   }
-  emit('preview', result.value, e)
-}
+  emit("preview", result.value, e);
+};
 
 const onLongPress = () => {
-  emit('longPress')
-}
+  emit("longPress");
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

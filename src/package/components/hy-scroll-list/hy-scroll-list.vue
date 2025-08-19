@@ -33,25 +33,26 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-scroll-list',
+  name: "hy-scroll-list",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, type CSSProperties, toRefs, ref, onMounted, getCurrentInstance } from 'vue'
-import type { IScrollListEmits } from './typing'
-import { addUnit, colorGradient, getRect, sleep } from '../../utils'
+import { computed, ref, onMounted, getCurrentInstance } from "vue";
+import type { CSSProperties } from "vue";
+import type { IScrollListEmits } from "./typing";
+import { addUnit, colorGradient, getRect, sleep } from "../../utils";
 
 /**
  * 该组件一般用于同时展示多个商品、分类的场景，也可以完成左右滑动的列表。
  * @displayName hy-scroll-list
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -74,77 +75,73 @@ const props = defineProps({
   indicatorColor: String,
   /** 指示器的激活颜色 */
   indicatorActiveColor: String,
-})
-const { indicatorWidth, indicatorColor, indicatorBarWidth, indicatorActiveColor } = toRefs(props)
-const emit = defineEmits<IScrollListEmits>()
+});
+const emit = defineEmits<IScrollListEmits>();
 
-const instance = getCurrentInstance()
-const scrollInfo = ref({
-  scrollLeft: 0,
-  scrollWidth: 0,
-})
-const scrollWidth = ref(0)
-const barLeft = ref(0)
+const instance = getCurrentInstance();
+const scrollWidth = ref(0);
+const barLeft = ref(0);
 
 /**
  * @description 线条样式
  * */
 const barStyle = computed<CSSProperties>(() => {
-  const style: CSSProperties = {}
-  style.transform = `translateX(${barLeft.value}px)`
+  const style: CSSProperties = {};
+  style.transform = `translateX(${barLeft.value}px)`;
   // 设置滑块的宽度和背景色，是每个平台都需要的
-  style.width = addUnit(indicatorBarWidth.value)
-  style.backgroundColor = indicatorActiveColor.value
-  return style
-})
+  style.width = addUnit(props.indicatorBarWidth);
+  style.backgroundColor = props.indicatorActiveColor;
+  return style;
+});
 /**
  * @description 轨道样式
  * */
 const lineStyle = computed<CSSProperties>(() => {
-  const style: CSSProperties = {}
+  const style: CSSProperties = {};
   // 指示器整体的样式，需要设置其宽度和背景色
-  style.width = addUnit(indicatorWidth.value)
+  style.width = addUnit(props.indicatorWidth);
   style.backgroundColor =
-    indicatorColor.value ||
-    (indicatorActiveColor.value && colorGradient(indicatorActiveColor.value)[90])
-  return style
-})
+    props.indicatorColor ||
+    (props.indicatorActiveColor &&
+      colorGradient(props.indicatorActiveColor)[90]);
+  return style;
+});
 
 onMounted(() => {
-  initWidth()
-})
+  initWidth();
+});
 
 /**
  * @description 初始化宽度
  * */
 const initWidth = async () => {
   // 延时一定时间，以获取dom尺寸
-  await sleep(30)
+  await sleep(30);
   // #ifndef APP-NVUE
-  getRect('.hy-scroll-list', false, instance).then((size) => {
-    scrollWidth.value = (size as UniApp.NodeInfo).width!
-  })
+  getRect(".hy-scroll-list", false, instance).then((size) => {
+    scrollWidth.value = (size as UniApp.NodeInfo).width!;
+  });
   // #endif
-}
+};
 
 const onScroll = (event: any) => {
-  const { scrollLeft, scrollWidth: totalWidth } = event.detail
-  const targetWidth = totalWidth - scrollWidth.value
-  const targetBarWidth = indicatorWidth.value - indicatorBarWidth.value
-  barLeft.value = (scrollLeft / targetWidth) * targetBarWidth
-}
+  const { scrollLeft, scrollWidth: totalWidth } = event.detail;
+  const targetWidth = totalWidth - scrollWidth.value;
+  const targetBarWidth = props.indicatorWidth - props.indicatorBarWidth;
+  barLeft.value = (scrollLeft / targetWidth) * targetBarWidth;
+};
 
 const onScrollToLower = () => {
-  barLeft.value = indicatorWidth.value - indicatorBarWidth.value
-  emit('scrollRight')
-}
+  barLeft.value = props.indicatorWidth - props.indicatorBarWidth;
+  emit("scrollRight");
+};
 
 const onScrollToUpper = () => {
-  barLeft.value = 0
-  emit('scrollLeft')
-}
+  barLeft.value = 0;
+  emit("scrollLeft");
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

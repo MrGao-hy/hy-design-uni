@@ -16,7 +16,9 @@
             :top="icon?.top"
             :stop="icon?.stop"
             :round="icon?.round"
-            :customStyle="Object.assign({ marginRight: '3px' }, icon?.customStyle)"
+            :customStyle="
+              Object.assign({ marginRight: '3px' }, icon?.customStyle)
+            "
           ></HyIcon>
         </slot>
         <text :class="textClass" :style="textStyle">
@@ -31,7 +33,11 @@
         @tap.stop="closeHandler"
         :style="{ backgroundColor: closeColor }"
       >
-        <HyIcon :name="IconConfig.CLOSE" :size="closeSize" color="#ffffff"></HyIcon>
+        <HyIcon
+          :name="IconConfig.CLOSE"
+          :size="closeSize"
+          color="#ffffff"
+        ></HyIcon>
       </view>
     </view>
   </HyTransition>
@@ -39,32 +45,32 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-tag',
+  name: "hy-tag",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { ITagEmits } from './typing'
-import { IconConfig } from '../../config'
-import { colorGradient } from '../../utils'
-import type HyIconProps from '../hy-icon/typing'
+import { computed, toRefs } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { ITagEmits } from "./typing";
+import { IconConfig } from "../../config";
+import { colorGradient } from "../../utils";
+import type HyIconProps from "../hy-icon/typing";
 
 // 组件
-import HyTransition from '../hy-transition/hy-transition.vue'
-import HyIcon from '../hy-icon/hy-icon.vue'
+import HyTransition from "../hy-transition/hy-transition.vue";
+import HyIcon from "../hy-icon/hy-icon.vue";
 
 /**
  * tag组件一般用于标记和选择，我们提供了更加丰富的表现形式，能够较全面的涵盖您的使用场景
  * @displayName hy-tag
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -78,7 +84,7 @@ const props = defineProps({
    * */
   type: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   /** 禁用点击标签 */
   disabled: {
@@ -91,7 +97,7 @@ const props = defineProps({
    * */
   size: {
     type: String,
-    default: 'medium',
+    default: "medium",
   },
   /**
    * tag的形状
@@ -99,7 +105,7 @@ const props = defineProps({
    * */
   shape: {
     type: String,
-    default: 'square',
+    default: "square",
   },
   /** 背景颜色，默认为空字符串，即不处理 */
   bgColor: String,
@@ -110,7 +116,7 @@ const props = defineProps({
   /** 关闭按钮图标的颜色 */
   closeColor: {
     type: String,
-    default: '#C6C7CB',
+    default: "#C6C7CB",
   },
   /** 镂空时是否填充背景色 */
   plainFill: {
@@ -135,130 +141,128 @@ const props = defineProps({
   /** 组件内置图标，或绝对路径的图片 */
   icon: Object as PropType<HyIconProps>,
   /** 定义需要用到的外部样式 */
-  customStyle: Object as PropType<CSSProperties>,
+  customStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: "",
+  },
   /** 自定义外部类名 */
-  customClass: String,
-})
-const {
-  text,
-  name,
-  shape,
-  plain,
-  type,
-  size,
-  plainFill,
-  closable,
-  bgColor,
-  color,
-  borderColor,
-  icon,
-  disabled,
-  customStyle,
-  customClass,
-} = toRefs(props)
-const emit = defineEmits<ITagEmits>()
+  customClass: {
+    type: String,
+    default: "",
+  },
+});
+const emit = defineEmits<ITagEmits>();
 
 /**
  * @description tag类名
  * */
 const tagClass = computed((): string[] => {
-  let classes = ['hy-tag', `hy-tag--${shape.value}`, `hy-tag--${size.value}`, customClass.value]
-  if (disabled.value) {
-    classes.push('hy-tag--disabled')
+  let classes = [
+    "hy-tag",
+    `hy-tag--${props.shape}`,
+    `hy-tag--${props.size}`,
+    props.customClass,
+  ];
+  if (props.disabled) {
+    classes.push("hy-tag--disabled");
   } else {
     const arr = [
-      plain.value ? `hy-tag--${type.value}--plain` : `hy-tag--${type.value}`,
-      plain.value && plainFill.value && `hy-tag--${type.value}--plain__fill`,
-    ].filter(Boolean)
-    classes = classes.concat(arr as string[])
+      props.plain ? `hy-tag--${props.type}--plain` : `hy-tag--${props.type}`,
+      props.plain && props.plainFill && `hy-tag--${props.type}--plain__fill`,
+    ].filter(Boolean);
+    classes = classes.concat(arr as string[]);
   }
-  return classes
-})
+  return classes;
+});
 /**
  * @description tag样式
  * */
 const tagStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {
-    marginRight: closable.value ? '10px' : 0,
-    marginTop: closable.value ? '10px' : 0,
-    background: bgColor.value,
-    borderColor: borderColor.value,
-  }
+    marginRight: props.closable ? "10px" : 0,
+    marginTop: props.closable ? "10px" : 0,
+    background: props.bgColor,
+    borderColor: props.borderColor,
+  };
 
-  if (color.value) {
-    if (plain.value) {
-      style.borderColor = color.value
-      if (plainFill.value) {
-        style.background = colorGradient(color.value, '#FFFFFF', 100)[90]
+  if (props.color) {
+    if (props.plain) {
+      style.borderColor = props.color;
+      if (props.plainFill) {
+        style.background = colorGradient(props.color, "#FFFFFF", 100)[90];
       }
     } else {
-      style.background = color.value
-      style.borderColor = color.value
+      style.background = props.color;
+      style.borderColor = props.color;
     }
   }
 
-  return Object.assign(style, customStyle.value)
-})
+  return Object.assign(style, props.customStyle);
+});
 
 /**
  * @description 文本样式
  * */
 const textStyle = computed(() => {
-  const style: CSSProperties = {}
-  if (color.value && plain.value) style.color = color.value
-  return style
-})
+  const style: CSSProperties = {};
+  if (props.color && props.plain) style.color = props.color;
+  return style;
+});
 /**
  * @description 文本类名
  * */
 const textClass = computed((): string[] => {
-  return [`hy-tag__text`, `hy-tag__text--${size.value}`]
-})
+  return [`hy-tag__text`, `hy-tag__text--${props.size}`];
+});
 
 /**
  * @description 关闭图标icon大小
  */
 const closeSize = computed(() => {
-  return size.value === 'large' ? 15 : size.value === 'medium' ? 13 : 11
-})
+  return props.size === "large" ? 15 : props.size === "medium" ? 13 : 11;
+});
 /**
  * @description 图标大小
  * */
 const hyIconSize = computed(() => {
-  if (icon.value.size) {
-    return icon.value.size
+  if (props.icon?.size) {
+    return props.icon.size;
   } else {
-    return size.value === 'large' ? 18 : size.value === 'medium' ? 14 : 10
+    return props.size === "large" ? 18 : props.size === "medium" ? 14 : 10;
   }
-})
+});
 /**
  * @description 图标颜色
  * */
 const hyIconColor = computed(() => {
-  return icon.value.color ? icon.value.color : plain.value ? type.value : '#ffffff'
-})
+  return props.icon?.color
+    ? props.icon.color
+    : props.plain
+      ? props.type
+      : "#ffffff";
+});
 
 /**
  * @description 点击关闭按钮
  * */
 const closeHandler = () => {
-  if (!disabled.value) {
-    emit('close', text.value)
+  if (!props.disabled) {
+    emit("close", props.text);
   }
-}
+};
 /**
  * @description 点击标签
  * */
 const clickHandler = () => {
-  if (!disabled.value) {
-    emit('click', {
-      value: text.value,
-      name: name.value,
-    })
+  if (!props.disabled) {
+    emit("click", {
+      value: props.text,
+      name: props.name,
+    });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

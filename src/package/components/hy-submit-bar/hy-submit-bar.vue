@@ -1,5 +1,8 @@
 <template>
-  <view :class="['hy-submit-bar', border && 'hy-border__top', customClass]" :style="submitBarStyle">
+  <view
+    :class="['hy-submit-bar', border && 'hy-border__top', customClass]"
+    :style="submitBarStyle"
+  >
     <view class="hy-submit-bar__left">
       <slot name="left">
         <view
@@ -68,30 +71,29 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-submit-bar',
+  name: "hy-submit-bar",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { IconMenus, ISubmitBarEmits } from './typing'
-
+import { computed } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { IconMenus, ISubmitBarEmits } from "./typing";
 // 组件
-import HyIcon from '../hy-icon/hy-icon.vue'
-import HyLoading from '../hy-loading/hy-loading.vue'
-import HyBadge from '../hy-badge/hy-badge.vue'
+import HyIcon from "../hy-icon/hy-icon.vue";
+import HyLoading from "../hy-loading/hy-loading.vue";
+import HyBadge from "../hy-badge/hy-badge.vue";
 
 /**
  * 该布局一般用于商品详情页底部引导用户快速购买商品的场景，开发者可以根据自己的需求修改布局结构和样式。
  * @displayName hy-submit-bar
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -125,7 +127,7 @@ const props = defineProps({
   /** 左边文字的颜色 */
   iconLabelColor: {
     type: String,
-    default: '#909193FF',
+    default: "#909193FF",
   },
   /** 右边按钮文字颜色 */
   textColor: String,
@@ -142,22 +144,22 @@ const props = defineProps({
   /** 左边按钮文字 */
   leftBtnText: {
     type: String,
-    default: '加入购物车',
+    default: "加入购物车",
   },
   /** 右边按钮文字 */
   rightBtnText: {
     type: String,
-    default: '立即购买',
+    default: "立即购买",
   },
   /** 左边按钮颜色，支持渐变色 */
   leftBtnColor: {
     type: String,
-    default: '#ed3f14',
+    default: "#ed3f14",
   },
   /** 有边按钮颜色，支持渐变色 */
   rightBtnColor: {
     type: String,
-    default: '#ff7900',
+    default: "#ff7900",
   },
   /**
    * 按钮的形状
@@ -165,28 +167,17 @@ const props = defineProps({
    * */
   shape: {
     type: String,
-    default: 'circle',
+    default: "circle",
   },
   /** 定义需要用到的外部样式 */
   customStyle: {
     type: Object as PropType<CSSProperties>,
+    default: () => {},
   },
   /** 自定义外部类名 */
   customClass: String,
-})
-const {
-  fixed,
-  showLeftBtn,
-  showRightBtn,
-  leftBtnColor,
-  rightBtnColor,
-  shape,
-  textColor,
-  leftLoading,
-  rightLoading,
-  customStyle,
-} = toRefs(props)
-const emit = defineEmits<ISubmitBarEmits>()
+});
+const emit = defineEmits<ISubmitBarEmits>();
 
 /**
  * @description 整体样式
@@ -195,82 +186,82 @@ const submitBarStyle = computed(() => {
   const style: CSSProperties = {
     bottom: 0,
     left: 0,
-  }
-  if (fixed.value) style.position = 'fixed'
-  return Object.assign(style, customStyle.value)
-})
+  };
+  if (props.fixed) style.position = "fixed";
+  return Object.assign(style, props.customStyle);
+});
 
 /**
  * @description 左边按钮样式
  * */
 const leftBtnStyle = computed(() => {
   const style: CSSProperties = {
-    background: leftBtnColor.value,
-    color: textColor.value,
-  }
-  if (!showRightBtn.value) {
-    style.flex = 1
-    if (shape.value === 'circle') {
-      style.borderRadius = '100px'
+    background: props.leftBtnColor,
+    color: props.textColor,
+  };
+  if (!props.showRightBtn) {
+    style.flex = 1;
+    if (props.shape === "circle") {
+      style.borderRadius = "100px";
     } else {
-      style.borderRadius = '2px'
+      style.borderRadius = "2px";
     }
   } else {
-    if (shape.value === 'circle') {
-      style.borderRadius = '100px 0 0 100px'
+    if (props.shape === "circle") {
+      style.borderRadius = "100px 0 0 100px";
     } else {
-      style.borderRadius = '2px 0 0 2px'
+      style.borderRadius = "2px 0 0 2px";
     }
   }
-  return style
-})
+  return style;
+});
 
 /**
  * @description 右边按钮样式
  * */
 const rightBtnStyle = computed(() => {
   const style: CSSProperties = {
-    background: rightBtnColor.value,
-    color: textColor.value,
-  }
-  if (!showLeftBtn.value) {
-    style.flex = 1
-    if (shape.value === 'circle') {
-      style.borderRadius = '100px'
+    background: props.rightBtnColor,
+    color: props.textColor,
+  };
+  if (!props.showLeftBtn) {
+    style.flex = 1;
+    if (props.shape === "circle") {
+      style.borderRadius = "100px";
     } else {
-      style.borderRadius = '2px'
+      style.borderRadius = "2px";
     }
   } else {
-    if (shape.value === 'circle') {
-      style.borderRadius = '0 100px 100px 0'
+    if (props.shape === "circle") {
+      style.borderRadius = "0 100px 100px 0";
     } else {
-      style.borderRadius = '0 2px 2px 0'
+      style.borderRadius = "0 2px 2px 0";
     }
   }
-  return style
-})
+  return style;
+});
 
 /**
  * @description 点击左边图标
  * */
 const clickMenuFn = (i: number) => {
-  emit('menuClick', i)
-}
+  emit("menuClick", i);
+};
 
 /**
  * @description 点击按钮
  * */
 const confirmClickFn = (i: number) => {
   if (
-    (!leftLoading.value && !rightLoading.value) ||
-    (leftLoading.value && i !== 0) ||
-    (rightLoading.value && i !== 1)
+    (!props.leftLoading && !props.rightLoading) ||
+    (props.leftLoading && i !== 0) ||
+    (props.rightLoading && i !== 1)
   ) {
-    emit('click', i)
+    emit("click", i);
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

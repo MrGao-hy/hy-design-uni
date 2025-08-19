@@ -123,7 +123,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, toRefs, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import type { PropType } from "vue";
 import { deepClone, sleep, addUnit, isArray } from "../../utils";
 import { IconConfig } from "../../config";
@@ -247,16 +247,6 @@ const props = defineProps({
     default: false,
   },
 });
-const {
-  keyName,
-  closeOnClickOverlay,
-  hasInput,
-  defaultIndex,
-  modelValue,
-  columns,
-  separator,
-  input,
-} = toRefs(props);
 const emit = defineEmits<IPickerEmits>();
 
 // 上一次选择的列索引
@@ -285,7 +275,7 @@ const setColumns = (columns: any[]) => {
  * @description 监听默认索引的变化，重新设置对应的值
  * */
 watch(
-  () => defaultIndex.value,
+  () => props.defaultIndex,
   (newValue) => {
     setIndexs(newValue, true);
   },
@@ -295,7 +285,7 @@ watch(
  * @description 监听columns参数的变化
  * */
 watch(
-  () => columns.value,
+  () => props.columns,
   (newValue) => {
     setColumns(newValue);
   },
@@ -317,19 +307,19 @@ const inputLabelValue = computed((): string => {
       res.push(
         ...innerColumns.value[i]?.filter((item) => {
           return (
-            isArray(modelValue.value) && modelValue.value.includes(item["id"])
+            isArray(props.modelValue) && props.modelValue.includes(item["id"])
           );
         }),
       );
     });
-    res = res.map((item) => item[keyName.value]);
-    return res.join(separator.value);
+    res = res.map((item) => item[props.keyName]);
+    return res.join(props.separator);
   } else {
     //用户确定的值，才显示到输入框
-    if (modelValue.value.length && isArray(modelValue.value)) {
-      return modelValue.value.join(separator.value);
+    if (props.modelValue.length && isArray(props.modelValue)) {
+      return props.modelValue.join(props.separator);
     }
-    return modelValue.value as string;
+    return props.modelValue as string;
   }
 });
 
@@ -363,7 +353,7 @@ const inputValue = computed(() => {
  * @description 显示
  * */
 const onShowByClickInput = () => {
-  if (!input.value?.disabled) {
+  if (!props.input?.disabled) {
     showByClickInput.value = !showByClickInput.value;
   }
 };
@@ -374,9 +364,9 @@ const onShowByClickInput = () => {
 const getItemText = (item: any) => {
   if (
     Object.prototype.toString.call(item) === "[object Object]" &&
-    keyName.value
+    props.keyName
   ) {
-    return item[keyName.value];
+    return item[props.keyName];
   } else {
     return item;
   }
@@ -386,8 +376,8 @@ const getItemText = (item: any) => {
  * @description 关闭选择器
  * */
 const closeHandler = () => {
-  if (closeOnClickOverlay.value) {
-    if (hasInput.value) {
+  if (props.closeOnClickOverlay) {
+    if (props.hasInput) {
       showByClickInput.value = false;
     }
     emit("update:show", false);
@@ -399,7 +389,7 @@ const closeHandler = () => {
  * @description 点击工具栏的取消按钮
  * */
 const cancel = () => {
-  if (hasInput.value) {
+  if (props.hasInput) {
     showByClickInput.value = false;
   }
   emit("update:show", false);
@@ -415,10 +405,10 @@ const onConfirm = () => {
     let arr = [0];
     //如果有默认值&&默认值的数组长度是正确的，就用默认值
     if (
-      Array.isArray(defaultIndex.value) &&
-      defaultIndex.value.length == innerColumns.value.length
+      Array.isArray(props.defaultIndex) &&
+      props.defaultIndex.length == innerColumns.value.length
     ) {
-      arr = [...defaultIndex.value];
+      arr = [...props.defaultIndex];
     } else {
       //否则默认都选中第一个
       arr = Array(innerColumns.value.length).fill(0);
@@ -427,7 +417,7 @@ const onConfirm = () => {
     setIndexs(arr);
   }
   emit("update:modelValue", inputValue.value);
-  if (hasInput.value) {
+  if (props.hasInput) {
     showByClickInput.value = false;
   }
   emit("update:show", false);
@@ -463,22 +453,23 @@ const changeHandler = (e: any) => {
   }
   columnIndex.value = columnI;
   const values = innerColumns.value;
-  // 将当前的各项变化索引，设置为"上一次"的索引变化值
-  setLastIndex(value);
-  setIndexs(value);
-  //如果是非自带输入框才会在change时候触发v-model绑值的变化
-  //否则会非常的奇怪，用户未确认，值就变了
-  if (!hasInput.value) {
-    emit("update:modelValue", inputValue.value);
-  }
-  emit("change", {
+  const params = {
     value: innerColumns.value.map((item, index) => item[value[index]]),
     index,
     indexs: value,
     // values为当前变化列的数组内容
     values,
     columnIndex: columnI,
-  });
+  };
+  // 将当前的各项变化索引，设置为"上一次"的索引变化值
+  setLastIndex(value);
+  setIndexs(value);
+  //如果是非自带输入框才会在change时候触发v-model绑值的变化
+  //否则会非常的奇怪，用户未确认，值就变了
+  if (!props.hasInput) {
+    emit("update:modelValue", inputValue.value);
+  }
+  emit("change", params);
 };
 
 /**
@@ -503,7 +494,7 @@ const setLastIndex = (index: number[]) => {
 /**
  * @description 设置对应列选项的所有值
  * */
-const setColumnValues = (columnI: number, values: Record<string, any>) => {
+const setColumnValues = (columnI: number, values: AnyObject[]) => {
   // 替换innerColumns数组中columnIndex索引的值为values，使用的是数组的splice方法
   innerColumns.value.splice(columnI, 1, values);
   // 替换完成之后将修改列之后的已选值置空

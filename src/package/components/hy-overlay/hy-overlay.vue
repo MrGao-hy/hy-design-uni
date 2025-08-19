@@ -12,26 +12,26 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-overlay',
+  name: "hy-overlay",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { IOverlayEmits } from './typing'
-import HyTransition from '../hy-transition/hy-transition.vue'
+import { computed, toRefs } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { IOverlayEmits } from "./typing";
+import HyTransition from "../hy-transition/hy-transition.vue";
 
 /**
  * 创建一个遮罩层，用于强调特定的页面元素，并阻止用户对遮罩下层的内容进行操作，一般用于弹窗场景
  * @displayName hy-overlay
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -56,30 +56,32 @@ const props = defineProps({
     default: 0.5,
   },
   /** 定义需要用到的外部样式 */
-  customStyle: Object as PropType<CSSProperties>,
+  customStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: () => {},
+  },
   /** 自定义外部类名 */
   customClass: String,
-})
-const { customStyle, opacity, zIndex } = toRefs(props)
-const emit = defineEmits<IOverlayEmits>()
+});
+const emit = defineEmits<IOverlayEmits>();
 
 const overlayStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {
-    position: 'fixed',
+    position: "fixed",
     top: 0,
     left: 0,
     right: 0,
-    zIndex: zIndex?.value,
+    zIndex: props.zIndex,
     bottom: 0,
-    'background-color': `rgba(0, 0, 0, ${opacity.value})`,
-  }
-  return Object.assign(style, customStyle.value || {})
-})
+    "background-color": `rgba(0, 0, 0, ${props.opacity})`,
+  };
+  return Object.assign(style, props.customStyle);
+});
 const clickHandler = () => {
-  emit('click')
-}
+  emit("click");
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

@@ -4,11 +4,11 @@
 @include b(steps) {
   @include flex;
 
-  &--column {
+  @include m(column) {
     flex-direction: column;
   }
 
-  &--row {
+  @include m(row) {
     flex-direction: row;
     flex: 1;
     /* #ifdef MP */
@@ -21,20 +21,20 @@
     flex: 1;
     @include flex;
 
-    &--row {
+    @include m(row) {
       flex-direction: column;
       align-items: center;
       position: relative;
     }
 
-    &--column {
+    @include m(column) {
       position: relative;
       flex-direction: row;
       justify-content: flex-start;
       padding-bottom: 5px;
     }
 
-    &__wrapper {
+    @include e(wrapper) {
       @include flex;
       justify-content: center;
       align-items: center;
@@ -55,34 +55,34 @@
         }
       }
 
-      &--column {
+      @include m(column) {
         width: 20px;
         height: 20px;
       }
 
-      &--row {
+      @include m(row) {
         width: 20px;
         height: 20px;
       }
 
       /* 点形状 */
-      &--dot {
-        &__item {
+      @include m(dot) {
+        @include e(item) {
           width: 10px;
           height: 10px;
           border-radius: $hy-border-radius-circle;
           background-color: $hy-info;
           border: none;
         }
-        &__finish {
+        @include e(finish) {
           background-color: $hy-primary;
         }
-        &__process {
+        @include e(process) {
           background-color: $hy-primary;
         }
       }
 
-      &__circle {
+      @include e(circle) {
         width: 20px;
         height: 20px;
         /* #ifndef APP-NVUE */
@@ -96,7 +96,7 @@
         justify-content: center;
         transition: background-color 0.3s;
 
-        &__text {
+        @include e(text) {
           color: $hy-text-color--grey;
           font-size: 11px;
           @include flex(row);
@@ -108,19 +108,29 @@
       }
     }
 
-    &__content {
+    @include e(content) {
       @include flex;
       flex: 1;
-      &__title--active {
-        color: $hy-primary;
+
+      @include e(title) {
+        line-height: 25px;
+        font-size: 13px;
+        @include m(active) {
+          color: $hy-primary;
+          font-size: 15px;
+        }
+
+        @include m(error) {
+          color: $hy-error;
+        }
       }
 
-      &--row {
+      @include m(row) {
         flex-direction: column;
         align-items: center;
       }
 
-      &--column {
+      @include m(column) {
         flex-direction: column;
         justify-content: flex-start;
         margin-left: $hy-border-margin-padding-sm;
@@ -129,7 +139,7 @@
     }
 
     /* 线条样式 */
-    &__line {
+    @include e(line) {
       position: absolute;
       background: $hy-border-color;
 
@@ -146,12 +156,12 @@
         background-color: $hy-info;
       }
 
-      &--row {
+      @include m(row) {
         top: $hy-border-margin-padding-base;
         height: 1px;
       }
 
-      &--column {
+      @include m(column) {
         width: 1px;
         left: $hy-border-margin-padding-base;
       }

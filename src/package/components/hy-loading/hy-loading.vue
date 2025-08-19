@@ -25,7 +25,11 @@
     >
       <block v-if="mode === 'spinner'">
         <!-- #ifndef APP-NVUE -->
-        <view v-for="(item, index) in array12" :key="index" class="hy-loading-icon__dot"></view>
+        <view
+          v-for="(item, index) in array12"
+          :key="index"
+          class="hy-loading-icon__dot"
+        ></view>
         <!-- #endif -->
       </block>
     </view>
@@ -44,25 +48,25 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-loading',
+  name: "hy-loading",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { toRefs, ref, computed } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import { addUnit, colorGradient } from '../../utils'
+import { ref, computed } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import { addUnit, colorGradient } from "../../utils";
 
 /**
  * 目前用在华玥的loadMore加载更多等组件的正在加载状态场景。
  * @displayName hy-loading
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -74,12 +78,12 @@ const props = defineProps({
   /** 动画活动区域的颜色，只对 mode = flower 模式有效 */
   color: {
     type: String,
-    default: '#909399',
+    default: "#909399",
   },
   /** 提示文本的颜色 */
   textColor: {
     type: String,
-    default: '#909399',
+    default: "#909399",
   },
   /** 文字和图标是否垂直排列 */
   vertical: {
@@ -89,7 +93,7 @@ const props = defineProps({
   /** 模式选择，见官网说明 */
   mode: {
     type: String,
-    default: 'spinner',
+    default: "spinner",
   },
   /** 加载图标的大小，单位px */
   size: {
@@ -106,7 +110,7 @@ const props = defineProps({
   /** 动画模式 */
   timingFunction: {
     type: String,
-    default: 'ease-in-out',
+    default: "ease-in-out",
   },
   /** 动画执行周期时间 */
   duration: {
@@ -117,24 +121,23 @@ const props = defineProps({
   inactiveColor: String,
   /** 定义需要用到的外部样式 */
   customStyle: Object as PropType<CSSProperties>,
-})
-const { show, size, color, mode, inactiveColor } = toRefs(props)
+});
 
 //动画旋转角度
-const aniAngel = ref(360)
+const aniAngel = ref(360);
 const array12 = Array.from({
   length: 12,
-})
-const webviewHide = ref(false)
+});
+const webviewHide = ref(false);
 
 const otherBorderColor = computed(() => {
-  const lightColor = colorGradient(color.value, '#ffffff', 100)[80]
-  if (mode.value === 'circle') {
-    return inactiveColor.value ? inactiveColor.value : lightColor
+  const lightColor = colorGradient(props.color, "#ffffff", 100)[80];
+  if (props.mode === "circle") {
+    return props.inactiveColor ? props.inactiveColor : lightColor;
   } else {
-    return 'transparent'
+    return "transparent";
   }
-})
+});
 
 // 监听webview的显示与隐藏
 // const addEventListenerToWebview = () => {
@@ -155,5 +158,5 @@ const otherBorderColor = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

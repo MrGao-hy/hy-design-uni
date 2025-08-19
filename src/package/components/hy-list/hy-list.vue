@@ -9,7 +9,10 @@
     class="hy-virtual-container"
   >
     <view class="hy-virtual-container__list">
-      <slot v-if="slotDefault" :record="line === 1 ? virtualData : waterfall"></slot>
+      <slot
+        v-if="slotDefault"
+        :record="line === 1 ? virtualData : waterfall"
+      ></slot>
       <template v-else>
         <view
           v-if="line === 1"
@@ -63,55 +66,53 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-list',
+  name: "hy-list",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script lang="ts" setup>
 import {
   computed,
-  type CSSProperties,
   getCurrentInstance,
   nextTick,
   onMounted,
+  type PropType,
   reactive,
   ref,
-  toRefs,
   useSlots,
   watch,
-} from 'vue'
-import { addUnit, getPx, getRect } from '../../utils'
-import type { IListEmits } from './typing'
+} from "vue";
+import type { CSSProperties } from "vue";
+import { addUnit, getPx, getRect } from "../../utils";
+import type { IListEmits } from "./typing";
 
 /**
  * 实现只展示可视内容的dom，减少dom创建，优化滚动性能
  * @displayName hy-list
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
   /** 数据列表 */
   list: {
-    type: Array,
-    default() {
-      return []
-    },
+    type: Array as PropType<(string | Record<string, any>)[]>,
+    default: () => [],
   },
   /** 容器高度，必须给个高度，否则加载全部数据 */
   containerHeight: {
     type: String,
-    default: '100%',
+    default: "100%",
   },
   /** 子容器的高度，必须和内容一致，否则计算有问题 */
   itemHeight: {
     type: [String, Number],
-    default: '40px',
+    default: "40px",
   },
   /** 子容器的底部，会计算到容器内 */
   marginBottom: {
@@ -126,12 +127,12 @@ const props = defineProps({
   /** 子容器的圆角，单位px */
   borderRadius: {
     type: [String, Number],
-    default: '3px',
+    default: "3px",
   },
   /** 容器背景色 */
   background: {
     type: String,
-    default: 'transparent',
+    default: "transparent",
   },
   /** 是否显示边框 */
   border: {
@@ -146,7 +147,7 @@ const props = defineProps({
   /** 每一项的唯一标识key */
   keyField: {
     type: String,
-    default: 'id',
+    default: "id",
   },
   /**
    * 加载状态
@@ -154,143 +155,133 @@ const props = defineProps({
    * */
   load: {
     type: String,
-    default: 'loadMore',
+    default: "loadMore",
   },
   /** 显示底部加载状态 */
   showDivider: {
     type: Boolean,
     default: true,
   },
-})
-const {
-  list,
-  line,
-  keyField,
-  itemHeight,
-  containerHeight,
-  marginBottom,
-  padding,
-  borderRadius,
-  background,
-  border,
-} = toRefs(props)
-const emit = defineEmits<IListEmits>()
+});
+const emit = defineEmits<IListEmits>();
 
-const slots = useSlots()
+const slots = useSlots();
 // 滚动条距离顶部距离
-const scrollTop = ref(0)
+const scrollTop = ref(0);
 // 可视区域的高度
-const viewHeight = ref(0)
+const viewHeight = ref(0);
 const waterfall: {
-  left: AnyObject[]
-  right: AnyObject[]
+  left: AnyObject[];
+  right: AnyObject[];
 } = reactive({
   left: [],
   right: [],
-})
+});
 // 排列方式
-const arrange = computed(() => (line.value === 1 ? 'column' : 'row'))
-const boxHeight = getPx(itemHeight.value) + getPx(marginBottom.value)
-const listHeight = addUnit(containerHeight.value)
-const instance = getCurrentInstance()
+const arrange = computed(() => (props.line === 1 ? "column" : "row"));
+const boxHeight = getPx(props.itemHeight) + getPx(props.marginBottom);
+const listHeight = addUnit(props.containerHeight);
+const instance = getCurrentInstance();
 
 onMounted(() => {
   nextTick(async () => {
-    const res = await getRect('.hy-virtual-container', false, instance)
-    viewHeight.value = (res as UniApp.NodeInfo).height ?? 0
-  })
-})
+    const res = await getRect(".hy-virtual-container", false, instance);
+    viewHeight.value = (res as UniApp.NodeInfo).height ?? 0;
+  });
+});
 
 const itemStyle = computed((): CSSProperties => {
   return {
-    height: addUnit(itemHeight.value),
-    padding: addUnit(padding.value),
-    marginBottom: addUnit(marginBottom.value),
-    borderRadius: addUnit(borderRadius.value),
-    background: background.value,
-    border: border.value ? '1px solid #dadbde' : '',
-  }
-})
+    height: addUnit(props.itemHeight),
+    padding: addUnit(props.padding),
+    marginBottom: addUnit(props.marginBottom),
+    borderRadius: addUnit(props.borderRadius),
+    background: props.background,
+    border: props.border ? "1px solid #dadbde" : "",
+  };
+});
 
 /**
  * @description 虚拟列表真实展示数据：起始下标
  */
 const start = computed(() => {
-  const s = Math.floor(scrollTop.value / boxHeight)
-  return Math.max(0, s * line.value)
-})
+  const s = Math.floor(scrollTop.value / boxHeight);
+  return Math.max(0, s * props.line);
+});
 
 /**
  * @description 虚拟列表真实展示数据：结束下标
  */
 const over = computed(() => {
-  const o = Math.floor((scrollTop.value + viewHeight.value + 1) / boxHeight + 5)
-  return Math.min(list.value.length, o * line.value)
-})
+  const o = Math.floor(
+    (scrollTop.value + viewHeight.value + 1) / boxHeight + 5,
+  );
+  return Math.min(props.list.length, o * props.line);
+});
 
 /**
  * @description 计算虚拟列表的padding(保持列表高度完整且滚动条能正常滚动)
  */
 const paddingAttr = computed(() => {
-  const paddingTop = start.value * boxHeight
-  const paddingBottom = (list.value.length - over.value) * boxHeight
-  return `${paddingTop / line.value}px 0 ${paddingBottom / line.value}px`
-})
+  const paddingTop = start.value * boxHeight;
+  const paddingBottom = (props.list.length - over.value) * boxHeight;
+  return `${paddingTop / props.line}px 0 ${paddingBottom / props.line}px`;
+});
 
 /**
  * @description 虚拟列表真实展示数据
  */
-const virtualData = computed(() => {
-  return list.value.slice(start.value, over.value)
-})
+const virtualData = computed<(string | Record<string, any>)[]>(() => {
+  return props.list.slice(start.value, over.value);
+});
 
 watch(
   () => virtualData.value,
-  (newVal, oldValue) => {
-    waterfall.left.length = 0
-    waterfall.right.length = 0
-    if (line.value === 2 && newVal.every((item) => typeof item !== 'string')) {
+  (newVal) => {
+    waterfall.left.length = 0;
+    waterfall.right.length = 0;
+    if (props.line === 2 && newVal!.every((item) => typeof item !== "string")) {
       newVal.forEach((item, i) => {
         if (i % 2 === 0) {
-          waterfall.left.push(item as AnyObject)
+          waterfall.left.push(item as AnyObject);
         } else {
-          waterfall.right.push(item as AnyObject)
+          waterfall.right.push(item as AnyObject);
         }
-      })
+      });
     }
   },
   { immediate: true, deep: true },
-)
+);
 
 /**
  * @description 监听滚动条距离顶部距离，实时更新
  */
 const onScroll = async (e: any) => {
-  scrollTop.value = e.detail.scrollTop ?? 0
-}
+  scrollTop.value = e.detail.scrollTop ?? 0;
+};
 
 /**
  * @description 滚动底部函数
  * */
 const scrollToLower = () => {
-  emit('scrollToLower')
-}
+  emit("scrollToLower");
+};
 
 /**
  * @description 点击行触发函数
  * */
 const handleClick = (temp: string | AnyObject) => {
-  emit('click', temp)
-}
+  emit("click", temp);
+};
 
 /**
  * @description 获取默认插槽
  */
-const slotDefault = useSlots().default
+const slotDefault = useSlots().default;
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 .hy-virtual-container {
   height: v-bind(listHeight);
   &__list {

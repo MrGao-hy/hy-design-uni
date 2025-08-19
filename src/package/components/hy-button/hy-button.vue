@@ -26,8 +26,15 @@
     :class="['hy-button', 'hy-reset-button', bemClass, customClass]"
   >
     <template v-if="loading">
-      <HyLoading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></HyLoading>
-      <text class="hy-button__loading-text" :style="[{ fontSize: textSize + 'px' }]">
+      <HyLoading
+        :mode="loadingMode"
+        :size="loadingSize"
+        :color="loadingColor"
+      ></HyLoading>
+      <text
+        class="hy-button__loading-text"
+        :style="[{ fontSize: textSize + 'px' }]"
+      >
         {{ loadingText || text }}
       </text>
     </template>
@@ -49,7 +56,11 @@
       ></HyIcon>
       <!-- @slot 插入默认的值 -->
       <slot>
-        <text class="hy-button__text" :style="[{ fontSize: textSize + 'px' }]">{{ text }}</text>
+        <text
+          class="hy-button__text"
+          :style="[{ fontSize: textSize + 'px' }]"
+          >{{ text }}</text
+        >
       </slot>
     </template>
   </button>
@@ -72,7 +83,11 @@
     :style="[baseColor, customStyle]"
   >
     <template v-if="loading">
-      <HyLoading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></HyLoading>
+      <HyLoading
+        :mode="loadingMode"
+        :size="loadingSize"
+        :color="loadingColor"
+      ></HyLoading>
       <text
         class="hy-button__loading-text"
         :style="[nvueTextStyle]"
@@ -116,31 +131,31 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-button',
+  name: "hy-button",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import { bem, throttle } from "../../utils";
+import { ColorConfig } from "../../config";
+import type { IButtonEmits } from "./typing";
+import type HyIconProps from "../hy-icon/typing";
+// 组件
+import HyIcon from "../hy-icon/hy-icon.vue";
+import HyLoading from "../hy-loading/hy-loading.vue";
+
 /**
  * 该组件内部实现以uni-app的基础button组件为基础，进行二次封装
  * @displayName hy-button
  */
-defineOptions({})
-import { computed, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import { bem, throttle } from '../../utils'
-import { ColorConfig } from '../../config'
-import type { IButtonEmits } from './typing.d.ts'
-import type HyIconProps from '../hy-icon/typing'
-
-// 组件
-import HyIcon from '../hy-icon/hy-icon.vue'
-import HyLoading from '../hy-loading/hy-loading.vue'
+defineOptions({});
 
 // const props = withDefaults(defineProps<HyButtonProps>(), param)
 const props = defineProps({
@@ -155,7 +170,7 @@ const props = defineProps({
    * */
   type: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   /**
    * 按钮尺寸
@@ -163,7 +178,7 @@ const props = defineProps({
    * */
   size: {
     type: String,
-    default: 'medium',
+    default: "medium",
   },
   /**
    * 按钮形状
@@ -171,7 +186,7 @@ const props = defineProps({
    * */
   shape: {
     type: String,
-    default: 'square',
+    default: "square",
   },
   /** 按钮是否镂空，背景色透明  */
   plain: {
@@ -196,7 +211,7 @@ const props = defineProps({
    * */
   loadingMode: {
     type: String,
-    default: 'spinner',
+    default: "spinner",
   },
   /** 加载图标大小 */
   loadingSize: {
@@ -220,7 +235,7 @@ const props = defineProps({
    * */
   lang: {
     type: String,
-    default: 'en',
+    default: "en",
   },
   /** 会话来源，openType="contact"时有效 */
   sessionFrom: String,
@@ -267,135 +282,144 @@ const props = defineProps({
   customStyle: Object as unknown as PropType<CSSProperties>,
   /** 自定义外部类名 */
   customClass: String,
-})
-const { disabled, loading, throttleTime, stop, size, type, plain, color, icon } = toRefs(props)
-const emit = defineEmits<IButtonEmits>()
+});
+const emit = defineEmits<IButtonEmits>();
 
-const textColor = (ColorConfig as any)[type.value]
+const textColor = (ColorConfig as any)[props.type];
 
 /**
  * @description 生成bem风格的类名
  */
 const bemClass = computed(() => {
   // this.bem为一个computed变量，在mixin中
-  if (!color.value) {
-    return bem('button', props, ['type', 'shape', 'size'], ['disabled', 'plain', 'hairline'])
+  if (!props.color) {
+    return bem(
+      "button",
+      props,
+      ["type", "shape", "size"],
+      ["disabled", "plain", "hairline"],
+    );
   } else {
     // 由于nvue的原因，在有color参数时，不需要传入type，否则会生成type相关的类型，影响最终的样式
-    return bem('button', props, ['shape', 'size'], ['disabled', 'plain', 'hairline'])
+    return bem(
+      "button",
+      props,
+      ["shape", "size"],
+      ["disabled", "plain", "hairline"],
+    );
   }
-})
+});
 
 const loadingColor = computed(() => {
-  if (plain.value) {
+  if (props.plain) {
     // 如果有设置color值，则用color值，否则使用type主题颜色
-    return color.value ? color.value : ''
+    return props.color ? props.color : "";
   }
-  if (type.value === 'info') {
-    return '#c9c9c9'
+  if (props.type === "info") {
+    return "#c9c9c9";
   }
-  return '#fff'
-})
+  return "#fff";
+});
 
 const iconColorCom = computed((): string => {
   // 如果是镂空状态，设置了color就用color值，否则使用主题颜色，
-  if (icon.value?.color) return icon.value?.color
-  if (plain.value) {
-    return color.value ? color.value : ''
+  if (props.icon?.color) return props.icon?.color;
+  if (props.plain) {
+    return props.color ? props.color : "";
   } else {
-    return '#ffffff'
+    return "#ffffff";
   }
-})
+});
 const baseColor = computed((): CSSProperties => {
-  let style: CSSProperties = {}
-  if (color.value) {
+  let style: CSSProperties = {};
+  if (props.color) {
     // 针对自定义了color颜色的情况，镂空状态下，就是用自定义的颜色
-    style.color = plain.value ? color.value : 'white'
-    if (!plain.value) {
+    style.color = props.plain ? props.color : "white";
+    if (!props.plain) {
       // 非镂空，背景色使用自定义的颜色
-      style['background'] = color.value
+      style["background"] = props.color;
     }
-    if (color.value.indexOf('gradient') !== -1) {
+    if (props.color.indexOf("gradient") !== -1) {
       // 如果自定义的颜色为渐变色，不显示边框，以及通过backgroundImage设置渐变色
       // weex文档说明可以写borderWidth的形式，为什么这里需要分开写？
       // 因为weex是阿里巴巴为了部门业绩考核而做的你懂的东西，所以需要这么写才有效
-      style.borderTopWidth = 0
-      style.borderRightWidth = 0
-      style.borderBottomWidth = 0
-      style.borderLeftWidth = 0
-      if (!plain.value) {
-        style.backgroundImage = color.value
+      style.borderTopWidth = 0;
+      style.borderRightWidth = 0;
+      style.borderBottomWidth = 0;
+      style.borderLeftWidth = 0;
+      if (!props.plain) {
+        style.backgroundImage = props.color;
       }
     } else {
       // 非渐变色，则设置边框相关的属性
-      style.borderColor = color.value
-      style.borderWidth = '1px'
-      style.borderStyle = 'solid'
+      style.borderColor = props.color;
+      style.borderWidth = "1px";
+      style.borderStyle = "solid";
     }
   } else {
     // 针对自定义了color颜色的情况，镂空状态下，就是用自定义的颜色
-    // style.color = plain.value ? textColor : "";
+    // style.color = props.plain ? textColor : "";
   }
-  return style
-})
+  return style;
+});
 
 // nvue版本按钮的字体不会继承父组件的颜色，需要对每一个text组件进行单独的设置
 const nvueTextStyle = computed((): CSSProperties => {
-  let style: CSSProperties = {}
+  let style: CSSProperties = {};
   // 针对自定义了color颜色的情况，镂空状态下，就是用自定义的颜色
-  if (type.value === 'info') {
-    style.color = '#323233'
+  if (props.type === "info") {
+    style.color = "#323233";
   }
-  if (color.value) {
-    style.color = plain.value ? color.value : 'white'
+  if (props.color) {
+    style.color = props.plain ? props.color : "white";
   }
-  style.fontSize = textSize.value + 'px'
-  return style
-})
+  style.fontSize = textSize.value + "px";
+  return style;
+});
 /**
  * @description 字体大小
  * */
 const textSize = computed((): number => {
-  let fontSize = 14
-  if (size.value === 'large') fontSize = 16
-  if (size.value === 'medium') fontSize = 14
-  if (size.value === 'small') fontSize = 12
-  if (size.value === 'mini') fontSize = 10
-  return fontSize
-})
+  let fontSize = 14;
+  if (props.size === "large") fontSize = 16;
+  if (props.size === "medium") fontSize = 14;
+  if (props.size === "small") fontSize = 12;
+  if (props.size === "mini") fontSize = 10;
+  return fontSize;
+});
 
 const clickHandler = (e: any) => {
   // 非禁止并且非加载中，才能点击
-  if (!disabled.value && !loading.value) {
+  if (!props.disabled && !props.loading) {
     // 进行节流控制，每this.throttle毫秒内，只在开始处执行
     throttle(() => {
-      emit('click', e)
-    }, throttleTime.value)
+      emit("click", e);
+    }, props.throttleTime);
   }
   // 是否阻止事件传播
-  stop.value && e.stopPropagation()
-}
+  props.stop && e.stopPropagation();
+};
 
 const getphonenumber = (e: any) => {
-  emit('getphonenumber', e)
-}
+  emit("getphonenumber", e);
+};
 const getuserinfo = (e: any) => {
-  emit('getuserinfo', e)
-}
+  emit("getuserinfo", e);
+};
 const error = (e: any) => {
-  emit('error', e)
-}
+  emit("error", e);
+};
 const opensetting = (e: any) => {
-  emit('opensetting', e)
-}
+  emit("opensetting", e);
+};
 const launchapp = (e: any) => {
-  emit('launchapp', e)
-}
+  emit("launchapp", e);
+};
 const agreeprivacyauthorization = (e: any) => {
-  emit('agreeprivacyauthorization', e)
-}
+  emit("agreeprivacyauthorization", e);
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

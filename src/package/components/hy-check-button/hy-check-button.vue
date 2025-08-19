@@ -2,7 +2,7 @@
   <view class="hy-check-button">
     <template v-for="(item, i) in columns_1" :key="i">
       <HyTag
-        :text="item?.[fieldNames.label] as string | number"
+        :text="item?.[fieldNames.label] as string"
         :name="i"
         :type="type"
         :size="size"
@@ -17,27 +17,28 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-check-button',
+  name: "hy-check-button",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { toRefs, watch, ref, type PropType } from 'vue'
-import type { ICheckButtonEmits, IFieldNames } from './typing'
-import type { CheckboxColumnsVo } from './typing'
-import HyTag from '../hy-tag/hy-tag.vue'
-import { isArray } from '../../utils'
+import { toRefs, watch, ref, type PropType } from "vue";
+import type { ICheckButtonEmits, IFieldNames } from "./typing";
+import type { CheckboxColumnsVo } from "./typing";
+import HyTag from "../hy-tag/hy-tag.vue";
+import { isArray, isNumber } from "../../utils";
+import type { TagParamsVo } from "../hy-tag/typing";
 
 /**
  * 该组件内部实现以tag二次封装按钮复选框和单选框
  * @displayName hy-check-button
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -56,9 +57,9 @@ const props = defineProps({
   fieldNames: {
     type: Object as unknown as PropType<IFieldNames>,
     default: {
-      label: 'label',
-      value: 'value',
-      checked: 'checked',
+      label: "label",
+      value: "value",
+      checked: "checked",
     },
   },
   /**
@@ -67,7 +68,7 @@ const props = defineProps({
    * */
   selectType: {
     type: String,
-    default: 'checkbox',
+    default: "checkbox",
   },
   /** 禁用 */
   disabled: {
@@ -77,12 +78,12 @@ const props = defineProps({
   /** 每行几列，每列等宽 */
   col: {
     type: String,
-    default: 'repeat(3, 1fr)',
+    default: "repeat(3, 1fr)",
   },
   /** 设置每行间距,需要加单位 */
   gap: {
     type: String,
-    default: '10px',
+    default: "10px",
   },
   /**
    * 标签类型
@@ -90,7 +91,7 @@ const props = defineProps({
    * */
   type: {
     type: String,
-    default: 'primary',
+    default: "primary",
   },
   /**
    * 标签的大小
@@ -98,7 +99,7 @@ const props = defineProps({
    * */
   size: {
     type: String,
-    default: 'medium',
+    default: "medium",
   },
   /**
    * 标签的形状
@@ -106,51 +107,57 @@ const props = defineProps({
    * */
   shape: {
     type: String,
-    default: 'square',
+    default: "square",
   },
-})
-const { modelValue, columns, fieldNames, disabled, selectType } = toRefs(props)
-const emit = defineEmits<ICheckButtonEmits>()
+});
+const emit = defineEmits<ICheckButtonEmits>();
 
-const isDisabled = (disabledVal?: boolean): boolean => disabled.value || !!disabledVal
+const isDisabled = (disabledVal?: boolean): boolean =>
+  props.disabled || !!disabledVal;
 
-const columns_1 = ref<CheckboxColumnsVo[]>()
+const columns_1 = ref<CheckboxColumnsVo[]>();
 
 watch(
-  () => modelValue.value,
+  () => props.modelValue,
   (newValue: string | number | (string | number)[]) => {
-    if (!isArray(columns.value) || !columns.value.length) return
-    columns_1.value = columns.value.map((item) => {
+    if (!isArray(props.columns) || !props.columns.length) return;
+    columns_1.value = props.columns.map((item) => {
       if (isArray(newValue)) {
-        item[fieldNames.value.checked] = newValue.includes(item[fieldNames.value.value] as string)
+        item[props.fieldNames.checked] = newValue.includes(
+          item[props.fieldNames.value] as string,
+        );
       } else {
-        item[fieldNames.value.checked] = newValue === item[fieldNames.value.value]
+        item[props.fieldNames.checked] =
+          newValue === item[props.fieldNames.value];
       }
-      return item
-    })
+      return item;
+    });
   },
   { immediate: true },
-)
+);
 
-const onCheckbox = ({ name }: { name: number }) => {
-  if (selectType.value === 'checkbox') {
-    columns.value[name][fieldNames.value.checked] = !columns.value[name][fieldNames.value.checked]
-    emit(
-      'update:modelValue',
-      columns.value
-        .filter((item) => item[fieldNames.value.checked])
-        .map((item) => item[fieldNames.value.value]),
-    )
-  } else {
-    emit('update:modelValue', columns.value[name][fieldNames.value.value])
+const onCheckbox = ({ name }: TagParamsVo) => {
+  if (isNumber(name)) {
+    const index = Number(name);
+    if (props.selectType === "checkbox") {
+      props.columns[index][props.fieldNames.checked] =
+        !props.columns[index][props.fieldNames.checked];
+      emit(
+        "update:modelValue",
+        props.columns
+          .filter((item) => item[props.fieldNames.checked])
+          .map((item) => item[props.fieldNames.value]),
+      );
+    } else {
+      emit("update:modelValue", props.columns[index][props.fieldNames.value]);
+    }
+    emit("change", props.columns[index]);
   }
-
-  emit('change', columns.value[name])
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../libs/css/mixin.scss';
+@import "../../libs/css/mixin.scss";
 @include b(check-button) {
   display: grid;
   grid-template-columns: v-bind(col);

@@ -63,9 +63,9 @@ export default {
 
 <script setup lang="ts">
 import { computed, toRefs, ref, watch } from "vue";
-import type { CSSProperties } from "vue";
+import type { CSSProperties, PropType } from "vue";
 import type { IAvatarEmit } from "./typing";
-import { addUnit, random } from "../../utils";
+import { addUnit, isNumber, random } from "../../utils";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 
@@ -144,21 +144,9 @@ const props = defineProps({
   /** 自定义输入框外部样式 */
   customStyle: {
     type: Object as PropType<CSSProperties>,
+    default: () => {},
   },
 });
-const {
-  src,
-  defaultUrl,
-  text,
-  icon,
-  randomBgColor,
-  colorIndex,
-  bgColor,
-  size,
-  shape,
-  name,
-  customStyle,
-} = toRefs(props);
 const emit = defineEmits<IAvatarEmit>();
 
 const base64Avatar =
@@ -186,11 +174,11 @@ const colors = ref<string[]>([
   "#73d1f1",
   "#80a7dc",
 ]);
-const avatarUrl = ref(src.value);
+const avatarUrl = ref(props.src);
 const allowMp = ref<boolean>(false);
 
 watch(
-  () => src.value,
+  () => props.src,
   (newVal) => {
     avatarUrl.value = newVal;
     // 如果没有传src，则主动触发error事件，用于显示默认的头像，否则src为''空字符等的时候，会无内容展示
@@ -204,23 +192,23 @@ watch(
 const avatarStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {
     backgroundColor:
-      text.value || icon.value
-        ? randomBgColor.value
-          ? colors.value[colorIndex.value ? colorIndex.value : random(0, 19)]
-          : bgColor.value
+      props.text || props.icon
+        ? props.randomBgColor
+          ? colors.value[props.colorIndex ? props.colorIndex : random(0, 19)]
+          : props.bgColor
         : "transparent",
   };
-  if (typeof size.value === "number") {
-    style.width = addUnit(size.value);
-    style.height = addUnit(size.value);
+  if (isNumber(props.size)) {
+    style.width = addUnit(props.size);
+    style.height = addUnit(props.size);
   }
 
   return Object.assign(style, customStyle.value);
 });
 const avatarClass = computed<string[]>(() => {
   const classes: string[] = [`hy-avatar--${shape.value}`];
-  if (typeof size.value === "string") {
-    classes.push(`hy-avatar--${size.value}`);
+  if (typeof props.size === "string") {
+    classes.push(`hy-avatar--${props.size}`);
   }
 
   return classes;
@@ -240,7 +228,7 @@ init();
  * @description 判断传入的name属性，是否图片路径，只要带有"/"均认为是图片形式
  * */
 const isImg = () => {
-  return src.value.indexOf("/") !== -1;
+  return props.src.indexOf("/") !== -1;
 };
 // 图片加载时失败时触发
 function errorHandler() {

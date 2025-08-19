@@ -24,7 +24,9 @@
             :top="item?.iconConfig?.top || iconConfig?.top"
             :stop="item?.iconConfig?.stop || iconConfig?.stop"
             :round="item?.iconConfig?.round || iconConfig?.round || 6"
-            :customStyle="item?.iconConfig?.customStyle || iconConfig?.customStyle"
+            :customStyle="
+              item?.iconConfig?.customStyle || iconConfig?.customStyle
+            "
           ></HyIcon>
         </slot>
       </view>
@@ -34,29 +36,29 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-grid',
+  name: "hy-grid",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { CustomKeysVo, GridItemVo, IGridEmits } from './typing'
-import { addUnit } from '../../utils'
-import type HyIconProps from '../hy-icon/typing'
+import { computed } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { CustomKeysVo, GridItemVo, IGridEmits } from "./typing";
+import { addUnit } from "../../utils";
+import type HyIconProps from "../hy-icon/typing";
 // 组件
-import HyIcon from '../hy-icon/hy-icon.vue'
+import HyIcon from "../hy-icon/hy-icon.vue";
 
 /**
  * 宫格组件一般用于同时展示多个同类项目的场景，可以给宫格的项目设置徽标组件(badge)，或者图标等，也可以扩展为左右滑动的轮播形式
  * @displayName hy-grid
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
@@ -69,8 +71,8 @@ const props = defineProps({
   customKeys: {
     type: Object as PropType<CustomKeysVo>,
     default: () => ({
-      name: 'name',
-      icon: 'icon',
+      name: "name",
+      icon: "icon",
     }),
   },
   /** 宫格的列数 */
@@ -86,7 +88,7 @@ const props = defineProps({
   /** 单个宫格高度 */
   itemHeight: {
     type: [Number, String],
-    default: '80px',
+    default: "80px",
   },
   /**
    * 宫格对齐方式，表现为数量少的时候，靠左，居中，还是靠右
@@ -94,7 +96,7 @@ const props = defineProps({
    * */
   align: {
     type: String,
-    default: 'left',
+    default: "left",
   },
   /** 间隔 */
   gap: {
@@ -104,7 +106,7 @@ const props = defineProps({
   /** 宫格的背景颜色 */
   bgColor: {
     type: String,
-    default: 'transparent',
+    default: "transparent",
   },
   /** 图标属性api配置集合 */
   iconConfig: Object as PropType<HyIconProps>,
@@ -112,47 +114,46 @@ const props = defineProps({
   customStyle: Object as PropType<CSSProperties>,
   /** 自定义外部类名 */
   customClass: String,
-})
-const { align, customStyle, bgColor, itemHeight, border } = toRefs(props)
-const emit = defineEmits<IGridEmits>()
+});
+const emit = defineEmits<IGridEmits>();
 
 /**
  * @description 宫格对齐方式
  * */
 const gridStyle = computed<CSSProperties>(() => {
-  let style: CSSProperties = {}
-  switch (align.value) {
-    case 'left':
-      style.justifyContent = 'flex-start'
-      break
-    case 'center':
-      style.justifyContent = 'center'
-      break
-    case 'right':
-      style.justifyContent = 'flex-end'
-      break
+  let style: CSSProperties = {};
+  switch (props.align) {
+    case "left":
+      style.justifyContent = "flex-start";
+      break;
+    case "center":
+      style.justifyContent = "center";
+      break;
+    case "right":
+      style.justifyContent = "flex-end";
+      break;
     default:
-      style.justifyContent = 'flex-start'
+      style.justifyContent = "flex-start";
   }
-  return Object.assign(style, customStyle.value || {})
-})
+  return Object.assign(style, props.customStyle);
+});
 
 const itemStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {
-    background: bgColor.value,
-    height: addUnit(itemHeight.value),
-    width: '100%',
-    border: border.value ? '0.5px solid #c8c7cc66' : '',
-  }
-  return style
-})
+    background: props.bgColor,
+    height: addUnit(props.itemHeight),
+    width: "100%",
+    border: props.border ? "0.5px solid #c8c7cc66" : "",
+  };
+  return style;
+});
 
 /**
  * @description 点击事件
  * */
 const childClick = (name: string | Record<string, any>) => {
-  emit('click', name)
-}
+  emit("click", name);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -160,5 +161,5 @@ const childClick = (name: string | Record<string, any>) => {
   grid-gap: v-bind(gap);
   grid-template-columns: repeat(v-bind(col), 1fr);
 }
-@import './index.scss';
+@import "./index.scss";
 </style>

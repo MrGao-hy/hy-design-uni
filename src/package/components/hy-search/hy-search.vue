@@ -95,48 +95,57 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-search',
+  name: "hy-search",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, nextTick, toRefs, ref, watch } from 'vue'
-import type { PropType, CSSProperties } from 'vue'
-import type { ISearchEmits } from './typing'
-import { sleep, addUnit } from '../../utils'
-import { IconConfig } from '../../config'
-import HyIcon from '../hy-icon/hy-icon.vue'
-import type HyIconProps from '../hy-icon/typing'
+import { computed, nextTick, ref, watch } from "vue";
+import type { PropType, CSSProperties } from "vue";
+import type { ISearchEmits } from "./typing";
+import { sleep, addUnit } from "../../utils";
+import { IconConfig } from "../../config";
+import HyIcon from "../hy-icon/hy-icon.vue";
+import type HyIconProps from "../hy-icon/typing";
+import type {
+  InputOnBlurEvent,
+  InputOnConfirmEvent,
+  InputOnFocusEvent,
+  InputOnInputEvent,
+} from "@uni-helper/uni-types";
 
 /**
  * 搜索组件，集成了常见搜索框所需功能，用户可以一键引入，开箱即用。
  * @displayName hy-search
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
   /** 输入框初始值 */
-  modelValue: String,
+  modelValue: {
+    type: String,
+    default: "",
+  },
   /**
    * 搜索框形状
    * @values circle,square
    * */
   shape: {
     type: String,
-    default: 'circle',
+    default: "circle",
   },
   /** 搜索框背景颜色 */
   bgColor: String,
   /** 占位文字内容 */
   placeholder: {
     type: String,
-    default: '请输入关键字',
+    default: "请输入关键字",
   },
   /** 是否启用清除控件 */
   clear: {
@@ -156,7 +165,7 @@ const props = defineProps({
   /** 右侧控件文字 */
   actionText: {
     type: String,
-    default: '搜索',
+    default: "搜索",
   },
   /** 右侧控件的样式，对象形式 */
   actionStyle: {
@@ -166,7 +175,7 @@ const props = defineProps({
   /** 输入框内容水平对齐方式 */
   inputAlign: {
     type: String,
-    default: 'left',
+    default: "left",
   },
   /** 自定义输入框样式，对象形式 */
   inputStyle: {
@@ -181,14 +190,14 @@ const props = defineProps({
   /** 边框颜色，配置了颜色，才会有边框 */
   borderColor: {
     type: String,
-    default: 'transparent',
+    default: "transparent",
   },
   /** 输入框字体颜色 */
   color: String,
   /** placeholder的颜色 */
   placeholderColor: {
     type: String,
-    default: '#909399',
+    default: "#909399",
   },
   /** 输入框左边的图标属性集合，可以为图标名称或图片路径 */
   searchIcon: Object as PropType<HyIconProps>,
@@ -230,111 +239,109 @@ const props = defineProps({
   },
   /** 自定义外部类名 */
   customClass: String,
-})
-const { focus, modelValue, showAction, animation, disabled } = toRefs(props)
-const emit = defineEmits<ISearchEmits>()
+});
+const emit = defineEmits<ISearchEmits>();
 
-const keyword = ref<string>('')
-// 是否显示右边的清除图标
-const showClear = ref<boolean>(false)
-const show = ref<boolean>(false)
+const keyword = ref<string>("");
+// 显示右边搜索按钮
+const show = ref<boolean>(false);
 // 标记input当前状态是否处于聚焦中，如果是，才会显示右侧的清除控件
-const focused = ref(focus.value)
+const focused = ref(props.focus);
 
 watch(
   () => keyword.value,
   (newValue: string) => {
-    emit('update:modelValue', newValue)
-    emit('change', newValue)
+    emit("update:modelValue", newValue);
+    emit("change", newValue);
   },
-)
+);
 
 watch(
-  () => modelValue.value,
+  () => props.modelValue,
   (newValue: string) => {
-    keyword.value = newValue
+    keyword.value = newValue;
   },
   { immediate: true },
-)
+);
 
 const showActionBtn = computed<boolean>(() => {
-  return !animation.value && showAction.value
-})
+  return !props.animation && props.showAction;
+});
 
 /**
- * @description
+ * 值改变触发
  * */
-const inputChange = (e: Event) => {
-  keyword.value = e.detail.value
-}
+const inputChange = (e: InputOnInputEvent) => {
+  keyword.value = e.detail.value;
+};
 /**
  * @description 清空输入
  * */
 const clear = () => {
-  keyword.value = ''
+  keyword.value = "";
   // 延后发出事件，避免在父组件监听clear事件时，value为更新前的值(不为空)
   nextTick(() => {
-    emit('clear')
-  })
-}
+    emit("clear");
+  });
+};
 /**
  * @description 确定搜索
  * */
-const search = (e: InputEvent) => {
-  emit('search', e.detail.value)
+const search = (e: InputOnConfirmEvent) => {
+  emit("search", e, e.detail.value);
   try {
     // 收起键盘
-    uni.hideKeyboard()
+    uni.hideKeyboard();
   } catch (e) {}
-}
+};
 /**
  * @description 点击右边自定义按钮的事件
  */
 const confirm = () => {
-  emit('confirm', keyword.value)
+  emit("confirm", keyword.value);
   try {
     // 收起键盘
-    uni.hideKeyboard()
+    uni.hideKeyboard();
   } catch (e) {}
-}
+};
 /**
  * @description 获取焦点
  * */
-const getFocus = () => {
-  focused.value = true
+const getFocus = (e: InputOnFocusEvent) => {
+  focused.value = true;
   // 开启右侧搜索按钮展开的动画效果
-  if (animation.value && showAction.value) show.value = true
-  emit('focus', keyword.value)
-}
+  if (props.animation && props.showAction) show.value = true;
+  emit("focus", e, keyword.value);
+};
 /**
  * @description 失去焦点
  */
-const blur = async () => {
+const blur = async (e: InputOnBlurEvent) => {
   // 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
   // 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
-  show.value = false
-  emit('blur', keyword.value)
-  await sleep(100)
-  focused.value = false
-}
+  show.value = false;
+  emit("blur", e, keyword.value);
+  await sleep(100);
+  focused.value = false;
+};
 /**
  * @description 点击搜索框，只有disabled=true时才发出事件，因为禁止了输入，意味着是想跳转真正的搜索页
  * */
 const clickHandler = () => {
-  if (disabled.value) emit('click')
-}
+  if (props.disabled) emit("click");
+};
 /**
  * @description 点击左边图标
  * */
 const clickIcon = () => {
-  emit('clickIcon', keyword.value)
+  emit("clickIcon", keyword.value);
   try {
     // 收起键盘
-    uni.hideKeyboard()
+    uni.hideKeyboard();
   } catch (e) {}
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

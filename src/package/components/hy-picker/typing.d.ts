@@ -113,7 +113,7 @@ export type SelectValueVo = {
   indexs?: number[];
   // values为当前变化列的数组内容
   values?: Array<any>;
-  columnIndex?: Array<number>;
+  columnIndex?: number;
 };
 export interface IPickerEmits {
   /** 关闭选择器时触发 */

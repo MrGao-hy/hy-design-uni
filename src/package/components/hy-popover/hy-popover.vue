@@ -8,11 +8,14 @@
     <!-- 使用插槽时无法获取正确宽高 -->
     <view class="hy-popover__pos hy-popover__hidden" id="pos">
       <view class="hy-popover__container">
-        <view v-if="!slots.content && mode === 'normal'" class="hy-popover__inner">
+        <view
+          v-if="!slots.content && mode === 'normal'"
+          class="hy-popover__inner"
+        >
           {{ content }}
         </view>
         <view
-          v-if="!slots.content && mode === 'menu' && typeof content === 'object'"
+          v-if="!slots.content && mode === 'menu' && isArray(content)"
           class="hy-popover__menu"
         >
           <view
@@ -21,7 +24,11 @@
             class="hy-popover__menu-inner"
             @click="menuClick(index)"
           >
-            <hy-icon v-if="item.iconClass" :name="item.iconClass" custom-class="hy-popover__icon" />
+            <hy-icon
+              v-if="item.iconClass"
+              :name="item.iconClass"
+              custom-class="hy-popover__icon"
+            />
             <text>{{ item.content }}</text>
           </view>
         </view>
@@ -32,7 +39,7 @@
     </view>
     <hy-transition
       custom-class="hy-popover__pos"
-      :custom-style="popover.popStyle"
+      :custom-style="popover.popStyle.value"
       :show="showPopover"
       name="fade"
       :duration="200"
@@ -46,14 +53,17 @@
         <!-- 三角形 -->
 
         <!-- 普通模式 -->
-        <view v-if="!slots.content && mode === 'normal'" class="hy-popover__inner">
+        <view
+          v-if="!slots.content && mode === 'normal'"
+          class="hy-popover__inner"
+        >
           {{ content }}
         </view>
         <!-- 普通模式 -->
 
         <!-- 列表模式 -->
         <view
-          v-if="!slots.content && mode === 'menu' && Array.isArray(content)"
+          v-if="!slots.content && mode === 'menu' && isArray(content)"
           class="hy-popover__menu"
         >
           <view
@@ -69,7 +79,9 @@
               custom-class="hy-popover__icon"
             />
             <view style="display: inline-block">
-              {{ typeof item === 'object' && item.content ? item.content : item }}
+              {{
+                typeof item === "object" && item.content ? item.content : item
+              }}
             </view>
           </view>
         </view>
@@ -94,13 +106,13 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-popover',
+  name: "hy-popover",
   options: {
     virtualHost: true,
     addGlobalClass: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script lang="ts" setup>
@@ -110,25 +122,29 @@ import {
   onBeforeMount,
   onBeforeUnmount,
   ref,
-  toRefs,
   useSlots,
   watch,
   inject,
-} from 'vue'
-import type { PropType, CSSProperties } from 'vue'
-import type { IOffset, IPopoverEmits, PopoverContentVo, PopoverExpose } from './typing'
-import { isArray } from '../../utils'
-import { type Queue, queueKey, usePopover } from '../../composables'
-import { closeOther, pushToQueue, removeFromQueue } from '../../common'
+} from "vue";
+import type { PropType, CSSProperties } from "vue";
+import type {
+  IOffset,
+  IPlacementVo,
+  IPopoverEmits,
+  PopoverExpose,
+} from "./typing";
+import { isArray } from "../../utils";
+import { type Queue, queueKey, usePopover } from "../../composables";
+import { closeOther, pushToQueue, removeFromQueue } from "../../common";
 // 组件
-import HyIcon from '../hy-icon/hy-icon.vue'
-import HyTransition from '../hy-transition/hy-transition.vue'
+import HyIcon from "../hy-icon/hy-icon.vue";
+import HyTransition from "../hy-transition/hy-transition.vue";
 
 /**
  * 常用于展示提示信息。
  * @displayName hy-popover
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -138,14 +154,17 @@ const props = defineProps({
     default: false,
   },
   /** 显示的内容，也可以通过 slot#content 传入 */
-  content: [String, Array],
+  content: {
+    type: [String, Array] as PropType<string | any[]>,
+    required: true,
+  },
   /**
    * 指定 popover 的放置位置
    * @values top,top-start,top-end,bottom,bottom-start,bottom-end,left,left-start,left-end,right,right-start,right-end
    * */
   placement: {
-    type: String,
-    default: 'bottom',
+    type: String as PropType<IPlacementVo>,
+    default: "bottom",
   },
   /** 控制 popover 的显示状态 */
   offset: {
@@ -168,118 +187,119 @@ const props = defineProps({
    * */
   mode: {
     type: String,
-    default: 'normal',
+    default: "normal",
   },
   /** 定义需要用到的外部样式 */
   customStyle: Object as PropType<CSSProperties>,
   /** 自定义外部类名 */
   customClass: String,
-})
-const { modelValue, content, mode, placement } = toRefs(props)
-const emit = defineEmits<IPopoverEmits>()
+});
+const emit = defineEmits<IPopoverEmits>();
 
-const slots = useSlots()
-const queue = inject<Queue | null>(queueKey, null)
-const selector: string = 'popover'
-const { proxy } = getCurrentInstance() as any
-const popover = usePopover()
-const showPopover = ref<boolean>(false) // 控制popover显隐
+const slots = useSlots();
+const queue = inject<Queue | null>(queueKey, null);
+const selector: string = "popover";
+const { proxy } = getCurrentInstance() as any;
+const popover = usePopover();
+const showPopover = ref<boolean>(false); // 控制popover显隐
 
 watch(
-  () => content.value,
+  () => props.content,
   (newVal) => {
-    if (mode.value === 'normal' && typeof newVal !== 'string') {
-      console.error('在“normal”模式下，值类型必须为字符串类型。')
-    } else if (mode.value === 'menu' && !isArray(newVal)) {
-      console.error('在“menu”模式下，值类型必须是数组类型。')
+    if (props.mode === "normal" && typeof newVal !== "string") {
+      console.error("在“normal”模式下，值类型必须为字符串类型。");
+    } else if (props.mode === "menu" && !isArray(newVal)) {
+      console.error("在“menu”模式下，值类型必须是数组类型。");
     }
   },
-)
+);
 
 watch(
   () => props.placement,
-  () => {
-    popover.init(placement.value, true, selector)
+  (newVal) => {
+    popover.init(newVal, true, selector);
   },
-)
+);
 
 watch(
-  () => modelValue.value,
+  () => props.modelValue,
   (newValue: boolean) => {
-    showPopover.value = newValue
+    showPopover.value = newValue;
   },
-)
+);
 
 watch(
   () => showPopover.value,
   (newValue) => {
     if (newValue) {
-      popover.control(placement.value, props.offset)
+      popover.control(props.placement, props.offset);
       // provide/inject在微信小程序不能使用，所以执行两个保存方法
       if (queue && queue.closeOther) {
-        queue.closeOther(proxy)
+        queue.closeOther(proxy);
       } else {
-        closeOther(proxy)
+        closeOther(proxy);
       }
     }
-    popover.showStyle.value = newValue ? 'display: inline-block;' : 'display: none;'
-    emit('change', { show: newValue })
-    emit(`${newValue ? 'open' : 'close'}`)
+    popover.showStyle.value = newValue
+      ? "display: inline-block;"
+      : "display: none;";
+    emit("change", { show: newValue });
+    emit(`${newValue ? "open" : "close"}`);
   },
-)
+);
 
 onMounted(() => {
-  popover.init(placement.value, true, selector)
-})
+  popover.init(props.placement, true, selector);
+});
 
 onBeforeMount(() => {
   if (queue && queue.pushToQueue) {
-    queue.pushToQueue(proxy)
+    queue.pushToQueue(proxy);
   } else {
-    pushToQueue(proxy)
+    pushToQueue(proxy);
   }
-  popover.showStyle.value = showPopover.value ? 'opacity: 1;' : 'opacity: 0;'
-})
+  popover.showStyle.value = showPopover.value ? "opacity: 1;" : "opacity: 0;";
+});
 
 onBeforeUnmount(() => {
   if (queue && queue.removeFromQueue) {
-    queue.removeFromQueue(proxy)
+    queue.removeFromQueue(proxy);
   } else {
-    removeFromQueue(proxy)
+    removeFromQueue(proxy);
   }
-})
+});
 
 const menuClick = (index: number) => {
-  updateModelValue(false)
-  emit('menuClick', {
-    item: (props.content as Array<Record<string, any>>)[index],
+  updateModelValue(false);
+  emit("menuClick", {
+    item: isArray(props.content) ? props.content[index] : props.content,
     index,
-  })
-}
+  });
+};
 
 const toggle = () => {
-  if (props.disabled) return
-  updateModelValue(!showPopover.value)
-}
+  if (props.disabled) return;
+  updateModelValue(!showPopover.value);
+};
 
 const open = () => {
-  updateModelValue(true)
-}
+  updateModelValue(true);
+};
 
 const close = () => {
-  updateModelValue(false)
-}
+  updateModelValue(false);
+};
 
 function updateModelValue(value: boolean) {
-  showPopover.value = value
-  emit('update:modelValue', value)
+  showPopover.value = value;
+  emit("update:modelValue", value);
 }
 
 defineExpose<PopoverExpose>({
   open,
   close,
-})
+});
 </script>
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

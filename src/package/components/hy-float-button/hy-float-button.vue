@@ -74,7 +74,14 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, getCurrentInstance, onMounted, ref, toRefs } from "vue";
+import {
+  computed,
+  getCurrentInstance,
+  onMounted,
+  ref,
+  reactive,
+  watch,
+} from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IFloatButtonEmits, IGap } from "./typing";
 import type { MenusType } from "./typing";
@@ -140,7 +147,7 @@ const props = defineProps({
    * @values small,medium,large
    * */
   size: {
-    type: String,
+    type: [String, Number] as PropType<string | number>,
     default: "medium",
   },
   /**
@@ -196,21 +203,6 @@ const props = defineProps({
   /** 自定义外部类名 */
   customClass: String,
 });
-const {
-  menus,
-  customStyle,
-  gap,
-  zIndex,
-  bgColor,
-  text,
-  textColor,
-  size,
-  fixed,
-  direction,
-  draggable,
-  position,
-  expandable,
-} = toRefs(props);
 const emit = defineEmits<IFloatButtonEmits>();
 
 const instance = getCurrentInstance();
@@ -220,7 +212,7 @@ const btnSize: AnyObject = {
   large: "70px",
 };
 const open = ref(false);
-const rotate = computed(() => (open.value && !text.value ? "45deg" : "0deg"));
+const rotate = computed(() => (open.value && !props.text ? "45deg" : "0deg"));
 const soleId = `hy-float-button__${guid()}`;
 const fabSize = reactive({ width: 0, height: 0 }); // 悬浮按钮大小
 const screen = reactive({ width: 0, height: 0 });
@@ -247,7 +239,7 @@ onMounted(async () => {
 });
 
 watch(
-  () => position.value,
+  () => props.position,
   () => initPosition(),
 );
 
@@ -259,7 +251,7 @@ const initPosition = () => {
   const centerY = (maxTop + minTop) / 2;
   const centerX = (maxLeft + minLeft) / 2;
 
-  switch (position.value) {
+  switch (props.position) {
     case "left-top":
       currentCoordinate.top = minTop;
       currentCoordinate.left = minLeft;
@@ -316,12 +308,12 @@ const initPosition = () => {
  * */
 const getFloatBtnSize = computed(() => {
   if (
-    typeof size.value === "string" &&
-    Object.keys(btnSize).includes(size.value)
+    typeof props.size === "string" &&
+    Object.keys(btnSize).includes(props.size)
   ) {
-    return btnSize[size.value];
+    return btnSize[props.size];
   } else {
-    return addUnit(size.value);
+    return addUnit(props.size);
   }
 });
 
@@ -332,24 +324,24 @@ const FloatButtonStyle = computed(() => {
   const style: CSSProperties = {
     top: currentCoordinate.top + "px",
     left: currentCoordinate.left + "px",
-    backgroundColor: bgColor.value,
-    zIndex: zIndex.value,
-    color: textColor.value,
+    backgroundColor: props.bgColor,
+    zIndex: props.zIndex,
+    color: props.textColor,
     transition: "all ease 0.3s",
   };
-  if (fixed.value) style.position = "fixed";
+  if (props.fixed) style.position = "fixed";
 
   style.height = getFloatBtnSize.value;
   style.width = getFloatBtnSize.value;
-  return Object.assign(style, customStyle.value);
+  return Object.assign(style, props.customStyle);
 });
 const menusStyle = computed(() => {
   const style: CSSProperties = {
-    backgroundColor: bgColor.value,
+    backgroundColor: props.bgColor,
   };
 
   // 判断横向展示还是纵向展示
-  if (direction.value === "row") {
+  if (props.direction === "row") {
     if (fabDirection.value === "right") {
       style.transform = "translateX(-100%)";
       style.left = "100%";
@@ -363,7 +355,7 @@ const menusStyle = computed(() => {
     style.height = getFloatBtnSize.value;
     style.width = open.value
       ? addUnit(
-          getPx(getFloatBtnSize.value) * menus.value.length +
+          getPx(getFloatBtnSize.value) * props.menus.length +
             getPx(getFloatBtnSize.value),
         )
       : 0;
@@ -382,7 +374,7 @@ const menusStyle = computed(() => {
     style.width = getFloatBtnSize.value;
     style.height = open.value
       ? addUnit(
-          getPx(getFloatBtnSize.value) * menus.value.length +
+          getPx(getFloatBtnSize.value) * props.menus.length +
             getPx(getFloatBtnSize.value),
         )
       : 0;
@@ -395,12 +387,16 @@ const menusStyle = computed(() => {
  * */
 const getFatRect = () => {
   return new Promise((resolve, reject) => {
-    getRect(`#${soleId}`, false, instance).then((rect) => {
-      const { width, height } = rect as UniApp.NodeInfo;
-      fabSize.width = width;
-      fabSize.height = height;
-      resolve(rect);
-    });
+    getRect(`#${soleId}`, false, instance)
+      .then((rect) => {
+        const { width, height } = rect as UniApp.NodeInfo;
+        fabSize.width = width as number;
+        fabSize.height = height as number;
+        resolve(rect);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 };
 
@@ -409,7 +405,7 @@ const getFatRect = () => {
  * */
 const handleClick = () => {
   emit("click");
-  if (expandable.value) {
+  if (props.expandable) {
     open.value = !open.value;
   }
 };
@@ -431,7 +427,7 @@ const getBounding = () => {
   return new Promise((resolve) => {
     const sysInfo = uni.getSystemInfoSync();
 
-    const { top = 16, left = 16, right = 16, bottom = 16 } = gap.value;
+    const { top = 16, left = 16, right = 16, bottom = 16 } = props.gap;
     screen.width = sysInfo.windowWidth;
     screen.height = isH5
       ? sysInfo.windowTop + sysInfo.windowHeight
@@ -445,7 +441,7 @@ const getBounding = () => {
 };
 
 const handleTouchStart = (e: TouchEvent) => {
-  if (!draggable.value) return;
+  if (!props.draggable) return;
 
   const touch = e.touches[0];
   touchOffset.x = touch.clientX - getPx(currentCoordinate.left);
@@ -454,7 +450,7 @@ const handleTouchStart = (e: TouchEvent) => {
 };
 
 function handleTouchMove(e: TouchEvent) {
-  if (!draggable.value) return;
+  if (!props.draggable) return;
 
   const touch = e.touches[0];
   const { minLeft, minTop, maxLeft, maxTop } = bounding;
@@ -472,7 +468,7 @@ function handleTouchMove(e: TouchEvent) {
 }
 
 function handleTouchEnd() {
-  if (props.draggable === false) return;
+  if (!props.draggable) return;
 
   const screenCenterX = screen.width / 2;
   const fabCenterX = currentCoordinate.left + fabSize.width / 2;

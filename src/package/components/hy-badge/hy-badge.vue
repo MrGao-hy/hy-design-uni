@@ -11,31 +11,32 @@
     :style="[customStyle, badgeStyle]"
     @tap="onClick"
   >
-    {{ isDot ? '' : showValue }}
+    {{ isDot ? "" : showValue }}
   </text>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'hy-badge',
+  name: "hy-badge",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { IBadgeEmit } from "./typing";
+import { addUnit } from "../../utils";
+
 /**
  * 该组件一般用于图标右上角显示未读的消息数量，提示用户点击，有圆点和圆包含文字两种形式。
  * @displayName hy-badge
  */
-defineOptions({})
-import type { IBadgeEmit } from './typing'
-import defaultProps from './props'
-import { computed, type CSSProperties, PropType, toRefs } from 'vue'
-import { addUnit } from '../../utils'
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
@@ -65,7 +66,7 @@ const props = defineProps({
    * */
   type: {
     type: String,
-    default: 'error',
+    default: "error",
   },
   /** 当数值为 0 时，是否展示 Badge */
   showZero: {
@@ -82,7 +83,7 @@ const props = defineProps({
    * */
   shape: {
     type: String,
-    default: 'circle',
+    default: "circle",
   },
   /**
    * 设置数字的显示方式
@@ -90,7 +91,7 @@ const props = defineProps({
    * */
   numberType: {
     type: String,
-    default: 'overflow',
+    default: "overflow",
   },
   /**  设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，absolute为true时有效 */
   offset: Array<number>,
@@ -108,60 +109,60 @@ const props = defineProps({
   customStyle: {
     type: Object as PropType<CSSProperties>,
   },
-})
-const { value, bgColor, color, numberType, absolute, offset, inverted, max, customStyle } =
-  toRefs(props)
-const emit = defineEmits<IBadgeEmit>()
+});
+const emit = defineEmits<IBadgeEmit>();
 
 /**
  * @description 整个组件的样式
  * */
 const badgeStyle = computed<CSSProperties>(() => {
-  const style: CSSProperties = {}
-  if (color.value) {
-    style.color = color.value
+  const style: CSSProperties = {};
+  if (props.color) {
+    style.color = props.color;
   }
-  if (bgColor.value && !inverted.value) {
-    style.backgroundColor = bgColor.value
+  if (props.bgColor && !props.inverted) {
+    style.backgroundColor = props.bgColor;
   }
-  if (absolute.value) {
-    style.position = 'absolute'
+  if (props.absolute) {
+    style.position = "absolute";
     // 如果有设置offset参数
-    if (offset.value && Array.isArray(offset.value)) {
+    if (props.offset && Array.isArray(props.offset)) {
       // top和right分为为offset的第一个和第二个值，如果没有第二个值，则right等于top
-      const top = offset.value[0]
-      const right = offset.value[1] || top
-      style.top = addUnit(top)
-      style.left = addUnit(right)
+      const top = props.offset[0];
+      const right = props.offset[1] || top;
+      style.top = addUnit(top);
+      style.left = addUnit(right);
     }
   }
-  return style
-})
+  return style;
+});
 /**
  * @description 显示值
  * */
 const showValue = computed(() => {
-  switch (numberType.value) {
-    case 'overflow':
-      return Number(value.value) > Number(max.value) ? max.value + '+' : value.value
-    case 'ellipsis':
-      return Number(value.value) > Number(max.value) ? '...' : value.value
-    case 'limit':
-      return Number(value.value) > 999
-        ? Number(value.value) >= 9999
-          ? Math.floor((value.value / 1e4) * 100) / 100 + 'w'
-          : Math.floor((value.value / 1e3) * 100) / 100 + 'k'
-        : value.value
+  switch (props.numberType) {
+    case "overflow":
+      return Number(props.value) > Number(props.max)
+        ? props.max + "+"
+        : props.value;
+    case "ellipsis":
+      return Number(props.value) > Number(props.max) ? "..." : props.value;
+    case "limit":
+      return Number(props.value) > 999
+        ? Number(props.value) >= 9999
+          ? Math.floor((props.value / 1e4) * 100) / 100 + "w"
+          : Math.floor((props.value / 1e3) * 100) / 100 + "k"
+        : props.value;
     default:
-      return Number(value.value)
+      return Number(props.value);
   }
-})
+});
 
 const onClick = (e: Event) => {
-  emit('click', e)
-}
+  emit("click", e);
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

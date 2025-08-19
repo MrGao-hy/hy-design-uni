@@ -56,8 +56,8 @@ export default {
 <script setup lang="ts">
 import { toRefs, watch, nextTick, computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, error } from "../../utils";
-import type { ISwitchEmits } from "./typing";
+import { addUnit, error, isNumber } from "../../utils";
+import type { ISwitchEmits, SwiperValue } from "./typing";
 // 组件
 import HyLoading from "../hy-loading/hy-loading.vue";
 import HyIcon from "../hy-icon/hy-icon.vue";
@@ -73,7 +73,7 @@ defineOptions({});
 const props = defineProps({
   /** 通过v-model双向绑定的值 */
   modelValue: {
-    type: [String, Number, Boolean],
+    type: [String, Number, Boolean] as PropType<SwiperValue>,
     default: false,
   },
   /** 是否处于加载中 */
@@ -88,7 +88,7 @@ const props = defineProps({
   },
   /** 开关尺寸，单位px */
   size: {
-    type: String,
+    type: [String, Number] as PropType<string | number>,
     default: "medium",
   },
   /** 打开时的背景色 */
@@ -97,12 +97,12 @@ const props = defineProps({
   inactiveColor: String,
   /** 打开选择器时通过change事件发出的值 */
   activeValue: {
-    type: [String, Number, Boolean],
+    type: [String, Number, Boolean] as PropType<SwiperValue>,
     default: true,
   },
   /** 关闭选择器时通过change事件发出的值 */
   inactiveValue: {
-    type: [String, Number, Boolean],
+    type: [String, Number, Boolean] as PropType<SwiperValue>,
     default: false,
   },
   /** 打开选择器时图标 */
@@ -126,24 +126,12 @@ const props = defineProps({
   /** 自定义外部类名 */
   customClass: String,
 });
-const {
-  modelValue,
-  size,
-  space,
-  inactiveValue,
-  activeValue,
-  activeColor,
-  disabled,
-  loading,
-  asyncChange,
-  inactiveColor,
-} = toRefs(props);
 const emit = defineEmits<ISwitchEmits>();
 
 watch(
-  () => modelValue.value,
+  () => props.modelValue,
   (newValue) => {
-    if (newValue !== inactiveValue.value && newValue !== activeValue.value) {
+    if (newValue !== props.inactiveValue && newValue !== props.activeValue) {
       error("v-model绑定的值必须为inactiveValue、activeValue二者之一");
     }
   },
@@ -154,7 +142,7 @@ watch(
  * @description 是否打开
  * */
 const isActive = computed(() => {
-  return modelValue.value === activeValue.value;
+  return props.modelValue === props.activeValue;
 });
 
 /**
@@ -167,9 +155,7 @@ const switchSize = computed((): number => {
     large: 30,
   };
 
-  return typeof size.value === "number"
-    ? size.value
-    : sz[size.value] || Number(size.value);
+  return isNumber(props.size) ? props.size : sz[props.size];
 });
 
 /**
@@ -187,8 +173,8 @@ const switchStyle = computed<CSSProperties>(() => {
     style.borderColor = "rgba(0, 0, 0, 0)";
   }
   style.backgroundColor = isActive.value
-    ? activeColor.value
-    : inactiveColor.value;
+    ? props.activeColor
+    : props.inactiveColor;
   return style;
 });
 
@@ -198,10 +184,10 @@ const switchStyle = computed<CSSProperties>(() => {
 const nodeStyle = computed<CSSProperties>(() => {
   let style: CSSProperties = {};
   // 如果自定义非激活颜色，将node圆点的尺寸减少两个像素，让其与外边框距离更大一点
-  style.width = addUnit(switchSize.value - space.value);
-  style.height = addUnit(switchSize.value - space.value);
+  style.width = addUnit(switchSize.value - props.space);
+  style.height = addUnit(switchSize.value - props.space);
   const translateX = isActive.value
-    ? addUnit(space.value)
+    ? addUnit(props.space)
     : addUnit(switchSize.value);
   style.transform = `translateX(-${translateX})`;
   return style;
@@ -215,7 +201,7 @@ const bgStyle = computed<CSSProperties>(() => {
   // 这里配置一个多余的元素在HTML中，是为了让switch切换时，有更良好的背景色扩充体验(见实际效果)
   style.width = addUnit(switchSize.value * 2 - switchSize.value / 2);
   style.height = addUnit(switchSize.value);
-  style.backgroundColor = inactiveColor.value;
+  style.backgroundColor = props.inactiveColor;
   // 打开时，让此元素收缩，否则反之
   style.transform = `scale(${isActive.value ? 0 : 1})`;
   return style;
@@ -226,16 +212,16 @@ const bgStyle = computed<CSSProperties>(() => {
  * */
 const customInactiveColor = computed(() => {
   // 之所以需要判断是否自定义了“非激活”颜色，是为了让node圆点离外边框更宽一点的距离
-  return inactiveColor.value !== "#fff" && inactiveColor.value !== "#ffffff";
+  return props.inactiveColor !== "#fff" && props.inactiveColor !== "#ffffff";
 });
 
 /**
  * @description 点击事件
  * */
 const clickHandler = () => {
-  if (!disabled.value && !loading.value) {
-    const oldValue = isActive.value ? inactiveValue.value : activeValue.value;
-    if (!asyncChange.value) {
+  if (!props.disabled && !props.loading) {
+    const oldValue = isActive.value ? props.inactiveValue : props.activeValue;
+    if (!props.asyncChange) {
       emit("update:modelValue", oldValue);
     }
     // 放到下一个生命周期，因为双向绑定的value修改父组件状态需要时间，且是异步的

@@ -40,30 +40,30 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-folding-panel',
+  name: "hy-folding-panel",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { toRefs, ref, watch } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { IFoldingPanel, PanelVo } from './typing'
-import { addUnit } from '../../utils'
-import { ColorConfig } from '../../config'
-
-import HyCell from '../hy-cell/hy-cell.vue'
-import HyLine from '../hy-line/hy-line.vue'
+import { toRefs, ref, watch } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { IFoldingPanel, PanelVo } from "./typing";
+import { addUnit } from "../../utils";
+import { ColorConfig } from "../../config";
+// 组件
+import HyCell from "../hy-cell/hy-cell.vue";
+import HyLine from "../hy-line/hy-line.vue";
 
 /**
  * 通过折叠面板收纳内容区域。
  * @displayName hy-folding-panel
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
@@ -110,7 +110,7 @@ const props = defineProps({
    * */
   size: {
     type: String,
-    default: 'medium',
+    default: "medium",
   },
   /** 内容面板高度 */
   contentHeight: {
@@ -121,45 +121,44 @@ const props = defineProps({
   customStyle: {
     type: Object as PropType<CSSProperties>,
   },
-})
-const { list, contentHeight, accordion } = toRefs(props)
-const emit = defineEmits<IFoldingPanel>()
+});
+const emit = defineEmits<IFoldingPanel>();
 
-const lists = ref<PanelVo[]>([])
+const lists = ref<PanelVo[]>([]);
 
 watch(
-  () => list.value,
+  () => props.list,
   (newValue: PanelVo[]) => {
     lists.value = newValue.map((item) => ({
       ...item,
-      arrowDirection: 'down',
+      arrowDirection: "down",
       spread: false,
-    }))
+    }));
   },
   { immediate: true },
-)
+);
 
 const clickHandler = (temp: PanelVo, index: number) => {
   // if (temp?.disabled && temp?.animating) return;
-  lists.value = list.value.map((item, i) => {
-    if (accordion.value) {
+  lists.value = props.list.map((item, i) => {
+    if (props.accordion) {
       // 判断是否是收起来
-      item.spread = i === index ? !item.spread : false
+      item.spread = i === index ? !item.spread : false;
     } else {
       if (i === index) {
-        item.spread = !item.spread
+        item.spread = !item.spread;
       }
     }
 
-    item.arrowDirection = item.spread ? 'up' : 'down'
-    return item
-  })
-  const event = temp.spread ? 'open' : 'close'
-  emit('change', temp, index)
-  emit(event, temp, index)
-}
+    item.arrowDirection = item.spread ? "up" : "down";
+    return item;
+  });
+  const event: "open" | "close" = temp.spread ? "open" : "close";
+  emit("change", temp, index);
+  emit(event, temp, index);
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

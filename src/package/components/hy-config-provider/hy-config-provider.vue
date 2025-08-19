@@ -7,26 +7,26 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-config-provider',
+  name: "hy-config-provider",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import { addUnit, colorGradient } from '../../utils'
-import { ColorConfig } from '../../config'
+import { computed } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import { addUnit, colorGradient } from "../../utils";
+import { ColorConfig } from "../../config";
 
 /**
  * 将 ConfigProvider 组件的 theme 属性设置为 dark，可以开启深色模式。 深色模式会全局生效，使页面上的所有 Wot 组件变为深色风格。
  * @displayName hy-config-provider
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
@@ -36,7 +36,7 @@ const props = defineProps({
    * */
   theme: {
     type: String,
-    default: 'light',
+    default: "light",
   },
   /** 主题色 */
   themeColor: {
@@ -51,25 +51,24 @@ const props = defineProps({
   customStyle: {
     type: [Object, Array] as PropType<CSSProperties | CSSProperties[]>,
   },
-})
-const { theme, themeColor, customClass, customStyle, padding } = toRefs(props)
+});
 
 const themeClass = computed(() => {
-  return [customClass.value, 'hy-config-provider', `hy-theme--${theme.value}`]
-})
+  return [props.customClass, "hy-config-provider", `hy-theme--${props.theme}`];
+});
 
 const themeStyle = computed(() => {
   return [
     {
-      '--hy-theme-color': themeColor.value,
-      '--hy-theme--light': colorGradient(themeColor.value)[90],
-      padding: addUnit(padding.value),
+      "--hy-theme-color": props.themeColor,
+      "--hy-theme--light": colorGradient(props.themeColor)[90],
+      padding: addUnit(props.padding),
     },
-    customStyle.value,
-  ]
-})
+    props.customStyle,
+  ];
+});
 </script>
 
 <style scoped lang="scss">
-@import './index.scss';
+@import "./index.scss";
 </style>

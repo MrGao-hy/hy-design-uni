@@ -55,7 +55,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, toRefs } from "vue";
+import { ref } from "vue";
 import type { PropType, CSSProperties } from "vue";
 import type { INoticeBarEmits, NoticeBarModeVo } from "./typing";
 import { IconConfig } from "../../config";
@@ -130,7 +130,7 @@ const props = defineProps({
    * @values flex-start,flex-start,center
    * */
   justifyContent: {
-    type: String,
+    type: String as PropType<HyApp.JustifyContentType>,
     default: "flex-start",
   },
   /**
@@ -138,7 +138,7 @@ const props = defineProps({
    * @values navigateTo,redirectTo,switchTab,reLaunch
    * */
   linkType: {
-    type: String,
+    type: String as PropType<HyApp.NavigationType>,
     default: "navigateTo",
   },
   /** 跳转地址 */
@@ -148,7 +148,6 @@ const props = defineProps({
   /** 自定义外部类名 */
   customClass: String,
 });
-const { mode, linkType, url } = toRefs(props);
 const emit = defineEmits<INoticeBarEmits>();
 
 /**
@@ -156,8 +155,8 @@ const emit = defineEmits<INoticeBarEmits>();
  * */
 const click = (index: number) => {
   emit("click", index);
-  if (url.value && linkType.value && mode.value === "link") {
-    (uni as any)[linkType.value]({ url: url.value });
+  if (props.url && props.linkType && props.mode === "link") {
+    (uni as any)[props.linkType]({ url: props.url });
   }
 };
 /**

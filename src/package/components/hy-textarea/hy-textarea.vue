@@ -1,9 +1,9 @@
 <template>
-  <view
+  <View
     :class="['hy-textarea', customClass, textareaClass]"
     :style="[textareaStyle, borderStyle(isFocus)]"
   >
-    <textarea
+    <Textarea
       class="hy-textarea--field"
       :value="innerValue"
       :style="{ height: autoHeight ? 'auto' : addUnit(height) }"
@@ -26,13 +26,13 @@
       :confirm-type="confirmType"
       @focus="onFocus"
       @blur="onBlur"
-      @linechange="onLinechange"
+      @linechange="onLineChange"
       @input="onInput"
       @confirm="onConfirm"
       @keyboardheightchange="onKeyboardheightchange"
-    ></textarea>
+    ></Textarea>
     <!-- #ifndef MP-ALIPAY -->
-    <text
+    <Text
       class="hy-textarea--count"
       :style="{
         'background-color': disabled ? 'transparent' : '',
@@ -40,9 +40,9 @@
       v-if="count"
     >
       {{ innerValue.length }}/{{ maxlength }}
-    </text>
+    </Text>
     <!-- #endif -->
-  </view>
+  </View>
 </template>
 
 <script lang="ts">
@@ -57,11 +57,17 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, toRefs, watch, nextTick, inject } from "vue";
+import { computed, ref, watch, nextTick, inject } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ITextareaEmits } from "./typing";
 import { addUnit } from "../../utils";
-import type { FormItemContext } from "@/package/components/hy-form-item/typing";
+import type { FormItemContext } from "../hy-form-item/typing";
+import type {
+  InputOnBlurEvent,
+  InputOnConfirmEvent,
+  InputOnFocusEvent,
+  InputOnKeyboardheightchangeEvent,
+} from "@uni-helper/uni-types";
 
 /**
  * 用于输入多行文本信息,聊天输入框等。
@@ -72,7 +78,10 @@ defineOptions({});
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
   /** 输入框的内容 */
-  modelValue: String,
+  modelValue: {
+    type: String,
+    default: "",
+  },
   /** 输入框为空时占位符 */
   placeholder: String,
   /** 指定placeholder的样式类，注意页面或组件的style中写了scoped时，需要在类名前写/deep/ */
@@ -176,14 +185,11 @@ const props = defineProps({
   /** 自定义外部类名 */
   customClass: String,
 });
-const { modelValue, customStyle, border, disabled, formatter } = toRefs(props);
 const emit = defineEmits<ITextareaEmits>();
 const formItem = inject<FormItemContext>("formItem");
 
 // 输入框的值
 const innerValue = ref<string>("");
-// 是否处于获得焦点状态
-const focused = ref<boolean>(false);
 // value是否第一次变化，在watch中，由于加入immediate属性，会在第一次触发，此时不应该认为value发生了变化
 const firstChange = ref<boolean>(true);
 // value绑定值的变化是由内部还是外部引起的
@@ -194,7 +200,7 @@ const isFocus = ref<boolean>(false);
 let innerFormatter = (value: string) => value;
 
 watch(
-  () => modelValue.value,
+  () => props.modelValue,
   (newVal) => {
     innerValue.value = newVal;
     /* #ifdef H5 */
@@ -213,18 +219,18 @@ watch(
 // 组件的类名
 const textareaClass = computed(() => {
   let classes: string[] = [];
-  border.value === "surround" &&
+  props.border === "surround" &&
     (classes = classes.concat(["hy-border", "hy-textarea--radius"]));
-  border.value === "bottom" &&
+  props.border === "bottom" &&
     (classes = classes.concat(["hy-border__bottom", "hy-textarea--no-radius"]));
-  disabled.value && classes.push("hy-textarea--disabled");
+  props.disabled && classes.push("hy-textarea--disabled");
   return classes.join(" ");
 });
 // 组件的样式
 const textareaStyle = computed(() => {
   const style: CSSProperties = {};
 
-  return Object.assign(style, customStyle.value);
+  return Object.assign(style, props.customStyle);
 });
 /**
  * @description 边框颜色
@@ -233,7 +239,7 @@ const borderStyle = computed(() => {
   return (isFocus: boolean) => {
     let style: CSSProperties = {};
     if (isFocus) {
-      switch (border.value) {
+      switch (props.border) {
         case "surround":
           style = { border: `1px solid var(--hy-theme-color, #3c9cff)` };
           break;
@@ -248,24 +254,24 @@ const borderStyle = computed(() => {
   };
 });
 
-const onFocus = (e: FocusEvent) => {
+const onFocus = (e: InputOnFocusEvent) => {
   isFocus.value = true;
   emit("focus", e);
 };
-const onBlur = (e: any) => {
+const onBlur = (e: InputOnBlurEvent) => {
   isFocus.value = false;
   emit("blur", e);
-  formItem.handleBlur(e.detail.value);
+  if (formItem) formItem.handleBlur(e.detail.value);
   // 尝试调用u-form的验证方法
   // formValidate(this, "blur");
 };
-const onLinechange = (e: any) => {
+const onLineChange = (e: any) => {
   emit("lineChange", e);
 };
 const onInput = (e: any) => {
   let { value } = e?.detail;
   // 格式化过滤方法
-  const format = formatter.value || innerFormatter;
+  const format = props.formatter || innerFormatter;
   const formatValue = format(value);
   // 为了避免props的单向数据流特性，需要先将innerValue值设置为当前值，再在$nextTick中重新赋予设置后的值才有效
   innerValue.value = value;
@@ -284,13 +290,13 @@ const valueChange = () => {
     // 标识value值的变化是由内部引起的
     changeFromInner.value = true;
     emit("change", value);
-    formItem.handleChange(value);
+    if (formItem) formItem.handleChange(value);
   });
 };
-const onConfirm = (e: Event) => {
+const onConfirm = (e: InputOnConfirmEvent) => {
   emit("confirm", e);
 };
-const onKeyboardheightchange = (e: Event) => {
+const onKeyboardheightchange = (e: InputOnKeyboardheightchangeEvent) => {
   emit("keyboardheightchange", e);
 };
 </script>

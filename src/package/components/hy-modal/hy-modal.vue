@@ -32,7 +32,10 @@
           </text>
         </slot>
       </view>
-      <view class="hy-modal__button-group--confirm-button" v-if="$slots.confirmButton">
+      <view
+        class="hy-modal__button-group--confirm-button"
+        v-if="$slots.confirmButton"
+      >
         <slot name="confirmButton"></slot>
       </view>
       <template v-else>
@@ -41,7 +44,9 @@
             'hy-modal__button-group',
             showCancelButton &&
               showConfirmButton &&
-              (!buttonReverse ? 'hy-modal__button-exact' : 'hy-modal__button-exact--reverse'),
+              (!buttonReverse
+                ? 'hy-modal__button-exact'
+                : 'hy-modal__button-exact--reverse'),
           ]"
           :style="{
             flexDirection: buttonReverse ? 'row-reverse' : 'row',
@@ -89,28 +94,28 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-modal',
+  name: "hy-modal",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { ref, toRefs, watch } from 'vue'
-import type { IModalEmits } from './typing'
-import { addUnit } from '../../utils'
+import { ref, watch } from "vue";
+import type { IModalEmits } from "./typing";
+import { addUnit } from "../../utils";
 // 组件
-import HyPopup from '../hy-popup/hy-popup.vue'
-import HyLoading from '../hy-loading/hy-loading.vue'
+import HyPopup from "../hy-popup/hy-popup.vue";
+import HyLoading from "../hy-loading/hy-loading.vue";
 
 /**
  * 弹出模态框，常用于消息提示、消息确认、在当前页面内完成特定的交互操作。
  * @displayName hy-modal
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -126,12 +131,12 @@ const props = defineProps({
   /** 确认按钮的文字 */
   confirmText: {
     type: String,
-    default: '确认',
+    default: "确认",
   },
   /** 取消按钮的文字 */
   cancelText: {
     type: String,
-    default: '取消',
+    default: "取消",
   },
   /** 是否显示确认按钮 */
   showConfirmButton: {
@@ -180,7 +185,7 @@ const props = defineProps({
   /** modal宽度，不支持百分比，可以数值，px，rpx单位 */
   width: {
     type: [String, Number],
-    default: '550rpx',
+    default: "550rpx",
   },
   /**
    * 确认按钮的样式,如设置，将不会显示取消按钮
@@ -193,55 +198,54 @@ const props = defineProps({
    * */
   contentTextAlign: {
     type: String,
-    default: 'left',
+    default: "left",
   },
-})
-const { modelValue, asyncClose, closeOnClickOverlay } = toRefs(props)
-const emit = defineEmits<IModalEmits>()
+});
+const emit = defineEmits<IModalEmits>();
 
-const loading = ref<boolean>(false)
+const loading = ref<boolean>(false);
 
 watch(
-  () => modelValue.value,
+  () => props.modelValue,
   (newValue) => {
-    if (newValue && loading.value) loading.value = false
+    if (newValue && loading.value) loading.value = false;
   },
-)
+);
 
 /**
  * @description 点击确定按钮
  * */
 const confirmHandler = () => {
   // 如果配置了异步关闭，将按钮值为loading状态
-  if (asyncClose.value) {
-    loading.value = true
+  if (props.asyncClose) {
+    loading.value = true;
   } else {
-    emit('update:modelValue', false)
+    emit("update:modelValue", false);
   }
-  emit('confirm')
-}
+  emit("confirm");
+};
 
 /**
  * @description 点击取消按钮
  * */
 const cancelHandler = () => {
-  emit('update:modelValue', false)
-  emit('cancel')
-}
+  emit("update:modelValue", false);
+  emit("cancel");
+};
 
 /**
  * @description 点击遮罩
  * */
 const clickHandler = () => {
-  if (closeOnClickOverlay.value) {
-    emit('update:modelValue', false)
-    emit('close')
+  if (props.closeOnClickOverlay) {
+    emit("update:modelValue", false);
+    emit("close");
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 .modal__content__text {
   text-align: v-bind(contentTextAlign);
 }

@@ -37,7 +37,7 @@
           :type="type"
           :focus="focus"
           :cursor="cursor"
-          :value="innerValue"
+          :value="String(innerValue)"
           :auto-blur="autoBlur"
           :disabled="disabled || readonly"
           :maxlength="maxlength"
@@ -51,7 +51,7 @@
           :adjust-position="adjustPosition"
           :selection-end="selectionEnd"
           :selection-start="selectionStart"
-          :password="password || type === 'password' || false"
+          :password="password || type === 'safe-password' || false"
           :ignoreCompositionEvent="ignoreCompositionEvent"
           @input="onInput"
           @blur="onBlur"
@@ -125,7 +125,15 @@ import { addUnit, formatObject } from "../../utils";
 import { IconConfig } from "../../config";
 import type { IInputEmits } from "./typing";
 import type HyIconProps from "../hy-icon/typing";
-import type { FormItemContext } from "@/package/components/hy-form-item/typing";
+import type { FormItemContext } from "../hy-form-item/typing";
+import type {
+  InputConfirmType,
+  InputOnBlurEvent,
+  InputOnConfirmEvent,
+  InputOnFocusEvent,
+  InputOnKeyboardheightchange,
+  InputType,
+} from "@uni-helper/uni-types";
 
 /**
  * 为一个输入框，利用它可以快速实现表单验证，输入内容，下拉选择等功能。
@@ -142,10 +150,10 @@ const props = defineProps({
   },
   /**
    * 输入框类型，见上方说明
-   * @values text,idcard,number,digit,password
+   * @values text,idcard,number,digit,safe-password,tel,nickname
    * */
   type: {
-    type: String,
+    type: String as PropType<InputType>,
     default: "text",
   },
   /** 如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true，兼容性：微信小程序、百度小程序、字节跳动小程序、QQ小程序 */
@@ -159,7 +167,10 @@ const props = defineProps({
     default: false,
   },
   /** 禁用状态时的背景色 */
-  disabledColor: String,
+  disabledColor: {
+    type: String,
+    default: "",
+  },
   /** 是否显示清除控件 */
   clearable: {
     type: Boolean,
@@ -185,7 +196,7 @@ const props = defineProps({
   /** 指定placeholder的样式，字符串/对象形式，如"color: red;" */
   placeholderStyle: {
     type: Object as PropType<CSSProperties>,
-    default: {},
+    default: () => ({}),
   },
   /** 是否显示输入字数统计，只在 type ="text"或type ="textarea"时有效 */
   showWordLimit: {
@@ -194,7 +205,7 @@ const props = defineProps({
   },
   /** 设置右下角按钮的文字，兼容性详见uni-app文档 */
   confirmType: {
-    type: String,
+    type: String as PropType<InputConfirmType>,
     default: "done",
   },
   /** 点击键盘右下角按钮时是否保持键盘不收起，H5无效 */
@@ -261,16 +272,19 @@ const props = defineProps({
     default: "15px",
   },
   /** 输入框字体颜色 */
-  color: String,
+  color: {
+    type: String,
+    default: "",
+  },
   /** 输入框前置图标 */
   prefixIcon: {
     type: Object as PropType<HyIconProps>,
-    default: {},
+    default: () => {},
   },
   /** 输入框后置图标 */
   suffixIcon: {
     type: Object as PropType<HyIconProps>,
-    default: {},
+    default: () => {},
   },
   /**
    * 边框类型
@@ -303,6 +317,7 @@ const props = defineProps({
   /** 定义需要用到的外部样式 */
   customStyle: {
     type: Object as PropType<CSSProperties>,
+    default: () => {},
   },
   /** 自定义外部类名 */
   customClass: String,
@@ -313,13 +328,12 @@ const {
   border,
   color,
   inputAlign,
-  customStyle,
   fontSize,
   readonly,
   placeholderStyle,
 } = toRefs(props);
 const emit = defineEmits<IInputEmits>();
-const formItem = inject<FormItemContext>("formItem");
+const formItem = inject<FormItemContext | null>("formItem", null);
 
 const instance = getCurrentInstance();
 // 清除操作
@@ -391,7 +405,7 @@ const wrapperStyle = computed((): CSSProperties => {
   if (disabled.value) {
     style.backgroundColor = disabledColor.value;
   }
-  return Object.assign(style, customStyle.value);
+  return Object.assign(style, props.customStyle);
 });
 /**
  * @description 输入框的样式
@@ -443,9 +457,9 @@ const onInput = (e: any) => {
 /**
  * @description 输入框失去焦点时触发
  * */
-const onBlur = (event: any) => {
-  emit("blur", event.detail.value);
-  formItem.handleBlur(event.detail.value);
+const onBlur = (event: InputOnBlurEvent) => {
+  emit("blur", event, event.detail.value);
+  if (formItem) formItem.handleBlur(event.detail.value);
   // H5端的blur会先于点击清除控件的点击click事件触发，导致focused
   // 瞬间为false，从而隐藏了清除控件而无法被点击到
   setTimeout(() => {
@@ -455,22 +469,22 @@ const onBlur = (event: any) => {
 /**
  * @description 输入框聚焦时触发
  * */
-const onFocus = () => {
+const onFocus = (e: InputOnFocusEvent) => {
   focused.value = true;
-  emit("focus");
+  emit("focus", e);
 };
 
 /**
  * @description 点击完成按钮时触发
  * */
-const onConfirm = (event: string) => {
-  emit("confirm", innerValue.value);
+const onConfirm = (e: InputOnConfirmEvent) => {
+  emit("confirm", e, innerValue.value);
 };
 /**
  * 键盘高度发生变化的时候触发此事件
  * 兼容性：微信小程序2.7.0+、App 3.1.0+
  * */
-const onkeyboardheightchange = (event: Event) => {
+const onkeyboardheightchange = (event: InputOnKeyboardheightchange) => {
   emit("keyboardheightchange", event);
 };
 /**
@@ -486,7 +500,7 @@ const valueChange = (value: string | number, isOut = false) => {
       // 标识value值的变化是由内部引起的
       changeFromInner.value = true;
       emit("change", value);
-      formItem.handleChange(value);
+      if (formItem) formItem.handleChange(value);
 
       emit("update:modelValue", value);
     }

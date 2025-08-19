@@ -111,7 +111,10 @@ const props = defineProps({
     default: true,
   },
   /** 绑定值 */
-  modelValue: [String, Number, Date],
+  modelValue: {
+    type: [String, Number, Date],
+    default: "",
+  },
   /** 顶部标题 */
   title: String,
   /**
@@ -119,7 +122,7 @@ const props = defineProps({
    * @values date,time,year-month,datetime
    * */
   mode: {
-    type: String,
+    type: String as PropType<DateModeEnum>,
     default: DateModeEnum.DATETIME,
   },
   /** 可选的最大时间  默认值为后10年 */
@@ -226,23 +229,6 @@ const props = defineProps({
   /** 自定义外部类名 */
   customClass: String,
 });
-const {
-  show,
-  modelValue,
-  hasInput,
-  input,
-  formatter,
-  filter,
-  format,
-  mode,
-  closeOnClickOverlay,
-  maxDate,
-  minDate,
-  minHour,
-  maxHour,
-  minMinute,
-  maxMinute,
-} = toRefs(props);
 const emit = defineEmits<IDatetimePickerEmits>();
 
 // 原来的日期选择器不方便，这里增加一个hasInput选项支持类似element的自带输入框的功能。
@@ -263,7 +249,7 @@ const validModes = new Set([
  * @description 更新各列的值
  * */
 const updateColumns = () => {
-  const formatterFn = formatter.value || innerFormatter;
+  const formatterFn = props.formatter || innerFormatter;
   // 获取各列的值，并且map后，对各列的具体值进行补0操作
   columns.value = getOriginColumns().map((column) =>
     column.values.map((value) => formatterFn(column.type, value)),
@@ -284,7 +270,7 @@ const updateColumnValue = (value: string | number) => {
 
 const init = () => {
   // 获取当前值
-  innerValue.value = correctValue(modelValue.value);
+  innerValue.value = correctValue(props.modelValue);
   // 更新列表
   updateColumnValue(innerValue.value);
 
@@ -293,7 +279,7 @@ const init = () => {
 };
 
 watch(
-  () => show.value,
+  () => props.show,
   (newValue) => {
     if (newValue) {
       updateColumnValue(innerValue.value);
@@ -302,20 +288,20 @@ watch(
 );
 
 watch(
-  () => modelValue.value,
+  () => props.modelValue,
   () => init(),
 );
 
 const propsChange = computed(() => {
   return [
-    mode.value,
-    maxDate.value,
-    minDate.value,
-    minHour.value,
-    maxHour.value,
-    minMinute.value,
-    maxMinute.value,
-    filter.value,
+    props.mode,
+    props.maxDate,
+    props.minDate,
+    props.minHour,
+    props.maxHour,
+    props.minMinute,
+    props.maxMinute,
+    props.filter,
   ];
 });
 
@@ -333,14 +319,14 @@ const getInputValue = (newValue: string | number) => {
     inputValue.value = "";
     return;
   }
-  if (mode.value === "time") {
+  if (props.mode === "time") {
     inputValue.value = newValue;
   } else {
-    if (format.value) {
-      inputValue.value = dayjs(newValue).format(format.value);
+    if (props.format) {
+      inputValue.value = dayjs(newValue).format(props.format);
     } else {
       let format = "";
-      switch (mode.value) {
+      switch (props.mode) {
         case DateModeEnum.DATE:
           format = "YYYY-MM-DD";
           break;
@@ -381,8 +367,8 @@ const times = (n: number, iteratee: Function) => {
  * @description 关闭选择器
  * */
 const close = () => {
-  if (closeOnClickOverlay.value) {
-    if (hasInput.value) {
+  if (props.closeOnClickOverlay) {
+    if (props.hasInput) {
       showByClickInput.value = false;
     }
     emit("close");
@@ -393,7 +379,7 @@ const close = () => {
  * @description 点击工具栏的取消按钮
  * */
 const cancel = () => {
-  if (hasInput.value) {
+  if (props.hasInput) {
     showByClickInput.value = false;
   }
   emit("cancel");
@@ -404,13 +390,13 @@ const cancel = () => {
  * */
 const confirm = () => {
   emit("update:modelValue", innerValue.value);
-  if (hasInput.value) {
+  if (props.hasInput) {
     getInputValue(innerValue.value);
     showByClickInput.value = false;
   }
   emit("confirm", {
     value: innerValue.value,
-    mode: mode.value,
+    mode: props.mode,
   });
 };
 
@@ -440,10 +426,10 @@ const intercept = (e: any, type?: string) => {
 const change = (e: any) => {
   const { indexs, values } = e;
   let selectValue: string | number = "";
-  if (validModes.has(mode.value) && mode.value !== DateModeEnum.MONTH_DAY) {
+  if (validModes.has(props.mode) && props.mode !== DateModeEnum.MONTH_DAY) {
     // 根据value各列索引，从各列数组中，取出当前时间的选中值
     selectValue = `${intercept(values[0][indexs[0]])}:${intercept(values[1][indexs[1]])}`;
-  } else if (mode.value === DateModeEnum.MONTH_DAY) {
+  } else if (props.mode === DateModeEnum.MONTH_DAY) {
     // 根据value各列索引，从各列数组中，取出当前时间的选中值
     selectValue = `${intercept(values[0][indexs[0]])}-${intercept(values[1][indexs[1]])}`;
   } else {
@@ -458,7 +444,7 @@ const change = (e: any) => {
     const maxDate = dayjs(`${year}-${month}`).daysInMonth();
     // 不允许超过maxDate值
     date = Math.min(maxDate, date);
-    if (mode.value === DateModeEnum.DATETIME) {
+    if (props.mode === DateModeEnum.DATETIME) {
       hour = parseInt(intercept(values[3][indexs[3]]));
       minute = parseInt(intercept(values[4][indexs[4]]));
       second = parseInt(intercept(values[5][indexs[5]]));
@@ -473,11 +459,7 @@ const change = (e: any) => {
   // 发出change时间，value为当前选中的时间戳
   emit("change", {
     value: selectValue,
-    // #ifndef MP-WEIXIN
-    // 微信小程序不能传递this实例，会因为循环引用而报错
-    // picker: this.$refs.picker,
-    // #endif
-    mode: mode.value,
+    mode: props.mode,
   });
 };
 
@@ -487,9 +469,9 @@ const change = (e: any) => {
 const updateIndexes = (value: number | string) => {
   let values: string[] = [];
   let timeArr: string[] = [];
-  const formatterFn = formatter.value || innerFormatter;
+  const formatterFn = props.formatter || innerFormatter;
 
-  switch (mode.value) {
+  switch (props.mode) {
     case DateModeEnum.TIME:
       timeArr = value.toString().split(":");
       // 使用formatter格式化方法进行管道处理
@@ -528,11 +510,11 @@ const updateIndexes = (value: number | string) => {
         // 月份补0
         formatterFn("month", padZero(dayjs(value).month() + 1)),
       ];
-      if (mode.value === DateModeEnum.DATE) {
+      if (props.mode === DateModeEnum.DATE) {
         // date模式，需要添加天列
         values.push(formatterFn("day", padZero(dayjs(value).date())));
       }
-      if (mode.value === DateModeEnum.DATETIME) {
+      if (props.mode === DateModeEnum.DATETIME) {
         // 数组的push方法，可以写入多个参数
         values.push(
           formatterFn("day", padZero(dayjs(value).date())),
@@ -565,8 +547,8 @@ const getOriginColumns = () => {
       return value;
     });
     // 进行过滤
-    if (filter.value) {
-      values = filter.value(type, values);
+    if (props.filter) {
+      values = props.filter(type, values);
       if (!values || (values && values.length == 0)) {
         error("日期filter结果不能为空");
       }
@@ -579,19 +561,19 @@ const getOriginColumns = () => {
  * @description 得出合法的时间
  * */
 const correctValue = (value: number | string | Date): string | number => {
-  const isDateMode = mode.value !== DateModeEnum.TIME;
+  const isDateMode = props.mode !== DateModeEnum.TIME;
   // if (isDateMode && !test.date(value)) {
   if (!isDateMode && !value) {
     // 如果是时间类型，而又没有默认值的话，就用最小时间
-    value = `${padZero(minHour.value)}:${padZero(minMinute.value)}`;
+    value = `${padZero(props.minHour)}:${padZero(props.minMinute)}`;
   }
   // 时间类型
-  if (validModes.has(mode.value)) {
+  if (validModes.has(props.mode)) {
     return value as string;
   } else {
     // 如果是日期格式，控制在最小日期和最大日期之间
-    value = dayjs(value).isBefore(dayjs(minDate.value)) ? minDate.value : value;
-    value = dayjs(value).isAfter(dayjs(maxDate.value)) ? maxDate.value : value;
+    value = dayjs(value).isBefore(dayjs(props.minDate)) ? props.minDate : value;
+    value = dayjs(value).isAfter(dayjs(props.maxDate)) ? props.maxDate : value;
     return value as string | number;
   }
 };
@@ -599,7 +581,7 @@ const correctValue = (value: number | string | Date): string | number => {
  * @description 获取每列的最大和最小值
  * */
 const getRanges = () => {
-  if (mode.value === DateModeEnum.TIME) {
+  if (props.mode === DateModeEnum.TIME) {
     return [
       {
         type: "hour",
@@ -647,11 +629,11 @@ const getRanges = () => {
   ];
   let arr = result;
   // 截取对应的列数
-  if (mode.value === DateModeEnum.DATE) arr = result.splice(0, 3);
-  if (mode.value === DateModeEnum.YEAR_MONTH) arr = result.splice(0, 2);
-  if (mode.value === DateModeEnum.MONTH_DAY) arr = result.splice(1, 2);
-  if (mode.value === DateModeEnum.HOUR_MINUTE) arr = result.splice(3, 2);
-  if (mode.value === DateModeEnum.MINUTE_SECOND) arr = result.splice(4, 2);
+  if (props.mode === DateModeEnum.DATE) arr = result.splice(0, 3);
+  if (props.mode === DateModeEnum.YEAR_MONTH) arr = result.splice(0, 2);
+  if (props.mode === DateModeEnum.MONTH_DAY) arr = result.splice(1, 2);
+  if (props.mode === DateModeEnum.HOUR_MINUTE) arr = result.splice(3, 2);
+  if (props.mode === DateModeEnum.MINUTE_SECOND) arr = result.splice(4, 2);
   return arr;
 };
 /**
@@ -694,7 +676,7 @@ const getBoundary = (type: string, innerVal: string | number) => {
   };
 };
 const onShowByClickInput = () => {
-  if (!input.value?.disabled) {
+  if (!props.input?.disabled) {
     showByClickInput.value = !showByClickInput.value;
   }
 };

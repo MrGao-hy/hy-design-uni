@@ -340,7 +340,7 @@ const change = (e: any) => {
 };
 
 const onShowByClickInput = () => {
-  if (!input.value?.disabled) {
+  if (!props.input?.disabled) {
     showByClickInput.value = !showByClickInput.value;
   }
 };

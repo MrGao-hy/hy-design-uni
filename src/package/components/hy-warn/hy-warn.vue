@@ -25,7 +25,11 @@
               textAlign: center ? 'center' : 'left',
             },
           ]"
-          :class="[theme === 'dark' ? 'hy-warn__text--dark' : `hy-warn__text--${type}--light`]"
+          :class="[
+            theme === 'dark'
+              ? 'hy-warn__text--dark'
+              : `hy-warn__text--${type}--light`,
+          ]"
         >
           {{ title }}
         </text>
@@ -38,7 +42,11 @@
               textAlign: center ? 'center' : 'left',
             },
           ]"
-          :class="[theme === 'dark' ? 'hy-warn__text--dark' : `hy-warn__text--${type}--light`]"
+          :class="[
+            theme === 'dark'
+              ? 'hy-warn__text--dark'
+              : `hy-warn__text--${type}--light`,
+          ]"
         >
           {{ description }}
         </text>
@@ -52,30 +60,30 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-warn',
+  name: "hy-warn",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, ref, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { IWarnEmits } from './typing'
-import { addUnit } from '../../utils'
-import { IconConfig, iconName } from '../../config'
+import { computed, ref } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { IWarnEmits } from "./typing";
+import { addUnit } from "../../utils";
+import { IconConfig, iconName } from "../../config";
 // 组件
-import HyTransition from '../hy-transition/hy-transition.vue'
-import HyIcon from '../hy-icon/hy-icon.vue'
+import HyTransition from "../hy-transition/hy-transition.vue";
+import HyIcon from "../hy-icon/hy-icon.vue";
 
 /**
  * 警告提示，展现需要关注的信息
  * @displayName hy-warn
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
@@ -87,7 +95,7 @@ const props = defineProps({
    * */
   type: {
     type: String,
-    default: 'warning',
+    default: "warning",
   },
   /** 辅助性文字，颜色比title浅一点，字号也小一点 */
   description: String,
@@ -104,7 +112,7 @@ const props = defineProps({
   /** 显示的暗色或者亮色 */
   theme: {
     type: String,
-    default: 'light',
+    default: "light",
   },
   /** 文字是否居中 */
   center: {
@@ -122,34 +130,33 @@ const props = defineProps({
   },
   /** 自定义外部类名 */
   customClass: String,
-})
-const { type, theme } = toRefs(props)
-const emit = defineEmits<IWarnEmits>()
+});
+const emit = defineEmits<IWarnEmits>();
 
-const show = ref<boolean>(true)
+const show = ref<boolean>(true);
 
 /**
  * @description icon颜色
  * */
 const iconColor = computed(() => {
-  return theme.value === 'light' ? type.value : '#fff'
-})
+  return props.theme === "light" ? props.type : "#fff";
+});
 
 /**
  * @description 点击内容
  * */
 const clickHandler = () => {
-  emit('click')
-}
+  emit("click");
+};
 /**
  * @description 点击关闭按钮
  * */
 const closeHandler = () => {
-  show.value = false
-  emit('close')
-}
+  show.value = false;
+  emit("close");
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

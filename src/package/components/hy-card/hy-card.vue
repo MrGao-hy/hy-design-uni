@@ -59,7 +59,10 @@
       v-if="showFoot"
       class="hy-card__foot"
       @tap="footClick"
-      :style="[{ padding: $slots.foot ? addUnit(paddingFoot || padding) : 0 }, footStyle]"
+      :style="[
+        { padding: $slots.foot ? addUnit(paddingFoot || padding) : 0 },
+        footStyle,
+      ]"
       :class="{
         'hy-border-top': footBorderTop,
       }"
@@ -72,24 +75,26 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-card',
+  name: "hy-card",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import type { ICardEmits } from "./typing";
+import { addUnit } from "../../utils";
+
 /**
  * 卡片组件一般用于多个列表条目，且风格统一的场景。
  * @displayName hy-card
  */
-defineOptions({})
-import type { ICardEmits } from './typing'
-import { addUnit } from '../../utils'
-import { computed, type CSSProperties, PropType, toRefs } from 'vue'
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
@@ -105,14 +110,14 @@ const props = defineProps({
   /** 标题字体大小，单位rpx */
   titleSize: {
     type: String,
-    default: '18px',
+    default: "18px",
   },
   /** 头部右边的副标题 */
   subTitle: String,
   /** 副标题颜色 */
   subTitleColor: {
     type: String,
-    default: '#909399',
+    default: "#909399",
   },
   /** 副标题字体大小 */
   subTitleSize: {
@@ -129,7 +134,7 @@ const props = defineProps({
   /** 卡片与屏幕两边和上下元素的间距，需带单位，如"30px 20px" */
   margin: {
     type: String,
-    default: '15px',
+    default: "15px",
   },
   /** 卡片整体的圆角值，单位px */
   borderRadius: {
@@ -181,7 +186,7 @@ const props = defineProps({
   },
   /** 卡片外围阴影，字符串形式 */
   boxShadow: {
-    type: Boolean,
+    type: [Boolean, String],
     default: true,
   },
   /** 头部自定义样式，对象形式 */
@@ -191,59 +196,61 @@ const props = defineProps({
   /** 底部自定义样式 */
   footStyle: Object as unknown as PropType<CSSProperties>,
   /** 定义需要用到的外部样式 */
-  customStyle: Object as unknown as PropType<CSSProperties>,
-})
-const { border, full, borderRadius, margin, boxShadow, customStyle } = toRefs(props)
-const emit = defineEmits<ICardEmits>()
+  customStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: () => {},
+  },
+});
+const emit = defineEmits<ICardEmits>();
 
+const hasBorder =
+  +(props.borderRadius.toString().replace(/\D.*$/, "") || 0) > 0;
 const cardClass = computed(() => {
   return [
-    border.value && 'hy-border',
-    full.value && 'hy-border',
-    border.value && 'hy-card-full',
-    (typeof borderRadius.value === 'number'
-      ? borderRadius.value
-      : parseInt(borderRadius.value.replace(/px|rpx|vw|vh/g, '')) > 0) && 'hy-card--border',
-  ].filter(Boolean)
-})
+    props.border && "hy-border",
+    props.full && "hy-border",
+    props.border && "hy-card-full",
+    hasBorder && "hy-card--border",
+  ].filter(Boolean);
+});
 const cardStyle = computed(() => {
   return Object.assign(
     {
-      borderRadius: addUnit(borderRadius.value),
-      margin: margin.value,
-      boxShadow: boxShadow.value
-        ? typeof boxShadow.value === 'boolean'
-          ? '0 0 10rpx 4rpx rgba(0, 0, 0, 0.16)'
-          : boxShadow.value
-        : '',
+      borderRadius: addUnit(props.borderRadius),
+      margin: props.margin,
+      boxShadow: props.boxShadow
+        ? typeof props.boxShadow === "boolean"
+          ? "0 0 10rpx 4rpx rgba(0, 0, 0, 0.16)"
+          : props.boxShadow
+        : "",
     },
-    customStyle.value,
-  )
-})
+    props.customStyle,
+  );
+});
 
 const click = () => {
-  emit('click', props.index)
-}
+  emit("click", props.index);
+};
 /**
  * @description 点击头部
  * */
 const headClick = () => {
-  emit('head-click', props.index)
-}
+  emit("head-click", props.index);
+};
 /**
  * @description 点击身体
  * */
 const bodyClick = () => {
-  emit('body-click', props.index)
-}
+  emit("body-click", props.index);
+};
 /**
  * @description 点击尾部
  * */
 const footClick = () => {
-  emit('foot-click', props.index)
-}
+  emit("foot-click", props.index);
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>
