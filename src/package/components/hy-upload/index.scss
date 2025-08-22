@@ -1,5 +1,5 @@
 @use "../../libs/css/mixin.scss" as *;
-@use "../../theme.scss" as *;
+@use "../../libs/css/theme" as *;
 
 $hy-upload-image-width: 80px !default;
 $hy-upload-text-font-size: 11px !default;

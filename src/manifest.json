@@ -1,5 +1,5 @@
 {
-    "name" : "",
+    "name" : "华玥组件库",
     "appid" : "",
     "description" : "",
     "versionName" : "1.0.0",
@@ -50,7 +50,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wxd0a9a6016e343f99",
         "setting" : {
             "urlCheck" : false
         },

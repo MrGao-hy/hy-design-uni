@@ -1,5 +1,5 @@
 @use "../../libs/css/mixin.scss" as *;
-@use "../../theme.scss" as *;
+@use "../../libs/css/theme" as *;
 
 @include b(checkbox) {
   /* #ifndef APP-NVUE */
@@ -33,7 +33,7 @@
       justify-content: space-between;
     }
 
-    @include e( ){
+    @include e(wrap){
       /* #ifndef APP-NVUE */
       word-wrap: break-word;
       /* #endif */

@@ -4,7 +4,12 @@
       <template v-slot:left="{ leftList }">
         <view class="demo-water" v-for="(item, index) in leftList" :key="index">
           <!-- 微信小程序需要hx2.8.11版本才支持在template中引入其他组件，比如下方的u-lazy-load组件 -->
-          <hy-image width="100%" mode="widthFix" radius="5" :src="item.image"></hy-image>
+          <hy-image
+            width="100%"
+            mode="widthFix"
+            radius="5"
+            :src="item.image"
+          ></hy-image>
           <view class="demo-title">{{ item.title }}</view>
           <view class="demo-price">{{ item.price }}元</view>
           <view class="demo-tag">
@@ -27,8 +32,17 @@
         </view>
       </template>
       <template v-slot:right="{ rightList }">
-        <view class="demo-water" v-for="(item, index) in rightList" :key="index">
-          <hy-image width="100%" mode="widthFix" radius="5" :src="item.image"></hy-image>
+        <view
+          class="demo-water"
+          v-for="(item, index) in rightList"
+          :key="index"
+        >
+          <hy-image
+            width="100%"
+            mode="widthFix"
+            radius="5"
+            :src="item.image"
+          ></hy-image>
           <view class="demo-title">{{ item.title }}</view>
           <view class="demo-price">{{ item.price }}元</view>
           <view class="demo-tag">
@@ -56,59 +70,56 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { guid, random } from '@/package'
-import list from './data'
-import { onReachBottom } from '@dcloudio/uni-app'
-import { IconConfig } from 'hy-app'
+import { onMounted, ref } from "vue";
+import { guid, random } from "@/package";
+import list from "./data";
+import { onReachBottom } from "@dcloudio/uni-app";
+import { IconConfig } from "hy-app";
 
-import HyWaterfall from '@/package/components/hy-waterfall/hy-waterfall.vue'
-import HyImage from '@/package/components/hy-image/hy-image.vue'
-import HyIcon from '@/package/components/hy-icon/hy-icon.vue'
-import HyDivider from '@/package/components/hy-divider/hy-divider.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
+import HyWaterfall from "@/package/components/hy-waterfall/hy-waterfall.vue";
+import HyImage from "@/package/components/hy-image/hy-image.vue";
+import HyIcon from "@/package/components/hy-icon/hy-icon.vue";
+import HyDivider from "@/package/components/hy-divider/hy-divider.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
 
-const themeStore = useThemeStore()
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
-const flowList = ref<Record<string, any>[]>([])
-const waterfallRef = ref()
-const loadStatus = ref('loadmore')
+const { themeColor, darkMode } = themeStore;
+const flowList = ref<Record<string, any>[]>([]);
+const waterfallRef = ref();
+const loadStatus = ref("loadmore");
 
 onMounted(() => {
-  addRandomData()
-})
+  addRandomData();
+});
 onReachBottom(() => {
-  loadStatus.value = 'loading'
+  loadStatus.value = "loading";
   // 模拟数据加载
   setTimeout(() => {
-    addRandomData()
-    loadStatus.value = 'loadmore'
-  }, 1000)
-})
+    addRandomData();
+    loadStatus.value = "loadmore";
+  }, 1000);
+});
 
 const addRandomData = () => {
   for (let i = 0; i < 20; i++) {
-    let index = random(0, list.length - 1)
+    let index = random(0, list.length - 1);
     // 先转成字符串再转成对象，避免数组对象引用导致数据混乱
-    let item = JSON.parse(JSON.stringify(list[index]))
-    item.id = guid()
-    flowList.value.push(item)
+    let item = JSON.parse(JSON.stringify(list[index]));
+    item.id = guid();
+    flowList.value.push(item);
   }
-}
+};
 const remove = (id: string) => {
-  waterfallRef.value.remove(id)
-}
+  waterfallRef.value.remove(id);
+};
 const clear = () => {
-  waterfallRef.value.clear()
-}
+  waterfallRef.value.clear();
+};
 </script>
 
 <style scoped lang="scss">
-@import '@/package/libs/css/mixin.scss';
-@import '@/package/theme.scss';
-
 /* 暗色主题 */
 @include b(theme--dark) {
   .demo-water {

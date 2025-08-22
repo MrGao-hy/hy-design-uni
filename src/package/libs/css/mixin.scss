@@ -1,10 +1,10 @@
-@use "../../theme.scss";
-@import "config";
-@import "function";
+@use "theme";
+@use "config";
+@use "function";
 
 
 @mixin b($block) {
-  $B: $namespace + '-' + $block !global;
+  $B: config.$namespace + '-' + $block !global;
 
   .#{$B} {
     @content;
@@ -18,7 +18,7 @@
   @each $unit in $modifier {
     $currentSelector: #{$currentSelector +
       $selector +
-      $modifier-separator +
+      config.$modifier-separator +
       $unit +
       ','};
   }
@@ -35,9 +35,9 @@
   $selector: &;
   $selectors: "";
 
-  @if containsPseudo($selector) {
+  @if function.containsPseudo($selector) {
     @each $item in $element {
-      $selectors: #{$selectors + "." + $B + $element-separator + $item + ","};
+      $selectors: #{$selectors + "." + $B + config.$element-separator + $item + ","};
     }
 
     @at-root {
@@ -51,7 +51,7 @@
 
   @else {
     @each $item in $element {
-      $selectors: #{$selectors + $selector + $element-separator + $item + ","};
+      $selectors: #{$selectors + $selector + config.$element-separator + $item + ","};
     }
 
     @at-root {
@@ -68,9 +68,9 @@
   $selector: &;
   $selectors: "";
 
-  @if containsPseudo($selector) {
+  @if function.containsPseudo($selector) {
     @each $item in $element {
-      $selectors: #{$selectors + "." + $B + $element-separator + $item + ","};
+      $selectors: #{$selectors + "." + $B + config.$element-separator + $item + ","};
     }
 
     @at-root {
@@ -86,7 +86,7 @@
 
   @else {
     @each $item in $element {
-      $selectors: #{$selectors + $selector + $element-separator + $item + ","};
+      $selectors: #{$selectors + $selector + config.$element-separator + $item + ","};
     }
 
     @at-root {
@@ -103,7 +103,7 @@
 @mixin is($states...) {
   @at-root {
     @each $state in $states {
-      &.#{$state-prefix + $state} {
+      &.#{config.$state-prefix + $state} {
         @content;
       }
     }

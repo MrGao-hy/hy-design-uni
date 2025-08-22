@@ -1,5 +1,5 @@
 @use "../../libs/css/mixin.scss" as *;
-@use "../../theme.scss" as *;
+@use "../../libs/css/theme" as *;
 
 
 @include b(text) {
