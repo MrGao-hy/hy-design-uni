@@ -8,7 +8,7 @@
   /*标题*/
   @include m(title) {
     padding: $hy-border-margin-padding-lg $hy-border-margin-padding-base;
-    &__vertical {
+    @include e(vertical){
       position: relative;
       &::after {
         content: "";
@@ -22,13 +22,13 @@
         border-radius: $hy-border-radius-semicircle;
       }
     }
-    &__text {
+    @include e(text) {
       font-size: $hy-font-size-lg;
     }
   }
 
   /*row内容*/
-  &__body {
+  @include m(body) {
     /* #ifndef APP-NVUE */
     box-sizing: border-box;
     /* #endif */
@@ -37,7 +37,7 @@
     border-radius: $hy-border-margin-padding-sm;
     overflow: hidden;
 
-    &--container {
+    @include e(container) {
       @include flex(row);
       align-items: center;
       justify-content: space-between;
@@ -45,32 +45,32 @@
       background-color: $hy-background--container;
 
       /* 大 */
-      &__large {
+      @include e(large) {
         font-size: $hy-font-size-lg;
         padding: 35rpx;
         line-height: 25px;
       }
 
       /* 默认 */
-      &__medium {
+      @include e(medium) {
         font-size: $hy-font-size-base;
         padding: 30rpx;
         line-height: 20px;
       }
 
       /* 小 */
-      &__small {
+      @include e(small) {
         font-size: $hy-font-size-sm;
         padding: 25rpx;
         line-height: 15px;
       }
 
       /*点击状态*/
-      &__clickable {
+      @include e(clickable) {
         background-color: $hy-background--hover;
       }
 
-      &__content {
+      @include e(content) {
         @include flex(row);
         /*左边icon*/
         &-icon {
@@ -94,11 +94,11 @@
       }
 
       /*cell值*/
-      &__center {
+      @include e(center) {
         @include flex;
         max-width: 90%;
         flex: 1;
-        &__value {
+        @include e(value) {
           line-height: 24px;
           color: $hy-text-color--grey;
           margin-right: $hy-border-margin-padding-sm;
@@ -106,21 +106,21 @@
       }
 
       /*右边icon*/
-      &__right-icon {
+      @include e(right-icon) {
         transition: transform 0.3s;
         :deep(.hy-icon) {
           color: $hy-text-color--3;
         }
 
-        &--up {
+        @include m(up) {
           transform: rotate(-90deg);
         }
 
-        &--left {
+        @include m(left) {
           transform: rotate(180deg);
         }
 
-        &--down {
+        @include m(down) {
           transform: rotate(90deg);
         }
       }

@@ -101,7 +101,7 @@ const props = defineProps({
   },
   /**
    * tag的形状
-   * @values circle,square
+   * @values circle,square,opposite
    * */
   shape: {
     type: String,
@@ -143,7 +143,7 @@ const props = defineProps({
   /** 定义需要用到的外部样式 */
   customStyle: {
     type: Object as PropType<CSSProperties>,
-    default: "",
+    default: () => {},
   },
   /** 自定义外部类名 */
   customClass: {

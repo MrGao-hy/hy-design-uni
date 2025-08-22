@@ -1,10 +1,18 @@
 <template>
-  <hy-config-provider @click="closeOutside" :custom-style="themeColor" :theme="darkMode">
+  <hy-config-provider
+    @click="closeOutside"
+    :custom-style="themeColor"
+    :theme="darkMode"
+  >
     <hy-card>
       <template #header>
         <view class="header">
           <view class="hy-title">基础使用</view>
-          <hy-popover v-model="show" content="我是提示信息" placement="bottom-end">
+          <hy-popover
+            v-model="show"
+            content="我是提示信息"
+            placement="bottom-end"
+          >
             <hy-icon :name="IconConfig.HELP"></hy-icon>
           </hy-popover>
         </view>
@@ -66,7 +74,12 @@
 
     <view class="hy-title">多列联动</view>
     <view class="hy-container">
-      <hy-popover mode="menu" :content="menus" placement="bottom-start" @menu-click="onMenu">
+      <hy-popover
+        mode="menu"
+        :content="menus"
+        placement="bottom-start"
+        @menu-click="onMenu"
+      >
         <hy-button text="菜单栏" :stop="false"></hy-button>
       </hy-popover>
     </view>
@@ -84,50 +97,50 @@
 </template>
 
 <script setup lang="ts">
-import { IconConfig } from 'hy-app'
-import { useThemeStore } from '@/store'
-import { ref } from 'vue'
-import { useQueue } from '@/package'
+import { IconConfig } from "hy-app";
+import { useThemeStore } from "@/store";
+import { ref, reactive } from "vue";
+import { useQueue } from "@/package";
 
 // 组件
-import HyPopover from '@/package/components/hy-popover/hy-popover.vue'
-import HyIcon from '@/package/components/hy-icon/hy-icon.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyCard from '@/package/components/hy-card/hy-card.vue'
-import HyButton from '@/package/components/hy-button/hy-button.vue'
+import HyPopover from "@/package/components/hy-popover/hy-popover.vue";
+import HyIcon from "@/package/components/hy-icon/hy-icon.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import HyCard from "@/package/components/hy-card/hy-card.vue";
+import HyButton from "@/package/components/hy-button/hy-button.vue";
 
-const themeStore = useThemeStore()
-const { closeOutside } = useQueue()
-const { themeColor, darkMode } = themeStore
+const themeStore = useThemeStore();
+const { closeOutside } = useQueue();
+const { themeColor, darkMode } = themeStore;
 const content = ref(
-  '华玥组件库，我为自己代言，华玥组件库是一款集合了所以功能的超现代化的组件库，中国13亿人都在用的它',
-)
-const count = ref(0)
+  "华玥组件库，我为自己代言，华玥组件库是一款集合了所以功能的超现代化的组件库，中国13亿人都在用的它",
+);
+const count = ref(0);
 const menus = reactive([
   {
     icon: IconConfig.REMIND,
-    content: '全部标记已读',
+    content: "全部标记已读",
   },
   {
     icon: IconConfig.DELETE,
-    content: '清空最近会话',
+    content: "清空最近会话",
   },
   {
     icon: IconConfig.SETTING,
-    content: '消息订阅设置',
+    content: "消息订阅设置",
   },
   {
     icon: IconConfig.NOTICE,
-    content: '消息异常检测',
+    content: "消息异常检测",
   },
-])
-const show = ref(false)
+]);
+const show = ref(false);
 
-setTimeout(() => (count.value = 10), 2000)
+setTimeout(() => (count.value = 10), 2000);
 
 const onMenu = ({ index, item }) => {
-  uni.showToast({ title: `点击了第${index}个`, icon: 'none' })
-}
+  uni.showToast({ title: `点击了第${index}个`, icon: "none" });
+};
 </script>
 
 <style scoped lang="scss">

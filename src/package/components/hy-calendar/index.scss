@@ -10,12 +10,12 @@
   }
 
   /* 头部样式 */
-  &-header {
+  @include m(header) {
     display: flex;
     flex-direction: column;
     padding-bottom: 4px;
 
-    &__title {
+    @include e(title) {
       font-size: 16px;
       text-align: center;
       height: 42px;
@@ -23,7 +23,7 @@
       font-weight: bold;
     }
 
-    &__subtitle {
+    @include e(subtitle) {
       font-size: 14px;
       color: $hy-text-color--2;
       height: 40px;
@@ -32,11 +32,11 @@
       font-weight: bold;
     }
 
-    &__weekdays {
+    @include e(weekdays) {
       @include flex;
       justify-content: space-between;
 
-      &__weekday {
+      @include e(weekday) {
         font-size: 13px;
         color: $hy-text-color--grey;
         line-height: 30px;
@@ -47,8 +47,8 @@
   }
 
 
-  &-month {
-    &__title {
+  @include m(month) {
+    @include e(title) {
       display: flex;
       flex-direction: column;
       font-size: 14px;
@@ -60,16 +60,16 @@
     }
 
     /* 内容样式 */
-    &-wrapper {
+    @include e(wrapper) {
       margin-top: 4px;
     }
 
-    &__days {
+    @include e(days) {
       position: relative;
       @include flex;
       flex-wrap: wrap;
 
-      &__month-mark-wrapper {
+      @include e(month-mark-wrapper) {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -79,13 +79,13 @@
         justify-content: center;
         align-items: center;
 
-        &__text {
+        @include e(text) {
           font-size: 155px;
           color: $hy-text-color--4;
         }
       }
 
-      &__day {
+      @include e(day) {
         @include flex;
         padding: 2px;
         /* #ifndef APP-NVUE */
@@ -94,13 +94,13 @@
         box-sizing: border-box;
         /* #endif */
 
-        &__select {
+        @include e(select) {
           flex: 1;
           @include flex;
           align-items: center;
           justify-content: center;
           position: relative;
-          &--selected {
+          @include m(selected) {
             background-color: $hy-primary;
             @include flex;
             justify-content: center;
@@ -114,7 +114,7 @@
             }
           }
 
-          &__dot {
+          @include e(dot) {
             width: 7px;
             height: 7px;
             border-radius: 100px;
@@ -124,7 +124,7 @@
             right: 7px;
           }
 
-          &__buttom-info {
+          @include e(button-info) {
             color: $hy-text-color--2;
             text-align: center;
             position: absolute;
@@ -133,40 +133,40 @@
             left: 0;
             right: 0;
 
-            &--selected {
+            @include m(selected) {
               color: #ffffff;
             }
 
-            &--disabled {
-              background-color: $hy-primary-disabled;
-            }
-          }
-
-          &__info {
-            text-align: center;
-            font-size: 16px;
-
-            &--selected {
-              color: #ffffff;
-              background-color: $hy-primary;
-            }
-
-            &--disabled {
+            @include m(disabled) {
               color: $hy-text-color--disabled;
             }
           }
 
-          &--range-selected {
+          @include e(info) {
+            text-align: center;
+            font-size: 16px;
+
+            @include m(selected) {
+              color: #ffffff;
+              background-color: $hy-primary;
+            }
+
+            @include m(disabled) {
+              color: $hy-text-color--disabled;
+            }
+          }
+
+          @include m(range-selected) {
             opacity: 0.3;
             border-radius: 0;
           }
 
-          &--range-start-selected {
+          @include m(range-start-selected) {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
           }
 
-          &--range-end-selected {
+          @include m(range-end-selected ) {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
           }

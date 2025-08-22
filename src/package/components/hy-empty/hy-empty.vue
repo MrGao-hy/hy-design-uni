@@ -1,22 +1,22 @@
 <template>
   <view :class="['hy-empty', customClass]" v-if="show" :style="emptyStyle">
     <view class="hy-empty__img" :style="imgStyle">
-      <HyIcon
-        :name="imageUrl || emptyIcon[mode].icon"
+      <HyImage
+        :src="imageUrl || emptyIcon[mode].icon"
         :width="width"
         :height="height"
         img-mode="widthFix"
-      ></HyIcon>
+      ></HyImage>
     </view>
     <view v-if="$slots.default">
       <slot></slot>
     </view>
-    <view class="hy-empty__description" v-else>
+    <view class="hy-empty--description" v-else>
       <slot v-if="$slots.description" name="description"></slot>
       <text v-else :style="descriptionStyle">{{
-        emptyDescription || emptyIcon[mode].name
+        emptyDescription || emptyIcon[mode].desc
       }}</text>
-      <view class="hy-empty__button" v-if="button?.text">
+      <view class="hy-empty--button" v-if="button?.text">
         <HyButton
           :text="button?.text"
           :size="button?.size"
@@ -51,7 +51,7 @@ import type { HyButtonProps } from "../hy-button/typing";
 import type { IEmptyEmits } from "./typing";
 // 组件
 import HyButton from "../hy-button/hy-button.vue";
-import HyIcon from "../hy-icon/hy-icon.vue";
+import HyImage from "../hy-image/hy-image.vue";
 
 /**
  * 加载的第一页数据就为空
@@ -67,10 +67,13 @@ const props = defineProps({
     default: true,
     required: true,
   },
-  /** 缺省页内容 */
+  /**
+   * 缺省页内容
+   * @values content,search,address,network,order,coupon,favor,history,message,comment,integral
+   * */
   mode: {
     type: String,
-    default: "car",
+    default: "content",
   },
   /** 空状态图片 */
   imageUrl: String,
@@ -81,13 +84,13 @@ const props = defineProps({
   },
   /** 组件层级 */
   width: {
-    type: Number,
-    default: 350,
+    type: [String, Number],
+    default: "240px",
   },
   /** icon高度 */
   height: {
     type: [String, Number],
-    default: "auto",
+    default: "240px",
   },
   /** 提示信息 */
   description: String,

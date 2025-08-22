@@ -9,38 +9,40 @@
   background-color: $hy-background--container;
   box-sizing: border-box;
 
-  &-full {
+  @include m(full) {
     // 如果是与屏幕之间不留空隙，应该设置左右边距为0
     margin-left: 0 !important;
     margin-right: 0 !important;
     width: 100%;
   }
 
-  &--border:after {
-    border-radius: 16rpx;
+  @include m(border) {
+    @include pseudo(after) {
+      border-radius: 16rpx;
+    }
   }
 
-  &__head {
-    &--flex {
+  @include m(head) {
+    @include e(flex) {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    &--left {
+    @include e(left) {
       display: flex;
 
-      &__thumb {
+      @include e(thumb) {
         margin-right: 16rpx;
       }
 
-      &__title {
+      @include e(title) {
         max-width: 400rpx;
         @include lineEllipsis;
       }
     }
 
-    &--right {
+    @include e(right) {
       color: $hy-text-color--grey;
       margin-left: 6rpx;
     }

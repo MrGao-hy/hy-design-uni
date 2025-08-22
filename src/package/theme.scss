@@ -49,6 +49,7 @@ $hy-background--hover: var(--hy-background--hover, rgba(0,0,0,0.05)) !default; /
 $hy-light-background-mask: var(--hy-light-background-mask, rgba(0, 0, 0, 0.5)); //遮罩颜色
 $hy-background--active: var(--hy-background--active, #FFFFFF); // 选中背景色
 $hy-background--close: var(--hy-background--close, #f0f0f0); // 选中背景色
+$hy-background--box: var(--hy-background--box, #FFFFFF); // 选中背景色
 
 /* 文字尺寸 */
 $hy-font-size-sm: 24rpx; // 提示文字大小

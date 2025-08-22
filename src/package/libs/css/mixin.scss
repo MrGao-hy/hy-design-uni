@@ -139,8 +139,11 @@
     @if $shape == circle {
       border-radius:  theme.$hy-border-radius-semicircle;
     }
-    @else {
+    @else if($shape == square) {
       border-radius: theme.$hy-border-radius-sm;
+    }
+    @else {
+      border-radius: 28rpx theme.$hy-border-radius-sm;
     }
   }
 }

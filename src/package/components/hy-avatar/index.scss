@@ -29,7 +29,7 @@
     height: $hy-avatar-size-lg;
   }
 
-  &__image {
+  @include e(image) {
     width: 100%;
     height: 100%;
 

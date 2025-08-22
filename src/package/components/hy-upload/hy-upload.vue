@@ -25,7 +25,7 @@
             class="hy-upload__wrap__preview__other"
             @tap="onClickPreview(item, index)"
           >
-            <u-icon
+            <HyIcon
               color="#80CBF9"
               size="26"
               :name="
@@ -33,7 +33,7 @@
                   ? 'movie'
                   : 'folder'
               "
-            ></u-icon>
+            ></HyIcon>
             <text class="hy-upload__wrap__preview__other__text">
               {{
                 item.isVideo || (item.type && item.type === "video")
@@ -139,8 +139,8 @@ export default {
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import type { PropType, CSSProperties } from "vue";
-import type { FileVo, ReadFunctionVo } from "./typing";
-import { addUnit, chooseFile, isArray } from "../../utils";
+import type { FileVo, IUploadEmits, ReadFunctionVo } from "./typing";
+import { addUnit, bytesToSize, chooseFile, isArray } from "../../utils";
 import { IconConfig } from "../../config";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
@@ -278,14 +278,7 @@ const props = defineProps({
     type: Object as PropType<CSSProperties>,
   },
 });
-const emit = defineEmits([
-  "clickPreview",
-  "beforeRead",
-  "error",
-  "delete",
-  "afterRead",
-  "oversize",
-]);
+const emit = defineEmits<IUploadEmits>();
 
 const lists = ref<FileVo[]>([]);
 // 上传按钮

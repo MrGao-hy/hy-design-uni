@@ -1,29 +1,29 @@
 <template>
-  <view class="hy-calendar-header hy-border-bottom">
-    <text class="hy-calendar-header__title" v-if="showTitle">{{ title }}</text>
-    <text class="hy-calendar-header__subtitle" v-if="showSubtitle">{{
+  <view class="hy-calendar--header hy-border-bottom">
+    <text class="hy-calendar--header__title" v-if="showTitle">{{ title }}</text>
+    <text class="hy-calendar--header__subtitle" v-if="showSubtitle">{{
       subtitle
     }}</text>
-    <view class="hy-calendar-header__weekdays">
-      <text class="hy-calendar-header__weekdays__weekday">{{
+    <view class="hy-calendar--header__weekdays">
+      <text class="hy-calendar--header__weekdays__weekday">{{
         weekText[0]
       }}</text>
-      <text class="hy-calendar-header__weekdays__weekday">{{
+      <text class="hy-calendar--header__weekdays__weekday">{{
         weekText[1]
       }}</text>
-      <text class="hy-calendar-header__weekdays__weekday">{{
+      <text class="hy-calendar--header__weekdays__weekday">{{
         weekText[2]
       }}</text>
-      <text class="hy-calendar-header__weekdays__weekday">{{
+      <text class="hy-calendar--header__weekdays__weekday">{{
         weekText[3]
       }}</text>
-      <text class="hy-calendar-header__weekdays__weekday">{{
+      <text class="hy-calendar--header__weekdays__weekday">{{
         weekText[4]
       }}</text>
-      <text class="hy-calendar-header__weekdays__weekday">{{
+      <text class="hy-calendar--header__weekdays__weekday">{{
         weekText[5]
       }}</text>
-      <text class="hy-calendar-header__weekdays__weekday">{{
+      <text class="hy-calendar--header__weekdays__weekday">{{
         weekText[6]
       }}</text>
     </view>

@@ -2,18 +2,18 @@
   <view class="hy-card" @tap.stop="click" :class="cardClass" :style="cardStyle">
     <view
       v-if="showHead"
-      class="hy-card__head"
+      class="hy-card--head"
       :style="[{ padding: addUnit(paddingHead || padding) }, headStyle]"
       :class="{
         'hy-border__bottom': headBorderBottom,
       }"
       @tap="headClick"
     >
-      <view v-if="!$slots.header" class="hy-card__head--flex">
-        <view class="hy-card__head--left" v-if="title">
+      <view v-if="!$slots.header" class="hy-card--head__flex">
+        <view class="hy-card--head__left" v-if="title">
           <image
             :src="thumb"
-            class="hy-card__head--left__thumb"
+            class="hy-card--head__left__thumb"
             mode="aspectFill"
             v-if="thumb"
             :style="{
@@ -23,7 +23,7 @@
             }"
           ></image>
           <text
-            class="hy-card__head--left__title"
+            class="hy-card--head__left__title"
             :style="{
               fontSize: addUnit(titleSize),
               color: titleColor,
@@ -32,9 +32,9 @@
             {{ title }}
           </text>
         </view>
-        <view class="hy-card__head--right hy-line-1" v-if="subTitle">
+        <view class="hy-card--head__right hy-line-1" v-if="subTitle">
           <text
-            class="hy-card__head__title__text"
+            class="hy-card--head__title__text"
             :style="{
               fontSize: addUnit(subTitleSize),
               color: subTitleColor,
@@ -88,7 +88,7 @@ export default {
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ICardEmits } from "./typing";
-import { addUnit } from "../../utils";
+import { addUnit, getPx } from "../../utils";
 
 /**
  * 卡片组件一般用于多个列表条目，且风格统一的场景。
@@ -203,13 +203,11 @@ const props = defineProps({
 });
 const emit = defineEmits<ICardEmits>();
 
-const hasBorder =
-  +(props.borderRadius.toString().replace(/\D.*$/, "") || 0) > 0;
 const cardClass = computed(() => {
+  const hasBorder = getPx(props.borderRadius) > 0;
   return [
     props.border && "hy-border",
-    props.full && "hy-border",
-    props.border && "hy-card-full",
+    props.full && "hy-card--full",
     hasBorder && "hy-card--border",
   ].filter(Boolean);
 });

@@ -1,17 +1,17 @@
 <template>
-  <view class="hy-checkbox-group" :class="bemClass">
+  <view class="hy-checkbox--group" :class="bemClass">
     <template v-for="(item, i) in columns_1" :key="i">
       <view
         class="hy-checkbox cursor-pointer"
         @tap.stop="wrapperClickHandler($event, item)"
         :style="checkboxStyle"
         :class="[
-          `hy-checkbox-label--${iconPlacement}`,
+          `hy-checkbox--label__${iconPlacement}`,
           borderBottom && placement === 'column' && 'hy-border__bottom',
         ]"
       >
         <view
-          class="hy-checkbox__icon-wrap cursor-pointer"
+          class="hy-checkbox--icon-wrap cursor-pointer"
           @tap.stop="iconClickHandler($event, item)"
           :class="iconClasses(item)"
           :style="iconWrapStyle(item)"
@@ -22,7 +22,7 @@
             :iconSize="addUnit(iconSize)"
           >
             <HyIcon
-              class="hy-checkbox__icon-wrap__icon"
+              class="hy-checkbox--icon-wrap__icon"
               :name="IconConfig.CHECK_MASK"
               :size="addUnit(sizeType[size] ?? iconSize)"
               :color="iconColor || '#ffffff'"
@@ -31,9 +31,9 @@
         </view>
         <view
           :class="[
-            'hy-checkbox__label-wrap',
+            'hy-checkbox--label__wrap',
             'cursor-pointer',
-            disabled && 'hy-checkbox__label-wrap--disabled',
+            disabled && 'hy-checkbox--label__wrap--disabled',
           ]"
           @tap.stop="labelClickHandler($event, item)"
         >
@@ -229,14 +229,14 @@ const iconClasses = computed(() => {
   return (temp: CheckboxColumnsVo): string[] => {
     let classes: string[] = [];
     // 组件的形状
-    classes.push("hy-checkbox__icon-wrap--" + props.shape);
+    classes.push("hy-checkbox--icon-wrap--" + props.shape);
     if (isDisabled(temp?.disabled)) {
-      classes.push("hy-checkbox__icon-wrap--disabled");
+      classes.push("hy-checkbox--icon-wrap--disabled");
     }
     if (temp[props.fieldNames.checked]) {
-      classes.push("hy-checkbox__icon-wrap--checked");
+      classes.push("hy-checkbox--icon-wrap--checked");
       if (isDisabled(temp?.disabled)) {
-        classes.push("hy-checkbox__icon-wrap--disabled--checked");
+        classes.push("hy-checkbox--icon-wrap--disabled--checked");
       }
     }
     return classes;

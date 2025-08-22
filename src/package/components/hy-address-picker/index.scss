@@ -1,7 +1,7 @@
 @use "../../libs/css/mixin.scss" as *;
 @include b(address-picker) {
   flex: 1;
-  &__has-input {
+  @include e(has-input) {
     position: relative;
     display: flex;
     flex-direction: column;

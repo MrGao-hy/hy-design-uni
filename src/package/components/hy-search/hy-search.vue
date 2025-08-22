@@ -17,7 +17,7 @@
         borderColor: borderColor,
       }"
     >
-      <template v-if="$slots.label || label !== null">
+      <template v-if="$slots.label || label">
         <slot name="label">
           <text class="hy-search__content__label">{{ label }}</text>
         </slot>
@@ -72,14 +72,7 @@
         v-if="keyword && clear && focused"
         @click="clear"
       >
-        <HyIcon
-          :name="IconConfig.CLOSE"
-          size="11"
-          color="#ffffff"
-          :customStyle="{
-            lineHeight: '12px',
-          }"
-        ></HyIcon>
+        <HyIcon :name="IconConfig.CLOSE" color="#ffffff"></HyIcon>
       </view>
     </view>
     <text
