@@ -187,7 +187,7 @@ const props = defineProps({
   },
   /** 滑块的大小，取值范围为 12 - 28 */
   blockSize: {
-    type: Number,
+    type: [String, Number],
     default: 18,
   },
   /** 最小值 */

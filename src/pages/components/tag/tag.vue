@@ -50,6 +50,7 @@
     <view class="hy-flex hy-container">
       <hy-tag text="圆形" shape="circle"></hy-tag>
       <hy-tag text="方形" shape="square"></hy-tag>
+      <hy-tag text="方形" shape="opposite"></hy-tag>
     </view>
 
     <view class="hy-title">带图标</view>

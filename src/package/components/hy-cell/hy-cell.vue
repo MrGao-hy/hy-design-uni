@@ -10,7 +10,7 @@
       </slot>
     </view>
     <view
-      class="hy-cell__body"
+      class="hy-cell--body"
       :style="{ 'border-radius': addUnit(borderRadius) }"
     >
       <!-- @slot 整体插槽 -->
@@ -26,10 +26,10 @@
             }"
             @tap="clickHandler($event, item, i)"
           >
-            <view class="hy-cell__body--container__content">
+            <view class="hy-cell--body__container__content">
               <view
                 v-if="item?.icon?.name || $slots.icon"
-                class="hy-cell__body--container__content-icon"
+                class="hy-cell--body__container__content-icon"
               >
                 <!-- @slot 图标插槽 -->
                 <slot name="icon" :icon="item?.icon">
@@ -51,12 +51,12 @@
                   ></HyIcon>
                 </slot>
               </view>
-              <view class="hy-cell__body--container__content-title">
+              <view class="hy-cell--body__container__content-title">
                 <!-- 将slot与默认内容用if/else分开主要是因为微信小程序不支持slot嵌套传递，这样才能解决collapse组件的slot不失效问题，label暂时未用到。 -->
                 <!-- @slot 列表标题插槽 -->
                 <slot name="cell-title" :title="item?.title">
                   <text
-                    class="hy-cell__body--container__content-title--text"
+                    class="hy-cell--body__container__content-title--text"
                     :class="[
                       (disabled || item?.disabled) && 'hy-cell--disabled',
                     ]"
@@ -67,7 +67,7 @@
                 <!-- @slot 列表小标题插槽 -->
                 <slot name="sub" v-if="item?.subhead" :sub="item.subhead">
                   <text
-                    class="hy-cell__body--container__content-title--sub"
+                    class="hy-cell--body__container__content-title--sub"
                     :class="[disabled && 'hy-cell--disabled']"
                   >
                     {{ item.subhead }}
@@ -76,7 +76,7 @@
               </view>
             </view>
             <view
-              class="hy-cell__body--container__center"
+              class="hy-cell--body__container__center"
               :style="{
                 justifyContent:
                   arrange === 'left'
@@ -89,7 +89,7 @@
               <!-- @slot 值内容插槽 -->
               <slot name="value" :record="item">
                 <text
-                  class="hy-cell__body--container__center__value"
+                  class="hy-cell--body__container__center__value"
                   :class="[disabled && 'hy-cell--disabled']"
                   v-if="value || item?.value"
                 >
@@ -98,9 +98,9 @@
               </slot>
             </view>
             <view
-              class="hy-cell__body--container__right-icon"
+              class="hy-cell--body__container__right-icon"
               :class="[
-                `hy-cell__body--container__right-icon--${item?.arrowDirection || arrowDirection}`,
+                `hy-cell--body__container__right-icon--${item?.arrowDirection || arrowDirection}`,
               ]"
             >
               <!-- @slot 右边按钮插槽 -->
@@ -246,7 +246,7 @@ const containerClass = computed(() => {
       !props.disabled &&
         !temp?.disabled &&
         props.clickable &&
-        "hy-cell__body--container__clickable",
+        "hy-cell--body__container__clickable",
     ]
       .filter(Boolean)
       .join();
@@ -254,8 +254,8 @@ const containerClass = computed(() => {
 });
 const ItemClass = computed(() => {
   return [
-    "hy-cell__body--container",
-    `hy-cell__body--container__${props.size}`,
+    "hy-cell--body__container",
+    `hy-cell--body__container__${props.size}`,
   ];
 });
 

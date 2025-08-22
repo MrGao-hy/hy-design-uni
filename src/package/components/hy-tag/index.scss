@@ -19,41 +19,42 @@ $hy-background--disabled);
   /*圆角*/
   @include borderRadio(circle);
   @include borderRadio(square);
+  @include borderRadio(opposite);
 
-  &__icon {
+  @include e(icon) {
     margin-right: $hy-border-margin-padding-sm;
   }
 
-  &__text {
-    &--small {
+  @include e(text) {
+    @include m(small) {
       font-size: $hy-font-size-sm;
       line-height: $hy-font-size-sm;
     }
 
-    &--medium {
+    @include m(medium) {
       font-size: $hy-font-size-base;
       line-height: $hy-font-size-base;
     }
 
-    &--large {
+    @include m(large) {
       font-size: $hy-font-size-lg;
       line-height: $hy-font-size-lg;
     }
   }
 
-  &--small {
+  @include m(small) {
     height: 22px;
     line-height: 22px;
     padding: 0 $hy-border-margin-padding-sm;
   }
 
-  &--medium {
+  @include m(medium) {
     height: 26px;
     line-height: 26px;
     padding: 0 $hy-border-margin-padding-base;
   }
 
-  &--large {
+  @include m(large) {
     height: 32px;
     line-height: 32px;
     padding: 0 15px;
@@ -82,7 +83,7 @@ $hy-background--disabled);
   @include themeColor(info--plain__fill, $hy-info-light, $hy-info, $hy-info);
 
   /* 关闭按钮 */
-  &__close {
+  @include e(close) {
     position: absolute;
     z-index: 999;
     top: 10px;
@@ -99,17 +100,17 @@ $hy-background--disabled);
     transform: scale(0.6) translate(50%, -50%);
     /* #endif */
 
-    &--small {
+    @include m(small) {
       width: 18px;
       height: 18px;
     }
 
-    &--medium {
+    @include m(medium) {
       width: 22px;
       height: 22px;
     }
 
-    &--large {
+    @include m(large) {
       width: 25px;
       height: 25px;
     }

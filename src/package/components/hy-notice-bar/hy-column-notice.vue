@@ -8,8 +8,8 @@
     </slot>
     <swiper
       :disable-touch="disableTouch"
-      :vertical="step ? false : true"
-      circular
+      :vertical="!step"
+      :circular="true"
       :interval="duration"
       :autoplay="true"
       class="hy-notice__swiper"

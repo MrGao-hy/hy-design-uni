@@ -8,8 +8,9 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData:
-          '@use "hy-app/theme.scss" as *;\n' +
-          '@use "hy-app/index.scss" as *;\n',
+          '@use "hy-app/theme.scss" as theme;\n' +
+          '@use "hy-app/index.scss" as index;\n' +
+          '@import "~@/style/common.scss";',
       },
     },
   },

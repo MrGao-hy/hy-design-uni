@@ -1,0 +1,22 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      hy-app:
+        specifier: 0.3.*
+        version: 0.3.3
+
+packages:
+
+  hy-app@0.3.3:
+    resolution: {integrity: sha512-I/K9SmtzCjmzG3Bhai4LU9Jva5x4dsoC/JNZzJ3/KFKiBUkNrCtU42xi/RY005DRthw+aHIxgrvott1B50Kdjg==}
+
+snapshots:
+
+  hy-app@0.3.3: {}

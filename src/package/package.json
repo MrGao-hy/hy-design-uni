@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.3.2",
-  "description": "修复上传提示功能",
+  "version": "0.3.3",
+  "description": "scss添加颜色变量",
   "main": "./index.ts",
   "private": false,
   "scripts": {},
@@ -12,5 +12,8 @@
   ],
   "web-types": "./web-types.json",
   "author": "gaoxianhua",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "hy-app": "0.3.*"
+  }
 }

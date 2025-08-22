@@ -10,12 +10,18 @@
             :key="index"
             :class="[index === 9 && 'scroll-list__goods-item--no-margin-right']"
           >
-            <image class="scroll-list__goods-item__image" :src="item.thumbnail" mode=""></image>
-            <text class="scroll-list__goods-item__text">￥{{ item.price }}</text>
+            <image
+              class="scroll-list__goods-item__image"
+              :src="item.thumbnail"
+              mode=""
+            ></image>
+            <text class="scroll-list__goods-item__text"
+              >￥{{ item.price }}</text
+            >
           </view>
           <view class="scroll-list__show-more" @tap="showMore">
             <text class="scroll-list__show-more__text">查看更多</text>
-            <up-icon name="arrow-leftward" color="#f56c6c" size="12"></up-icon>
+            <hy-icon name="arrow-leftward" color="#f56c6c" size="12"></hy-icon>
           </view>
         </view>
       </hy-scroll-list>
@@ -24,59 +30,59 @@
 </template>
 
 <script setup lang="ts">
-import HyScrollList from '@/package/components/hy-scroll-list/hy-scroll-list.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import HyScrollList from "@/package/components/hy-scroll-list/hy-scroll-list.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
+const { themeColor, darkMode } = themeStore;
 
 const goodsArr = [
   {
-    price: '230.5',
+    price: "230.5",
     thumbnail:
-      'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png',
+      "https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png",
   },
   {
-    price: '74.1',
+    price: "74.1",
     thumbnail:
-      'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png',
+      "https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png",
   },
   {
-    price: '8457',
+    price: "8457",
     thumbnail:
-      'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png',
+      "https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png",
   },
   {
-    price: '1442',
+    price: "1442",
     thumbnail:
-      'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png',
+      "https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png",
   },
   {
-    price: '541',
+    price: "541",
     thumbnail:
-      'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png',
+      "https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png",
   },
   {
-    price: '234',
+    price: "234",
     thumbnail:
-      'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png',
+      "https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png",
   },
   {
-    price: '562',
+    price: "562",
     thumbnail:
-      'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png',
+      "https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png",
   },
   {
-    price: '251.5',
+    price: "251.5",
     thumbnail:
-      'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png',
+      "https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png",
   },
-]
+];
 
 const showMore = () => {
-  uni.showToast({ title: '查看更多' })
-}
+  uni.showToast({ title: "查看更多" });
+};
 </script>
 
 <style scoped lang="scss">

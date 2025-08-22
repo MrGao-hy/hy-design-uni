@@ -14,11 +14,11 @@
   /* #endif */
   flex-direction: row;
 
-  &__text {
+  @include e(text) {
     font-size: 15px;
   }
 
-  &__loading-text {
+  @include e(loading-text) {
     font-size: 15px;
     margin-left: 4px;
   }

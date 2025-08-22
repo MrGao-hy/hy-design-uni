@@ -62,7 +62,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IAvatarEmit } from "./typing";
 import { addUnit, isNumber, random } from "../../utils";
@@ -92,7 +92,7 @@ const props = defineProps({
    * @values large, medium, small
    * */
   size: {
-    type: [String, Number],
+    type: [String, Number] as PropType<string | number>,
     default: "medium",
   },
   /**
@@ -140,7 +140,10 @@ const props = defineProps({
     default: 0,
   },
   /** 组件标识符 */
-  name: String,
+  name: {
+    type: String,
+    default: "",
+  },
   /** 自定义输入框外部样式 */
   customStyle: {
     type: Object as PropType<CSSProperties>,
@@ -203,10 +206,10 @@ const avatarStyle = computed<CSSProperties>(() => {
     style.height = addUnit(props.size);
   }
 
-  return Object.assign(style, customStyle.value);
+  return Object.assign(style, props.customStyle);
 });
 const avatarClass = computed<string[]>(() => {
-  const classes: string[] = [`hy-avatar--${shape.value}`];
+  const classes: string[] = [`hy-avatar--${props.shape}`];
   if (typeof props.size === "string") {
     classes.push(`hy-avatar--${props.size}`);
   }
@@ -224,22 +227,16 @@ const init = () => {
 };
 init();
 
-/**
- * @description 判断传入的name属性，是否图片路径，只要带有"/"均认为是图片形式
- * */
-const isImg = () => {
-  return props.src.indexOf("/") !== -1;
-};
 // 图片加载时失败时触发
 function errorHandler() {
-  avatarUrl.value = defaultUrl.value || base64Avatar;
+  avatarUrl.value = props.defaultUrl || base64Avatar;
 }
 
 /**
  * @description 点击头像
  * */
 const clickHandler = (e: Event) => {
-  emit("click", name.value, e);
+  emit("click", props.name, e);
 };
 </script>
 

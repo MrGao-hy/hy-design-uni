@@ -53,7 +53,7 @@ import type IProps from "./typing";
 import defaultProps from "./props";
 import { addUnit, getRect, sleep } from "../../utils";
 import { IconConfig } from "../../config";
-
+// 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 
 const props = withDefaults(defineProps<IProps>(), defaultProps);

@@ -1,26 +1,26 @@
 <template>
-  <view class="hy-calendar-month-wrapper" ref="hy-calendar-month-wrapper">
+  <view class="hy-calendar--month__wrapper" ref="hy-calendar--month__wrapper">
     <view
       v-for="(item, index) in months"
       :key="index"
-      :class="[`hy-calendar-month-${index}`]"
-      :ref="`hy-calendar-month-${index}`"
+      :class="[`hy-calendar--month__${index}`]"
+      :ref="`hy-calendar--month__${index}`"
       :id="`month-${index}`"
     >
-      <text v-if="index !== 0" class="hy-calendar-month__title"
+      <text v-if="index !== 0" class="hy-calendar--month__title"
         >{{ item.year }}年{{ item.month }}月</text
       >
-      <view class="hy-calendar-month__days">
+      <view class="hy-calendar--month__days">
         <view
           v-if="showMark"
-          class="hy-calendar-month__days__month-mark-wrapper"
+          class="hy-calendar--month__days__month-mark-wrapper"
         >
-          <text class="hy-calendar-month__days__month-mark-wrapper__text">{{
+          <text class="hy-calendar--month__days__month-mark-wrapper__text">{{
             item.month
           }}</text>
         </view>
         <view
-          class="hy-calendar-month__days__day"
+          class="hy-calendar--month__days__day"
           v-for="(item1, index1) in item.date"
           :key="index1"
           :style="[dayStyle(index, index1, item1)]"
@@ -31,10 +31,10 @@
             :style="[daySelectStyle(index, index1, item1)]"
           >
             <text
-              class="hy-calendar-month__days__day__select__info"
+              class="hy-calendar--month__days__day__select__info"
               :class="[
                 item1.disabled || isForbid(item1)
-                  ? 'hy-calendar-month__days__day__select__info--disabled'
+                  ? 'hy-calendar--month__days__day__select__info--disabled'
                   : '',
               ]"
               :style="[textStyle(item1)]"
@@ -42,10 +42,10 @@
             >
             <text
               v-if="getBottomInfo(index, index1, item1)"
-              class="hy-calendar-month__days__day__select__buttom-info"
+              class="hy-calendar--month__days__day__select__button-info"
               :class="[
                 item1.disabled || isForbid(item1)
-                  ? 'hy-calendar-month__days__day__select__buttom-info--disabled'
+                  ? 'hy-calendar--month__days__day__select__button-info--disabled'
                   : '',
               ]"
               :style="[textStyle(item1)]"
@@ -53,7 +53,7 @@
             >
             <text
               v-if="item1.dot"
-              class="hy-calendar-month__days__day__select__dot"
+              class="hy-calendar--month__days__day__select__dot"
             ></text>
           </view>
         </view>
@@ -65,7 +65,6 @@
 <script>
 import { addUnit, colorGradient, deepClone, getRect, sleep } from "../../utils";
 import dayjs from "dayjs/esm";
-import { formatTime } from "../../utils";
 export default {
   name: "hy-calendar-month",
   props: {
@@ -219,10 +218,10 @@ export default {
       return (index1, index2, item) => {
         const date = dayjs(item.date).format("YYYY-MM-DD");
         const len = this.selected.length - 1;
-        const classes = ["hy-calendar-month__days__day__select"];
+        const classes = ["hy-calendar--month__days__day__select"];
         // 判断选中的
         if (this.selected.some((item) => this.dateSame(item, date))) {
-          classes.push("hy-calendar-month__days__day__select--selected");
+          classes.push("hy-calendar--month__days__day__select--selected");
           if (this.selected.length >= 2) {
             // 判断非两边选中内容
             if (
@@ -230,7 +229,7 @@ export default {
               !this.dateSame(date, this.selected[len])
             ) {
               classes.push(
-                "hy-calendar-month__days__day__select--selected--center",
+                "hy-calendar--month__days__day__select--selected--center",
               );
             }
           }
@@ -385,7 +384,7 @@ export default {
     // 获取月份数据区域的宽度，因为nvue不支持百分比，所以无法通过css设置每个日期item的宽度
     getWrapperWidth() {
       // #ifndef APP-NVUE
-      getRect(".hy-calendar-month-wrapper").then((size) => {
+      getRect(".hy-calendar--month__wrapper").then((size) => {
         this.width = size.width;
       });
       // #endif
@@ -393,7 +392,7 @@ export default {
     getMonthRect() {
       // 获取每个月份数据的尺寸，用于父组件在scroll-view滚动事件中，监听当前滚动到了第几个月份
       const promiseAllArr = this.months.map((item, index) =>
-        this.getMonthRectByPromise(`hy-calendar-month-${index}`),
+        this.getMonthRectByPromise(`hy-calendar--month__${index}`),
       );
       // 一次性返回
       Promise.all(promiseAllArr).then((sizes) => {

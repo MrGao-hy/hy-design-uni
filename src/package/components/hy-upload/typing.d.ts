@@ -150,3 +150,24 @@ export default interface HyUploadProps {
    * */
   customStyle?: CSSProperties;
 }
+
+export interface UploadFileParams {
+  file: FileVo | FileVo[];
+  name: string;
+  index: number;
+}
+
+export interface IUploadEmits {
+  /** 点击预览大图触发 */
+  (e: "clickPreview", params: UploadFileParams): void;
+  /** 上传前触发 */
+  (e: "beforeRead", params: UploadFileParams): void;
+  /** 上传错误触发 */
+  (e: "error", error: any): void;
+  /** 删除触发 */
+  (e: "delete", params: UploadFileParams): void;
+  /** 上传完成触发 */
+  (e: "afterRead", params: UploadFileParams): void;
+  /** 超出最大值 */
+  (e: "oversize", params: UploadFileParams): void;
+}

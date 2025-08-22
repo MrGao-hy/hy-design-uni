@@ -25,6 +25,12 @@
   }
 
   &__right-icon {
+    :deep(.hy-icon) {
+      color: $hy-warning;
+    }
+  }
+
+  &__right-icon {
     margin-left: 5px;
     align-items: center;
   }

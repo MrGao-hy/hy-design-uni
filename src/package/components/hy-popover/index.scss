@@ -31,7 +31,7 @@ $z-index: 998;
     white-space: nowrap;
     z-index: $z-index;
     position: relative;
-    background-color: $hy-background--container;
+    background-color: $hy-background--box;
     border-radius: $hy-border-radius-sm;
   }
 
@@ -63,7 +63,7 @@ $z-index: 998;
     padding: $hy-border-margin-padding-base;
     line-height: 22px;
     z-index: $z-index;
-    background-color: $hy-background--container;
+    background-color: $hy-background--box;
     border-radius: $hy-border-radius-sm;
     box-sizing: content-box;
     width: 200px;
@@ -79,5 +79,5 @@ $z-index: 998;
     z-index: $z-index;
   }
 
-  @include squareArrow(6px, $hy-background--container, $z-index, $hy-box-shadow);
+  @include squareArrow(6px, $hy-background--box, $z-index, $hy-box-shadow);
 }
