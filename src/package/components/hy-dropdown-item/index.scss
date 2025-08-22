@@ -1,4 +1,4 @@
-@use "../../theme.scss" as *;
+@use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin.scss" as *;
 
 @include b(dropdown-item) {

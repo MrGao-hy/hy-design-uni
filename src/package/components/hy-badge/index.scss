@@ -1,5 +1,5 @@
 @use "../../libs/css/mixin.scss" as *;
-@use "../../theme.scss" as *;
+@use "../../libs/css/theme" as *;
 
 $hy-badge-dot-size: 8px !default;
 $hy-badge-text-font-size: 11px !default;

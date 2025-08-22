@@ -1,6 +1,6 @@
 @use "../../libs/css/mixin.scss" as *;
 @use "../../public/font/iconfont.css" as *;
-@use "../../theme.scss" as *;
+@use "../../libs/css/theme" as *;
 
 
 @include b(icon) {

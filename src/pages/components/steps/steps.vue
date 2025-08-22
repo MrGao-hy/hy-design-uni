@@ -1,12 +1,14 @@
 <template>
   <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <view class="hy-title">基础使用</view>
-    <hy-steps
-      :list="list"
-      v-model:current="current"
-      :direction="direction"
-      :dot="dot"
-    ></hy-steps>
+    <view style="overflow: auto; width: 400px">
+      <hy-steps
+        :list="list"
+        v-model:current="current"
+        :direction="direction"
+        :dot="dot"
+      ></hy-steps>
+    </view>
 
     <view class="hy-setting__box">
       <view class="hy-title">指示点</view>
@@ -28,7 +30,7 @@ import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import { ref } from "vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
-import {useThemeStore} from "@/store";
+import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = themeStore;

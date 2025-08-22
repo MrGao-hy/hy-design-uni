@@ -293,7 +293,7 @@ const inputHandler = (e: InputOnInputEvent) => {
 <style scoped lang="scss">
 @import "./index.scss";
 @import "../../libs/css/mixin.scss";
-@import "../../theme.scss";
+@import "../../libs/css/theme";
 @include b(code-input) {
   @include m(item) {
     &__box {
