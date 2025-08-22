@@ -1,11 +1,19 @@
 <template>
-  <hy-config-provider :custom-style="[themeColor, { padding: '10px' }]" :theme="darkMode">
+  <hy-config-provider
+    :custom-style="[themeColor, { padding: '10px' }]"
+    :theme="darkMode"
+  >
     <view class="demo-header">
       <text class="demo-title">表单组件示例</text>
     </view>
 
     <view class="demo-content">
-      <hy-form ref="formRef" :model="formData" :rules="rules" label-width="80px">
+      <hy-form
+        ref="formRef"
+        :model="formData"
+        :rules="rules"
+        label-width="80px"
+      >
         <hy-form-item label="用户名" prop="username" required>
           <hy-input v-model="formData.username" placeholder="请输入用户名" />
         </hy-form-item>
@@ -24,7 +32,11 @@
         </hy-form-item>
 
         <hy-form-item label="密码" prop="password" required>
-          <hy-input v-model="formData.password" type="password" placeholder="请输入密码" />
+          <hy-input
+            v-model="formData.password"
+            type="password"
+            placeholder="请输入密码"
+          />
         </hy-form-item>
 
         <hy-form-item label="确认密码" prop="confirmPassword" required>
@@ -36,7 +48,11 @@
         </hy-form-item>
 
         <hy-form-item label="年龄" prop="age">
-          <hy-input v-model="formData.age" type="number" placeholder="请输入年龄" />
+          <hy-input
+            v-model="formData.age"
+            type="number"
+            placeholder="请输入年龄"
+          />
         </hy-form-item>
 
         <hy-form-item label="性别" prop="gender">
@@ -56,7 +72,11 @@
         </hy-form-item>
 
         <hy-form-item label="备注" prop="remark">
-          <hy-textarea v-model="formData.remark" placeholder="请输入备注信息" :height="80" />
+          <hy-textarea
+            v-model="formData.remark"
+            placeholder="请输入备注信息"
+            :height="80"
+          />
         </hy-form-item>
       </hy-form>
     </view>
@@ -69,123 +89,136 @@
 
     <view class="demo-result">
       <text class="result-title">表单数据：</text>
-      <text class="result-content">{{ JSON.stringify(formData, null, 2) }}</text>
+      <text class="result-content">{{
+        JSON.stringify(formData, null, 2)
+      }}</text>
     </view>
   </hy-config-provider>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { useThemeStore } from '@/store'
+import { reactive, ref } from "vue";
+import { useThemeStore } from "@/store";
 // 组件
-import HyForm from '@/package/components/hy-form/hy-form.vue'
-import HyFormItem from '@/package/components/hy-form-item/hy-form-item.vue'
-import HyInput from '@/package/components/hy-input/hy-input.vue'
-import HyRadio from '@/package/components/hy-radio/hy-radio.vue'
-import HyCheckButton from '@/package/components/hy-check-button/hy-check-button.vue'
-import HySwitch from '@/package/components/hy-switch/hy-switch.vue'
-import HyTextarea from '@/package/components/hy-textarea/hy-textarea.vue'
-import HyButton from '@/package/components/hy-button/hy-button.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
+import HyForm from "@/package/components/hy-form/hy-form.vue";
+import HyFormItem from "@/package/components/hy-form-item/hy-form-item.vue";
+import HyInput from "@/package/components/hy-input/hy-input.vue";
+import HyRadio from "@/package/components/hy-radio/hy-radio.vue";
+import HyCheckButton from "@/package/components/hy-check-button/hy-check-button.vue";
+import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
+import HyTextarea from "@/package/components/hy-textarea/hy-textarea.vue";
+import HyButton from "@/package/components/hy-button/hy-button.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 
-const themeStore = useThemeStore()
-const { themeColor, darkMode } = themeStore
+const themeStore = useThemeStore();
+const { themeColor, darkMode } = themeStore;
 
 // 表单数据
 const formData = reactive({
-  username: '',
-  phone: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  age: '',
-  gender: '',
+  username: "",
+  phone: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  age: "",
+  gender: "",
   hobbies: [],
   switch: false,
-  remark: '',
-})
+  remark: "",
+});
 
 // 表单验证规则
 const rules = {
   username: [
-    { required: true, message: '请输入用户名' },
-    { min: 2, max: 4, message: '用户名长度在 2 到 4 个字符', trigger: ['change'] },
+    { required: true, message: "请输入用户名" },
+    {
+      min: 2,
+      max: 4,
+      message: "用户名长度在 2 到 4 个字符",
+      trigger: ["change"],
+    },
   ],
   phone: [
-    { required: true, message: '请输入手机号' },
-    { type: 'phone', message: '请输入正确的手机号', trigger: ['change', 'blur'] },
+    { required: true, message: "请输入手机号" },
+    {
+      type: "phone",
+      message: "请输入正确的手机号",
+      trigger: ["change", "blur"],
+    },
   ],
-  email: [{ type: 'email', message: '请输入正确的邮箱格式', trigger: ['change'] }],
+  email: [
+    { type: "email", message: "请输入正确的邮箱格式", trigger: ["change"] },
+  ],
   password: [
-    { required: true, message: '请输入密码' },
-    { min: 6, message: '密码长度不能少于 6 个字符', trigger: ['change'] },
+    { required: true, message: "请输入密码" },
+    { min: 6, message: "密码长度不能少于 6 个字符", trigger: ["change"] },
   ],
   confirmPassword: [
-    { required: true, message: '请确认密码' },
+    { required: true, message: "请确认密码" },
     {
       validator: (value: string) => {
         if (value !== formData.password) {
-          return '两次输入的密码不一致'
+          return "两次输入的密码不一致";
         }
-        return true
+        return true;
       },
-      trigger: ['change'],
+      trigger: ["change"],
     },
   ],
   age: [
     {
       validator: (value: string) => {
         if (value && (Number(value) < 1 || Number(value) > 120)) {
-          return '年龄必须在 1-120 之间'
+          return "年龄必须在 1-120 之间";
         }
-        return true
+        return true;
       },
-      trigger: ['change'],
+      trigger: ["change"],
     },
   ],
-}
+};
 
 // 选项数据
 const genderOptions = [
-  { label: '男', value: 'male' },
-  { label: '女', value: 'female' },
-]
+  { label: "男", value: "male" },
+  { label: "女", value: "female" },
+];
 
 const hobbyOptions = [
-  { label: '阅读', value: 'reading' },
-  { label: '音乐', value: 'music' },
-  { label: '运动', value: 'sports' },
-  { label: '旅行', value: 'travel' },
-]
+  { label: "阅读", value: "reading" },
+  { label: "音乐", value: "music" },
+  { label: "运动", value: "sports" },
+  { label: "旅行", value: "travel" },
+];
 
 // 表单引用
-const formRef = ref()
+const formRef = ref();
 
 // 提交表单
 const handleSubmit = async (data: any) => {
-  const isSuccess = await formRef.value?.submit()
+  const isSuccess = await formRef.value?.submit();
   if (isSuccess) {
     await uni.showToast({
-      title: '提交成功',
-      icon: 'success',
-    })
+      title: "提交成功",
+      icon: "success",
+    });
   }
-}
+};
 
 // 验证表单
 const handleValidate = async () => {
-  const isValid = await formRef.value?.validate()
-  await uni.showToast({ title: '表单校验成功', icon: 'none' })
-}
+  const isValid = await formRef.value?.validate();
+  await uni.showToast({ title: "表单校验成功", icon: "none" });
+};
 
 // 重置表单
 const handleReset = () => {
-  formRef.value?.resetFields()
+  formRef.value?.resetFields();
   uni.showToast({
-    title: '重置成功',
-    icon: 'success',
-  })
-}
+    title: "重置成功",
+    icon: "success",
+  });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -208,12 +241,8 @@ const handleReset = () => {
 
 .demo-actions {
   display: flex;
-  gap: 10px;
+  justify-content: space-around;
   margin-bottom: 20px;
-
-  .hy-button {
-    flex: 1;
-  }
 }
 
 .demo-result {

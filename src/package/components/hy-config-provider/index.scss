@@ -11,7 +11,8 @@
   /* #ifndef H5 */
   height: 100vh;
   /* #endif */
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   background-color: $hy-background;
   color: $hy-text-color;
 }
