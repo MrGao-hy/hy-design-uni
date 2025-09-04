@@ -121,6 +121,8 @@ declare namespace HyApp {
     | "slide-right"
     | "zoom-in"
     | "zoom-out";
+  /** label位置 */
+  type LabelPosition = "left" | "top";
   interface IFieldNames {
     /**
      * @description 自定义columns的文本键

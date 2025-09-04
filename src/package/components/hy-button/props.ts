@@ -1,7 +1,6 @@
-import type { HyButtonProps } from './typing'
-import { HyApp } from 'hy-app/typing/modules/common'
-import type { CSSProperties, PropType } from 'vue'
-import HyIconProps from '@/package/components/hy-icon/typing'
+import type { HyButtonProps } from "./typing";
+import type { CSSProperties, PropType } from "vue";
+import type HyIconProps from "@/package/components/hy-icon/typing";
 
 export const defaultProps = {
   /** 是否显示按钮的细边框 */
@@ -12,20 +11,21 @@ export const defaultProps = {
   /** 按钮的预置样式 */
   type: {
     type: String as PropType<HyApp.ThemeType>,
-    default: 'primary',
-    validator: (v) => ['info', 'primary', 'error', 'warning', 'success'].includes(v),
+    default: "primary",
+    validator: (v) =>
+      ["info", "primary", "error", "warning", "success"].includes(v),
   },
   /** 按钮尺寸 */
   size: {
-    type: String as PropType<HyApp.SizeType | 'mini'>,
-    default: 'medium',
-    validator: (v) => ['large', 'medium', 'small', 'mini'].includes(v),
+    type: String as PropType<HyApp.SizeType | "mini">,
+    default: "medium",
+    validator: (v) => ["large", "medium", "small", "mini"].includes(v),
   },
   /** 按钮形状 */
   shape: {
     type: String as PropType<HyApp.ShapeType>,
-    default: 'square',
-    validator: (v) => ['circle', 'square'].includes(v),
+    default: "square",
+    validator: (v) => ["circle", "square"].includes(v),
   },
   /** 按钮是否镂空，背景色透明  */
   plain: {
@@ -45,13 +45,13 @@ export const defaultProps = {
   /** 加载中提示文字 */
   loadingText: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 加载状态图标类型 */
   loadingMode: {
     type: String as PropType<HyApp.LoadingMode>,
-    default: 'spinner',
-    validator: (v) => ['spinner', 'circle', 'semicircle'].includes(v),
+    default: "spinner",
+    validator: (v) => ["spinner", "circle", "semicircle"].includes(v),
   },
   /** 加载图标大小 */
   loadingSize: {
@@ -61,17 +61,17 @@ export const defaultProps = {
   /** 开放能力，具体请看uniapp稳定关于button组件部分说明 */
   openType: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件 */
   formType: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 （注：只微信小程序、QQ小程序有效） */
   appParameter: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 指定是否阻止本节点的祖先节点出现点击态，微信小程序有效 */
   hoverStopPropagation: {
@@ -81,27 +81,27 @@ export const defaultProps = {
   /** 指定返回用户信息的语言，zh_CN 简体中文，zh_TW 繁体中文，en 英文（默认 en ） */
   lang: {
     type: String,
-    default: 'en',
+    default: "en",
   },
   /** 会话来源，openType="contact"时有效 */
   sessionFrom: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 会话内消息卡片标题，openType="contact"时有效 */
   sendMessageTitle: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 会话内消息卡片点击跳转小程序路径，openType="contact"时有效 */
   sendMessagePath: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 会话内消息卡片图片，openType="contact"时有效 */
   sendMessageImg: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 是否显示会话内消息卡片，设置此参数为 true，用户进入客服会话会在右下角显示"可能要发送的小程序"提示，用户点击后可以快速发送小程序消息，openType="contact"时有效 */
   showMessageCard: {
@@ -111,7 +111,7 @@ export const defaultProps = {
   /** 额外传参参数，用于小程序的data-xxx属性，通过target.dataset.name获取 */
   dataName: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 节流时间，一定时间内只能触发一次 */
   throttleTime: {
@@ -131,7 +131,7 @@ export const defaultProps = {
   /** 按钮文字，之所以通过props传入，是因为slot传入的话（注：nvue中无法控制文字的样式） */
   text: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 按钮图标api集合 */
   icon: {
@@ -141,7 +141,7 @@ export const defaultProps = {
   /** 按钮颜色，支持传入linear-gradient渐变色 */
   color: {
     type: String,
-    default: '',
+    default: "",
   },
   /** 阻止事件冒泡 */
   stop: {
@@ -156,4 +156,4 @@ export const defaultProps = {
   customClass: {
     type: String,
   },
-} as const
+} as const;

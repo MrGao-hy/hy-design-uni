@@ -118,7 +118,7 @@ export function usePopover(visibleArrow = true) {
             left: `${offsetX}px`,
             bottom: `${verticalY}px`,
           },
-          `left: ${(popWidth.value >= width.value ? width.value / 2 : popWidth.value - 25) - offsetX}px;`,
+          `left: ${(popWidth.value >= width.value ? width.value / 2 : popWidth.value + 25) - offsetX}px;`,
         ],
       ],
       [
@@ -128,7 +128,7 @@ export function usePopover(visibleArrow = true) {
             right: `${offsetX}px`,
             bottom: `${verticalY}px`,
           },
-          `right: ${(popWidth.value >= width.value ? width.value / 2 : popWidth.value - 25) - offsetX}px; transform: translateX(50%);`,
+          `right: ${(popWidth.value >= width.value ? width.value / 2 : popWidth.value + 25) - offsetX}px; transform: translateX(50%);`,
         ],
       ],
       // 下
@@ -150,7 +150,7 @@ export function usePopover(visibleArrow = true) {
             left: `${offsetX}px`,
             top: `${verticalY}px`,
           },
-          `left: ${(popWidth.value >= width.value ? width.value / 2 : popWidth.value - 25) - offsetX}px;`,
+          `left: ${(popWidth.value >= width.value ? width.value / 2 : popWidth.value + 25) - offsetX}px;`,
         ],
       ],
       [
@@ -160,7 +160,7 @@ export function usePopover(visibleArrow = true) {
             right: `${offsetX}px`,
             top: `${verticalY}px`,
           },
-          `right: ${(popWidth.value >= width.value ? width.value / 2 : popWidth.value - 25) - offsetX}px; transform: translateX(50%);`,
+          `right: ${(popWidth.value >= width.value ? width.value / 2 : popWidth.value + 25) - offsetX}px; transform: translateX(50%);`,
         ],
       ],
       // 左

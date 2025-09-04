@@ -1,5 +1,5 @@
 <template>
-  <view :class="cls" :style="style">
+  <view :class="flexClass" :style="flexStyle">
     <slot />
   </view>
 </template>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, type CSSProperties } from "vue";
 import type { PropType } from "vue";
 import type { FlexAlign, FlexDirection, FlexJustify, FlexWrap } from "./typing";
 import { addUnit, isArray } from "../../utils";
@@ -73,13 +73,24 @@ const props = defineProps({
     type: [String, Number],
     default: "auto",
   },
+  /** 定义需要用到的外部样式 */
+  customStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: () => {},
+  },
+  /** 自定义外部类名 */
+  customClass: String,
 });
 
 // 计算 class
-const cls = computed(() => ["hy-flex", props.vertical && "hy-flex--vertical"]);
+const flexClass = computed(() => [
+  "hy-flex",
+  props.customClass,
+  props.vertical && "hy-flex--vertical",
+]);
 
 // 计算 style
-const style = computed(() => {
+const flexStyle = computed(() => {
   const gap = isArray(props.gap) ? props.gap : [props.gap, props.gap];
   const [rowGap, colGap] = gap.map((v) => addUnit(v));
 
@@ -92,6 +103,7 @@ const style = computed(() => {
     "flex-basis": props.basis,
     "row-gap": colGap,
     "column-gap": rowGap,
+    ...props.customStyle,
   };
 });
 </script>

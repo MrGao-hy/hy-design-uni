@@ -85,8 +85,8 @@
     </view>
 
     <view class="hy-title">自定义插槽</view>
-    <view class="hy-container">
-      <hy-popover placement="bottom-end">
+    <view class="hy-container hy-flex">
+      <hy-popover placement="top-end">
         <template #content>
           <view class="custom-content">这是一段自定义样式的内容。</view>
         </template>
@@ -178,7 +178,7 @@ const onMenu = ({ index, item }) => {
   z-index: 999;
   border-radius: 4px;
   /* 必填 结束 */
-  background: #fff;
+  background: #ffffff;
   color: #8268de;
   font-weight: bolder;
   padding: 10px;

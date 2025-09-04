@@ -29,37 +29,37 @@
   align-items: center;
   border-radius: $hy-border-radius-sm;
 
-  &--primary--dark {
+  @include m(primary__dark) {
     background-color: $hy-primary;
   }
 
-  &--primary--light {
+  @include m(primary__light) {
     background-color: $hy-primary-light;
-    .hy-warn__icon--left {
+    .hy-warn--icon__left {
       :deep(.hy-icon) {
         color: $hy-primary;
       }
     }
   }
 
-  &--error--dark {
+  @include m(error__dark) {
     background-color: $hy-error;
   }
 
-  &--error--light {
+  @include m(error__light) {
     background-color: $hy-error-light;
-    .hy-warn__icon--left {
+    .hy-warn--icon__left {
       :deep(.hy-icon) {
         color: $hy-error;
       }
     }
   }
 
-  &--success--dark {
+  @include m(success__dark) {
     background-color: $hy-success;
   }
 
-  &--success--light {
+  @include m(success__light) {
     background-color: $hy-success-light;
     .hy-warn__icon--left {
       :deep(.hy-icon) {
@@ -68,11 +68,11 @@
     }
   }
 
-  &--warning--dark {
+  @include m(warning__dark) {
     background-color: $hy-warning;
   }
 
-  &--warning--light {
+  @include m(warning__light) {
     background-color: $hy-warning-light;
     .hy-warn__icon--left {
       :deep(.hy-icon) {
@@ -81,72 +81,66 @@
     }
   }
 
-  &--info--dark {
+  @include m(info__dark) {
     background-color: $hy-info;
   }
 
-  &--info--light {
+  @include m(info__light) {
     background-color: $hy-info-light;
-    .hy-warn__icon--left {
+    .hy-warn--icon__left {
       :deep(.hy-icon) {
         color: $hy-info;
       }
     }
   }
 
-  &__icon {
+  @include m(icon) {
     margin-right: $hy-border-margin-padding-sm;
   }
 
-  &__content {
+  @include m(content) {
     @include flex(column);
     flex: 1;
 
-    &__title {
+    @include e(title) {
       font-size: 14px;
       font-weight: bold;
       color: #fff;
       margin-bottom: 2px;
     }
 
-    &__desc {
+    @include e(desc) {
       font-size: 14px;
       flex-wrap: wrap;
       color: #fff;
     }
   }
 
-  &__title--dark,
-  &__desc--dark {
+  @include m([title__dark, desc__dark]) {
     color: #ffffff;
   }
 
-  &__text--primary--light,
-  &__text--primary--light {
+  @include m(text__primary--light) {
     color: $hy-primary;
   }
 
-  &__text--success--light,
-  &__text--success--light {
+  @include m(text__success--light) {
     color: $hy-success;
   }
 
-  &__text--warning--light,
-  &__text--warning--light {
+  @include m(text__primary--light) {
     color: $hy-warning;
   }
 
-  &__text--error--light,
-  &__text--error--light {
+  @include m(text__error--light) {
     color: $hy-error;
   }
 
-  &__text--info--light,
-  &__text--info--light {
+  @include m(text__info--light) {
     color: $hy-info;
   }
 
-  &__close {
+  @include m(close) {
     position: absolute;
     top: 11px;
     right: 10px;

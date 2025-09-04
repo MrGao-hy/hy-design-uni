@@ -291,7 +291,7 @@ const props = defineProps({
    * @values surround,bottom,none
    * */
   border: {
-    type: String,
+    type: String as PropType<HyApp.BorderType>,
     default: "surround",
   },
   /** 是否只读，与disabled不同之处在于disabled会置灰组件，而readonly则不会 */
@@ -304,7 +304,7 @@ const props = defineProps({
    * @values circle,square
    * */
   shape: {
-    type: String,
+    type: String as PropType<HyApp.ShapeType>,
     default: "square",
   },
   /** 是否忽略组件内对文本合成系统事件的处理 */

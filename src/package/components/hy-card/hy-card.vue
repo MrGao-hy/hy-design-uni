@@ -60,7 +60,7 @@
       class="hy-card__foot"
       @tap="footClick"
       :style="[
-        { padding: $slots.foot ? addUnit(paddingFoot || padding) : 0 },
+        { padding: $slots.footer ? addUnit(paddingFoot || padding) : 0 },
         footStyle,
       ]"
       :class="{
@@ -134,7 +134,7 @@ const props = defineProps({
   /** 卡片与屏幕两边和上下元素的间距，需带单位，如"30px 20px" */
   margin: {
     type: String,
-    default: "15px",
+    default: "10px",
   },
   /** 卡片整体的圆角值，单位px */
   borderRadius: {

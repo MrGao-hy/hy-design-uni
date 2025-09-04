@@ -98,8 +98,11 @@ const props = defineProps({
     default: "",
     required: true,
   },
-  /** 主题颜色 */
-  type: String,
+  /**
+   * 主题颜色
+   * @values primary,success,error,warning,info
+   * */
+  type: String as PropType<HyApp.ThemeType>,
   /** 是否显示 */
   show: {
     type: Boolean,

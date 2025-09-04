@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.3.3",
-  "description": "scss添加颜色变量",
+  "version": "0.3.7",
+  "description": "修改popover气泡的自定义内容定位不准确bug",
   "main": "./index.ts",
   "private": false,
   "scripts": {},
@@ -11,9 +11,6 @@
     "暗黑模式"
   ],
   "web-types": "./web-types.json",
-  "author": "gaoxianhua",
-  "license": "MIT",
-  "dependencies": {
-    "hy-app": "0.3.*"
-  }
+  "author": "华玥作者",
+  "license": "MIT"
 }

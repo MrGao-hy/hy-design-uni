@@ -32,9 +32,6 @@
             <text>{{ item.content }}</text>
           </view>
         </view>
-
-        <!-- 用户自定义样式 -->
-        <slot name="content" v-else />
       </view>
     </view>
     <hy-transition
@@ -156,7 +153,6 @@ const props = defineProps({
   /** 显示的内容，也可以通过 slot#content 传入 */
   content: {
     type: [String, Array] as PropType<string | any[]>,
-    required: true,
   },
   /**
    * 指定 popover 的放置位置

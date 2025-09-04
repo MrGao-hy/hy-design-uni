@@ -64,7 +64,7 @@ defineOptions({});
 const props = defineProps({
   /** 数据列表 */
   list: {
-    type: Array as PropType<GridItemVo[]>,
+    type: Array as PropType<(GridItemVo | string)[]>,
     default: () => [],
   },
   /** 自定义键值 */

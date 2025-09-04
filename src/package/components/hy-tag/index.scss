@@ -26,6 +26,12 @@ $hy-background--disabled);
   }
 
   @include e(text) {
+
+    @include m(mini) {
+      font-size: 20rpx;
+      line-height: 20rpx;
+    }
+
     @include m(small) {
       font-size: $hy-font-size-sm;
       line-height: $hy-font-size-sm;
@@ -40,6 +46,12 @@ $hy-background--disabled);
       font-size: $hy-font-size-lg;
       line-height: $hy-font-size-lg;
     }
+  }
+
+  @include m(mini) {
+    height: 17px;
+    line-height: 17px;
+    padding: 0 $hy-border-margin-padding-sm;
   }
 
   @include m(small) {

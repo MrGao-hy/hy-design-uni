@@ -1,6 +1,6 @@
 import type { IEmptyIcon } from "./typing";
 
-const url = "https://registry.npmmirror.com/wot-design-uni-assets/*/files/";
+const url = "https://registry.npmmirror.com/wot-design-uni-assets/1.0.4/files/";
 
 const emptyIcon: IEmptyIcon = {
   content: {

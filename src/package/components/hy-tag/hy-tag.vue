@@ -55,7 +55,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from "vue";
+import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ITagEmits } from "./typing";
 import { IconConfig } from "../../config";
@@ -93,7 +93,7 @@ const props = defineProps({
   },
   /**
    * 标签的大小
-   * @values large,medium,small
+   * @values large,medium,small,mini
    * */
   size: {
     type: String,

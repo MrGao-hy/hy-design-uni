@@ -12,54 +12,66 @@
         ref="formRef"
         :model="formData"
         :rules="rules"
-        label-width="80px"
+        label-position="top"
       >
-        <hy-form-item label="用户名" prop="username" required>
-          <hy-input v-model="formData.username" placeholder="请输入用户名" />
+        <hy-form-item label="用户名（测试）" prop="username" required>
+          <hy-input
+            v-model="formData.username"
+            placeholder="请输入用户名"
+            border="bottom"
+          />
         </hy-form-item>
 
-        <hy-form-item label="手机号" prop="phone" required>
+        <hy-form-item label="手机号（测试）" prop="phone" required>
           <hy-input
             v-model="formData.phone"
             type="number"
             placeholder="请输入手机号"
             :maxlength="11"
+            border="bottom"
           />
         </hy-form-item>
 
-        <hy-form-item label="邮箱" prop="email">
-          <hy-input v-model="formData.email" placeholder="请输入邮箱" />
+        <hy-form-item label="邮箱（测试）" prop="email">
+          <hy-input
+            v-model="formData.email"
+            placeholder="请输入邮箱"
+            border="bottom"
+          />
         </hy-form-item>
 
-        <hy-form-item label="密码" prop="password" required>
+        <hy-form-item label="密码（测试）" prop="password" required>
           <hy-input
             v-model="formData.password"
-            type="password"
+            type="safe-password"
             placeholder="请输入密码"
+            border="bottom"
           />
         </hy-form-item>
 
-        <hy-form-item label="确认密码" prop="confirmPassword" required>
+        <hy-form-item label="确认密码（测试）" prop="confirmPassword" required>
           <hy-input
             v-model="formData.confirmPassword"
-            type="password"
+            type="safe-password"
             placeholder="请再次输入密码"
+            border="bottom"
           />
         </hy-form-item>
 
-        <hy-form-item label="年龄" prop="age">
+        <hy-form-item label="年龄（测试）" prop="age">
           <hy-input
             v-model="formData.age"
             type="number"
             placeholder="请输入年龄"
+            border="bottom"
           />
         </hy-form-item>
 
-        <hy-form-item label="性别" prop="gender">
+        <hy-form-item label="性别（测试）" prop="gender">
           <hy-radio v-model="formData.gender" :columns="genderOptions" />
         </hy-form-item>
 
-        <hy-form-item label="爱好" prop="hobbies">
+        <hy-form-item label="爱好（测试）" prop="hobbies">
           <hy-check-button
             v-model="formData.hobbies"
             :columns="hobbyOptions"
@@ -109,6 +121,7 @@ import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
 import HyTextarea from "@/package/components/hy-textarea/hy-textarea.vue";
 import HyButton from "@/package/components/hy-button/hy-button.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import type { FormItemRule } from "@/package/components/hy-form/typing";
 
 const themeStore = useThemeStore();
 const { themeColor, darkMode } = themeStore;
@@ -128,7 +141,7 @@ const formData = reactive({
 });
 
 // 表单验证规则
-const rules = {
+const rules: FormItemRule = {
   username: [
     { required: true, message: "请输入用户名" },
     {

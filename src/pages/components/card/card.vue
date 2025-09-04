@@ -1,5 +1,5 @@
 <template>
-  <hy-config-provider  :custom-style="themeColor" :theme="darkMode">
+  <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <view class="hy-title">基础使用</view>
     <view>
       <hy-card
@@ -38,7 +38,7 @@
           </view>
         </template>
         <template #footer>
-          <view style="padding: 10px">
+          <view>
             <HyIcon
               :name="IconConfig.MESSAGE"
               size="25"

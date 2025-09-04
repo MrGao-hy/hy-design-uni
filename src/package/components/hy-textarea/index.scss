@@ -30,6 +30,8 @@
     flex: 1;
     font-size: 15px;
     width: 100%;
+    background-color: transparent;
+    border: none;
   }
 
   @include m(count) {
@@ -41,4 +43,8 @@
     padding: 1px 4px;
     border-radius: $hy-border-radius-sm;
   }
+}
+textarea {
+  background-color: transparent;
+  border: none;
 }

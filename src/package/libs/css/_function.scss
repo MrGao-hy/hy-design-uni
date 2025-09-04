@@ -1,7 +1,5 @@
-/**
- * 辅助函数
- */
-@import 'config';
+@use 'config';
+
 $default-theme: #4d80f0 !default; // 正常色
 
 /* 转换成字符串 */
@@ -16,7 +14,7 @@ $default-theme: #4d80f0 !default; // 正常色
 @function containsModifier($selector) {
   $selector: selectorToString($selector);
 
-  @if str-index($selector, $modifierSeparator) {
+  @if str-index($selector, config.$modifier-separator) {
     @return true;
   }
 

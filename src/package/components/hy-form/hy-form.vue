@@ -20,6 +20,7 @@ import { provide, reactive, ref } from "vue";
 import type { PropType } from "vue";
 import type { FormItemRule } from "./typing";
 import { clearVal, isArray } from "../../utils";
+import type { AppType } from "vite";
 
 /**
  * 表单组件父组件，需要搭配hy-form-item
@@ -47,7 +48,7 @@ const props = defineProps({
    * @values left,top
    * */
   labelPosition: {
-    type: String,
+    type: String as PropType<HyApp.LabelPosition>,
     default: "left",
   },
   /**
@@ -55,7 +56,7 @@ const props = defineProps({
    * @values left,center,right
    * */
   labelAlign: {
-    type: String,
+    type: String as PropType<HyApp.ColumnCenterType>,
     default: "left",
   },
 });
