@@ -11,10 +11,7 @@
 
   &__wrapper {
     flex: 1;
-
-    :deep(.uni-swiper-wrapper) {
-      background-color: $hy-background;
-    }
+    background-color: $hy-background;
 
     &__item {
       flex: 1;

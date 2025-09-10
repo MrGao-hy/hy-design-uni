@@ -1,6 +1,6 @@
 <template>
   <view class="hy-grid" ref="hy-grid" :style="gridStyle">
-    <template v-for="item in list">
+    <template v-for="(item, i) in list" :key="i">
       <view
         class="hy-grid-item"
         hover-class="hy-grid-item--hover-class"

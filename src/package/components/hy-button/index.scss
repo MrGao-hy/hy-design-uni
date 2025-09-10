@@ -7,6 +7,7 @@
   position: relative;
   align-items: center;
   justify-content: center;
+  background: transparent;
   margin: 0;
   @include flex;
   /* #ifndef APP-NVUE */
@@ -84,9 +85,4 @@
   @include m(hairline) {
     border-width: 0.5px;
   }
-}
-
-/* 去掉背景色 */
-button {
-  background: transparent;
 }

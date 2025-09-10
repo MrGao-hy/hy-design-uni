@@ -9,10 +9,10 @@
       class="hy-price__text"
       :style="[{ 'font-size': addUnit(getPx(size) * ratio) }]"
     >
-      {{ priceOne[0] }}
+      {{ priceOne?.[0] }}
     </text>
     <text class="hy-price__decimal">
-      {{ "." + priceOne[1].slice(0, num) }}
+      {{ "." + priceOne?.[1].slice(0, num) }}
     </text>
   </text>
 </template>
@@ -31,7 +31,7 @@ export default {
 <script setup lang="ts">
 import { computed, toRefs } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, getPx } from "../../utils";
+import { addUnit, getPx, error } from "../../utils";
 
 /**
  * 业务组件,突出金额小数点前大，小数点后小
@@ -42,7 +42,7 @@ defineOptions({});
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
   /** 传入金额值 */
-  text: String,
+  text: [String, Number] as PropType<string | number>,
   /** 金额符号 */
   symbol: {
     type: String,
@@ -65,7 +65,7 @@ const props = defineProps({
   },
   /** 字体大小 */
   size: {
-    type: Number,
+    type: [Number, String],
     default: 12,
   },
   /** 字体粗细 */
@@ -107,11 +107,14 @@ const priceStyle = computed<CSSProperties>(() => {
  * @description 价格处理
  * */
 const priceOne = computed(() => {
+  if (props.text === undefined) return error("值为空");
+
   let value = "";
-  if (typeof text.value !== "string") {
-    value = text.value.toString();
+  const price = props.text;
+  if (typeof price !== "string") {
+    value = price.toString();
   } else {
-    value = text.value;
+    value = price;
   }
   if (/\./g.test(value)) {
     if (Number(value)) {

@@ -40,22 +40,19 @@
         ></HyIcon>
       </view>
       <input
-        confirm-type="search"
-        @blur="blur"
+        :confirm-type="confirmType"
         :value="keyword"
-        @confirm="search"
-        @input="inputChange"
         :disabled="disabled"
-        @focus="getFocus"
-        :focus="focus"
         :maxlength="maxlength"
         :adjust-position="adjustPosition"
+        :focus="autoFocus"
         :auto-blur="autoBlur"
         placeholder-class="hy-search__content__input--placeholder"
         :placeholder="placeholder"
         :placeholder-style="`color: ${placeholderColor}`"
         class="hy-search__content__input"
         type="text"
+        :always-embed="true"
         :style="[
           {
             pointerEvents: disabled ? 'none' : 'auto',
@@ -66,11 +63,15 @@
           },
           inputStyle,
         ]"
+        @blur="onBlur"
+        @focus="onFocus"
+        @confirm="onSearch"
+        @input="inputChange"
       />
       <view
         class="hy-search__content__icon hy-search__content__close"
-        v-if="keyword && clear && focused"
-        @click="clear"
+        v-if="showClear"
+        @click="onClear"
       >
         <HyIcon :name="IconConfig.CLOSE" color="#ffffff"></HyIcon>
       </view>
@@ -79,7 +80,7 @@
       :style="[actionStyle]"
       class="hy-search__action"
       :class="[(showActionBtn || show) && 'hy-search__action--active']"
-      @tap.stop.prevent="confirm"
+      @tap.stop.prevent="onConfirm"
     >
       {{ actionText }}
     </text>
@@ -110,6 +111,7 @@ import type {
   InputOnConfirmEvent,
   InputOnFocusEvent,
   InputOnInputEvent,
+  InputConfirmType,
 } from "@uni-helper/uni-types";
 
 /**
@@ -140,15 +142,33 @@ const props = defineProps({
     type: String,
     default: "请输入关键字",
   },
+  /**
+   * 设置右下角按钮的文字，兼容性详见uni-app文档
+   * @valuse send,search,next,go,done
+   * */
+  confirmType: {
+    type: String as PropType<InputConfirmType>,
+    default: "search",
+  },
   /** 是否启用清除控件 */
-  clear: {
+  clearable: {
     type: Boolean,
     default: true,
   },
   /** 是否自动获得焦点 */
-  focus: {
+  autoFocus: {
     type: Boolean,
     default: false,
+  },
+  /** 键盘收起时，是否自动失去焦点 */
+  autoBlur: {
+    type: Boolean,
+    default: true,
+  },
+  /** 键盘弹起时，是否自动上推页面 */
+  adjustPosition: {
+    type: Boolean,
+    default: true,
   },
   /** 是否显示右侧控件 */
   showAction: {
@@ -216,16 +236,6 @@ const props = defineProps({
   },
   /** 搜索框左边显示内容 */
   label: String,
-  /** 键盘弹起时，是否自动上推页面 */
-  adjustPosition: {
-    type: Boolean,
-    default: true,
-  },
-  /** 键盘收起时，是否自动失去焦点 */
-  autoBlur: {
-    type: Boolean,
-    default: true,
-  },
   /** 定义需要用到的外部样式 */
   customStyle: {
     type: Object as PropType<CSSProperties>,
@@ -235,11 +245,11 @@ const props = defineProps({
 });
 const emit = defineEmits<ISearchEmits>();
 
-const keyword = ref<string>("");
+const keyword = ref<string>(props.modelValue);
 // 显示右边搜索按钮
 const show = ref<boolean>(false);
 // 标记input当前状态是否处于聚焦中，如果是，才会显示右侧的清除控件
-const focused = ref(props.focus);
+const focused = ref(false);
 
 watch(
   () => keyword.value,
@@ -249,16 +259,14 @@ watch(
   },
 );
 
-watch(
-  () => props.modelValue,
-  (newValue: string) => {
-    keyword.value = newValue;
-  },
-  { immediate: true },
-);
-
+// 是否显示右边控件
 const showActionBtn = computed<boolean>(() => {
   return !props.animation && props.showAction;
+});
+// 是否显示清除控件
+const showClear = computed(() => {
+  const { clearable, disabled } = props;
+  return clearable && !disabled && !!focused.value && keyword.value !== "";
 });
 
 /**
@@ -270,7 +278,7 @@ const inputChange = (e: InputOnInputEvent) => {
 /**
  * @description 清空输入
  * */
-const clear = () => {
+const onClear = () => {
   keyword.value = "";
   // 延后发出事件，避免在父组件监听clear事件时，value为更新前的值(不为空)
   nextTick(() => {
@@ -280,7 +288,7 @@ const clear = () => {
 /**
  * @description 确定搜索
  * */
-const search = (e: InputOnConfirmEvent) => {
+const onSearch = (e: InputOnConfirmEvent) => {
   emit("search", e, e.detail.value);
   try {
     // 收起键盘
@@ -290,7 +298,7 @@ const search = (e: InputOnConfirmEvent) => {
 /**
  * @description 点击右边自定义按钮的事件
  */
-const confirm = () => {
+const onConfirm = () => {
   emit("confirm", keyword.value);
   try {
     // 收起键盘
@@ -300,22 +308,17 @@ const confirm = () => {
 /**
  * @description 获取焦点
  * */
-const getFocus = (e: InputOnFocusEvent) => {
+const onFocus = (e: InputOnFocusEvent) => {
   focused.value = true;
   // 开启右侧搜索按钮展开的动画效果
   if (props.animation && props.showAction) show.value = true;
   emit("focus", e, keyword.value);
 };
-/**
- * @description 失去焦点
- */
-const blur = async (e: InputOnBlurEvent) => {
-  // 最开始使用的是监听图标@touchstart事件，自从hx2.8.4后，此方法在微信小程序出错
-  // 这里改为监听点击事件，手点击清除图标时，同时也发生了@blur事件，导致图标消失而无法点击，这里做一个延时
+
+// 失去焦点
+const onBlur = (e: InputOnBlurEvent) => {
   show.value = false;
   emit("blur", e, keyword.value);
-  await sleep(100);
-  focused.value = false;
 };
 /**
  * @description 点击搜索框，只有disabled=true时才发出事件，因为禁止了输入，意味着是想跳转真正的搜索页

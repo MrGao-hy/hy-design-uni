@@ -10,6 +10,8 @@
         :action-text="label"
         :disabled="disabled"
         :inputAlign="inputAlign"
+        @change="onChange"
+        @search="onSearch"
       ></hy-search>
     </view>
 
@@ -44,7 +46,7 @@ import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = themeStore;
-const value = ref("");
+const value = ref("测试");
 const label = ref("搜索");
 const disabled = ref(false);
 const shape = ref<HyApp.ShapeType>("circle");
@@ -60,6 +62,16 @@ const list_1 = reactive([
   { name: "中", value: "center" },
   { name: "右", value: "right" },
 ]);
+
+// 搜索函数
+const onSearch = () => {
+  uni.showToast({ title: value.value });
+};
+
+// 输入框值改变
+const onChange = (value: string) => {
+  console.log(value, "输入框值改变");
+};
 </script>
 
 <style scoped lang="scss"></style>

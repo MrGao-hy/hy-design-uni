@@ -110,18 +110,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {
-  computed,
-  nextTick,
-  ref,
-  toRefs,
-  watch,
-  getCurrentInstance,
-  inject,
-} from "vue";
+import { computed, nextTick, ref, watch, inject } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import HyIcon from "../hy-icon/hy-icon.vue";
-import { addUnit, formatObject } from "../../utils";
+import { addUnit, formatObject, sleep } from "../../utils";
 import { IconConfig } from "../../config";
 import type { IInputEmits } from "./typing";
 import type HyIconProps from "../hy-icon/typing";
@@ -322,20 +314,9 @@ const props = defineProps({
   /** 自定义外部类名 */
   customClass: String,
 });
-const {
-  disabled,
-  disabledColor,
-  border,
-  color,
-  inputAlign,
-  fontSize,
-  readonly,
-  placeholderStyle,
-} = toRefs(props);
 const emit = defineEmits<IInputEmits>();
 const formItem = inject<FormItemContext | null>("formItem", null);
 
-const instance = getCurrentInstance();
 // 清除操作
 const clearInput = ref<boolean>(false);
 // 输入框的值
@@ -359,9 +340,6 @@ watch(
     // 在H5中，外部value变化后，修改input中的值，不会触发@input事件，此时手动调用值变化方法
     if (firstChange.value === false && changeFromInner.value === false) {
       valueChange(innerValue.value, true);
-    } else {
-      // 尝试调用up-form的验证方法
-      // if (!firstChange.value) formValidate(this, "change");
     }
     firstChange.value = false;
     // 重置changeFromInner的值为false，标识下一次引起默认为外部引起的
@@ -388,7 +366,7 @@ const inputClass = computed((): string => {
   classes.push(`hy-input--${shape}`);
   border === "bottom" &&
     (classes = classes.concat(["hy-border__bottom", "hy-input--no-radius"]));
-  disabled.value && classes.push("hy-input--disabled");
+  props.disabled && classes.push("hy-input--disabled");
   return classes.join(" ");
 });
 
@@ -402,8 +380,8 @@ const wrapperStyle = computed((): CSSProperties => {
   style.paddingLeft = "9px";
   style.paddingRight = "9px";
   // 禁用状态下，被背景色加上对应的样式
-  if (disabled.value) {
-    style.backgroundColor = disabledColor.value;
+  if (props.disabled) {
+    style.backgroundColor = props.disabledColor;
   }
   return Object.assign(style, props.customStyle);
 });
@@ -412,9 +390,9 @@ const wrapperStyle = computed((): CSSProperties => {
  * */
 const inputStyle = computed((): CSSProperties => {
   return {
-    color: color.value,
-    fontSize: addUnit(fontSize.value),
-    textAlign: inputAlign.value,
+    color: props.color,
+    fontSize: addUnit(props.fontSize),
+    textAlign: props.inputAlign,
   };
 });
 
@@ -425,7 +403,7 @@ const borderStyle = computed(() => {
   return (isFocus: boolean) => {
     let style: CSSProperties = {};
     if (isFocus) {
-      switch (border.value) {
+      switch (props.border) {
         case "surround":
           style = { border: `1px solid var(--hy-theme-color, #3c9cff)` };
           break;
@@ -457,14 +435,11 @@ const onInput = (e: any) => {
 /**
  * @description 输入框失去焦点时触发
  * */
-const onBlur = (event: InputOnBlurEvent) => {
+const onBlur = async (event: InputOnBlurEvent) => {
   emit("blur", event, event.detail.value);
   if (formItem) formItem.handleBlur(event.detail.value);
-  // H5端的blur会先于点击清除控件的点击click事件触发，导致focused
-  // 瞬间为false，从而隐藏了清除控件而无法被点击到
-  setTimeout(() => {
-    focused.value = false;
-  }, 150);
+  await sleep();
+  focused.value = false;
 };
 /**
  * @description 输入框聚焦时触发
@@ -524,7 +499,7 @@ const onClear = () => {
  */
 const clickHandler = () => {
   // 隐藏键盘
-  if (disabled.value || readonly.value) {
+  if (props.disabled || props.readonly) {
     uni.hideKeyboard();
   }
 };

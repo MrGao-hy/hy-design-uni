@@ -24,6 +24,24 @@
   overflow: auto;
 }
 
+.hy-title {
+  padding: $hy-border-margin-padding-base;
+  color: $hy-text-color;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 18px;
+    background: $hy-primary;
+    border-radius: $hy-border-radius-semicircle;
+  }
+}
+
 /* 解决滚动时候出现滚动条 */
 ::-webkit-scrollbar{
   width: 0;

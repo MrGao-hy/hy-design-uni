@@ -7,6 +7,7 @@
         :shape="shape"
         :border="border"
         :type="type"
+        clearable
         :disabled="disabled"
         placeholder="输入值"
       ></hy-input>
@@ -58,41 +59,41 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import HyInput from '@/package/components/hy-input/hy-input.vue'
-import HySubsection from '@/package/components/hy-subsection/hy-subsection.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { IconConfig } from 'hy-app'
-import type { HyApp } from 'hy-app/typing/modules/common'
-import { useThemeStore } from '@/store'
-import HySwitch from '../../../package/components/hy-switch/hy-switch.vue'
+import { reactive, ref } from "vue";
+import HyInput from "@/package/components/hy-input/hy-input.vue";
+import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { IconConfig } from "hy-app";
+import { useThemeStore } from "@/store";
+import HySwitch from "../../../package/components/hy-switch/hy-switch.vue";
+import type { InputType } from "@uni-helper/uni-types";
 
-const themeStore = useThemeStore()
-const { themeColor, darkMode } = themeStore
-const value = ref('')
-const disabled = ref(false)
-const shape = ref<HyApp.ShapeType>('square')
-const type = ref('text')
-const border = ref<HyApp.BorderType>('surround')
+const themeStore = useThemeStore();
+const { themeColor, darkMode } = themeStore;
+const value = ref("");
+const disabled = ref(false);
+const shape = ref<HyApp.ShapeType>("square");
+const type = ref<InputType>("text");
+const border = ref<HyApp.BorderType>("surround");
 
 const list_1 = reactive([
-  { name: '半圆', value: 'circle' },
-  { name: '方形', value: 'square' },
-])
+  { name: "半圆", value: "circle" },
+  { name: "方形", value: "square" },
+]);
 
 const list_2 = reactive([
-  { name: '文本', value: 'text' },
-  { name: '数字', value: 'number' },
-  { name: '身份证id', value: 'idcard' },
-  { name: '方形', value: 'digit' },
-  { name: '密码', value: 'password' },
-])
+  { name: "文本", value: "text" },
+  { name: "数字", value: "number" },
+  { name: "身份证id", value: "idcard" },
+  { name: "方形", value: "digit" },
+  { name: "密码", value: "password" },
+]);
 
 const list_3 = reactive([
-  { name: '四周边框', value: 'surround' },
-  { name: '底部边框', value: 'bottom' },
-  { name: '无边框', value: 'none' },
-])
+  { name: "四周边框", value: "surround" },
+  { name: "底部边框", value: "bottom" },
+  { name: "无边框", value: "none" },
+]);
 </script>
 
 <style scoped lang="scss"></style>

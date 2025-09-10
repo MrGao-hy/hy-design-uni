@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.3.7",
-  "description": "修改popover气泡的自定义内容定位不准确bug",
+  "version": "0.3.11",
+  "description": "修复搜索输入框，有值时候获取焦点会立马失去焦点问题",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

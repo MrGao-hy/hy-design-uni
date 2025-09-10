@@ -1,5 +1,5 @@
 <template>
-  <hy-config-provider  :custom-style="themeColor" :theme="darkMode">
+  <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <view class="hy-title">图标图片(带圆角)</view>
     <view class="hy-flex">
       <hy-icon :name="config.avatar" size="80" round="5px" />
@@ -268,6 +268,11 @@ const icons = reactive([
     name: "REMIND",
   },
   {
+    icon: "remind-fill",
+    label: "提醒-实体",
+    name: "REMIND_FILL",
+  },
+  {
     icon: "warning",
     label: "警告",
     name: "WARNING",
@@ -326,6 +331,11 @@ const icons = reactive([
     icon: "setting",
     label: "设置",
     name: "SETTING",
+  },
+  {
+    icon: "setting-fill",
+    label: "设置-实体",
+    name: "SETTING_FILL",
   },
   {
     icon: "close-circle",
@@ -403,6 +413,11 @@ const icons = reactive([
     name: "PHOTO",
   },
   {
+    icon: "picture-fill",
+    label: "图片-实体",
+    name: "PHOTO_FILL",
+  },
+  {
     icon: "pdf",
     label: "pdf",
     name: "PDF",
@@ -478,6 +493,16 @@ const icons = reactive([
     name: "EYE",
   },
   {
+    icon: "eye-close",
+    label: "眼睛-关闭",
+    name: "EYE_CLOSE",
+  },
+  {
+    icon: "hide",
+    label: "隐藏",
+    name: "HIDE",
+  },
+  {
     icon: "calendar",
     label: "日历",
     name: "CALENDAR",
@@ -506,6 +531,26 @@ const icons = reactive([
     icon: "send",
     label: "发送",
     name: "SEND",
+  },
+  {
+    icon: "telephone-out",
+    label: "打出电话",
+    name: "TELEPHONE_OUT",
+  },
+  {
+    icon: "telephone",
+    label: "电话",
+    name: "TELEPHONE",
+  },
+  {
+    icon: "telephone-fill",
+    label: "电话-实心",
+    name: "TELEPHONE_FILL",
+  },
+  {
+    icon: "mic",
+    label: "话筒",
+    name: "MIC",
   },
 ]);
 </script>
