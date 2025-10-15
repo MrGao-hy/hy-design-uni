@@ -75,7 +75,7 @@
             v-if="showConfirmButton"
             @tap="confirmHandler"
           >
-            <HyLoading v-if="loading"></HyLoading>
+            <HyLoading v-if="load" mode="circle"></HyLoading>
             <text
               v-else
               class="hy-modal__button-group__wrapper__text hy-modal__button-group__wrapper--confirm-text"
@@ -104,9 +104,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, toRefs, watch } from "vue";
 import type { IModalEmits } from "./typing";
-import { addUnit } from "../../utils";
+import { addUnit, sleep } from "../../utils";
 // 组件
 import HyPopup from "../hy-popup/hy-popup.vue";
 import HyLoading from "../hy-loading/hy-loading.vue";
@@ -167,8 +167,13 @@ const props = defineProps({
     type: [String, Number],
     default: 16,
   },
-  /** 是否异步关闭，只对确定按钮有效，见上方说明 */
-  asyncClose: {
+  /** 点击确认按钮自动关闭 */
+  autoClose: {
+    type: Boolean,
+    default: true,
+  },
+  /** 加载按钮 */
+  loading: {
     type: Boolean,
     default: false,
   },
@@ -202,27 +207,36 @@ const props = defineProps({
   },
 });
 const emit = defineEmits<IModalEmits>();
+const load = ref(props.loading);
 
-const loading = ref<boolean>(false);
+watch(
+  () => props.loading,
+  (newVal) => {
+    load.value = props.loading;
+  },
+);
 
 watch(
   () => props.modelValue,
-  (newValue) => {
-    if (newValue && loading.value) loading.value = false;
+  (newVal) => {
+    console.log(newVal, "newVal");
+    if (!newVal) load.value = false;
   },
 );
 
 /**
  * @description 点击确定按钮
  * */
-const confirmHandler = () => {
+const confirmHandler = async () => {
+  console.log(load.value, "props.loading");
+  if (load.value) return;
   // 如果配置了异步关闭，将按钮值为loading状态
-  if (props.asyncClose) {
-    loading.value = true;
-  } else {
+  emit("confirm");
+
+  await sleep();
+  if (!props.loading && props.autoClose) {
     emit("update:modelValue", false);
   }
-  emit("confirm");
 };
 
 /**

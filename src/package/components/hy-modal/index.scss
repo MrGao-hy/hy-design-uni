@@ -37,11 +37,11 @@
   &__button {
     /* 两个按钮的样式 */
     &-exact {
-      view:first-child {
+      .hy-modal__button-group__wrapper:first-child {
         margin-right: $hy-border-margin-padding-lg;
       }
       &--reverse {
-        view:last-child {
+        .hy-modal__button-group__wrapper:last-child {
           margin-right: $hy-border-margin-padding-lg;
         }
       }

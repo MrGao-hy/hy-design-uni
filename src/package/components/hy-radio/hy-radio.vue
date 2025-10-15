@@ -313,8 +313,8 @@ const setRadioCheckedStatus = (temp: CheckboxColumnsVo) => {
       temp[props.fieldNames.value] === item[props.fieldNames.value];
     return item;
   });
-  emit("change", temp);
   emit("update:modelValue", temp[props.fieldNames.value]);
+  emit("change", temp);
 };
 </script>
 

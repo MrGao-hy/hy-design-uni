@@ -13,7 +13,13 @@
       ￥
     </text>
     <view class="hy-text__prefix-icon" v-if="prefixIcon">
-      <HyIcon :name="prefixIcon" :customStyle="iconStyle"></HyIcon>
+      <HyIcon
+        :name="prefixIcon"
+        :color="color"
+        :size="size"
+        space="2"
+        :customStyle="iconStyle"
+      ></HyIcon>
     </view>
     <template v-if="openType && isMp">
       <button
@@ -51,7 +57,12 @@
       {{ value }}
     </text>
     <view class="hy-text__suffix-icon" v-if="suffixIcon">
-      <HyIcon :name="suffixIcon" :customStyle="iconStyle"></HyIcon>
+      <HyIcon
+        :name="suffixIcon"
+        :color="color"
+        :size="size"
+        :customStyle="iconStyle"
+      ></HyIcon>
     </view>
   </view>
 </template>

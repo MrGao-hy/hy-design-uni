@@ -64,7 +64,7 @@
         footStyle,
       ]"
       :class="{
-        'hy-border-top': footBorderTop,
+        'hy-border__top': footBorderTop,
       }"
     >
       <!-- @slot 底部插槽 -->
@@ -134,7 +134,7 @@ const props = defineProps({
   /** 卡片与屏幕两边和上下元素的间距，需带单位，如"30px 20px" */
   margin: {
     type: String,
-    default: "10px",
+    default: "0 0 20rpx",
   },
   /** 卡片整体的圆角值，单位px */
   borderRadius: {

@@ -303,7 +303,6 @@ const setRadioCheckedStatus = (temp: CheckboxColumnsVo) => {
     }
     return item;
   });
-  emit("change", temp);
   emit(
     "update:modelValue",
     columns_1.value.length === 1
@@ -312,10 +311,7 @@ const setRadioCheckedStatus = (temp: CheckboxColumnsVo) => {
           .filter((item: CheckboxColumnsVo) => item[props.fieldNames.checked])
           .map((item: CheckboxColumnsVo) => item[props.fieldNames.value]),
   );
-  // 双向绑定
-  // if (this.usedAlone) {
-  // 	this.$emit('update:checked', this.isChecked)
-  // }
+  emit("change", temp);
 };
 </script>
 

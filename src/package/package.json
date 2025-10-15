@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.3.11",
-  "description": "修复搜索输入框，有值时候获取焦点会立马失去焦点问题",
+  "version": "0.3.13",
+  "description": "拦截器get和post加类型判断",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

@@ -22,7 +22,7 @@
           <text class="hy-search__content__label">{{ label }}</text>
         </slot>
       </template>
-      <view class="hy-search__content__icon">
+      <view class="hy-search__content__icon" v-if="searchIcon">
         <HyIcon
           :name="searchIcon?.name || IconConfig.SEARCH"
           :size="searchIcon?.size"
@@ -73,7 +73,7 @@
         v-if="showClear"
         @click="onClear"
       >
-        <HyIcon :name="IconConfig.CLOSE" color="#ffffff"></HyIcon>
+        <HyIcon :name="IconConfig.CLOSE"></HyIcon>
       </view>
     </view>
     <text
@@ -102,7 +102,7 @@ export default {
 import { computed, nextTick, ref, watch } from "vue";
 import type { PropType, CSSProperties } from "vue";
 import type { ISearchEmits } from "./typing";
-import { sleep, addUnit } from "../../utils";
+import { addUnit } from "../../utils";
 import { IconConfig } from "../../config";
 import HyIcon from "../hy-icon/hy-icon.vue";
 import type HyIconProps from "../hy-icon/typing";
@@ -213,7 +213,7 @@ const props = defineProps({
     default: "#909399",
   },
   /** 输入框左边的图标属性集合，可以为图标名称或图片路径 */
-  searchIcon: Object as PropType<HyIconProps>,
+  searchIcon: [Boolean, Object] as PropType<HyIconProps | boolean>,
   /** 组件与其他上下左右之间的距离，带单位的字符串形式，如"30px" */
   margin: {
     type: [String, Number],
