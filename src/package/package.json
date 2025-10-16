@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.3.13",
-  "description": "拦截器get和post加类型判断",
+  "version": "0.3.14",
+  "description": "修改小问题，新增复选框分开组件",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

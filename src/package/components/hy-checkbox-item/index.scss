@@ -11,19 +11,6 @@
   margin-bottom: 5px;
   margin-top: 5px;
 
-  @include m(group) {
-    @include m(row) {
-      /* #ifndef APP-NVUE */
-      display: flex;
-      /* #endif */
-      flex-flow: row wrap;
-    }
-
-    @include m(column) {
-      @include flex(column);
-    }
-  }
-
   @include m(label) {
     @include e(left) {
       flex-direction: row;

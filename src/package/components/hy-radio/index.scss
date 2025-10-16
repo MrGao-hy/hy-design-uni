@@ -71,7 +71,7 @@
     }
 
     @include m(disabled) {
-      background-color: $hy-text-color--disabled;
+      background-color: $hy-background--disabled;
       :deep(.hy-icon) {
         display: none;
       }

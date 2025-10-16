@@ -127,7 +127,7 @@ const props = defineProps({
   /** 是否显示边框 */
   border: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   /** 用于标识点击了第几个卡片 */
   index: [String, Number],
@@ -144,12 +144,12 @@ const props = defineProps({
   /** 是否显示头部的下边框 */
   headBorderBottom: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   /** 是否显示底部的上边框 */
   footBorderTop: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   /** 缩略图路径，如设置将显示在标题的左边，不建议使用相对路径 */
   thumb: String,

@@ -2,7 +2,25 @@
   <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <view class="hy-title">基础使用</view>
     <view class="hy-container">
-      <hy-checkbox :columns="columns" v-model="value" :size="size" :shape="shape"></hy-checkbox>
+      <view class="hy-title">组合式组件</view>
+      <hy-checkbox
+        :columns="columns"
+        v-model="value"
+        :size="size"
+        :shape="shape"
+      ></hy-checkbox>
+
+      <view class="hy-title">分开式组件</view>
+      <hy-checkbox-group v-model="value2">
+        <hy-checkbox-item
+          value="f"
+          label="法拉利"
+          :checked="true"
+        ></hy-checkbox-item>
+        <hy-checkbox-item value="l" label="兰博基尼"></hy-checkbox-item>
+        <hy-checkbox-item value="b" label="布加迪"></hy-checkbox-item>
+        <hy-checkbox-item value="a" label="阿斯顿马丁"></hy-checkbox-item>
+      </hy-checkbox-group>
     </view>
 
     <view class="hy-title">禁用</view>
@@ -61,33 +79,36 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import HyCheckbox from '@/package/components/hy-checkbox/hy-checkbox.vue'
-import HySubsection from '../../../package/components/hy-subsection/hy-subsection.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import { reactive, ref } from "vue";
+import HyCheckbox from "@/package/components/hy-checkbox/hy-checkbox.vue";
+import HyCheckboxGroup from "@/package/components/hy-checkbox-group/hy-checkbox-group.vue";
+import HyCheckboxItem from "@/package/components/hy-checkbox-item/hy-checkbox-item.vue";
+import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
-const value = ref([])
-const size = ref<HyApp.SizeType>('medium')
-const shape = ref<HyApp.ShapeType>('square')
+const { themeColor, darkMode } = themeStore;
+const value = ref([]);
+const value2 = ref([]);
+const size = ref<HyApp.SizeType>("medium");
+const shape = ref<HyApp.ShapeType>("square");
 
 const columns = reactive([
-  { label: '老师', value: 0 },
-  { label: '护士', value: 1 },
-  { label: '空姐', value: 2 },
-])
+  { label: "老师", value: 0 },
+  { label: "护士", value: 1 },
+  { label: "空姐", value: 2 },
+]);
 
 const list_1 = reactive([
-  { name: '圆形', value: 'circle' },
-  { name: '方形', value: 'square' },
-])
+  { name: "圆形", value: "circle" },
+  { name: "方形", value: "square" },
+]);
 const list_2 = reactive([
-  { name: '小', value: 'small' },
-  { name: '中', value: 'medium' },
-  { name: '大', value: 'large' },
-])
+  { name: "小", value: "small" },
+  { name: "中", value: "medium" },
+  { name: "大", value: "large" },
+]);
 </script>
 
 <style scoped lang="scss"></style>

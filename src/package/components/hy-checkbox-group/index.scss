@@ -1,0 +1,16 @@
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(checkbox) {
+  @include m(group) {
+    @include m(row) {
+      /* #ifndef APP-NVUE */
+      display: flex;
+      /* #endif */
+      flex-flow: row wrap;
+    }
+
+    @include m(column) {
+      @include flex(column);
+    }
+  }
+}
