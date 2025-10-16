@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide } from "vue";
+import { computed, provide, toRefs } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import { bem } from "../../utils";
 import type { ICheckBoxGroupEmits } from "./typing";
@@ -98,8 +98,8 @@ const bemClass = computed(() => {
   return bem("checkbox-group", props, ["placement"]);
 });
 
-provide("hy-checkbox-group", {
-  ...props,
+const context = {
+  ...toRefs(props),
   setCheckedStatus(value: string | number) {
     let arr = [...props.modelValue];
     if (props.modelValue?.includes(value)) {
@@ -110,7 +110,9 @@ provide("hy-checkbox-group", {
     emit("update:modelValue", arr);
     emit("change", arr);
   },
-});
+};
+
+provide("hy-checkbox-group", context);
 </script>
 
 <style lang="scss" scoped>

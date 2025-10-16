@@ -4,9 +4,9 @@
     @tap.stop="wrapperClickHandler"
     :style="checkboxStyle"
     :class="[
-      `hy-checkbox--label__${checkboxGroup?.iconPlacement}`,
-      checkboxGroup?.borderBottom &&
-        checkboxGroup?.placement === 'column' &&
+      `hy-checkbox--label__${checkboxGroup?.iconPlacement?.value}`,
+      checkboxGroup?.borderBottom?.value &&
+        checkboxGroup?.placement?.value === 'column' &&
         'hy-border__bottom',
     ]"
   >
@@ -21,9 +21,12 @@
           class="hy-checkbox--icon-wrap__icon"
           :name="IconConfig.CHECK_MASK"
           :size="
-            addUnit(sizeType[checkboxGroup?.size] ?? checkboxGroup?.iconSize)
+            addUnit(
+              sizeType[checkboxGroup?.size?.value] ??
+                checkboxGroup?.iconSize?.value,
+            )
           "
-          :color="checkboxGroup?.iconColor || '#ffffff'"
+          :color="checkboxGroup?.iconColor?.value || '#ffffff'"
         />
       </slot>
     </view>
@@ -38,9 +41,10 @@
       <slot name="label">
         <text
           :style="{
-            color: checkboxGroup?.labelColor,
+            color: checkboxGroup?.labelColor?.value,
             fontSize: addUnit(
-              sizeType[checkboxGroup?.size] ?? checkboxGroup?.labelSize,
+              sizeType[checkboxGroup?.size?.value] ??
+                checkboxGroup?.labelSize?.value,
             ),
           }"
         >
@@ -67,7 +71,7 @@ import { computed, watch, ref, reactive, inject } from "vue";
 import type { CSSProperties } from "vue";
 import { addUnit, error } from "../../utils";
 import { IconConfig } from "../../config";
-import type { ICheckboxGroupProps } from "./typing";
+import type { ICheckboxGroupContext } from "./typing";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 
@@ -101,7 +105,7 @@ const props = defineProps({
 });
 
 // 注入表单上下文
-const checkboxGroup = inject<ICheckboxGroupProps>("hy-checkbox-group");
+const checkboxGroup = inject<ICheckboxGroupContext>("hy-checkbox-group");
 const isChecked = ref(false);
 const sizeType: AnyObject = reactive({
   small: 14,
@@ -113,27 +117,44 @@ watch(
   () => props.checked,
   (newValue) => {
     isChecked.value = newValue;
-    if (props.checked) {
-      checkboxGroup?.setCheckedStatus(props.value);
+    if (props.checked) checkboxGroup?.setCheckedStatus(props.value);
+  },
+  { immediate: true },
+);
+
+watch(
+  () => checkboxGroup?.modelValue.value,
+  (newVal) => {
+    if (newVal?.length) {
+      isChecked.value = newVal.includes(props.value);
+    } else {
+      isChecked.value = false;
     }
   },
   { immediate: true },
 );
 
-const isDisabled = (): boolean => checkboxGroup?.disabled || props.disabled;
+const isDisabled = (): boolean =>
+  checkboxGroup?.disabled?.value || props.disabled;
 
 const checkboxStyle = computed(() => {
   const style: CSSProperties = {};
-  if (checkboxGroup?.borderBottom && checkboxGroup?.placement === "row") {
+  if (
+    checkboxGroup?.borderBottom?.value &&
+    checkboxGroup?.placement?.value === "row"
+  ) {
     error(
       "检测到您将borderBottom设置为true，需要同时将hy-checkbox-group的placement设置为column才有效",
     );
   }
   // 当父组件设置了显示下边框并且排列形式为纵向时，给内容和边框之间加上一定间隔
-  if (checkboxGroup?.borderBottom && checkboxGroup?.placement === "column") {
+  if (
+    checkboxGroup?.borderBottom?.value &&
+    checkboxGroup?.placement?.value === "column"
+  ) {
     style.paddingBottom = "8px";
   }
-  return Object.assign(style, checkboxGroup?.customStyle);
+  return Object.assign(style, checkboxGroup?.customStyle?.value);
 });
 /**
  * @description 定义icon的Class类名
@@ -141,7 +162,7 @@ const checkboxStyle = computed(() => {
 const iconClasses = computed(() => {
   let classes: string[] = [];
   // 组件的形状
-  classes.push("hy-checkbox--icon-wrap--" + checkboxGroup?.shape);
+  classes.push("hy-checkbox--icon-wrap--" + checkboxGroup?.shape?.value);
   if (isDisabled()) {
     classes.push("hy-checkbox--icon-wrap--disabled");
   }
@@ -163,18 +184,20 @@ const iconWrapStyle = computed(() => {
     const style: CSSProperties = {};
     style.backgroundColor =
       isChecked.value && !isDisabled()
-        ? checkboxGroup?.activeColor
+        ? checkboxGroup?.activeColor?.value
         : !isDisabled()
           ? "#ffffff"
           : "";
     style.borderColor =
       isChecked.value && !isDisabled()
-        ? checkboxGroup?.activeColor
-        : checkboxGroup?.inactiveColor;
-    if (checkboxGroup?.size) {
-      style.width = addUnit(sizeType[checkboxGroup.size] ?? checkboxGroup.size);
+        ? checkboxGroup?.activeColor?.value
+        : checkboxGroup?.inactiveColor?.value;
+    if (checkboxGroup?.size?.value) {
+      style.width = addUnit(
+        sizeType[checkboxGroup.size.value] ?? checkboxGroup.size.value,
+      );
       style.height = addUnit(
-        sizeType[checkboxGroup.size] ?? checkboxGroup.size,
+        sizeType[checkboxGroup.size.value] ?? checkboxGroup.size.value,
       );
     }
     return style;
@@ -195,7 +218,7 @@ const iconClickHandler = (e: Event) => {
  * */
 const wrapperClickHandler = (e: Event) => {
   e.stopPropagation();
-  if (checkboxGroup?.labelDisabled || isDisabled()) return;
+  if (checkboxGroup?.labelDisabled?.value || isDisabled()) return;
   setCheckedStatus();
 };
 /**
@@ -203,7 +226,7 @@ const wrapperClickHandler = (e: Event) => {
  * */
 const labelClickHandler = (e: Event) => {
   e.stopPropagation();
-  if (checkboxGroup?.labelDisabled || isDisabled()) return;
+  if (checkboxGroup?.labelDisabled?.value || isDisabled()) return;
   setCheckedStatus();
 };
 

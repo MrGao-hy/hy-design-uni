@@ -11,12 +11,13 @@
       ></hy-checkbox>
 
       <view class="hy-title">分开式组件</view>
-      <hy-checkbox-group v-model="value2">
-        <hy-checkbox-item
-          value="f"
-          label="法拉利"
-          :checked="true"
-        ></hy-checkbox-item>
+      <hy-checkbox-group
+        v-model="value2"
+        :size="size"
+        :shape="shape"
+        icon-color="green"
+      >
+        <hy-checkbox-item value="f" label="法拉利"></hy-checkbox-item>
         <hy-checkbox-item value="l" label="兰博基尼"></hy-checkbox-item>
         <hy-checkbox-item value="b" label="布加迪"></hy-checkbox-item>
         <hy-checkbox-item value="a" label="阿斯顿马丁"></hy-checkbox-item>
@@ -90,7 +91,7 @@ const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = themeStore;
 const value = ref([]);
-const value2 = ref([]);
+const value2 = ref(["f", "l"]);
 const size = ref<HyApp.SizeType>("medium");
 const shape = ref<HyApp.ShapeType>("square");
 

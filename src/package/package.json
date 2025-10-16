@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.3.14",
-  "description": "修改小问题，新增复选框分开组件",
+  "version": "0.3.16",
+  "description": "fix: 修复复选框父子传递provide/inject传递，更新不响应问题",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

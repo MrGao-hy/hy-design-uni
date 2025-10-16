@@ -16,11 +16,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { provide, reactive, ref } from "vue";
+import { provide, reactive, ref, toRefs } from "vue";
 import type { PropType } from "vue";
 import type { FormItemRule } from "./typing";
 import { clearVal, isArray } from "../../utils";
-import type { AppType } from "vite";
 
 /**
  * 表单组件父组件，需要搭配hy-form-item
@@ -73,13 +72,9 @@ const errors = reactive<Record<string, string>>({});
 
 // 表单上下文
 const formContext = {
+  ...toRefs(props),
   formData,
   errors,
-  rules: props.rules,
-  border: props.border,
-  labelWidth: props.labelWidth,
-  labelPosition: props.labelPosition,
-  labelAlign: props.labelAlign,
   addFormItem: (item: any) => {
     formItems.value.push(item);
   },

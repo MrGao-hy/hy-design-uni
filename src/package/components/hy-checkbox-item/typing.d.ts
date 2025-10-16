@@ -1,5 +1,6 @@
 import type HyCheckboxGroupProps from "@/package/components/hy-checkbox-group/typing";
+import type { ToRefs } from "vue";
 
-export interface ICheckboxGroupProps extends HyCheckboxGroupProps {
-  setCheckedStatus: (name: string) => void;
+export interface ICheckboxGroupContext extends ToRefs<HyCheckboxGroupProps> {
+  setCheckedStatus: (name: string | number) => void;
 }
