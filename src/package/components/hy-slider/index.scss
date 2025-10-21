@@ -7,11 +7,11 @@
   @include flex;
   align-items: center;
 
-  &__native {
+  @include e(native) {
     flex: 1;
   }
 
-  &-inner {
+  @include e(inner) {
     flex: 1;
     @include flex(column);
     position: relative;
@@ -20,11 +20,11 @@
     justify-content: center;
   }
 
-  &__show-value {
+  @include e(show-value) {
     margin: $hy-border-margin-padding-base $hy-border-margin-padding-lg $hy-border-margin-padding-base 0;
   }
 
-  &__show-range-value {
+  @include e(show-range-value) {
     padding-top: 2px;
     font-size: 12px;
     line-height: 12px;
@@ -32,7 +32,7 @@
     bottom: 0;
   }
 
-  &__base {
+  @include e(base) {
     background-color: $hy-background--empty;
     border-radius: $hy-border-radius-semicircle;
   }
@@ -49,7 +49,7 @@
   }
   /* #endif */
 
-  &__gap {
+  @include e(gap) {
     position: relative;
     border-radius: $hy-border-radius-semicircle;
     transition: width 0.2s;
@@ -59,7 +59,7 @@
     }
   }
 
-  &__button {
+  @include e(button) {
     width: 24px;
     height: 24px;
     border-radius: 50%;
@@ -69,14 +69,14 @@
     /* #ifdef H5 */
     cursor: pointer;
     /* #endif */
+
+    @include m(wrap) {
+      position: absolute;
+      // transform: translate3d(50%, -50%, 0);
+    }
   }
 
-  &__button-wrap {
-    position: absolute;
-    // transform: translate3d(50%, -50%, 0);
-  }
-
-  @include m(disabled) {
+  @include e(disabled) {
     opacity: 0.5;
   }
 }

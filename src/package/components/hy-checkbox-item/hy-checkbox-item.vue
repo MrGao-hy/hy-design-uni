@@ -11,24 +11,25 @@
     ]"
   >
     <view
-      class="hy-checkbox--icon-wrap cursor-pointer"
       @tap.stop="iconClickHandler"
       :class="iconClasses"
       :style="iconWrapStyle"
     >
-      <slot name="icon">
+      <template v-if="isChecked">
+        <slot v-if="$slots.icon" name="icon"></slot>
         <HyIcon
+          v-else
           class="hy-checkbox--icon-wrap__icon"
           :name="IconConfig.CHECK_MASK"
           :size="
             addUnit(
-              sizeType[checkboxGroup?.size?.value] ??
+              sizeType[checkboxGroup?.size?.value] ||
                 checkboxGroup?.iconSize?.value,
             )
           "
           :color="checkboxGroup?.iconColor?.value || '#ffffff'"
         />
-      </slot>
+      </template>
     </view>
     <view
       :class="[
@@ -43,7 +44,7 @@
           :style="{
             color: checkboxGroup?.labelColor?.value,
             fontSize: addUnit(
-              sizeType[checkboxGroup?.size?.value] ??
+              sizeType[checkboxGroup?.size?.value] ||
                 checkboxGroup?.labelSize?.value,
             ),
           }"
@@ -110,7 +111,7 @@ const isChecked = ref(false);
 const sizeType: AnyObject = reactive({
   small: 14,
   medium: 18,
-  large: 22,
+  large: 24,
 });
 
 watch(
@@ -160,7 +161,7 @@ const checkboxStyle = computed(() => {
  * @description 定义icon的Class类名
  * */
 const iconClasses = computed(() => {
-  let classes: string[] = [];
+  let classes: string[] = ["hy-checkbox--icon-wrap", "cursor-pointer"];
   // 组件的形状
   classes.push("hy-checkbox--icon-wrap--" + checkboxGroup?.shape?.value);
   if (isDisabled()) {
@@ -179,29 +180,23 @@ const iconClasses = computed(() => {
  * @description 定义icon的样式
  * */
 const iconWrapStyle = computed(() => {
-  return (): CSSProperties => {
-    // checkbox的整体样式
-    const style: CSSProperties = {};
-    style.backgroundColor =
-      isChecked.value && !isDisabled()
-        ? checkboxGroup?.activeColor?.value
-        : !isDisabled()
-          ? "#ffffff"
-          : "";
-    style.borderColor =
-      isChecked.value && !isDisabled()
-        ? checkboxGroup?.activeColor?.value
-        : checkboxGroup?.inactiveColor?.value;
-    if (checkboxGroup?.size?.value) {
-      style.width = addUnit(
-        sizeType[checkboxGroup.size.value] ?? checkboxGroup.size.value,
-      );
-      style.height = addUnit(
-        sizeType[checkboxGroup.size.value] ?? checkboxGroup.size.value,
-      );
-    }
-    return style;
-  };
+  // checkbox的整体样式
+  const style: CSSProperties = {};
+  style.backgroundColor =
+    isChecked.value && !isDisabled() ? checkboxGroup?.activeColor?.value : "";
+  style.borderColor =
+    isChecked.value && !isDisabled()
+      ? checkboxGroup?.activeColor?.value
+      : checkboxGroup?.inactiveColor?.value;
+  if (checkboxGroup?.size?.value) {
+    style.width = addUnit(
+      sizeType[checkboxGroup.size.value] || checkboxGroup.size.value,
+    );
+    style.height = addUnit(
+      sizeType[checkboxGroup.size.value] || checkboxGroup.size.value,
+    );
+  }
+  return style;
 });
 
 /**

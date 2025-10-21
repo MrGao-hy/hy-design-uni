@@ -16,7 +16,7 @@
     border-radius: $hy-border-radius-sm;
   }
 
-  &__left-icon {
+  @include e(left-icon) {
     align-items: center;
     margin-right: 5px;
     :deep(.hy-icon) {
@@ -24,25 +24,22 @@
     }
   }
 
-  &__right-icon {
+  @include e(right-icon) {
+    margin-left: 5px;
+    align-items: center;
     :deep(.hy-icon) {
       color: $hy-warning;
     }
   }
 
-  &__right-icon {
-    margin-left: 5px;
-    align-items: center;
-  }
-
-  &__content {
+  @include e(content) {
     text-align: right;
     flex: 1;
     @include flex;
     flex-wrap: nowrap;
     overflow: hidden;
 
-    &__text {
+    @include m(text) {
       font-size: 14px;
       color: $hy-warning;
       /* #ifndef APP-NVUE */
@@ -57,18 +54,18 @@
     }
   }
 
-  &__swiper {
+  @include e(swiper) {
     height: 16px;
     @include flex;
     align-items: center;
     flex: 1;
 
-    &__item {
+    @include m(item) {
       @include flex;
       align-items: center;
       overflow: hidden;
 
-      &__text {
+      @include e(text) {
         font-size: 14px;
         color: $hy-warning;
       }

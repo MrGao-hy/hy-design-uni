@@ -24,8 +24,10 @@
         <view
           v-if="closeable"
           @tap.stop="close"
-          class="hy-popup__content__close"
-          :class="['hy-popup__content__close--' + closeIconPos]"
+          :class="[
+            'hy-popup__content__close',
+            'hy-popup__content__close--' + closeIconPos,
+          ]"
           hover-class="hy-popup__content__close--hover"
           hover-stay-time="150"
         >

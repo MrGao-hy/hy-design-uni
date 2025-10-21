@@ -2,13 +2,12 @@
   <view
     class="hy-loading-icon"
     :style="customStyle"
-    :class="[vertical && 'hy-loading-icon--vertical']"
+    :class="[vertical && 'hy-loading-icon__vertical']"
     v-if="show"
   >
     <view
       v-if="!webviewHide"
-      class="hy-loading-icon__spinner"
-      :class="[`hy-loading-icon__spinner--${mode}`]"
+      :class="['hy-loading-icon__spinner', `hy-loading-icon__spinner--${mode}`]"
       ref="ani"
       :style="{
         color: color,

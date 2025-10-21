@@ -48,7 +48,6 @@ import HySwiper from "@/package/components/hy-swiper/hy-swiper.vue";
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HySlider from "@/package/components/hy-slider/hy-slider.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
-import type { HyApp } from "hy-app/typing/modules/common";
 import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 

@@ -23,7 +23,7 @@
 import { onMounted, reactive, ref } from "vue";
 
 import HyToast from "@/package/components/hy-toast/hy-toast.vue";
-import HyCell from "hy-app/components/hy-cell/hy-cell.vue";
+import HyCell from "@/package/components/hy-cell/hy-cell.vue";
 import HySubsection from "../../../package/components/hy-subsection/hy-subsection.vue";
 import HySwitch from "../../../package/components/hy-switch/hy-switch.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";

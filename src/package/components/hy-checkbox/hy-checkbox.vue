@@ -11,23 +11,26 @@
         ]"
       >
         <view
-          class="hy-checkbox--icon-wrap cursor-pointer"
           @tap.stop="iconClickHandler($event, item)"
           :class="iconClasses(item)"
           :style="iconWrapStyle(item)"
         >
-          <slot
-            name="icon"
-            :iconColor="iconColor"
-            :iconSize="addUnit(iconSize)"
-          >
+          <template v-if="item[fieldNames.checked]">
+            <slot
+              v-if="$slots.icon"
+              name="icon"
+              :iconColor="iconColor"
+              :iconSize="addUnit(iconSize)"
+            >
+            </slot>
             <HyIcon
+              v-else
               class="hy-checkbox--icon-wrap__icon"
               :name="IconConfig.CHECK_MASK"
-              :size="addUnit(sizeType[size] ?? iconSize)"
+              :size="addUnit(sizeType[size] || iconSize)"
               :color="iconColor || '#ffffff'"
             />
-          </slot>
+          </template>
         </view>
         <view
           :class="[
@@ -41,7 +44,7 @@
             <text
               :style="{
                 color: labelColor,
-                fontSize: addUnit(sizeType[size] ?? labelSize),
+                fontSize: addUnit(sizeType[size] || labelSize),
               }"
             >
               {{ item[fieldNames.label] }}
@@ -178,7 +181,7 @@ const columns_1 = ref();
 const sizeType: AnyObject = reactive({
   small: 14,
   medium: 18,
-  large: 22,
+  large: 24,
 });
 
 watch(
@@ -227,7 +230,7 @@ const bemClass = computed(() => {
  * */
 const iconClasses = computed(() => {
   return (temp: CheckboxColumnsVo): string[] => {
-    let classes: string[] = [];
+    let classes: string[] = ["hy-checkbox--icon-wrap", "cursor-pointer"];
     // 组件的形状
     classes.push("hy-checkbox--icon-wrap--" + props.shape);
     if (isDisabled(temp?.disabled)) {
@@ -253,15 +256,13 @@ const iconWrapStyle = computed(() => {
     style.backgroundColor =
       temp[props.fieldNames.checked] && !isDisabled(temp?.disabled)
         ? props.activeColor
-        : !isDisabled(temp?.disabled)
-          ? "#ffffff"
-          : "";
+        : "";
     style.borderColor =
       temp[props.fieldNames.checked] && !isDisabled(temp?.disabled)
         ? props.activeColor
         : props.inactiveColor;
-    style.width = addUnit(sizeType[props.size] ?? props.size);
-    style.height = addUnit(sizeType[props.size] ?? props.size);
+    style.width = addUnit(sizeType[props.size] || props.size);
+    style.height = addUnit(sizeType[props.size] || props.size);
     return style;
   };
 });

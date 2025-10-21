@@ -81,8 +81,8 @@
           >
             <view
               v-if="Array.isArray(item)"
-              class="hy-picker--view__column__item u-line-1"
               :class="[
+                'hy-picker--view__column__item',
                 index1 === innerIndex[index] &&
                   'hy-picker--view__column__item--selected',
               ]"

@@ -19,7 +19,11 @@
         </view>
         <template #left>
           <view class="action">
-            <view class="action-btn" :style="item.style" v-for="item in options">
+            <view
+              class="action-btn"
+              :style="item.style"
+              v-for="item in options"
+            >
               {{ item.text }}
             </view>
           </view>
@@ -30,37 +34,36 @@
 </template>
 
 <script setup lang="ts">
-import HySwipeAction from '@/package/components/hy-swipe-action/hy-swipe-action.vue'
-import { ref } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
+import HySwipeAction from "@/package/components/hy-swipe-action/hy-swipe-action.vue";
+import { ref } from "vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
 
-const themeStore = useThemeStore()
-const { themeColor, darkMode } = themeStore
-const show = ref(false)
+const themeStore = useThemeStore();
+const { themeColor, darkMode } = themeStore;
+const show = ref(false);
 
 const options = [
   {
-    text: '收藏',
+    text: "收藏",
     style: {
-      backgroundColor: '#3c9cff',
+      backgroundColor: "#3c9cff",
     },
   },
   {
-    text: '删除',
+    text: "删除",
     style: {
-      backgroundColor: '#f56c6c',
+      backgroundColor: "#f56c6c",
     },
   },
-]
+];
 
 const beforeClose = () => {
-  uni.showToast({ title: '关闭', icon: 'none' })
-}
+  uni.showToast({ title: "关闭", icon: "none" });
+};
 </script>
 
 <style scoped lang="scss">
-@import 'hy-app/theme.scss';
 .cell {
   padding: 20rpx;
   display: flex;

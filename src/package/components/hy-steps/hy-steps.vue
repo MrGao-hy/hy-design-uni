@@ -26,7 +26,13 @@
           ]"
           :style="itemStyleInner"
         >
-          <slot name="icon" :error="item?.error" :index="i">
+          <slot
+            v-if="$slots.icon"
+            name="icon"
+            :error="item?.error"
+            :index="i"
+          ></slot>
+          <template v-else>
             <view
               :class="[
                 'hy-steps-item__wrapper--dot__item',
@@ -83,7 +89,7 @@
                 "
               ></HyIcon>
             </view>
-          </slot>
+          </template>
         </view>
         <!-- 步骤状态 -->
 
@@ -93,26 +99,32 @@
           :class="[`hy-steps-item__content--${direction}`]"
           :style="[contentStyle]"
         >
-          <slot name="content" :record="item" :index="i">
-            <slot name="title" :title="item.title" :index="i">
-              <text
-                :class="[
-                  'hy-steps-item__content__title',
-                  current == i && 'hy-steps-item__content__title--active',
-                  current == i &&
-                    item.error &&
-                    'hy-steps-item__content__title--error',
-                ]"
-              >
-                {{ item.title }}
-              </text>
-            </slot>
-            <slot name="desc" :desc="item.desc" :index="i">
-              <text :style="{ fontSize: '12px', color: '#999' }">{{
-                item.desc
-              }}</text>
-            </slot>
-          </slot>
+          <slot
+            v-if="$slots.content"
+            name="content"
+            :record="item"
+            :index="i"
+          ></slot>
+          <template v-else>
+            <slot
+              v-if="$slots.title"
+              name="title"
+              :title="item.title"
+              :index="i"
+            ></slot>
+            <text v-else :class="titleClass(i, item.error)">
+              {{ item.title }}
+            </text>
+            <slot
+              v-if="$slots.desc"
+              name="desc"
+              :desc="item.desc"
+              :index="i"
+            ></slot>
+            <text v-else :style="{ fontSize: '12px', color: '#999' }">{{
+              item.desc
+            }}</text>
+          </template>
         </view>
         <!-- 内容区域 -->
       </view>
@@ -212,10 +224,25 @@ watch(
   },
 );
 
+// 字体标题类名
+const titleClass = computed(() => {
+  return (index: number, error: boolean) => {
+    const classes = ["hy-steps-item__content__title"];
+    if (props.current === index) {
+      classes.push("hy-steps-item__content__title--active");
+
+      if (error) {
+        classes.push("hy-steps-item__content__title--error");
+      }
+    }
+
+    return classes;
+  };
+});
 // 字体颜色
 const textColor = computed(() => {
   return (index: number) =>
-    index == props.current ? "#ffffff" : props.inactiveColor;
+    index === props.current ? "#ffffff" : props.inactiveColor;
 });
 
 /**

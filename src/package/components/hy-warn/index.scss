@@ -1,26 +1,6 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin.scss" as *;
 
-/* 暗色主题 */
-@include b(theme){
-  @include m(dark) {
-    @include b(warn) {
-      &--error--light {
-        background-color: rgba(250, 53, 52, 0.3);
-      }
-      &--success--light {
-        background-color: rgba(25, 190, 107, 0.3);
-      }
-      &--warning--light {
-        background-color: rgba(255, 153, 0, 0.3);
-      }
-      &--info--light {
-        background-color: rgba(144, 147, 153, 0.3);
-      }
-    }
-  }
-}
-
 @include b(warn) {
   position: relative;
   background-color: $hy-primary;
@@ -29,118 +9,132 @@
   align-items: center;
   border-radius: $hy-border-radius-sm;
 
-  @include m(primary__dark) {
-    background-color: $hy-primary;
+  @include e(primary) {
+
+    @include m(dark) {
+      background-color: $hy-primary;
+    }
+
+    @include m(light) {
+      background-color: $hy-primary-light;
+      .tips {
+        :deep(.hy-icon) {
+          color: $hy-primary;
+        }
+      }
+    }
+
   }
 
-  @include m(primary__light) {
-    background-color: $hy-primary-light;
-    .hy-warn--icon__left {
-      :deep(.hy-icon) {
-        color: $hy-primary;
+  @include e(error) {
+
+    @include m(dark) {
+      background-color: $hy-error;
+    }
+
+    @include m(light) {
+      background-color: $hy-error-light;
+      .tips {
+        :deep(.hy-icon) {
+          color: $hy-error;
+        }
       }
     }
   }
 
-  @include m(error__dark) {
-    background-color: $hy-error;
-  }
+  @include e(success) {
+    @include m(dark) {
+      background-color: $hy-success;
+    }
 
-  @include m(error__light) {
-    background-color: $hy-error-light;
-    .hy-warn--icon__left {
-      :deep(.hy-icon) {
-        color: $hy-error;
+    @include m(light) {
+      background-color: $hy-success-light;
+      .tips {
+        :deep(.hy-icon) {
+          color: $hy-success;
+        }
       }
     }
   }
 
-  @include m(success__dark) {
-    background-color: $hy-success;
-  }
+  @include e(warning) {
 
-  @include m(success__light) {
-    background-color: $hy-success-light;
-    .hy-warn__icon--left {
-      :deep(.hy-icon) {
-        color: $hy-success;
+    @include m(dark) {
+      background-color: $hy-warning;
+    }
+
+    @include m(light) {
+      background-color: $hy-warning-light;
+      .tips {
+        :deep(.hy-icon) {
+          color: $hy-warning;
+        }
       }
     }
   }
 
-  @include m(warning__dark) {
-    background-color: $hy-warning;
-  }
+  @include e(info) {
 
-  @include m(warning__light) {
-    background-color: $hy-warning-light;
-    .hy-warn__icon--left {
-      :deep(.hy-icon) {
-        color: $hy-warning;
+    @include m(dark) {
+      background-color: $hy-info;
+    }
+
+    @include m(light) {
+      background-color: $hy-info-light;
+      .tips {
+        :deep(.hy-icon) {
+          color: $hy-info;
+        }
       }
     }
   }
 
-  @include m(info__dark) {
-    background-color: $hy-info;
-  }
-
-  @include m(info__light) {
-    background-color: $hy-info-light;
-    .hy-warn--icon__left {
-      :deep(.hy-icon) {
-        color: $hy-info;
-      }
-    }
-  }
-
-  @include m(icon) {
+  @include e(icon) {
     margin-right: $hy-border-margin-padding-sm;
   }
 
-  @include m(content) {
+  @include e(content) {
     @include flex(column);
     flex: 1;
 
-    @include e(title) {
+    @include m(title) {
       font-size: 14px;
       font-weight: bold;
       color: #fff;
       margin-bottom: 2px;
     }
 
-    @include e(desc) {
+    @include m(desc) {
       font-size: 14px;
       flex-wrap: wrap;
       color: #fff;
     }
   }
 
-  @include m([title__dark, desc__dark]) {
-    color: #ffffff;
+  @include e(text) {
+
+    @include m(primary__light) {
+      color: $hy-primary;
+    }
+
+    @include m(success__light) {
+      color: $hy-success;
+    }
+
+    @include m(warning__light) {
+      color: $hy-warning;
+    }
+
+    @include m(error__light) {
+      color: $hy-error;
+    }
+
+    @include m(info__light) {
+      color: $hy-info;
+    }
   }
 
-  @include m(text__primary--light) {
-    color: $hy-primary;
-  }
-
-  @include m(text__success--light) {
-    color: $hy-success;
-  }
-
-  @include m(text__primary--light) {
-    color: $hy-warning;
-  }
-
-  @include m(text__error--light) {
-    color: $hy-error;
-  }
-
-  @include m(text__info--light) {
-    color: $hy-info;
-  }
-
-  @include m(close) {
+  @include e(close) {
     position: absolute;
     top: 11px;
     right: 10px;

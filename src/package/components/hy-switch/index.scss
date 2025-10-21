@@ -1,24 +1,6 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin.scss" as *;
 
-/* 暗色主题 */
-//@include b(theme){
-//  @include m(dark) {
-//    @include b(switch) {
-//      color: $hy-dark-color;
-//      @include m(container) {
-//        background-color: $hy-dark-background--track;
-//      }
-//      @include m(node) {
-//        background-color: $hy-dark-background--container;
-//      }
-//      @include m(bg) {
-//        background-color: $hy-dark-background--track;
-//      }
-//    }
-//  }
-//}
-
 @include b(switch) {
   @include flex(row);
   /* #ifndef APP-NVUE */
@@ -34,11 +16,11 @@
   // 由于weex为阿里逗着玩的KPI项目，导致bug奇多，这必须要写这一行，
   // 否则在iOS上，点击页面任意地方，都会触发switch的点击事件
   overflow: hidden;
-  @include m(active){
+  @include e(active){
     background: $hy-primary;
   }
 
-  @include m(node) {
+  @include e(node) {
     @include flex(row);
     align-items: center;
     justify-content: center;
@@ -50,7 +32,7 @@
     transition-timing-function: cubic-bezier(0.3, 1.05, 0.4, 1.05);
   }
 
-  @include m(bg) {
+  @include e(bg) {
     position: absolute;
     border-radius: $hy-border-radius-semicircle;
     background-color: $hy-background--3;
@@ -59,7 +41,7 @@
     transition-timing-function: ease;
   }
 
-  @include m(disabled) {
+  @include e(disabled) {
     opacity: 0.6;
   }
 }

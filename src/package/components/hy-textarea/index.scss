@@ -8,25 +8,26 @@
   flex: 1;
   padding: $hy-border-margin-padding-sm;
 
-  @include m(field) {
+  @include e(field) {
     min-height: 50rpx;
     max-height: 200rpx;
+    color: $hy-text-color;
   }
 
-  @include m(radius) {
+  @include e(radius) {
     border-radius: $hy-border-radius-sm;
   }
 
-  @include m(no-radius) {
+  @include e(no-radius) {
     border-radius: $hy-border-radius-no;
   }
 
-  @include m(disabled) {
+  @include e(disabled) {
     background-color: $hy-background--disabled;
     color: $hy-text-color--disabled;
   }
 
-  @include m(field) {
+  @include e(field) {
     flex: 1;
     font-size: 15px;
     width: 100%;
@@ -34,7 +35,7 @@
     border: none;
   }
 
-  @include m(count) {
+  @include e(count) {
     position: absolute;
     right: 5px;
     bottom: 2px;
@@ -44,7 +45,7 @@
     border-radius: $hy-border-radius-sm;
   }
 }
-textarea {
-  background-color: transparent;
-  border: none;
-}
+//textarea {
+//  background-color: transparent;
+//  border: none;
+//}

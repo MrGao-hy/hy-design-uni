@@ -41,7 +41,7 @@ import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
 import HyInput from "@/package/components/hy-input/hy-input.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
-import type { HyApp } from "hy-app/typing/modules/common";
+import type { HyApp } from "@/package/typing/modules/common";
 import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 

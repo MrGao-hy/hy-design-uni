@@ -8,7 +8,7 @@
         'hy-float-button__animation': float,
         'hy-float-button__shadow': shadow,
       },
-      `hy-float-button__${shape}`,
+      `hy-float-button--${shape}`,
       customClass,
     ]"
     @touchmove.stop.prevent="handleTouchMove"

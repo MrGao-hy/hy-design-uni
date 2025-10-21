@@ -9,14 +9,14 @@
   touch-action: none;
   /* #endif */
 
-  &__content {
+  @include e(content) {
     @include flex;
 
-    &__item {
+    @include m(item) {
       position: relative;
 
-      &__icon-wrap {
-        &--half {
+      @include e(icon-wrap) {
+        @include m(half) {
           position: absolute;
           overflow: hidden;
           top: 0;

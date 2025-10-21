@@ -2,33 +2,33 @@
   <view class="hy-grid" ref="hy-grid" :style="gridStyle">
     <template v-for="(item, i) in list" :key="i">
       <view
-        class="hy-grid-item"
-        hover-class="hy-grid-item--hover-class"
+        class="hy-grid__item"
+        hover-class="hy-grid__item--hover-class"
         :hover-stay-time="200"
         @tap="childClick(item)"
         :style="itemStyle"
       >
-        <slot :record="item">
-          <HyIcon
-            :name="item[customKeys?.icon]"
-            label-pos="bottom"
-            :label="item[customKeys?.name]"
-            :space="item?.iconConfig?.space || iconConfig?.space || 8"
-            :color="item?.iconConfig?.color || iconConfig?.color"
-            :size="item?.iconConfig?.size || iconConfig?.size || 30"
-            :bold="item?.iconConfig?.bold || iconConfig?.bold"
-            :customPrefix="item?.iconConfig?.customPrefix"
-            :imgMode="item?.iconConfig?.imgMode || iconConfig?.imgMode"
-            :width="item?.iconConfig?.width || iconConfig?.width"
-            :height="item?.iconConfig?.height || iconConfig?.height"
-            :top="item?.iconConfig?.top || iconConfig?.top"
-            :stop="item?.iconConfig?.stop || iconConfig?.stop"
-            :round="item?.iconConfig?.round || iconConfig?.round || 6"
-            :customStyle="
-              item?.iconConfig?.customStyle || iconConfig?.customStyle
-            "
-          ></HyIcon>
-        </slot>
+        <slot v-if="$slots.default" :record="item"></slot>
+        <HyIcon
+          v-else
+          :name="item[customKeys?.icon]"
+          label-pos="bottom"
+          :label="item[customKeys?.name]"
+          :space="item?.iconConfig?.space || iconConfig?.space || 8"
+          :color="item?.iconConfig?.color || iconConfig?.color"
+          :size="item?.iconConfig?.size || iconConfig?.size || 30"
+          :bold="item?.iconConfig?.bold || iconConfig?.bold"
+          :customPrefix="item?.iconConfig?.customPrefix"
+          :imgMode="item?.iconConfig?.imgMode || iconConfig?.imgMode"
+          :width="item?.iconConfig?.width || iconConfig?.width"
+          :height="item?.iconConfig?.height || iconConfig?.height"
+          :top="item?.iconConfig?.top || iconConfig?.top"
+          :stop="item?.iconConfig?.stop || iconConfig?.stop"
+          :round="item?.iconConfig?.round || iconConfig?.round || 6"
+          :customStyle="
+            item?.iconConfig?.customStyle || iconConfig?.customStyle
+          "
+        ></HyIcon>
       </view>
     </template>
   </view>

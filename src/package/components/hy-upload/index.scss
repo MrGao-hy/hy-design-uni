@@ -9,24 +9,24 @@ $hy-upload-text-font-size: 11px !default;
   @include flex(column);
   flex: 1;
 
-  &__wrap {
+  @include e(wrap) {
     @include flex;
     flex-wrap: wrap;
     flex: 1;
 
-    &__preview {
+    @include m(preview) {
       border-radius: 2px;
       margin: 0 8px 8px 0;
       position: relative;
       overflow: hidden;
       @include flex;
 
-      &__image {
+      @include e(image) {
         width: $hy-upload-image-width;
         height: $hy-upload-image-width;
       }
 
-      &__other {
+      @include e(other) {
         width: $hy-upload-image-width;
         height: $hy-upload-image-width;
         background-color: rgb(242, 242, 242);
@@ -35,16 +35,40 @@ $hy-upload-text-font-size: 11px !default;
         justify-content: center;
         align-items: center;
 
-        &__text {
+        @include m(text) {
           font-size: $hy-upload-text-font-size;
           color: $hy-text-color--grey;
           margin-top: 2px;
         }
       }
+
+      /* 进度条样式 */
+      @include e(progress) {
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(4px);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 10;
+
+        @include m(number) {
+          width: 70%;
+          height: 10rpx;
+          margin-bottom: 12rpx;
+        }
+
+        @include m(value) {
+          font-size: 12px;
+          color: $hy-primary;
+        }
+      }
     }
   }
 
-  &__deletable {
+  @include e(deletable) {
     position: absolute;
     top: 0;
     right: 0;
@@ -57,7 +81,7 @@ $hy-upload-text-font-size: 11px !default;
     justify-content: center;
     z-index: 9;
 
-    &__icon {
+    @include m(icon) {
       position: absolute;
       transform: scale(0.7);
       top: 0;
@@ -65,7 +89,7 @@ $hy-upload-text-font-size: 11px !default;
     }
   }
 
-  &__success {
+  @include e(success) {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -80,7 +104,7 @@ $hy-upload-text-font-size: 11px !default;
     justify-content: center;
     /* #endif */
 
-    &__icon {
+    @include m(icon) {
       /* #ifndef APP-NVUE */
       position: absolute;
       transform: scale(0.7);
@@ -94,7 +118,7 @@ $hy-upload-text-font-size: 11px !default;
     }
   }
 
-  &__button {
+  @include e(button) {
     @include flex(column);
     align-items: center;
     justify-content: center;
@@ -107,41 +131,18 @@ $hy-upload-text-font-size: 11px !default;
     box-sizing: border-box;
     /* #endif */
 
-    &__text {
+    @include m(text) {
       font-size: $hy-upload-text-font-size;
       color: $hy-text-color--grey;
       margin-top: 2px;
     }
 
-    &--hover {
+    @include m(hover) {
       background-color: $hy-background--hover;
     }
 
-    &--disabled {
+    @include m(disabled) {
       opacity: 0.5;
     }
-  }
-}
-
-.material-sent {
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(4px);
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  z-index: 10;
-
-  .select-tips {
-    width: 70%;
-    height: 10rpx;
-    margin-bottom: 12rpx;
-  }
-
-  .tips-text {
-    font-size: 12px;
-    color: $hy-primary;
   }
 }

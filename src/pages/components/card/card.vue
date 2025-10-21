@@ -66,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import HyCard from "@/package/components/hy-card/hy-card.vue";
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HySwitch from "@/package/components/hy-switch/hy-switch.vue";

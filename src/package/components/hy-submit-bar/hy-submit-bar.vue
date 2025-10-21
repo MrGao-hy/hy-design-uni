@@ -23,7 +23,7 @@
           <HyBadge
             :value="item?.badge?.value"
             :absolute="true"
-            :offset="item?.badge?.offset ?? [-5, 20]"
+            :offset="item?.badge?.offset || [-5, 20]"
             :isDot="item?.badge?.isDot"
             :type="item?.badge?.type"
             :color="item?.badge?.color"

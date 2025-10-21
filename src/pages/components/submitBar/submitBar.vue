@@ -24,9 +24,9 @@
 <script setup lang="ts">
 import HySubmitBar from "@/package/components/hy-submit-bar/hy-submit-bar.vue";
 import { reactive } from "vue";
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
-import {useThemeStore} from "@/store";
+import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = themeStore;

@@ -2,27 +2,27 @@
 @use "../../libs/css/mixin.scss" as *;
 
 @include b(tabs) {
-  &__wrapper {
+  @include e(wrapper) {
     @include flex;
     align-items: center;
 
-    &__scroll-view-wrapper {
-      flex: 1;
-      /* #ifndef APP-NVUE */
-      overflow: auto hidden;
-      /* #endif */
-    }
-
-    &__scroll-view {
+    @include m(scroll-view) {
       @include flex;
       flex: 1;
+
+      @include e(wrapper) {
+        flex: 1;
+        /* #ifndef APP-NVUE */
+        overflow: auto hidden;
+        /* #endif */
+      }
     }
 
-    &__nav {
+    @include m(nav) {
       @include flex;
       position: relative;
 
-      &__item {
+      @include e(item) {
         height: 44px;
         padding: 0 11px;
         @include flex;
@@ -32,30 +32,30 @@
         cursor: pointer;
         /* #endif */
 
-        &--disabled {
+        @include m(disabled) {
           /* #ifdef H5 */
           cursor: not-allowed;
           /* #endif */
         }
 
-        &--active {
+        @include m(active) {
           .hy-tabs__wrapper__nav__item--text {
             color: $hy-text-color;
           }
         }
 
-        &--text {
+        @include m(text) {
           font-size: 15px;
           color: $hy-text-color;
           white-space: nowrap;
 
-          &--disabled {
+          @include e(disabled) {
             color: $hy-background--disabled !important;
           }
         }
       }
 
-      &__line {
+      @include e(line) {
         height: 3px;
         background: $hy-primary;
         width: 30px;

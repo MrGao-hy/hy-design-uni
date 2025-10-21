@@ -8,12 +8,12 @@
   flex-wrap: nowrap;
   color: $hy-text-color;
 
-  &__price {
+  @include e(price) {
     font-size: 14px;
     color: $hy-text-color--grey;
   }
 
-  &__value {
+  @include e(value) {
     font-size: 14px;
     @include flex;
     flex-wrap: wrap;
@@ -22,7 +22,7 @@
     align-items: center;
 
     /*链接*/
-    &--link {
+    @include m(link) {
       text-decoration: underline;
       color: $hy-primary;
     }

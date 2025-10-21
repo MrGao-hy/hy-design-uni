@@ -11,6 +11,6 @@ onHide(() => {
 });
 </script>
 <style lang="scss">
-@import "hy-app/libs/css/common.scss";
 @import "@/style/common.scss";
+@import "@/package/libs/css/common.scss";
 </style>

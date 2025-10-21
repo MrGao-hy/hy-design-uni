@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { computed, type CSSProperties, reactive, ref } from "vue";
-import type { CellContentVo } from "hy-app/components/hy-cell/typing";
+import type { CellContentVo } from "@/package/components/hy-cell/typing";
 import { getWindowInfo } from "@/package";
 import { useThemeStore } from "@/store";
 
@@ -58,7 +58,6 @@ const onClick = (temp: CellContentVo) => {
 </script>
 
 <style scoped lang="scss">
-@import "hy-app/theme.scss";
 .transition {
   background-color: $hy-primary;
 }

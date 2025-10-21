@@ -15,12 +15,14 @@
     align-items: center;
     padding: $hy-border-margin-padding-base;
   }
+
   @include e(message) {
     text-align: center;
     font-size: $hy-font-size-sm;
     padding: 1px 0 16px 0;
   }
-  &__nav {
+
+  @include e(nav) {
     min-width: 60px;
     @include m(active){
       color: rgba(0,0,0,0.65)
@@ -29,15 +31,18 @@
       color: rgba(0,0,0,0.15)
     }
   }
+
   @include e(size){
     flex: 1;
     text-align: center;
     font-size: $hy-font-size-sm;
   }
+
   @include e(separator){
     padding:  0 4px;
   }
-  &__left {
+
+  @include e(left) {
     display: inline-block;
   }
   @include e(current){

@@ -5,18 +5,21 @@
       :style="[backgroundColor, customStyle]"
     >
       <hy-status-bar v-if="tmpConfig?.safeAreaInsetTop"></hy-status-bar>
-      <view class="hy-notify--wrapper">
-        <slot name="icon">
+      <view class="hy-notify__wrapper">
+        <template
+          v-if="['success', 'warning', 'error'].includes(tmpConfig.type)"
+        >
+          <slot v-if="$slots.icon" name="icon"></slot>
           <hy-icon
-            v-if="['success', 'warning', 'error'].includes(tmpConfig.type)"
+            v-else
             :name="tmpConfig?.icon || icon"
             :color="tmpConfig?.color"
             :size="tmpConfig.fontSize"
             :customStyle="{ marginRight: '4px' }"
           ></hy-icon>
-        </slot>
+        </template>
         <text
-          class="hy-notify--wrapper__text"
+          class="hy-notify__wrapper--text"
           :style="{
             fontSize: addUnit(tmpConfig?.fontSize),
             color: tmpConfig?.color,

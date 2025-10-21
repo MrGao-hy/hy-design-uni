@@ -19,9 +19,15 @@
     </view>
 
     <view class="hy-title">手动控制</view>
-    <view class="hy-container" style="display: flex; margin-top: 100px">
-      <button @click="computedWidth('minus')">减少</button>
-      <button @click="computedWidth('plus')">增加</button>
+    <view class="hy-container">
+      <hy-flex justify="space-around">
+        <hy-button
+          type="error"
+          text="减少"
+          @click="computedWidth('minus')"
+        ></hy-button>
+        <hy-button text="增加" @click="computedWidth('plus')"></hy-button>
+      </hy-flex>
     </view>
   </hy-config-provider>
 </template>
@@ -29,8 +35,10 @@
 <script setup lang="ts">
 import HyLineProgress from "@/package/components/hy-line-progress/hy-line-progress.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import HyFlex from "@/package/components/hy-flex/hy-flex.vue";
+import HyButton from "@/package/components/hy-button/hy-button.vue";
 import { ref } from "vue";
-import { range } from "hy-app";
+import { range } from "@/package";
 import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 

@@ -2,7 +2,7 @@
 @use "../../libs/css/mixin.scss" as *;
 
 @include b(folding-panel) {
-  &__main {
+  @include e(main) {
     overflow: auto;
     transition: height 0.5s ease;
   }

@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { reactive } from "vue";
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import { config } from "@/config/config";
 
 import HyIcon from "@/package/components/hy-icon/hy-icon.vue";

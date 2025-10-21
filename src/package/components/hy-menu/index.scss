@@ -6,7 +6,7 @@
   max-width: 260rpx;
   background-color: $hy-background--track;
 
-  &-item {
+  @include e(item) {
     display: flex;
     align-items: center;
     justify-content: flex-start;

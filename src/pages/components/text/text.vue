@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import HyText from "@/package/components/hy-text/hy-text.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 

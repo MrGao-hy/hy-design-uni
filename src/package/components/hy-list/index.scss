@@ -5,16 +5,16 @@
   padding: 0 $hy-border-margin-padding-base;
   box-sizing: border-box;
 
-  &__list {
+  @include e(list) {
     overflow-anchor: none;
-    &--item {
+    @include m(item) {
       box-sizing: border-box;
     }
 
-    &--left {
+    @include m(left) {
       margin-right: $hy-border-margin-padding-base;
     }
-    &--box {
+    @include m(box) {
       box-sizing: border-box;
       width: 50%;
       display: flex;

@@ -74,7 +74,7 @@ import { onMounted, ref } from "vue";
 import { guid, random } from "@/package";
 import list from "./data";
 import { onReachBottom } from "@dcloudio/uni-app";
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 
 import HyWaterfall from "@/package/components/hy-waterfall/hy-waterfall.vue";
 import HyImage from "@/package/components/hy-image/hy-image.vue";

@@ -9,10 +9,10 @@
     @touchcancel="endDrag"
   >
     <!--容器-->
-    <view class="hy-swipe-action--wrapper" :style="wrapperStyle">
+    <view class="hy-swipe-action__wrapper" :style="wrapperStyle">
       <!--左侧操作-->
       <view
-        :class="['hy-swipe-action--left', leftClass]"
+        :class="['hy-swipe-action__left', leftClass]"
         @click="onClick('left')"
       >
         <slot name="left" />
@@ -22,7 +22,7 @@
       <!--内容-->
       <view
         :class="[
-          'hy-swipe-action--center',
+          'hy-swipe-action__center',
           borderBottom && 'hy-border__bottom',
         ]"
       >
@@ -32,13 +32,13 @@
 
       <!--右侧操作-->
       <view
-        :class="['hy-swipe-action--right', rightClass]"
+        :class="['hy-swipe-action__right', rightClass]"
         @click="onClick('right')"
       >
         <slot name="right">
-          <view v-if="!slots.left" class="hy-swipe-action--right__action">
+          <view v-if="!slots.left" class="hy-swipe-action__right--action">
             <view
-              class="hy-swipe-action--right__action-btn"
+              class="hy-swipe-action__right--action__btn"
               v-for="(item, i) in options"
               :style="item.style"
               @tap.stop="onActiveClick(item, i)"
@@ -135,8 +135,8 @@ const props = defineProps({
   beforeClose: Function,
 });
 const emit = defineEmits<ISwipeActionEmits>();
-const leftClass = `hy-swipe-action--left--${guid()}`;
-const rightClass = `hy-swipe-action--right--${guid()}`;
+const leftClass = `hy-swipe-action__left--${guid()}`;
+const rightClass = `hy-swipe-action__right--${guid()}`;
 
 const slots = useSlots();
 const wrapperStyle = ref<string>("");

@@ -7,7 +7,7 @@
   overflow: hidden;
 
   /* 标题 */
-  &__title {
+  @include e(title) {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,12 +20,12 @@
   }
 
   /* 内容 */
-  &__content {
+  @include e(content) {
     padding: 20px;
     @include flex;
     justify-content: center;
 
-    &__text {
+    @include m(text) {
       font-size: $hy-font-size-sm;
       color: $hy-text-color--grey;
       flex: 1;
@@ -34,32 +34,32 @@
   }
 
   /* 底部按钮 */
-  &__button {
+  @include e(button) {
     /* 两个按钮的样式 */
-    &-exact {
-      .hy-modal__button-group__wrapper:first-child {
+    @include m(exact) {
+      .first {
         margin-right: $hy-border-margin-padding-lg;
       }
-      &--reverse {
-        .hy-modal__button-group__wrapper:last-child {
+      @include m(reverse) {
+        .last {
           margin-right: $hy-border-margin-padding-lg;
         }
       }
     }
 
 
-    &-group {
+    @include m(group) {
       @include flex;
       padding: 20px;
 
       /* 自定义底部按钮 */
-      &--confirm-button {
+      @include e(confirm-button) {
         flex-direction: column;
         padding: 0 25px 15px;
       }
 
 
-      &__wrapper {
+      @include e(wrapper) {
         flex: 1;
         @include flex;
         justify-content: center;
@@ -68,28 +68,28 @@
         border-radius: $hy-border-radius-semicircle;
 
         /* 确认 */
-        &--confirm {
+        @include m(confirm) {
           background-color: $hy-primary;
-          &-text {
+          @include e(text) {
             color: #FFFFFF;
           }
         }
 
         /* 取消 */
-        &--cancel {
+        @include m(cancel) {
           //background-color: $hy-background--empty;
           background-color: $hy-background--empty;
 
-          &-text {
+          @include e(text) {
             color: $hy-text-color;
           }
         }
 
-        &--hover {
+        @include m(hover) {
           opacity: 0.7;
         }
 
-        &__text {
+        @include m(text) {
           font-size: 16px;
           text-align: center;
         }

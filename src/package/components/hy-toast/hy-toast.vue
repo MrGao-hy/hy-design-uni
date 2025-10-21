@@ -8,7 +8,7 @@
       :style="[contentStyle]"
       :class="[
         'hy-toast__content',
-        'hy-toast--' + tmpConfig.type,
+        'hy-toast__' + tmpConfig.type,
         tmpConfig.type === 'loading' || tmpConfig.loading
           ? 'hy-toast__content--loading'
           : '',
@@ -31,8 +31,8 @@
       ></HyIcon>
       <text
         :class="[
-          'hy-toast__content__text',
-          'hy-toast__content__text--' + tmpConfig.type,
+          'hy-toast__content--text',
+          'hy-toast__content--text__' + tmpConfig.type,
         ]"
         style="max-width: 400rpx"
       >
@@ -139,10 +139,10 @@ const contentStyle = computed(() => {
 
 const loadingIconColor = computed(() => {
   let colorTmp = "rgb(255, 255, 255)";
-  if (isThemeType(tmpConfig.value.type)) {
+  if (isThemeType(tmpConfig.value.type!)) {
     // loading-icon组件内部会对color参数进行一个透明度处理，该方法要求传入的颜色值
     // 必须为rgb格式的，所以这里做一个处理
-    colorTmp = hexToRgb(ColorConfig[tmpConfig.value.type]) as string;
+    colorTmp = hexToRgb(ColorConfig[tmpConfig.value.type!]) as string;
   }
   return colorTmp;
 });

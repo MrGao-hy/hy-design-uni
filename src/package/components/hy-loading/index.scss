@@ -8,14 +8,14 @@
   justify-content: center;
   color: #c8c9cc;
 
-  &__text {
+  @include e(text) {
     margin-left: 4px;
     color: $hy-text-color--grey;
     font-size: 14px;
     line-height: 20px;
   }
 
-  &__spinner {
+  @include e(spinner) {
     width: 30px;
     height: 30px;
     position: relative;
@@ -25,19 +25,19 @@
     max-height: 100%;
     animation: hy-rotate 1s linear infinite;
     /* #endif */
+
+    @include m(semicircle) {
+      border: 2px solid transparent;
+      border-radius: 50%;
+    }
+
+    @include m(circle) {
+      border-radius: 50%;
+      border: 2px solid #e5e5e5;
+    }
   }
 
-  &__spinner--semicircle {
-    border: 2px solid transparent;
-    border-radius: 50%;
-  }
-
-  &__spinner--circle {
-    border-radius: 50%;
-    border: 2px solid #e5e5e5;
-  }
-
-  &--vertical {
+  @include m(vertical) {
     flex-direction: column;
   }
 }
@@ -49,20 +49,22 @@
 }
 
 @include b(loading-icon) {
-  &__spinner--spinner {
-    animation-timing-function: steps(12);
+  @include e(spinner) {
+    @include m(spinner) {
+      animation-timing-function: steps(12);
+    }
   }
 
   &__text:empty {
     display: none;
   }
 
-  &--vertical &__text {
+  @include e(vertical, text) {
     margin: 6px 0 0;
     color: $hy-text-color--grey;
   }
 
-  &__dot {
+  @include e(dot) {
     position: absolute;
     top: 0;
     left: 0;

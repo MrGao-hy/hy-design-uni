@@ -2,7 +2,7 @@
 @use "../../libs/css/theme" as *;
 
 @include b(count-down) {
-  &__text {
+  @include e(text) {
     font-size: 15px;
     line-height: 22px;
   }

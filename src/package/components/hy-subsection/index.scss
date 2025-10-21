@@ -11,24 +11,24 @@
   box-sizing: border-box;
   /* #endif */
 
-  @include m(button) {
+  @include e(button) {
     height: 35px;
     background-color: $hy-background--3;
     padding: 3px;
     border-radius: $hy-border-radius-sm;
     align-items: stretch;
 
-    &__bar {
+    @include m(bar) {
       background-color: $hy-background--container !important;
       border-radius: $hy-border-radius-sm;
     }
   }
 
-  @include m(subsection) {
+  @include e(subsection) {
     height: 32px;
   }
 
-  &__bar {
+  @include e(bar) {
     position: absolute;
     /* #ifndef APP-NVUE */
     transition-property: transform, color;
@@ -50,7 +50,7 @@
     }
   }
 
-  &__item {
+  @include e(item) {
     @include flex;
     flex: 1;
     justify-content: center;
@@ -62,7 +62,7 @@
       border: 1px solid $hy-primary;
     }
 
-    &--no-border-right {
+    @include m(no-border-right) {
       border-right-width: 0 !important;
     }
 
@@ -76,7 +76,7 @@
       border-bottom-right-radius: $hy-border-radius-sm;
     }
 
-    &__text {
+    @include m(text) {
       font-size: 12px;
       line-height: 14px;
       @include flex;

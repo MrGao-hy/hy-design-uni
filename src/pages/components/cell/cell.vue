@@ -1,5 +1,5 @@
 <template>
-  <hy-config-provider  :custom-style="themeColor" :theme="darkMode">
+  <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <hy-cell
       title="设置cell"
       :list="list"
@@ -26,8 +26,7 @@ import HyCell from "@/package/components/hy-cell/hy-cell.vue";
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { reactive, ref } from "vue";
-import { IconConfig } from "hy-app";
-import type { HyApp } from "hy-app/typing/modules/common";
+import { IconConfig } from "@/package";
 import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 

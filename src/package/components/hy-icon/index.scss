@@ -30,41 +30,41 @@
     justify-content: center;
   }
 
-  &__icon {
+  @include e(icon) {
     position: relative;
     @include flex;
     align-items: center;
     vertical-align: -100%;
 
-    &--primary {
+    @include m(primary) {
       color: $hy-primary;
     }
 
-    &--success {
+    @include m(success) {
       color: $hy-success;
     }
 
-    &--error {
+    @include m(error) {
       color: $hy-error;
     }
 
-    &--warning {
+    @include m(warning) {
       color: $hy-warning;
     }
 
-    &--info {
+    @include m(info) {
       color: $hy-info;
     }
   }
 
-  &__img {
+  @include e(mg) {
     /* #ifndef APP-NVUE */
     height: auto;
     will-change: transform;
     /* #endif */
   }
 
-  &__label {
+  @include e(label) {
     @include lineEllipsis;
     /* #ifndef APP-NVUE */
     line-height: 1;

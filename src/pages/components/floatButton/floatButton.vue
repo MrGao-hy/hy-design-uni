@@ -42,54 +42,53 @@
 </template>
 
 <script setup lang="ts">
-import HyFloatButton from '@/package/components/hy-float-button/hy-float-button.vue'
-import HySubsection from '@/package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '@/package/components/hy-switch/hy-switch.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { reactive, ref } from 'vue'
-import { IconConfig } from 'hy-app'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import HyFloatButton from "@/package/components/hy-float-button/hy-float-button.vue";
+import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
+import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { reactive, ref } from "vue";
+import { useThemeStore } from "@/store";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
-const menus = ['菜单1', '菜单2', '菜单3']
+const { themeColor, darkMode } = themeStore;
+const menus = ["菜单1", "菜单2", "菜单3"];
 
-const shape = ref('circle')
-const size = ref('medium')
-const direction = ref('column')
-const float = ref(false)
-const shadow = ref(false)
-const draggable = ref(false)
-const expandable = ref(true)
-const opacity = ref(1)
-const position = ref('right-top')
+const shape = ref("circle");
+const size = ref("medium");
+const direction = ref("column");
+const float = ref(false);
+const shadow = ref(false);
+const draggable = ref(false);
+const expandable = ref(true);
+const opacity = ref(1);
+const position = ref("right-top");
 
 const list_1 = reactive([
-  { name: '圆形', value: 'circle' },
-  { name: '方形', value: 'square' },
-])
+  { name: "圆形", value: "circle" },
+  { name: "方形", value: "square" },
+]);
 
 const list_2 = reactive([
-  { name: '大', value: 'large' },
-  { name: '中', value: 'medium' },
-  { name: '小', value: 'small' },
-])
+  { name: "大", value: "large" },
+  { name: "中", value: "medium" },
+  { name: "小", value: "small" },
+]);
 
 const list_3 = reactive([
-  { name: '横向', value: 'row' },
-  { name: '竖直', value: 'column' },
-])
+  { name: "横向", value: "row" },
+  { name: "竖直", value: "column" },
+]);
 
 const list_4 = reactive([
-  { name: '左上', value: 'left-top' },
-  { name: '右上', value: 'right-top' },
-  { name: '左中', value: 'left-center' },
-  { name: '右中', value: 'right-center' },
-  { name: '左下', value: 'left-bottom' },
-  { name: '右下', value: 'right-bottom' },
-  { name: '上中', value: 'top-center' },
-  { name: '下中', value: 'bottom-center' },
-])
+  { name: "左上", value: "left-top" },
+  { name: "右上", value: "right-top" },
+  { name: "左中", value: "left-center" },
+  { name: "右中", value: "right-center" },
+  { name: "左下", value: "left-bottom" },
+  { name: "右下", value: "right-bottom" },
+  { name: "上中", value: "top-center" },
+  { name: "下中", value: "bottom-center" },
+]);
 </script>
 
 <style scoped lang="scss"></style>

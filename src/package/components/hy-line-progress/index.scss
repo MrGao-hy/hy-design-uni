@@ -9,13 +9,13 @@
   overflow: hidden;
   border-radius: $hy-border-radius-semicircle;
 
-  &__background {
+  @include e(background) {
     background-color: $hy-background--empty;
     border-radius: $hy-border-radius-semicircle;
     flex: 1;
   }
 
-  &__line {
+  @include e(line) {
     position: absolute;
     top: 0;
     left: 0;
@@ -29,7 +29,7 @@
     background-color: $hy-primary;
   }
 
-  &__text {
+  @include e(text) {
     font-size: 10px;
     color: #ffffff;
     margin-bottom: 1px;

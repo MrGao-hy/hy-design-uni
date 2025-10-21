@@ -6,7 +6,7 @@
   border-style: solid;
   @include flex;
   align-items: center;
-  &__wrapper {
+  @include e(wrapper) {
     @include flex;
     position: relative;
     box-sizing: border-box;

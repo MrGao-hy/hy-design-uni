@@ -73,7 +73,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import HyTag from "@/package/components/hy-tag/hy-tag.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";

@@ -1,7 +1,6 @@
 import { DateModeEnum } from "../../typing";
 import type { CSSProperties } from "vue";
 import type HyInputProps from "../hy-input/typing";
-import HyApp from "hy-app";
 
 export default interface HyDatetimeProps {
   /**

@@ -29,11 +29,17 @@
           </view>
         </template>
         <template #input>
-          <text style="width: 30px; text-align: center" class="input">{{ value }}</text>
+          <text style="width: 30px; text-align: center" class="input">{{
+            value
+          }}</text>
         </template>
         <template #plus>
           <view class="plus">
-            <hy-icon :name="IconConfig.PLUS" color="#FFFFFF" size="12"></hy-icon>
+            <hy-icon
+              :name="IconConfig.PLUS"
+              color="#FFFFFF"
+              size="12"
+            ></hy-icon>
           </view>
         </template>
       </hy-number-step>
@@ -42,17 +48,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { IconConfig } from 'hy-app'
+import { ref } from "vue";
+import { IconConfig } from "@/package";
 
-import hyIcon from '@/package/components/hy-icon/hy-icon.vue'
-import HyNumberStep from '@/package/components/hy-number-step/hy-number-step.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import hyIcon from "@/package/components/hy-icon/hy-icon.vue";
+import HyNumberStep from "@/package/components/hy-number-step/hy-number-step.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
-const value = ref(10)
+const { themeColor, darkMode } = themeStore;
+const value = ref(10);
 </script>
 
 <style scoped lang="scss">

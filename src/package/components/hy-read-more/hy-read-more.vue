@@ -26,27 +26,26 @@
       :style="[innerShadowStyle]"
       v-if="isLongContent"
     >
-      <slot name="toggle">
-        <view class="hy-read-more__toggle__text" @tap="toggleReadMore">
-          <text
-            :style="{
-              color: color,
-              fontSize: addUnit(fontSize),
-              lineHeight: addUnit(fontSize),
-              marginRight: '5px',
-            }"
-          >
-            {{ status === "close" ? closeText : openText }}
-          </text>
-          <view class="hy-read-more__toggle__icon">
-            <HyIcon
-              :color="color"
-              :size="fontSize + 2"
-              :name="status === 'close' ? IconConfig.DOWN : IconConfig.UP"
-            ></HyIcon>
-          </view>
+      <slot v-if="$slots.toggle" name="toggle"></slot>
+      <view v-else class="hy-read-more__toggle--content" @tap="toggleReadMore">
+        <text
+          class="hy-read-more__toggle--content__text"
+          :style="{
+            color: color,
+            fontSize: addUnit(fontSize),
+            lineHeight: addUnit(fontSize),
+          }"
+        >
+          {{ status === "close" ? closeText : openText }}
+        </text>
+        <view class="hy-read-more__toggle--icon">
+          <HyIcon
+            :color="color"
+            :size="fontSize + 2"
+            :name="status === 'close' ? IconConfig.DOWN : IconConfig.UP"
+          ></HyIcon>
         </view>
-      </slot>
+      </view>
     </view>
   </view>
 </template>

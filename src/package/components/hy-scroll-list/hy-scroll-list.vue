@@ -1,7 +1,5 @@
 <template>
   <view class="hy-scroll-list" ref="hy-scroll-list">
-    <!-- #ifdef MP-WEIXIN || APP-VUE || H5 || MP-QQ -->
-    <!-- 以上平台，支持wxs -->
     <scroll-view
       class="hy-scroll-list__scroll-view scroll-view-native"
       scroll-x
@@ -18,13 +16,12 @@
     >
       <slot></slot>
     </scroll-view>
-    <!--	#endif		-->
     <view class="hy-scroll-list__indicator" v-if="indicator">
-      <view class="hy-scroll-list__indicator__line" :style="lineStyle">
+      <view class="hy-scroll-list__indicator--line" :style="lineStyle">
         <view
-          class="hy-scroll-list__indicator__line__bar"
+          class="hy-scroll-list__indicator--line__bar"
           :style="barStyle"
-          ref="hy-scroll-list__indicator__line__bar"
+          ref="hy-scroll-list__indicator--line__bar"
         ></view>
       </view>
     </view>

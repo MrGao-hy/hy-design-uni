@@ -25,31 +25,31 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-back-top',
+  name: "hy-back-top",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import { addUnit, getPx } from '../../utils'
-import { IconConfig } from '../../config'
-import type { IBackTopEmit } from './typing'
-import type HyIconProps from '../hy-icon/typing'
+import { computed, toRefs } from "vue";
+import type { CSSProperties, PropType } from "vue";
+import { addUnit, getPx } from "../../utils";
+import { IconConfig } from "../../config";
+import type { IBackTopEmit } from "./typing";
+import type HyIconProps from "../hy-icon/typing";
 // 组件
-import HyTransition from '../hy-transition/hy-transition.vue'
-import HyIcon from '../hy-icon/hy-icon.vue'
+import HyTransition from "../hy-transition/hy-transition.vue";
+import HyIcon from "../hy-icon/hy-icon.vue";
 
 /**
  * 该组件一个用于长页面，滑动一定距离后，出现返回顶部按钮，方便快速返回顶部的场景。
  * @displayName hy-back-top
  */
-defineOptions({})
+defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
@@ -59,7 +59,7 @@ const props = defineProps({
    * */
   mode: {
     type: String,
-    default: 'circle',
+    default: "circle",
   },
   /** 自定义图标属性集合 */
   icon: {
@@ -101,41 +101,45 @@ const props = defineProps({
   customStyle: {
     type: Object as PropType<CSSProperties>,
     default: {
-      transform: 'rotate(180deg)',
+      transform: "rotate(180deg)",
     },
   },
-})
-const { customStyle, duration, mode, bottom, right, top, scrollTop } = toRefs(props)
-const emit = defineEmits<IBackTopEmit>()
+});
+const { customStyle, duration, mode, bottom, right, top, scrollTop } =
+  toRefs(props);
+const emit = defineEmits<IBackTopEmit>();
 
 const backTopStyle = computed<CSSProperties>(() => {
   return {
     bottom: addUnit(bottom.value),
     right: addUnit(right.value),
-    width: '40px',
-    height: '40px',
-    position: 'fixed',
+    width: "40px",
+    height: "40px",
+    position: "fixed",
     zIndex: 10,
-  }
-})
+  };
+});
 const contentStyle = computed<CSSProperties>(() => {
   const style: CSSProperties = {
-    borderRadius: mode.value === 'circle' ? '50%' : '4px',
-  }
-  return Object.assign(style, customStyle.value)
-})
+    borderRadius: mode.value === "circle" ? "50%" : "4px",
+  };
+  return Object.assign(style, customStyle.value);
+});
 const show = computed<boolean>(() => {
-  return getPx(scrollTop.value) > getPx(top.value)
-})
+  return getPx(scrollTop.value) > getPx(top.value);
+});
 const backToTop = () => {
   uni.pageScrollTo({
     scrollTop: 0,
+    // #ifndef MP-ALIPAY
+    // 支付宝不支持duration属性
     duration: duration.value,
-  })
-  emit('click')
-}
+    // #endif
+  });
+  emit("click");
+};
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>

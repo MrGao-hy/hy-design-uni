@@ -13,7 +13,6 @@
             <image
               class="scroll-list__goods-item__image"
               :src="item.thumbnail"
-              mode=""
             ></image>
             <text class="scroll-list__goods-item__text"
               >￥{{ item.price }}</text
@@ -32,6 +31,7 @@
 <script setup lang="ts">
 import HyScrollList from "@/package/components/hy-scroll-list/hy-scroll-list.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import HyIcon from "@/package/components/hy-icon/hy-icon.vue";
 import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 

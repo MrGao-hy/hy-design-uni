@@ -34,11 +34,11 @@
         </view>
       </view>
     </view>
+
     <hy-transition
       custom-class="hy-popover__pos"
       :custom-style="popover.popStyle.value"
       :show="showPopover"
-      name="fade"
       :duration="200"
     >
       <view class="hy-popover__container">
@@ -195,6 +195,7 @@ const emit = defineEmits<IPopoverEmits>();
 const slots = useSlots();
 const queue = inject<Queue | null>(queueKey, null);
 const selector: string = "popover";
+const visibleArrow = ref<boolean>(true);
 const { proxy } = getCurrentInstance() as any;
 const popover = usePopover();
 const showPopover = ref<boolean>(false); // 控制popover显隐
@@ -213,7 +214,7 @@ watch(
 watch(
   () => props.placement,
   (newVal) => {
-    popover.init(newVal, true, selector);
+    popover.init(newVal, visibleArrow.value, selector);
   },
 );
 
@@ -229,7 +230,6 @@ watch(
   (newValue) => {
     if (newValue) {
       popover.control(props.placement, props.offset);
-      // provide/inject在微信小程序不能使用，所以执行两个保存方法
       if (queue && queue.closeOther) {
         queue.closeOther(proxy);
       } else {
@@ -245,7 +245,9 @@ watch(
 );
 
 onMounted(() => {
-  popover.init(props.placement, true, selector);
+  setTimeout(() => {
+    popover.init(props.placement, visibleArrow.value, selector);
+  }, 2000);
 });
 
 onBeforeMount(() => {

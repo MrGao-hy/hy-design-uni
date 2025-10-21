@@ -21,7 +21,7 @@ import HyCell from "@/package/components/hy-cell/hy-cell.vue";
 import HyPopup from "@/package/components/hy-popup/hy-popup.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { ref } from "vue";
-import type { CellContentVo } from "hy-app/components/hy-cell/typing";
+import type { CellContentVo } from "@/package/components/hy-cell/typing";
 import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 

@@ -90,7 +90,7 @@
       }
     }
 
-    @include m([disabled--checked]){
+    @include m(disabled--checked){
       background-color: $hy-primary;
       border-color: $hy-primary;
       opacity: 0.5;

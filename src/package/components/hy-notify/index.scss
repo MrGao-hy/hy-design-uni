@@ -5,13 +5,13 @@
 @include b(notify) {
   padding: $hy-border-margin-padding-base;
 
-  @include m(wrapper) {
+  @include e(wrapper) {
     @include flex;
     align-items: center;
     text-align: center;
     justify-content: center;
 
-    &__text {
+    @include m(text) {
       font-size: $hy-font-size-base;
       text-align: center;
     }

@@ -18,10 +18,10 @@
       <swiper-item
         v-for="(item, index) in text"
         :key="index"
-        class="hy-notice__swiper__item"
+        class="hy-notice__swiper--item"
         :style="{ justifyContent: justifyContent }"
       >
-        <text class="hy-notice__swiper__item__text" :style="[textStyle]">{{
+        <text class="hy-notice__swiper--item__text" :style="[textStyle]">{{
           item
         }}</text>
       </swiper-item>

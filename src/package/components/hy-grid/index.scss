@@ -11,7 +11,7 @@
   /* #ifndef APP-NVUE */
   display: grid;
   /* #endif */
-  &-item {
+  @include e(item) {
     align-items: center;
     justify-content: center;
     position: relative;
@@ -27,14 +27,8 @@
     float: left;
     /* #endif */
 
-    &--hover-class {
+    @include m(hover-class) {
       opacity: 0.7;
-    }
-
-    &__title {
-      color: $hy-text-color;
-      line-height: 60rpx;
-      font-size: $hy-font-size-sm;
     }
   }
 }

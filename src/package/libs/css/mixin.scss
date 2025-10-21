@@ -241,15 +241,6 @@
   flex-direction: $direction;
 }
 
-/* 几行出现省略号 */
-@mixin line-feed($line: 1) {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $line;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 /* 单行超出隐藏 */
 @mixin lineEllipsis {
   overflow: hidden;

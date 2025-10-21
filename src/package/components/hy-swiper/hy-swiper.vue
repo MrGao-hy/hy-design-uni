@@ -31,18 +31,18 @@
       :easingFunction="easingFunction"
     >
       <swiper-item
-        class="hy-swiper__wrapper__item"
+        class="hy-swiper__wrapper--item"
         v-for="(item, index) in list"
         :key="index"
       >
         <slot :record="item" :index="index">
           <view
-            class="hy-swiper__wrapper__item__wrapper"
+            class="hy-swiper__wrapper--item__wrapper"
             :style="[itemStyle(index)]"
           >
             <!-- 在nvue中，image图片的宽度默认为屏幕宽度，需要通过flex:1撑开，另外必须设置高度才能显示图片 -->
             <image
-              class="hy-swiper__wrapper__item__wrapper__image"
+              class="hy-swiper__wrapper--item__wrapper--image"
               v-if="getItemType(item) === 'image'"
               :src="getSource(item)"
               :mode="imgMode"
@@ -53,7 +53,7 @@
               }"
             ></image>
             <video
-              class="hy-swiper__wrapper__item__wrapper__video"
+              class="hy-swiper__wrapper--item__wrapper--video"
               v-if="getItemType(item) === 'video'"
               :id="`video-${index}`"
               :enable-progress-gesture="false"
@@ -68,7 +68,7 @@
             ></video>
             <view
               v-if="showTitle && hasTitle(item)"
-              class="hy-swiper__wrapper__item__wrapper__title"
+              class="hy-swiper__wrapper--item__wrapper--title"
             >
               <text class="hy-line-1">{{ hasTitle(item) }}</text>
             </view>
@@ -258,7 +258,7 @@ watch(
 const hasTitle = computed(() => {
   return (item: string | Record<string, any>) => {
     if (typeof item === "object") {
-      return item.title ?? "";
+      return item.title || "";
     } else {
       return "";
     }

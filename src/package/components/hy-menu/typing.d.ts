@@ -5,54 +5,58 @@ import type HyIconProps from "../hy-icon/typing";
 export type ModelValueVo = string | number;
 export interface MenusType {
   /**
-   * @description 唯一id
+   *  唯一id
    * */
   id: string | number;
   /**
-   * @description 标题
+   *  标题
    * */
   title: string;
   /**
-   * @description 是否禁用
+   *  是否禁用
    * */
   disabled?: boolean;
   /**
-   * @description icon
+   *  icon
    * */
   icon?: string;
   /**
-   * @description 徽标值
+   *  徽标值
    * */
   badge?: number;
+  /**
+   *  键值
+   * */
+  [key: string]: string | number;
 }
 
 export default interface HyMenuProps {
   /**
-   * @description 当前值
+   *  当前值
    * */
   modelValue: string | number;
   /**
-   * @description 菜单数据集
+   *  菜单数据集
    * */
   list: MenusType[];
   /**
-   * @description 侧边菜单栏宽度
+   *  侧边菜单栏宽度
    * */
   width?: string | number;
   /**
-   * @description 选中颜色
+   *  选中颜色
    * */
   color?: string;
   /**
-   * @description 图标属性值
+   *  图标属性值
    * */
   icon?: Partial<HyIconProps>;
   /**
-   * @description 徽标属性值
+   *  徽标属性值
    * */
   badge?: Partial<HyBadgeProps>;
   /**
-   * @description 定义需要用到的外部样式
+   *  定义需要用到的外部样式
    * */
   customStyle?: CSSProperties;
 }

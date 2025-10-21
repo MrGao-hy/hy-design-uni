@@ -36,7 +36,7 @@
 
         <!-- 选项卡 -->
         <view class="hy-action-sheet__actions" v-if="actions && actions.length">
-          <button
+          <view
             v-for="(action, rowIndex) in actions"
             :key="rowIndex"
             :class="`hy-action-sheet__action ${
@@ -55,7 +55,7 @@
             >
               {{ action?.sub }}
             </view>
-          </button>
+          </view>
         </view>
         <!-- 选项卡 -->
 

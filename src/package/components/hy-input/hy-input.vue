@@ -5,34 +5,34 @@
   >
     <view class="hy-input__content">
       <view
-        class="hy-input__content__prefix-icon"
+        class="hy-input__content--prefix-icon"
         v-if="prefixIcon?.name || $slots.prefix"
-        @tap="onPrefix"
+        @tap.stop="onPrefix"
       >
-        <slot name="prefix">
-          <HyIcon
-            :name="prefixIcon?.name"
-            :size="prefixIcon?.size"
-            :color="prefixIcon?.color"
-            :bold="prefixIcon?.bold"
-            :customPrefix="prefixIcon?.customPrefix"
-            :imgMode="prefixIcon?.imgMode"
-            :width="prefixIcon?.width"
-            :height="prefixIcon?.height"
-            :top="prefixIcon?.top"
-            :stop="prefixIcon?.stop"
-            :round="prefixIcon?.round"
-            :customStyle="prefixIcon?.customStyle"
-          ></HyIcon>
-        </slot>
+        <slot v-if="$slots.prefix" name="prefix"></slot>
+        <HyIcon
+          v-else
+          :name="prefixIcon?.name"
+          :size="prefixIcon?.size"
+          :color="prefixIcon?.color"
+          :bold="prefixIcon?.bold"
+          :customPrefix="prefixIcon?.customPrefix"
+          :imgMode="prefixIcon?.imgMode"
+          :width="prefixIcon?.width"
+          :height="prefixIcon?.height"
+          :top="prefixIcon?.top"
+          :stop="prefixIcon?.stop"
+          :round="prefixIcon?.round"
+          :customStyle="prefixIcon?.customStyle"
+        ></HyIcon>
       </view>
-      <view class="hy-input__content__field-wrapper" @tap="clickHandler">
+      <view class="hy-input__content--field-wrapper" @tap="clickHandler">
         <!-- 根据uni-app的input组件文档，H5和APP中只要声明了password参数(无论true还是false)，type均失效，此时
 					为了防止type=number时，又存在password属性，type无效，此时需要设置password为undefined
 				 -->
         <input
           ref="input-native"
-          class="hy-input__content__field-wrapper__field"
+          class="hy-input__content--field-wrapper__field"
           :style="[inputStyle]"
           :type="type"
           :focus="focus"
@@ -61,9 +61,9 @@
         />
       </view>
       <view
-        class="hy-input__content__clear"
+        class="hy-input__content--clear"
         v-if="isShowClear"
-        @click="onClear"
+        @tap.stop="onClear"
       >
         <HyIcon
           :name="IconConfig.CLOSE"
@@ -73,26 +73,26 @@
         ></HyIcon>
       </view>
       <view
-        class="hy-input__content__subfix-icon"
+        class="hy-input__content--subfix-icon"
         v-if="suffixIcon?.name || $slots.suffix"
-        @tap="onSuffix"
+        @tap.stop="onSuffix"
       >
-        <slot name="suffix">
-          <HyIcon
-            :name="suffixIcon?.name"
-            :size="suffixIcon?.size"
-            :color="suffixIcon?.color"
-            :bold="suffixIcon?.bold"
-            :customPrefix="suffixIcon?.customPrefix"
-            :imgMode="suffixIcon?.imgMode"
-            :width="suffixIcon?.width"
-            :height="suffixIcon?.height"
-            :top="suffixIcon?.top"
-            :stop="suffixIcon?.stop"
-            :round="suffixIcon?.round"
-            :customStyle="suffixIcon?.customStyle"
-          ></HyIcon>
-        </slot>
+        <slot v-if="$slots.suffix" name="suffix"></slot>
+        <HyIcon
+          v-else
+          :name="suffixIcon?.name"
+          :size="suffixIcon?.size"
+          :color="suffixIcon?.color"
+          :bold="suffixIcon?.bold"
+          :customPrefix="suffixIcon?.customPrefix"
+          :imgMode="suffixIcon?.imgMode"
+          :width="suffixIcon?.width"
+          :height="suffixIcon?.height"
+          :top="suffixIcon?.top"
+          :stop="suffixIcon?.stop"
+          :round="suffixIcon?.round"
+          :customStyle="suffixIcon?.customStyle"
+        ></HyIcon>
       </view>
     </view>
   </view>
@@ -353,7 +353,7 @@ watch(
  * */
 const isShowClear = computed(() => {
   const { clearable, readonly } = props;
-  return clearable && !readonly && !!focused.value && innerValue.value !== "";
+  return clearable && !readonly && innerValue.value !== "";
 });
 /**
  * @description 组件的类名
@@ -362,11 +362,11 @@ const inputClass = computed((): string => {
   let classes: string[] = [],
     { border, shape } = props;
   border === "surround" &&
-    (classes = classes.concat(["hy-border", "hy-input--radius"]));
-  classes.push(`hy-input--${shape}`);
+    (classes = classes.concat(["hy-border", "hy-input__radius"]));
+  classes.push(`hy-input__${shape}`);
   border === "bottom" &&
-    (classes = classes.concat(["hy-border__bottom", "hy-input--no-radius"]));
-  props.disabled && classes.push("hy-input--disabled");
+    (classes = classes.concat(["hy-border__bottom", "hy-input__no-radius"]));
+  props.disabled && classes.push("hy-input__disabled");
   return classes.join(" ");
 });
 

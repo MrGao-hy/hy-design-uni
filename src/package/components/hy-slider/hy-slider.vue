@@ -2,14 +2,14 @@
   <view :class="['hy-slider', customClass]" :style="[customStyle]">
     <template v-if="!useNative || isRange">
       <view
-        ref="hy-slider-inner"
-        class="hy-slider-inner"
+        ref="hy-slider__inner"
+        class="hy-slider__inner"
         @tap="onClick"
         @onTouchStart="onTouchStart2($event, 1)"
         @touchmove="onTouchMove2($event, 1)"
         @touchend="onTouchEnd2($event, 1)"
         @touchcancel="onTouchEnd2($event, 1)"
-        :class="[disabled ? 'hy-slider--disabled' : '']"
+        :class="[disabled ? 'hy-slider__disabled' : '']"
         :style="{
           height:
             isRange && showValue
@@ -71,7 +71,7 @@
         </text>
         <template v-if="isRange">
           <view
-            class="hy-slider__button-wrap hy-slider__button-wrap-0"
+            class="hy-slider__button--wrap hy-slider__button--wrap-0"
             @touchstart="onTouchStart($event, 0)"
             @touchmove="onTouchMove($event, 0)"
             @touchend="onTouchEnd($event, 0)"
@@ -96,7 +96,7 @@
           </view>
         </template>
         <view
-          class="hy-slider__button-wrap"
+          class="hy-slider__button--wrap"
           @touchstart="onTouchStart"
           @touchmove="onTouchMove"
           @touchend="onTouchEnd"

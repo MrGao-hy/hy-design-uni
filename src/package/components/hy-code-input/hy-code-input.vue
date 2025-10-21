@@ -245,7 +245,7 @@ const itemClass = computed(() => {
       "hy-code-input--item",
       props.border
         ? `hy-code-input--item__${props.mode}`
-        : "hy-code-input--item__not",
+        : "hy-code-input--item__no",
       current.value > index &&
         getPx(props.space) != 0 &&
         props.border &&
@@ -255,7 +255,7 @@ const itemClass = computed(() => {
         getPx(props.space) != 0 &&
         (props.border
           ? `hy-code-input--item__${props.mode}__active`
-          : "hy-code-input--item__not__active"),
+          : "hy-code-input--item__no--active"),
     ];
   };
 });

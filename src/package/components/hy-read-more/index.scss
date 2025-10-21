@@ -2,31 +2,37 @@
 @use "../../libs/css/mixin.scss" as *;
 
 @include b(read-more) {
-  &__content {
+  @include e(content) {
     overflow: hidden;
     font-size: 15px;
     text-align: left;
     transition: height 0.3s ease;
   }
 
-  &__toggle {
+  @include e(toggle) {
     @include flex;
     justify-content: center;
     position: relative;
 
-    &--mask {
+    @include m(mask) {
       background-image:
               linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, $hy-background--2 80%);
       padding-top: 100px;
       margin-top: -100px;
     }
 
-    &__text {
+    @include m(content) {
       @include flex;
       align-items: center;
       justify-content: center;
-      margin-top: 5px;
-      color: $hy-primary;
+      margin: $hy-border-margin-padding-sm 0;
+      line-height: 30px;
+
+      @include e(text) {
+        color: $hy-primary;
+        margin-right: $hy-border-margin-padding-sm;
+      }
+
       :deep(.hy-icon) {
         color: $hy-primary;
       }

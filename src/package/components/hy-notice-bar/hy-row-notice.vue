@@ -7,8 +7,8 @@
     </slot>
     <view class="hy-notice__content" ref="hy-notice__content">
       <view
-        ref="hy-notice__content__text"
-        class="hy-notice__content__text"
+        ref="hy-notice__content--text"
+        class="hy-notice__content--text"
         :style="animationStyle"
       >
         <text
@@ -74,7 +74,7 @@ watch(
     // 进行一定的延时
     await sleep();
     // 查询盒子和文字的宽度
-    textWidth = (await getRect(".hy-notice__content__text", false, instance))
+    textWidth = (await getRect(".hy-notice__content--text", false, instance))
       .width;
     boxWidth = (await getRect(".hy-notice__content", false, instance)).width;
     // 根据t=s/v(时间=路程/速度)，这里为何不需要加上#u-notice-box的宽度，因为中设置了.u-notice-content样式中设置了padding-left: 100%

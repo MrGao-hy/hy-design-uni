@@ -13,6 +13,16 @@
       ></hy-input>
     </view>
 
+    <view class="hy-title">清空按钮</view>
+    <view class="hy-container">
+      <hy-input
+        v-model="value2"
+        clearable
+        focus
+        placeholder="输入值"
+      ></hy-input>
+    </view>
+
     <view class="hy-title">icon</view>
     <view class="hy-container">
       <hy-input
@@ -63,7 +73,7 @@ import { reactive, ref } from "vue";
 import HyInput from "@/package/components/hy-input/hy-input.vue";
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import { useThemeStore } from "@/store";
 import HySwitch from "../../../package/components/hy-switch/hy-switch.vue";
 import type { InputType } from "@uni-helper/uni-types";
@@ -71,6 +81,7 @@ import type { InputType } from "@uni-helper/uni-types";
 const themeStore = useThemeStore();
 const { themeColor, darkMode } = themeStore;
 const value = ref("");
+const value2 = ref("中国速度，东风快递，使命必达，风雨无阻！！！");
 const disabled = ref(false);
 const shape = ref<HyApp.ShapeType>("square");
 const type = ref<InputType>("text");

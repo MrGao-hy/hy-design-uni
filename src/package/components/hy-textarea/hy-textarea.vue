@@ -1,10 +1,10 @@
 <template>
-  <View
+  <view
     :class="['hy-textarea', customClass, textareaClass]"
     :style="[textareaStyle, borderStyle(isFocus)]"
   >
-    <Textarea
-      class="hy-textarea--field"
+    <textarea
+      class="hy-textarea__field"
       :value="innerValue"
       :style="{ height: autoHeight ? 'auto' : addUnit(height) }"
       :placeholder="placeholder || ''"
@@ -30,19 +30,19 @@
       @input="onInput"
       @confirm="onConfirm"
       @keyboardheightchange="onKeyboardheightchange"
-    ></Textarea>
+    ></textarea>
     <!-- #ifndef MP-ALIPAY -->
-    <Text
-      class="hy-textarea--count"
+    <text
+      class="hy-textarea__count"
       :style="{
         'background-color': disabled ? 'transparent' : '',
       }"
       v-if="count"
     >
       {{ innerValue.length }}/{{ maxlength }}
-    </Text>
+    </text>
     <!-- #endif -->
-  </View>
+  </view>
 </template>
 
 <script lang="ts">
@@ -220,10 +220,10 @@ watch(
 const textareaClass = computed(() => {
   let classes: string[] = [];
   props.border === "surround" &&
-    (classes = classes.concat(["hy-border", "hy-textarea--radius"]));
+    (classes = classes.concat(["hy-border", "hy-textarea__radius"]));
   props.border === "bottom" &&
-    (classes = classes.concat(["hy-border__bottom", "hy-textarea--no-radius"]));
-  props.disabled && classes.push("hy-textarea--disabled");
+    (classes = classes.concat(["hy-border__bottom", "hy-textarea__no-radius"]));
+  props.disabled && classes.push("hy-textarea__disabled");
   return classes.join(" ");
 });
 // 组件的样式

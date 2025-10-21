@@ -55,13 +55,13 @@
         :customStyle="icon?.customStyle || { marginRight: '2px' }"
       ></HyIcon>
       <!-- @slot 插入默认的值 -->
-      <slot>
-        <text
-          class="hy-button__text"
-          :style="[{ fontSize: textSize + 'px' }]"
-          >{{ text }}</text
-        >
-      </slot>
+      <slot v-if="$slots.default"></slot>
+      <text
+        v-else
+        class="hy-button__text"
+        :style="[{ fontSize: textSize + 'px' }]"
+        >{{ text }}</text
+      >
     </template>
   </button>
   <!-- #endif -->

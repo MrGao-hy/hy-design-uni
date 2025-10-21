@@ -15,7 +15,7 @@ $hy-search-close-size: 20px !default;
   align-items: center;
   flex: 1;
 
-  &__content {
+  @include e(content) {
     @include flex;
     align-items: center;
     padding: 0 $hy-border-margin-padding-lg;
@@ -27,19 +27,19 @@ $hy-search-close-size: 20px !default;
     overflow: hidden;
     background-color: $hy-background--empty;
 
-    &__icon {
+    @include e(icon) {
       @include flex;
       align-items: center;
     }
 
-    &__label {
+    @include e(label) {
       color: $hy-text-color;
       font-size: $hy-font-size-base;
       margin: 0 4px;
     }
 
     /*清除icon样式*/
-    &__close {
+    @include e(close) {
       width: $hy-search-close-size;
       height: $hy-search-close-size;
       border-radius: $hy-border-radius-circle;
@@ -51,21 +51,22 @@ $hy-search-close-size: 20px !default;
     }
 
     /*输入框样式*/
-    &__input {
+    @include e(input) {
       flex: 1;
       font-size: $hy-font-size-base;
       line-height: 1;
       margin: 0 $hy-border-margin-padding-sm;
       color: $hy-text-color;
+      background-color: $hy-background--empty;
 
-      &--placeholder {
+      @include m(placeholder) {
         font-size: 25rpx;
         color: $hy-text-color--placeholder;
       }
     }
   }
 
-  &__action {
+  @include e(action) {
     font-size: $hy-font-size-base;
     color: $hy-text-color;
     width: 0;
@@ -77,7 +78,7 @@ $hy-search-close-size: 20px !default;
     /* #endif */
     text-align: center;
 
-    &--active {
+    @include m(active) {
       width: 40px;
       margin-left: $hy-border-margin-padding-sm;
     }

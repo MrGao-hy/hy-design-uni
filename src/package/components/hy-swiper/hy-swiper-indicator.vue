@@ -18,11 +18,11 @@
     </view>
     <view class="hy-swiper-indicator__wrapper" v-if="indicatorMode === 'dot'">
       <view
-        class="hy-swiper-indicator__wrapper__dot"
+        class="hy-swiper-indicator__wrapper--dot"
         v-for="(item, index) in length"
         :key="index"
         :class="[
-          index === current && 'hy-swiper-indicator__wrapper__dot--active',
+          index === current && 'hy-swiper-indicator__wrapper--dot__active',
         ]"
         :style="[dotStyle(index)]"
       >

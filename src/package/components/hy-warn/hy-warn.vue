@@ -1,15 +1,15 @@
 <template>
   <HyTransition mode="fade" :show="show">
     <view
-      :class="['hy-warn', `hy-warn--${type}__${theme}`, customClass]"
+      :class="['hy-warn', `hy-warn__${type}--${theme}`, customClass]"
       @tap.stop="clickHandler"
       :style="customStyle"
     >
-      <view class="hy-warn--icon__left" v-if="showIcon">
+      <view class="hy-warn__icon--left tips" v-if="showIcon">
         <HyIcon :name="iconName(type)" size="21" :color="iconColor"></HyIcon>
       </view>
       <view
-        class="hy-warn--content"
+        class="hy-warn__content"
         :style="[
           {
             paddingRight: closable ? '20px' : 0,
@@ -17,7 +17,7 @@
         ]"
       >
         <text
-          class="hy-warn--content__title"
+          class="hy-warn__content--title"
           v-if="title"
           :style="[
             {
@@ -27,14 +27,13 @@
           ]"
           :class="[
             theme === 'dark'
-              ? 'hy-warn--text__dark'
-              : `hy-warn--text__${type}--light`,
+              ? 'hy-warn__text--dark'
+              : `hy-warn__text--${type}__light`,
           ]"
         >
           {{ title }}
         </text>
         <text
-          class="hy-warn--content__desc"
           v-if="description"
           :style="[
             {
@@ -43,18 +42,19 @@
             },
           ]"
           :class="[
+            'hy-warn__content--desc',
             theme === 'dark'
-              ? 'hy-warn--text__dark'
-              : `hy-warn--text__${type}--light`,
+              ? 'hy-warn__text--dark'
+              : `hy-warn__text--${type}__light`,
           ]"
         >
           {{ description }}
         </text>
       </view>
-      <view class="hy-warn--right" v-if="$slots.right">
+      <view class="hy-warn__right" v-if="$slots.right">
         <slot name="right"></slot>
       </view>
-      <view class="hy-warn--close" v-if="closable" @tap.stop="closeHandler">
+      <view class="hy-warn__close" v-if="closable" @tap.stop="closeHandler">
         <HyIcon :name="IconConfig.CLOSE" :color="iconColor" size="15"></HyIcon>
       </view>
     </view>

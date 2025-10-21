@@ -7,12 +7,20 @@
 
     <view class="hy-title">自定义格式</view>
     <view class="hy-container">
-      <hy-count-down :time="30 * 60 * 60 * 1000" format="DD天HH时mm分ss秒"></hy-count-down>
+      <hy-count-down
+        :time="30 * 60 * 60 * 1000"
+        format="DD天HH时mm分ss秒"
+      ></hy-count-down>
     </view>
 
     <view class="hy-title">毫秒级渲染</view>
     <view class="hy-container">
-      <hy-count-down :time="30 * 60 * 60 * 1000" format="HH:mm:ss:SSS" autoStart millisecond />
+      <hy-count-down
+        :time="30 * 60 * 60 * 1000"
+        format="HH:mm:ss:SSS"
+        autoStart
+        millisecond
+      />
     </view>
 
     <view class="hy-title">自定义样式</view>
@@ -22,7 +30,9 @@
           <view class="time">
             <view class="time__custom">
               <text class="time__custom__item">
-                {{ timeData.hours > 10 ? timeData.hours : '0' + timeData.hours }}
+                {{
+                  timeData.hours > 10 ? timeData.hours : "0" + timeData.hours
+                }}
               </text>
             </view>
             <text class="time__doc">:</text>
@@ -57,38 +67,37 @@
 </template>
 
 <script setup lang="ts">
-import HyCountDown from '@/package/components/hy-count-down/hy-count-down.vue'
-import HyButton from '@/package/components/hy-button/hy-button.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { ref } from 'vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import HyCountDown from "@/package/components/hy-count-down/hy-count-down.vue";
+import HyButton from "@/package/components/hy-button/hy-button.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { ref } from "vue";
+import { useThemeStore } from "@/store";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
-const countDownRef = ref<InstanceType<typeof HyCountDown>>()
+const { themeColor, darkMode } = themeStore;
+const countDownRef = ref<InstanceType<typeof HyCountDown>>();
 
 // methods
 const start = () => {
   if (countDownRef.value) {
-    countDownRef.value.start()
+    countDownRef.value.start();
   }
-}
+};
 
 const pause = () => {
   if (countDownRef.value) {
-    countDownRef.value.pause()
+    countDownRef.value.pause();
   }
-}
+};
 
 const reset = () => {
   if (countDownRef.value) {
-    countDownRef.value.reset()
+    countDownRef.value.reset();
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-@import 'hy-app/theme.scss';
 .time {
   display: flex;
   align-items: center;

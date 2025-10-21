@@ -8,7 +8,7 @@
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import HyTabBar from "@/package/components/hy-tabBar/hy-tabBar.vue";
 import { useThemeStore } from "@/store";
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import { ref } from "vue";
 
 const themeStore = useThemeStore();

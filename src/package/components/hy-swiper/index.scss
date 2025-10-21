@@ -9,14 +9,14 @@
   position: relative;
   overflow: hidden;
 
-  &__wrapper {
+  @include e(wrapper) {
     flex: 1;
     background-color: $hy-background;
 
-    &__item {
+    @include m(item) {
       flex: 1;
 
-      &__wrapper {
+      @include e(wrapper){
         @include flex;
         position: relative;
         overflow: hidden;
@@ -24,15 +24,11 @@
         flex: 1;
 
 
-        &__image {
+        @include m([image, video]){
           flex: 1;
         }
 
-        &__video {
-          flex: 1;
-        }
-
-        &__title {
+        @include m(title) {
           position: absolute;
           background-color: rgba(0, 0, 0, 0.3);
           bottom: 0;
@@ -47,7 +43,7 @@
     }
   }
 
-  &__indicator {
+  @include e(indicator) {
     position: absolute;
     bottom: $hy-border-margin-padding-sm;
   }

@@ -2,7 +2,7 @@
 @use "../../libs/css/theme" as *;
 
 @include b(toast){
-  &__content {
+  @include e(content) {
     @include flex;
     padding: 12px 20px;
     border-radius: 4px;
@@ -14,33 +14,33 @@
     /* #endif */
     position: relative;
 
-    &--loading {
+    @include m(loading) {
       flex-direction: column;
       padding: 20px;
     }
 
-    &__text {
+    @include m(text) {
       color: #ffffff;
       font-size: 15px;
       line-height: 15px;
 
-      &--default {
+      @include e(default) {
         color: #ffffff;
       }
 
-      &--error {
+      @include e(error) {
         color: $hy-error;
       }
 
-      &--primary {
+      @include e(primary) {
         color: $hy-primary;
       }
 
-      &--success {
+      @include e(success) {
         color: $hy-success;
       }
 
-      &--warning {
+      @include e(warning) {
         color: $hy-warning;
       }
     }

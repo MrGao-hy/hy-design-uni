@@ -101,7 +101,7 @@ defineOptions({});
 // const props = withDefaults(defineProps<IProps>(), defaultProps)
 const props = defineProps({
   /** 获取值 */
-  modelValue: String,
+  modelValue: [String, Number],
   /** 标题 */
   title: String,
   /** 下拉选择值 */
@@ -206,7 +206,7 @@ const onSelect = (item: DropdownMenuItem, index: number) => {
   if (index !== currentIndex.value) {
     currentIndex.value = index;
     emit("change", item, index);
-    emit("update:modelValue", item);
+    emit("update:modelValue", item.value);
   }
 };
 

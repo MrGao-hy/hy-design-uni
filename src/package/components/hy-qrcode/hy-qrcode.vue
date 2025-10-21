@@ -3,7 +3,7 @@
     <view class="hy-qrcode__content" @click="preview">
       <!-- #ifndef APP-NVUE -->
       <canvas
-        class="hy-qrcode__canvas"
+        class="hy-qrcode__content--canvas"
         :id="cid"
         :canvas-id="cid"
         :style="{ width: addUnit(size), height: addUnit(size) }"
@@ -11,7 +11,7 @@
       <!-- #endif -->
       <view
         v-if="showLoading && loading"
-        class="hy-qrcode__loading"
+        class="hy-qrcode__content--loading"
         :style="{ width: addUnit(size), height: addUnit(size) }"
       >
         <HyLoading></HyLoading>
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { getCurrentInstance, toRefs, ref, onMounted } from "vue";
+import { getCurrentInstance, ref, onMounted } from "vue";
 import type { IQrcodeEmits } from "./typing";
 import QRCode from "./qrcode.js";
 import { addUnit, error } from "../../utils";

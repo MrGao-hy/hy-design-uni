@@ -136,8 +136,8 @@ export function usePopover(visibleArrow = true) {
         "bottom",
         [
           {
-            left: verticalX + "px",
-            top: verticalY + "px",
+            left: `${verticalX}px`,
+            top: `${verticalY}px`,
             transform: "translateX(-50%)",
           },
           "left: 50%;",

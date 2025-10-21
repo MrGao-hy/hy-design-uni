@@ -27,13 +27,13 @@
         }"
       >
         <slot>
-          <text class="hy-modal__content__text">
+          <text class="hy-modal__content--text">
             {{ content }}
           </text>
         </slot>
       </view>
       <view
-        class="hy-modal__button-group--confirm-button"
+        class="hy-modal__button--group__confirm-button"
         v-if="$slots.confirmButton"
       >
         <slot name="confirmButton"></slot>
@@ -41,26 +41,26 @@
       <template v-else>
         <view
           :class="[
-            'hy-modal__button-group',
+            'hy-modal__button--group',
             showCancelButton &&
               showConfirmButton &&
               (!buttonReverse
-                ? 'hy-modal__button-exact'
-                : 'hy-modal__button-exact--reverse'),
+                ? 'hy-modal__button--exact'
+                : 'hy-modal__button--exact--reverse'),
           ]"
           :style="{
             flexDirection: buttonReverse ? 'row-reverse' : 'row',
           }"
         >
           <view
-            class="hy-modal__button-group__wrapper hy-modal__button-group__wrapper--cancel"
+            class="hy-modal__button--group__wrapper first hy-modal__button--group__wrapper--cancel"
             :hover-stay-time="150"
-            hover-class="hy-modal__button-group__wrapper--hover"
+            hover-class="hy-modal__button--group__wrapper--hover"
             v-if="showCancelButton"
             @tap.stop="cancelHandler"
           >
             <text
-              class="hy-modal__button-group__wrapper__text hy-modal__button-group__wrapper--cancel-text"
+              class="hy-modal__button--group__wrapper--text hy-modal__button--group__wrapper--cancel__text"
               :style="{
                 color: cancelColor,
               }"
@@ -69,16 +69,16 @@
             </text>
           </view>
           <view
-            class="hy-modal__button-group__wrapper hy-modal__button-group__wrapper--confirm"
+            class="hy-modal__button--group__wrapper last hy-modal__button--group__wrapper--confirm"
             :hover-stay-time="150"
-            hover-class="hy-modal__button-group__wrapper--hover"
+            hover-class="hy-modal__button--group__wrapper--hover"
             v-if="showConfirmButton"
             @tap="confirmHandler"
           >
             <HyLoading v-if="load" mode="circle"></HyLoading>
             <text
               v-else
-              class="hy-modal__button-group__wrapper__text hy-modal__button-group__wrapper--confirm-text"
+              class="hy-modal__button--group__wrapper--text hy-modal__button--group__wrapper--confirm__text"
               :style="{
                 color: confirmColor,
               }"

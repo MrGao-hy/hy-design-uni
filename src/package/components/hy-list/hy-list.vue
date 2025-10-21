@@ -186,7 +186,7 @@ const instance = getCurrentInstance();
 onMounted(() => {
   nextTick(async () => {
     const res = await getRect(".hy-virtual-container", false, instance);
-    viewHeight.value = (res as UniApp.NodeInfo).height ?? 0;
+    viewHeight.value = (res as UniApp.NodeInfo).height || 0;
   });
 });
 
@@ -257,7 +257,7 @@ watch(
  * @description 监听滚动条距离顶部距离，实时更新
  */
 const onScroll = async (e: any) => {
-  scrollTop.value = e.detail.scrollTop ?? 0;
+  scrollTop.value = e.detail.scrollTop || 0;
 };
 
 /**

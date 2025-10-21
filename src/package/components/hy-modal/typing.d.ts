@@ -1,5 +1,3 @@
-import { RowCenterType } from "hy-app/typing/modules/common";
-
 export default interface HyModalProps {
   /**
    * @description 是否显示模态框，请赋值给show （默认 false ）

@@ -7,7 +7,7 @@
         height: addUnit(getPx(height) + statusBarHeight),
       }"
     ></view>
-    <view :class="[fixed && 'hy-navbar--fixed']">
+    <view :class="[fixed && 'hy-navbar__fixed']">
       <HyStatusBar v-if="safeAreaInsetTop" :bgColor="bgColor"></HyStatusBar>
       <view
         :class="[border && 'hy-border__bottom', 'hy-navbar__content']"
@@ -34,7 +34,7 @@
               :style="{
                 color: leftIconColor,
               }"
-              class="hy-navbar__content__left__text"
+              class="hy-navbar__content__left--text"
             >
               {{ leftText }}
             </text>
@@ -75,7 +75,7 @@
         >
           <slot name="right">
             <HyIcon v-if="rightIcon" :name="rightIcon" size="20"></HyIcon>
-            <text v-if="rightText" class="hy-navbar__content__right__text">{{
+            <text v-if="rightText" class="hy-navbar__content__right--text">{{
               rightText
             }}</text>
           </slot>

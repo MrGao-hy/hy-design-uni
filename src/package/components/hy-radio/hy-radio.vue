@@ -6,7 +6,7 @@
         @tap.stop="wrapperClickHandler($event, item)"
         :style="radioStyle"
         :class="[
-          `hy-radio-label--${iconPlacement}`,
+          `hy-radio__label--${iconPlacement}`,
           borderBottom && placement === 'column' && 'hy-border__bottom',
         ]"
       >
@@ -16,32 +16,36 @@
           :class="iconClasses(item)"
           :style="iconWrapStyle(item)"
         >
-          <slot
-            name="icon"
-            :iconColor="iconColor"
-            :iconSize="addUnit(sizeType[size] ?? iconSize)"
-          >
+          <template v-if="item[fieldNames.checked]">
+            <slot
+              v-if="$slots.icon"
+              name="icon"
+              :iconColor="iconColor"
+              :iconSize="addUnit(sizeType[size] || iconSize)"
+            >
+            </slot>
             <HyIcon
+              v-else
               class="hy-radio__icon-wrap__icon"
               :name="IconConfig.CHECK_MASK"
-              :size="addUnit(sizeType[size] ?? iconSize)"
+              :size="addUnit(sizeType[size] || iconSize)"
               :color="iconColorCom(item.checked)"
             />
-          </slot>
+          </template>
         </view>
         <view
-          class="hy-radio__label-wrap cursor-pointer"
+          class="hy-radio__label--wrap cursor-pointer"
           @tap.stop="labelClickHandler($event, item)"
         >
           <slot name="label" :record="item">
             <text
               :class="[
                 'hy-radio__text',
-                disabled && 'hy-radio__label-wrap--disabled',
+                disabled && 'hy-radio__label--wrap--disabled',
               ]"
               :style="{
                 color: labelColor,
-                fontSize: addUnit(sizeType[size] ?? labelSize),
+                fontSize: addUnit(sizeType[size] || labelSize),
               }"
             >
               {{ item[fieldNames.label] }}
@@ -179,7 +183,7 @@ const columns_1 = ref<CheckboxColumnsVo[]>();
 const sizeType: AnyObject = reactive({
   small: 14,
   medium: 18,
-  large: 22,
+  large: 24,
 });
 
 watch(
@@ -220,7 +224,7 @@ const radioStyle = computed(() => {
   const style: CSSProperties = {};
   if (props.borderBottom && props.placement === "row") {
     error(
-      "检测到您将borderBottom设置为true，需要同时将u-checkbox-group的placement设置为column才有效",
+      "检测到您将borderBottom设置为true，需要同时将hy-checkbox-group的placement设置为column才有效",
     );
   }
   // 当父组件设置了显示下边框并且排列形式为纵向时，给内容和边框之间加上一定间隔
@@ -264,15 +268,13 @@ const iconWrapStyle = computed(() => {
     style.backgroundColor =
       temp[props.fieldNames.checked] && !isDisabled(temp?.disabled)
         ? props.activeColor
-        : !isDisabled(temp?.disabled)
-          ? "#ffffff"
-          : "";
+        : "";
     style.borderColor =
       temp[props.fieldNames.checked] && !isDisabled(temp?.disabled)
         ? props.activeColor
         : props.inactiveColor;
-    style.width = addUnit(sizeType[props.size] ?? props.size);
-    style.height = addUnit(sizeType[props.size] ?? props.size);
+    style.width = addUnit(sizeType[props.size] || props.size);
+    style.height = addUnit(sizeType[props.size] || props.size);
     return style;
   };
 });

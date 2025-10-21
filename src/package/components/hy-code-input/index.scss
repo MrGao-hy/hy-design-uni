@@ -12,12 +12,12 @@
     align-items: center;
     position: relative;
 
-    &__text {
+    @include e(text) {
       font-size: 15px;
       color: $hy-icon-color;
     }
 
-    &__dot {
+    @include e(dot) {
       width: 7px;
       height: 7px;
       border-radius: 100px;
@@ -25,10 +25,10 @@
     }
 
     /* 无边框 */
-    &__not {
+    @include e(no) {
       background-color: $hy-background--track;
       border-radius: $hy-border-radius-sm;
-      &__active {
+      @include m(active) {
         &:before {
           content: "";
           background-color: $hy-text-color;
@@ -41,28 +41,28 @@
     }
 
     /* 方块模式 */
-    &__box {
+    @include e(box) {
       border-color: $hy-border-color--2;
-      &__border {
+      @include e(border) {
         border-color: $hy-primary !important;
 
         @include b(code-input--item__dot) {
           background-color: $hy-primary;
         }
 
-        text {
+        @include b(code-input--item__text) {
           color: $hy-primary;
         }
       }
 
-      &__active {
+      @include e(active) {
         border-color: $hy-primary !important;
         animation: 1.5s hy-cursor-flicker infinite;
       }
     }
 
     /* 线条模式 */
-    &__line {
+    @include e(line) {
       &::after {
         content: "";
         position: absolute;
@@ -73,7 +73,7 @@
       }
 
       /* 边框 */
-      &__border {
+      @include e(border) {
         @include b(code-input--item__dot) {
           background-color: $hy-primary;
         }
@@ -87,7 +87,7 @@
       }
 
       /* 状态 */
-      &__active {
+      @include e(active) {
         &::after {
           content: "";
           background-color: $hy-primary !important;
@@ -97,7 +97,7 @@
     }
   }
 
-  &__input {
+  @include e(input) {
     // 之所以需要input输入框，是因为有它才能唤起键盘
     // 这里将它设置为两倍的屏幕宽度，再将左边的一半移出屏幕，为了不让用户看到输入的内容
     position: absolute;

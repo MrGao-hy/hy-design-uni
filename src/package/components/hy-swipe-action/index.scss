@@ -4,24 +4,28 @@
 @include b(swipe-action) {
   position: relative;
   overflow: hidden;
-  @include m(left) {
+
+  @include e(left) {
     left: 0;
     transform: translate3d(-100%, 0, 0);
     position: absolute;
     top: 0;
     height: 100%;
   }
-  @include m(right) {
+
+  @include e(right) {
     right: 0;
     transform: translate3d(100%, 0, 0);
     position: absolute;
     top: 0;
     height: 100%;
-    &__action {
+
+    @include m(action) {
       display: flex;
       align-items: center;
       height: 100%;
-      &-btn {
+
+      @include e(btn) {
         padding: 0 15px;
         line-height: 46px;
         display: flex;

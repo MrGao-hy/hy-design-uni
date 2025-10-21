@@ -8,18 +8,18 @@
   align-items: center;
   min-height: 35px;
 
-  &__line {
+  @include e(line) {
     /* #ifndef APP-NVUE */
     vertical-align: middle;
     /* #endif */
   }
 
-  &__text {
+  @include e(text) {
     color: $hy-text-color--3;
     margin: 0 $hy-border-margin-padding-sm;
   }
 
-  &__dot {
+  @include e(dot) {
     font-size: $hy-font-size-sm;
     margin: 0 $hy-border-margin-padding-sm;
     color: $hy-text-color--3;

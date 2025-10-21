@@ -1,98 +1,126 @@
 <template>
-  <view :class="['hy-tooltip', customClass]" :style="customStyle">
+  <view
+    :class="['hy-tooltip', customClass]"
+    :style="customStyle"
+    @click.stop="closeHandler"
+  >
     <HyOverlay
       :show="showTooltip && tooltipTop !== -10000 && overlay"
       :customStyle="{ backgroundColor: 'rgba(0, 0, 0, 0)' }"
-      @click="overlayClickHandler"
+      @click="closeHandler"
     ></HyOverlay>
-    <view class="hy-tooltip__wrapper">
-      <text
-        class="hy-tooltip__wrapper__text"
-        :id="textId"
-        :ref="textId"
-        :userSelect="false"
-        :selectable="false"
-        @longpress.stop="longPressHandler"
-        :style="{
-          color: color,
-          backgroundColor:
-            bgColor && showTooltip && tooltipTop !== -10000
-              ? bgColor
-              : 'transparent',
-        }"
-      >
-        {{ text }}
-      </text>
-      <HyTransition
-        mode="fade"
-        :show="showTooltip"
-        :duration="300"
-        :customStyle="{
-          position: 'absolute',
-          top: addUnit(tooltipTop),
-          zIndex: zIndex,
-          ...tooltipStyle,
-        }"
-      >
-        <view
-          class="hy-tooltip__wrapper__popup"
-          :id="tooltipId"
-          :ref="tooltipId"
-        >
+    <!-- 文本内容区域 -->
+    <view
+      class="hy-tooltip__content"
+      id="target"
+      @longpress.stop="longPressHandler"
+      @tap.stop="clickHandler"
+      :style="{
+        color: color,
+        backgroundColor:
+          bgColor && showTooltip && tooltipTop !== -10000
+            ? bgColor
+            : 'transparent',
+      }"
+    >
+      <slot v-if="$slots.default"></slot>
+      <text class="hy-tooltip__content--text" v-else>{{ text }}</text>
+    </view>
+
+    <!-- 用于获取弹窗宽高 -->
+    <view class="hy-tooltip__popup hy-tooltip__hidden" id="pos">
+      <view class="hy-tooltip__container custom-pop">
+        <view class="hy-tooltip__container--list">
           <view
-            v-if="showCopy || buttons.length"
-            class="hy-tooltip__wrapper__popup__indicator"
-            hover-class="hy-tooltip__wrapper__popup__indicator--hover"
-            :style="[
-              indicatorStyle,
-              {
-                width: addUnit(indicatorWidth),
-                height: addUnit(indicatorWidth),
-              },
-            ]"
+            v-if="showCopy"
+            class="hy-tooltip__container--list__btn"
+            hover-class="hy-tooltip__container--list__btn--hover"
+            @tap="setClipboardData"
           >
-            <!-- 由于nvue不支持三角形绘制，这里就做一个四方形，再旋转45deg，得到露出的一个三角 -->
+            <text class="hy-tooltip__container--list__btn--text">复制</text>
           </view>
-          <view class="hy-tooltip__wrapper__popup__list">
+          <HyLine
+            direction="column"
+            color="#8d8e90"
+            v-if="showCopy && buttons.length > 0"
+            length="18"
+          ></HyLine>
+          <template v-for="(item, index) in buttons" :key="index">
             <view
-              v-if="showCopy"
-              class="hy-tooltip__wrapper__popup__list__btn"
-              hover-class="hy-tooltip__wrapper__popup__list__btn--hover"
-              @tap="setClipboardData"
+              class="hy-tooltip__container--list__btn"
+              hover-class="hy-tooltip__container--list__btn--hover"
             >
-              <text class="hy-tooltip__wrapper__popup__list__btn__text"
-                >复制</text
+              <text
+                class="hy-tooltip__container--list__btn--text"
+                @tap="btnClickHandler(index)"
               >
+                {{ item }}
+              </text>
             </view>
             <HyLine
               direction="column"
               color="#8d8e90"
-              v-if="showCopy && buttons.length > 0"
+              v-if="index < buttons.length - 1"
               length="18"
             ></HyLine>
-            <template v-for="(item, index) in buttons" :key="index">
-              <view
-                class="hy-tooltip__wrapper__popup__list__btn"
-                hover-class="hy-tooltip__wrapper__popup__list__btn--hover"
-              >
-                <text
-                  class="hy-tooltip__wrapper__popup__list__btn__text"
-                  @tap="btnClickHandler(index)"
-                >
-                  {{ item }}
-                </text>
-              </view>
-              <HyLine
-                direction="column"
-                color="#8d8e90"
-                v-if="index < buttons.length - 1"
-                length="18"
-              ></HyLine>
-            </template>
-          </view>
+          </template>
         </view>
-      </HyTransition>
+      </view>
     </view>
+
+    <HyTransition
+      mode="fade"
+      :show="showTooltip"
+      :duration="300"
+      custom-class="hy-tooltip__popup"
+      :custom-style="popover.popStyle.value"
+    >
+      <view class="hy-tooltip__container">
+        <!-- 三角形 -->
+        <view
+          v-if="showCopy"
+          :class="`hy-tooltip__arrow ${popover.arrowClass.value}`"
+          :style="popover.arrowStyle.value"
+        ></view>
+        <!-- 三角形 -->
+
+        <view class="hy-tooltip__container--list">
+          <view
+            v-if="showCopy"
+            class="hy-tooltip__container--list__btn"
+            hover-class="hy-tooltip__container--list__btn--hover"
+            @tap="setClipboardData"
+          >
+            <text class="hy-tooltip__container--list__btn--text">复制</text>
+          </view>
+          <HyLine
+            direction="column"
+            color="#8d8e90"
+            v-if="showCopy && buttons.length > 0"
+            length="18"
+          ></HyLine>
+          <template v-for="(item, index) in buttons" :key="index">
+            <view
+              class="hy-tooltip__container--list__btn"
+              hover-class="hy-tooltip__container--list__btn--hover"
+            >
+              <text
+                class="hy-tooltip__container--list__btn--text"
+                @tap="btnClickHandler(index)"
+              >
+                {{ item }}
+              </text>
+            </view>
+            <HyLine
+              direction="column"
+              color="#8d8e90"
+              v-if="index < buttons.length - 1"
+              length="18"
+            ></HyLine>
+          </template>
+        </view>
+      </view>
+    </HyTransition>
   </view>
 </template>
 
@@ -108,15 +136,24 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, getCurrentInstance } from "vue";
+import {
+  ref,
+  onMounted,
+  watch,
+  inject,
+  onBeforeUnmount,
+  getCurrentInstance,
+} from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ITooltipEmits } from "./typing";
-import { addUnit, getRect, guid, sleep } from "../../utils";
+import { type Queue, queueKey, usePopover } from "../../composables";
+import type { IPlacementVo } from "../hy-popover/typing";
+import { closeOther, removeFromQueue, pushToQueue } from "../../common";
 
 // 组件
-import HyOverlay from "../hy-overlay/hy-overlay.vue";
 import HyTransition from "../hy-transition/hy-transition.vue";
 import HyLine from "../hy-line/hy-line.vue";
+import HyOverlay from "../hy-overlay/hy-overlay.vue";
 
 /**
  * Tooltip组件主要用于长按操作，类似微信的长按气泡
@@ -140,6 +177,22 @@ const props = defineProps({
   size: {
     type: [String, Number],
     default: 14,
+  },
+  /**
+   * 触发模式
+   * @values longpress,click
+   * */
+  triggerMode: {
+    type: String as PropType<"longpress" | "click">,
+    default: "longpress",
+  },
+  /**
+   * 指定 popover 的放置位置
+   * @values top,top-start,top-end,bottom,bottom-start,bottom-end,left,left-start,left-end,right,right-start,right-end
+   * */
+  placement: {
+    type: String as PropType<IPlacementVo>,
+    default: "bottom",
   },
   /** 字体颜色 */
   color: String,
@@ -190,131 +243,88 @@ const props = defineProps({
 });
 const emit = defineEmits<ITooltipEmits>();
 
-const instance = getCurrentInstance();
-const showTooltip = ref<boolean>(true);
-const textId = ref(guid());
-const tooltipId = ref(guid());
+const queue = inject<Queue | null>(queueKey, null);
+const { proxy } = getCurrentInstance() as any;
+// 显示三角标
+const visibleArrow = ref<boolean>(true);
+const popover = usePopover(visibleArrow.value);
+const showTooltip = ref<boolean>(false);
 const tooltipTop = ref<number>(-10000);
-// 气泡的位置信息
-const tooltipInfo = ref<UniApp.NodeInfo>({
-  width: 0,
-  left: 0,
-});
-const textInfo = ref<UniApp.NodeInfo>({
-  width: 0,
-  left: 0,
-  right: 0,
-});
-// 三角形指示器的样式
-const indicatorStyle = ref<CSSProperties>({
-  left: 0,
-  right: 0,
-});
-// 气泡在可能超出屏幕边沿范围时，重新定位后，距离屏幕边沿的距离
-const screenGap = ref(12);
-// 三角形指示器的宽高，由于对元素进行了角度旋转，精确计算指示器位置时，需要用到其尺寸信息
-const indicatorWidth = ref(14);
+const selector: string = "tooltip";
 
-// 计算气泡和指示器的位置信息
-const tooltipStyle = computed(() => {
-  const style: CSSProperties = {
-      transform: `translateY(${props.direction === "top" ? "-100%" : "100%"})`,
-    },
-    // #ifdef APP || H5 || MP-WEIXIN
-    sysInfo = uni.getWindowInfo();
-  // #endif
-  if (
-    tooltipInfo.value.width! / 2 >
-    textInfo.value.left! + textInfo.value.width! / 2 - screenGap.value
-  ) {
-    indicatorStyle.value = {};
-    style.left = `-${addUnit(textInfo.value.left! - screenGap.value)}`;
-    indicatorStyle.value.left = addUnit(
-      textInfo.value.width! / 2 - Number(style.left) - indicatorWidth.value / 2,
-    );
-  } else if (
-    tooltipInfo.value.width! / 2 >
-    sysInfo.windowWidth -
-      textInfo.value.right! +
-      textInfo.value.width! / 2 -
-      screenGap.value
-  ) {
-    indicatorStyle.value = {};
-    style.right = `-${addUnit(sysInfo.windowWidth - textInfo.value.right! - screenGap.value)}`;
-    indicatorStyle.value.right = addUnit(
-      textInfo.value.width! / 2 -
-        Number(style.right) -
-        indicatorWidth.value / 2,
-    );
-  } else {
-    const left = Math.abs(
-      textInfo.value.width! / 2 - tooltipInfo.value.width! / 2,
-    );
-    style.left =
-      textInfo.value.width! > tooltipInfo.value.width!
-        ? addUnit(left)
-        : -addUnit(left);
-    indicatorStyle.value = {};
-  }
-  if (props.direction === "top") {
-    style.marginTop = "-10px";
-    indicatorStyle.value.bottom = "-4px";
-  } else {
-    style.marginBottom = "-10px";
-    indicatorStyle.value.top = "-4px";
-  }
-  return style;
-});
+watch(
+  () => props.placement,
+  () => {
+    popover.init(props.placement, visibleArrow.value, selector);
+  },
+);
+
+watch(
+  () => showTooltip.value,
+  (newValue) => {
+    if (newValue) {
+      popover.control(props.placement, 0);
+      if (queue && queue.closeOther) {
+        queue.closeOther(proxy);
+      } else {
+        closeOther(proxy);
+      }
+    }
+  },
+);
 
 onMounted(() => {
-  getElRect();
+  // getElRect();
+  popover.init(props.placement, visibleArrow.value, selector);
 });
 
-/**
- * @description 长按触发事件
- * */
+function onBeforeMount(param: () => void) {}
+
+onBeforeMount(() => {
+  if (queue && queue.pushToQueue) {
+    queue.pushToQueue(proxy);
+  } else {
+    pushToQueue(proxy);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (queue && queue.removeFromQueue) {
+    queue.removeFromQueue(proxy);
+  } else {
+    removeFromQueue(proxy);
+  }
+});
+
+// 长按触发事件
 const longPressHandler = () => {
-  tooltipTop.value = 0;
-  showTooltip.value = true;
+  if (props.triggerMode === "longpress") {
+    tooltipTop.value = 0;
+    showTooltip.value = true;
+  }
 };
 
-/**
- * @description 点击透明遮罩
- * */
-const overlayClickHandler = () => {
+// 点击触发事件
+const clickHandler = () => {
+  if (props.triggerMode === "click") {
+    tooltipTop.value = 0;
+    showTooltip.value = true;
+  }
+};
+
+// 点击关闭
+const closeHandler = () => {
   showTooltip.value = false;
 };
 
-/**
- * @description 点击弹出按钮
- * */
+// 点击操作栏按钮
 const btnClickHandler = (index: number) => {
   showTooltip.value = false;
   // 如果需要展示复制按钮，此处index需要加1，因为复制按钮在第一个位置
   emit("click", props.showCopy ? index + 1 : index);
 };
 
-/**
- * @description 元素尺寸
- * */
-const getElRect = () => {
-  // 调用之前，先将指示器调整到屏幕外，方便获取尺寸
-  showTooltip.value = true;
-  tooltipTop.value = -10000;
-  sleep(500).then(() => {
-    getRect(`#${tooltipId.value}`, false, instance).then((size) => {
-      tooltipInfo.value = size as UniApp.NodeInfo;
-      // 获取气泡尺寸之后，将其隐藏，为了让下次切换气泡显示与隐藏时，有淡入淡出的效果
-      showTooltip.value = false;
-    });
-    getRect(`#${textId.value}`, false, instance).then((size) => {
-      textInfo.value = size as UniApp.NodeInfo;
-    });
-  });
-};
-/**
- * @description 复制文本到粘贴板
- * */
+// 复制文本到粘贴板
 const setClipboardData = () => {
   // 关闭组件
   showTooltip.value = false;

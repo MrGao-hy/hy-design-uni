@@ -1,7 +1,7 @@
 <template>
   <view
     ref="hy-subsection"
-    :class="[`hy-subsection--${mode}`, 'hy-subsection', customClass]"
+    :class="[`hy-subsection__${mode}`, 'hy-subsection', customClass]"
     :style="[customStyle, wrapperStyle]"
   >
     <view ref="hy-subsection__bar" :style="barStyle" :class="barClass"></view>
@@ -13,7 +13,7 @@
       v-for="(item, index) in list"
       :key="index"
     >
-      <text class="hy-subsection__item__text" :style="[textStyle(index)]">{{
+      <text class="hy-subsection__item--text" :style="[textStyle(index)]">{{
         getName(item)
       }}</text>
     </view>
@@ -150,7 +150,7 @@ const barStyle = computed<CSSProperties>(() => {
 const barClass = computed(() => {
   let className: string[] = ["hy-subsection__bar", "cursor-pointer"];
   const className_2 = [
-    props.mode === "button" && "hy-subsection--button__bar",
+    props.mode === "button" && "hy-subsection__button--bar",
     innerCurrent.value === 0 &&
       props.mode === "subsection" &&
       "hy-subsection__bar--first",

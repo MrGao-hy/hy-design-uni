@@ -6,14 +6,14 @@
       @touchend.stop="touchEnd"
     >
       <view
-        class="hy-rate__content__item cursor-pointer"
+        class="hy-rate__content--item cursor-pointer"
         v-for="(item, index) in Number(count)"
         :key="index"
         :class="[elClass]"
       >
         <view
-          class="hy-rate__content__item__icon-wrap"
-          ref="hy-rate__content__item__icon-wrap"
+          class="hy-rate__content--item__icon-wrap"
+          ref="hy-rate__content--item__icon-wrap"
           @tap.stop="clickHandler($event)"
         >
           <HyIcon
@@ -34,13 +34,13 @@
         <view
           v-if="allowHalf"
           @tap.stop="clickHandler($event)"
-          class="hy-rate__content__item__icon-wrap hy-rate__content__item__icon-wrap--half"
+          class="hy-rate__content--item__icon-wrap hy-rate__content--item__icon-wrap--half"
           :style="[
             {
               width: addUnit(rateWidth / 2),
             },
           ]"
-          ref="hy-rate__content__item__icon-wrap"
+          ref="hy-rate__content--item__icon-wrap"
         >
           <HyIcon
             :name="Math.ceil(activeIndex) > index ? activeIcon : inactiveIcon"

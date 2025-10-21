@@ -2,16 +2,16 @@
   <view
     :class="[
       'hy-switch cursor-pointer',
-      disabled && 'hy-switch--disabled',
-      isActive ? 'hy-switch--active' : 'hy-switch--container',
+      disabled && 'hy-switch__disabled',
+      isActive ? 'hy-switch__active' : 'hy-switch__container',
       customClass,
     ]"
     :style="[switchStyle, customStyle]"
     @tap="clickHandler"
   >
-    <view class="hy-switch--bg" :style="[bgStyle]"></view>
+    <view class="hy-switch__bg" :style="[bgStyle]"></view>
     <view
-      :class="['hy-switch--node', modelValue && 'hy-switch__node--on']"
+      :class="['hy-switch__node', modelValue && 'hy-switch__node--on']"
       :style="[nodeStyle]"
       ref="hy-switch__node"
     >

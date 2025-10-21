@@ -42,7 +42,7 @@
 import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { ref } from "vue";
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import { useThemeStore } from "@/store";
 const themeStore = useThemeStore();
 

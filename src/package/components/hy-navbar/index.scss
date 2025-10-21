@@ -11,7 +11,7 @@
     z-index: 11;
   }
 
-  &__content {
+  @include e(content) {
     @include flex(row);
     align-items: center;
     height: 44px;
@@ -19,8 +19,7 @@
     position: relative;
     justify-content: center;
 
-    &__left,
-    &__right {
+    @include e(left, right) {
       padding: 0 13px;
       position: absolute;
       top: 0;
@@ -29,36 +28,36 @@
       align-items: center;
     }
 
-    &__left {
+    @include e(left){
       left: 0;
 
-      &--hover {
+      @include m(hover) {
         opacity: 0.7;
       }
 
-      &__text {
+      @include m(text) {
         font-size: 15px;
         margin-left: 3px;
       }
     }
 
-    &__center {
+    @include e(center) {
       display: flex;
       flex-direction: column;
       text-align: center;
-      &--title {
+      @include m(title) {
         font-size: $hy-font-size-base;
       }
-      &--sub {
+      @include m(sub) {
         font-size: $hy-font-size-sm;
         color: $hy-text-color--grey;
       }
     }
 
-    &__right {
+    @include e(right) {
       right: 0;
 
-      &__text {
+      @include m(text) {
         font-size: 15px;
         margin-left: 3px;
       }

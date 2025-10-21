@@ -28,7 +28,7 @@
   }
 
   /*row内容*/
-  @include m(body) {
+  @include e(body) {
     /* #ifndef APP-NVUE */
     box-sizing: border-box;
     /* #endif */
@@ -37,7 +37,7 @@
     border-radius: $hy-border-margin-padding-sm;
     overflow: hidden;
 
-    @include e(container) {
+    @include m(container) {
       @include flex(row);
       align-items: center;
       justify-content: space-between;
@@ -73,20 +73,20 @@
       @include e(content) {
         @include flex(row);
         /*左边icon*/
-        &-icon {
+        @include m(icon) {
           @include flex;
           align-items: center;
           margin-right: 10px;
         }
         /*行头部*/
-        &-title {
+        @include m(title) {
           margin-right: $hy-border-margin-padding-sm;
           flex: 33rpx;
           display: flex;
           flex-direction: column;
 
           /*sub值*/
-          &--sub {
+          @include e(sub) {
             margin-top: $hy-border-margin-padding-sm;
             color: $hy-text-color--grey;
           }
@@ -98,7 +98,7 @@
         @include flex;
         max-width: 90%;
         flex: 1;
-        @include e(value) {
+        @include m(value) {
           line-height: 24px;
           color: $hy-text-color--grey;
           margin-right: $hy-border-margin-padding-sm;
@@ -127,7 +127,7 @@
     }
   }
 
-  @include m(disabled) {
+  @include e(disabled) {
     color: $hy-text-color--disabled;
     /* #ifndef APP-NVUE */
     cursor: not-allowed;

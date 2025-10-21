@@ -6,26 +6,25 @@
         :class="menuItemClass(item, i)"
         :style="customStyle"
       >
-        <slot name="icon">
-          <hy-icon
-            class="hy-menu-item__icon"
-            :name="item.icon"
-            :color="current === i ? color || 'var(--hy-theme-color)' : ''"
-            :size="icon?.size || 16"
-            :bold="icon?.bold"
-            :customPrefix="icon?.customPrefix"
-            :imgMode="icon?.imgMode"
-            :width="icon?.width"
-            :height="icon?.height"
-            :top="icon?.top"
-            :stop="icon?.stop"
-            :round="icon?.round"
-            :customStyle="icon?.customStyle || { marginRight: '2px' }"
-          ></hy-icon>
-        </slot>
-        <slot>
-          <text class="hy-menu-item--title">{{ item.title }}</text>
-        </slot>
+        <slot v-if="$slots.icon" name="icon"></slot>
+        <hy-icon
+          v-else
+          class="hy-menu__item__icon"
+          :name="item.icon"
+          :color="current === i ? color || 'var(--hy-theme-color)' : ''"
+          :size="icon?.size || 16"
+          :bold="icon?.bold"
+          :customPrefix="icon?.customPrefix"
+          :imgMode="icon?.imgMode"
+          :width="icon?.width"
+          :height="icon?.height"
+          :top="icon?.top"
+          :stop="icon?.stop"
+          :round="icon?.round"
+          :customStyle="icon?.customStyle || { marginRight: '2px' }"
+        ></hy-icon>
+        <slot v-if="$slots.default"></slot>
+        <text v-else class="hy-menu__item--title">{{ item.title }}</text>
         <hy-badge
           :value="item?.badge"
           :offset="badge?.offset"
@@ -83,6 +82,15 @@ const props = defineProps({
     type: Array as PropType<Array<MenusType>>,
     default: [],
   },
+  /** 对应的键 */
+  id: {
+    type: String,
+    default: "id",
+  },
+  name: {
+    type: String,
+    default: "id",
+  },
   /** 侧边菜单栏宽度 */
   width: {
     type: [String, Number],
@@ -110,23 +118,23 @@ const current = ref<string | number>(0);
 watch(
   () => props.modelValue,
   (newVal) => {
-    current.value = props.list.findIndex((item) => item.id === newVal);
-    // current.value = newVal;
+    if (newVal) current.value = newVal;
   },
+  { immediate: true },
 );
 
 const menuItemClass = computed(() => {
   return (temp: MenusType, i: number) => {
     const classes = [
-      "hy-menu-item",
-      prefix.value && "hy-menu-item--prefix",
-      suffix.value && "hy-menu-item--suffix",
-      temp.disabled && "hy-menu-item--disabled",
+      "hy-menu__item",
+      prefix.value && "hy-menu__item--prefix",
+      suffix.value && "hy-menu__item--suffix",
+      temp.disabled && "hy-menu__item--disabled",
     ];
-    if (current.value === i) {
+    if (current.value === temp[props.id]) {
       classes.push(
-        "hy-menu-item--active",
-        props.color && "hy-menu-item--active__color",
+        "hy-menu__item--active",
+        props.color && "hy-menu__item--active__color",
       );
     }
 
@@ -182,7 +190,7 @@ function handleClick(temp: MenusType, i: number) {
 
 <style lang="scss" scoped>
 @import "./index.scss";
-.hy-menu-item--active__color {
+.hy-menu__item--active__color {
   color: v-bind(color);
   &::before {
     background: v-bind(color);

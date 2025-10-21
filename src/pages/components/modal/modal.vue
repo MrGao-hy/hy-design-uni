@@ -35,12 +35,13 @@
 
 <script setup lang="ts">
 import HyModal from "@/package/components/hy-modal/hy-modal.vue";
+import HyFormGroup from "@/package/components/hy-form-group/hy-form-group.vue";
 import HyCell from "@/package/components/hy-cell/hy-cell.vue";
-import type { CellContentVo } from "hy-app/components/hy-cell/typing";
-import { ref, reactive } from "vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import type { CellContentVo } from "@/package/components/hy-cell/typing";
+import { ref, reactive } from "vue";
 import { useThemeStore } from "@/store";
-import { FormTypeEnum } from "hy-app";
+import { FormTypeEnum } from "@/package";
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = themeStore;

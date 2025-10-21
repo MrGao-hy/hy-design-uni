@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { IconConfig } from "hy-app";
+import { IconConfig } from "@/package";
 import { useThemeStore } from "@/store";
 import { ref, reactive } from "vue";
 import { useQueue } from "@/package";

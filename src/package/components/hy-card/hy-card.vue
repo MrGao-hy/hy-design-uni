@@ -9,7 +9,9 @@
       }"
       @tap="headClick"
     >
-      <view v-if="!$slots.header" class="hy-card--head__flex">
+      <!-- @slot 头部插槽 -->
+      <slot v-if="$slots.header" name="header" />
+      <view v-else class="hy-card--head__flex">
         <view class="hy-card--head__left" v-if="title">
           <image
             :src="thumb"
@@ -44,8 +46,6 @@
           </text>
         </view>
       </view>
-      <!-- @slot 头部插槽 -->
-      <slot name="header" v-else />
     </view>
     <view
       @tap="bodyClick"

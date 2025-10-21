@@ -3,7 +3,7 @@
     <view class="hy-upload__wrap">
       <template v-if="previewImage">
         <view
-          class="hy-upload__wrap__preview"
+          class="hy-upload__wrap--preview"
           v-for="(item, index) in lists"
           :key="index"
         >
@@ -11,7 +11,7 @@
             v-if="item.isImage || (item.type && item.type === 'image')"
             :src="item.thumb || item.url"
             :mode="imageMode"
-            class="hy-upload__wrap__preview__image"
+            class="hy-upload__wrap--preview__image"
             @tap="onPreviewImage(item, index)"
             :style="[
               {
@@ -22,7 +22,7 @@
           />
           <view
             v-else
-            class="hy-upload__wrap__preview__other"
+            class="hy-upload__wrap--preview__other"
             @tap="onClickPreview(item, index)"
           >
             <HyIcon
@@ -34,7 +34,7 @@
                   : 'folder'
               "
             ></HyIcon>
-            <text class="hy-upload__wrap__preview__other__text">
+            <text class="hy-upload__wrap--preview__other--text">
               {{
                 item.isVideo || (item.type && item.type === "video")
                   ? "视频"
@@ -44,14 +44,19 @@
           </view>
 
           <!-- 上传进度条	-->
-          <view class="material-sent" v-if="item.status === 'loading'">
+          <view
+            class="hy-upload__wrap--preview__progress"
+            v-if="item.status === 'loading'"
+          >
             <progress
-              class="select-tips"
+              class="hy-upload__wrap--preview__progress--number"
               :percent="item.schedule"
               stroke-width="4"
               activeColor="#B99C65"
             />
-            <view class="tips-text">上传进度{{ item.schedule }}%</view>
+            <view class="hy-upload__wrap--preview__progress--value"
+              >上传进度{{ item.schedule }}%</view
+            >
           </view>
           <!-- 上传进度条	-->
 
@@ -61,7 +66,7 @@
             v-if="item.status !== 'loading' && (deletable || item.deletable)"
             @tap.stop="deleteItem(index)"
           >
-            <view class="hy-upload__deletable__icon">
+            <view class="hy-upload__deletable--icon">
               <HyIcon
                 :name="IconConfig.CLOSE"
                 color="#ffffff"
@@ -74,7 +79,7 @@
           <!-- 上传成功图标 -->
           <view class="hy-upload__success" v-if="item.status === 'success'">
             <!-- #ifndef APP-NVUE -->
-            <view class="hy-upload__success__icon">
+            <view class="hy-upload__success--icon">
               <HyIcon
                 :name="IconConfig.CHECK_MASK"
                 color="#ffffff"
@@ -116,7 +121,7 @@
             size="26"
             :color="uploadIconColor"
           ></HyIcon>
-          <text v-if="uploadText" class="hy-upload__button__text">{{
+          <text v-if="uploadText" class="hy-upload__button--text">{{
             uploadText
           }}</text>
         </view>

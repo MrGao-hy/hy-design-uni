@@ -120,8 +120,11 @@ export function guid(len = 32, firstU = true, radix = null) {
  * */
 export const getWindowInfo = (): UniNamespace.GetWindowInfoResult => {
   let ret: UniNamespace.GetWindowInfoResult;
-  // #ifdef APP || H5 || MP-WEIXIN
+  // #ifdef APP || H5
   ret = uni.getWindowInfo();
+  // #endif
+  // #ifndef APP || H5
+  ret = uni.getSystemInfoSync();
   // #endif
   return ret;
 };

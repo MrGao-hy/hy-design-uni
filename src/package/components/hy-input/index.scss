@@ -8,12 +8,11 @@
   flex: 1;
   color: $hy-text-color;
 
-  &--radius,
-  &--square {
+  @include e(radius, square) {
     border-radius: 4px;
   }
 
-  @include m(disabled) {
+  @include e(disabled) {
     background-color: $hy-background--disabled;
     color: $hy-text-color--disabled;
     :deep(.hy-icon) {
@@ -21,36 +20,43 @@
     }
   }
 
-  &--no-radius {
+  @include e(no-radius){
     border-radius: 0;
   }
 
-  &--circle {
+  @include e(circle) {
     border-radius: 100px;
   }
 
-  &__content {
+  @include e(content) {
     flex: 1;
     @include flex(row);
     align-items: center;
     justify-content: space-between;
 
-    &__field-wrapper {
+    @include m(field-wrapper) {
       position: relative;
       @include flex(row);
-      margin: 0;
       flex: 1;
+      margin-right: $hy-border-margin-padding-base;
 
-      &__field {
+      @include e(field) {
+        background: transparent;
         line-height: 26px;
         text-align: left;
         height: 24px;
         font-size: 15px;
         flex: 1;
+        color: $hy-text-color;
+        caret-color: $hy-text-color;
+      }
+
+      :deep(.input-placeholder) {
+        color: $hy-text-color--placeholder;
       }
     }
 
-    &__clear {
+    @include m(clear) {
       width: 20px;
       height: 20px;
       border-radius: 100px;
@@ -59,15 +65,14 @@
       align-items: center;
       justify-content: center;
       transform: scale(0.82);
-      margin-left: 4px;
     }
 
-    &__subfix-icon {
-      margin-left: 4px;
+    @include m(subfix-icon) {
+      margin-left: $hy-border-margin-padding-sm;
     }
 
-    &__prefix-icon {
-      margin-right: 4px;
+    @include m(prefix-icon) {
+      margin-right: $hy-border-margin-padding-sm;
     }
   }
 }

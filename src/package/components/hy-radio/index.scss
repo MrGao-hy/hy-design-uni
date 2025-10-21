@@ -24,16 +24,34 @@
     }
   }
 
-  &-label--left {
-    flex-direction: row;
+  @include e(label) {
+
+    @include m(left) {
+      flex-direction: row;
+    }
+
+    @include m(right) {
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
+    @include m(wrap) {
+      /* #ifndef APP-NVUE */
+      word-wrap: break-word;
+      /* #endif */
+
+      color: $hy-text-color;
+      font-size: $hy-font-size-base;
+      margin-right: $hy-border-margin-padding-sm;
+
+      @include m(disabled) {
+        color: $hy-text-color--disabled;
+      }
+    }
+
   }
 
-  &-label--right {
-    flex-direction: row-reverse;
-    justify-content: space-between;
-  }
-
-  &__icon-wrap {
+  @include e(icon-wrap) {
     /* #ifndef APP-NVUE */
     box-sizing: border-box;
     // nvue下，border-color过渡有问题
@@ -50,7 +68,7 @@
 
     /* #ifdef MP-TOUTIAO */
     // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
-    &__icon {
+    @include e(icon) {
       line-height: 0;
     }
 
@@ -84,20 +102,6 @@
       :deep(.hy-icon) {
         display: block;
       }
-    }
-  }
-
-  &__label-wrap {
-    /* #ifndef APP-NVUE */
-    word-wrap: break-word;
-    /* #endif */
-
-    color: $hy-text-color;
-    font-size: $hy-font-size-base;
-    margin-right: $hy-border-margin-padding-sm;
-
-    @include m(disabled) {
-      color: $hy-text-color--disabled;
     }
   }
 }

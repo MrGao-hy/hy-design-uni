@@ -15,7 +15,7 @@ export default defineConfig({
       scss: {
         additionalData:
           '@use "@/package/libs/css/theme.scss" as *;\n' +
-          '@use "hy-app/libs/css/mixin.scss" as *;\n',
+          '@use "@/package/libs/css/mixin.scss" as *;\n',
       },
     },
   },

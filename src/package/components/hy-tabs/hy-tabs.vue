@@ -2,29 +2,29 @@
   <view class="hy-tabs">
     <view class="hy-tabs__wrapper">
       <slot name="left" />
-      <view class="hy-tabs__wrapper__scroll-view-wrapper">
+      <view class="hy-tabs__wrapper--scroll-view__wrapper">
         <scroll-view
           :scroll-x="scrollable"
           :scroll-left="scrollLeft"
           :scroll-with-animation="true"
-          class="hy-tabs__wrapper__scroll-view"
+          class="hy-tabs__wrapper--scroll-view"
           :show-scrollbar="false"
-          ref="hy-tabs__wrapper__scroll-view"
+          ref="hy-tabs__wrapper--scroll-view"
         >
-          <view class="hy-tabs__wrapper__nav" ref="hy-tabs__wrapper__nav">
+          <view class="hy-tabs__wrapper--nav" ref="hy-tabs__wrapper__nav">
             <view
               v-for="(item, index) in list"
               :key="index"
               @tap="clickHandler(item, index)"
               @longpress="longPressHandler(item, index)"
-              :ref="`u-tabs__wrapper__nav__item-${index}`"
+              :ref="`u-tabs__wrapper--nav__item-${index}`"
               :style="[itemStyle, { flex: scrollable ? '' : 1 }]"
               :class="[
-                'hy-tabs__wrapper__nav__item',
-                `hy-tabs__wrapper__nav__item-${index}`,
-                item.disabled && 'hy-tabs__wrapper__nav__item--disabled',
+                'hy-tabs__wrapper--nav__item',
+                `hy-tabs__wrapper--nav__item-${index}`,
+                item.disabled && 'hy-tabs__wrapper--nav__item--disabled',
                 innerCurrent == index
-                  ? 'hy-tabs__wrapper__nav__item--active'
+                  ? 'hy-tabs__wrapper--nav__item--active'
                   : '',
               ]"
             >
@@ -36,7 +36,7 @@
               />
               <template v-else>
                 <view
-                  class="hy-tabs__wrapper__nav__item__prefix-icon"
+                  class="hy-tabs__wrapper--nav__item--prefix-icon"
                   v-if="item.icon"
                 >
                   <HyIcon :name="item.icon" :customStyle="iconStyle"></HyIcon>
@@ -51,10 +51,10 @@
               <text
                 v-else
                 :class="[
+                  'hy-tabs__wrapper--nav__item--text',
                   item.disabled &&
-                    'hy-tabs__wrapper__nav__item__text--disabled',
+                    'hy-tabs__wrapper--nav__item--text__disabled',
                 ]"
-                class="hy-tabs__wrapper__nav__item--text"
                 :style="[textStyle(index)]"
               >
                 {{ item[keyName] }}
@@ -102,8 +102,8 @@
             </view>
             <!-- #ifndef APP-NVUE -->
             <view
-              class="hy-tabs__wrapper__nav__line"
-              ref="hy-tabs__wrapper__nav__line"
+              class="hy-tabs__wrapper--nav__line"
+              ref="hy-tabs__wrapper--nav__line"
               :style="[
                 {
                   width: addUnit(lineWidth),
@@ -406,7 +406,7 @@ const resize = () => {
  * */
 const getTabsRect = () => {
   return new Promise((resolve) => {
-    getRect(".hy-tabs__wrapper__scroll-view", false, instance).then((size) =>
+    getRect(".hy-tabs__wrapper--scroll-view", false, instance).then((size) =>
       resolve(size),
     );
   });
@@ -417,7 +417,7 @@ const getTabsRect = () => {
 const getAllItemRect = () => {
   return new Promise((resolve) => {
     const promiseAllArr = props.list.map((item, index) =>
-      getRect(`.hy-tabs__wrapper__nav__item-${index}`, false, instance),
+      getRect(`.hy-tabs__wrapper--nav__item-${index}`, false, instance),
     );
     Promise.all(promiseAllArr).then((sizes) => resolve(sizes));
   });

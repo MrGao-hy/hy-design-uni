@@ -1,20 +1,19 @@
 <template>
-  <view
-    class="hy-form-item"
-    :class="[
-      `hy-form-item--${labelPosition}`,
-      formContext.border && 'hy-border__bottom',
-    ]"
-  >
+  <view class="hy-form-item" :class="[`hy-form-item--${labelPosition}`]">
     <view v-if="label" class="hy-form-item__label" :style="labelStyle">
       <text v-if="isRequired" class="hy-form-item__label--required">*</text>
       {{ label }}
     </view>
-    <view class="hy-form-item__content">
+    <view
+      :class="[
+        'hy-form-item__content',
+        formContext.border && 'hy-border__bottom',
+      ]"
+    >
       <slot></slot>
-      <view v-if="errorMessage" class="hy-form-item__error">
-        {{ errorMessage }}
-      </view>
+    </view>
+    <view v-if="errorMessage" class="hy-form-item__error">
+      {{ errorMessage }}
     </view>
   </view>
 </template>
