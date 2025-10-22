@@ -49,9 +49,10 @@ import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HySlider from "@/package/components/hy-slider/hy-slider.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const list = ref([
   "https://img0.baidu.com/it/u=1913990970,584854398&fm=253&id=1",
   "http://mms2.baidu.com/it/u=204741874,3444396868&fm=253&id=2",

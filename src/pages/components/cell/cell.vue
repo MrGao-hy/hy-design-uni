@@ -28,9 +28,10 @@ import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-
 import { reactive, ref } from "vue";
 import { IconConfig } from "@/package";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const arrange = ref<HyApp.RowCenterType>("right");
 const size = ref<HyApp.SizeType>("medium");
 const arrowDirection = ref<HyApp.RotateType>("right");

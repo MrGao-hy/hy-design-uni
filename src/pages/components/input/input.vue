@@ -77,9 +77,10 @@ import { IconConfig } from "@/package";
 import { useThemeStore } from "@/store";
 import HySwitch from "../../../package/components/hy-switch/hy-switch.vue";
 import type { InputType } from "@uni-helper/uni-types";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const value = ref("");
 const value2 = ref("中国速度，东风快递，使命必达，风雨无阻！！！");
 const disabled = ref(false);

@@ -32,9 +32,10 @@
 import HyLoading from "@/package/components/hy-loading/hy-loading.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 </script>
 
 <style scoped lang="scss"></style>

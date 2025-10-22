@@ -1,5 +1,5 @@
 <template>
-  <hy-config-provider  :custom-style="themeColor" :theme="darkMode">
+  <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <view class="hy-title">基础使用</view>
     <view class="hy-container">
       <hy-divider text="月落"></hy-divider>
@@ -41,9 +41,10 @@
 import HyDivider from "@/package/components/hy-divider/hy-divider.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 </script>
 
 <style scoped lang="scss"></style>

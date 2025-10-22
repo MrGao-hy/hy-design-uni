@@ -122,9 +122,10 @@ import HyTextarea from "@/package/components/hy-textarea/hy-textarea.vue";
 import HyButton from "@/package/components/hy-button/hy-button.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import type { FormItemRule } from "@/package/components/hy-form/typing";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 // 表单数据
 const formData = reactive({

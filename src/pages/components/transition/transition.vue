@@ -13,6 +13,7 @@ import { computed, type CSSProperties, reactive, ref } from "vue";
 import type { CellContentVo } from "@/package/components/hy-cell/typing";
 import { getWindowInfo } from "@/package";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 
 // 组件
 import HyCell from "@/package/components/hy-cell/hy-cell.vue";
@@ -20,7 +21,7 @@ import HyTransition from "@/package/components/hy-transition/hy-transition.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 
 const themeStore = useThemeStore();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const show = ref(false);
 const mode = ref<HyApp.TransitionMode>("fade");
 const style = computed((): CSSProperties => {

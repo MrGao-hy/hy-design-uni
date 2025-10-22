@@ -40,9 +40,10 @@ import HyButton from "@/package/components/hy-button/hy-button.vue";
 import { ref } from "vue";
 import { range } from "@/package";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const value = ref(20);
 
 const computedWidth = (type: "plus" | "minus") => {

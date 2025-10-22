@@ -66,9 +66,10 @@ import HyText from "@/package/components/hy-text/hy-text.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { IconConfig } from "@/package";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const clickHandler = () => {
   // #ifndef MP-WEIXIN
   uni.showToast({ title: "请在微信小程序内查看效果" });

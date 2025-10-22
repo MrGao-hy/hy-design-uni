@@ -58,9 +58,10 @@ import { DateModeEnum } from "@/package";
 import HyDatetimePicker from "@/package/components/hy-datetime-picker/hy-datetime-picker.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const value_1 = ref("");
 const value_2 = ref("");
 const value_3 = ref("");

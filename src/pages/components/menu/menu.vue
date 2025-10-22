@@ -38,6 +38,7 @@ import { getCurrentInstance, nextTick, onMounted, ref } from "vue";
 import { useThemeStore } from "@/store";
 import { data } from "./data";
 import { debounce, IconConfig } from "@/package";
+import { storeToRefs } from "pinia";
 
 // 组件
 import HyMenu from "@/package/components/hy-menu/hy-menu.vue";
@@ -53,8 +54,7 @@ interface ItemTopVo {
   top: number;
 }
 
-const instance = getCurrentInstance();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const scrollTop = ref<number>(0);
 const itemScrollTop = ref<ItemTopVo[]>([]);
 const current = ref<string | number>(1);
@@ -75,6 +75,8 @@ const list = [
 onMounted(() => {
   nextTick(() => {
     list.forEach((item) => {
+      // 需要吧instance放在里面，否则会失效
+      const instance = getCurrentInstance();
       getRect(`.item--${item.id}`, false, instance).then((rect) => {
         itemScrollTop.value.push({
           id: item.id,

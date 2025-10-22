@@ -23,9 +23,10 @@ import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-
 import { ref } from "vue";
 import type { CellContentVo } from "@/package/components/hy-cell/typing";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 const show = ref(false);
 const mode = ref<HyApp.LayoutType>("center");

@@ -17,7 +17,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, toRefs, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import { addUnit, colorGradient } from "../../utils";
 import { ColorConfig } from "../../config";

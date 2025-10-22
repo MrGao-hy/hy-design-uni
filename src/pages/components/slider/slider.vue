@@ -75,9 +75,10 @@ import HySlider from "@/package/components/hy-slider/hy-slider.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { ref } from "vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const value = ref(20);
 const value_3 = ref(0);
 const value_2 = ref([20, 80]);

@@ -39,9 +39,10 @@ import { reactive, ref } from "vue";
 import HyPicker from "@/package/components/hy-picker/hy-picker.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 const value = ref("");
 const columns: string[][] = reactive([["西瓜", "香蕉", "苹果"]]);

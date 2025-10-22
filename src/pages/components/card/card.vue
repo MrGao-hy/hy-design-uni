@@ -74,9 +74,10 @@ import HyIcon from "@/package/components/hy-icon/hy-icon.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { reactive, ref } from "vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const showHead = ref(true);
 const showFoot = ref(true);
 const boxShadow = ref(true);

@@ -22,7 +22,12 @@
 
     <view class="hy-title">设置字体</view>
     <view class="hy-container">
-      <hy-count-to :endVal="1542" bold fontSize="40" color="#31E749"></hy-count-to>
+      <hy-count-to
+        :endVal="1542"
+        bold
+        fontSize="40"
+        color="#31E749"
+      ></hy-count-to>
     </view>
 
     <view class="hy-title">手动控制</view>
@@ -43,34 +48,35 @@
 </template>
 
 <script setup lang="ts">
-import HyCountTo from '@/package/components/hy-count-to/hy-count-to.vue'
-import HyButton from '@/package/components/hy-button/hy-button.vue'
-import { ref } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import HyCountTo from "@/package/components/hy-count-to/hy-count-to.vue";
+import HyButton from "@/package/components/hy-button/hy-button.vue";
+import { ref } from "vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
-const countToRef = ref<InstanceType<typeof HyCountTo>>()
+const { themeColor, darkMode } = storeToRefs(themeStore);
+const countToRef = ref<InstanceType<typeof HyCountTo>>();
 
 // methods
 const start = () => {
   if (countToRef.value) {
-    countToRef.value.start()
+    countToRef.value.start();
   }
-}
+};
 
 const pause = () => {
   if (countToRef.value) {
-    countToRef.value.stop()
+    countToRef.value.stop();
   }
-}
+};
 
 const resume = () => {
   if (countToRef.value) {
-    countToRef.value.resume()
+    countToRef.value.resume();
   }
-}
+};
 </script>
 
 <style scoped lang="scss"></style>

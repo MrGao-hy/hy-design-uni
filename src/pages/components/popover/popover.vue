@@ -108,10 +108,11 @@ import HyIcon from "@/package/components/hy-icon/hy-icon.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import HyCard from "@/package/components/hy-card/hy-card.vue";
 import HyButton from "@/package/components/hy-button/hy-button.vue";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
 const { closeOutside } = useQueue();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const content = ref(
   "华玥组件库，我为自己代言，华玥组件库是一款集合了所以功能的超现代化的组件库，中国13亿人都在用的它",
 );

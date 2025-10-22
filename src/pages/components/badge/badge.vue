@@ -49,14 +49,15 @@
 </template>
 
 <script setup lang="ts">
-import HyBadge from '@/package/components/hy-badge/hy-badge.vue'
-import HyAvatar from '@/package/components/hy-avatar/hy-avatar.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { config } from '@/config/config'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import HyBadge from "@/package/components/hy-badge/hy-badge.vue";
+import HyAvatar from "@/package/components/hy-avatar/hy-avatar.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { config } from "@/config/config";
+import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
+const { themeColor, darkMode } = storeToRefs(themeStore);
 </script>
 
 <style scoped lang="scss">

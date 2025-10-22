@@ -36,6 +36,42 @@ export const data = [
     ],
   },
   {
+    id: 2,
+    name: "炒菜",
+    children: [
+      {
+        key: "1-1",
+        name: "蘑菇盖浇饭",
+        url: "https://gips2.baidu.com/it/u=987818134,4255615059&fm=3003&app=3003&f=JPEG",
+      },
+      {
+        key: "1-2",
+        name: "牛肉香菇盖浇饭",
+        url: "https://gips2.baidu.com/it/u=987818134,4255615059&fm=3003&app=3003&f=JPEG",
+      },
+      {
+        key: "1-3",
+        name: "鱼香肉丝盖浇饭",
+        url: "https://gips2.baidu.com/it/u=987818134,4255615059&fm=3003&app=3003&f=JPEG",
+      },
+      {
+        key: "1-4",
+        name: "肉末茄子盖浇饭",
+        url: "https://gips2.baidu.com/it/u=987818134,4255615059&fm=3003&app=3003&f=JPEG",
+      },
+      {
+        key: "1-5",
+        name: "红烧肉盖浇饭",
+        url: "https://gips2.baidu.com/it/u=987818134,4255615059&fm=3003&app=3003&f=JPEG",
+      },
+      {
+        key: "1-6",
+        name: "猪脚盖浇饭",
+        url: "https://gips2.baidu.com/it/u=987818134,4255615059&fm=3003&app=3003&f=JPEG",
+      },
+    ],
+  },
+  {
     id: 3,
     name: "米粉面条",
     children: [

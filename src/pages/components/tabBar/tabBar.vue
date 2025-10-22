@@ -10,9 +10,10 @@ import HyTabBar from "@/package/components/hy-tabBar/hy-tabBar.vue";
 import { useThemeStore } from "@/store";
 import { IconConfig } from "@/package";
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 const current = ref(0);
 const list = [

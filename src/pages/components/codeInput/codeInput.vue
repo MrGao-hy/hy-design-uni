@@ -43,7 +43,11 @@
 
     <view class="hy-title">无边框</view>
     <view class="hy-container">
-      <hy-code-input v-model="value_1" :border="false" size="50"></hy-code-input>
+      <hy-code-input
+        v-model="value_1"
+        :border="false"
+        size="50"
+      ></hy-code-input>
     </view>
 
     <view class="hy-setting__box">
@@ -66,25 +70,26 @@
 </template>
 
 <script setup lang="ts">
-import { useThemeStore } from '@/store'
-import { reactive, ref } from 'vue'
+import { useThemeStore } from "@/store";
+import { reactive, ref } from "vue";
 
 // 组件
-import HyCodeInput from '@/package/components/hy-code-input/hy-code-input.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HySubsection from '@/package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '@/package/components/hy-switch/hy-switch.vue'
-import HySlider from '@/package/components/hy-slider/hy-slider.vue'
+import HyCodeInput from "@/package/components/hy-code-input/hy-code-input.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
+import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
+import HySlider from "@/package/components/hy-slider/hy-slider.vue";
+import { storeToRefs } from "pinia";
 
-const themeStore = useThemeStore()
-const { themeColor, darkMode } = themeStore
-const value = ref('')
-const value_1 = ref('123')
-const dot = ref(false)
-const bold = ref(false)
-const hairline = ref(false)
-const focus = ref(false)
-const space = ref(10)
+const themeStore = useThemeStore();
+const { themeColor, darkMode } = storeToRefs(themeStore);
+const value = ref("");
+const value_1 = ref("123");
+const dot = ref(false);
+const bold = ref(false);
+const hairline = ref(false);
+const focus = ref(false);
+const space = ref(10);
 </script>
 
 <style scoped lang="scss"></style>

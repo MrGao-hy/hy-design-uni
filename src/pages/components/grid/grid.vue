@@ -32,9 +32,10 @@ import HyGrid from "@/package/components/hy-grid/hy-grid.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
 import HySlider from "../../../package/components/hy-slider/hy-slider.vue";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 const list = [
   {

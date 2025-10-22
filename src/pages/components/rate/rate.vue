@@ -19,7 +19,11 @@
 
     <view class="hy-title">自定义颜色</view>
     <view class="hy-container">
-      <hy-rate v-model="value" inactiveColor="green" activeColor="red"></hy-rate>
+      <hy-rate
+        v-model="value"
+        inactiveColor="green"
+        activeColor="red"
+      ></hy-rate>
     </view>
 
     <view class="hy-title">使用图片</view>
@@ -44,15 +48,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import HyRate from '@/package/components/hy-rate/hy-rate.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import { ref } from "vue";
+import HyRate from "@/package/components/hy-rate/hy-rate.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
-const value = ref(3)
+const value = ref(3);
 </script>
 
 <style scoped lang="scss"></style>

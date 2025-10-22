@@ -11,9 +11,10 @@ import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-
 import HyCell from "@/package/components/hy-cell/hy-cell.vue";
 import { useThemeStore } from "@/store";
 import { reactive, ref } from "vue";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const hyNotifyRef = ref<InstanceType<typeof HyNotify>>(null);
 const list = reactive([
   {

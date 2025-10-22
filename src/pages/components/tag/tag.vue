@@ -77,10 +77,11 @@ import { IconConfig } from "@/package";
 import HyTag from "@/package/components/hy-tag/hy-tag.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const close = ref(true);
 </script>
 

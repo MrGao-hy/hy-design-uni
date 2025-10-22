@@ -22,9 +22,10 @@ import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-
 import HyPagination from "@/package/components/hy-pagination/hy-pagination.vue";
 import { useThemeStore } from "@/store";
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 const current = ref(1);
 </script>

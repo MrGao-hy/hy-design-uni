@@ -525,11 +525,14 @@
 		}
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "华玥组件库",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
+        "navigationBarBackgroundColor": "@navBgColor",
+        "navigationBarTextStyle": "@navTxtStyle",
+        "backgroundColor": "@bgColor",
+        "backgroundTextStyle": "@bgTxtStyle",
+        "backgroundColorTop": "@bgColorTop",
+        "backgroundColorBottom": "@bgColorBottom"
+    },
 	"easycom": {
 		"autoscan": true,
 		"custom": {

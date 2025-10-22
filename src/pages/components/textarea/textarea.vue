@@ -24,18 +24,19 @@
 </template>
 
 <script setup lang="ts">
-import HyTextarea from '@/package/components/hy-textarea/hy-textarea.vue'
-import { ref } from 'vue'
-import HySwitch from '@/package/components/hy-switch/hy-switch.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import HyTextarea from "@/package/components/hy-textarea/hy-textarea.vue";
+import { ref } from "vue";
+import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
-const value = ref('')
-const autoHeight = ref(false)
-const count = ref(false)
-const disabled = ref(false)
+const { themeColor, darkMode } = storeToRefs(themeStore);
+const value = ref("");
+const autoHeight = ref(false);
+const count = ref(false);
+const disabled = ref(false);
 </script>
 
 <style scoped lang="scss"></style>

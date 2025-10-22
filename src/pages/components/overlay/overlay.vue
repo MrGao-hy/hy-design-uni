@@ -26,9 +26,10 @@ import HyButton from "@/package/components/hy-button/hy-button.vue";
 import HySlider from "@/package/components/hy-slider/hy-slider.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const show = ref(false);
 const opacity = ref(0.5);
 

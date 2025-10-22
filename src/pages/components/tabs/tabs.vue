@@ -12,10 +12,11 @@
 import HyTabs from "@/package/components/hy-tabs/hy-tabs.vue";
 import { reactive } from "vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
-import {useThemeStore} from "@/store";
+import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const list = reactive([
   { name: "关注", content: "我是内容" },
   { name: "推荐", badge: { isDot: true } },

@@ -429,13 +429,19 @@ const onTouchEnd2 = (e: TouchEvent, index = 1) => {
   }
 };
 const onClick = (e: TouchEvent) => {
-  // if (props.isRange) return;
   if (props.disabled) return;
   // 直接点击滑块的情况，计算方式与onTouchMove方法相同
-  // console.log('click', event)
   // #ifndef APP-NVUE
-  // nvue下暂时无法获取坐标
-  let clientX = e.detail.x - sliderRect.value.left!;
+
+  let x;
+  // #ifdef MP-ALIPAY
+  x = e.detail.clientX;
+  // #endif
+  // #ifndef MP-ALIPAY
+  x = e.detail.x;
+  // #endif
+
+  const clientX = x - sliderRect.value.left!;
   newValue.value =
     (clientX / sliderRect.value.width!) * (props.max - props.min) + props.min;
   updateValue(newValue.value, false, 1);
@@ -453,12 +459,12 @@ const updateValue = (
     valueFormat = props.max;
   }
   // 设置移动的距离，不能用百分比，因为NVUE不支持。
-  let width = Math.min(
+  const width = Math.min(
     ((valueFormat - props.min) / (props.max - props.min)) *
       sliderRect.value.width!,
     sliderRect.value.width!,
   );
-  let barStyle_1: CSSProperties = {
+  const barStyle_1: CSSProperties = {
     width: width + "px",
   };
   // 移动期间无需过渡动画

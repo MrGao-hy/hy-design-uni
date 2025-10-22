@@ -39,12 +39,13 @@ import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-
 import HyActionSheet from "@/package/components/hy-action-sheet/hy-action-sheet.vue";
 import HyCell from "@/package/components/hy-cell/hy-cell.vue";
 import { useThemeStore } from "@/store";
-import { toRefs, ref, reactive } from "vue";
+import { ref, reactive } from "vue";
 import type { IActionSheetAction } from "@/package/components/hy-action-sheet/typing";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = toRefs(themeStore);
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 const list = reactive([
   { title: "基础使用", value: false },

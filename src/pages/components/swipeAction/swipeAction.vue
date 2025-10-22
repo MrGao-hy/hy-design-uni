@@ -38,9 +38,10 @@ import HySwipeAction from "@/package/components/hy-swipe-action/hy-swipe-action.
 import { ref } from "vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const show = ref(false);
 
 const options = [

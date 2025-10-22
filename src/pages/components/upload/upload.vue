@@ -45,9 +45,10 @@ import type {
 import { ref } from "vue";
 import { useThemeStore } from "@/store";
 import { bytesToSize, isArray } from "@/package";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const maxSize = ref(500000);
 
 const list = ref<FileVo[]>([

@@ -87,9 +87,10 @@ import HyCheckboxItem from "@/package/components/hy-checkbox-item/hy-checkbox-it
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const value = ref([]);
 const value2 = ref(["f", "l"]);
 const size = ref<HyApp.SizeType>("medium");

@@ -1,5 +1,5 @@
 <template>
-  <hy-config-provider  :custom-style="themeColor" :theme="darkMode">
+  <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <hy-cell :list="list" @click="onClick"></hy-cell>
     <HyCalendar
       :show="show1"
@@ -75,9 +75,10 @@ import HyCell from "@/package/components/hy-cell/hy-cell.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { reactive, ref } from "vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 const index = ref(0);
 const show1 = ref(false);

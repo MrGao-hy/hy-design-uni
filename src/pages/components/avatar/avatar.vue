@@ -23,28 +23,29 @@
 </template>
 
 <script setup lang="ts">
-import HyAvatar from '@/package/components/hy-avatar/hy-avatar.vue'
-import HySubsection from '../../../package/components/hy-subsection/hy-subsection.vue'
-import { reactive, ref } from 'vue'
-import { config } from '@/config/config'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import HyAvatar from "@/package/components/hy-avatar/hy-avatar.vue";
+import HySubsection from "../../../package/components/hy-subsection/hy-subsection.vue";
+import { reactive, ref } from "vue";
+import { config } from "@/config/config";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
-const size = ref<HyApp.SizeType>('medium')
-const shape = ref<HyApp.ShapeType>('circle')
+const { themeColor, darkMode } = storeToRefs(themeStore);
+const size = ref<HyApp.SizeType>("medium");
+const shape = ref<HyApp.ShapeType>("circle");
 
 const list_1 = [
-  { name: '圆形', value: 'circle' },
-  { name: '方形', value: 'square' },
-]
+  { name: "圆形", value: "circle" },
+  { name: "方形", value: "square" },
+];
 
 const list_2 = reactive([
-  { name: '小', value: 'small' },
-  { name: '默认', value: 'medium' },
-  { name: '大', value: 'large' },
-])
+  { name: "小", value: "small" },
+  { name: "默认", value: "medium" },
+  { name: "大", value: "large" },
+]);
 </script>
 
 <style scoped lang="scss"></style>

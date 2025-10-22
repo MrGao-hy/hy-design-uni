@@ -6,23 +6,25 @@
         :class="menuItemClass(item, i)"
         :style="customStyle"
       >
-        <slot v-if="$slots.icon" name="icon"></slot>
-        <hy-icon
-          v-else
-          class="hy-menu__item__icon"
-          :name="item.icon"
-          :color="current === i ? color || 'var(--hy-theme-color)' : ''"
-          :size="icon?.size || 16"
-          :bold="icon?.bold"
-          :customPrefix="icon?.customPrefix"
-          :imgMode="icon?.imgMode"
-          :width="icon?.width"
-          :height="icon?.height"
-          :top="icon?.top"
-          :stop="icon?.stop"
-          :round="icon?.round"
-          :customStyle="icon?.customStyle || { marginRight: '2px' }"
-        ></hy-icon>
+        <template v-if="item.icon">
+          <slot v-if="$slots.icon" name="icon" :value="item.icon"></slot>
+          <hy-icon
+            v-else
+            class="hy-menu__item__icon"
+            :name="item.icon"
+            :color="current === i ? color || 'var(--hy-theme-color)' : ''"
+            :size="icon?.size || 16"
+            :bold="icon?.bold"
+            :customPrefix="icon?.customPrefix"
+            :imgMode="icon?.imgMode"
+            :width="icon?.width"
+            :height="icon?.height"
+            :top="icon?.top"
+            :stop="icon?.stop"
+            :round="icon?.round"
+            :customStyle="icon?.customStyle || { marginRight: '2px' }"
+          ></hy-icon>
+        </template>
         <slot v-if="$slots.default"></slot>
         <text v-else class="hy-menu__item--title">{{ item.title }}</text>
         <hy-badge

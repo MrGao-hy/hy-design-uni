@@ -42,9 +42,10 @@ import HyIcon from "@/package/components/hy-icon/hy-icon.vue";
 import { IconConfig } from "@/package";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 </script>
 
 <style scoped lang="scss">

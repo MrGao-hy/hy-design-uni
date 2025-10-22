@@ -43,9 +43,10 @@ import { reactive, ref } from "vue";
 import type { NoticeBarModeVo } from "@/package/components/hy-notice-bar/typing";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const direction = ref<HyApp.DirectionType>("column");
 const mode = ref<NoticeBarModeVo>("");
 const justifyContent = ref<HyApp.JustifyContentType>("flex-start");

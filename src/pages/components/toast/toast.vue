@@ -28,10 +28,11 @@ import HySubsection from "../../../package/components/hy-subsection/hy-subsectio
 import HySwitch from "../../../package/components/hy-switch/hy-switch.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const hyToastRef = ref<InstanceType<typeof HyToast>>(null);
 const list = reactive([
   {

@@ -406,7 +406,7 @@ const getRect = <T extends boolean>(
       } else if (!all && rect) {
         resolve(rect as RectResultType<T>);
       } else {
-        error("没找到模块");
+        error(`调用getRect方法，没有找到${selector}对应的元素内容`);
         reject(new Error("No nodes found"));
       }
     };

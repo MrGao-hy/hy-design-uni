@@ -42,11 +42,11 @@ import HyCheckButton from "@/package/components/hy-check-button/hy-check-button.
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { reactive, ref } from "vue";
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
-import type { HyApp } from "@/package/typing/modules/common";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 const value_1 = ref("");
 const value_2 = ref("");

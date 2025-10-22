@@ -42,9 +42,10 @@ import type { CellContentVo } from "@/package/components/hy-cell/typing";
 import { ref, reactive } from "vue";
 import { useThemeStore } from "@/store";
 import { FormTypeEnum } from "@/package";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const show = ref(false);
 const formRef = ref();
 const showAsync = ref(true);

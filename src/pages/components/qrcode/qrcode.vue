@@ -7,7 +7,11 @@
 
     <view class="hy-title">带logo</view>
     <view class="hy-container">
-      <hy-qrcode cid="qrcode_2" text="https://gxh151.top/h5" :icon="logo"></hy-qrcode>
+      <hy-qrcode
+        cid="qrcode_2"
+        text="https://gxh151.top/h5"
+        :icon="logo"
+      ></hy-qrcode>
     </view>
 
     <view class="hy-title">图片错误加载中</view>
@@ -22,13 +26,14 @@
 </template>
 
 <script setup lang="ts">
-import HyQrcode from '@/package/components/hy-qrcode/hy-qrcode.vue'
-import logo from '@/static/hy_logo_light.png'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-const themeStore = useThemeStore()
+import HyQrcode from "@/package/components/hy-qrcode/hy-qrcode.vue";
+import logo from "@/static/hy_logo_light.png";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
+const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore
+const { themeColor, darkMode } = storeToRefs(themeStore);
 </script>
 
 <style scoped lang="scss"></style>

@@ -25,11 +25,12 @@
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
 import HyCheckButton from "@/package/components/hy-check-button/hy-check-button.vue";
-import { reactive, toRefs } from "vue";
+import { reactive } from "vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { color, themeColor, darkMode } = toRefs(themeStore);
+const { color, themeColor, darkMode } = storeToRefs(themeStore);
 const columns = reactive([
   { label: "红色", value: "#E83A30" },
   { label: "紫红色", value: "#E72F8C" },

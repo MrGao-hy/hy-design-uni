@@ -1,5 +1,5 @@
 <template>
-  <hy-config-provider  :custom-style="themeColor" :theme="darkMode">
+  <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <view class="hy-title">按钮颜色</view>
     <view class="hy-grid hy-container">
       <hy-button type="info" text="默认按钮"></hy-button>
@@ -96,9 +96,10 @@ import HyButton from "@/package/components/hy-button/hy-button.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { IconConfig } from "@/package/config";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 </script>
 
 <style scoped lang="scss"></style>

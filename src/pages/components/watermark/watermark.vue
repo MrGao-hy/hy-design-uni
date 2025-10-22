@@ -38,41 +38,48 @@
       <hy-slider v-model="size" :min="12" :max="25" show-value />
 
       <view class="hy-title">透明度</view>
-      <hy-slider v-model="opacity" :min="0" :max="1" :step="0.1" show-value></hy-slider>
+      <hy-slider
+        v-model="opacity"
+        :min="0"
+        :max="1"
+        :step="0.1"
+        show-value
+      ></hy-slider>
     </view>
   </hy-config-provider>
 </template>
 
 <script setup lang="ts">
-import HyWatermark from '@/package/components/hy-watermark/hy-watermark.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import HySubsection from '@/package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '@/package/components/hy-switch/hy-switch.vue'
-import HySlider from '@/package/components/hy-slider/hy-slider.vue'
-import { isImage } from '@/package/utils'
-import { ref } from 'vue'
+import HyWatermark from "@/package/components/hy-watermark/hy-watermark.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import { useThemeStore } from "@/store";
+import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
+import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
+import HySlider from "@/package/components/hy-slider/hy-slider.vue";
+import { isImage } from "@/package/utils";
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
-const themeStore = useThemeStore()
-const { themeColor, darkMode } = themeStore
+const themeStore = useThemeStore();
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
-const content = ref('华玥组件库')
-const size = ref(12)
-const space = ref(0)
-const opacity = ref(0.5)
-const rotate = ref(-25)
-const fullScreen = ref(false)
+const content = ref("华玥组件库");
+const size = ref(12);
+const space = ref(0);
+const opacity = ref(0.5);
+const rotate = ref(-25);
+const fullScreen = ref(false);
 const list_1 = [
   {
-    name: '文字',
-    value: '华玥组件库',
+    name: "文字",
+    value: "华玥组件库",
   },
   {
-    name: '图片',
-    value: 'https://pic1.imgdb.cn/item/67f8dfea88c538a9b5caea38.png',
+    name: "图片",
+    value: "https://pic1.imgdb.cn/item/67f8dfea88c538a9b5caea38.png",
   },
-]
-const list_2 = [-45, -25, 0, 25, 45]
+];
+const list_2 = [-45, -25, 0, 25, 45];
 </script>
 
 <style scoped lang="scss">

@@ -48,9 +48,10 @@ import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { reactive, ref } from "vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 const menus = ["菜单1", "菜单2", "菜单3"];
 
 const shape = ref("circle");

@@ -46,9 +46,10 @@ import HyGrid from "@/package/components/hy-grid/hy-grid.vue";
 // import HyGrid from "hy-app/components/hy-grid/hy-grid.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
+import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
-const { themeColor, darkMode } = themeStore;
+const { themeColor, darkMode } = storeToRefs(themeStore);
 
 // 图标集合
 const icons = reactive([
