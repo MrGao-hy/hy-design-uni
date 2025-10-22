@@ -7,12 +7,12 @@ body:
     attributes:
       value: |
         感谢对项目的支持与关注。在提出问题之前，请确保你已查看相关开发或使用文档：
-        - https://...
+        - https://www.hy-design-uni.top/
   - type: checkboxes
     attributes:
       label: 这个问题是否已经存在？
       options:
-        - label: 我已经搜索过现有的问题 (https://gitee.com/../../issues)
+        - label: 我已经搜索过现有的问题 (https://github.com/MrGao-hy/hy-design-uni/issues)
           required: true
   - type: textarea
     attributes:
@@ -46,9 +46,11 @@ body:
     id: version
     attributes:
       label: 版本
-      description: 你当前正在使用我们软件的哪个版本/分支？
+      description: 您当前正在使用我们组件库的哪个版本？
       options:
-        - 1.0.2 (默认)
-        - 1.0.3 (最新)
+        - 0.1.x
+        - 0.2.x
+        - 0.3.x
+        - 0.4.x (最新)
     validations:
       required: true

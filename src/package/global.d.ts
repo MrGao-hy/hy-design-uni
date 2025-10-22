@@ -38,7 +38,6 @@ declare module "vue" {
     HyLineProgress: (typeof import("./components/hy-line-progress/hy-line-progress.vue"))["default"];
     HyList: (typeof import("./components/hy-list/hy-list.vue"))["default"];
     HyLoading: (typeof import("./components/hy-loading/hy-loading.vue"))["default"];
-    HyLogin: (typeof import("./components/hy-login/hy-login.vue"))["default"];
     HyMenu: (typeof import("./components/hy-menu/hy-menu.vue"))["default"];
     HyModal: (typeof import("./components/hy-modal/hy-modal.vue"))["default"];
     HyNavbar: (typeof import("./components/hy-navbar/hy-navbar.vue"))["default"];

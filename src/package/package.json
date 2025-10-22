@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.4.1",
-  "description": "feat: 修复输入框在支付宝无法点击到关闭按钮，水印在支付宝真机调试有问题，后续修复",
+  "version": "0.4.2",
+  "description": "delete: 删除登录组件",
   "main": "./index.ts",
   "private": false,
   "scripts": {},
