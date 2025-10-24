@@ -216,6 +216,7 @@ watch(
   (newVal) => {
     popover.init(newVal, visibleArrow.value, selector);
   },
+  { immediate: true },
 );
 
 watch(

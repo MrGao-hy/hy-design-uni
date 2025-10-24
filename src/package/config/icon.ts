@@ -236,9 +236,13 @@ export const IconConfig = {
    * */
   CLOSE_CIRCLE_FILL: "close-circle-fill",
   /**
-   * 注意
+   * 感叹号
    * */
   NOTICE: "notice",
+  /**
+   * 注意
+   * */
+  NOTICE_CIRCLE: "notice-circle",
   /**
    * 注意-实心
    * */
@@ -252,9 +256,13 @@ export const IconConfig = {
    * */
   SUCCESS_FILL: "success-fill",
   /**
+   * 疑问
+   * */
+  QUERY: "query",
+  /**
    * 帮助
    * */
-  HELP: "help",
+  HELP_CIRCLE: "help-circle",
   /**
    * 帮助-实心
    * */
@@ -407,16 +415,16 @@ export const IconConfig = {
 export const iconName = (type: string) => {
   switch (type) {
     case "success":
-      return IconConfig.SUCCESS_FILL;
+      return IconConfig.CHECK_MASK;
     case "error":
-      return IconConfig.CLOSE_CIRCLE_FILL;
+      return IconConfig.CLOSE;
     case "warning":
-      return IconConfig.NOTICE_FILL;
+      return IconConfig.NOTICE;
     case "info":
-      return IconConfig.HELP_FILL;
+      return IconConfig.QUERY;
     case "primary":
       return IconConfig.MESSAGE_FILL;
     default:
-      return IconConfig.CLOSE_CIRCLE_FILL;
+      return IconConfig.CLOSE;
   }
 };

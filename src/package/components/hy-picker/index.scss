@@ -36,6 +36,7 @@
       @include flex;
       flex: 1;
       justify-content: center;
+      text-align: center;
 
       :deep(.uni-picker-view-indicator) {
         background: $hy-background--hover;

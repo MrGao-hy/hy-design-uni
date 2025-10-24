@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.4.2",
-  "description": "delete: 删除登录组件",
+  "version": "0.4.4",
+  "description": "fix: 使用hooks触发toast显示提示消息",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

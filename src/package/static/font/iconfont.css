@@ -1,8 +1,8 @@
 @font-face {
-  font-family: 'iconfont';  /* Project id 4305932 */
-  src: url('https://at.alicdn.com/t/c/font_4305932_vv9jfh6hbj.woff2?t=1757404491336') format('woff2'),
-  url('https://at.alicdn.com/t/c/font_4305932_vv9jfh6hbj.woff?t=1757404491336') format('woff'),
-  url('https://at.alicdn.com/t/c/font_4305932_vv9jfh6hbj.ttf?t=1757404491336') format('truetype');
+  font-family: "iconfont"; /* Project id 4305932 */
+  src: url('https://at.alicdn.com/t/c/font_4305932_qgtc1zvcqsm.woff2?t=1761211099193') format('woff2'),
+       url('https://at.alicdn.com/t/c/font_4305932_qgtc1zvcqsm.woff?t=1761211099193') format('woff'),
+       url('https://at.alicdn.com/t/c/font_4305932_qgtc1zvcqsm.ttficonfont.ttf?t=1761211099193') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.hy-icon-query:before {
+  content: "\e617";
+}
+
+.hy-icon-notice:before {
+  content: "\e61f";
 }
 
 .hy-icon-telephone-fill:before {
@@ -333,7 +341,7 @@
   content: "\e621";
 }
 
-.hy-icon-help:before {
+.hy-icon-help-circle:before {
   content: "\e622";
 }
 
@@ -357,7 +365,7 @@
   content: "\e629";
 }
 
-.hy-icon-notice:before {
+.hy-icon-notice-circle:before {
   content: "\e62a";
 }
 

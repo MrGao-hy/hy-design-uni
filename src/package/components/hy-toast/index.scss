@@ -19,6 +19,42 @@
       padding: 20px;
     }
 
+    @include m(icon) {
+      width: 32px;
+      height: 32px;
+      border-radius: $hy-border-radius-semicircle;
+      box-sizing: border-box;
+      margin-right: $hy-border-margin-padding-base;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include e(info) {
+        background: $hy-info;
+        border: 6rpx solid $hy-info-dark;
+      }
+
+      @include e(primary) {
+        background: $hy-primary;
+        border: 6rpx solid $hy-primary-dark;
+      }
+
+      @include e(success) {
+        background: $hy-success;
+        border: 6rpx solid $hy-success-dark;
+      }
+
+      @include e(error) {
+        background: $hy-error;
+        border: 6rpx solid $hy-error-dark;
+      }
+
+      @include e(warning) {
+        background: $hy-warning;
+        border: 6rpx solid $hy-warning-dark;
+      }
+    }
+
     @include m(text) {
       color: #ffffff;
       font-size: 15px;
@@ -45,12 +81,6 @@
       }
     }
   }
-
-  @include themeColor(success, $hy-success-light, #bef5c8, $hy-success);
-  @include themeColor(primary, $hy-primary-light, rgb(215, 234, 254), $hy-primary);
-  @include themeColor(error, $hy-error-light, #fde2e2, $hy-error);
-  @include themeColor(warning, $hy-warning-light, #faecd8, $hy-warning);
-  @include themeColor(info, $hy-info-light, $hy-info, $hy-info);
 
 
   @include m(default)  {

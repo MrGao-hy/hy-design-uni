@@ -219,7 +219,6 @@ watch(
 watch(
   () => props.modelValue,
   (newVal) => {
-    console.log(newVal, "newVal");
     if (!newVal) load.value = false;
   },
 );
@@ -228,7 +227,6 @@ watch(
  * @description 点击确定按钮
  * */
 const confirmHandler = async () => {
-  console.log(load.value, "props.loading");
   if (load.value) return;
   // 如果配置了异步关闭，将按钮值为loading状态
   emit("confirm");

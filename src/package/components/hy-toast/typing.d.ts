@@ -1,4 +1,4 @@
-export default interface HyToastParamsVo {
+export default interface ToastOptions {
   /**
    * @description 显示文本
    * */

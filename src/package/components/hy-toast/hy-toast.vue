@@ -22,20 +22,16 @@
         size="25"
         :customStyle="{ marginBottom: '20px' }"
       ></HyLoading>
-      <HyIcon
+      <view
         v-else-if="iconNameCom"
-        :name="iconNameCom"
-        size="17"
-        :color="tmpConfig.type"
-        :customStyle="iconStyle"
-      ></HyIcon>
-      <text
         :class="[
-          'hy-toast__content--text',
-          'hy-toast__content--text__' + tmpConfig.type,
+          'hy-toast__content--icon',
+          `hy-toast__content--icon__${tmpConfig.type}`,
         ]"
-        style="max-width: 400rpx"
       >
+        <HyIcon :name="iconNameCom" size="17" color="#FFFFFF"></HyIcon>
+      </view>
+      <text class="hy-toast__content--text" style="max-width: 400rpx">
         {{ tmpConfig.message }}
       </text>
     </view>
@@ -113,12 +109,6 @@ const iconNameCom = computed(() => {
     return tmpConfig.value.icon;
   }
 });
-const iconStyle = computed(() => {
-  const style: CSSProperties = {};
-  // 图标需要一个右边距，以跟右边的文字有隔开的距离
-  style.marginRight = "4px";
-  return style;
-});
 
 /**
  * @description 内容盒子的样式
@@ -157,7 +147,7 @@ const show = (options: ToastParamsVo) => {
   clearTimer();
   isShow.value = true;
   // -1时不自动关闭
-  if (tmpConfig.value.duration !== -1) {
+  if (tmpConfig.value.duration !== -1 && !tmpConfig.value.loading) {
     timer = setTimeout(() => {
       // 倒计时结束，清除定时器，隐藏toast组件
       clearTimer();

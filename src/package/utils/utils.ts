@@ -68,6 +68,22 @@ const padZero = (value: string | number): string => {
 };
 
 /**
+ * @description 后面补零
+ * @param {String | Number} value 需要补零的值
+ * @param {Number} length 多少位
+ * @returns {String}
+ */
+const addZero = (value: string | number, length: number): string => {
+  let val = value.toString();
+  if (length > val.length) {
+    val += "0".repeat(length - val.length);
+  } else {
+    val = val.slice(0, length);
+  }
+  return val;
+};
+
+/**
  * @description 清空对象里面的值
  * @param val 任意类型的值
  * */
@@ -459,6 +475,7 @@ export {
   decryptData,
   addUnit,
   padZero,
+  addZero,
   clearVal,
   formatTime,
   formatTimeToString,
