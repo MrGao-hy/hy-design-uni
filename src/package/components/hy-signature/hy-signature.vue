@@ -104,7 +104,7 @@ import {
   watch,
 } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, getRect, guid } from "../../utils";
+import { addUnit, getRect, guid } from "../../libs";
 import type {
   SignatureExpose,
   SignatureResult,

@@ -12,7 +12,7 @@
 import type IProps from "./typing";
 import defaultProps from "./props";
 import { computed, type CSSProperties, ref } from "vue";
-import { addUnit, getWindowInfo } from "../../utils";
+import { addUnit, getWindowInfo } from "../../libs";
 
 const props = withDefaults(defineProps<IProps>(), defaultProps);
 

@@ -1,3 +1,6 @@
+/**
+ * 全局分享hooks
+ * */
 interface ShareConfig {
   title?: string;
   path?: string;

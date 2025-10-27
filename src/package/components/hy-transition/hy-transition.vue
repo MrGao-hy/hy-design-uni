@@ -25,7 +25,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { sleep } from "../../utils";
+import { sleep } from "../../libs";
 import type { ITransitionEmits } from "./typing";
 
 /**

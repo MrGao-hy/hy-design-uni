@@ -31,7 +31,7 @@ export default {
 <script setup lang="ts">
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, getPx, error, addZero } from "../../utils";
+import { addUnit, getPx, error, addZero } from "../../libs";
 
 /**
  * 业务组件,突出金额小数点前大，小数点后小
@@ -106,7 +106,8 @@ const priceStyle = computed<CSSProperties>(() => {
  * @description 价格处理
  * */
 const priceOne = computed(() => {
-  if (props.text === undefined) return error("text值不能为空");
+  if (props.text === undefined || props.text === null)
+    return error("text值不能为空");
 
   let value =
     typeof props.text === "string" ? props.text : props.text.toString();

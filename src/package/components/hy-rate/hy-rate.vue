@@ -74,11 +74,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { addUnit, getRect, guid, range, sleep } from "../../utils";
 import { ref, watch, onMounted, getCurrentInstance } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IRateEmits } from "./typing";
-import { IconConfig } from "../../config";
+import { addUnit, getRect, guid, range, sleep, IconConfig } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 
@@ -254,8 +253,11 @@ const clickHandler = (e: TouchEvent) => {
   // }
   e.stopPropagation();
   let x = 0;
-  // #ifndef APP-NVUE
-  x = e.changedTouches[0].pageX;
+  // #ifndef APP-NVUE || MP-ALIPAY
+  x = e.detail.x;
+  // #endif
+  // #ifdef MP-ALIPAY
+  x = e.detail.pageX;
   // #endif
   getActiveIndex(x, true);
 };

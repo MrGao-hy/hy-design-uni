@@ -104,9 +104,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, toRefs, watch } from "vue";
+import { ref, watch } from "vue";
 import type { IModalEmits } from "./typing";
-import { addUnit, sleep } from "../../utils";
+import { addUnit, sleep } from "../../libs";
 // 组件
 import HyPopup from "../hy-popup/hy-popup.vue";
 import HyLoading from "../hy-loading/hy-loading.vue";

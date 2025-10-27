@@ -40,12 +40,11 @@ import { computed, getCurrentInstance, onMounted, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import {
   addUnit,
-  getPx,
   getRect,
   range,
   type RectResultType,
   sleep,
-} from "../../utils";
+} from "../../libs";
 
 /**
  * 展示操作或任务的当前进度，比如上传文件，是一个线形的进度条。

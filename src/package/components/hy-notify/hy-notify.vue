@@ -47,8 +47,7 @@ export default {
 import type IProps from "./typing";
 import { computed, ref } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { IconConfig } from "../../config";
-import { addUnit } from "../../utils";
+import { addUnit, IconConfig } from "../../libs";
 // 组件
 import HyTransition from "../hy-transition/hy-transition.vue";
 import HyStatusBar from "../hy-status-bar/hy-status-bar.vue";

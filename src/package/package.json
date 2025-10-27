@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.4.4",
-  "description": "fix: 使用hooks触发toast显示提示消息",
+  "version": "0.4.5",
+  "description": "fix: 修复toast在支付小程序获取不到ref问题",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

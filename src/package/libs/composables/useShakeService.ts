@@ -1,7 +1,9 @@
-// src/composables/useShakeService.ts
+/**
+ * 摇一摇传感器hooks
+ * */
 import { ref } from "vue";
 import type { Ref } from "vue";
-import { debounce } from "../utils";
+import { debounce } from "../../libs";
 
 interface Acceleration {
   x: number;

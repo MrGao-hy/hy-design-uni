@@ -139,8 +139,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, watch, onMounted, nextTick } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, IconConfig } from "../../libs";
 import type HyIconProps from "../hy-icon/typing";
 import type { INumberStepEmits } from "./typing";
 // 组件

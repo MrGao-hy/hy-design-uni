@@ -424,13 +424,6 @@
 					}
 				},
 				{
-					"path": "login/login",
-					"style": {
-						"navigationBarTitleText": "登录页面",
-						"enablePullDownRefresh": false
-					}
-				},
-				{
 					"path": "waterfall/waterfall",
 					"style": {
 						"navigationBarTitleText": "瀑布流",

@@ -73,8 +73,7 @@ import { computed, reactive, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IRadioEmits } from "./typing";
 import type { CheckboxColumnsVo, IFieldNames } from "../hy-check-button/typing";
-import { addUnit, bem, error } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, bem, error, IconConfig } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 

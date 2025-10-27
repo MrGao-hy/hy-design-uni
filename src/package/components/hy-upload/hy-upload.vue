@@ -145,8 +145,13 @@ export default {
 import { ref, watch } from "vue";
 import type { PropType, CSSProperties } from "vue";
 import type { FileVo, IUploadEmits, ReadFunctionVo } from "./typing";
-import { addUnit, bytesToSize, chooseFile, isArray } from "../../utils";
-import { IconConfig } from "../../config";
+import {
+  addUnit,
+  bytesToSize,
+  chooseFile,
+  isArray,
+  IconConfig,
+} from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 

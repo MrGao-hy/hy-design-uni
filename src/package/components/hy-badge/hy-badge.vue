@@ -30,7 +30,7 @@ export default {
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IBadgeEmit } from "./typing";
-import { addUnit } from "../../utils";
+import { addUnit } from "../../libs";
 
 /**
  * 该组件一般用于图标右上角显示未读的消息数量，提示用户点击，有圆点和圆包含文字两种形式。

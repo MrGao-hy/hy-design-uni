@@ -35,4 +35,8 @@ onLaunch(() => {
 <style lang="scss">
 @import "@/style/common.scss";
 @import "@/package/libs/css/common.scss";
+
+.app {
+  z-index: 1000000;
+}
 </style>

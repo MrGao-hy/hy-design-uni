@@ -45,7 +45,7 @@ export default {
 <script setup lang="ts">
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit } from "../../utils";
+import { addUnit } from "../../libs";
 import emptyIcon from "./icon";
 import type { HyButtonProps } from "../hy-button/typing";
 import type { IEmptyEmits } from "./typing";

@@ -73,7 +73,7 @@ export default {
 import { ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IPaginationEmits } from "./typing";
-import { IconConfig } from "../../config";
+import { IconConfig } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 import HyButton from "../hy-button/hy-button.vue";

@@ -102,9 +102,7 @@ export default {
 import { computed, nextTick, ref, watch } from "vue";
 import type { PropType, CSSProperties } from "vue";
 import type { ISearchEmits } from "./typing";
-import { addUnit } from "../../utils";
-import { IconConfig } from "../../config";
-import HyIcon from "../hy-icon/hy-icon.vue";
+import { addUnit, IconConfig } from "../../libs";
 import type HyIconProps from "../hy-icon/typing";
 import type {
   InputOnBlurEvent,
@@ -113,6 +111,8 @@ import type {
   InputOnInputEvent,
   InputConfirmType,
 } from "@uni-helper/uni-types";
+// 组件
+import HyIcon from "../hy-icon/hy-icon.vue";
 
 /**
  * 搜索组件，集成了常见搜索框所需功能，用户可以一键引入，开箱即用。

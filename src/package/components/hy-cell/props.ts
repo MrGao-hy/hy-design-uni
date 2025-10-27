@@ -1,5 +1,5 @@
 import type IProps from "./typing";
-import { ColorConfig } from "../../config";
+import { ColorConfig } from "../../libs/config";
 
 const defaultProps: IProps = {
   list: [],

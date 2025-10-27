@@ -59,9 +59,10 @@
       color: #ffffff;
       font-size: 15px;
       line-height: 15px;
+      max-width: 400rpx;
 
-      @include e(default) {
-        color: #ffffff;
+      @include e(info) {
+        color: $hy-info;
       }
 
       @include e(error) {

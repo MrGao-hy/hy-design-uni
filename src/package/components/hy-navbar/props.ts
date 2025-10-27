@@ -1,5 +1,5 @@
 import type IProps from "./typing";
-import { IconConfig } from "../../config";
+import { IconConfig } from "../../libs/config";
 
 const defaultProps: IProps = {
   safeAreaInsetTop: true,

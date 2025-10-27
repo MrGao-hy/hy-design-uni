@@ -1,5 +1,4 @@
 import type { CSSProperties } from "vue";
-import { HyApp } from "@/package/typing/modules/common";
 
 export interface SubSectionItemVo extends AnyObject {
   name: string;

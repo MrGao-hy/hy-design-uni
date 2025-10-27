@@ -3,3 +3,4 @@ export * from "./useTouch";
 export * from "./usePopover";
 export * from "./useQueue";
 export * from "./useToast";
+export * from "./useShakeService";

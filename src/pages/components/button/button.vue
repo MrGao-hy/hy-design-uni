@@ -94,7 +94,7 @@
 <script setup lang="ts">
 import HyButton from "@/package/components/hy-button/hy-button.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
-import { IconConfig } from "@/package/config";
+import { IconConfig } from "@/package/libs/config";
 import { useThemeStore } from "@/store";
 import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();

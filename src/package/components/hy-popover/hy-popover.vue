@@ -130,9 +130,15 @@ import type {
   IPopoverEmits,
   PopoverExpose,
 } from "./typing";
-import { isArray } from "../../utils";
-import { type Queue, queueKey, usePopover } from "../../composables";
-import { closeOther, pushToQueue, removeFromQueue } from "../../common";
+import {
+  type Queue,
+  queueKey,
+  usePopover,
+  closeOther,
+  pushToQueue,
+  removeFromQueue,
+  isArray,
+} from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 import HyTransition from "../hy-transition/hy-transition.vue";

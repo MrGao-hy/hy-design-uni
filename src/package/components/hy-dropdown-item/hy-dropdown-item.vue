@@ -86,8 +86,7 @@ import {
 } from "vue";
 import type { IDropdownItemEmits, DropdownMenuItem } from "./typing";
 import type FatherIProps from "../hy-dropdown/typing";
-import { addUnit, getRect, throttle } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, getRect, throttle, IconConfig } from "../../libs";
 // 组件
 import HyOverlay from "../hy-overlay/hy-overlay.vue";
 import HyIcon from "../hy-icon/hy-icon.vue";

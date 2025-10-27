@@ -162,8 +162,7 @@ import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ICellEmits } from "./typing";
 import type { CellContentVo } from "./typing";
-import { IconConfig } from "../../config";
-import { addUnit } from "../../utils";
+import { IconConfig, addUnit } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 import type HyIconProps from "../hy-icon/typing";

@@ -1,11 +1,11 @@
 import type { DateModeEnum } from "./enum";
-import type { CheckboxColumnsVo } from "../../components/hy-check-button/typing";
-import type HyInputProps from "../../components/hy-input/typing";
-import type HyTextareaProps from "../../components/hy-textarea/typing";
-import type HySwitchProps from "../../components/hy-switch/typing";
-import type HyPickerProps from "../../components/hy-picker/typing";
-import type HyRadioProps from "../../components/hy-radio/typing";
-import type HyCheckButtonProps from "../../components/hy-check-button/typing";
+import type { CheckboxColumnsVo } from "../../../components/hy-check-button/typing";
+import type HyInputProps from "../../../components/hy-input/typing";
+import type HyTextareaProps from "../../../components/hy-textarea/typing";
+import type HySwitchProps from "../../../components/hy-switch/typing";
+import type HyPickerProps from "../../../components/hy-picker/typing";
+import type HyRadioProps from "../../../components/hy-radio/typing";
+import type HyCheckButtonProps from "../../../components/hy-check-button/typing";
 
 /**
  * 类型

@@ -1,4 +1,4 @@
-import Http from "@/package/api/http";
+import Http from "@/package/libs/api/http";
 
 const http = new Http();
 const apiMessage = (msg: string, isLogin?: boolean) => {

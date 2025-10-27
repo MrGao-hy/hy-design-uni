@@ -81,9 +81,8 @@ import type {
   SwipeActionReason,
   SwipeActionOptionsVo,
 } from "./typing";
-import { useTouch } from "../../composables";
+import { useTouch, getRect, guid } from "../../libs";
 import { closeOther, pushToQueue, removeFromQueue } from "./index";
-import { getRect, guid } from "../../utils";
 
 /**
  * 常用于单元格左右滑删除等手势操作。

@@ -69,8 +69,7 @@ export default {
 import { computed, onMounted, ref, watch } from "vue";
 import type { PropType, CSSProperties } from "vue";
 import type { IImageEmits } from "./typing";
-import { addUnit, getPx } from "../../utils";
-import { IconConfig } from "../../config";
+import { IconConfig, addUnit, getPx } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 import HyTransition from "../hy-transition/hy-transition.vue";

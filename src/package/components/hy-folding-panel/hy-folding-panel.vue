@@ -50,11 +50,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { toRefs, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IFoldingPanel, PanelVo } from "./typing";
-import { addUnit } from "../../utils";
-import { ColorConfig } from "../../config";
+import { ColorConfig, addUnit } from "../../libs";
 // 组件
 import HyCell from "../hy-cell/hy-cell.vue";
 import HyLine from "../hy-line/hy-line.vue";

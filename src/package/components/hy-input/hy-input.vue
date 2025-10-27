@@ -113,8 +113,7 @@ export default {
 import { computed, nextTick, ref, watch, inject } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import HyIcon from "../hy-icon/hy-icon.vue";
-import { addUnit, formatObject, sleep } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, formatObject, sleep, IconConfig } from "../../libs";
 import type { IInputEmits } from "./typing";
 import type HyIconProps from "../hy-icon/typing";
 import type { FormItemContext } from "../hy-form-item/typing";

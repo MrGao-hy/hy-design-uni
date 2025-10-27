@@ -65,8 +65,7 @@ export default {
 import { computed, ref, onMounted, getCurrentInstance } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IReadMoreEmits } from "./typing";
-import { addUnit, getRect, guid, sleep } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, getRect, guid, sleep, IconConfig } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 

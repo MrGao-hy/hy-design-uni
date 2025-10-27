@@ -58,7 +58,7 @@ export default {
 import { ref } from "vue";
 import type { PropType, CSSProperties } from "vue";
 import type { INoticeBarEmits, NoticeBarModeVo } from "./typing";
-import { IconConfig } from "../../config";
+import { IconConfig } from "../../libs";
 // 组件
 import HyRowNotice from "./hy-row-notice.vue";
 import HyColumnNotice from "./hy-column-notice.vue";

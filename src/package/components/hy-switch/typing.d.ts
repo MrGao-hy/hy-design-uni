@@ -1,5 +1,4 @@
 import type { CSSProperties } from "vue";
-import { HyApp } from "@/package/typing/modules/common";
 import type IconProps from "../hy-icon/typing";
 
 export default interface HySwitchProps {

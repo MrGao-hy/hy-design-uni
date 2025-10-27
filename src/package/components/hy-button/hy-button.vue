@@ -143,8 +143,7 @@ export default {
 <script setup lang="ts">
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { bem, throttle } from "../../utils";
-import { ColorConfig } from "../../config";
+import { ColorConfig, bem, throttle } from "../../libs";
 import type { IButtonEmits } from "./typing";
 import type HyIconProps from "../hy-icon/typing";
 // 组件

@@ -146,9 +146,15 @@ import {
 } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ITooltipEmits } from "./typing";
-import { type Queue, queueKey, usePopover } from "../../composables";
 import type { IPlacementVo } from "../hy-popover/typing";
-import { closeOther, removeFromQueue, pushToQueue } from "../../common";
+import {
+  type Queue,
+  queueKey,
+  usePopover,
+  closeOther,
+  removeFromQueue,
+  pushToQueue,
+} from "../../libs";
 
 // 组件
 import HyTransition from "../hy-transition/hy-transition.vue";

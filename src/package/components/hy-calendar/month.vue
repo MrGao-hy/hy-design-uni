@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { addUnit, colorGradient, deepClone, getRect, sleep } from "../../utils";
+import { addUnit, colorGradient, deepClone, getRect, sleep } from "../../libs";
 import dayjs from "dayjs/esm";
 export default {
   name: "hy-calendar-month",

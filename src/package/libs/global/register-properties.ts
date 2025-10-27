@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import { addUnit, bytesToSize, formatTime, random } from "../utils";
+import { addUnit, bytesToSize, formatTime, random } from "../../libs";
 export default function registerProperties(app: App) {
   app.config.globalProperties.$hy = {
     /**

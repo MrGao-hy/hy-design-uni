@@ -76,8 +76,7 @@ export default {
 import { computed, ref } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IWarnEmits } from "./typing";
-import { addUnit } from "../../utils";
-import { IconConfig, iconName } from "../../config";
+import { addUnit, IconConfig, iconName } from "../../libs";
 // 组件
 import HyTransition from "../hy-transition/hy-transition.vue";
 import HyIcon from "../hy-icon/hy-icon.vue";

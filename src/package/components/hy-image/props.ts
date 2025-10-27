@@ -1,12 +1,12 @@
-import type IProps from './typing'
-import { IconConfig } from '../../config'
+import type IProps from "./typing";
+import { IconConfig } from "../../libs/config";
 
 const defaultProps: IProps = {
-  src: '',
-  mode: 'aspectFill',
-  width: '',
-  height: '',
-  shape: 'square',
+  src: "",
+  mode: "aspectFill",
+  width: "",
+  height: "",
+  shape: "square",
   radius: 0,
   lazyLoad: true,
   showMenuByLongPress: true,
@@ -17,9 +17,9 @@ const defaultProps: IProps = {
   fade: true,
   webp: false,
   duration: 500,
-  bgColor: '',
+  bgColor: "",
   indistinct: false,
   previewImage: false,
-}
+};
 
-export default defaultProps
+export default defaultProps;

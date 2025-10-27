@@ -56,11 +56,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, toRefs, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IPopupEmits } from "./typing";
-import { addUnit, getWindowInfo } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, getWindowInfo, IconConfig } from "../../libs";
 
 // 组件
 import HyTransition from "../hy-transition/hy-transition.vue";

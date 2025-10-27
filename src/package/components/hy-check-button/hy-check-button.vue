@@ -27,11 +27,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { toRefs, watch, ref, type PropType } from "vue";
+import { watch, ref, type PropType } from "vue";
 import type { ICheckButtonEmits, IFieldNames } from "./typing";
 import type { CheckboxColumnsVo } from "./typing";
 import HyTag from "../hy-tag/hy-tag.vue";
-import { isArray, isNumber } from "../../utils";
+import { isArray, isNumber } from "../../libs";
 import type { TagParamsVo } from "../hy-tag/typing";
 
 /**

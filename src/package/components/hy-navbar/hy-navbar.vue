@@ -99,8 +99,7 @@ export default {
 <script setup lang="ts">
 import type { CSSProperties, PropType } from "vue";
 import type { INavbarEmits } from "./typing";
-import { addUnit, getPx, getWindowInfo } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, getPx, getWindowInfo, IconConfig } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 import HyStatusBar from "../hy-status-bar/hy-status-bar.vue";

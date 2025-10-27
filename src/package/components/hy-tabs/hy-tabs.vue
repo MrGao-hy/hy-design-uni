@@ -158,10 +158,9 @@ import {
   getCurrentInstance,
 } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import type { ITabsEmits } from "./typing";
-import type { TabsItemVo } from "./typing";
+import type { ITabsEmits, TabsItemVo } from "./typing";
 import type HyBadgeProps from "../hy-badge/typing";
-import { addUnit, getPx, getRect, sleep } from "../../utils";
+import { addUnit, getPx, getRect, sleep } from "../../libs";
 // 组件
 import HyBadge from "../hy-badge/hy-badge.vue";
 import HyIcon from "../hy-icon/hy-icon.vue";

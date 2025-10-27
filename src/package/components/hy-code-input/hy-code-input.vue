@@ -56,7 +56,7 @@ export default {
 import { computed, nextTick, onUnmounted, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ICodeInputEmits } from "./typing";
-import { addUnit, getPx } from "../../utils";
+import { addUnit, getPx } from "../../libs";
 import type { InputOnInputEvent } from "@uni-helper/uni-types";
 
 /**

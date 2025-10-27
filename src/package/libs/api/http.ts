@@ -1,5 +1,5 @@
-import type { HttpRequestConfig } from "../typing";
-import { objectToUrlParams } from "../utils";
+import type { HttpRequestConfig } from "../../libs/typing";
+import { objectToUrlParams } from "../../libs";
 
 export default class Http {
   /**

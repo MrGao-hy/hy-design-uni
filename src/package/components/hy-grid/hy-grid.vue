@@ -49,7 +49,7 @@ export default {
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { CustomKeysVo, GridItemVo, IGridEmits } from "./typing";
-import { addUnit } from "../../utils";
+import { addUnit } from "../../libs";
 import type HyIconProps from "../hy-icon/typing";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";

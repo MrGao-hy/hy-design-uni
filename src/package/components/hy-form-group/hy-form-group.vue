@@ -6,7 +6,10 @@
       :key="item.field"
     >
       <view v-if="item.label" class="hy-form--item__label" :style="labelStyle">
-        <text v-if="isRequired(item.rules)" style="color: red; font-size: 20px; line-height: 10px">
+        <text
+          v-if="isRequired(item.rules)"
+          style="color: red; font-size: 20px; line-height: 10px"
+        >
           *
         </text>
         {{ item.label }}
@@ -20,23 +23,35 @@
               v-model="formData[item.field]"
               :type="item.type"
               :disabled="item?.input?.disabled || input?.disabled"
-              :disabledColor="item?.input?.disabledColor || input?.disabledColor"
+              :disabledColor="
+                item?.input?.disabledColor || input?.disabledColor
+              "
               :maxlength="item?.input?.maxlength || input?.maxlength"
               :password="item?.input?.password"
               :clearable="item?.input?.clearable || input?.clearable"
               :readonly="item?.input?.readonly || input?.readonly"
               :placeholder="item?.input?.placeholder"
-              :placeholderClass="item?.input?.placeholderClass || input?.placeholderClass"
-              :placeholderStyle="item?.input?.placeholderStyle || input?.placeholderStyle"
-              :showWordLimit="item?.input?.showWordLimit || input?.showWordLimit"
+              :placeholderClass="
+                item?.input?.placeholderClass || input?.placeholderClass
+              "
+              :placeholderStyle="
+                item?.input?.placeholderStyle || input?.placeholderStyle
+              "
+              :showWordLimit="
+                item?.input?.showWordLimit || input?.showWordLimit
+              "
               :confirmType="item?.input?.confirmType || input?.confirmType"
               :confirmHold="item?.input?.confirmHold || input?.confirmHold"
               :holdKeyboard="item?.input?.holdKeyboard || input?.holdKeyboard"
               :focus="item?.input?.focus || input?.focus"
               :autoBlur="item?.input?.autoBlur || input?.autoBlur"
-              :selectionStart="item?.input?.selectionStart || input?.selectionStart"
+              :selectionStart="
+                item?.input?.selectionStart || input?.selectionStart
+              "
               :selectionEnd="item?.input?.selectionEnd || input?.selectionEnd"
-              :adjustPosition="item?.input?.adjustPosition || input?.adjustPosition"
+              :adjustPosition="
+                item?.input?.adjustPosition || input?.adjustPosition
+              "
               :inputAlign="item?.input?.inputAlign || input?.inputAlign"
               :fontSize="item?.input?.fontSize || input?.fontSize"
               :color="item?.input?.color || input?.color"
@@ -79,13 +94,25 @@
               :disabled="item?.textarea?.disabled || textarea?.disabled"
               :maxlength="item?.textarea?.maxlength || textarea?.maxlength"
               :placeholder="item?.textarea?.placeholder"
-              :placeholderClass="item?.textarea?.placeholderClass || textarea?.placeholderClass"
-              :placeholderStyle="item?.textarea?.placeholderStyle || textarea?.placeholderStyle"
-              :holdKeyboard="item?.textarea?.holdKeyboard || textarea?.holdKeyboard"
+              :placeholderClass="
+                item?.textarea?.placeholderClass || textarea?.placeholderClass
+              "
+              :placeholderStyle="
+                item?.textarea?.placeholderStyle || textarea?.placeholderStyle
+              "
+              :holdKeyboard="
+                item?.textarea?.holdKeyboard || textarea?.holdKeyboard
+              "
               :focus="item?.textarea?.focus || textarea?.focus"
-              :selectionStart="item?.textarea?.selectionStart || textarea?.selectionStart"
-              :selectionEnd="item?.textarea?.selectionEnd || textarea?.selectionEnd"
-              :adjustPosition="item?.textarea?.adjustPosition || textarea?.adjustPosition"
+              :selectionStart="
+                item?.textarea?.selectionStart || textarea?.selectionStart
+              "
+              :selectionEnd="
+                item?.textarea?.selectionEnd || textarea?.selectionEnd
+              "
+              :adjustPosition="
+                item?.textarea?.adjustPosition || textarea?.adjustPosition
+              "
               :formatter="item?.textarea?.formatter || textarea?.formatter"
               :border="item?.textarea?.border || textarea?.border"
               :customStyle="errorStyle(!!errors[item.field])"
@@ -106,9 +133,13 @@
               :size="item?.checkButton?.size || checkButton?.size"
               :col="item?.checkButton?.col || checkButton?.col"
               :gap="item?.checkButton?.gap || checkButton?.gap"
-              :fieldNames="item?.checkButton?.fieldNames || checkButton?.fieldNames"
+              :fieldNames="
+                item?.checkButton?.fieldNames || checkButton?.fieldNames
+              "
               :disabled="item?.checkButton?.size || checkButton?.disabled"
-              :selectType="item?.checkButton?.selectType || checkButton?.selectType"
+              :selectType="
+                item?.checkButton?.selectType || checkButton?.selectType
+              "
             ></hy-check-button>
           </template>
           <!--	复选框/单选框	-->
@@ -123,7 +154,9 @@
               :disabled="item?.radio?.disabled || radio?.disabled"
               :size="item?.radio?.size || radio?.size"
               :activeColor="item?.radio?.activeColor || radio?.activeColor"
-              :inactiveColor="item?.radio?.inactiveColor || radio?.inactiveColor"
+              :inactiveColor="
+                item?.radio?.inactiveColor || radio?.inactiveColor
+              "
               :iconSize="item?.radio?.iconSize || radio?.iconSize"
               :iconColor="item?.radio?.iconColor || radio?.iconColor"
               :labelDisabled="item?.radio?.disabled || radio?.labelDisabled"
@@ -139,12 +172,24 @@
               :loading="item?.switchItem?.loading || switchItem?.loading"
               :disabled="item?.switchItem?.disabled || switchItem?.disabled"
               :size="item?.switchItem?.size || switchItem?.size"
-              :activeColor="item?.switchItem?.activeColor || switchItem?.activeColor"
-              :inactiveColor="item?.switchItem?.inactiveColor || switchItem?.inactiveColor"
-              :activeValue="item?.switchItem?.activeValue || switchItem?.activeValue"
-              :inactiveValue="item?.switchItem?.inactiveValue || switchItem?.inactiveValue"
-              :activeIcon="item?.switchItem?.activeIcon || switchItem?.activeIcon"
-              :inactiveIcon="item?.switchItem?.inactiveIcon || switchItem?.inactiveIcon"
+              :activeColor="
+                item?.switchItem?.activeColor || switchItem?.activeColor
+              "
+              :inactiveColor="
+                item?.switchItem?.inactiveColor || switchItem?.inactiveColor
+              "
+              :activeValue="
+                item?.switchItem?.activeValue || switchItem?.activeValue
+              "
+              :inactiveValue="
+                item?.switchItem?.inactiveValue || switchItem?.inactiveValue
+              "
+              :activeIcon="
+                item?.switchItem?.activeIcon || switchItem?.activeIcon
+              "
+              :inactiveIcon="
+                item?.switchItem?.inactiveIcon || switchItem?.inactiveIcon
+              "
               :space="item?.switchItem?.space || switchItem?.space"
             ></HySwitch>
           </template>
@@ -162,7 +207,9 @@
               :confirmText="item?.picker?.confirmText || picker?.confirmText"
               :cancelColor="item?.picker?.cancelColor || picker?.cancelColor"
               :confirmColor="item?.picker?.confirmColor || picker?.confirmColor"
-              :visibleItemCount="item?.picker?.visibleItemCount || picker?.visibleItemCount"
+              :visibleItemCount="
+                item?.picker?.visibleItemCount || picker?.visibleItemCount
+              "
               :closeOnClickOverlay="
                 item?.picker?.closeOnClickOverlay || picker?.closeOnClickOverlay
               "
@@ -170,7 +217,8 @@
               :showToolbar="item?.picker?.showToolbar || picker?.showToolbar"
               :customStyle="errorStyle(!!errors[item.field])"
               :input="{
-                disabled: item?.picker?.input?.disabled || picker?.input?.disabled,
+                disabled:
+                  item?.picker?.input?.disabled || picker?.input?.disabled,
                 placeholder: item.picker?.input?.placeholder,
                 shape: item?.picker?.input?.shape || picker?.input?.shape,
                 border: item?.picker?.input?.border || picker?.input?.border,
@@ -192,7 +240,9 @@
               :confirmText="item?.picker?.confirmText || picker?.confirmText"
               :cancelColor="item?.picker?.cancelColor || picker?.cancelColor"
               :confirmColor="item?.picker?.confirmColor || picker?.confirmColor"
-              :visibleItemCount="item?.picker?.visibleItemCount || picker?.visibleItemCount"
+              :visibleItemCount="
+                item?.picker?.visibleItemCount || picker?.visibleItemCount
+              "
               :closeOnClickOverlay="
                 item?.picker?.closeOnClickOverlay || picker?.closeOnClickOverlay
               "
@@ -200,7 +250,8 @@
               :showToolbar="item?.picker?.showToolbar || picker?.showToolbar"
               :customStyle="errorStyle(!!errors[item.field])"
               :input="{
-                disabled: item?.picker?.input?.disabled || picker?.input?.disabled,
+                disabled:
+                  item?.picker?.input?.disabled || picker?.input?.disabled,
                 placeholder: item.picker?.input?.placeholder,
                 shape: item?.picker?.input?.shape || picker?.input?.shape,
                 border: item?.picker?.input?.border || picker?.input?.border,
@@ -221,7 +272,9 @@
               :confirmText="item?.picker?.confirmText || picker?.confirmText"
               :cancelColor="item?.picker?.cancelColor || picker?.cancelColor"
               :confirmColor="item?.picker?.confirmColor || picker?.confirmColor"
-              :visibleItemCount="item?.picker?.visibleItemCount || picker?.visibleItemCount"
+              :visibleItemCount="
+                item?.picker?.visibleItemCount || picker?.visibleItemCount
+              "
               :closeOnClickOverlay="
                 item?.picker?.closeOnClickOverlay || picker?.closeOnClickOverlay
               "
@@ -229,7 +282,8 @@
               :showToolbar="item?.picker?.showToolbar || picker?.showToolbar"
               :customStyle="errorStyle(!!errors[item.field])"
               :input="{
-                disabled: item?.picker?.input?.disabled || picker?.input?.disabled,
+                disabled:
+                  item?.picker?.input?.disabled || picker?.input?.disabled,
                 placeholder: item.picker?.input?.placeholder,
                 shape: item?.picker?.input?.shape || picker?.input?.shape,
                 border: item?.picker?.input?.border || picker?.input?.border,
@@ -252,7 +306,9 @@
 
         <!--	提示信息	-->
         <HyTransition :show="!!errors[item.field]" mode="slide-left">
-          <view class="hy-form--item__container-warning">{{ errors[item.field] }}</view>
+          <view class="hy-form--item__container-warning">{{
+            errors[item.field]
+          }}</view>
         </HyTransition>
         <!--	提示信息	-->
       </view>
@@ -262,69 +318,77 @@
 
 <script lang="ts">
 export default {
-  name: 'hy-form',
+  name: "hy-form",
   options: {
     addGlobalClass: true,
     virtualHost: true,
-    styleIsolation: 'shared',
+    styleIsolation: "shared",
   },
-}
+};
 </script>
 
 <script setup lang="ts">
-import { computed, reactive, toRefs } from 'vue'
-import type { CSSProperties } from 'vue'
-import type IProps from './typing'
-import defaultProps from './props'
-import { addUnit, error } from '../../utils'
-import type { FormColumnsType, RulesVo } from '../../typing'
-import { FormTypeEnum } from '../../typing'
+import { computed, reactive, toRefs } from "vue";
+import type { CSSProperties } from "vue";
+import type IProps from "./typing";
+import defaultProps from "./props";
+import { addUnit, error, FormTypeEnum } from "../../libs";
+import type { FormColumnsType, RulesVo } from "../../libs/typing";
 
 // 组件
-import HyInput from '../hy-input/hy-input.vue'
-import HyPicker from '../hy-picker/hy-picker.vue'
-import HyUpload from '../hy-upload/hy-upload.vue'
-import HyTextarea from '../hy-textarea/hy-textarea.vue'
-import HySwitch from '../hy-switch/hy-switch.vue'
-import HyRadio from '../hy-radio/hy-radio.vue'
-import HyDatetimePicker from '../hy-datetime-picker/hy-datetime-picker.vue'
-import HyAddressPicker from '../hy-address-picker/hy-address-picker.vue'
-import HyTransition from '../hy-transition/hy-transition.vue'
-import HyCheckButton from '../hy-check-button/hy-check-button.vue'
+import HyInput from "../hy-input/hy-input.vue";
+import HyPicker from "../hy-picker/hy-picker.vue";
+import HyUpload from "../hy-upload/hy-upload.vue";
+import HyTextarea from "../hy-textarea/hy-textarea.vue";
+import HySwitch from "../hy-switch/hy-switch.vue";
+import HyRadio from "../hy-radio/hy-radio.vue";
+import HyDatetimePicker from "../hy-datetime-picker/hy-datetime-picker.vue";
+import HyAddressPicker from "../hy-address-picker/hy-address-picker.vue";
+import HyTransition from "../hy-transition/hy-transition.vue";
+import HyCheckButton from "../hy-check-button/hy-check-button.vue";
 
-const props = withDefaults(defineProps<IProps>(), defaultProps)
-const { formData, columns, labelWidth, labelAlign, labelPosition, borderBottom } = toRefs(props)
-const emit = defineEmits(['click'])
+const props = withDefaults(defineProps<IProps>(), defaultProps);
+const {
+  formData,
+  columns,
+  labelWidth,
+  labelAlign,
+  labelPosition,
+  borderBottom,
+} = toRefs(props);
+const emit = defineEmits(["click"]);
 
-const labelPos = labelPosition.value === 'top' ? 'column' : 'row'
+const labelPos = labelPosition.value === "top" ? "column" : "row";
 const isInput = (type: FormTypeEnum) =>
-  type === FormTypeEnum.TEXT || type === FormTypeEnum.NUMBER || type === FormTypeEnum.PASSWORD
+  type === FormTypeEnum.TEXT ||
+  type === FormTypeEnum.NUMBER ||
+  type === FormTypeEnum.PASSWORD;
 
 /**
  * @description 错误输入框样式
  * */
 const errorStyle = computed(() => {
   return (err: boolean) => {
-    const style: CSSProperties = {}
+    const style: CSSProperties = {};
     if (err) {
-      style.background = '#dd6161'
+      style.background = "#dd6161";
     }
 
-    return style
-  }
-})
+    return style;
+  };
+});
 
 const isRequired = computed(() => {
   return (temp: any) => {
     if (Array.isArray(temp)) {
-      return temp.some((item) => item?.required)
+      return temp.some((item) => item?.required);
     } else {
-      return temp?.required
+      return temp?.required;
     }
-  }
-})
+  };
+});
 
-const errors: AnyObject = reactive({})
+const errors: AnyObject = reactive({});
 
 /**
  * @description 标题行内样式
@@ -333,36 +397,44 @@ const labelStyle = computed(() => {
   return {
     textAlign: labelAlign.value,
     width: addUnit(labelWidth.value),
-  }
-})
+  };
+});
 
 /**
  * @description 错误信息校验
  * */
 const errorMsg = (rule: RulesVo, value: string): string => {
   // 手机正则
-  const phoneExpression = /^1[3-9]\d{9}$/
+  const phoneExpression = /^1[3-9]\d{9}$/;
   // 邮箱正则
-  const emitExpression = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+  const emitExpression = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   // 复杂密码正则
   const passwordExpression =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
   if (rule.required && !value) {
-    return rule.message!
-  } else if ((rule?.min || rule?.max) && (value.length < rule?.min! || value.length > rule?.max!)) {
-    return rule.message!
-  } else if (rule.type === 'phone' && !phoneExpression.test(String(value))) {
-    return rule.message || '请输入正确的手机号'
-  } else if (rule.type === 'email' && !emitExpression.test(String(value))) {
-    return rule.message || '请输入正确的邮箱格式'
-  } else if (rule.type === 'password' && !passwordExpression.test(String(value))) {
-    return rule.message || '至少8个字符串，并且包含大、小写字母、数字和特殊符号'
+    return rule.message!;
+  } else if (
+    (rule?.min || rule?.max) &&
+    (value.length < rule?.min! || value.length > rule?.max!)
+  ) {
+    return rule.message!;
+  } else if (rule.type === "phone" && !phoneExpression.test(String(value))) {
+    return rule.message || "请输入正确的手机号";
+  } else if (rule.type === "email" && !emitExpression.test(String(value))) {
+    return rule.message || "请输入正确的邮箱格式";
+  } else if (
+    rule.type === "password" &&
+    !passwordExpression.test(String(value))
+  ) {
+    return (
+      rule.message || "至少8个字符串，并且包含大、小写字母、数字和特殊符号"
+    );
   } else if (rule?.validator && !rule.validator(rule, value)) {
-    return rule.message || ''
+    return rule.message || "";
   } else {
-    return ''
+    return "";
   }
-}
+};
 
 /**
  * @description 校验字段
@@ -371,28 +443,28 @@ const validateField = (
   rules: RulesVo | RulesVo[] | undefined,
   value: string,
   field: string,
-  event?: 'blur' | 'change',
+  event?: "blur" | "change",
 ) => {
-  if (!rules) return
+  if (!rules) return;
 
-  let errorMessage = ''
+  let errorMessage = "";
 
   if (Array.isArray(rules)) {
     // 遍历所有规则
     for (const index in rules) {
       // 判断是否有change事件或者blur事件
-      if (event && !rules[index]?.trigger?.includes(event)) continue
-      errorMessage = errorMsg(rules[index], value)
+      if (event && !rules[index]?.trigger?.includes(event)) continue;
+      errorMessage = errorMsg(rules[index], value);
       if (errorMessage) {
-        errors[field] = errorMessage
-        return
+        errors[field] = errorMessage;
+        return;
       }
       // 可以继续添加更多规则
     }
   } else {
     // 必填校验
-    if (event && !rules?.trigger?.includes(event)) return
-    errorMessage = errorMsg(rules, value)
+    if (event && !rules?.trigger?.includes(event)) return;
+    errorMessage = errorMsg(rules, value);
   }
 
   // 自定义校验规则
@@ -403,61 +475,61 @@ const validateField = (
   //   }
   // }
 
-  errors[field] = errorMessage
-}
+  errors[field] = errorMessage;
+};
 
 /**
  * @description 提交表单
  * */
 const handleSubmit = () => {
   return new Promise((resolve, reject) => {
-    let isValid = true
+    let isValid = true;
 
     // 校验所有字段
     props.columns.forEach((col) => {
-      validateField(col.rules, formData.value[col.field], col.field)
+      validateField(col.rules, formData.value[col.field], col.field);
       if (errors[col.field]) {
-        isValid = false
+        isValid = false;
       }
-    })
+    });
 
     if (isValid) {
       // alert("表单提交成功！");
-      resolve(formData.value)
+      resolve(formData.value);
     } else {
-      reject()
-      error('表单校验失败，请检查输入！')
+      reject();
+      error("表单校验失败，请检查输入！");
     }
-  })
-}
+  });
+};
 
 /**
  * @description 输入值触发
  * */
 const handleChange = (event: string, temp: FormColumnsType) => {
   if (isInput(temp.type) && temp?.input?.onChange) {
-    temp.input.onChange(event, temp)
+    temp.input.onChange(event, temp);
   }
-  validateField(temp.rules, event, temp.field, 'change')
-}
+  validateField(temp.rules, event, temp.field, "change");
+};
 /**
  * @description 输入值触发
  * */
 const handleBlur = (event: string, temp: FormColumnsType) => {
   if (isInput(temp.type) && temp?.input?.onBlur) {
-    temp.input.onBlur(event, temp)
+    temp.input.onBlur(event, temp);
   }
-  validateField(temp.rules, event, temp.field, 'blur')
-}
+  validateField(temp.rules, event, temp.field, "blur");
+};
 
 defineExpose({
   validateField,
   handleSubmit,
-})
+});
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 .hy-form--item {
   flex-direction: v-bind(labelPos);
 }

@@ -59,7 +59,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, colorGradient } from "../../utils";
+import { addUnit, colorGradient } from "../../libs";
 
 /**
  * 目前用在华玥的loadMore加载更多等组件的正在加载状态场景。

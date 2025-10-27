@@ -1,16 +1,5 @@
 <template>
   <hy-config-provider :custom-style="themeColor" :theme="darkMode">
-    <!--    <hy-watermark-->
-    <!--      v-if="fullScreen"-->
-    <!--      :content="content"-->
-    <!--      :image="isImage(content) ? content : ''"-->
-    <!--      :size="size"-->
-    <!--      :opacity="opacity"-->
-    <!--      :rotate="rotate"-->
-    <!--      :fullScreen="fullScreen"-->
-    <!--      :gutter-x="space"-->
-    <!--      :gutter-y="space"-->
-    <!--    ></hy-watermark>-->
     <view class="hy-setting__box">
       <hy-watermark
         :content="content"
@@ -56,7 +45,7 @@ import { useThemeStore } from "@/store";
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
 import HySlider from "@/package/components/hy-slider/hy-slider.vue";
-import { isImage } from "@/package/utils";
+import { isImage } from "@/package";
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 

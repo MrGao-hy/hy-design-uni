@@ -29,7 +29,7 @@ export default {
 import type { ICountToEmits } from "./typing";
 import { computed, onMounted, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, isNumber } from "../../utils";
+import { addUnit, isNumber } from "../../libs";
 
 /**
  * 一般用于需要滚动数字到某一个值的场景，目标要求是一个递增的值。

@@ -68,10 +68,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs, watch, ref, reactive } from "vue";
+import { computed, watch, ref, reactive } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, bem, error } from "../../utils";
-import { IconConfig } from "../../config";
+import { IconConfig, addUnit, bem, error } from "../../libs";
 import type { ICheckBoxEmits } from "./typing";
 import type { CheckboxColumnsVo, IFieldNames } from "../hy-check-button/typing";
 // 组件

@@ -51,8 +51,7 @@ import {
 } from "vue";
 import type IProps from "./typing";
 import defaultProps from "./props";
-import { addUnit, getRect, sleep } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, getRect, sleep, IconConfig } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 

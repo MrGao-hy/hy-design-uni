@@ -103,10 +103,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs, ref, watch, getCurrentInstance } from "vue";
+import { computed, ref, watch, getCurrentInstance } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, isVideo } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, isVideo, IconConfig } from "../../libs";
 import type { ISwiperEmits, SwiperList, SwiperVo } from "./typing";
 
 // 组件

@@ -13,37 +13,45 @@
 </template>
 
 <script setup lang="ts">
-import HyCell from '@/package/components/hy-cell/hy-cell.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyModal from '@/package/components/hy-modal/hy-modal.vue'
-import { list_1, list_2, list_3, list_4, list_5, list_6, list_7 } from './index1'
-import { useThemeStore } from '@/store'
-import { useShakeService } from '@/package/common/shakeService'
-import { onHide, onShow } from '@dcloudio/uni-app'
-import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
-const themeStore = useThemeStore()
-const { startShakeListener, stopShakeListener } = useShakeService()
+import HyCell from "@/package/components/hy-cell/hy-cell.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import HyModal from "@/package/components/hy-modal/hy-modal.vue";
+import {
+  list_1,
+  list_2,
+  list_3,
+  list_4,
+  list_5,
+  list_6,
+  list_7,
+} from "./index1";
+import { useThemeStore } from "@/store";
+import { useShakeService } from "@/package";
+import { onHide, onShow } from "@dcloudio/uni-app";
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
+const themeStore = useThemeStore();
+const { startShakeListener, stopShakeListener } = useShakeService();
 
-const { themeColor, darkMode, showHint } = storeToRefs(themeStore)
+const { themeColor, darkMode, showHint } = storeToRefs(themeStore);
 
 onShow(() => {
-  startShakeListener(handleShake)
-})
+  startShakeListener(handleShake);
+});
 onHide(() => {
-  stopShakeListener()
-})
+  stopShakeListener();
+});
 
 const handleShake = () => {
   // 在这里执行摇一摇后的逻辑
-  themeColor.value['--hy-theme-color'] = getRandomHexColor()
-}
+  themeColor.value["--hy-theme-color"] = getRandomHexColor();
+};
 
 function getRandomHexColor() {
   // 生成随机的十六进制颜色
-  const hex = Math.floor(Math.random() * 0xffffff).toString(16)
+  const hex = Math.floor(Math.random() * 0xffffff).toString(16);
   // 补齐 6 位
-  return `#${hex.padStart(6, '0')}`
+  return `#${hex.padStart(6, "0")}`;
 }
 </script>
 

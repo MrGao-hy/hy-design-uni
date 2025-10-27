@@ -35,7 +35,7 @@ export default {
 import { computed, ref, onMounted, getCurrentInstance } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ISubsectionEmits, SubSectionVo } from "./typing";
-import { addUnit, getRect, guid } from "../../utils";
+import { addUnit, getRect, guid } from "../../libs";
 
 /**
  * 该分段器一般用于用户从几个选项中选择某一个的场景

@@ -36,8 +36,7 @@ export default {
 <script setup lang="ts">
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, IconConfig } from "../../libs";
 // 组件
 import HyLine from "../hy-line/hy-line.vue";
 import HyLoading from "../hy-loading/hy-loading.vue";

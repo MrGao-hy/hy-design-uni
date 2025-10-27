@@ -88,7 +88,7 @@ import {
   watch,
 } from "vue";
 import type { CSSProperties } from "vue";
-import { addUnit, getPx, getRect } from "../../utils";
+import { addUnit, getPx, getRect } from "../../libs";
 import type { IListEmits } from "./typing";
 
 /**

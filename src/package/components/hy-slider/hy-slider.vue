@@ -156,21 +156,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {
-  computed,
-  getCurrentInstance,
-  onMounted,
-  ref,
-  toRefs,
-  watch,
-} from "vue";
+import { computed, getCurrentInstance, onMounted, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, error, getRect, getPx } from "../../utils";
+import { addUnit, error, getRect, getPx } from "../../libs";
 import type { ISliderEmits } from "./typing";
-import type {
-  MovableViewOnChange,
-  SliderOnChangingEvent,
-} from "@uni-helper/uni-types";
+import type { SliderOnChangingEvent } from "@uni-helper/uni-types";
 
 /**
  * 一般用于表单中，手动选择一个区间范围的场景。

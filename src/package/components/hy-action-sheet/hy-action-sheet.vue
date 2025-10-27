@@ -118,7 +118,7 @@ export default {
 <script lang="ts" setup>
 import { watch, ref } from "vue";
 import type { PropType, CSSProperties } from "vue";
-import { isArray } from "../../utils";
+import { isArray } from "../../libs";
 import type {
   IActionSheetPanel,
   IActionSheetEmits,

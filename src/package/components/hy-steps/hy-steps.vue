@@ -148,8 +148,7 @@ import { computed, ref, onMounted, getCurrentInstance, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IStepsEmits } from "./typing";
 import type { StepListVo } from "./typing";
-import { addUnit, getRect } from "../../utils";
-import { ColorConfig, IconConfig } from "../../config";
+import { addUnit, getRect, ColorConfig, IconConfig } from "../../libs";
 
 /**
  * 一般用于完成一个任务要分几个步骤，标识目前处于第几步的场景。

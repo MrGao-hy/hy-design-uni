@@ -58,8 +58,7 @@ export default {
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ITagEmits } from "./typing";
-import { IconConfig } from "../../config";
-import { colorGradient } from "../../utils";
+import { IconConfig, colorGradient } from "../../libs";
 import type HyIconProps from "../hy-icon/typing";
 
 // 组件

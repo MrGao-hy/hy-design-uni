@@ -1,5 +1,5 @@
 import type IProps from "./typing";
-import { DateModeEnum } from "../../typing";
+import { DateModeEnum } from "../../libs";
 
 const defaultProps: IProps = {
   show: false,

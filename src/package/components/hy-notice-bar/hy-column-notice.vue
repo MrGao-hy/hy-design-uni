@@ -51,8 +51,7 @@
 import { type CSSProperties, toRefs, computed, ref, watch } from "vue";
 import type IProps from "./typing";
 import defaultProps from "./props";
-import { addUnit, error } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, error, IconConfig } from "../../libs";
 
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";

@@ -6,7 +6,7 @@ export default interface ToastOptions {
   /**
    * @description 主题类型，primary，success，error，warning，info
    * */
-  type?: HyApp.ThemeType;
+  type?: HyApp.ThemeType | "";
   /**
    * @description toast出现的位置
    * */

@@ -33,7 +33,7 @@ export default {
 import { computed, inject, onMounted, onUnmounted, provide, ref } from "vue";
 import type { PropType } from "vue";
 import type { IFormContext } from "./typing";
-import { addUnit } from "../../utils";
+import { addUnit } from "../../libs";
 
 /**
  * 表单组件子组件，需要搭配hy-form

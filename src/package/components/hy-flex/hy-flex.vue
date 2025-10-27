@@ -19,7 +19,7 @@ export default {
 import { computed, type CSSProperties } from "vue";
 import type { PropType } from "vue";
 import type { FlexAlign, FlexDirection, FlexJustify, FlexWrap } from "./typing";
-import { addUnit, isArray } from "../../utils";
+import { addUnit, isArray } from "../../libs";
 
 const props = defineProps({
   /** flex 主轴的方向是否垂直，使用 flex-direction: column */

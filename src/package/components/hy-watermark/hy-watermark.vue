@@ -28,7 +28,7 @@ export default {
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch, nextTick } from "vue";
 import type { CSSProperties } from "vue";
-import { addUnit, guid } from "../../utils";
+import { addUnit, guid } from "../../libs";
 
 /**
  * 在页面或组件上添加指定的图片或文字，可用于版权保护、品牌宣传等场景。

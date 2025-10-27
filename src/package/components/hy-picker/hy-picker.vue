@@ -125,8 +125,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import type { PropType } from "vue";
-import { deepClone, sleep, addUnit, isArray } from "../../utils";
-import { IconConfig } from "../../config";
+import { deepClone, sleep, addUnit, isArray, IconConfig } from "../../libs";
 import type { IPickerEmits, PickerColumnVo } from "./typing";
 import type HyInputProps from "../hy-input/typing";
 // 组件

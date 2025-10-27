@@ -62,7 +62,7 @@ export default {
 import { computed, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IMenuEmits, MenusType, ModelValueVo } from "./typing";
-import { addUnit } from "../../utils";
+import { addUnit } from "../../libs";
 import type HyBadgeProps from "../hy-badge/typing";
 import type HyIconProps from "../hy-icon/typing";
 // 组件

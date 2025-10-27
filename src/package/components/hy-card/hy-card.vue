@@ -88,7 +88,7 @@ export default {
 import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ICardEmits } from "./typing";
-import { addUnit, getPx } from "../../utils";
+import { addUnit, getPx } from "../../libs";
 
 /**
  * 卡片组件一般用于多个列表条目，且风格统一的场景。

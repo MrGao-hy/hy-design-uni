@@ -80,7 +80,7 @@ export default {
 import { onMounted, ref, toRefs } from "vue";
 import type { PropType, CSSProperties } from "vue";
 import type { IAddressPickerEmits } from "./typing";
-import address from "../../utils/address.json";
+import address from "../../libs/utils/address.json";
 import type HyInputProps from "../hy-input/typing";
 // 组件
 import HyInput from "../hy-input/hy-input.vue";

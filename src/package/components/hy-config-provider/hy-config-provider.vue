@@ -17,10 +17,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs, watch } from "vue";
+import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, colorGradient } from "../../utils";
-import { ColorConfig } from "../../config";
+import { ColorConfig, addUnit, colorGradient } from "../../libs";
 
 /**
  * 将 ConfigProvider 组件的 theme 属性设置为 dark，可以开启深色模式。 深色模式会全局生效，使页面上的所有 Wot 组件变为深色风格。

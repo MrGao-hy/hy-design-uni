@@ -35,7 +35,7 @@ export default {
 import { getCurrentInstance, ref, onMounted } from "vue";
 import type { IQrcodeEmits } from "./typing";
 import QRCode from "./qrcode.js";
-import { addUnit, error } from "../../utils";
+import { addUnit, error } from "../../libs";
 // 组件
 import HyLoading from "../hy-loading/hy-loading.vue";
 

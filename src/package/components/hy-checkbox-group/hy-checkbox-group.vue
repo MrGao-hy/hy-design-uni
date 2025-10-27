@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { computed, provide, toRefs } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { bem } from "../../utils";
+import { bem } from "../../libs";
 import type { ICheckBoxGroupEmits } from "./typing";
 
 /**

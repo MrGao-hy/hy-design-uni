@@ -70,8 +70,7 @@ export default {
 <script setup lang="ts">
 import { computed, watch, ref, reactive, inject } from "vue";
 import type { CSSProperties } from "vue";
-import { addUnit, error } from "../../utils";
-import { IconConfig } from "../../config";
+import { IconConfig, addUnit, error } from "../../libs";
 import type { ICheckboxGroupContext } from "./typing";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";

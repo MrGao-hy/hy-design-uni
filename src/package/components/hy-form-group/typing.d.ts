@@ -1,4 +1,4 @@
-import type { FormColumnsType } from "../../typing";
+import type { FormColumnsType } from "../../libs";
 import type HyInputProps from "../hy-input/typing";
 import type HyTextareaProps from "../hy-textarea/typing";
 import type HySwitchProps from "../hy-switch/typing";

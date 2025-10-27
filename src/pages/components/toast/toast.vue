@@ -1,13 +1,13 @@
 <template>
   <hy-config-provider :custom-style="themeColor" :theme="darkMode">
-    <hy-cell title="导航组件" :list="list" @click="showToast"></hy-cell>
-    <hy-toast ref="hyToastRef"></hy-toast>
+    <hy-cell title="消息提示" :list="list" @click="showToast"></hy-cell>
+    <hy-toast></hy-toast>
 
     <view class="hy-setting__box">
       <view class="hy-title">显示图标</view>
       <hy-switch v-model="icon" />
 
-      <view class="hy-title">加载中</view>
+      <view class="hy-title">加载中(设置五秒钟后自动关闭)</view>
       <hy-switch v-model="loading" />
 
       <view class="hy-title">加载图标形状</view>
@@ -29,6 +29,9 @@ import HySwitch from "../../../package/components/hy-switch/hy-switch.vue";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
 import { storeToRefs } from "pinia";
+import { useToast } from "@/package";
+
+const toast = useToast();
 
 const themeStore = useThemeStore();
 
@@ -62,22 +65,24 @@ const list_2 = [
 onMounted(() => {
   // hyToastRef.value.show({
   //   message: "我是默认提示信息",
-  //   type: "primary",
+  //   type: "error",
   //   icon: true,
   //   duration: 1000000,
-  //   position: "bottom",
+  //   position: "top",
   // });
 });
 
-const showToast = (params) => {
-  hyToastRef.value.show({
-    message: `${params.title}提示信息`,
-    type: params.value,
+const showToast = (params: AnyObject) => {
+  (toast as any)[params.value]?.(`${params.title}提示信息`, {
     icon: icon.value,
     loading: loading.value,
     loadMode: loadMode.value,
     position: position.value,
   });
+
+  setTimeout(() => {
+    toast.close();
+  }, 5000);
 };
 </script>
 

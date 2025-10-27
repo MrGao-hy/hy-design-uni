@@ -37,8 +37,7 @@ export default {
 <script setup lang="ts">
 import { computed, toRefs } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, getPx } from "../../utils";
-import { IconConfig } from "../../config";
+import { IconConfig, addUnit, getPx } from "../../libs";
 import type { IBackTopEmit } from "./typing";
 import type HyIconProps from "../hy-icon/typing";
 // 组件

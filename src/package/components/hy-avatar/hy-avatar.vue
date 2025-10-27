@@ -65,7 +65,7 @@ export default {
 import { computed, ref, watch } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IAvatarEmit } from "./typing";
-import { addUnit, isNumber, random } from "../../utils";
+import { addUnit, isNumber, random } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 

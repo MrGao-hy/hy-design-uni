@@ -46,7 +46,7 @@ export default {
 <script setup lang="ts">
 import { computed } from "vue";
 import type { PropType, CSSProperties } from "vue";
-import { addUnit } from "../../utils";
+import { addUnit } from "../../libs";
 import type { IIconEmits } from "./typing";
 
 /**

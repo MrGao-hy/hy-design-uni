@@ -18,8 +18,7 @@ export default {
 <script setup lang="ts">
 import { provide, ref, computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { IconConfig } from "../../config";
-import { addUnit } from "../../utils";
+import { IconConfig, addUnit } from "../../libs";
 
 /**
  * 主要提供筛选下拉筛选框，内置基础筛选功能，可以根据自己的需求自定义筛选项。
@@ -74,7 +73,7 @@ const dropdownStyle = computed(() => {
         top: "44px",
         // #endif
         // #ifndef H5
-        top: 0,
+        top: "0px",
         // #endif
       }
     : {};

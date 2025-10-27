@@ -85,8 +85,7 @@ import {
 import type { CSSProperties, PropType } from "vue";
 import type { IFloatButtonEmits, IGap } from "./typing";
 import type { MenusType } from "./typing";
-import { addUnit, getPx, getRect, guid, isH5 } from "../../utils";
-import { IconConfig } from "../../config";
+import { addUnit, getPx, getRect, guid, isH5, IconConfig } from "../../libs";
 // 组件
 import HyIcon from "../hy-icon/hy-icon.vue";
 import HyLine from "../hy-line/hy-line.vue";

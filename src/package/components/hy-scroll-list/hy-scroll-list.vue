@@ -43,7 +43,7 @@ export default {
 import { computed, ref, onMounted, getCurrentInstance } from "vue";
 import type { CSSProperties } from "vue";
 import type { IScrollListEmits } from "./typing";
-import { addUnit, colorGradient, getRect, sleep } from "../../utils";
+import { addUnit, colorGradient, getRect, sleep } from "../../libs";
 
 /**
  * 该组件一般用于同时展示多个商品、分类的场景，也可以完成左右滑动的列表。

@@ -19,7 +19,7 @@ export default {
 import { provide, reactive, ref, toRefs } from "vue";
 import type { PropType } from "vue";
 import type { FormItemRule } from "./typing";
-import { clearVal, isArray } from "../../utils";
+import { clearVal, isArray } from "../../libs";
 
 /**
  * 表单组件父组件，需要搭配hy-form-item

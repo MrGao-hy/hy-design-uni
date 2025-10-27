@@ -22,7 +22,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, toRefs } from "vue";
+import { computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { IOverlayEmits } from "./typing";
 import HyTransition from "../hy-transition/hy-transition.vue";

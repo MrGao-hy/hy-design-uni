@@ -4,16 +4,7 @@
     :zIndex="tmpConfig.overlay ? 10070 : -1"
     :custom-style="overlayStyle"
   >
-    <view
-      :style="[contentStyle]"
-      :class="[
-        'hy-toast__content',
-        'hy-toast__' + tmpConfig.type,
-        tmpConfig.type === 'loading' || tmpConfig.loading
-          ? 'hy-toast__content--loading'
-          : '',
-      ]"
-    >
+    <view :style="[contentStyle]" :class="contentClass">
       <HyLoading
         v-if="tmpConfig.loading"
         :mode="tmpConfig.loadMode || 'circle'"
@@ -31,7 +22,12 @@
       >
         <HyIcon :name="iconNameCom" size="17" color="#FFFFFF"></HyIcon>
       </view>
-      <text class="hy-toast__content--text" style="max-width: 400rpx">
+      <text
+        :class="[
+          'hy-toast__content--text',
+          !tmpConfig.icon ? `hy-toast__content--text__${tmpConfig.type}` : '',
+        ]"
+      >
         {{ tmpConfig.message }}
       </text>
     </view>
@@ -50,11 +46,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, onUnmounted, reactive, ref } from "vue";
 import type { CSSProperties } from "vue";
-import type ToastParamsVo from "./typing";
-import { getWindowInfo, hexToRgb } from "../../utils";
-import { ColorConfig, iconName } from "../../config";
+import type ToastOptions from "./typing";
+import { ColorConfig, iconName, getWindowInfo, hexToRgb } from "../../libs";
 // 组件
 import HyOverlay from "../hy-overlay/hy-overlay.vue";
 import HyIcon from "../hy-icon/hy-icon.vue";
@@ -67,10 +62,10 @@ import HyLoading from "../hy-loading/hy-loading.vue";
 defineOptions({});
 
 const isShow = ref(false);
-const tmpConfig = ref<ToastParamsVo>({});
-const config: ToastParamsVo = reactive({
+const tmpConfig = ref<ToastOptions>({});
+const config: ToastOptions = reactive({
   message: "",
-  type: "info",
+  type: "",
   duration: 2000,
   icon: false,
   position: "center",
@@ -127,6 +122,14 @@ const contentStyle = computed(() => {
   return style;
 });
 
+const contentClass = computed(() => {
+  return [
+    "hy-toast__content",
+    "hy-toast__" + tmpConfig.value.type,
+    tmpConfig.value.loading && "hy-toast__content--loading",
+  ];
+});
+
 const loadingIconColor = computed(() => {
   let colorTmp = "rgb(255, 255, 255)";
   if (isThemeType(tmpConfig.value.type!)) {
@@ -137,10 +140,21 @@ const loadingIconColor = computed(() => {
   return colorTmp;
 });
 
+onMounted(() => {
+  // 监听全局事件
+  uni.$on("__hy_toast_open__", show);
+  uni.$on("__hy_toast_close__", hide);
+});
+
+onUnmounted(() => {
+  uni.$off("__hy_toast_open__", show);
+  uni.$off("__hy_toast_close__", hide);
+});
+
 /**
  * @description 显示toast组件，由父组件通过xxx.show(options)形式调用
  * */
-const show = (options: ToastParamsVo) => {
+const show = (options: ToastOptions) => {
   // 不将结果合并到this.config变量，避免多次调用u-toast，前后的配置造成混乱
   tmpConfig.value = Object.assign(config, options);
   // 清除定时器

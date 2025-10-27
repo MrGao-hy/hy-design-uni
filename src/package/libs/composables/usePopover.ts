@@ -1,7 +1,11 @@
+/**
+ * 气泡组件hooks
+ * */
+
 import { getCurrentInstance, ref } from "vue";
 import type { CSSProperties } from "vue";
-import { getRect, isObject } from "../utils";
-import type { IOffset, IPlacementVo } from "../components/hy-popover/typing";
+import { getRect, isObject } from "../../libs";
+import type { IOffset, IPlacementVo } from "../../components/hy-popover/typing";
 
 export function usePopover(visibleArrow = true) {
   const instance = getCurrentInstance();
@@ -89,6 +93,7 @@ export function usePopover(visibleArrow = true) {
         (horizontalY - 17 > 0 ? 0 : horizontalY - 25) +
         (offset[1] ? offset[1] : offset[0]);
     } else if (isObject(offset)) {
+      offset = offset as Record<"x" | "y", number>;
       offsetX = (verticalX - 17 > 0 ? 0 : verticalX - 25) + offset.x;
       offsetY = (horizontalY - 17 > 0 ? 0 : horizontalY - 25) + offset.y;
     } else {

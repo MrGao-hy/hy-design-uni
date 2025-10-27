@@ -6,7 +6,7 @@
     <textarea
       class="hy-textarea__field"
       :value="innerValue"
-      :style="{ height: autoHeight ? 'auto' : addUnit(height) }"
+      :style="`height: ${autoHeight ? 'auto' : addUnit(height)}`"
       :placeholder="placeholder || ''"
       :placeholder-style="placeholderStyle"
       :placeholder-class="placeholderClass"
@@ -60,7 +60,7 @@ export default {
 import { computed, ref, watch, nextTick, inject } from "vue";
 import type { CSSProperties, PropType } from "vue";
 import type { ITextareaEmits } from "./typing";
-import { addUnit } from "../../utils";
+import { addUnit } from "../../libs";
 import type { FormItemContext } from "../hy-form-item/typing";
 import type {
   InputOnBlurEvent,

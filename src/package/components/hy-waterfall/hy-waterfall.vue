@@ -31,7 +31,7 @@ export default {
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, watch } from "vue";
 import type { PropType } from "vue";
-import { getRect, isArray } from "../../utils";
+import { getRect, isArray } from "../../libs";
 
 /**
  * 这是一个瀑布流形式的组件，内容分为左右两列，结合uview的懒加载组件效果更佳。

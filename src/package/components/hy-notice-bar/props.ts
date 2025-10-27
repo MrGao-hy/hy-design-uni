@@ -1,5 +1,5 @@
 import type IProps from "./typing";
-import { IconConfig } from "../../config";
+import { IconConfig } from "../../libs";
 
 const defaultProps: IProps = {
   text: [],

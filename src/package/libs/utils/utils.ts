@@ -74,6 +74,7 @@ const padZero = (value: string | number): string => {
  * @returns {String}
  */
 const addZero = (value: string | number, length: number): string => {
+  if (value === undefined || value === null) return "";
   let val = value.toString();
   if (length > val.length) {
     val += "0".repeat(length - val.length);

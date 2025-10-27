@@ -54,9 +54,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { toRefs, watch, nextTick, computed } from "vue";
+import { watch, nextTick, computed } from "vue";
 import type { CSSProperties, PropType } from "vue";
-import { addUnit, error, isNumber } from "../../utils";
+import { addUnit, error, isNumber } from "../../libs";
 import type { ISwitchEmits, SwiperValue } from "./typing";
 // 组件
 import HyLoading from "../hy-loading/hy-loading.vue";
