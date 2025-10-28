@@ -3,13 +3,11 @@
 
 
 @include b(loading-icon) {
-  @include flex(row);
   align-items: center;
   justify-content: center;
   color: #c8c9cc;
 
   @include e(text) {
-    margin-left: 4px;
     color: $hy-text-color--grey;
     font-size: 14px;
     line-height: 20px;
@@ -37,8 +35,20 @@
     }
   }
 
-  @include m(vertical) {
-    flex-direction: column;
+  @include e(row) {
+    @include flex(row);
+
+    @include m(text) {
+      margin-left: $hy-border-margin-padding-base;
+    }
+  }
+
+  @include e(column) {
+    @include flex(column);
+
+    @include m(text) {
+      margin-top: $hy-border-margin-padding-base;
+    }
   }
 }
 
@@ -60,7 +70,6 @@
   }
 
   @include e(vertical, text) {
-    margin: 6px 0 0;
     color: $hy-text-color--grey;
   }
 

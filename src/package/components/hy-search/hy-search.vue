@@ -210,7 +210,7 @@ const props = defineProps({
   /** placeholder的颜色 */
   placeholderColor: {
     type: String,
-    default: "#909399",
+    default: "",
   },
   /** 输入框左边的图标属性集合，可以为图标名称或图片路径 */
   searchIcon: [Boolean, Object] as PropType<HyIconProps | boolean>,

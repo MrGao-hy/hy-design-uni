@@ -14,7 +14,7 @@ let toastInstance: any = null;
  */
 export const useToast = () => {
   const show = (msg: string, opt?: ToastOptions) =>
-    openToast({ message: msg, icon: false, ...opt });
+    openToast({ message: msg, icon: false, type: "", ...opt });
   const info = (msg: string, opt?: ToastOptions) =>
     openToast({ message: msg, type: "info", ...opt });
   const success = (msg: string, opt?: ToastOptions) =>

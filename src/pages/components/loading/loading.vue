@@ -21,9 +21,14 @@
       <hy-loading mode="spinner" color="#19be6b"></hy-loading>
     </view>
 
-    <view class="hy-title">自定义文字</view>
-    <view class="hy-container">
-      <hy-loading mode="circle" text="加载中..."></hy-loading>
+    <view class="hy-title">自定义文字/排列</view>
+    <view class="hy-container hy-flex">
+      <hy-loading
+        mode="circle"
+        text="加载中..."
+        direction="column"
+      ></hy-loading>
+      <hy-loading mode="circle" text="加载中..." direction="row"></hy-loading>
     </view>
   </hy-config-provider>
 </template>

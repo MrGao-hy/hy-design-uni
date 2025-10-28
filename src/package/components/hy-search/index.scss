@@ -62,6 +62,7 @@ $hy-search-close-size: 20px !default;
       @include m(placeholder) {
         font-size: 25rpx;
         color: $hy-text-color--placeholder;
+        line-height: 30rpx;
       }
     }
   }

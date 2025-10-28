@@ -3,7 +3,7 @@
     ref="hyVirtualContainer"
     @scroll="onScroll"
     @scrolltolower="scrollToLower"
-    :lower-threshold="showDivider ? 40 : 10"
+    :lower-threshold="showDivider ? 100 : 50"
     :scroll-y="true"
     scroll-with-animation
     class="hy-virtual-container"
@@ -60,7 +60,8 @@
       </template>
       <!--加载更多样式-->
     </view>
-    <!--    <HyDivider :text="load" v-if="showDivider"></HyDivider>-->
+    <slot v-if="$slots.footer" name="footer"></slot>
+    <hy-divider :text="load" v-else-if="showDivider"></hy-divider>
   </scroll-view>
 </template>
 
@@ -81,15 +82,16 @@ import {
   getCurrentInstance,
   nextTick,
   onMounted,
-  type PropType,
   reactive,
   ref,
   useSlots,
   watch,
 } from "vue";
-import type { CSSProperties } from "vue";
+import type { CSSProperties, PropType } from "vue";
 import { addUnit, getPx, getRect } from "../../libs";
 import type { IListEmits } from "./typing";
+// 组件
+import HyDivider from "@/package/components/hy-divider/hy-divider.vue";
 
 /**
  * 实现只展示可视内容的dom，减少dom创建，优化滚动性能

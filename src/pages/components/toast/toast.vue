@@ -36,13 +36,10 @@ const toast = useToast();
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = storeToRefs(themeStore);
-const hyToastRef = ref<InstanceType<typeof HyToast>>(null);
 const list = reactive([
-  {
-    title: "默认",
-    value: "info",
-  },
-  { title: "信息", value: "primary" },
+  { title: "默认", value: "show" },
+  { title: "信息", value: "info" },
+  { title: "主题", value: "primary" },
   { title: "成功", value: "success" },
   { title: "错误", value: "error" },
   { title: "警告", value: "warning" },
@@ -74,15 +71,18 @@ onMounted(() => {
 
 const showToast = (params: AnyObject) => {
   (toast as any)[params.value]?.(`${params.title}提示信息`, {
-    icon: icon.value,
+    icon: params.value !== "show" ? icon.value : "",
     loading: loading.value,
     loadMode: loadMode.value,
     position: position.value,
   });
 
-  setTimeout(() => {
-    toast.close();
-  }, 5000);
+  if (loading.value) {
+    const timer = setTimeout(() => {
+      toast.close();
+      clearTimeout(timer);
+    }, 5000);
+  }
 };
 </script>
 

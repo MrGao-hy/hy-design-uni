@@ -89,7 +89,7 @@ const themeStore = useThemeStore();
 const { themeColor, darkMode } = storeToRefs(themeStore);
 const flowList = ref<Record<string, any>[]>([]);
 const waterfallRef = ref();
-const loadStatus = ref("loadmore");
+const loadStatus = ref("noMore");
 
 onMounted(() => {
   addRandomData();

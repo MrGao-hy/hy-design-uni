@@ -1,7 +1,7 @@
 import type { HttpRequestConfig } from "../../libs/typing";
 import { objectToUrlParams } from "../../libs";
 
-export default class Http {
+export class Http {
   /**
    * 默认请求配置
    */

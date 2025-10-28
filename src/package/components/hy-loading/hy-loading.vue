@@ -1,9 +1,8 @@
 <template>
   <view
-    class="hy-loading-icon"
-    :style="customStyle"
-    :class="[vertical && 'hy-loading-icon__vertical']"
     v-if="show"
+    :style="customStyle"
+    :class="['hy-loading-icon', `hy-loading-icon__${direction}`]"
   >
     <view
       v-if="!webviewHide"
@@ -34,7 +33,7 @@
     </view>
     <text
       v-if="text"
-      class="hy-loading-icon__text"
+      :class="['hy-loading-icon__text', `hy-loading-icon__${direction}--text`]"
       :style="{
         fontSize: addUnit(textSize),
         color: textColor,
@@ -84,10 +83,13 @@ const props = defineProps({
     type: String,
     default: "#909399",
   },
-  /** 文字和图标是否垂直排列 */
-  vertical: {
-    type: Boolean,
-    default: false,
+  /**
+   * 文字和图标是否垂直排列
+   * @values row,column
+   * */
+  direction: {
+    type: String as PropType<HyApp.DirectionType>,
+    default: "row",
   },
   /** 模式选择，见官网说明 */
   mode: {
