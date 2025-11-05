@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.4.5",
-  "description": "fix: 修复toast在支付小程序获取不到ref问题",
+  "version": "0.4.8",
+  "description": "fix: 修复tooltip字体样式未修改问题",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

@@ -15,14 +15,21 @@
       <hy-tooltip
         text="复制内容"
         :buttons="['扩展', '分享']"
+        :show-copy="false"
         trigger-mode="click"
         placement="bottom-start"
+        @click="onClick"
       ></hy-tooltip>
     </view>
 
     <view class="hy-title">高亮选中文本背景色</view>
     <view class="hy-container">
       <hy-tooltip text="复制内容" bgColor="#e3e4e6"></hy-tooltip>
+    </view>
+
+    <view class="hy-title">改变字体</view>
+    <view class="hy-container">
+      <hy-tooltip text="复制内容" color="red" size="30" bold></hy-tooltip>
     </view>
   </hy-config-provider>
 </template>
@@ -35,6 +42,10 @@ import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = storeToRefs(themeStore);
+
+const onClick = (index: number) => {
+  uni.showToast({ title: `点击第${index}个`, icon: "none" });
+};
 </script>
 
 <style scoped lang="scss"></style>

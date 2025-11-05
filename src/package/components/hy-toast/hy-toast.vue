@@ -174,6 +174,7 @@ const show = (options: ToastOptions) => {
 
 // 隐藏toast组件，由父组件通过this.$refs.xxx.hide()形式调用
 const hide = () => {
+  config.loading = false;
   clearTimer();
 };
 /**

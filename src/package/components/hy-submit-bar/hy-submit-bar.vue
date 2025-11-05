@@ -4,38 +4,39 @@
     :style="submitBarStyle"
   >
     <view class="hy-submit-bar__left">
-      <slot name="left">
-        <view
-          class="hy-submit-bar__left--item"
-          v-for="(item, i) in menus"
-          :key="i"
-          @tap="clickMenuFn(i)"
-        >
-          <HyIcon
-            :name="item.icon"
-            :label="item.text"
-            :color="iconColor"
-            :label-color="iconLabelColor"
-            labelPos="bottom"
-            space="7"
-            :size="20"
-          ></HyIcon>
-          <HyBadge
-            :value="item?.badge?.value"
-            :absolute="true"
-            :offset="item?.badge?.offset || [-5, 20]"
-            :isDot="item?.badge?.isDot"
-            :type="item?.badge?.type"
-            :color="item?.badge?.color"
-            :shape="item?.badge?.shape"
-            :numberType="item?.badge?.numberType"
-            :inverted="item?.badge?.inverted"
-          ></HyBadge>
-        </view>
-      </slot>
+      <slot v-if="$slots.left" name="left"></slot>
+      <view
+        v-else-if="menus.length"
+        class="hy-submit-bar__left--item"
+        v-for="(item, i) in menus"
+        :key="i"
+        @tap="clickMenuFn(i)"
+      >
+        <HyIcon
+          :name="item.icon"
+          :label="item.text"
+          :color="iconColor"
+          :label-color="iconLabelColor"
+          labelPos="bottom"
+          space="7"
+          :size="20"
+        ></HyIcon>
+        <HyBadge
+          :value="item?.badge?.value"
+          :absolute="true"
+          :offset="item?.badge?.offset || [-5, 20]"
+          :isDot="item?.badge?.isDot"
+          :type="item?.badge?.type"
+          :color="item?.badge?.color"
+          :shape="item?.badge?.shape"
+          :numberType="item?.badge?.numberType"
+          :inverted="item?.badge?.inverted"
+        ></HyBadge>
+      </view>
     </view>
     <view class="hy-submit-bar__right">
-      <slot name="right">
+      <slot v-if="$slots.right" name="right"></slot>
+      <template v-else>
         <view
           class="hy-submit-bar__right--button"
           v-if="showLeftBtn"
@@ -64,7 +65,7 @@
           ></HyLoading>
           {{ rightBtnText }}
         </view>
-      </slot>
+      </template>
     </view>
   </view>
 </template>
@@ -169,6 +170,11 @@ const props = defineProps({
     type: String,
     default: "circle",
   },
+  /** 层级 */
+  zIndex: {
+    type: [Number, String],
+    default: 999,
+  },
   /** 定义需要用到的外部样式 */
   customStyle: {
     type: Object as PropType<CSSProperties>,
@@ -186,6 +192,7 @@ const submitBarStyle = computed(() => {
   const style: CSSProperties = {
     bottom: 0,
     left: 0,
+    zIndex: props.zIndex,
   };
   if (props.fixed) style.position = "fixed";
   return Object.assign(style, props.customStyle);

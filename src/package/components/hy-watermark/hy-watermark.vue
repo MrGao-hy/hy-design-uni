@@ -532,11 +532,12 @@ function drawTextOffScreen(
   color: string,
   canvas: HTMLCanvasElement,
 ) {
+  console.log(fontSize, "离屏");
   ctx.textBaseline = "middle";
   ctx.textAlign = "center";
   ctx.translate(contentWidth / 2, contentWidth / 2);
   ctx.rotate((Math.PI / 180) * rotate);
-  ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px ${fontFamily}`;
+  ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px/${contentHeight}px ${fontFamily}`;
   ctx.fillStyle = color;
   ctx.fillText(content, 0, 0);
   ctx.restore();

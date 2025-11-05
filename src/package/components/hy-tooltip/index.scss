@@ -16,7 +16,6 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
     background-clip: padding-box;
     text-align: center;
     min-height: 36px;
-    z-index: $hy-tooltip--z-index;
     transition: opacity 0.2s;
     box-shadow: $hy-box-shadow;
     border-radius: $hy-border-radius-sm;
@@ -49,10 +48,6 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
     /* #ifndef APP-NVUE */
     white-space: nowrap;
     /* #endif */
-
-    @include m(text) {
-      font-size: 28rpx;
-    }
   }
 
   @include e(container) {
@@ -67,7 +62,6 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
       padding: 0;
       @include flex(row);
       align-items: center;
-      z-index: 999;
 
       @include e(btn) {
         padding: $hy-border-margin-padding-base;

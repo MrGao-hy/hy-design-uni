@@ -384,7 +384,7 @@ export default {
     // 获取月份数据区域的宽度，因为nvue不支持百分比，所以无法通过css设置每个日期item的宽度
     getWrapperWidth() {
       // #ifndef APP-NVUE
-      getRect(".hy-calendar--month__wrapper").then((size) => {
+      getRect(".hy-calendar--month__wrapper", false, this).then((size) => {
         this.width = size.width;
       });
       // #endif
@@ -413,7 +413,7 @@ export default {
       // $uGetRect为uView自带的节点查询简化方法，详见文档介绍：https://ijry.github.io/uview-plus/js/getRect.html
       // 组件内部一般用this.$uGetRect，对外的为uni.$u.getRect，二者功能一致，名称不同
       return new Promise((resolve) => {
-        getRect(`.${el}`).then((size) => {
+        getRect(`.${el}`, false, this).then((size) => {
           resolve(size);
         });
       });

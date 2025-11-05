@@ -16,15 +16,15 @@ export const useToast = () => {
   const show = (msg: string, opt?: ToastOptions) =>
     openToast({ message: msg, icon: false, type: "", ...opt });
   const info = (msg: string, opt?: ToastOptions) =>
-    openToast({ message: msg, type: "info", ...opt });
+    openToast({ message: msg, type: "info", icon: true, ...opt });
   const success = (msg: string, opt?: ToastOptions) =>
-    openToast({ message: msg, type: "success", ...opt });
+    openToast({ message: msg, type: "success", icon: true, ...opt });
   const error = (msg: string, opt?: ToastOptions) =>
-    openToast({ message: msg, type: "error", ...opt });
+    openToast({ message: msg, type: "error", icon: true, ...opt });
   const warning = (msg: string, opt?: ToastOptions) =>
-    openToast({ message: msg, type: "warning", ...opt });
+    openToast({ message: msg, type: "warning", icon: true, ...opt });
   const primary = (msg: string, opt?: ToastOptions) =>
-    openToast({ message: msg, type: "primary", ...opt });
+    openToast({ message: msg, type: "primary", icon: true, ...opt });
   const loading = (msg: string = "加载中...", opt?: ToastOptions) =>
     openToast({ message: msg, loading: true, ...opt });
   const close = (all?: boolean) => closeToast();

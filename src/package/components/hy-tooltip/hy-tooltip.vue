@@ -1,9 +1,5 @@
 <template>
-  <view
-    :class="['hy-tooltip', customClass]"
-    :style="customStyle"
-    @click.stop="closeHandler"
-  >
+  <view class="hy-tooltip">
     <HyOverlay
       :show="showTooltip && tooltipTop !== -10000 && overlay"
       :customStyle="{ backgroundColor: 'rgba(0, 0, 0, 0)' }"
@@ -11,17 +7,22 @@
     ></HyOverlay>
     <!-- 文本内容区域 -->
     <view
-      class="hy-tooltip__content"
+      :class="`hy-tooltip__content ${customClass}`"
       id="target"
       @longpress.stop="longPressHandler"
       @tap.stop="clickHandler"
-      :style="{
-        color: color,
-        backgroundColor:
-          bgColor && showTooltip && tooltipTop !== -10000
-            ? bgColor
-            : 'transparent',
-      }"
+      :style="[
+        {
+          color: color,
+          fontSize: addUnit(size),
+          fontWeight: bold ? 'bold' : '',
+          backgroundColor:
+            bgColor && showTooltip && tooltipTop !== -10000
+              ? bgColor
+              : 'transparent',
+        },
+        customStyle,
+      ]"
     >
       <slot v-if="$slots.default"></slot>
       <text class="hy-tooltip__content--text" v-else>{{ text }}</text>
@@ -35,7 +36,7 @@
             v-if="showCopy"
             class="hy-tooltip__container--list__btn"
             hover-class="hy-tooltip__container--list__btn--hover"
-            @tap="setClipboardData"
+            @tap.stop="setClipboardData"
           >
             <text class="hy-tooltip__container--list__btn--text">复制</text>
           </view>
@@ -73,12 +74,14 @@
       :show="showTooltip"
       :duration="300"
       custom-class="hy-tooltip__popup"
-      :custom-style="popover.popStyle.value"
+      :custom-style="{
+        ...popover.popStyle.value,
+        zIndex: zIndex,
+      }"
     >
       <view class="hy-tooltip__container">
         <!-- 三角形 -->
         <view
-          v-if="showCopy"
           :class="`hy-tooltip__arrow ${popover.arrowClass.value}`"
           :style="popover.arrowStyle.value"
         ></view>
@@ -154,6 +157,7 @@ import {
   closeOther,
   removeFromQueue,
   pushToQueue,
+  addUnit,
 } from "../../libs";
 
 // 组件
@@ -179,11 +183,6 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  /** 文本大小 */
-  size: {
-    type: [String, Number],
-    default: 14,
-  },
   /**
    * 触发模式
    * @values longpress,click
@@ -200,20 +199,22 @@ const props = defineProps({
     type: String as PropType<IPlacementVo>,
     default: "bottom",
   },
+  /** 文本大小 */
+  size: {
+    type: [String, Number],
+    default: 14,
+  },
   /** 字体颜色 */
   color: String,
+  /** 字体粗细 */
+  bold: {
+    type: Boolean,
+    default: false,
+  },
   /** 弹出提示框时，文本的背景色 */
   bgColor: {
     type: String,
     default: "transparent",
-  },
-  /**
-   * 弹出提示的方向
-   * @values top,bottom
-   * */
-  direction: {
-    type: String,
-    default: "top",
   },
   /** 弹出提示的z-index，nvue无效 */
   zIndex: {
@@ -237,7 +238,7 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  /** 是否显示遮罩 */
+  /** 是否显示提示 */
   showToast: {
     type: Boolean,
     default: true,

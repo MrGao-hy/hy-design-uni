@@ -252,6 +252,7 @@ const clickHandler = (e: TouchEvent) => {
   //   return;
   // }
   e.stopPropagation();
+  console.log(e, "微信");
   let x = 0;
   // #ifndef APP-NVUE || MP-ALIPAY
   x = e.detail.x;

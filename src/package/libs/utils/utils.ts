@@ -373,6 +373,32 @@ const objectToUrlParams = (params: Record<string, any>): string => {
 };
 
 /**
+ * @description  地址栏参数转换对象
+ * @param paramStr - 字符串参数
+ * @returns 返回转换对象
+ */
+const urlParamsToObject = (paramStr: string): AnyObject => {
+  const params: AnyObject = {};
+  // 去掉字符串两端的可能的空格
+  paramStr = paramStr.trim();
+  // 如果字符串以?开头，去掉它
+  if (paramStr.startsWith("?")) {
+    paramStr = paramStr.substring(1);
+  }
+  // 按&分割字符串，得到键值对数组
+  const pairs = paramStr.split("&");
+  for (let i = 0; i < pairs.length; i++) {
+    const pair = pairs[i];
+    // 按=分割键值对
+    const [key, ...valueParts] = pair.split("=");
+    const value = valueParts.join("=");
+    // 将键值对存入对象
+    params[decodeURIComponent(key)] = decodeURIComponent(value);
+  }
+  return params;
+};
+
+/**
  * 获取 [min,max]的随机数
  * Math.floor(Math.random()*10) 可均衡获取 0 到 9 的随机整数
  * @param min 最小值
@@ -486,6 +512,7 @@ export {
   deepClone,
   bytesToSize,
   objectToUrlParams,
+  urlParamsToObject,
   random,
   range,
   getRect,
