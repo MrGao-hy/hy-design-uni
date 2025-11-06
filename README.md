@@ -1,7 +1,11 @@
-<div style="text-align: center; font-size: 30px; font-weight: bold; background: linear-gradient(90deg, #ff4e50, #f9d423); background-clip: text;-webkit-background-clip: text;-webkit-text-fill-color: transparent;">华玥组件库</div>
-<div style="display: flex; justify-content: center;">
-<p style="width: 320px; text-align: center">基于 Vue3 + TypeScript 的现代化组件库，拥有大部分常用组件。一键切换主题色，拥有暗色/亮色模式，开发体验丝滑。</p>
-</div>
+<h1 align="center">
+华玥组件库
+</h1>
+
+<p align="center">
+  基于 Vue3 + TypeScript 的现代化组件库，内置 70+ 常用组件。<br>
+  一键切换主题色，自动亮色/暗色模式，开发体验丝滑。
+</p>
 
 ## 支持平台
 | APP(vue) | H5(网页版) | 微信小程序 | 支付宝小程序 |
