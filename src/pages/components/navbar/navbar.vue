@@ -1,6 +1,14 @@
 <template>
-  <hy-config-provider :custom-style="themeColor" :theme="darkMode">
-    <hy-navbar title="悬浮" autoBack placeholder></hy-navbar>
+  <hy-config-provider
+    :custom-style="[themeColor, { height: '2000px' }]"
+    :theme="darkMode"
+  >
+    <hy-navbar
+      bg-color="#FFFFFF"
+      title="自定义导航栏"
+      autoBack
+      placeholder
+    ></hy-navbar>
 
     <view class="hy-title">基础使用</view>
     <view class="hy-container">

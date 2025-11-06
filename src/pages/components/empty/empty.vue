@@ -1,6 +1,12 @@
 <template>
   <hy-config-provider :custom-style="themeColor" :theme="darkMode">
-    <hy-empty :button="{ text: '去购物' }"></hy-empty>
+    <view class="hy-container">
+      <hy-empty :show="true"></hy-empty>
+    </view>
+
+    <view class="hy-container">
+      <hy-empty mode="search" :show="true"></hy-empty>
+    </view>
   </hy-config-provider>
 </template>
 
@@ -12,6 +18,7 @@ import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = storeToRefs(themeStore);
+const imgUrl = "";
 </script>
 
 <style scoped lang="scss"></style>

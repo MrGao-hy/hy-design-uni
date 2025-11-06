@@ -7,15 +7,13 @@
         height: addUnit(getPx(height) + statusBarHeight),
       }"
     ></view>
-    <view
-      :class="[fixed && 'hy-navbar__fixed']"
-      :style="{ backgroundColor: bgColor }"
-    >
+    <view :class="[fixed && 'hy-navbar__fixed']">
       <HyStatusBar v-if="safeAreaInsetTop" :bgColor="bgColor"></HyStatusBar>
       <view
         :class="[border && 'hy-border__bottom', 'hy-navbar__content']"
         :style="{
           height: addUnit(height),
+          backgroundColor: bgColor,
         }"
       >
         <!-- 左边 -->

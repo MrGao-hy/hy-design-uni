@@ -122,6 +122,7 @@ import {
   useSlots,
   watch,
   inject,
+  nextTick,
 } from "vue";
 import type { PropType, CSSProperties } from "vue";
 import type {
@@ -220,7 +221,9 @@ watch(
 watch(
   () => props.placement,
   (newVal) => {
-    popover.init(newVal, visibleArrow.value, selector);
+    nextTick(() => {
+      popover.init(newVal, visibleArrow.value, selector);
+    });
   },
   { immediate: true },
 );
@@ -251,11 +254,11 @@ watch(
   },
 );
 
-onMounted(() => {
-  setTimeout(() => {
-    popover.init(props.placement, visibleArrow.value, selector);
-  }, 2000);
-});
+// onMounted(() => {
+//   setTimeout(() => {
+//     popover.init(props.placement, visibleArrow.value, selector);
+//   }, 2000);
+// });
 
 onBeforeMount(() => {
   if (queue && queue.pushToQueue) {

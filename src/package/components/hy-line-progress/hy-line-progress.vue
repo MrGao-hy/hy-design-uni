@@ -44,6 +44,7 @@ import {
   range,
   type RectResultType,
   sleep,
+  getPx,
 } from "../../libs";
 
 /**

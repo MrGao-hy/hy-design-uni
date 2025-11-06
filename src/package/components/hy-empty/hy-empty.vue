@@ -65,7 +65,6 @@ const props = defineProps({
   show: {
     type: Boolean,
     default: true,
-    required: true,
   },
   /**
    * 缺省页内容

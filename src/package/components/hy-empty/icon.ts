@@ -1,6 +1,6 @@
 import type { IEmptyIcon } from "./typing";
 
-const url = "https://registry.npmmirror.com/wot-design-uni-assets/1.0.4/files/";
+const url = "https://hy-design-uni.oss-cn-hangzhou.aliyuncs.com/image/";
 
 const emptyIcon: IEmptyIcon = {
   content: {
@@ -13,7 +13,7 @@ const emptyIcon: IEmptyIcon = {
   },
   address: {
     desc: "没有收货地址",
-    icon: url + "png",
+    icon: url + "address.png",
   },
   network: {
     desc: "没有网络",
@@ -21,19 +21,19 @@ const emptyIcon: IEmptyIcon = {
   },
   order: {
     desc: "订单为空",
-    icon: url + "png",
+    icon: url + "order.png",
   },
   coupon: {
     desc: "没有优惠券",
-    icon: url + "png",
+    icon: url + "coupon.png",
   },
-  favor: {
+  collect: {
     desc: "暂无收藏",
     icon: url + "collect.png",
   },
   history: {
     desc: "无历史记录",
-    icon: url + "png",
+    icon: url + "history.png",
   },
   message: {
     desc: "消息列表为空",
@@ -45,7 +45,27 @@ const emptyIcon: IEmptyIcon = {
   },
   integral: {
     desc: "暂无积分",
-    icon: url + "halo.png",
+    icon: url + "integral.png",
+  },
+  card: {
+    desc: "暂无银行卡",
+    icon: url + "card.png",
+  },
+  notification: {
+    desc: "暂无通知",
+    icon: url + "notification.png",
+  },
+  shop: {
+    desc: "暂无购物车",
+    icon: url + "shop.png",
+  },
+  activity: {
+    desc: "暂无活动",
+    icon: url + "activity.png",
+  },
+  loading: {
+    desc: "加载中",
+    icon: url + "loading.png",
   },
 };
 

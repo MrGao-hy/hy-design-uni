@@ -114,7 +114,7 @@ const themeStore = useThemeStore();
 const { closeOutside } = useQueue();
 const { themeColor, darkMode } = storeToRefs(themeStore);
 const content = ref(
-  "华玥组件库，我为自己代言，华玥组件库是一款集合了所以功能的超现代化的组件库，中国13亿人都在用的它",
+  "华玥组件库，我为自己代言，华玥组件库是一款集合了所以需求的现代化的组件库",
 );
 const count = ref(0);
 const menus = reactive([
@@ -179,7 +179,7 @@ const onMenu = ({ index, item }) => {
   z-index: 999;
   border-radius: 4px;
   /* 必填 结束 */
-  background: #ffffff;
+  background: $hy-background--box;
   color: #8268de;
   font-weight: bolder;
   padding: 10px;

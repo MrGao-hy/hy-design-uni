@@ -1,16 +1,24 @@
 ## 在线使用文档地址
-[华玥组件库文档(需要翻墙)](https://hy-component-docs.vercel.app/)
-[华玥组件库文档(国内旧地址，2025-11-12之后域名过期)](https://www.gxh151.top)
-[华玥组件库文档(国内新地址)](https://www.hy-design-uni.top)
+- [华玥组件库文档(需要翻墙)](https://hy-component-docs.vercel.app/)
+- [华玥组件库文档(国内旧地址，2025-11-12之后域名过期)](https://www.gxh151.top)
+- [华玥组件库文档(国内新地址)](https://www.hy-design-uni.top)
 
-## H5测试页面地址
-[华玥组件库dome(需要翻墙)](https://hy-design-uni.vercel.app/#/)
+## 📱 移动端预览
+<p style="display:flex;gap:24px">
+<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f37.png" width="200" height="200" />
+<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f38.jpg" width="200" height="200" />
+<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f36.png" width="200" height="200" />
+
+</p>
 
 ## 安装教程
 
 ```angular2html
-<!--只支持vue3+uniapp的项目-->
-pnpm install hy-app
+<!-- 只支持vue3+uniapp+ts的项目 -->
+pnpm add hy-app
+
+<!-- 没有需要下载 -->
+pnpm add dayjs
 
 node版本 >= 16.14.*
 ```
@@ -35,7 +43,7 @@ export function createApp () {
 </template>
 ```
 
-## 在小程序里面配置全局组件
+## 在page.json文件里面配置按需引入组件
 ```json
 {
   "easycom": {

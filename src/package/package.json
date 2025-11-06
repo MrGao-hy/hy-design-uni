@@ -1,13 +1,15 @@
 {
   "name": "hy-app",
-  "version": "0.4.8",
-  "description": "fix: 修复tooltip字体样式未修改问题",
+  "version": "0.4.9",
+  "description": "fix: 修复navbar绝对定位问题",
   "main": "./index.ts",
   "private": false,
   "scripts": {},
   "keywords": [
     "华玥组件库",
-    "ui组件库",
+    "精美ui库",
+    "移动端组件库",
+    "适配多端小程序",
     "暗黑模式"
   ],
   "web-types": "./web-types.json",

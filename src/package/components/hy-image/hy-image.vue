@@ -24,6 +24,7 @@
           height: addUnit(height),
           borderRadius: shape == 'circle' ? '1000px' : addUnit(radius),
         }"
+        referrerpolicy="no-referrer"
       ></image>
       <view
         v-if="showLoading && loading"

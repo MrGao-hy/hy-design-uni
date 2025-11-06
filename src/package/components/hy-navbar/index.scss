@@ -3,7 +3,7 @@
 
 
 @include b(navbar) {
-  @include m(fixed) {
+  @include e(fixed) {
     position: fixed;
     left: 0;
     right: 0;

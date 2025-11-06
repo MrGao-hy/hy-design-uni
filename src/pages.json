@@ -279,8 +279,7 @@
 				{
 					"path": "navbar/navbar",
 					"style": {
-						"navigationBarTitleText": "顶部导航栏",
-						"enablePullDownRefresh": false
+						"navigationStyle": "custom"
 					}
 				},
 				{

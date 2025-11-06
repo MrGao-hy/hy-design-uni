@@ -24,13 +24,6 @@ onUnload(() => {
 onThemeChange((option) => {
   darkMode.value = option.theme;
 });
-
-onLaunch(() => {
-  const systemInfo = uni.getSystemInfoSync();
-  if (systemInfo.theme) {
-    darkMode.value = systemInfo.theme;
-  }
-});
 </script>
 <style lang="scss">
 @import "@/style/common.scss";
