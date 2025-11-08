@@ -1,7 +1,13 @@
 <template>
   <view class="hy-qrcode" @longpress="onLongPress">
-    <view class="hy-qrcode__content" @click="preview">
+    <view class="hy-qrcode__content">
       <!-- #ifndef APP-NVUE -->
+      <hy-image
+        :src="result"
+        :width="size"
+        :height="size"
+        @click="preview"
+      ></hy-image>
       <canvas
         class="hy-qrcode__content--canvas"
         :id="cid"
@@ -14,7 +20,7 @@
         class="hy-qrcode__content--loading"
         :style="{ width: addUnit(size), height: addUnit(size) }"
       >
-        <HyLoading></HyLoading>
+        <hy-loading :text="loadingText" direction="column" />
       </view>
     </view>
   </view>
@@ -32,12 +38,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { getCurrentInstance, ref, onMounted } from "vue";
+import { getCurrentInstance, ref, watch, nextTick } from "vue";
 import type { IQrcodeEmits } from "./typing";
 import QRCode from "./qrcode.js";
 import { addUnit, error } from "../../libs";
 // 组件
 import HyLoading from "../hy-loading/hy-loading.vue";
+import HyImage from "../hy-image/hy-image.vue";
 
 /**
  * 根据提供的字符串前端JS生成二维码展示
@@ -104,7 +111,7 @@ const props = defineProps({
   /** 加载中提示语 */
   loadingText: {
     type: String,
-    default: "二维码生成中",
+    default: "二维码生成中...",
   },
   /** 是否预览 */
   allowPreview: {
@@ -115,17 +122,12 @@ const props = defineProps({
 const emit = defineEmits<IQrcodeEmits>();
 
 const instance = getCurrentInstance();
-const loading = ref(false);
+const loading = ref(true);
 const qrcode = ref("");
 const result = ref("");
 
-onMounted(() => {
-  initQrCode();
-});
-
 const initQrCode = () => {
   if (props.text) {
-    loading.value = true;
     qrcode.value = new QRCode({
       context: instance, // 上下文环境
       canvasId: props.cid, // canvas-id
@@ -149,6 +151,17 @@ const initQrCode = () => {
     error("二维码内容不能为空");
   }
 };
+
+// 判断是否显示二维码
+watch(
+  () => props.show,
+  (newValue) => {
+    if (newValue) {
+      nextTick(() => initQrCode());
+    }
+  },
+  { immediate: true },
+);
 
 const _result = (res: any) => {
   loading.value = false;

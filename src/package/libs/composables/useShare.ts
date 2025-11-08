@@ -2,9 +2,21 @@
  * 全局分享hooks
  * */
 interface ShareConfig {
+  /**
+   * 标题名称
+   * */
   title?: string;
+  /**
+   * 页面路径
+   * */
   path?: string;
+  /**
+   * 分享朋友的封面图片
+   * */
   friendImageUrl?: string;
+  /**
+   * 分享朋友圈的封面图片
+   * */
   timelineImageUrl?: string;
 }
 

@@ -7,6 +7,7 @@
         :col="col"
         :gap="gap + 'px'"
         :border="border"
+        @click="onClick"
       ></hy-grid>
     </view>
 
@@ -24,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { config } from "@/config/config";
 import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
 import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
@@ -37,45 +38,28 @@ const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = storeToRefs(themeStore);
 
-const list = [
-  {
+type Menus = {
+  icon: string;
+  name: string;
+};
+
+const list: Menus[] = reactive([]);
+
+for (let i = 0; i < 12; i++) {
+  list.push({
     icon: config.image,
-    name: "菜单1",
-  },
-  {
-    icon: config.image,
-    name: "菜单1",
-  },
-  {
-    icon: config.image,
-    name: "菜单1",
-  },
-  {
-    icon: config.image,
-    name: "菜单1",
-  },
-  {
-    icon: config.image,
-    name: "菜单1",
-  },
-  {
-    icon: config.image,
-    name: "菜单1",
-  },
-  {
-    icon: config.image,
-    name: "菜单1",
-  },
-  {
-    icon: config.image,
-    name: "菜单1",
-  },
-];
+    name: "菜单" + i,
+  });
+}
 
 const col = ref(4);
 const gap = ref(0);
 const border = ref(false);
 const list_1 = [2, 3, 4, 5];
+
+const onClick = (e) => {
+  uni.showToast({ title: e.name, icon: "none" });
+};
 </script>
 
 <style scoped lang="scss"></style>

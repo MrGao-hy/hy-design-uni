@@ -151,8 +151,8 @@ const itemStyle = computed<CSSProperties>(() => {
 /**
  * @description 点击事件
  * */
-const childClick = (name: string | Record<string, any>) => {
-  emit("click", name);
+const childClick = (temp: string | Record<string, any>) => {
+  emit("click", temp);
 };
 </script>
 

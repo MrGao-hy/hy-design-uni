@@ -5,12 +5,13 @@
   @include e(content) {
     position: relative;
 
-    //@include m(canvas) {
-    //  position: fixed;
-    //  top: -99999rpx;
-    //  left: -99999rpx;
-    //  z-index: -99999;
-    //}
+    @include m(canvas) {
+      position: fixed;
+      top: -99999rpx;
+      left: -99999rpx;
+      z-index: -99999;
+      overflow: hidden;
+    }
 
     @include m(loading) {
       display: flex;

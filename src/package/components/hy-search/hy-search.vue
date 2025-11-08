@@ -17,10 +17,11 @@
         borderColor: borderColor,
       }"
     >
-      <template v-if="$slots.label || label">
-        <slot name="label">
-          <text class="hy-search__content__label">{{ label }}</text>
-        </slot>
+      <template>
+        <slot v-if="$slots.label" name="label"></slot>
+        <text v-else-if="label" class="hy-search__content__label">{{
+          label
+        }}</text>
       </template>
       <view class="hy-search__content__icon" v-if="searchIcon">
         <HyIcon
@@ -50,7 +51,10 @@
         placeholder-class="hy-search__content__input--placeholder"
         :placeholder="placeholder"
         :placeholder-style="`color: ${placeholderColor}`"
-        class="hy-search__content__input"
+        :class="[
+          'hy-search__content__input',
+          disabled && 'hy-search__content__input--disabled',
+        ]"
         type="text"
         :always-embed="true"
         :style="[
@@ -213,7 +217,10 @@ const props = defineProps({
     default: "",
   },
   /** 输入框左边的图标属性集合，可以为图标名称或图片路径 */
-  searchIcon: [Boolean, Object] as PropType<HyIconProps | boolean>,
+  searchIcon: {
+    type: [Boolean, Object] as PropType<HyIconProps | boolean>,
+    default: { name: IconConfig.SEARCH },
+  },
   /** 组件与其他上下左右之间的距离，带单位的字符串形式，如"30px" */
   margin: {
     type: [String, Number],

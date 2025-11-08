@@ -1,5 +1,5 @@
 <template>
-  <HyTransition
+  <hy-transition
     mode="fade"
     :show="show"
     :style="transStyle"
@@ -36,9 +36,10 @@
           height: addUnit(height),
         }"
       >
-        <slot name="loading">
-          <HyLoading :name="loadingIcon"></HyLoading>
-        </slot>
+        <slot v-if="$slots.loading" name="loading"></slot>
+        <template v-else>
+          <hy-loading :name="loadingIcon"></hy-loading>
+        </template>
       </view>
       <view
         v-if="showError && isError && !loading"
@@ -48,11 +49,11 @@
         }"
       >
         <slot name="error">
-          <HyIcon :name="errorIcon" size="30"></HyIcon>
+          <hy-icon :name="errorIcon" size="30"></hy-icon>
         </slot>
       </view>
     </view>
-  </HyTransition>
+  </hy-transition>
 </template>
 
 <script lang="ts">

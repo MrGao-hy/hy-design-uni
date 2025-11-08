@@ -59,6 +59,10 @@ $hy-search-close-size: 20px !default;
       color: $hy-text-color;
       background-color: $hy-background--empty;
 
+      @include m(disabled) {
+        color: $hy-text-color--disabled;
+      }
+
       @include m(placeholder) {
         font-size: 25rpx;
         color: $hy-text-color--placeholder;
