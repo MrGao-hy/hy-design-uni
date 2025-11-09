@@ -11,7 +11,7 @@
       <canvas
         class="hy-qrcode__content--canvas"
         :id="cid"
-        :canvas-id="cid"
+        type="2d"
         :style="{ width: addUnit(size), height: addUnit(size) }"
       />
       <!-- #endif -->

@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.4.10",
-  "description": "fix: 二维码异步显示不加载问题",
+  "version": "0.4.11",
+  "description": "feat: 水印图片和文字同时存在并且加上title字段",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

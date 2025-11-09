@@ -200,5 +200,5 @@ generateWebTypes({
   entry: "./dist/src/package/components/**/*.md", // 你的组件路径
   outDir: "dist", // 输出目录
   name: "hy-app", // 组件库名字
-  version: "0.3.14", // 版本号
+  version: "0.4.x", // 版本号
 });
