@@ -41,7 +41,7 @@ export default {
 import { getCurrentInstance, ref, watch, nextTick } from "vue";
 import type { IQrcodeEmits } from "./typing";
 import QRCode from "./qrcode.js";
-import { addUnit, error } from "../../libs";
+import { addUnit, error, random } from "../../libs";
 // 组件
 import HyLoading from "../hy-loading/hy-loading.vue";
 import HyImage from "../hy-image/hy-image.vue";
@@ -57,7 +57,7 @@ const props = defineProps({
   /** 实例ID字符串(如果有多个二维码组件必须设置不一样的cid) */
   cid: {
     type: String,
-    default: "hy-qrcode-canvas" + Math.random().toString(),
+    default: "hy-qrcode-canvas_" + random(1, 1000),
   },
   /** 二维码大小 */
   size: {

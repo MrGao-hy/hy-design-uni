@@ -12,37 +12,47 @@
       <!-- @slot 头部插槽 -->
       <slot v-if="$slots.header" name="header" />
       <view v-else class="hy-card--head__flex">
-        <view class="hy-card--head__left" v-if="title">
-          <image
-            :src="thumb"
-            class="hy-card--head__left__thumb"
-            mode="aspectFill"
+        <view class="hy-card--head__left">
+          <hy-icon
             v-if="thumb"
-            :style="{
-              height: addUnit(thumbWidth),
-              width: addUnit(thumbWidth),
-              borderRadius: thumbCircle ? '50px' : '4px',
-            }"
-          ></image>
-          <text
-            class="hy-card--head__left__title"
-            :style="{
-              fontSize: addUnit(titleSize),
-              color: titleColor,
-            }"
-          >
-            {{ title }}
-          </text>
+            :name="thumb"
+            custom-class="hy-card--head__left__thumb"
+            :height="thumbWidth"
+            :width="thumbWidth"
+            :round="thumbCircle ? '50%' : '4px'"
+          ></hy-icon>
+          <view>
+            <view
+              v-if="title"
+              class="hy-card--head__left__title"
+              :style="{
+                fontSize: addUnit(titleSize),
+                color: titleColor,
+              }"
+            >
+              {{ title }}
+            </view>
+            <text
+              v-if="subTitle"
+              class="hy-card--head__left__sub"
+              :style="{
+                fontSize: addUnit(subTitleSize),
+                color: subTitleColor,
+              }"
+            >
+              {{ subTitle }}
+            </text>
+          </view>
         </view>
-        <view class="hy-card--head__right hy-line-1" v-if="subTitle">
+        <view class="hy-card--head__right" v-if="subTitle">
           <text
-            class="hy-card--head__title__text"
+            class="hy-card--head__right__text"
             :style="{
-              fontSize: addUnit(subTitleSize),
-              color: subTitleColor,
+              fontSize: addUnit(rightTextSize),
+              color: rightTextColor,
             }"
           >
-            {{ subTitle }}
+            {{ rightText }}
           </text>
         </view>
       </view>
@@ -90,6 +100,9 @@ import type { CSSProperties, PropType } from "vue";
 import type { ICardEmits } from "./typing";
 import { addUnit, getPx } from "../../libs";
 
+// 组件
+import HyIcon from "../hy-icon/hy-icon.vue";
+
 /**
  * 卡片组件一般用于多个列表条目，且风格统一的场景。
  * @displayName hy-card
@@ -98,7 +111,7 @@ defineOptions({});
 
 // const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps({
-  /** 卡片与屏幕两侧是否留空隙 */
+  /** 卡片与屏幕两侧是否留空隙,false-不留缝隙，true-有margin */
   full: {
     type: Boolean,
     default: false,
@@ -117,12 +130,27 @@ const props = defineProps({
   /** 副标题颜色 */
   subTitleColor: {
     type: String,
-    default: "#909399",
+    default: "",
   },
   /** 副标题字体大小 */
   subTitleSize: {
     type: [String, Number],
     default: 13,
+  },
+  /** 右边内容 */
+  rightText: {
+    type: String,
+    default: "",
+  },
+  /** 右边内容颜色 */
+  rightTextColor: {
+    type: String,
+    default: "",
+  },
+  /** 右边内容字体大小 */
+  rightTextSize: {
+    type: [String, Number],
+    default: "",
   },
   /** 是否显示边框 */
   border: {

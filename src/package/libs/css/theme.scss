@@ -39,7 +39,7 @@ $hy-text-color--hover: var(--hy-text-color--hover, #58595b)!default; // 点击�
 
 
 /* 背景色 */
-$hy-background: var(--hy-background, #f8f8f8) !default; // 背景色
+$hy-background: var(--hy-background, #f8f8f8) !default; // 页面背景色
 $hy-background--2: var(--hy-background--2, #ffffff) !default; // 弹窗背景色
 $hy-background--3: var(--hy-background--3, rgb(238, 238, 239)) !default; // 弹窗背景色
 $hy-background--container: var(--hy-background--container, #ffffff) !default; // 容器背景色
@@ -49,8 +49,8 @@ $hy-background--empty: var(--hy-background--empty, #F3F3F3) !default; // 搜索�
 $hy-background--hover: var(--hy-background--hover, rgba(0,0,0,0.05)) !default; // 点击状态
 $hy-light-background-mask: var(--hy-light-background-mask, rgba(0, 0, 0, 0.5)); //遮罩颜色
 $hy-background--active: var(--hy-background--active, #FFFFFF); // 选中背景色
-$hy-background--close: var(--hy-background--close, #f0f0f0); // 选中背景色
-$hy-background--box: var(--hy-background--box, #FFFFFF); // 选中背景色
+$hy-background--close: var(--hy-background--close, #f0f0f0); // 关闭背景色
+$hy-background--box: var(--hy-background--box, #FFFFFF); // 盒子背景色
 
 /* 文字尺寸 */
 $hy-font-size-sm: 24rpx; // 提示文字大小

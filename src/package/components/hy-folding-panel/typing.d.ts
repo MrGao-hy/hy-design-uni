@@ -1,68 +1,57 @@
-import type { CSSProperties } from 'vue'
-import type { CellContentVo } from '../hy-cell/typing'
+import type { Ref, ToRefs } from "vue";
 
-export interface PanelVo extends CellContentVo {
+// 折叠面板组组件的Props接口
+export interface HyFoldingPanelGroupProps {
   /**
-   * @description 是否展示
-   * */
-  spread?: boolean
+   * 当前激活的面板索引，支持v-model
+   */
+  modelValue?: number;
   /**
-   * @description 展示面板里自定义值
-   * */
-  content?: string
-}
-export default interface HyFoldingPanelProps {
+   * 是否手风琴模式，默认false
+   */
+  accordion?: boolean;
   /**
-   * @description 数据集
-   * */
-  list: PanelVo[]
-  /**
-   * @description 是否手风琴模式（ 默认 false ）
-   * */
-  accordion?: boolean
-  /**
-   * @description 头部标题
-   * */
-  title?: string
-  /**
-   * @description 是否显示头部底部边框
-   * */
-  titleBorder?: boolean
-  /**
-   * @description 是否显示cell下边框 (默认 true )
-   * */
-  border?: boolean
-  /**
-   * @description 标题前缀竖线颜色
-   * */
-  verticalColor?: string
-  /**
-   * @description 是否显示标题前缀竖线
-   * */
-  showVertical?: boolean
-  /**
-   * @description 是否禁用（默认false）
-   * */
-  disabled?: boolean
-  /**
-   * @description 单元的大小，可选值为 large，medium，small
-   * */
-  size?: HyApp.SizeType
-  /**
-   * @description 内容面板高度
-   * */
-  contentHeight?: string | number
-  /**
-   * @description 定义需要用到的外部样式
-   * */
-  customStyle?: CSSProperties
+   * 是否禁用整个折叠面板组
+   */
+  disabled?: boolean;
+    /**
+     * 是否显示边框，默认true
+     */
+    border?: boolean;
+    /**
+     * 面板大小 large, medium, small
+     */
+    size?: HyApp.SizeType;
 }
 
-export interface IFoldingPanel {
-  /** 打开面板触发 */
-  (e: 'open', temp: PanelVo, index: number): void
-  /** 关闭面板触发 */
-  (e: 'close', temp: PanelVo, index: number): void
-  /** 改成面板开关状态触发 */
-  (e: 'change', temp: PanelVo, index: number): void
+// 父组件提供给子组件的配置接口
+export interface HyFoldingPanelGroupConfig extends ToRefs<HyFoldingPanelGroupProps> {
+  /**
+   * 当前激活的索引
+   */
+  activeIndex: Ref<number | string>;
+  /**
+   * 更新激活索引的方法
+   */
+  updateActiveIndex: (index: number | string) => void;
+}
+
+// 折叠面板组组件的事件接口
+export interface HyFoldingPanelGroupEmits {
+  /**
+   * v-model 同步事件
+   */
+  (e: "update:modelValue", value: number | string): void;
+  /**
+   * 面板状态改变时触发
+   */
+  (e: "change", index: number | string): void;
+  /**
+   * 面板打开时触发
+   */
+  (e: "open", index: number | string): void;
+  /**
+   * 面板关闭时触发
+   */
+  (e: "close", index: number | string): void;
 }

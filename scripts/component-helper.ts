@@ -178,7 +178,10 @@ export function generateWebTypes(options = {} as InstallOptions) {
     if (content.hasOwnProperty("props")) {
       content.props.content = content?.props.content.map((item) => {
         // 去除多余标点符号
-        item.Values = item.Values.replace(/`|-/g, "");
+        item.Values = item.Values.replace(
+          /`|(?<![a-zA-Z0-9])-(?![a-zA-Z0-9])/g,
+          "",
+        );
         item.Default = item.Default.replace(/'/g, "");
         if (!item.Default) {
           delete item.Default;

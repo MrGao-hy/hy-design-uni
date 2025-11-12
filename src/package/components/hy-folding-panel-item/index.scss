@@ -1,0 +1,87 @@
+@use "../../libs/css/theme.scss" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(folding-panel-item) {
+  position: relative;
+  width: 100%;
+
+  @include m(disabled) {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  @include is(active) {
+    background-color: $hy-background--active;
+  }
+
+  @include m(border) {
+    border-bottom: $hy-border-line;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  @include m(large) {
+    padding: $hy-border-margin-padding-lg;
+    font-size: $hy-font-size-lg;
+  }
+
+  @include m(medium) {
+    padding: $hy-border-margin-padding-base;
+    font-size: $hy-font-size-base;
+  }
+
+  @include m(small) {
+    padding: $hy-border-margin-padding-sm;
+    font-size: $hy-font-size-sm;
+  }
+
+  @include e(header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+    background: $hy-background--container;
+
+    @include pseudo(active) {
+      background-color: $hy-background--hover;
+    }
+  }
+
+  @include e(left) {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  @include e(title) {
+    font-weight: 500;
+    flex: 1;
+  }
+
+  @include e(right) {
+    display: flex;
+    align-items: center;
+  }
+
+  @include e(value) {
+    font-size: 13px;
+    color: $hy-text-color--grey;
+    margin-right: 8px;
+  }
+
+  @include e(arrow) {
+    transition: transform 0.3s;
+
+    @include m(up) {
+      transform: rotate(180deg);
+    }
+  }
+
+  @include e(content) {
+    background-color: transparent;
+    transition: height 0.3s ease;
+    box-sizing: border-box;
+  }
+}

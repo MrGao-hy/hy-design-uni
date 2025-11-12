@@ -28,11 +28,6 @@ const props = defineProps({
     default: false,
   },
   /**
-   * 快捷设置 flex-direction
-   * @values row,row-reverse,column,column-reverse
-   * */
-  direction: String as PropType<FlexDirection>,
-  /**
    * 设置元素在主轴方向上的对齐方式
    * @values flex-start,flex-end,space-between,space-around,space-evenly,center
    * */
@@ -108,4 +103,6 @@ const flexStyle = computed(() => {
 });
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+@import "./index.scss";
+</style>

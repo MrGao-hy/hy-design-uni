@@ -1,163 +1,149 @@
 <template>
   <view class="hy-folding-panel">
-    <HyCell
-      :title="title"
-      :titleBorder="titleBorder"
-      :border="border"
-      :showVertical="showVertical"
-      :verticalColor="verticalColor"
-      :size="size"
-      :disabled="disabled"
-      :list="lists"
-      @click="clickHandler"
-    >
-      <template #icon="{ icon }">
-        <slot name="icon" :icon="icon"></slot>
-      </template>
-      <template #title="{ title }">
-        <slot name="title" :title="title"></slot>
-      </template>
-      <template #value="{ record }">
-        <slot name="value" :record="record"></slot>
-      </template>
-      <template #bottom="{ record }">
-        <view
-          class="hy-folding-panel__main"
-          :style="[
-            customStyle,
-            {
-              height: record?.spread ? addUnit(contentHeight) : '0px',
-            },
-          ]"
-        >
-          <slot :record="record?.content" />
-        </view>
-        <HyLine v-if="record?.spread"></HyLine>
-      </template>
-    </HyCell>
+    <slot></slot>
   </view>
 </template>
 
 <script lang="ts">
 export default {
   name: "hy-folding-panel",
-  options: {
-    addGlobalClass: true,
-    virtualHost: true,
-    styleIsolation: "shared",
-  },
 };
 </script>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import type { CSSProperties, PropType } from "vue";
-import type { IFoldingPanel, PanelVo } from "./typing";
-import { ColorConfig, addUnit } from "../../libs";
-// 组件
-import HyCell from "../hy-cell/hy-cell.vue";
-import HyLine from "../hy-line/hy-line.vue";
+import { provide, ref, watch, toRefs } from "vue";
+import type { PropType } from "vue";
+import type { HyFoldingPanelGroupEmits } from "./typing";
 
-/**
- * 通过折叠面板收纳内容区域。
- * @displayName hy-folding-panel
- */
-defineOptions({});
-
-// const props = withDefaults(defineProps<IProps>(), defaultProps);
+// Props定义
 const props = defineProps({
-  /** 数据集 */
-  list: {
-    type: Array as PropType<PanelVo[]>,
-    default: [],
+  /**
+   * 当前激活的面板索引，支持v-model
+   */
+  modelValue: {
+    type: [Number, String],
+    default: -1,
   },
-  /** 是否手风琴模式 */
+  /**
+   * 是否手风琴模式，默认false
+   */
   accordion: {
     type: Boolean,
     default: false,
   },
-  /** 头部标题 */
-  title: String,
-  /** 是否显示头部底部边框 */
-  titleBorder: {
-    type: Boolean,
-    default: false,
-  },
-  /** 是否显示cell下边框 */
-  border: {
-    type: Boolean,
-    default: true,
-  },
-  /** 标题前缀竖线颜色 */
-  verticalColor: {
-    type: String,
-    default: ColorConfig.primary,
-  },
-  /** 是否显示标题前缀竖线 */
-  showVertical: {
-    type: Boolean,
-    default: true,
-  },
-  /** 是否禁用 */
+  /**
+   * 是否禁用整个折叠面板组
+   */
   disabled: {
     type: Boolean,
     default: false,
   },
   /**
-   * 单元的大小
-   * @values large,medium,small
-   * */
+   * 是否显示边框
+   */
+  border: {
+    type: Boolean,
+    default: true,
+  },
+  /**
+   * 面板头部大小 large, medium, small
+   * @values large, medium, small
+   */
   size: {
-    type: String,
+    type: String as PropType<HyApp.SizeType>,
     default: "medium",
   },
-  /** 内容面板高度 */
-  contentHeight: {
-    type: [Number, String],
-    default: 120,
-  },
-  /** 定义需要用到的外部样式 */
-  customStyle: {
-    type: Object as PropType<CSSProperties>,
-  },
 });
-const emit = defineEmits<IFoldingPanel>();
 
-const lists = ref<PanelVo[]>([]);
+// 事件定义
+const emit = defineEmits<HyFoldingPanelGroupEmits>();
 
+// 内部激活索引
+const activeIndex = ref(props.modelValue);
+
+// 监听v-model变化
 watch(
-  () => props.list,
-  (newValue: PanelVo[]) => {
-    lists.value = newValue.map((item) => ({
-      ...item,
-      arrowDirection: "down",
-      spread: false,
-    }));
+  () => props.modelValue,
+  (newVal) => {
+    activeIndex.value = newVal;
   },
-  { immediate: true },
 );
 
-const clickHandler = (temp: PanelVo, index: number) => {
-  // if (temp?.disabled && temp?.animating) return;
-  lists.value = props.list.map((item, i) => {
-    if (props.accordion) {
-      // 判断是否是收起来
-      item.spread = i === index ? !item.spread : false;
-    } else {
-      if (i === index) {
-        item.spread = !item.spread;
-      }
-    }
+// 监听内部激活索引变化
+watch(activeIndex, (newVal) => {
+  emit("update:modelValue", newVal);
+  emit("change", newVal);
+});
 
-    item.arrowDirection = item.spread ? "up" : "down";
-    return item;
-  });
-  const event: "open" | "close" = temp.spread ? "open" : "close";
-  emit("change", temp, index);
-  emit(event, temp, index);
+// 提供给子组件的方法
+const updateActiveIndex = (index: number) => {
+  if (props.disabled) return;
+
+  if (props.accordion) {
+    // 手风琴模式下，如果点击的是当前激活的索引，则关闭（设为-1）
+    const wasActive = activeIndex.value === index;
+    activeIndex.value = wasActive ? -1 : index;
+
+    // 触发相应的事件
+    if (!wasActive) {
+      emit("open", index);
+    } else {
+      emit("close", index);
+    }
+  } else {
+    // 非手风琴模式下，这里不做特殊处理，由子组件自己控制
+    activeIndex.value = index;
+  }
 };
+
+// 提供给子组件的配置
+provide("hy-folding-panel", {
+  ...toRefs(props),
+  activeIndex,
+  updateActiveIndex,
+});
+// 对外暴露的方法
+defineExpose({
+  /**
+   * 打开指定索引的面板
+   */
+  open: (index: number | string) => {
+    if (props.disabled) return;
+    activeIndex.value = index;
+    emit("open", index);
+  },
+
+  /**
+   * 关闭所有面板
+   */
+  closeAll: () => {
+    if (props.disabled) return;
+    const prevIndex = activeIndex.value;
+    activeIndex.value = -1;
+    if (prevIndex !== -1) {
+      emit("close", prevIndex);
+    }
+  },
+
+  /**
+   * 切换指定索引面板的状态
+   */
+  toggle: (index: number | string) => {
+    if (props.disabled) return;
+    updateActiveIndex(index);
+  },
+
+  /**
+   * 关闭指定索引的面板
+   */
+  close: (index: number | string) => {
+    if (props.disabled) return;
+    if (activeIndex.value === index) {
+      activeIndex.value = -1;
+      emit("close", index);
+    }
+  },
+});
 </script>
 
-<style lang="scss" scoped>
-@import "./index.scss";
-</style>
+<style lang="scss" scoped></style>

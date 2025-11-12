@@ -2,7 +2,7 @@
   <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <view class="hy-title">基础使用</view>
     <view class="hy-container">
-      <hy-qrcode cid="qrcode_1" text="我是文本111"></hy-qrcode>
+      <hy-qrcode text="我是文本111"></hy-qrcode>
     </view>
 
     <view class="hy-title">异步显示数据</view>

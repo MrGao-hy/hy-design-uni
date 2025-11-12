@@ -27,6 +27,7 @@ declare module "vue" {
     HyFlex: (typeof import("./components/hy-flex/hy-flex.vue"))["default"];
     HyFloatButton: (typeof import("./components/hy-float-button/hy-float-button.vue"))["default"];
     HyFloatingPanel: (typeof import("./components/hy-floating-panel/hy-floating-panel.vue"))["default"];
+    HyFloatingPanelItem: (typeof import("./components/hy-floating-panel-item/hy-floating-panel-item.vue"))["default"];
     HyForm: (typeof import("@/package/components/hy-form-group/hy-form.vue"))["default"];
     HyFormItem: (typeof import("./components/hy-form-item/hy-form-item.vue"))["default"];
     HyFormGroup: (typeof import("./components/hy-form-group/hy-form-group.vue"))["default"];

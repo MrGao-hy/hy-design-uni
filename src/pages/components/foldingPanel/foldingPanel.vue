@@ -1,27 +1,46 @@
 <template>
   <hy-config-provider :custom-style="themeColor" :theme="darkMode">
     <hy-folding-panel
-      :list="columns"
-      title="水果摊"
-      :border="border"
-      :size="size"
-      :contentHeight="height"
-      :showVertical="showVertical"
+      v-model="activeIndex"
       :accordion="accordion"
+      :border="border"
+      :disabled="disabled"
+      :size="size"
     >
-      <template #default="{ record }">
-        <view style="padding: 20px">
-          {{ record }}
-        </view>
-      </template>
+      <hy-folding-panel-item title="水果" index="fruits">
+        内容一
+      </hy-folding-panel-item>
+      <hy-folding-panel-item title="主食" index="food">
+        内容二
+      </hy-folding-panel-item>
+      <hy-folding-panel-item
+        title="饮品"
+        index="beverage"
+        value="奶茶"
+        :default-open="true"
+      >
+        内容三
+      </hy-folding-panel-item>
+      <hy-folding-panel-item index="title">
+        <template #title>
+          <view class="hy-folding-panel-item__title">自定义标题</view>
+        </template>
+        内容四
+      </hy-folding-panel-item>
+      <hy-folding-panel-item index="header">
+        <template #header>
+          <view class="hy-folding-panel-item__title">自定义头部</view>
+        </template>
+        内容五
+      </hy-folding-panel-item>
     </hy-folding-panel>
 
     <view class="hy-setting__box">
-      <view class="hy-title">滚动方向</view>
+      <view class="hy-title">大小</view>
       <hy-subsection :list="list_1" v-model="size"></hy-subsection>
 
-      <view class="hy-title">显示标题前缀竖线</view>
-      <hy-switch v-model="showVertical"></hy-switch>
+      <view class="hy-title">是否禁用</view>
+      <hy-switch v-model="disabled"></hy-switch>
 
       <view class="hy-title">显示下边框</view>
       <hy-switch v-model="border"></hy-switch>
@@ -36,22 +55,24 @@
 </template>
 
 <script setup lang="ts">
-import HyFoldingPanel from "@/package/components/hy-folding-panel/hy-folding-panel.vue";
-import HySlider from "../../../package/components/hy-slider/hy-slider.vue";
-import HySubsection from "../../../package/components/hy-subsection/hy-subsection.vue";
-import HySwitch from "../../../package/components/hy-switch/hy-switch.vue";
+import HySlider from "@/package/components/hy-slider/hy-slider.vue";
+import HySubsection from "@/package/components/hy-subsection/hy-subsection.vue";
+import HySwitch from "@/package/components/hy-switch/hy-switch.vue";
+import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
+import HyFoldingPanel from "../../../package/components/hy-folding-panel/hy-folding-panel.vue";
+import HyFoldingPanelItem from "@/package/components/hy-folding-panel-item/hy-folding-panel-item.vue";
 import { ref } from "vue";
 import { useThemeStore } from "@/store";
-import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { storeToRefs } from "pinia";
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = storeToRefs(themeStore);
 const size = ref<HyApp.SizeType>("medium");
-const border = ref(false);
-const showVertical = ref(false);
+const border = ref(true);
+const disabled = ref(false);
 const accordion = ref(false);
 const height = ref(80);
+const activeIndex = ref(1);
 
 const list_1 = [
   { name: "小", value: "small" },
@@ -79,4 +100,11 @@ const columns = [
 ];
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.hy-folding-panel {
+  //width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: $hy-box-shadow;
+}
+</style>

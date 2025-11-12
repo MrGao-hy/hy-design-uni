@@ -9,8 +9,8 @@
     "lib": ["esnext", "dom"],
     "types": [
       "@dcloudio/types",
-      "@types/uni-app",
       "@uni-helper/uni-types",
+      "@types/uni-app",
       "@types/wechat-miniprogram",
     ]
   },

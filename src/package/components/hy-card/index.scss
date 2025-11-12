@@ -11,8 +11,8 @@
 
   @include m(full) {
     // 如果是与屏幕之间不留空隙，应该设置左右边距为0
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    margin-left: $hy-border-margin-padding-base !important;
+    margin-right: $hy-border-margin-padding-base !important;
     width: 100%;
   }
 
@@ -31,20 +31,28 @@
 
     @include e(left) {
       display: flex;
+      align-items: center;
+      flex: 1;
 
-      @include e(thumb) {
-        margin-right: 16rpx;
+      @include edeep(thumb) {
+        margin-right: $hy-border-margin-padding-base;
+        flex-shrink: 0
       }
 
       @include e(title) {
-        max-width: 400rpx;
+        max-width: 450rpx;
         @include lineEllipsis;
+      }
+
+      @include e(sub) {
+        color: $hy-text-color--grey;
+        font-size: $hy-font-size-sm;
       }
     }
 
     @include e(right) {
       color: $hy-text-color--grey;
-      margin-left: 6rpx;
+      margin-left: $hy-border-margin-padding-sm;
     }
   }
 }
