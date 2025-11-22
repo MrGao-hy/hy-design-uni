@@ -10,16 +10,8 @@
     pointer-events: none;
   }
 
-  @include is(active) {
-    background-color: $hy-background--active;
-  }
-
   @include m(border) {
     border-bottom: $hy-border-line;
-
-    &:last-child {
-      border-bottom: none;
-    }
   }
 
   @include m(large) {

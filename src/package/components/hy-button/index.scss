@@ -15,6 +15,11 @@
   /* #endif */
   flex-direction: row;
 
+  /* 去除原生按钮边框 */
+  &:after {
+    border: none !important;
+  }
+
   @include e(text) {
     font-size: 15px;
   }
@@ -57,6 +62,10 @@
 
   @include m(disabled) {
     opacity: 0.5;
+  }
+
+  @include e(no-border) {
+    border: none !important;
   }
 
   @include themeColor(info,  $hy-info, $hy-info);

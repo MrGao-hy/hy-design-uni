@@ -1,15 +1,55 @@
-import type IProps from "./typing";
+import type { CSSProperties, PropType } from 'vue'
 
-const defaultProps: IProps = {
-  modelValue: 1,
-  totalPage: 1,
-  showIcon: false,
-  showMessage: false,
-  total: 0,
-  pageSize: 10,
-  prevText: "上一页",
-  nextText: "下一页",
-  hideIfOnePage: true,
-};
+const paginationProps = {
+    /** 当前页 */
+    modelValue: {
+        type: Number,
+        default: 1
+    },
+    /** 总页数，如果有total，则优先使用total计算页数 */
+    totalPage: {
+        type: Number,
+        default: 1
+    },
+    /** 是否展示分页为Icon图标 */
+    showIcon: {
+        type: Boolean,
+        default: false
+    },
+    /** 是否展示总条数 */
+    showMessage: {
+        type: Boolean,
+        default: false
+    },
+    /** 总条数 */
+    total: {
+        type: Number,
+        default: 0
+    },
+    /** 每页条数 */
+    pageSize: {
+        type: Number,
+        default: 10
+    },
+    /** 上一页文本 */
+    prevText: {
+        type: String,
+        default: '上一页'
+    },
+    /** 下一页文本 */
+    nextText: {
+        type: String,
+        default: '下一页'
+    },
+    /** 总页数只有一页时是否隐藏 */
+    hideIfOnePage: {
+        type: Boolean,
+        default: true
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: {
+        type: Object as PropType<CSSProperties>
+    }
+}
 
-export default defaultProps;
+export default paginationProps

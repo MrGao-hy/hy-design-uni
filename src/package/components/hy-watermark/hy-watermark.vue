@@ -1,246 +1,141 @@
 <template>
-  <view :class="rootClass" :style="rootStyle">
-    <canvas
-      v-if="!canvasOffScreenable && showCanvas"
-      type="2d"
-      :style="{
-        height: canvasHeight + 'px',
-        width: canvasWidth + 'px',
-        visibility: 'hidden',
-      }"
-      :canvas-id="canvasId"
-      :id="canvasId"
-    />
-  </view>
+    <view :class="rootClass" :style="rootStyle">
+        <canvas
+            v-if="!canvasOffScreenable && showCanvas"
+            type="2d"
+            :style="{
+                height: canvasHeight + 'px',
+                width: canvasWidth + 'px',
+                visibility: 'hidden'
+            }"
+            :canvas-id="canvasId"
+            :id="canvasId"
+        />
+    </view>
 </template>
 
 <script lang="ts">
 export default {
-  name: "hy-watermark",
-  options: {
-    addGlobalClass: true,
-    virtualHost: true,
-    styleIsolation: "shared",
-  },
-};
+    name: 'hy-watermark',
+    options: {
+        addGlobalClass: true,
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+}
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch, nextTick } from "vue";
-import type { CSSProperties } from "vue";
-import { addUnit, guid } from "../../libs";
+import { computed, onMounted, ref, watch, nextTick } from 'vue'
+import type { CSSProperties } from 'vue'
+import { addUnit, guid } from '../../libs'
+import watermarkProps from './props'
 
 /**
  * 在页面或组件上添加指定的图片或文字，可用于版权保护、品牌宣传等场景。
  * @displayName hy-watermark
  */
-defineOptions({});
+defineOptions({})
 
-// const props = withDefaults(defineProps<IProps>(), defaultProps)
-const props = defineProps({
-  /** 显示主标题 */
-  title: {
-    type: String,
-    default: "",
-  },
-  /** 主标题颜色 */
-  titleColor: {
-    type: String,
-    default: "",
-  },
-  /** 主标题字体大小，单位px */
-  titleSize: {
-    type: Number,
-    default: 0,
-  },
-  /** 显示副标题内容 */
-  content: {
-    type: String,
-    default: "",
-  },
-  /** 显示图片的地址，支持网络图片和base64（钉钉小程序仅支持网络图片） */
-  image: {
-    type: String,
-    default: "",
-  },
-  /** 图片高度 */
-  imageHeight: {
-    type: Number,
-    default: 50,
-  },
-  /** 图片宽度 */
-  imageWidth: {
-    type: Number,
-    default: 70,
-  },
-  /** X轴间距，单位px */
-  gutterX: {
-    type: Number,
-    default: 0,
-  },
-  /** Y轴间距，单位px */
-  gutterY: {
-    type: Number,
-    default: 0,
-  },
-  /** canvas画布宽度，单位px */
-  width: {
-    type: Number,
-    default: 100,
-  },
-  /** canvas画布高度，单位px */
-  height: {
-    type: Number,
-    default: 100,
-  },
-  /** 是否为全屏水印 */
-  fullScreen: {
-    type: Boolean,
-    default: true,
-  },
-  /** 水印字体颜色 */
-  color: {
-    type: String,
-    default: "#8c8c8c",
-  },
-  /** 水印字体大小，单位px */
-  size: {
-    type: Number,
-    default: 14,
-  },
-  /** 水印字体样式（仅微信和h5支持） */
-  fontStyle: {
-    type: String,
-    default: "",
-  },
-  /** 水印字体的粗细 */
-  fontWeight: {
-    type: String,
-    default: "",
-  },
-  /** 水印字体系列（仅微信和h5支持） */
-  fontFamily: {
-    type: String,
-    default: "PingFang SC",
-  },
-  /** 水印旋转角度 */
-  rotate: {
-    type: Number,
-    default: -25,
-  },
-  /** 自定义层级 */
-  zIndex: {
-    type: Number,
-    default: 10086,
-  },
-  /** 自定义透明度，取值 0~1 */
-  opacity: {
-    type: Number,
-    default: 0.5,
-  },
-});
+const props = defineProps(watermarkProps)
 
 watch(
-  () => props,
-  () => {
-    doReset();
-  },
-  { deep: true },
-);
+    () => props,
+    () => {
+        doReset()
+    },
+    { deep: true }
+)
 
-const canvasId = ref<string>(`watermark--${guid()}`); // canvas 组件的唯一标识符
-const waterMarkUrl = ref<string>(""); // canvas生成base64水印
+const canvasId = ref<string>(`watermark--${guid()}`) // canvas 组件的唯一标识符
+const waterMarkUrl = ref<string>('') // canvas生成base64水印
 const canvasOffScreenable = ref<boolean>(
-  uni.canIUse("createOffscreenCanvas") && Boolean(uni.createOffscreenCanvas),
-); // 是否可以使用离屏canvas
-const pixelRatio = ref<number>(uni.getSystemInfoSync().pixelRatio); // 像素比
-const canvasHeight = ref<number>(
-  (props.height + props.gutterY) * pixelRatio.value,
-); // canvas画布高度
-const canvasWidth = ref<number>(
-  (props.width + props.gutterX) * pixelRatio.value,
-); // canvas画布宽度
-const showCanvas = ref<boolean>(true); // 是否展示canvas
+    uni.canIUse('createOffscreenCanvas') && Boolean(uni.createOffscreenCanvas)
+) // 是否可以使用离屏canvas
+const pixelRatio = ref<number>(uni.getSystemInfoSync().pixelRatio) // 像素比
+const canvasHeight = ref<number>((props.height + props.gutterY) * pixelRatio.value) // canvas画布高度
+const canvasWidth = ref<number>((props.width + props.gutterX) * pixelRatio.value) // canvas画布宽度
+const showCanvas = ref<boolean>(true) // 是否展示canvas
 
 /**
  * @description 水印css类
  */
 const rootClass = computed(() => {
-  const classes: string[] = ["hy-watermark"];
-  if (props.fullScreen) {
-    classes.push("is-fullscreen");
-  }
-  return classes;
-});
+    const classes: string[] = ['hy-watermark']
+    if (props.fullScreen) {
+        classes.push('is-fullscreen')
+    }
+    return classes
+})
 
 /**
  * @description 水印样式
  */
 const rootStyle = computed(() => {
-  const style: CSSProperties = {
-    opacity: props.opacity,
-    backgroundSize: addUnit(props.width + props.gutterX),
-  };
-  if (waterMarkUrl.value) {
-    style["backgroundImage"] = `url('${waterMarkUrl.value}')`;
-  }
-  return style;
-});
+    const style: CSSProperties = {
+        opacity: props.opacity,
+        backgroundSize: addUnit(props.width + props.gutterX)
+    }
+    if (waterMarkUrl.value) {
+        style['backgroundImage'] = `url('${waterMarkUrl.value}')`
+    }
+    return style
+})
 
 onMounted(() => {
-  doInit();
-});
+    doInit()
+})
 
 function doReset() {
-  showCanvas.value = true;
-  canvasHeight.value = (props.height + props.gutterY) * pixelRatio.value;
-  canvasWidth.value = (props.width + props.gutterX) * pixelRatio.value;
-  nextTick(() => {
-    doInit();
-  });
+    showCanvas.value = true
+    canvasHeight.value = (props.height + props.gutterY) * pixelRatio.value
+    canvasWidth.value = (props.width + props.gutterX) * pixelRatio.value
+    nextTick(() => {
+        doInit()
+    })
 }
 
 function doInit() {
-  // #ifdef H5
-  // h5使用document.createElement创建canvas，不用展示canvas标签
-  showCanvas.value = false;
-  // #endif
-  const {
-    width,
-    height,
-    color,
-    size,
-    fontStyle,
-    fontWeight,
-    fontFamily,
-    content,
-    rotate,
-    gutterX,
-    gutterY,
-    image,
-    imageHeight,
-    imageWidth,
-    title
-  } = props;
+    // #ifdef H5
+    // h5使用document.createElement创建canvas，不用展示canvas标签
+    showCanvas.value = false
+    // #endif
+    const {
+        width,
+        height,
+        color,
+        size,
+        fontStyle,
+        fontWeight,
+        fontFamily,
+        content,
+        rotate,
+        gutterX,
+        gutterY,
+        image,
+        imageHeight,
+        imageWidth,
+        title
+    } = props
 
-  // 创建水印
-  createWaterMark(
-    width,
-    height,
-    color,
-    size,
-    fontStyle,
-    fontWeight,
-    fontFamily,
-    content,
-    rotate,
-    gutterX,
-    gutterY,
-    image,
-    imageHeight,
-    imageWidth,
-    title
-  );
+    // 创建水印
+    createWaterMark(
+        width,
+        height,
+        color,
+        size,
+        fontStyle,
+        fontWeight,
+        fontFamily,
+        content,
+        rotate,
+        gutterX,
+        gutterY,
+        image,
+        imageHeight,
+        imageWidth,
+        title
+    )
 }
 
 /**
@@ -262,86 +157,86 @@ function doInit() {
  * @param title 标题
  */
 function createWaterMark(
-  width: number,
-  height: number,
-  color: string,
-  size: number,
-  fontStyle: string,
-  fontWeight: number | string,
-  fontFamily: string,
-  content: string,
-  rotate: number,
-  gutterX: number,
-  gutterY: number,
-  image: string,
-  imageHeight: number,
-  imageWidth: number,
-  title: string,
+    width: number,
+    height: number,
+    color: string,
+    size: number,
+    fontStyle: string,
+    fontWeight: number | string,
+    fontFamily: string,
+    content: string,
+    rotate: number,
+    gutterX: number,
+    gutterY: number,
+    image: string,
+    imageHeight: number,
+    imageWidth: number,
+    title: string
 ) {
-  const canvasHeight = (height + gutterY) * pixelRatio.value;
-  const canvasWidth = (width + gutterX) * pixelRatio.value;
-  const contentWidth = width * pixelRatio.value;
-  const contentHeight = height * pixelRatio.value;
-  const fontSize = size * pixelRatio.value;
-  // 标题字体大小：如果设置了titleSize则使用titleSize，否则使用size的1.2倍
-  const titleFontSize = props.titleSize > 0 ? props.titleSize * pixelRatio.value : fontSize * 1.2;
-  
-  // #ifndef H5
-  if (canvasOffScreenable.value) {
-    createOffscreenCanvas(
-      canvasHeight,
-      canvasWidth,
-      contentWidth,
-      contentHeight,
-      rotate,
-      fontSize,
-      fontFamily,
-      fontStyle,
-      fontWeight,
-      color,
-      content,
-      image,
-      imageHeight,
-      imageWidth,
-      title,
-      titleFontSize
-    );
-  } else {
-    createCanvas(
-      canvasHeight,
-      contentWidth,
-      rotate,
-      fontSize,
-      color,
-      content,
-      image,
-      imageHeight,
-      imageWidth,
-      title,
-      titleFontSize
-    );
-  }
-  // #endif
-  // #ifdef H5
-  createH5Canvas(
-    canvasHeight,
-    canvasWidth,
-    contentWidth,
-    contentHeight,
-    rotate,
-    fontSize,
-    fontFamily,
-    fontStyle,
-    fontWeight,
-    color,
-    content,
-    image,
-    imageHeight,
-    imageWidth,
-    title,
-    titleFontSize
-  );
-  // #endif
+    const canvasHeight = (height + gutterY) * pixelRatio.value
+    const canvasWidth = (width + gutterX) * pixelRatio.value
+    const contentWidth = width * pixelRatio.value
+    const contentHeight = height * pixelRatio.value
+    const fontSize = size * pixelRatio.value
+    // 标题字体大小：如果设置了titleSize则使用titleSize，否则使用size的1.2倍
+    const titleFontSize = props.titleSize > 0 ? props.titleSize * pixelRatio.value : fontSize * 1.2
+
+    // #ifndef H5
+    if (canvasOffScreenable.value) {
+        createOffscreenCanvas(
+            canvasHeight,
+            canvasWidth,
+            contentWidth,
+            contentHeight,
+            rotate,
+            fontSize,
+            fontFamily,
+            fontStyle,
+            fontWeight,
+            color,
+            content,
+            image,
+            imageHeight,
+            imageWidth,
+            title,
+            titleFontSize
+        )
+    } else {
+        createCanvas(
+            canvasHeight,
+            contentWidth,
+            rotate,
+            fontSize,
+            color,
+            content,
+            image,
+            imageHeight,
+            imageWidth,
+            title,
+            titleFontSize
+        )
+    }
+    // #endif
+    // #ifdef H5
+    createH5Canvas(
+        canvasHeight,
+        canvasWidth,
+        contentWidth,
+        contentHeight,
+        rotate,
+        fontSize,
+        fontFamily,
+        fontStyle,
+        fontWeight,
+        color,
+        content,
+        image,
+        imageHeight,
+        imageWidth,
+        title,
+        titleFontSize
+    )
+    // #endif
 }
 
 /**
@@ -362,86 +257,86 @@ function createWaterMark(
  * @param imageWidth canvas图片宽度
  */
 function createOffscreenCanvas(
-  canvasHeight: number,
-  canvasWidth: number,
-  contentWidth: number,
-  contentHeight: number,
-  rotate: number,
-  fontSize: number,
-  fontFamily: string,
-  fontStyle: string,
-  fontWeight: string | number,
-  color: string,
-  content: string,
-  image: string,
-  imageHeight: number,
-  imageWidth: number,
-  title: string,
-  titleFontSize: number
+    canvasHeight: number,
+    canvasWidth: number,
+    contentWidth: number,
+    contentHeight: number,
+    rotate: number,
+    fontSize: number,
+    fontFamily: string,
+    fontStyle: string,
+    fontWeight: string | number,
+    color: string,
+    content: string,
+    image: string,
+    imageHeight: number,
+    imageWidth: number,
+    title: string,
+    titleFontSize: number
 ) {
-  // 创建离屏canvas
-  const canvas: any = uni.createOffscreenCanvas({
-    height: canvasHeight,
-    width: canvasWidth,
-    type: "2d",
-  });
-  const ctx: any = canvas.getContext("2d");
-  if (ctx) {
-    if (image && (title || content)) {
-      // 图片和文字同时显示
-      const img = canvas.createImage() as HTMLImageElement;
-      drawImageAndTextOffScreen(
-        ctx,
-        img,
-        image,
-        imageHeight,
-        imageWidth,
-        title,
-        content,
-        rotate,
-        contentWidth,
-        contentHeight,
-        fontSize,
-        titleFontSize,
-        fontFamily,
-        fontStyle,
-        fontWeight,
-        color,
-        canvas,
-      );
-    } else if (image) {
-      const img = canvas.createImage() as HTMLImageElement;
-      drawImageOffScreen(
-        ctx,
-        img,
-        image,
-        imageHeight,
-        imageWidth,
-        rotate,
-        contentWidth,
-        contentHeight,
-        canvas,
-      );
+    // 创建离屏canvas
+    const canvas: any = uni.createOffscreenCanvas({
+        height: canvasHeight,
+        width: canvasWidth,
+        type: '2d'
+    })
+    const ctx: any = canvas.getContext('2d')
+    if (ctx) {
+        if (image && (title || content)) {
+            // 图片和文字同时显示
+            const img = canvas.createImage() as HTMLImageElement
+            drawImageAndTextOffScreen(
+                ctx,
+                img,
+                image,
+                imageHeight,
+                imageWidth,
+                title,
+                content,
+                rotate,
+                contentWidth,
+                contentHeight,
+                fontSize,
+                titleFontSize,
+                fontFamily,
+                fontStyle,
+                fontWeight,
+                color,
+                canvas
+            )
+        } else if (image) {
+            const img = canvas.createImage() as HTMLImageElement
+            drawImageOffScreen(
+                ctx,
+                img,
+                image,
+                imageHeight,
+                imageWidth,
+                rotate,
+                contentWidth,
+                contentHeight,
+                canvas
+            )
+        } else {
+            drawTextOffScreen(
+                ctx,
+                title,
+                contentWidth,
+                contentHeight,
+                rotate,
+                fontSize,
+                fontFamily,
+                fontStyle,
+                fontWeight,
+                color,
+                canvas,
+                content,
+                titleFontSize
+            )
+        }
     } else {
-      drawTextOffScreen(
-        ctx,
-        title,
-        contentWidth,
-        contentHeight,
-        rotate,
-        fontSize,
-        fontFamily,
-        fontStyle,
-        fontWeight,
-        color,
-        canvas,
-        content,
-        titleFontSize
-      );
+        console.error('无法获取canvas上下文，请确认当前环境是否支持canvas')
     }
-  } else {
-    console.error("无法获取canvas上下文，请确认当前环境是否支持canvas");
-  }
 }
 
 /**
@@ -458,52 +353,61 @@ function createOffscreenCanvas(
  * @param imageWidth canvas图片宽度
  */
 function createCanvas(
-  contentHeight: number,
-  contentWidth: number,
-  rotate: number,
-  fontSize: number,
-  color: string,
-  content: string,
-  image: string,
-  imageHeight: number,
-  imageWidth: number,
-  title: string,
-  titleFontSize: number
+    contentHeight: number,
+    contentWidth: number,
+    rotate: number,
+    fontSize: number,
+    color: string,
+    content: string,
+    image: string,
+    imageHeight: number,
+    imageWidth: number,
+    title: string,
+    titleFontSize: number
 ) {
-  const ctx = uni.createCanvasContext(canvasId.value);
-  if (ctx) {
-    if (image && (title || content)) {
-      // 图片和文字同时显示
-      drawImageAndTextOnScreen(
-        ctx,
-        image,
-        imageHeight,
-        imageWidth,
-        title,
-        content,
-        rotate,
-        contentWidth,
-        contentHeight,
-        fontSize,
-        titleFontSize,
-        color
-      );
-    } else if (image) {
-      drawImageOnScreen(
-        ctx,
-        image,
-        imageHeight,
-        imageWidth,
-        rotate,
-        contentWidth,
-        contentHeight,
-      );
+    const ctx = uni.createCanvasContext(canvasId.value)
+    if (ctx) {
+        if (image && (title || content)) {
+            // 图片和文字同时显示
+            drawImageAndTextOnScreen(
+                ctx,
+                image,
+                imageHeight,
+                imageWidth,
+                title,
+                content,
+                rotate,
+                contentWidth,
+                contentHeight,
+                fontSize,
+                titleFontSize,
+                color
+            )
+        } else if (image) {
+            drawImageOnScreen(
+                ctx,
+                image,
+                imageHeight,
+                imageWidth,
+                rotate,
+                contentWidth,
+                contentHeight
+            )
+        } else {
+            drawTextOnScreen(
+                ctx,
+                title,
+                contentWidth,
+                rotate,
+                fontSize,
+                color,
+                content,
+                titleFontSize
+            )
+        }
     } else {
-      drawTextOnScreen(ctx, title, contentWidth, rotate, fontSize, color, content, titleFontSize);
+        console.error('无法获取canvas上下文，请确认当前环境是否支持canvas')
     }
-  } else {
-    console.error("无法获取canvas上下文，请确认当前环境是否支持canvas");
-  }
 }
 
 /**
@@ -524,83 +428,83 @@ function createCanvas(
  * @param imageWidth canvas图片宽度
  */
 function createH5Canvas(
-  canvasHeight: number,
-  canvasWidth: number,
-  contentWidth: number,
-  contentHeight: number,
-  rotate: number,
-  fontSize: number,
-  fontFamily: string,
-  fontStyle: string,
-  fontWeight: string | number,
-  color: string,
-  content: string,
-  image: string,
-  imageHeight: number,
-  imageWidth: number,
-  title: string,
-  titleFontSize: number
+    canvasHeight: number,
+    canvasWidth: number,
+    contentWidth: number,
+    contentHeight: number,
+    rotate: number,
+    fontSize: number,
+    fontFamily: string,
+    fontStyle: string,
+    fontWeight: string | number,
+    color: string,
+    content: string,
+    image: string,
+    imageHeight: number,
+    imageWidth: number,
+    title: string,
+    titleFontSize: number
 ) {
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  canvas.setAttribute("width", `${canvasWidth}px`);
-  canvas.setAttribute("height", `${canvasHeight}px`);
-  if (ctx) {
-    if (image && (title || content)) {
-      // 图片和文字同时显示
-      const img = new Image();
-      drawImageAndTextOffScreen(
-        ctx,
-        img,
-        image,
-        imageHeight,
-        imageWidth,
-        title,
-        content,
-        rotate,
-        contentWidth,
-        contentHeight,
-        fontSize,
-        titleFontSize,
-        fontFamily,
-        fontStyle,
-        fontWeight,
-        color,
-        canvas,
-      );
-    } else if (image) {
-      const img = new Image();
-      drawImageOffScreen(
-        ctx,
-        img,
-        image,
-        imageHeight,
-        imageWidth,
-        rotate,
-        contentWidth,
-        contentHeight,
-        canvas,
-      );
+    const canvas = document.createElement('canvas')
+    const ctx = canvas.getContext('2d')
+    canvas.setAttribute('width', `${canvasWidth}px`)
+    canvas.setAttribute('height', `${canvasHeight}px`)
+    if (ctx) {
+        if (image && (title || content)) {
+            // 图片和文字同时显示
+            const img = new Image()
+            drawImageAndTextOffScreen(
+                ctx,
+                img,
+                image,
+                imageHeight,
+                imageWidth,
+                title,
+                content,
+                rotate,
+                contentWidth,
+                contentHeight,
+                fontSize,
+                titleFontSize,
+                fontFamily,
+                fontStyle,
+                fontWeight,
+                color,
+                canvas
+            )
+        } else if (image) {
+            const img = new Image()
+            drawImageOffScreen(
+                ctx,
+                img,
+                image,
+                imageHeight,
+                imageWidth,
+                rotate,
+                contentWidth,
+                contentHeight,
+                canvas
+            )
+        } else {
+            drawTextOffScreen(
+                ctx,
+                title,
+                contentWidth,
+                contentHeight,
+                rotate,
+                fontSize,
+                fontFamily,
+                fontStyle,
+                fontWeight,
+                color,
+                canvas,
+                content,
+                titleFontSize
+            )
+        }
     } else {
-      drawTextOffScreen(
-        ctx,
-        title,
-        contentWidth,
-        contentHeight,
-        rotate,
-        fontSize,
-        fontFamily,
-        fontStyle,
-        fontWeight,
-        color,
-        canvas,
-        content,
-        titleFontSize
-      );
+        console.error('无法获取canvas上下文，请确认当前环境是否支持canvas')
     }
-  } else {
-    console.error("无法获取canvas上下文，请确认当前环境是否支持canvas");
-  }
 }
 
 /**
@@ -619,85 +523,85 @@ function createH5Canvas(
  */
 // 测量文本宽度并自动换行
 function wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number, fontSize: number) {
-  const words = text.split('');
-  const lines: string[] = [];
-  let currentLine = '';
-  
-  for (let i = 0; i < words.length; i++) {
-    const testLine = currentLine + words[i];
-    const metrics = ctx.measureText(testLine);
-    const testWidth = metrics.width;
-    
-    // 当文字宽度超过容器宽度的80%时换行
-    if (testWidth > maxWidth * 0.8 && currentLine !== '') {
-      lines.push(currentLine);
-      currentLine = words[i];
-    } else {
-      currentLine = testLine;
+    const words = text.split('')
+    const lines: string[] = []
+    let currentLine = ''
+
+    for (let i = 0; i < words.length; i++) {
+        const testLine = currentLine + words[i]
+        const metrics = ctx.measureText(testLine)
+        const testWidth = metrics.width
+
+        // 当文字宽度超过容器宽度的80%时换行
+        if (testWidth > maxWidth * 0.8 && currentLine !== '') {
+            lines.push(currentLine)
+            currentLine = words[i]
+        } else {
+            currentLine = testLine
+        }
     }
-  }
-  lines.push(currentLine);
-  return lines;
+    lines.push(currentLine)
+    return lines
 }
 
 function drawTextOffScreen(
-  ctx: CanvasRenderingContext2D,
-  title: string,
-  contentWidth: number,
-  contentHeight: number,
-  rotate: number,
-  fontSize: number,
-  fontFamily: string,
-  fontStyle: string,
-  fontWeight: string | number,
-  color: string,
-  canvas: HTMLCanvasElement,
-  content: string = '',
-  titleFontSize: number = 0
+    ctx: CanvasRenderingContext2D,
+    title: string,
+    contentWidth: number,
+    contentHeight: number,
+    rotate: number,
+    fontSize: number,
+    fontFamily: string,
+    fontStyle: string,
+    fontWeight: string | number,
+    color: string,
+    canvas: HTMLCanvasElement,
+    content: string = '',
+    titleFontSize: number = 0
 ) {
-  ctx.textBaseline = "middle";
-  ctx.textAlign = "center";
-  ctx.translate(contentWidth / 2, contentHeight / 2);
-  ctx.rotate((Math.PI / 180) * rotate);
-  
-  // 计算总高度
-  let totalTextHeight = titleFontSize;
-  if (content) {
-    totalTextHeight += fontSize + 5; // 标题和副标题之间的间距
-  }
-  
-  // 起始Y坐标
-  let startY = -totalTextHeight / 2;
-  
-  // 绘制主标题（支持自动换行）
-  if (title) {
-    ctx.font = `${fontStyle} normal ${fontWeight} ${titleFontSize}px/${contentHeight}px ${fontFamily}`;
-    // 使用titleColor或默认color
-    ctx.fillStyle = props.titleColor || color;
-    const titleLines = wrapText(ctx, title, contentWidth, titleFontSize);
-    const titleLineHeight = titleFontSize * 1.2;
-    
-    for (let i = 0; i < titleLines.length; i++) {
-      ctx.fillText(titleLines[i], 0, startY + i * titleLineHeight);
+    ctx.textBaseline = 'middle'
+    ctx.textAlign = 'center'
+    ctx.translate(contentWidth / 2, contentHeight / 2)
+    ctx.rotate((Math.PI / 180) * rotate)
+
+    // 计算总高度
+    let totalTextHeight = titleFontSize
+    if (content) {
+        totalTextHeight += fontSize + 5 // 标题和副标题之间的间距
     }
-    
-    startY += titleLines.length * titleLineHeight + 5;
-  }
-  
-  // 绘制副标题（支持自动换行）
-  if (content) {
-    ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px/${contentHeight}px ${fontFamily}`;
-    ctx.fillStyle = color;
-    const contentLines = wrapText(ctx, content, contentWidth, fontSize);
-    const contentLineHeight = fontSize * 1.2;
-    
-    for (let i = 0; i < contentLines.length; i++) {
-      ctx.fillText(contentLines[i], 0, startY + i * contentLineHeight);
+
+    // 起始Y坐标
+    let startY = -totalTextHeight / 2
+
+    // 绘制主标题（支持自动换行）
+    if (title) {
+        ctx.font = `${fontStyle} normal ${fontWeight} ${titleFontSize}px/${contentHeight}px ${fontFamily}`
+        // 使用titleColor或默认color
+        ctx.fillStyle = props.titleColor || color
+        const titleLines = wrapText(ctx, title, contentWidth, titleFontSize)
+        const titleLineHeight = titleFontSize * 1.2
+
+        for (let i = 0; i < titleLines.length; i++) {
+            ctx.fillText(titleLines[i], 0, startY + i * titleLineHeight)
+        }
+
+        startY += titleLines.length * titleLineHeight + 5
     }
-  }
-  
-  ctx.restore();
-  waterMarkUrl.value = canvas.toDataURL();
+
+    // 绘制副标题（支持自动换行）
+    if (content) {
+        ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px/${contentHeight}px ${fontFamily}`
+        ctx.fillStyle = color
+        const contentLines = wrapText(ctx, content, contentWidth, fontSize)
+        const contentLineHeight = fontSize * 1.2
+
+        for (let i = 0; i < contentLines.length; i++) {
+            ctx.fillText(contentLines[i], 0, startY + i * contentLineHeight)
+        }
+    }
+
+    ctx.restore()
+    waterMarkUrl.value = canvas.toDataURL()
 }
 
 /**
@@ -711,97 +615,97 @@ function drawTextOffScreen(
  */
 // 简化版本的文字换行（UniApp CanvasContext不支持measureText）
 function simpleWrapText(text: string, maxLength: number) {
-  const lines: string[] = [];
-  let currentLine = '';
-  
-  // 基于字符数估算换行（适用于UniApp CanvasContext）
-  for (let i = 0; i < text.length; i++) {
-    currentLine += text[i];
-    if (currentLine.length >= maxLength) {
-      lines.push(currentLine);
-      currentLine = '';
+    const lines: string[] = []
+    let currentLine = ''
+
+    // 基于字符数估算换行（适用于UniApp CanvasContext）
+    for (let i = 0; i < text.length; i++) {
+        currentLine += text[i]
+        if (currentLine.length >= maxLength) {
+            lines.push(currentLine)
+            currentLine = ''
+        }
     }
-  }
-  if (currentLine) {
-    lines.push(currentLine);
-  }
-  return lines;
+    if (currentLine) {
+        lines.push(currentLine)
+    }
+    return lines
 }
 
 function drawTextOnScreen(
-  ctx: UniApp.CanvasContext,
-  title: string,
-  contentWidth: number,
-  rotate: number,
-  fontSize: number,
-  color: string,
-  content: string = '',
-  titleFontSize: number = 0
+    ctx: UniApp.CanvasContext,
+    title: string,
+    contentWidth: number,
+    rotate: number,
+    fontSize: number,
+    color: string,
+    content: string = '',
+    titleFontSize: number = 0
 ) {
-  ctx.setTextBaseline("middle");
-  ctx.setTextAlign("center");
-  ctx.translate(contentWidth / 2, contentWidth / 2);
-  ctx.rotate((Math.PI / 180) * rotate);
-  
-  // 估算每行最大字符数
-  const maxChars = Math.floor(contentWidth / (fontSize * 0.5));
-  
-  // 计算总高度
-  let totalTextHeight = titleFontSize;
-  if (content) {
-    totalTextHeight += fontSize + 5;
-  }
-  
-  // 起始Y坐标
-  let startY = -totalTextHeight / 2;
-  
-  // 绘制主标题（支持自动换行）
-  if (title) {
-    // 使用titleColor或默认color
-    ctx.setFillStyle(props.titleColor || color);
-    ctx.setFontSize(titleFontSize);
-    const titleLines = simpleWrapText(title, maxChars);
-    const titleLineHeight = titleFontSize * 1.2;
-    
-    for (let i = 0; i < titleLines.length; i++) {
-      ctx.fillText(titleLines[i], 0, startY + i * titleLineHeight);
+    ctx.setTextBaseline('middle')
+    ctx.setTextAlign('center')
+    ctx.translate(contentWidth / 2, contentWidth / 2)
+    ctx.rotate((Math.PI / 180) * rotate)
+
+    // 估算每行最大字符数
+    const maxChars = Math.floor(contentWidth / (fontSize * 0.5))
+
+    // 计算总高度
+    let totalTextHeight = titleFontSize
+    if (content) {
+        totalTextHeight += fontSize + 5
     }
-    
-    startY += titleLines.length * titleLineHeight + 5;
-  }
-  
-  // 绘制副标题（支持自动换行）
-  if (content) {
-    ctx.setFillStyle(color);
-    ctx.setFontSize(fontSize);
-    const contentLines = simpleWrapText(content, maxChars);
-    const contentLineHeight = fontSize * 1.2;
-    
-    for (let i = 0; i < contentLines.length; i++) {
-      ctx.fillText(contentLines[i], 0, startY + i * contentLineHeight);
+
+    // 起始Y坐标
+    let startY = -totalTextHeight / 2
+
+    // 绘制主标题（支持自动换行）
+    if (title) {
+        // 使用titleColor或默认color
+        ctx.setFillStyle(props.titleColor || color)
+        ctx.setFontSize(titleFontSize)
+        const titleLines = simpleWrapText(title, maxChars)
+        const titleLineHeight = titleFontSize * 1.2
+
+        for (let i = 0; i < titleLines.length; i++) {
+            ctx.fillText(titleLines[i], 0, startY + i * titleLineHeight)
+        }
+
+        startY += titleLines.length * titleLineHeight + 5
     }
-  }
-  
-  ctx.restore();
-  ctx.draw();
-  // #ifdef MP-DINGTALK
-  // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
-  (ctx as any).toTempFilePath({
-    success(res: any) {
-      showCanvas.value = false;
-      waterMarkUrl.value = res.filePath;
-    },
-  });
-  // #endif
-  // #ifndef MP-DINGTALK
-  uni.canvasToTempFilePath({
-    canvasId: canvasId.value,
-    success: (res) => {
-      showCanvas.value = false;
-      waterMarkUrl.value = res.tempFilePath;
-    },
-  });
-  // #endif
+
+    // 绘制副标题（支持自动换行）
+    if (content) {
+        ctx.setFillStyle(color)
+        ctx.setFontSize(fontSize)
+        const contentLines = simpleWrapText(content, maxChars)
+        const contentLineHeight = fontSize * 1.2
+
+        for (let i = 0; i < contentLines.length; i++) {
+            ctx.fillText(contentLines[i], 0, startY + i * contentLineHeight)
+        }
+    }
+
+    ctx.restore()
+    ctx.draw()
+    // #ifdef MP-DINGTALK
+    // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
+    ;(ctx as any).toTempFilePath({
+        success(res: any) {
+            showCanvas.value = false
+            waterMarkUrl.value = res.filePath
+        }
+    })
+    // #endif
+    // #ifndef MP-DINGTALK
+    uni.canvasToTempFilePath({
+        canvasId: canvasId.value,
+        success: (res) => {
+            showCanvas.value = false
+            waterMarkUrl.value = res.tempFilePath
+        }
+    })
+    // #endif
 }
 
 /**
@@ -817,215 +721,203 @@ function drawTextOnScreen(
  * @param canvas canvas实例
  */
 async function drawImageOffScreen(
-  ctx: CanvasRenderingContext2D,
-  img: HTMLImageElement,
-  image: string,
-  imageHeight: number,
-  imageWidth: number,
-  rotate: number,
-  contentWidth: number,
-  contentHeight: number,
-  canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    img: HTMLImageElement,
+    image: string,
+    imageHeight: number,
+    imageWidth: number,
+    rotate: number,
+    contentWidth: number,
+    contentHeight: number,
+    canvas: HTMLCanvasElement
 ) {
-  ctx.translate(contentWidth / 2, contentHeight / 2);
-  ctx.rotate((Math.PI / 180) * Number(rotate));
-  img.crossOrigin = "anonymous";
-  img.referrerPolicy = "no-referrer";
+    ctx.translate(contentWidth / 2, contentHeight / 2)
+    ctx.rotate((Math.PI / 180) * Number(rotate))
+    img.crossOrigin = 'anonymous'
+    img.referrerPolicy = 'no-referrer'
 
-  img.src = image;
-  img.onload = () => {
-    ctx.drawImage(
-      img,
-      (-imageWidth * pixelRatio.value) / 2,
-      (-imageHeight * pixelRatio.value) / 2,
-      imageWidth * pixelRatio.value,
-      imageHeight * pixelRatio.value,
-    );
-    ctx.restore();
-    waterMarkUrl.value = canvas.toDataURL();
-  };
+    img.src = image
+    img.onload = () => {
+        ctx.drawImage(
+            img,
+            (-imageWidth * pixelRatio.value) / 2,
+            (-imageHeight * pixelRatio.value) / 2,
+            imageWidth * pixelRatio.value,
+            imageHeight * pixelRatio.value
+        )
+        ctx.restore()
+        waterMarkUrl.value = canvas.toDataURL()
+    }
 }
 
 // 绘制图片和文字（离屏）
 async function drawImageAndTextOffScreen(
-  ctx: CanvasRenderingContext2D,
-  img: HTMLImageElement,
-  image: string,
-  imageHeight: number,
-  imageWidth: number,
-  title: string,
-  content: string,
-  rotate: number,
-  contentWidth: number,
-  contentHeight: number,
-  fontSize: number,
-  titleFontSize: number,
-  fontFamily: string,
-  fontStyle: string,
-  fontWeight: string | number,
-  color: string,
-  canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D,
+    img: HTMLImageElement,
+    image: string,
+    imageHeight: number,
+    imageWidth: number,
+    title: string,
+    content: string,
+    rotate: number,
+    contentWidth: number,
+    contentHeight: number,
+    fontSize: number,
+    titleFontSize: number,
+    fontFamily: string,
+    fontStyle: string,
+    fontWeight: string | number,
+    color: string,
+    canvas: HTMLCanvasElement
 ) {
-  ctx.translate(contentWidth / 2, contentHeight / 2);
-  ctx.rotate((Math.PI / 180) * Number(rotate));
-  img.crossOrigin = "anonymous";
-  img.referrerPolicy = "no-referrer";
-  
-  const imgHeight = imageHeight * pixelRatio.value;
-  const imgWidth = imageWidth * pixelRatio.value;
-  
-  img.src = image;
-  img.onload = () => {
-    // 计算总高度
-    let totalHeight = imgHeight;
-    const textSpacing = 10;
-    
-    if (title) totalHeight += textSpacing + titleFontSize;
-    if (content) totalHeight += fontSize;
-    
-    // 起始Y坐标
-    let startY = -totalHeight / 2;
-    
-    // 绘制图片
-    ctx.drawImage(
-      img,
-      -imgWidth / 2,
-      startY,
-      imgWidth,
-      imgHeight,
-    );
-    
-    startY += imgHeight + textSpacing;
-    
-    // 设置文字样式
-    ctx.textBaseline = "top";
-    ctx.textAlign = "center";
-    
-    // 绘制主标题
-    if (title) {
-      ctx.font = `${fontStyle} normal ${fontWeight} ${titleFontSize}px/${contentHeight}px ${fontFamily}`;
-      // 使用titleColor或默认color
-      ctx.fillStyle = props.titleColor || color;
-      const titleLines = wrapText(ctx, title, contentWidth * 0.9, titleFontSize);
-      const titleLineHeight = titleFontSize * 1.2;
-      
-      for (let i = 0; i < titleLines.length; i++) {
-        ctx.fillText(titleLines[i], 0, startY + i * titleLineHeight);
-      }
-      
-      startY += titleLines.length * titleLineHeight + 5;
+    ctx.translate(contentWidth / 2, contentHeight / 2)
+    ctx.rotate((Math.PI / 180) * Number(rotate))
+    img.crossOrigin = 'anonymous'
+    img.referrerPolicy = 'no-referrer'
+
+    const imgHeight = imageHeight * pixelRatio.value
+    const imgWidth = imageWidth * pixelRatio.value
+
+    img.src = image
+    img.onload = () => {
+        // 计算总高度
+        let totalHeight = imgHeight
+        const textSpacing = 10
+
+        if (title) totalHeight += textSpacing + titleFontSize
+        if (content) totalHeight += fontSize
+
+        // 起始Y坐标
+        let startY = -totalHeight / 2
+
+        // 绘制图片
+        ctx.drawImage(img, -imgWidth / 2, startY, imgWidth, imgHeight)
+
+        startY += imgHeight + textSpacing
+
+        // 设置文字样式
+        ctx.textBaseline = 'top'
+        ctx.textAlign = 'center'
+
+        // 绘制主标题
+        if (title) {
+            ctx.font = `${fontStyle} normal ${fontWeight} ${titleFontSize}px/${contentHeight}px ${fontFamily}`
+            // 使用titleColor或默认color
+            ctx.fillStyle = props.titleColor || color
+            const titleLines = wrapText(ctx, title, contentWidth * 0.9, titleFontSize)
+            const titleLineHeight = titleFontSize * 1.2
+
+            for (let i = 0; i < titleLines.length; i++) {
+                ctx.fillText(titleLines[i], 0, startY + i * titleLineHeight)
+            }
+
+            startY += titleLines.length * titleLineHeight + 5
+        }
+
+        // 绘制副标题
+        if (content) {
+            ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px/${contentHeight}px ${fontFamily}`
+            ctx.fillStyle = color
+            const contentLines = wrapText(ctx, content, contentWidth * 0.9, fontSize)
+            const contentLineHeight = fontSize * 1.2
+
+            for (let i = 0; i < contentLines.length; i++) {
+                ctx.fillText(contentLines[i], 0, startY + i * contentLineHeight)
+            }
+        }
+
+        ctx.restore()
+        waterMarkUrl.value = canvas.toDataURL()
     }
-    
-    // 绘制副标题
-    if (content) {
-      ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px/${contentHeight}px ${fontFamily}`;
-      ctx.fillStyle = color;
-      const contentLines = wrapText(ctx, content, contentWidth * 0.9, fontSize);
-      const contentLineHeight = fontSize * 1.2;
-      
-      for (let i = 0; i < contentLines.length; i++) {
-        ctx.fillText(contentLines[i], 0, startY + i * contentLineHeight);
-      }
-    }
-    
-    ctx.restore();
-    waterMarkUrl.value = canvas.toDataURL();
-  };
 }
 
 // 绘制图片和文字（在屏）
 function drawImageAndTextOnScreen(
-  ctx: UniApp.CanvasContext,
-  image: string,
-  imageHeight: number,
-  imageWidth: number,
-  title: string,
-  content: string,
-  rotate: number,
-  contentWidth: number,
-  contentHeight: number,
-  fontSize: number,
-  titleFontSize: number,
-  color: string
+    ctx: UniApp.CanvasContext,
+    image: string,
+    imageHeight: number,
+    imageWidth: number,
+    title: string,
+    content: string,
+    rotate: number,
+    contentWidth: number,
+    contentHeight: number,
+    fontSize: number,
+    titleFontSize: number,
+    color: string
 ) {
-  ctx.setTextBaseline("top");
-  ctx.setTextAlign("center");
-  ctx.translate(contentWidth / 2, contentWidth / 2);
-  ctx.rotate((Math.PI / 180) * Number(rotate));
-  
-  const imgHeight = imageHeight * pixelRatio.value;
-  const imgWidth = imageWidth * pixelRatio.value;
-  const maxChars = Math.floor(contentWidth / (fontSize * 0.5));
-  
-  // 计算总高度
-  let totalHeight = imgHeight;
-  const textSpacing = 10;
-  
-  if (title) totalHeight += textSpacing + titleFontSize;
-  if (content) totalHeight += fontSize;
-  
-  // 起始Y坐标
-  let startY = -totalHeight / 2;
-  
-  // 绘制图片
-  ctx.drawImage(
-    image,
-    -imgWidth / 2,
-    startY,
-    imgWidth,
-    imgHeight,
-  );
-  
-  startY += imgHeight + textSpacing;
-  
-  // 绘制主标题
-  if (title) {
-    // 使用titleColor或默认color
-    ctx.setFillStyle(props.titleColor || color);
-    ctx.setFontSize(titleFontSize);
-    const titleLines = simpleWrapText(title, maxChars);
-    const titleLineHeight = titleFontSize * 1.2;
-    
-    for (let i = 0; i < titleLines.length; i++) {
-      ctx.fillText(titleLines[i], 0, startY + i * titleLineHeight);
+    ctx.setTextBaseline('top')
+    ctx.setTextAlign('center')
+    ctx.translate(contentWidth / 2, contentWidth / 2)
+    ctx.rotate((Math.PI / 180) * Number(rotate))
+
+    const imgHeight = imageHeight * pixelRatio.value
+    const imgWidth = imageWidth * pixelRatio.value
+    const maxChars = Math.floor(contentWidth / (fontSize * 0.5))
+
+    // 计算总高度
+    let totalHeight = imgHeight
+    const textSpacing = 10
+
+    if (title) totalHeight += textSpacing + titleFontSize
+    if (content) totalHeight += fontSize
+
+    // 起始Y坐标
+    let startY = -totalHeight / 2
+
+    // 绘制图片
+    ctx.drawImage(image, -imgWidth / 2, startY, imgWidth, imgHeight)
+
+    startY += imgHeight + textSpacing
+
+    // 绘制主标题
+    if (title) {
+        // 使用titleColor或默认color
+        ctx.setFillStyle(props.titleColor || color)
+        ctx.setFontSize(titleFontSize)
+        const titleLines = simpleWrapText(title, maxChars)
+        const titleLineHeight = titleFontSize * 1.2
+
+        for (let i = 0; i < titleLines.length; i++) {
+            ctx.fillText(titleLines[i], 0, startY + i * titleLineHeight)
+        }
+
+        startY += titleLines.length * titleLineHeight + 5
     }
-    
-    startY += titleLines.length * titleLineHeight + 5;
-  }
-  
-  // 绘制副标题
-  if (content) {
-    ctx.setFillStyle(color);
-    ctx.setFontSize(fontSize);
-    const contentLines = simpleWrapText(content, maxChars);
-    const contentLineHeight = fontSize * 1.2;
-    
-    for (let i = 0; i < contentLines.length; i++) {
-      ctx.fillText(contentLines[i], 0, startY + i * contentLineHeight);
+
+    // 绘制副标题
+    if (content) {
+        ctx.setFillStyle(color)
+        ctx.setFontSize(fontSize)
+        const contentLines = simpleWrapText(content, maxChars)
+        const contentLineHeight = fontSize * 1.2
+
+        for (let i = 0; i < contentLines.length; i++) {
+            ctx.fillText(contentLines[i], 0, startY + i * contentLineHeight)
+        }
     }
-  }
-  
-  ctx.restore();
-  ctx.draw(false, () => {
-    // #ifdef MP-DINGTALK
-    // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
-    (ctx as any).toTempFilePath({
-      success(res: any) {
-        showCanvas.value = false;
-        waterMarkUrl.value = res.filePath;
-      },
-    });
-    // #endif
-    // #ifndef MP-DINGTALK
-    uni.canvasToTempFilePath({
-      canvasId: canvasId.value,
-      success: (res) => {
-        showCanvas.value = false;
-        waterMarkUrl.value = res.tempFilePath;
-      },
-    });
-    // #endif
-  });
+
+    ctx.restore()
+    ctx.draw(false, () => {
+        // #ifdef MP-DINGTALK
+        // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
+        ;(ctx as any).toTempFilePath({
+            success(res: any) {
+                showCanvas.value = false
+                waterMarkUrl.value = res.filePath
+            }
+        })
+        // #endif
+        // #ifndef MP-DINGTALK
+        uni.canvasToTempFilePath({
+            canvasId: canvasId.value,
+            success: (res) => {
+                showCanvas.value = false
+                waterMarkUrl.value = res.tempFilePath
+            }
+        })
+        // #endif
+    })
 }
 
 /**
@@ -1039,48 +931,48 @@ function drawImageAndTextOnScreen(
  * @param contentHeight 水印高度
  */
 function drawImageOnScreen(
-  ctx: UniApp.CanvasContext,
-  image: string,
-  imageHeight: number,
-  imageWidth: number,
-  rotate: number,
-  contentWidth: number,
-  contentHeight: number,
+    ctx: UniApp.CanvasContext,
+    image: string,
+    imageHeight: number,
+    imageWidth: number,
+    rotate: number,
+    contentWidth: number,
+    contentHeight: number
 ) {
-  ctx.translate(contentWidth / 2, contentHeight / 2);
-  ctx.rotate((Math.PI / 180) * Number(rotate));
+    ctx.translate(contentWidth / 2, contentHeight / 2)
+    ctx.rotate((Math.PI / 180) * Number(rotate))
 
-  ctx.drawImage(
-    image,
-    (-imageWidth * pixelRatio.value) / 2,
-    (-imageHeight * pixelRatio.value) / 2,
-    imageWidth * pixelRatio.value,
-    imageHeight * pixelRatio.value,
-  );
-  ctx.restore();
-  ctx.draw(false, () => {
-    // #ifdef MP-DINGTALK
-    // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
-    (ctx as any).toTempFilePath({
-      success(res: any) {
-        showCanvas.value = false;
-        waterMarkUrl.value = res.filePath;
-      },
-    });
-    // #endif
-    // #ifndef MP-DINGTALK
-    uni.canvasToTempFilePath({
-      canvasId: canvasId.value,
-      success: (res) => {
-        showCanvas.value = false;
-        waterMarkUrl.value = res.tempFilePath;
-      },
-    });
-    // #endif
-  });
+    ctx.drawImage(
+        image,
+        (-imageWidth * pixelRatio.value) / 2,
+        (-imageHeight * pixelRatio.value) / 2,
+        imageWidth * pixelRatio.value,
+        imageHeight * pixelRatio.value
+    )
+    ctx.restore()
+    ctx.draw(false, () => {
+        // #ifdef MP-DINGTALK
+        // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
+        ;(ctx as any).toTempFilePath({
+            success(res: any) {
+                showCanvas.value = false
+                waterMarkUrl.value = res.filePath
+            }
+        })
+        // #endif
+        // #ifndef MP-DINGTALK
+        uni.canvasToTempFilePath({
+            canvasId: canvasId.value,
+            success: (res) => {
+                showCanvas.value = false
+                waterMarkUrl.value = res.tempFilePath
+            }
+        })
+        // #endif
+    })
 }
 </script>
 
 <style lang="scss" scoped>
-@import "./index.scss";
+@import './index.scss';
 </style>

@@ -121,8 +121,3 @@
     @include lineEllipsis;
   }
 }
-
-/* 去除原生按钮边框 */
-button:after {
-  border: none;
-}

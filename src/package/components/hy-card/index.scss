@@ -10,10 +10,8 @@
   box-sizing: border-box;
 
   @include m(full) {
-    // 如果是与屏幕之间不留空隙，应该设置左右边距为0
     margin-left: $hy-border-margin-padding-base !important;
     margin-right: $hy-border-margin-padding-base !important;
-    width: 100%;
   }
 
   @include m(border) {
@@ -41,6 +39,7 @@
 
       @include e(title) {
         max-width: 450rpx;
+        font-size: $hy-font-size-base;
         @include lineEllipsis;
       }
 

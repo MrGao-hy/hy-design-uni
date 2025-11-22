@@ -1,0 +1,167 @@
+@use '../../libs/css/mixin.scss' as *;
+@use '../../libs/css/theme.scss' as *;
+
+$hy-box-width: 180rpx;
+@include b(coupon) {
+  width: 100%;
+  min-height: 190rpx;
+  max-height: 220rpx;
+
+  /* 已使用/过期状态的置灰效果 */
+  @include m(disabled) {
+    filter: grayscale(1) !important;
+    opacity: 0.6;
+  }
+
+  /* 优惠券卡片主体 */
+  @include e(card) {
+    position: relative;
+    display: flex;
+    border-radius: 16rpx;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d; /* 子元素将保持 3D 位置 */
+
+    .status-unused:hover {
+      transform: translateY(-4rpx) rotateX(5deg);
+    }
+  }
+
+  /* 不同类型优惠券的背景色 */
+  @include m(moneyOff) {
+    background:
+            radial-gradient(circle at $hy-box-width top, transparent 15rpx, #ff7d00 0) top / 100% 60px
+            no-repeat,
+            radial-gradient(circle at $hy-box-width bottom, transparent 15rpx, #ff7d00 0) bottom / 100%
+            51px no-repeat;
+  }
+  @include m(discount) {
+    background:
+            radial-gradient(circle at $hy-box-width top, transparent 15rpx, #00c6ff 0) top / 100% 60px
+            no-repeat,
+            radial-gradient(circle at $hy-box-width bottom, transparent 15rpx, #00c6ff 0) bottom / 100%
+            51px no-repeat;
+  }
+  @include m(fixedAmount) {
+    background:
+            radial-gradient(circle at $hy-box-width top, transparent 15rpx, $hy-error 0) top / 100% 60px
+            no-repeat,
+            radial-gradient(circle at $hy-box-width bottom, transparent 15rpx, $hy-error 0) bottom / 100%
+            51px no-repeat;
+  }
+
+  /* 优惠券内容区域 */
+  @include e(content) {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    position: relative;
+
+    /* 左侧金额 */
+    @include m(left) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: $hy-box-width;
+      padding: $hy-border-margin-padding-base;
+      box-sizing: border-box;
+
+      @include e(block) {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: $hy-border-margin-padding-sm;
+      }
+
+      @include e(value) {
+        font-size: 64rpx;
+        font-weight: 800;
+        line-height: 1;
+        display: inline-block;
+        vertical-align: baseline; /* 关键：基线对齐 */
+      }
+      @include e(suffix) {
+        font-size: 28rpx;
+        font-weight: 500;
+        display: inline-block;
+        vertical-align: baseline; /* 关键：基线对齐 */
+      }
+    }
+
+    /* 右侧描述 */
+    @include m(right) {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      text-align: start;
+      padding: $hy-border-margin-padding-base;
+
+      @include e(name) {
+        font-size: 30rpx;
+        font-weight: 600;
+        margin-bottom: 8rpx;
+        @include lineEllipsis;
+      }
+
+      @include e(desc) {
+        @include multiEllipsis(2);
+      }
+
+      @include e(validity) {
+        @include lineEllipsis;
+      }
+
+      @include e(desc, validity) {
+        font-size: 22rpx;
+        opacity: 0.9;
+        line-height: 1.4;
+        @include lineEllipsis;
+      }
+    }
+  }
+
+  /* 右侧状态标签 */
+  @include e(btn) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  @include e(tag) {
+    height: 100%;
+    margin-left: 60rpx;
+    width: 120rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffd16d;
+    color: #d43c33;
+    font-size: 26rpx;
+    font-weight: bold;
+    z-index: 2;
+    transform-origin: top right;
+    transform: skewX(-15deg) translateX(15rpx); /* 倾斜标签 */
+
+    /* 标签文字反向倾斜，使其看起来是正的 */
+    @include m(btn) {
+      transform: skewX(15deg);
+    }
+
+    /* 标签与主体之间的白色分隔线 */
+    @include pseudo(before) {
+      content: '';
+      position: absolute;
+      left: -2px;
+      top: 0;
+      height: 100%;
+      width: 2px;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}

@@ -1,37 +1,159 @@
-import type IProps from "./typing";
+import type IProps from './typing'
+import type { PropType } from 'vue'
 
-const defaultProps: IProps = {
-  title: "日期选择",
-  showTitle: true,
-  showSubtitle: true,
-  mode: "single",
-  startText: "开始",
-  endText: "结束",
-  customList: [],
-  color: "",
-  minDate: 0,
-  maxDate: 0,
-  defaultDate: null,
-  maxCount: Number.MAX_SAFE_INTEGER, // Infinity
-  rowHeight: 56,
-  formatter: null,
-  showLunar: false,
-  showMark: true,
-  confirmText: "确定",
-  confirmDisabledText: "确定",
-  show: false,
-  closeOnClickOverlay: false,
-  readonly: false,
-  showConfirm: true,
-  maxRange: Number.MAX_SAFE_INTEGER,
-  rangePrompt: "",
-  showRangePrompt: true,
-  allowSameDay: false,
-  round: 0,
-  monthNum: 3,
-  weekText: ["一", "二", "三", "四", "五", "六", "日"],
-  forbidDays: [],
-  forbidDaysToast: "该日期已禁用",
-};
+const calendarProps = {
+    /** 是否显示日历弹窗 */
+    show: {
+        type: Boolean,
+        default: false,
+        required: true
+    },
+    /** 标题内容 */
+    title: {
+        type: String,
+        default: '日期选选择'
+    },
+    /** 是否显示标题 */
+    showTitle: {
+        type: Boolean,
+        default: true
+    },
+    /** 是否显示副标题 */
+    showSubtitle: {
+        type: Boolean,
+        default: true
+    },
+    /**
+     * 日期类型选择
+     * @values single,range,multiple
+     * */
+    mode: {
+        type: String,
+        default: 'single'
+    },
+    /** mode=range时，第一个日期底部的提示文字 */
+    startText: {
+        type: String,
+        default: '开始'
+    },
+    /** mode=range时，最后一个日期底部的提示文字 */
+    endText: {
+        type: String,
+        default: '结束'
+    },
+    /** 自定义列表 */
+    customList: {
+        type: Array as PropType<any[]>,
+        default: []
+    },
+    /** 主题色，对底部按钮和选中日期有效 */
+    color: {
+        type: String,
+        default: ''
+    },
+    /** 最小的可选日期 */
+    minDate: {
+        type: [String, Number],
+        default: 0
+    },
+    /** 最大可选日期 */
+    maxDate: {
+        type: [String, Number],
+        default: 0
+    },
+    /** 默认选中的日期，mode为multiple或range是必须为数组格式 */
+    defaultDate: [Date, String, Array],
+    /** mode=multiple时，最多可选多少个日期 */
+    maxCount: {
+        type: Number,
+        default: Number.MAX_SAFE_INTEGER
+    },
+    /** 日期行高 */
+    rowHeight: {
+        type: Number,
+        default: 56
+    },
+    /** 日期格式化函数 */
+    formatter: {
+        type: Function as PropType<(date: Date) => string>
+    },
+    /** 是否显示农历 */
+    showLunar: {
+        type: Boolean,
+        default: false
+    },
+    /** 是否显示月份背景色 */
+    showMark: {
+        type: Boolean,
+        default: true
+    },
+    /** 确定按钮的文字 */
+    confirmText: {
+        type: String,
+        default: '确定'
+    },
+    /** 确认按钮处于禁用状态时的文字 */
+    confirmDisabledText: {
+        type: String,
+        default: '确定'
+    },
+    /** 是否允许点击遮罩关闭日历 */
+    closeOnClickOverlay: {
+        type: Boolean,
+        default: false
+    },
+    /** 是否为只读状态，只读状态下禁止选择日期 */
+    readonly: {
+        type: Boolean,
+        default: false
+    },
+    /** 是否展示确认按钮 */
+    showConfirm: {
+        type: Boolean,
+        default: true
+    },
+    /** 日期区间最多可选天数，默认无限制，mode = range时有效 */
+    maxRange: {
+        type: Number,
+        default: Number.MAX_SAFE_INTEGER
+    },
+    /** 范围选择超过最多可选天数时的提示文案，mode = range时有效 */
+    rangePrompt: String,
+    /** 范围选择超过最多可选天数时，是否展示提示文案，mode = range时有效 */
+    showRangePrompt: {
+        type: Boolean,
+        default: true
+    },
+    /** 是否允许日期范围的起止时间为同一天，mode = range时有效 */
+    allowSameDay: {
+        type: Boolean,
+        default: false
+    },
+    /** 圆角值，默认无圆角 */
+    round: {
+        type: [String, Number],
+        default: 0
+    },
+    /** 最多展示的月份数量 */
+    monthNum: {
+        type: Number,
+        default: 3
+    },
+    /** 星期文案 */
+    weekText: {
+        type: Array as PropType<string[]>,
+        default: () => ['一', '二', '三', '四', '五', '六', '日']
+    },
+    /** 单选与多选禁止选中的日期列表，mode!=range时有效。 */
+    forbidDays: {
+        type: Array as PropType<Date[]>,
+        default: () => []
+    },
+    /** 单选与多选禁止选中的日期选择时提示 */
+    forbidDaysToast: {
+        type: String,
+        default: '该日期已禁用'
+    }
+}
 
-export default defaultProps;
+export default calendarProps

@@ -1,28 +1,112 @@
-import type IProps from "./typing";
+import type { PickerColumnVo } from './typing'
+import type HyInputProps from './typing'
+import type { PropType } from 'vue'
 
-const defaultProps: IProps = {
-  modelValue: "",
-  show: false,
-  popupMode: "bottom",
-  separator: "/",
-  showToolbar: true,
-  title: "",
-  columns: [],
-  loading: false,
-  itemHeight: 44,
-  cancelText: "取消",
-  confirmText: "确定",
-  cancelColor: "#909193",
-  confirmColor: "",
-  visibleItemCount: 5,
-  keyName: "text",
-  closeOnClickOverlay: false,
-  defaultIndex: [],
-  immediateChange: true,
-  zIndex: 10076,
-  hasInput: false,
-  input: {},
-  toolbarRightSlot: false,
-};
+const pickerProps = {
+    /** 显示到输入框值 */
+    modelValue: {
+        type: [String, Array],
+        default: ''
+    },
+    /** 是否显示弹窗 */
+    show: {
+        type: Boolean,
+        default: false
+    },
+    /** 弹窗弹出模式 */
+    popupMode: {
+        type: String,
+        default: 'bottom'
+    },
+    /** 分割数组条件 */
+    separator: {
+        type: String,
+        default: '/'
+    },
+    /** 是否显示顶部的操作栏 */
+    showToolbar: {
+        type: Boolean,
+        default: true
+    },
+    /** 顶部标题 */
+    title: String,
+    /** 二维数组，设置每一列的数据 */
+    columns: {
+        type: Array as unknown as PropType<(string | PickerColumnVo)[][]>,
+        default: []
+    },
+    /** 是否显示加载中状态 */
+    loading: {
+        type: Boolean,
+        default: false
+    },
+    /** 各列中，单个选项的高度 */
+    itemHeight: {
+        type: Number,
+        default: 44
+    },
+    /** 取消按钮的文字 */
+    cancelText: {
+        type: String,
+        default: '取消'
+    },
+    /** 确认按钮的文字 */
+    confirmText: {
+        type: String,
+        default: '确定'
+    },
+    /** 取消按钮的颜色 */
+    cancelColor: {
+        type: String,
+        default: '#909193'
+    },
+    /** 确认按钮的颜色 */
+    confirmColor: String,
+    /** 每列中可见选项的数量 */
+    visibleItemCount: {
+        type: Number,
+        default: 5
+    },
+    /** 显示到选项对象中，需要展示的属性键名 */
+    keyName: {
+        type: String,
+        default: 'text'
+    },
+    /** 是否允许点击遮罩关闭选择器 */
+    closeOnClickOverlay: {
+        type: Boolean,
+        default: false
+    },
+    /** 各列的默认索引 */
+    defaultIndex: {
+        type: Array as PropType<number[]>,
+        default: []
+    },
+    /** 是否在手指松开时立即触发change事件 */
+    immediateChange: {
+        type: Boolean,
+        default: true
+    },
+    /** 最高层级 */
+    zIndex: {
+        type: Number,
+        default: 10076
+    },
+    /** 是否显示输入框 */
+    hasInput: {
+        type: Boolean,
+        default: false
+    },
+    /** 输入框集合属性 */
+    input: {
+        type: Object as PropType<HyInputProps>,
+        default: () => {}
+    },
+    /** 是否自定义选择器nav左边内容 */
+    toolbarRightSlot: {
+        type: Boolean,
+        default: false
+    }
+}
 
-export default defaultProps;
+export default pickerProps

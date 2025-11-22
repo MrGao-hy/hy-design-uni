@@ -8,6 +8,8 @@
         sub-title="釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放"
         right-text="2020-05-15"
         thumb="https://img0.baidu.com/it/u=3124282249,3904399666&fm=253"
+        thumb-width="40"
+        full
         :showHead="showHead"
         :showFoot="showFoot"
         :boxShadow="boxShadow"

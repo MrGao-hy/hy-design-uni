@@ -18,6 +18,10 @@
     :deep(.hy-icon) {
       color: $hy-text-color--disabled;
     }
+
+    &-text {
+      color: $hy-text-color--disabled !important;
+    }
   }
 
   @include e(no-radius){

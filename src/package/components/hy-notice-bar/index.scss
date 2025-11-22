@@ -27,9 +27,6 @@
   @include e(right-icon) {
     margin-left: 5px;
     align-items: center;
-    :deep(.hy-icon) {
-      color: $hy-warning;
-    }
   }
 
   @include e(content) {
@@ -63,7 +60,8 @@
     @include m(item) {
       @include flex;
       align-items: center;
-      overflow: hidden;
+      height: 100%;
+      //overflow: hidden;
 
       @include e(text) {
         font-size: 14px;

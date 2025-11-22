@@ -1,144 +1,88 @@
 <template>
-  <view
-    v-if="show"
-    :style="customStyle"
-    :class="['hy-loading-icon', `hy-loading-icon__${direction}`]"
-  >
     <view
-      v-if="!webviewHide"
-      :class="['hy-loading-icon__spinner', `hy-loading-icon__spinner--${mode}`]"
-      ref="ani"
-      :style="{
-        color: color,
-        width: addUnit(size),
-        height: addUnit(size),
-        borderTopColor: color,
-        borderBottomColor: otherBorderColor,
-        borderLeftColor: otherBorderColor,
-        borderRightColor: otherBorderColor,
-        'animation-duration': `${duration}ms`,
-        'animation-timing-function':
-          mode === 'semicircle' || mode === 'circle' ? timingFunction : '',
-      }"
+        v-if="show"
+        :style="customStyle"
+        :class="['hy-loading-icon', `hy-loading-icon__${direction}`, props.customClass]"
     >
-      <block v-if="mode === 'spinner'">
-        <!-- #ifndef APP-NVUE -->
         <view
-          v-for="(item, index) in array12"
-          :key="index"
-          class="hy-loading-icon__dot"
-        ></view>
-        <!-- #endif -->
-      </block>
+            v-if="!webviewHide"
+            :class="['hy-loading-icon__spinner', `hy-loading-icon__spinner--${mode}`]"
+            ref="ani"
+            :style="{
+                color: color,
+                width: addUnit(size),
+                height: addUnit(size),
+                borderTopColor: color,
+                borderBottomColor: otherBorderColor,
+                borderLeftColor: otherBorderColor,
+                borderRightColor: otherBorderColor,
+                'animation-duration': `${duration}ms`,
+                'animation-timing-function':
+                    mode === 'semicircle' || mode === 'circle' ? timingFunction : ''
+            }"
+        >
+            <block v-if="mode === 'spinner'">
+                <!-- #ifndef APP-NVUE -->
+                <view
+                    v-for="(item, index) in array12"
+                    :key="index"
+                    class="hy-loading-icon__dot"
+                ></view>
+                <!-- #endif -->
+            </block>
+        </view>
+        <text
+            v-if="text"
+            :class="['hy-loading-icon__text', `hy-loading-icon__${direction}--text`]"
+            :style="{
+                fontSize: addUnit(textSize),
+                color: textColor
+            }"
+        >
+            {{ text }}
+        </text>
     </view>
-    <text
-      v-if="text"
-      :class="['hy-loading-icon__text', `hy-loading-icon__${direction}--text`]"
-      :style="{
-        fontSize: addUnit(textSize),
-        color: textColor,
-      }"
-    >
-      {{ text }}
-    </text>
-  </view>
 </template>
 
 <script lang="ts">
 export default {
-  name: "hy-loading",
-  options: {
-    addGlobalClass: true,
-    virtualHost: true,
-    styleIsolation: "shared",
-  },
-};
+    name: 'hy-loading',
+    options: {
+        addGlobalClass: true,
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+}
 </script>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import type { CSSProperties, PropType } from "vue";
-import { addUnit, colorGradient } from "../../libs";
+import { ref, computed } from 'vue'
+import { addUnit, colorGradient } from '../../libs'
+import loadingProps from './props'
 
 /**
  * 目前用在华玥的loadMore加载更多等组件的正在加载状态场景。
  * @displayName hy-loading
  */
-defineOptions({});
+defineOptions({})
 
-// const props = withDefaults(defineProps<IProps>(), defaultProps)
-const props = defineProps({
-  /** 是否显示组件 */
-  show: {
-    type: Boolean,
-    default: true,
-  },
-  /** 动画活动区域的颜色，只对 mode = flower 模式有效 */
-  color: {
-    type: String,
-    default: "#909399",
-  },
-  /** 提示文本的颜色 */
-  textColor: {
-    type: String,
-    default: "#909399",
-  },
-  /**
-   * 文字和图标是否垂直排列
-   * @values row,column
-   * */
-  direction: {
-    type: String as PropType<HyApp.DirectionType>,
-    default: "row",
-  },
-  /** 模式选择，见官网说明 */
-  mode: {
-    type: String,
-    default: "spinner",
-  },
-  /** 加载图标的大小，单位px */
-  size: {
-    type: [String, Number],
-    default: 24,
-  },
-  /** 文字大小 */
-  textSize: {
-    type: [String, Number],
-    default: 15,
-  },
-  /** 文字内容 */
-  text: String,
-  /** 动画模式 */
-  timingFunction: {
-    type: String,
-    default: "ease-in-out",
-  },
-  /** 动画执行周期时间 */
-  duration: {
-    type: Number,
-    default: 1200,
-  },
-  /** mode=circle时的暗边颜色 */
-  inactiveColor: String,
-  /** 定义需要用到的外部样式 */
-  customStyle: Object as PropType<CSSProperties>,
-});
+const props = defineProps(loadingProps)
 
 //动画旋转角度
-const aniAngel = ref(360);
+const aniAngel = ref(360)
 const array12 = Array.from({
-  length: 12,
-});
-const webviewHide = ref(false);
+    length: 12
+})
+const webviewHide = ref(false)
 
 const otherBorderColor = computed(() => {
-  const lightColor = colorGradient(props.color, "#ffffff", 100)[80];
-  if (props.mode === "circle") {
-    return props.inactiveColor ? props.inactiveColor : lightColor;
-  } else {
-    return "transparent";
-  }
-});
+    const lightColor = colorGradient(props.color, '#ffffff', 100)[80]
+    if (props.mode === 'circle') {
+        return props.inactiveColor ? props.inactiveColor : lightColor
+    } else {
+        return 'transparent'
+    }
+})
 
 // 监听webview的显示与隐藏
 // const addEventListenerToWebview = () => {
@@ -159,5 +103,5 @@ const otherBorderColor = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import "./index.scss";
+@import './index.scss';
 </style>

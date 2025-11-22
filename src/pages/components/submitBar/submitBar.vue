@@ -28,6 +28,7 @@ import { IconConfig } from "@/package";
 import HyConfigProvider from "@/package/components/hy-config-provider/hy-config-provider.vue";
 import { useThemeStore } from "@/store";
 import { storeToRefs } from "pinia";
+import type { SubmitBarIconMenus } from "@/package/components/hy-submit-bar/typing";
 const themeStore = useThemeStore();
 
 const { themeColor, darkMode } = storeToRefs(themeStore);
@@ -42,7 +43,7 @@ const menus = reactive([
   },
 ]);
 
-const clickMenuFn = (i: number) => {
+const clickMenuFn = (temp: SubmitBarIconMenus, i: number) => {
   uni.showToast({ title: `点击第${i}个` });
 };
 </script>

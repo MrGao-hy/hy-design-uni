@@ -512,7 +512,14 @@
 						"navigationBarTitleText": "弹性布局",
 						"enablePullDownRefresh": false
 					}
-				}
+				},
+              {
+                "path": "coupon/coupon",
+                "style": {
+                  "navigationBarTitleText": "优惠券示例",
+                  "enablePullDownRefresh": false
+                }
+              }
 			]
 		}
 	],

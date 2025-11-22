@@ -20,8 +20,8 @@
     }
 
     @include m(icon) {
-      width: 32px;
-      height: 32px;
+      width: 60rpx;
+      height: 60rpx;
       border-radius: $hy-border-radius-semicircle;
       box-sizing: border-box;
       margin-right: $hy-border-margin-padding-base;
@@ -31,27 +31,22 @@
 
       @include e(info) {
         background: $hy-info;
-        border: 6rpx solid $hy-info-dark;
       }
 
       @include e(primary) {
         background: $hy-primary;
-        border: 6rpx solid $hy-primary-dark;
       }
 
       @include e(success) {
         background: $hy-success;
-        border: 6rpx solid $hy-success-dark;
       }
 
       @include e(error) {
         background: $hy-error;
-        border: 6rpx solid $hy-error-dark;
       }
 
       @include e(warning) {
         background: $hy-warning;
-        border: 6rpx solid $hy-warning-dark;
       }
     }
 

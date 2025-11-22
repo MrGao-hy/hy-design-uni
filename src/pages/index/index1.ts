@@ -305,4 +305,8 @@ export const list_7 = [
     title: "Price 金额",
     url: "/pages/components/price/price",
   },
+  {
+    title: "Coupon 优惠券",
+    url: "/pages/components/coupon/coupon",
+  },
 ];

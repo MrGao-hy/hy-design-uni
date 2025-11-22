@@ -1,15 +1,45 @@
-import type IProps from "./typing";
+import type { CSSProperties, PropType } from 'vue'
 
-const defaultProps: IProps = {
-  showHeight: 200,
-  toggle: true,
-  closeText: "展开阅读全文",
-  openText: "收起",
-  color: "",
-  fontSize: 14,
-  textIndent: "2em",
-  name: "",
-  shadowStyle: {},
-};
+const readMoreProps = {
+    /** 内容超出此高度才会显示展开全文按钮，单位px */
+    showHeight: {
+        type: Number,
+        default: 200
+    },
+    /** 展开后是否显示收起按钮 */
+    toggle: {
+        type: Boolean,
+        default: true
+    },
+    /** 关闭时的提示文字 */
+    closeText: {
+        type: String,
+        default: '展开阅读全文'
+    },
+    /** 展开时的提示文字 */
+    openText: {
+        type: String,
+        default: '收起'
+    },
+    /** 提示文字的颜色 */
+    color: String,
+    /** 提示文字的大小，单位px */
+    fontSize: {
+        type: Number,
+        default: 14
+    },
+    /** 段落首行缩进的字符个数 */
+    textIndent: {
+        type: String,
+        default: '2em'
+    },
+    /** 用于在 open 和 close 事件中当作回调参数返回 */
+    name: String,
+    /** 显示阴影的样式 */
+    shadowStyle: {
+        type: Object as PropType<CSSProperties>,
+        default: () => {}
+    }
+}
 
-export default defaultProps;
+export default readMoreProps

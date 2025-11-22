@@ -57,18 +57,14 @@
     @include edeep(mask) {
       background-image: none;
     }
-  }
 
-  @include m(loading) {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    @include flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.87);
-    z-index: 1000;
+    @include edeep(loading) {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1000;
+    }
   }
 }

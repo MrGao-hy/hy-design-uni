@@ -18,6 +18,7 @@ declare module "vue" {
     HyConfigProvider: (typeof import("./components/hy-config-provider/hy-config-provider.vue"))["default"];
     HyCountDown: (typeof import("./components/hy-count-down/hy-count-down.vue"))["default"];
     HyCountTo: (typeof import("./components/hy-count-to/hy-count-to.vue"))["default"];
+    HyCoupon: (typeof import("./components/hy-coupon/hy-coupon.vue"))["default"];
     HyDatetimePicker: (typeof import("./components/hy-datetime-picker/hy-datetime-picker.vue"))["default"];
     HyDatetimePickerView: (typeof import("./components/hy-datetime-picker-view/hy-datetime-picker-view.vue"))["default"];
     HyDivider: (typeof import("./components/hy-divider/hy-divider.vue"))["default"];
