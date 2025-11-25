@@ -9,7 +9,7 @@ $hy-box-width: 180rpx;
 
   /* 已使用/过期状态的置灰效果 */
   @include m(disabled) {
-    filter: grayscale(1) !important;
+    filter: grayscale(0.4) !important;
     opacity: 0.6;
   }
 
@@ -34,6 +34,11 @@ $hy-box-width: 180rpx;
             no-repeat,
             radial-gradient(circle at $hy-box-width bottom, transparent 15rpx, #ff7d00 0) bottom / 100%
             51px no-repeat;
+    //background:
+    //        radial-gradient(circle at left center, transparent 15rpx, #ff7d00 0) left center / 30rpx 100% no-repeat,
+    //        radial-gradient(circle at right center, transparent 15rpx, #ff7d00 0) right center / 30rpx 100% no-repeat;
+
+
   }
   @include m(discount) {
     background:

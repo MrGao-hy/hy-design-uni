@@ -82,7 +82,7 @@ const uploadProps = {
     /** 所选的图片的尺寸 */
     sizeType: {
         type: Array as PropType<('original' | 'compressed')[]>,
-        default: ['original', 'compressed']
+        default: () => ['original', 'compressed']
     },
     /** 是否开启图片多选，部分安卓机型不支持 */
     multiple: {

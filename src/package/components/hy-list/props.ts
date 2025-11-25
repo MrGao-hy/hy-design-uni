@@ -3,7 +3,7 @@ import type { PropType } from 'vue'
 const listProps = {
     /** 数据列表 */
     list: {
-        type: Array as PropType<(string | Record<string, any>)[]>,
+        type: Array,
         default: () => []
     },
     /** 容器高度，必须给个高度，否则加载全部数据 */

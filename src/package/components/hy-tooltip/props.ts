@@ -58,9 +58,7 @@ const tooltipProps = {
     /** 扩展的按钮组 */
     buttons: {
         type: Array,
-        default() {
-            return []
-        }
+        default: () => []
     },
     /** 是否显示透明遮罩以防止触摸穿透 */
     overlay: {

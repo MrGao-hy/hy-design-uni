@@ -113,9 +113,7 @@ const datetimePickerProps = {
     /** 各列的默认索引 */
     defaultIndex: {
         type: Array,
-        default() {
-            return []
-        }
+        default: () => []
     },
     /** 输入框是否显示边框 */
     hasInput: {

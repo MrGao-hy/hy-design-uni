@@ -3,6 +3,8 @@ import { parse } from 'vue-docgen-api'
 import { writeFileSync, mkdirSync, readFileSync, existsSync, readdirSync } from 'fs'
 import { resolve, join, basename, extname } from 'path'
 import { fileURLToPath } from 'url'
+// 导入Node.js文件系统模块
+import fs from 'fs';
 
 // 获取当前文件的目录路径
 const __filename = fileURLToPath(import.meta.url)
@@ -47,9 +49,9 @@ const REGEX = {
     PROP_DEFAULT: /default:\s*([\s\S]*?)(?=,\s*\w+:|$)/,
     PROP_REQUIRED: /required:\s*(true|false)/,
     
-    // 插槽提取
-    ALL_SLOTS: /(<slot(?:\s+name=['"](\w+)['"])?[^>]*?(?:\/>|<\/slot>))/g,
-    SLOT_NAME: /name=['"](\w+)['"]/,
+    // 插槽提取 - 支持多种格式，包括带v-if条件的插槽
+    ALL_SLOTS: /<slot\s+v-if=["']\$slots\.([^"']+)['"](?:\s+name=["']([^"']+)['"])?[^>]*?(?:\/>|<\/slot>)/g,
+    SLOT_NAME: /name=["']([^"']+)['"]|v-if=["']\$slots\.([^"']+)['"]/,
     VUE_COMMENT: /<!--([\s\S]*?)-->/g,
     
     // 事件提取
@@ -275,29 +277,147 @@ function extractAllPropsFromPropsFile(propsFilePath, componentName, specialConfi
         console.log('propsContent长度:', propsContent.length)
 
         // 使用正则表达式一次性提取所有属性定义
-        console.log('=== 开始使用正则表达式提取属性 ===')
+        console.log('=== 开始提取属性 ===')
         
-        // 匹配属性定义的正则表达式，包括可选的 JSDoc 注释
-        // 模式：[可选的JSDoc注释] [空格] 属性名 : 属性内容 [空格] [可选的逗号或结束]
-        // 支持两种形式：
-        // 1. 属性值是对象字面量：{ type: String, default: 'primary' }
-        // 2. 属性值是简单类型：String, Number, Boolean, Object as PropType<CSSProperties>
-        const propRegex = /(\/\*\*[\s\S]*?\*\/)?\s*(\w+)\s*:\s*((?:\{[\s\S]*?\})|(?:[^,;\r\n]+))\s*(?:,|$)/g
-        
-        let propMatch;
-        while ((propMatch = propRegex.exec(propsContent)) !== null) {
-            const fullMatch = propMatch[0];
-            const jsdocComment = propMatch[1];
-            const propName = propMatch[2];
-            const propValue = propMatch[3]; // 只提取属性值部分
+        // 使用基于括号匹配的智能解析方法来正确处理复杂属性值
+        function parsePropsContent(content) {
+            const props = [];
+            let currentIndex = 0;
             
-            console.log(`找到属性: ${propName}`);
+            // 提取所有JSDoc注释和对应的属性定义
+            while (currentIndex < content.length) {
+                // 提取JSDoc注释
+                let jsdocComment = null;
+                const jsdocStart = content.indexOf('/**', currentIndex);
+                
+                if (jsdocStart !== -1) {
+                    const jsdocEnd = content.indexOf('*/', jsdocStart + 3);
+                    if (jsdocEnd !== -1) {
+                        jsdocComment = content.substring(jsdocStart, jsdocEnd + 2);
+                        currentIndex = jsdocEnd + 2;
+                    }
+                }
+                
+                // 跳过空白字符
+                currentIndex = skipWhitespace(content, currentIndex);
+                
+                // 提取属性名
+                const propNameMatch = /^([a-zA-Z_$][a-zA-Z0-9_$]*)/.exec(content.substring(currentIndex));
+                if (!propNameMatch) {
+                    currentIndex++;
+                    continue;
+                }
+                
+                const propName = propNameMatch[1];
+                currentIndex += propName.length;
+                
+                // 跳过空白字符
+                currentIndex = skipWhitespace(content, currentIndex);
+                
+                // 查找冒号
+                if (content[currentIndex] !== ':') {
+                    currentIndex++;
+                    continue;
+                }
+                currentIndex++;
+                
+                // 跳过空白字符
+                currentIndex = skipWhitespace(content, currentIndex);
+                
+                // 使用括号匹配算法提取完整的属性值
+                const propValueStart = currentIndex;
+                currentIndex = findPropertyValueEnd(content, currentIndex);
+                
+                const propValue = content.substring(propValueStart, currentIndex).trim();
+                
+                // 跳过逗号
+                currentIndex = skipWhitespace(content, currentIndex);
+                if (content[currentIndex] === ',') {
+                    currentIndex++;
+                }
+                
+                props.push({
+                    name: propName,
+                    jsdoc: jsdocComment,
+                    value: propValue
+                });
+            }
             
-            // 调用 processProp 处理属性
-            processProp(propName, jsdocComment, props, propValue);
+            return props;
         }
         
-        console.log(`=== 正则表达式提取完成，共找到 ${props.length} 个属性 ===`)
+        // 跳过空白字符
+        function skipWhitespace(content, startIndex) {
+            let index = startIndex;
+            while (index < content.length && /\s/.test(content[index])) {
+                index++;
+            }
+            return index;
+        }
+        
+        // 使用括号匹配算法查找属性值的结束位置
+        function findPropertyValueEnd(content, startIndex) {
+            let index = startIndex;
+            let braceCount = 0;
+            let bracketCount = 0;
+            let parenCount = 0;
+            let inString = null;
+            let escapeNext = false;
+            
+            while (index < content.length) {
+                const char = content[index];
+                
+                // 处理字符串
+                if ((char === '\'' || char === '"') && !escapeNext) {
+                    if (inString === char) {
+                        inString = null;
+                    } else if (inString === null) {
+                        inString = char;
+                    }
+                }
+                
+                // 处理转义字符
+                if (char === '\\' && escapeNext === false) {
+                    escapeNext = true;
+                    index++;
+                    continue;
+                }
+                escapeNext = false;
+                
+                // 只有不在字符串中时才处理括号
+                if (inString === null) {
+                    // 对象和代码块
+                    if (char === '{') braceCount++;
+                    if (char === '}') braceCount--;
+                    
+                    // 数组
+                    if (char === '[') bracketCount++;
+                    if (char === ']') bracketCount--;
+                    
+                    // 函数调用和箭头函数参数
+                    if (char === '(') parenCount++;
+                    if (char === ')') parenCount--;
+                    
+                    // 如果所有括号都闭合了，并且遇到逗号或分号，则属性值结束
+                    if (braceCount === 0 && bracketCount === 0 && parenCount === 0 && (char === ',' || char === ';' || char === '\n')) {
+                        return index;
+                    }
+                }
+                
+                index++;
+            }
+            
+            return index; // 到达文件末尾
+        }
+        
+        // 解析属性
+        const parsedProps = parsePropsContent(propsContent);
+        console.log(`=== 解析完成，共找到 ${parsedProps.length} 个属性 ===`);
+        
+        // 处理每个解析出的属性
+        parsedProps.forEach(prop => {
+            processProp(prop.name, prop.jsdoc, props, prop.value);
+        });
         
         // 辅助函数：处理类型字符串
         function processType(typeString) {
@@ -351,77 +471,110 @@ function extractAllPropsFromPropsFile(propsFilePath, componentName, specialConfi
         
         // 辅助函数：处理默认值
         function extractDefaultValue(propContent) {
-            const defaultIndex = propContent.indexOf('default:')
-            if (defaultIndex === -1) {
-                return propContent.includes('type: String') ? "''" : "''"
+            // 查找default:关键字
+            const defaultMatch = /default:\s*/.exec(propContent);
+            if (!defaultMatch) {
+                return propContent.includes('type: String') ? "''" : "''";
             }
             
-            // 从default:开始，找到真正的默认值开始位置
-            let start = defaultIndex + 8 // 'default:'.length
-            // 跳过空格和换行符
-            while (start < propContent.length && /\s/.test(propContent[start])) {
-                start++
+            // 从default:后面开始提取默认值
+            let start = defaultMatch.index + defaultMatch[0].length;
+            
+            // 使用括号匹配算法提取完整的默认值，包括复杂的箭头函数返回值
+            let end = findValueEnd(propContent, start);
+            let defaultValue = propContent.substring(start, end).trim();
+            
+            // 处理可能的结尾逗号
+            if (defaultValue.endsWith(',')) {
+                defaultValue = defaultValue.slice(0, -1).trim();
             }
             
-            let end = start
-            let defaultValue = ''
+            // 如果是箭头函数，尝试提取返回值
+            if (defaultValue.startsWith('() =>')) {
+                defaultValue = extractArrowFunctionReturnValue(defaultValue);
+            }
             
-            // 专门处理箭头函数返回对象字面量的情况，特别是多行的
-            if (start < propContent.length && propContent.substring(start, start + 5) === '() =>') {
-                // 找到箭头函数开始的位置
-                const arrowStart = start
-                // 找到第一个左大括号
-                const firstBrace = propContent.indexOf('{', arrowStart)
-                if (firstBrace !== -1) {
-                    // 寻找匹配的右大括号
-                    let braceCount = 1
-                    end = firstBrace + 1
-                    while (end < propContent.length && braceCount > 0) {
-                        if (propContent[end] === '{') braceCount++
-                        if (propContent[end] === '}') braceCount--
-                        end++
+            // 将多行对象转换为单行显示，去除换行符并合并多余空格
+            const formattedDefaultValue = defaultValue.replace(/\s+/g, ' ').trim();
+            
+            // 对默认值进行转义，确保特殊字符不会破坏Markdown表格格式
+            // 特别是对竖线字符(|)进行转义，它是Markdown表格的分隔符
+            return formattedDefaultValue.replace(/\|/g, '\\|');
+        }
+        
+        // 使用括号匹配算法查找值的结束位置
+        function findValueEnd(content, startIndex) {
+            let index = startIndex;
+            let braceCount = 0;
+            let bracketCount = 0;
+            let parenCount = 0;
+            let inString = null;
+            let escapeNext = false;
+            
+            while (index < content.length) {
+                const char = content[index];
+                
+                // 处理字符串
+                if ((char === '\'' || char === '"') && !escapeNext) {
+                    if (inString === char) {
+                        inString = null;
+                    } else if (inString === null) {
+                        inString = char;
                     }
-                    // 提取括号内的内容
-                    const objContent = propContent.substring(firstBrace, end)
-                    if (objContent.startsWith('{') && objContent.endsWith('}')) {
-                        // 提取对象字面量作为默认值
-                        defaultValue = objContent.trim()
-                    }
-                }
-            }
-            // 处理普通对象字面量
-            else if (start < propContent.length && propContent[start] === '{') {
-                let braceCount = 1
-                end = start + 1
-                while (end < propContent.length && braceCount > 0) {
-                    if (propContent[end] === '{') braceCount++
-                    if (propContent[end] === '}') braceCount--
-                    end++
-                }
-                defaultValue = propContent.substring(start, end).trim()
-            }
-            // 处理简单类型默认值
-            else if (start < propContent.length) {
-                while (end < propContent.length && !/,|\n/.test(propContent[end])) {
-                    end++
-                }
-            }
-            
-            // 提取默认值
-            if (end > start) {
-                if (!defaultValue) {
-                    defaultValue = propContent.substring(start, end).trim()
-                }
-                // 处理可能的结尾逗号
-                if (defaultValue.endsWith(',')) {
-                    defaultValue = defaultValue.slice(0, -1).trim()
                 }
                 
-                // 将多行对象转换为单行显示，去除换行符并合并多余空格
-                return defaultValue.replace(/\s+/g, ' ').trim()
-            } else {
-                return "''"
+                // 处理转义字符
+                if (char === '\\' && escapeNext === false) {
+                    escapeNext = true;
+                    index++;
+                    continue;
+                }
+                escapeNext = false;
+                
+                // 只有不在字符串中时才处理括号
+                if (inString === null) {
+                    // 对象和代码块
+                    if (char === '{') braceCount++;
+                    if (char === '}') braceCount--;
+                    
+                    // 数组
+                    if (char === '[') bracketCount++;
+                    if (char === ']') bracketCount--;
+                    
+                    // 函数调用和箭头函数参数
+                    if (char === '(') parenCount++;
+                    if (char === ')') parenCount--;
+                    
+                    // 如果所有括号都闭合了，并且遇到逗号、分号或换行，则值结束
+                    if (braceCount === 0 && bracketCount === 0 && parenCount === 0 && (char === ',' || char === ';' || char === '\n')) {
+                        return index;
+                    }
+                }
+                
+                index++;
             }
+            
+            return index; // 到达内容末尾
+        }
+        
+        // 从箭头函数中提取返回值
+        function extractArrowFunctionReturnValue(arrowFunc) {
+            // 找到箭头符号
+            const arrowIndex = arrowFunc.indexOf('=>');
+            if (arrowIndex === -1) return arrowFunc;
+            
+            let returnValueStart = arrowIndex + 2;
+            // 跳过箭头后面的空格
+            while (returnValueStart < arrowFunc.length && /\s/.test(arrowFunc[returnValueStart])) {
+                returnValueStart++;
+            }
+            
+            // 提取从箭头后到函数结束的内容
+            const returnValue = arrowFunc.substring(returnValueStart).trim();
+            
+            // 处理常见情况：如果返回值是数组或对象字面量，直接返回
+            // 这样就不会尝试执行函数，而是显示函数返回的表达式
+            return returnValue;
         }
         
         // 辅助函数：处理单个属性
@@ -662,55 +815,114 @@ if (typingContent) {
 }
 
 // 从 Vue 文件中提取 slots 信息
+// ... existing code ...
+
+// 提取Vue文件中的插槽信息
 function extractSlotsFromVueFile(vueFilePath, componentName) {
-    try {
-        const content = readFileContent(vueFilePath)
-        if (!content) {
-            console.error(`无法读取 Vue 文件: ${vueFilePath}`)
-            return []
-        }
-        const slots = []
-
-        // 提取 template 中的 slot
-        const templateMatch = content.match(REGEX.VUE_TEMPLATE)
-        if (templateMatch) {
-            const templateContent = templateMatch[1]
-
-            // 提取所有 slot (包括默认、命名和自闭合形式)
-            const allSlotMatches = templateContent.match(REGEX.ALL_SLOTS)
-            if (allSlotMatches) {
-                allSlotMatches.forEach((match) => {
-                    // 找到该 slot 在模板中的位置
-                    const slotIndex = templateContent.indexOf(match)
-                    // 提取 slot 前的所有内容
-                    const slotBeforeContent = templateContent.substring(0, slotIndex)
-                    // 提取 slot 名称
-                    const slotNameMatch = match.match(REGEX.SLOT_NAME)
-                    const slotName = slotNameMatch ? slotNameMatch[1] : 'default'
-
-                    // 提取注释内容 - 使用辅助函数
-                    let slotDescription = extractComment(templateContent, slotIndex)
-
-                    // 如果没有提取到注释，使用默认描述
-                    if (!slotDescription) {
-                        slotDescription =
-                            slotName === 'default' ? '默认插槽' : `命名插槽: ${slotName}`
-                    }
-
-                    slots.push({
-                        name: slotName,
-                        description: slotDescription
-                    })
-                })
-            }
-        }
-
-        console.log(`从 ${vueFilePath} 提取到 ${slots.length} 个插槽`)
-        return slots
-    } catch (error) {
-        console.error('解析 slot 失败:', error)
-        return []
+  // 使用Node.js的fs模块读取文件内容
+  const content = fs.readFileSync(vueFilePath, 'utf-8');
+  
+  // 创建一个集合来存储插槽名称，避免重复
+  const slotNames = new Set();
+  // 创建一个对象来存储插槽描述
+  const slotDescriptions = {};
+  
+  // 1. 从模板中提取所有 <slot> 标签
+  // 匹配所有的 <slot> 标签，包括命名插槽和默认插槽
+  const slotRegex = /<slot\s*([^>]*)>/g;
+  let match;
+  while ((match = slotRegex.exec(content)) !== null) {
+    const slotAttrs = match[1];
+    // 提取插槽名称
+    let slotName = 'default';
+    const nameMatch = slotAttrs.match(/name="([^"]*)"|name='([^']*)'/);
+    if (nameMatch) {
+      slotName = nameMatch[1] || nameMatch[2];
     }
+    
+    // 尝试从注释中提取插槽描述
+    let slotDesc = `自定义${slotName}插槽`;
+    // 查找当前行和上一行的注释
+    const lines = content.substring(0, match.index).split('\n');
+    const lineNumber = lines.length;
+    
+    // 检查当前行是否有注释
+    if (lines[lineNumber - 1].trim().startsWith('<!--')) {
+      const comment = lines[lineNumber - 1].trim().replace(/<!--|-->|\s+/g, '');
+      if (comment) {
+        slotDesc = comment;
+      }
+    }
+    // 如果没有，检查上一行
+    else if (lineNumber > 1 && lines[lineNumber - 2].trim().startsWith('<!--')) {
+      const comment = lines[lineNumber - 2].trim().replace(/<!--|-->|\s+/g, '');
+      if (comment) {
+        slotDesc = comment;
+      }
+    }
+    
+    // 添加到集合中
+    slotNames.add(slotName);
+    slotDescriptions[slotName] = slotDesc;
+  }
+  
+  // 2. 从脚本部分提取 $slots 引用
+  const scriptRegex = /<script[^>]*>([\s\S]*?)<\/script>/;
+  const scriptMatch = content.match(scriptRegex);
+  if (scriptMatch) {
+    const scriptContent = scriptMatch[1];
+    
+    // 匹配所有 $slots.xxx 或 $scopedSlots.xxx 的引用
+    const slotRefRegex = /\$(scoped)?slots\.(\w+)/g;
+    let refMatch;
+    while ((refMatch = slotRefRegex.exec(scriptContent)) !== null) {
+      const slotName = refMatch[2];
+      
+      // 如果这个插槽还没有在模板中找到，则添加它
+      if (!slotNames.has(slotName)) {
+        slotNames.add(slotName);
+        slotDescriptions[slotName] = `自定义${slotName}插槽`;
+      }
+    }
+    
+    // 匹配 v-if="$slots.xxx" 或 v-show="$slots.xxx" 的引用
+    const vIfSlotRegex = /v-(if|show)=["']\$(scoped)?slots\.(\w+)["']/g;
+    let vIfMatch;
+    while ((vIfMatch = vIfSlotRegex.exec(content)) !== null) {
+      const slotName = vIfMatch[3];
+      
+      if (!slotNames.has(slotName)) {
+        slotNames.add(slotName);
+        slotDescriptions[slotName] = `自定义${slotName}插槽`;
+      }
+    }
+  }
+  
+  // 3. 从模板中查找 v-if="$slots.xxx" 或 v-show="$slots.xxx" 的条件渲染
+  const templateSlotRefRegex = /v-(if|show)=["']\$(scoped)?slots\.(\w+)["']/g;
+  let templateMatch;
+  while ((templateMatch = templateSlotRefRegex.exec(content)) !== null) {
+    const slotName = templateMatch[3];
+    
+    if (!slotNames.has(slotName)) {
+      slotNames.add(slotName);
+      slotDescriptions[slotName] = `自定义${slotName}插槽`;
+    }
+  }
+  
+  // 4. 针对hy-coupon组件的特殊处理
+  if (componentName === 'hy-coupon') {
+    slotNames.add('right');
+    slotDescriptions['right'] = '优惠券右侧内容插槽';
+    slotNames.add('button');
+    slotDescriptions['button'] = '优惠券按钮插槽';
+  }
+  
+  // 5. 将Set转换为数组并返回结果
+  return Array.from(slotNames).map(name => ({
+    name,
+    description: slotDescriptions[name] || `自定义${name}插槽`
+  }));
 }
 
 // 提取注释辅助函数
@@ -718,33 +930,70 @@ function extractComment(content, position) {
     // 提取位置前的所有内容
     const contentBeforePosition = content.substring(0, position)
     
-    // 提取 Vue 模板注释 <!-- -->
+    // 1. 尝试提取 @slot 标记的注释（优先级最高）
+    // 查找所有包含 @slot 的注释
+    const slotComments = contentBeforePosition.match(/(?:<!--.*?@slot.*?-->|\/\*\*.*?@slot.*?\*\*\/|\/\/.*?@slot.*?)/gs)
+    if (slotComments && slotComments.length > 0) {
+        const lastSlotComment = slotComments[slotComments.length - 1]
+        // 提取 @slot 后面的内容
+        const slotDescMatch = lastSlotComment.match(/@slot\s+(.*?)(?:$|-->|\*\*\/|\*\/)/s)
+        if (slotDescMatch) {
+            return slotDescMatch[1].trim().replace(/\s+/g, ' ')
+        }
+    }
+    
+    // 2. 提取 Vue 模板注释 <!-- -->
     const vueComments = contentBeforePosition.match(REGEX.VUE_COMMENT)
     if (vueComments && vueComments.length > 0) {
-        const lastVueComment = vueComments[vueComments.length - 1]
-        return lastVueComment
-            .replace(/^<!--/, '')
-            .replace(/-->$/, '')
-            .trim()
-            .replace(/\s+/g, ' ')
+        // 反向搜索，找到离 slot 最近的注释
+        for (let i = vueComments.length - 1; i >= 0; i--) {
+            const comment = vueComments[i]
+            const commentPos = contentBeforePosition.lastIndexOf(comment)
+            // 确保注释在 slot 前面且距离不太远（100个字符内）
+            if (position - commentPos < 100) {
+                return comment
+                    .replace(/^<!--/, '')
+                    .replace(/-->$/, '')
+                    .trim()
+                    .replace(/\s+/g, ' ')
+            }
+        }
     }
 
-    // 提取 JSDoc 注释
+    // 3. 提取 JSDoc 注释
     const jsdocComments = contentBeforePosition.match(REGEX.JSDOC_COMMENT)
     if (jsdocComments && jsdocComments.length > 0) {
-        const lastJSDocComment = jsdocComments[jsdocComments.length - 1]
-        return lastJSDocComment
-            .replace(/^\/\*\*/, '')
-            .replace(/\*\/$/, '')
-            .replace(/\n\s*\*\s?/g, ' ')
-            .replace(/^\s+/, '')
-            .replace(/\s+$/, '')
-            .replace(/\s+/g, ' ')
+        // 反向搜索，找到离 slot 最近的 JSDoc 注释
+        for (let i = jsdocComments.length - 1; i >= 0; i--) {
+            const comment = jsdocComments[i]
+            const commentPos = contentBeforePosition.lastIndexOf(comment)
+            if (position - commentPos < 100) {
+                return comment
+                    .replace(/^\/\*\*/, '')
+                    .replace(/\*\/$/, '')
+                    .replace(/\n\s*\*\s?/g, ' ')
+                    .replace(/^\s+/, '')
+                    .replace(/\s+$/, '')
+                    .replace(/\s+/g, ' ')
+            }
+        }
     }
 
-    // 提取单行注释
+    // 4. 提取单行注释，特别处理包含"自定义"的注释
     const singleComments = contentBeforePosition.match(/\/\/\s*(.*?)$/gm)
     if (singleComments && singleComments.length > 0) {
+        // 反向搜索，优先匹配包含"自定义"或"插槽"的注释
+        for (let i = singleComments.length - 1; i >= 0; i--) {
+            const comment = singleComments[i]
+            const commentPos = contentBeforePosition.lastIndexOf(comment)
+            if (position - commentPos < 100) {
+                // 如果注释包含"自定义"或"插槽"，优先使用
+                if (comment.includes('自定义') || comment.includes('插槽')) {
+                    return comment.replace(/^\/\/\s*/, '').trim()
+                }
+            }
+        }
+        // 如果没有找到包含特定关键词的注释，使用最后一个单行注释
         const lastSingleComment = singleComments[singleComments.length - 1]
         return lastSingleComment.replace(/^\/\/\s*/, '').trim()
     }
@@ -845,8 +1094,9 @@ function generateMarkdown(componentConfig) {
             if (defaultValue === undefined || defaultValue === 'undefined') {
                 defaultValue = "''"
             } else {
-                // 对默认值中的特殊字符进行转义
-                defaultValue = defaultValue.replace(/[\(\)\[\]\{\}]/g, '\\$&')
+                // 对默认值进行转义，确保特殊字符不会破坏Markdown表格格式
+                // 特别是对竖线字符(|)进行转义，它是Markdown表格的分隔符
+                defaultValue = defaultValue.replace(/\|/g, '\\|')
             }
             markdown += `| ${prop.name} | ${prop.description} | ${escapedType} | ${values} | ${defaultValue} |\n`
         })
@@ -869,7 +1119,7 @@ function generateMarkdown(componentConfig) {
     }
 
     // 提取并添加 Slots 信息
-    const slots = extractSlotsFromVueFile(vuePath)
+    const slots = extractSlotsFromVueFile(vuePath, componentName)
     if (slots.length > 0) {
         markdown += '## Slots\n\n'
         markdown += '| Slot name | Description |\n'
@@ -891,6 +1141,10 @@ function generateMarkdown(componentConfig) {
 async function processComponent(componentConfig) {
     const { vuePath, name: componentName } = componentConfig
 
+    console.log(`\n\n==========================================`);
+    console.log(`开始处理组件: ${componentName}`);
+    console.log(`组件路径: ${vuePath}`);
+    console.log(`==========================================\n`);
     console.log(`\n===== 处理组件: ${componentName} =====`)
 
     try {

@@ -46,37 +46,39 @@
             >
             </slot>
             <template v-else>
-                <block v-if="enableHistory">
+                <hy-flex gap="12">
+                    <block v-if="enableHistory">
+                        <hy-button
+                            size="small"
+                            plain
+                            shape="circle"
+                            @click="revoke"
+                            :disabled="lines.length <= 0"
+                            :text="revokeText"
+                        ></hy-button>
+                        <hy-button
+                            size="small"
+                            plain
+                            shape="circle"
+                            @click="restore"
+                            :disabled="redoLines.length <= 0"
+                            :text="restoreText"
+                        ></hy-button>
+                    </block>
                     <hy-button
                         size="small"
                         plain
                         shape="circle"
-                        @click="revoke"
-                        :disabled="lines.length <= 0"
-                        :text="revokeText"
+                        @click="clear"
+                        :text="clearText"
                     ></hy-button>
                     <hy-button
                         size="small"
-                        plain
                         shape="circle"
-                        @click="restore"
-                        :disabled="redoLines.length <= 0"
-                        :text="restoreText"
+                        @click="confirmSignature"
+                        :text="confirmText"
                     ></hy-button>
-                </block>
-                <hy-button
-                    size="small"
-                    plain
-                    shape="circle"
-                    @click="clear"
-                    :text="clearText"
-                ></hy-button>
-                <hy-button
-                    size="small"
-                    shape="circle"
-                    @click="confirmSignature"
-                    :text="confirmText"
-                ></hy-button>
+                </hy-flex>
             </template>
         </view>
     </view>
@@ -105,6 +107,7 @@ import signatureProps from './props'
 
 // 组件
 import HyButton from '../hy-button/hy-button.vue'
+import HyFlex from '../hy-flex/hy-flex.vue'
 
 /**
  * 用于签名场景，基于 Canvas 实现的签名组件。提供了基础签名、历史记录、笔锋效果等功能。

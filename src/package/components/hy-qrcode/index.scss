@@ -6,11 +6,10 @@
     position: relative;
 
     @include m(canvas) {
-      // 移除fixed定位，确保canvas在H5端能正确绘制
       position: fixed;
-      top: -99999rpx;
-      left: -99999rpx;
-      z-index: -99999;
+      // top: -99999rpx;
+      // left: -99999rpx;
+      // z-index: -99999;
       overflow: hidden;
     }
 

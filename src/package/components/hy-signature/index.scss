@@ -21,9 +21,5 @@
     margin-top: $hy-border-margin-padding-base;
     justify-content: flex-end;
     display: flex;
-
-    :deep(.hy-button) {
-      margin-left: $hy-border-margin-padding-base;
-    }
   }
 }

@@ -61,7 +61,7 @@
       }
       /* #endif */
 
-      &--bar {
+      @include m(bar) {
         position: relative;
         display: flex;
         justify-content: center;

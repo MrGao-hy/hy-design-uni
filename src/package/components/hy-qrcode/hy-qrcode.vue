@@ -6,7 +6,7 @@
             <canvas
                 class="hy-qrcode__content--canvas"
                 :id="cid"
-                :canvas-id="cid"
+                type="2d"
                 :style="{ width: addUnit(size), height: addUnit(size) }"
             />
             <!-- #endif -->
@@ -36,8 +36,7 @@ export default {
 import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import type { IQrcodeEmits } from './typing'
 import QRCode from './qrcode.js'
-import { addUnit, error } from '../../libs'
-import qrCodeProps from './props'
+import { addUnit, error, random } from '../../libs'
 // 组件
 import HyLoading from '../hy-loading/hy-loading.vue'
 import HyImage from '../hy-image/hy-image.vue'
@@ -48,7 +47,73 @@ import HyImage from '../hy-image/hy-image.vue'
  */
 defineOptions({})
 
-const props = defineProps(qrCodeProps)
+// const props = withDefaults(defineProps<IProps>(), defaultProps)
+const props = defineProps({
+    /** 实例ID字符串(如果有多个二维码组件必须设置不一样的cid) */
+    cid: {
+        type: String,
+        default: 'hy-qrcode-canvas_' + random(1, 1000)
+    },
+    /** 二维码大小 */
+    size: {
+        type: Number,
+        default: 200
+    },
+    /** 二维码内容 */
+    text: String,
+    /** 是否显示二维码 */
+    show: {
+        type: Boolean,
+        default: true
+    },
+    /** 二维码背景色 */
+    background: {
+        type: String,
+        default: '#ffffff'
+    },
+    /** 二维码颜色 */
+    foreground: {
+        type: String,
+        default: '#000000'
+    },
+    /** 定位角点颜色 */
+    pdGround: {
+        type: String,
+        default: '#000000'
+    },
+    /** 是否是自定义组件 */
+    usingComponents: {
+        type: Boolean,
+        default: true
+    },
+    /** 容错级别 */
+    lv: {
+        type: Number,
+        default: 3
+    },
+    /** 二维码中间图标 */
+    icon: String,
+    /** 二维码中间图标大小 */
+    iconSize: {
+        type: Number,
+        default: 40
+    },
+    /** 显示加载状态 */
+    showLoading: {
+        type: Boolean,
+        default: true
+    },
+    /** 加载中提示语 */
+    loadingText: {
+        type: String,
+        default: '二维码生成中...'
+    },
+    /** 是否预览 */
+    allowPreview: {
+        type: Boolean,
+        default: false
+    }
+})
 const emit = defineEmits<IQrcodeEmits>()
 
 const instance = getCurrentInstance()
@@ -73,6 +138,7 @@ const initQrCode = () => {
             image: props.icon, // 二维码图标
             imageSize: props.iconSize, // 二维码图标大小
             cbResult: function (res: any) {
+                console.log(res)
                 // 生成二维码的回调
                 _result(res)
             }

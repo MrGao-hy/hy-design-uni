@@ -1,7 +1,7 @@
 <template>
     <view class="hy-tabBar--placeholder"></view>
     <view class="hy-tabBar">
-        <view class="hy-tabBar--box" :style="{ backgroundColor: barBgColor }">
+        <view class="hy-tabBar--box" :style="{ background: barBgColor }">
             <view class="hy-tabBar--container">
                 <view
                     :class="[
@@ -61,7 +61,7 @@ export default {
 <script setup lang="ts">
 import { ref, toRefs, watch } from 'vue'
 import defaultProps from './props'
-import type IProps from './typing'
+import type { HyTabBarProps, ITabBarEmits } from './typing'
 
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -73,22 +73,24 @@ import HyBadge from '../hy-badge/hy-badge.vue'
  */
 defineOptions({})
 
-const props = withDefaults(defineProps<IProps>(), defaultProps)
-const { modelValue, baseBgColor } = toRefs(props)
-const emit = defineEmits(['clickTab'])
+const props = defineProps(tabBarProps)
+const emit = defineEmits<ITabBarEmits>()
 
-const baseBackgroundColor = baseBgColor.value ? baseBgColor.value : 'var(--hy-background)'
+const baseBackgroundColor = props.baseBgColor ? props.baseBgColor : 'var(--hy-background)'
 const current = ref(0)
 watch(
-    () => modelValue.value,
+    () => props.modelValue,
     (newVal) => {
         current.value = newVal
     }
 )
 
 const checkItem = (index: number) => {
-    current.value = index
-    emit('clickTab', index)
+    if (current.value !== index) {
+        current.value = index
+        emit('change', index)
+        emit('update:modelValue', index)
+    }
 }
 </script>
 

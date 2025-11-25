@@ -63,12 +63,6 @@
             <view class="hy-title">显示阴影</view>
             <hy-switch v-model="boxShadow" />
 
-            <view class="hy-title">显示尾部</view>
-            <hy-switch v-model="showFoot" />
-
-            <view class="hy-title">显示阴影</view>
-            <hy-switch v-model="boxShadow" />
-
             <view class="hy-title">按钮样式</view>
             <hy-subsection :list="btnModeOptions" v-model="btnMode"></hy-subsection>
         </view>

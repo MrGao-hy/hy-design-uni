@@ -35,7 +35,10 @@ const textProps = {
         default: ''
     },
     /** 格式化规则 */
-    format: [Function, String],
+    format: {
+        type: [Function, String],
+        default: ''
+    },
     /** mode=phone时，点击文本是否拨打电话 */
     call: {
         type: Boolean,
@@ -54,7 +57,10 @@ const textProps = {
         default: false
     },
     /** 文本显示的行数，如果设置，超出此行数，将会显示省略号 */
-    lines: [String, Number],
+    lines: {
+        type: [String, Number],
+        default: ''
+    },
     /** 文本颜色 */
     color: String,
     /** 字体大小 */

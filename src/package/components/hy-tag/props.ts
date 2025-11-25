@@ -3,9 +3,15 @@ import type HyIconProps from './typing'
 
 const tagProps = {
     /** 标签的文字内容 */
-    text: String,
+    text: {
+        type: String,
+        default: ''
+    },
     /** 点击需要传得值 */
-    name: [String, Number],
+    name: {
+        type: [String, Number],
+        default: ''
+    },
     /**
      * 标签类型
      * @values info,primary,success,error,warning

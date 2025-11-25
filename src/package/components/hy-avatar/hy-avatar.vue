@@ -1,6 +1,7 @@
 <template>
     <view class="hy-avatar" :class="avatarClass" :style="avatarStyle" @tap="clickHandler">
-        <slot>
+        <slot v-if="$slots.default"></slot>
+        <template v-else>
             <!-- #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU  -->
             <open-data
                 v-if="mpAvatar && allowMp"
@@ -16,7 +17,7 @@
             <!-- #ifndef MP-WEIXIN && MP-QQ && MP-BAIDU  -->
             <template v-if="mpAvatar && allowMp"></template>
             <!-- #endif -->
-            <HyIcon v-else-if="icon" :name="icon" :size="fontSize" :color="color"></HyIcon>
+            <hy-icon v-else-if="icon" :name="icon" :size="fontSize" :color="color"></hy-icon>
             <text
                 v-else-if="text"
                 :style="{
@@ -36,7 +37,7 @@
                 :mode="mode"
                 @error="errorHandler"
             ></image>
-        </slot>
+        </template>
     </view>
 </template>
 
