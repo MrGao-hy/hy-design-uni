@@ -1,44 +1,48 @@
 <template>
-    <view class="hy-tabBar--placeholder"></view>
-    <view class="hy-tabBar">
-        <view class="hy-tabBar--box" :style="{ background: barBgColor }">
-            <view class="hy-tabBar--container">
+    <view class="hy-tabbar" :style="tabBarStyle">
+        <view v-if="placeholder" class="hy-tabbar--placeholder"></view>
+
+        <view class="hy-tabbar--box" :style="{ background: bgColor }">
+            <view class="hy-tabbar--container">
                 <view
                     :class="[
-                        'hy-tabBar--container__item',
+                        'hy-tabbar--container__item',
                         'list',
                         current === i ? 'is-active' : ''
                     ]"
                     v-for="(item, i) in list"
                     :key="i"
+                    ref="itemRef"
                     @click="checkItem(i)"
                 >
-                    <view class="hy-tabBar--container__item--bar">
+                    <view class="hy-tabbar--container__item--bar">
                         <view class="icon">
                             <hy-badge
                                 :value="item?.badge"
                                 absolute
                                 :offset="[-13, 25]"
-                                :max="badge?.max"
-                                :is-dot="badge?.isDot"
-                                :inverted="badge?.inverted"
-                                :bg-color="badge?.bgColor"
-                                :type="badge?.type"
-                                :number-type="badge?.numberType"
-                                :shape="badge?.shape"
-                                :show-zero="badge?.showZero"
+                                :max="badgeProps?.max"
+                                :is-dot="badgeProps?.isDot"
+                                :inverted="badgeProps?.inverted"
+                                :bg-color="badgeProps?.bgColor"
+                                :type="badgeProps?.type"
+                                :number-type="badgeProps?.numberType"
+                                :shape="badgeProps?.shape"
+                                :show-zero="badgeProps?.showZero"
                                 :show="!!item?.badge"
                             ></hy-badge>
-                            <hy-icon :name="item.icon" :color="color" size="25"></hy-icon>
+                            <!-- 图标插槽 -->
+                            <slot v-if="$slots.icon" name="icon"></slot>
+                            <hy-icon v-else :name="item.icon" :color="color" size="25"></hy-icon>
                         </view>
                         <text class="text" :style="[{ color: color }]">{{ item.name }}</text>
                         <text class="circle"></text>
                     </view>
                 </view>
                 <view
-                    class="hy-tabBar--indicator"
+                    class="hy-tabbar--indicator"
                     :style="{
-                        '--num': `translateX(calc(((100vw - 110rpx - ${list.length} * 70rpx) / ${list.length - 1} + 70rpx) * ${current}))`,
+                        '--num': `translateX(${rectList[current]?.left}px)`,
                         background: activeColor
                     }"
                 ></view>
@@ -49,7 +53,7 @@
 
 <script lang="ts">
 export default {
-    name: 'hy-switch',
+    name: 'hy-tabbar',
     options: {
         addGlobalClass: true,
         virtualHost: true,
@@ -59,31 +63,53 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, toRefs, watch } from 'vue'
-import defaultProps from './props'
-import type { HyTabBarProps, ITabBarEmits } from './typing'
+import { computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
+import tabBarProps from './props'
+import type { ITabBarEmits } from './typing'
 
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
 import HyBadge from '../hy-badge/hy-badge.vue'
+import { getRect } from '@/package'
 
 /**
- * 一般用于导航轮播，广告展示等场景,可开箱即用
- * @displayName hy-swiper
+ * 底部导航栏，用于在不同页面之间进行切换。
+ * @displayName hy-tabbar
  */
 defineOptions({})
 
 const props = defineProps(tabBarProps)
 const emit = defineEmits<ITabBarEmits>()
 
+const instance = getCurrentInstance()
+const rectList = ref<UniNamespace.NodeInfo[]>([])
 const baseBackgroundColor = props.baseBgColor ? props.baseBgColor : 'var(--hy-background)'
-const current = ref(0)
+const current = ref<number>(props.modelValue)
 watch(
     () => props.modelValue,
     (newVal) => {
         current.value = newVal
     }
 )
+
+onMounted(() => {
+    nextTick(() => {
+        getRect('.list', true, instance).then((res) => {
+            console.log(res, current.value)
+            rectList.value = res
+        })
+    })
+})
+
+// tabbar属性值
+const tabBarStyle = computed(() => {
+    const style = {
+        position: props.fixed ? 'fixed' : '',
+        zIndex: props.zIndex
+    }
+
+    return Object.assign(style, props.customStyle)
+})
 
 const checkItem = (index: number) => {
     if (current.value !== index) {
@@ -96,10 +122,10 @@ const checkItem = (index: number) => {
 
 <style lang="scss" scoped>
 @import './index.scss';
-.hy-tabBar {
+.hy-tabbar {
     background: v-bind(baseBackgroundColor);
     &--indicator {
-        border: 12rpx solid v-bind(baseBackgroundColor);
+        border: 5px solid v-bind(baseBackgroundColor);
         &::before {
             box-shadow: 1px -15rpx 0 v-bind(baseBackgroundColor);
         }

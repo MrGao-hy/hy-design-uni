@@ -292,7 +292,7 @@
 				{
 					"path": "tabs/tabs",
 					"style": {
-						"navigationBarTitleText": "tabs",
+						"navigationBarTitleText": "标签栏",
 						"enablePullDownRefresh": false
 					}
 				},

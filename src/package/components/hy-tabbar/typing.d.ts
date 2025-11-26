@@ -54,6 +54,8 @@ export interface HyTabBarProps {
 }
 
 export interface ITabBarEmits {
+    /** 更新选中索引 */
     (e: 'update:modelValue', index: number): void
+    /** 变化事件 */
     (e: 'change', index: number): void
 }

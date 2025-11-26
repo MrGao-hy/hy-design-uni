@@ -37,6 +37,6 @@ const foldingPanelProps = {
         type: String as PropType<HyApp.SizeType>,
         default: 'medium'
     }
-}
+} as const
 
 export default foldingPanelProps

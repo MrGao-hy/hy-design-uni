@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.3",
-  "description": "fix: 新增优惠券",
+  "version": "0.5.4",
+  "description": "fix: tabbar优化",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

@@ -67,8 +67,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, inject, onMounted } from 'vue'
-import type { IFoldingPanelItemEmits } from './typing'
-import type { HyFoldingPanelGroupConfig } from '../hy-folding-panel/typing'
+import type { IFoldingPanelConfig, IFoldingPanelItemEmits } from './typing'
 import { addUnit, IconConfig } from '../../libs'
 import foldingPanelItemProps from './props'
 // 组件
@@ -86,7 +85,7 @@ const props = defineProps(foldingPanelItemProps)
 const emit = defineEmits<IFoldingPanelItemEmits>()
 
 // 尝试从父组件注入配置
-const groupConfig = inject<HyFoldingPanelGroupConfig>('hy-folding-panel')
+const groupConfig = inject<IFoldingPanelConfig>('hy-folding-panel')
 
 // 内部展开状态
 const expanded = ref(props.defaultOpen)

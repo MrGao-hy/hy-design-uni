@@ -8,7 +8,7 @@ const badgeProps = {
     },
     /** 显示的内容 */
     value: {
-        type: Number,
+        type: [String, Number],
         default: 0
     },
     /** 是否显示 */
@@ -18,6 +18,11 @@ const badgeProps = {
     },
     /** 最大值，超过最大值会显示 '{max}+' */
     max: {
+        type: Number,
+        default: 999
+    },
+    /** 层级 */
+    zIndex: {
         type: Number,
         default: 999
     },

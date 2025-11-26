@@ -7,12 +7,7 @@
             :mode="imgMode"
             :style="[imgStyle, customStyle]"
         ></image>
-        <text
-            v-else
-            class="hy-icon__icon"
-            :class="uClasses"
-            :style="[iconStyle, customStyle]"
-        ></text>
+        <text v-else :class="uClasses" :style="[iconStyle, customStyle]"></text>
         <!-- 这里进行空字符串判断，如果仅仅是v-if="label"，可能会出现传递0的时候，结果也无法显示 -->
         <text
             v-if="label"
@@ -58,9 +53,9 @@ const emit = defineEmits<IIconEmits>()
 
 const uClasses = computed(() => {
     let classes: string | string[] = [
+        'hy-icon__icon',
         'iconfont',
-        `${props.customPrefix}-${props.name}`,
-        props.customPrefix
+        `${props.customPrefix}-${props.name}`
     ]
     if (props.isRotate) classes.push('hy-rotate')
     if (props.color)

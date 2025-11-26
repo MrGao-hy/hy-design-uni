@@ -47,9 +47,9 @@ const emit = defineEmits<IBadgeEmit>()
  * @description 整个组件的样式
  * */
 const badgeStyle = computed<CSSProperties>(() => {
-    const style: CSSProperties = {}
-    if (props.color) {
-        style.color = props.color
+    const style: CSSProperties = {
+        zIndex: props.zIndex,
+        color: props.color
     }
     if (props.bgColor && !props.inverted) {
         style.backgroundColor = props.bgColor

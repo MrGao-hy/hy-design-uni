@@ -12,7 +12,6 @@ $hy-badge-text-font-size: 11px !default;
   line-height: $hy-badge-text-font-size;
   text-align: center;
   font-size: $hy-badge-text-font-size;
-  z-index: 999;
 
   @include m(dot) {
     height: $hy-badge-dot-size;

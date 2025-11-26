@@ -1,0 +1,57 @@
+@use "../../libs/css/theme" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(tabbar-group) {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  position: relative;
+  background: $hy-background--container;
+  height: 100rpx;
+
+  @include e(placeholder) {
+    box-sizing: content-box;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    height: 100rpx;
+  }
+
+  @include m(circle) {
+    margin-left: $hy-border-margin-padding-lg;
+    margin-right: $hy-border-margin-padding-lg;
+    border-radius: $hy-border-radius-semicircle;
+    box-shadow: $hy-box-shadow;
+
+    @include is(fixed) {
+      @include is(safe) {
+        bottom: constant(safe-area-inset-bottom);
+        bottom: env(safe-area-inset-bottom);
+      }
+    }
+
+  }
+
+  @include m(square) {
+
+    @include is(fixed) {
+      @include is(safe) {
+        box-sizing: content-box;
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+    }
+
+
+    @include is(border) {
+      border-top: $hy-border-line;
+    }
+  }
+
+  @include is(fixed) {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 500;
+  }
+}

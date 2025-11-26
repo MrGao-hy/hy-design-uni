@@ -1,3 +1,17 @@
+import foldingPanelProps from '../hy-folding-panel/props'
+import type { ExtractPropTypes, ToRefs } from 'vue'
+
+export interface IFoldingPanelConfig extends ToRefs<ExtractPropTypes<typeof foldingPanelProps>> {
+    /**
+     * 当前激活的索引
+     */
+    activeIndex: Ref<number | string>
+    /**
+     * 更新激活索引的方法
+     */
+    updateActiveIndex: (index: number | string) => void
+}
+
 // 折叠面板项组件的事件接口
 export interface IFoldingPanelItemEmits {
     /**
