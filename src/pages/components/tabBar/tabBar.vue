@@ -10,7 +10,7 @@
         <view class="hy-title"> 徽标提示 </view>
         <hy-tabbar-group
             :custom-style="{ marginBottom: '20px' }"
-            :badgeProp="{ isDot: true }"
+            :badgeProps="{ isDot: true }"
             v-model="current"
             @change="onChange"
         >
@@ -57,12 +57,7 @@
         </hy-tabbar-group>
 
         <!-- 底部固定的tabbar测试 -->
-        <hy-tabbar
-            v-model="fixedCurrent"
-            :list="list"
-            activeColor="red"
-            baseBgColor="green"
-        ></hy-tabbar>
+        <hy-tabbar v-model="fixedCurrent" :list="list"></hy-tabbar>
     </hy-config-provider>
 </template>
 
