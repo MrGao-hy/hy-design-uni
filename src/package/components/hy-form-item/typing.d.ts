@@ -22,25 +22,6 @@ export interface FormItemContext {
     handleChange: (value: string | number) => void
 }
 
-export default interface HyFormItemProps {
-    /**
-     * 标签文本
-     */
-    label?: string
-    /**
-     * 表单字段名
-     */
-    prop?: string
-    /**
-     * 是否必填
-     */
-    required?: boolean
-    /**
-     * 验证规则
-     */
-    rules?: any
-}
-
 export interface IFormItemEmits {
     /** 提交表单 */
     (e: 'change', value: any): void

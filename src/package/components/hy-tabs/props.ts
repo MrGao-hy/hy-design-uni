@@ -1,6 +1,6 @@
 import type { TabsItemVo } from './typing'
 import type { CSSProperties, PropType } from 'vue'
-import type HyBadgeProps from '../hy-badge/typing'
+import type { HyBadgeProps } from '../hy-badge/typing'
 
 const tabsProps = {
     /** 标签数组，元素为对象，如[{name: '推荐'}] */

@@ -1,6 +1,5 @@
-import type IProps from './typing'
 import type { CSSProperties, PropType } from 'vue'
-import type HyIconProps from '../hy-icon/typing'
+import type { HyIconProps } from '../hy-icon/typing'
 
 const backTopProps = {
     /**
@@ -55,7 +54,7 @@ const backTopProps = {
         })
     },
     /** 自定义外部类名 */
-    customClass: String,
+    customClass: String
 }
 
 export default backTopProps

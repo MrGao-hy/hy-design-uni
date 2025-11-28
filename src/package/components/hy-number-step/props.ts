@@ -1,4 +1,4 @@
-import type HyIconProps from './typing'
+import type { HyIconProps } from '../hy-icon/typing'
 import type { PropType } from 'vue'
 
 const numberStepProps = {

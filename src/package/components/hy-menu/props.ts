@@ -1,7 +1,7 @@
 import type { MenusType, ModelValueVo } from './typing'
 import type { CSSProperties, PropType } from 'vue'
-import type HyIconProps from '../hy-icon/typing'
-import type HyBadgeProps from '../hy-badge/typing'
+import type { HyIconProps } from '../hy-icon/typing'
+import type { HyBadgeProps } from '../hy-badge/typing'
 
 const menuProps = {
     /** 当前值 */

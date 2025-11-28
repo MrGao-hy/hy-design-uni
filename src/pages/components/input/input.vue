@@ -13,6 +13,12 @@
             ></hy-input>
         </view>
 
+        <view class="hy-title">限制输入金额格式</view>
+        <view class="hy-container">
+            {{ value3 }}
+            <hy-input v-model="value3" type="digit" clearable @change="onChange"></hy-input>
+        </view>
+
         <view class="hy-title">清空按钮</view>
         <view class="hy-container">
             <hy-input v-model="value2" clearable focus placeholder="输入值"></hy-input>
@@ -64,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import HyInput from '@/package/components/hy-input/hy-input.vue'
 import HySubsection from '@/package/components/hy-subsection/hy-subsection.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
@@ -77,6 +83,7 @@ import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 const { themeColor, darkMode } = storeToRefs(themeStore)
 const value = ref('')
+const value3 = ref('')
 const value2 = ref('中国速度，东风快递，使命必达，风雨无阻！！！')
 const disabled = ref(false)
 const shape = ref<HyApp.ShapeType>('square')
@@ -101,6 +108,33 @@ const list_3 = reactive([
     { name: '底部边框', value: 'bottom' },
     { name: '无边框', value: 'none' }
 ])
+
+// 实时过滤
+const onChange = (e) => {
+    const val = e
+    // 1. 只保留数字和小数点
+    let filtered = val.replace(/[^\d.]/g, '')
+    // 2. 保证只有一个小数点
+    filtered = filtered.replace(/\.{2,}/g, '.')
+    // 3. 去掉开头的小数点
+    filtered = filtered.replace(/^\./g, '')
+    // 4. 保留 2 位小数
+    filtered = filtered.replace(/^\d+\.\d{2}.*/, (match) => match.slice(0, match.indexOf('.') + 3))
+    // 5. 防止 00、01 这类开头
+    filtered = filtered.replace(/^0(\d+)/, '$1')
+
+    // 7. 回写
+    value3.value = filtered
+    console.log(value3.value)
+}
+
+watch(
+    () => value3.value,
+    (newValue) => {
+        console.log(newValue, 'newValue')
+    },
+    { immediate: true }
+)
 </script>
 
 <style scoped lang="scss"></style>

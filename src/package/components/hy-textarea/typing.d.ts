@@ -1,35 +1,8 @@
-import type { CSSProperties } from 'vue'
 import type {
     InputOnBlurEvent,
     InputOnConfirmEvent,
     InputOnFocusEvent
 } from '@uni-helper/uni-types'
-
-export default interface HyTextareaProps {
-    modelValue: string
-    placeholder?: string | null
-    placeholderClass?: string
-    placeholderStyle?: CSSProperties
-    height?: number
-    confirmType?: 'done' | 'send' | 'search' | 'next' | 'go'
-    disabled?: boolean
-    count?: boolean
-    focus?: boolean
-    autoHeight?: boolean
-    fixed?: boolean
-    cursorSpacing?: number
-    cursor?: string
-    showConfirmBar?: boolean
-    selectionStart?: number
-    selectionEnd?: number
-    adjustPosition?: boolean
-    disableDefaultPadding?: boolean
-    holdKeyboard?: boolean
-    maxlength?: number
-    border?: HyApp.BorderType
-    formatter?: ((value: string) => string) | null
-    customStyle?: CSSProperties
-}
 
 export interface ITextareaEmits {
     /** 输入框失去焦点时触发 */

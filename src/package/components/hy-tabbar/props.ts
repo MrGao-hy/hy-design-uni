@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import type HyBadgeProps from '../hy-badge/typing'
+import type { HyBadgeProps } from '../hy-badge/typing'
 
 const tabBarProps = {
     /** 选中项的索引值 */

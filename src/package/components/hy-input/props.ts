@@ -1,6 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { InputConfirmType } from '@uni-helper/uni-types'
-import type HyIconProps from '../hy-icon/typing'
+import type { HyIconProps } from '../hy-icon/typing'
 
 const inputProps = {
     /** 输入的值 */

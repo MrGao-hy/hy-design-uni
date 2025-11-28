@@ -54,10 +54,17 @@ const priceOne = computed(() => {
     if (props.text === undefined || props.text === null) return error('text值不能为空')
 
     let value = typeof props.text === 'string' ? props.text : props.text.toString()
+
+    // 格式化整数部分为千分位
+    const formatValue = (val: string) => {
+        return val.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+
     if (/\./g.test(value)) {
-        return Number(value) ? value.split('.') : ['0', '000000']
+        const [integer, decimal] = value.split('.')
+        return [formatValue(integer), decimal]
     } else {
-        return [value, '000000']
+        return [formatValue(value), '000000']
     }
 })
 

@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'vue'
 export interface IActionSheetAction {
     /**
      * 选项名称
@@ -21,6 +20,7 @@ export interface IActionSheetAction {
      */
     loading?: boolean
 }
+
 export interface IActionSheetPanel {
     /**
      * 图片地址
@@ -30,68 +30,6 @@ export interface IActionSheetPanel {
      * 标题内容
      */
     name: string
-}
-export interface HyActionSheetProps {
-    /**
-     * 操作菜单是否展示 ( 默认 false )
-     * */
-    modelValue?: boolean
-    /**
-     * 菜单选项
-     * */
-    actions?: IActionSheetAction[]
-    /**
-     * 自定义面板项,可以为字符串数组，也可以为对象数组，如果为二维数组，则为多行展示
-     * */
-    panels?: Array<IActionSheetPanel | IActionSheetPanel[]>
-    /**
-     * 圆角值 (默认 20 )
-     * */
-    round?: string | number
-    /**
-     * 标题
-     * */
-    title?: string
-    /**
-     * 标题文字位置
-     * */
-    titleAlign?: HyApp.RowCenterType
-    /**
-     * 取消按钮的提示文字,不为空时显示按钮
-     * */
-    cancelText?: string
-    /**
-     * 点击某个菜单项时是否关闭弹窗 （默认 true ）
-     * */
-    closeOnClickAction?: boolean
-    /**
-     * 点击遮罩是否允许关闭  (默认 true )
-     * */
-    closeOnClickOverlay?: boolean
-    /**
-     * 弹框动画持续时间 ( 默认 200 )
-     * */
-    duration?: number
-    /**
-     * 菜单层级 ( 默认 100 )
-     * */
-    zIndex?: number
-    /**
-     * 处理底部安全区 （默认 true ）
-     * */
-    safeAreaInsetBottom?: boolean
-    /**
-     * 自定义外部样式
-     * */
-    customStyle?: CSSProperties
-    /**
-     * 自定义外部类名
-     * */
-    customClass?: string
-    /**
-     * 自定义标题类名
-     * */
-    customHeaderClass?: string
 }
 
 interface SelectEventParams {

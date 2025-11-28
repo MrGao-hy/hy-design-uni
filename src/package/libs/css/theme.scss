@@ -33,7 +33,7 @@ $hy-text-color--4: var(--hy-text-color--4, rgba(0, 0, 0, 0.1)) !default; // 一�
 $hy-icon-color: var(--hy-icon-color, #606266) !default; // 一般用于icon
 $hy-text-color--grey: var(--hy-text-color--grey, #999) !default; // 辅助灰色，如加载更多的提示信息
 $hy-text-color--placeholder: var(--hy-text-color--placeholder, #909399) !default; // 输入框提示颜色
-$hy-text-color--disabled: var(--hy-text-color--disabled, #c0c0c0) !default; // 禁用文字颜色
+$hy-text-color--disabled: var(--hy-text-color--disabled, #FFFFFF3F) !default; // 禁用文字颜色
 $hy-border-color: var(--hy-border-color, #c0c0c0) !default; // 边框颜色
 $hy-text-color--hover: var(--hy-text-color--hover, #58595b)!default; // 点击状态文字颜色
 

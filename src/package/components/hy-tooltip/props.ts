@@ -1,5 +1,4 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { IPlacementVo } from '@/package/components/hy-popover/typing'
 
 const tooltipProps = {
     /** 需要显示的提示文字 */

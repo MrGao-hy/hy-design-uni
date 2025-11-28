@@ -33,33 +33,6 @@ export interface FormItemRule {
     [key: string]: FormRule | FormRule[]
 }
 
-export default interface HyFormSimpleProps {
-    /**
-     * 表单数据对象
-     */
-    model?: Record<string, any>
-    /**
-     * 验证规则
-     */
-    rules?: FormItemRule
-    /**
-     * 标签宽度
-     */
-    labelWidth?: string | number
-    /**
-     * 标签位置
-     */
-    labelPosition?: 'left' | 'top'
-    /**
-     * 标签对齐方式
-     */
-    labelAlign?: 'left' | 'center' | 'right'
-    /**
-     * 表单列底部边框
-     * */
-    border: boolean
-}
-
 export interface IFormEmits {
     /** 提交表单 */
     (e: 'submit', data: FormRule): void

@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import type HyIconProps from '../hy-icon/typing'
+import type { HyIconProps } from '../hy-icon/typing'
 import type { CustomKeysVo, GridItemVo } from './typing'
 
 const gridProps = {

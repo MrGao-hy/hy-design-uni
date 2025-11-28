@@ -1,6 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { SwitchValue } from './typing'
-import type HyIconProps from '../hy-icon/typing'
+import type { HyIconProps } from '../hy-icon/typing'
 
 const switchProps = {
     /** 通过v-model双向绑定的值 */

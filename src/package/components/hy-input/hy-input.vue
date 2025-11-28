@@ -40,7 +40,7 @@
                     :type="type"
                     :focus="focus"
                     :cursor="cursor"
-                    :value="String(innerValue)"
+                    :value="innerValue"
                     :auto-blur="autoBlur"
                     :disabled="disabled || readonly"
                     :maxlength="maxlength"
@@ -148,13 +148,14 @@ const innerFormatter = (value: string) => value
 watch(
     () => props.modelValue,
     (newVal) => {
-        if (changeFromInner.value || innerValue.value === newVal) {
-            changeFromInner.value = false // 重要否则会出现双向绑定失效问题https://github.com/ijry/uview-plus/issues/419
+        if (changeFromInner.value || innerValue.value === newVal || newVal === undefined) {
+            changeFromInner.value = false
             return
         }
+        console.log(newVal, 'newVal')
         innerValue.value = newVal
         // 在H5中，外部value变化后，修改input中的值，不会触发@input事件，此时手动调用值变化方法
-        if (firstChange.value === false && changeFromInner.value === false) {
+        if (!firstChange.value && !changeFromInner.value) {
             valueChange(innerValue.value, true)
         }
         firstChange.value = false
@@ -165,14 +166,14 @@ watch(
 )
 
 /**
- * @description 是否显示清除控件
+ * 是否显示清除控件
  * */
 const isShowClear = computed(() => {
     const { clearable, readonly, disabled } = props
     return clearable && !readonly && !disabled && innerValue.value !== ''
 })
 /**
- * @description 组件的类名
+ * 组件的类名
  * */
 const inputClass = computed((): string => {
     let classes: string[] = [],
@@ -185,7 +186,7 @@ const inputClass = computed((): string => {
 })
 
 /**
- * @description 组件的样式
+ * 组件的样式
  * */
 const wrapperStyle = computed((): CSSProperties => {
     const style: CSSProperties = {}
@@ -200,9 +201,9 @@ const wrapperStyle = computed((): CSSProperties => {
     return Object.assign(style, props.customStyle)
 })
 /**
- * @description 输入框的样式
+ * 输入框的样式
  * */
-const inputStyle = computed((): CSSProperties => {
+const inputStyle = computed(() => {
     return {
         color: props.color,
         fontSize: addUnit(props.fontSize),
@@ -211,7 +212,7 @@ const inputStyle = computed((): CSSProperties => {
 })
 
 /**
- * @description 边框颜色
+ * 边框颜色
  * */
 const borderStyle = computed(() => {
     return (isFocus: boolean) => {
@@ -233,13 +234,10 @@ const borderStyle = computed(() => {
 })
 
 /**
- * @description 当键盘输入时，触发input事件
+ * 当键盘输入时，触发input事件
  */
 const onInput = (e: any) => {
     let { value = '' } = e.detail || {}
-    // 为了避免props的单向数据流特性，需要先将innerValue值设置为当前值，再在$nextTick中重新赋予设置后的值才有效
-    // console.log('onInput', value, this.innerValue)
-    innerValue.value = value
     nextTick(() => {
         let formatValue = innerFormatter(value)
         innerValue.value = formatValue
@@ -247,7 +245,7 @@ const onInput = (e: any) => {
     })
 }
 /**
- * @description 输入框失去焦点时触发
+ * 输入框失去焦点时触发
  * */
 const onBlur = async (event: InputOnBlurEvent) => {
     emit('blur', event, event.detail.value)
@@ -256,7 +254,7 @@ const onBlur = async (event: InputOnBlurEvent) => {
     focused.value = false
 }
 /**
- * @description 输入框聚焦时触发
+ * 输入框聚焦时触发
  * */
 const onFocus = (e: InputOnFocusEvent) => {
     focused.value = true
@@ -264,7 +262,7 @@ const onFocus = (e: InputOnFocusEvent) => {
 }
 
 /**
- * @description 点击完成按钮时触发
+ * 点击完成按钮时触发
  * */
 const onConfirm = (e: InputOnConfirmEvent) => {
     emit('confirm', e, innerValue.value)
@@ -288,15 +286,14 @@ const valueChange = (value: string | number, isOut = false) => {
         if (!isOut || clearInput.value) {
             // 标识value值的变化是由内部引起的
             changeFromInner.value = true
+            emit('update:modelValue', value)
             emit('change', value)
             if (formItem) formItem.handleChange(value)
-
-            emit('update:modelValue', value)
         }
     })
 }
 /**
- * @description 点击清除控件
+ * 点击清除控件
  */
 const onClear = () => {
     clearInput.value = true
@@ -319,13 +316,13 @@ const clickHandler = () => {
 }
 
 /**
- * @description 点击前缀
+ * 点击前缀
  * */
 const onPrefix = () => {
     emit('onPrefix')
 }
 /**
- * @description 点击后缀
+ * 点击后缀
  * */
 const onSuffix = () => {
     emit('onSuffix')

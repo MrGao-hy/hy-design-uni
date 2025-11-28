@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import type HyIconProps from '../hy-icon/typing'
+import type { HyIconProps } from '../hy-icon/typing'
 
 const buttonProps = {
     /** 是否显示按钮的细边框 */

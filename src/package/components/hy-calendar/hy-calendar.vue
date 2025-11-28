@@ -1,5 +1,5 @@
 <template>
-    <HyPopup
+    <hy-popup
         :show="show"
         mode="bottom"
         closeable
@@ -61,7 +61,7 @@
                 </view>
             </slot>
         </view>
-    </HyPopup>
+    </hy-popup>
 </template>
 
 <script lang="ts">

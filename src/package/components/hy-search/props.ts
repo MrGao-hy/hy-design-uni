@@ -1,7 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { InputConfirmType } from '@uni-helper/uni-types'
 import { IconConfig } from '../../libs'
-import type HyIconProps from '../hy-icon/typing'
+import type { HyIconProps } from '../hy-icon/typing'
 
 const searchProps = {
     /** 输入框初始值 */

@@ -4,11 +4,13 @@
             <text v-if="isRequired" class="hy-form-item__label--required">*</text>
             {{ label }}
         </view>
-        <view :class="['hy-form-item__content', formContext.border.value && 'hy-border__bottom']">
-            <slot></slot>
-        </view>
-        <view v-if="errorMessage" class="hy-form-item__error">
-            {{ errorMessage }}
+        <view class="hy-form-item__content">
+            <view :class="[formContext.border.value && 'hy-border__bottom']">
+                <slot></slot>
+            </view>
+            <view v-if="errorMessage" class="hy-form-item__error">
+                {{ errorMessage }}
+            </view>
         </view>
     </view>
 </template>

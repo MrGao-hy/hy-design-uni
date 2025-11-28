@@ -75,6 +75,6 @@ const checkboxGroupProps = {
     customStyle: {
         type: Object as PropType<CSSProperties>
     }
-}
+} as const
 
 export default checkboxGroupProps

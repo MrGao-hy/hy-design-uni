@@ -84,8 +84,7 @@ const cardProps = {
     },
     /** 给head，body，foot的内边距 */
     padding: {
-        type: [String, Number],
-        default: 15
+        type: [String, Number]
     },
     /** 头部内边距 */
     paddingHead: [String, Number],
@@ -115,10 +114,9 @@ const cardProps = {
     /** 底部自定义样式 */
     footStyle: Object as PropType<CSSProperties>,
     /** 定义需要用到的外部样式 */
-    customStyle: {
-        type: Object as PropType<CSSProperties>,
-        default: () => {}
-    }
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default cardProps

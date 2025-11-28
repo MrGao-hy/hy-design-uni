@@ -2,8 +2,9 @@
     <view class="hy-address-picker">
         <view v-if="hasInput" class="hy-address-picker__has-input" @tap="onShowByClickInput">
             <!-- @slot 自定义输入框 -->
-            <slot name="trigger" :value="inputValue">
-                <HyInput
+            <slot v-if="$slots.trigger" name="trigger" :value="inputValue"></slot>
+            <template v-else>
+                <hy-input
                     v-model="inputValue"
                     :readonly="true"
                     :disabled="input?.disabled"
@@ -19,11 +20,11 @@
                     :placeholderStyle="input?.placeholderStyle"
                     :placeholderClass="input?.placeholderClass"
                     :customStyle="Object.assign({ 'pointer-events': 'none' }, input?.customStyle)"
-                ></HyInput>
+                ></hy-input>
                 <view class="input-cover"></view>
-            </slot>
+            </template>
         </view>
-        <HyPicker
+        <hy-picker
             ref="uPickerRef"
             :show="show || (hasInput && showByClickInput)"
             :popupMode="popupMode"
@@ -55,7 +56,7 @@
                 <!-- @slot 工具栏下面内容，自定义底部内容 -->
                 <slot name="toolbar-bottom"></slot>
             </template>
-        </HyPicker>
+        </hy-picker>
     </view>
 </template>
 

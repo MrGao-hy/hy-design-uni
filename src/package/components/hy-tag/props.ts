@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import type HyIconProps from './typing'
+import type { HyIconProps } from '../hy-icon/typing'
 
 const tagProps = {
     /** 标签的文字内容 */

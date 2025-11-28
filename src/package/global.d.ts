@@ -10,6 +10,7 @@ declare module 'vue' {
         HyCalendar: (typeof import('./components/hy-calendar/hy-calendar.vue'))['default']
         HyCard: (typeof import('./components/hy-card/hy-card.vue'))['default']
         HyCell: (typeof import('./components/hy-cell/hy-cell.vue'))['default']
+        HyCellItem: (typeof import('./components/hy-cell-item/hy-cell-item.vue'))['default']
         HyCheckButton: (typeof import('./components/hy-check-button/hy-check-button.vue'))['default']
         HyCheckbox: (typeof import('./components/hy-checkbox/hy-checkbox.vue'))['default']
         HyCheckboxGroup: (typeof import('./components/hy-checkbox-group/hy-checkbox-group.vue'))['default']

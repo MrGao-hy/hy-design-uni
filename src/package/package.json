@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.4",
-  "description": "fix: tabbar优化",
+  "version": "0.5.6",
+  "description": "fix: 单元格拆分",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

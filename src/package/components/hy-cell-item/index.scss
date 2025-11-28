@@ -1,0 +1,100 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../libs/css/theme" as *;
+
+
+@include b(cell-item) {
+  @include flex(row);
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  background-color: $hy-background--container;
+
+  /* 大 */
+  @include m(large) {
+    font-size: $hy-font-size-lg;
+    padding: 35rpx;
+    line-height: 25px;
+  }
+
+  /* 默认 */
+  @include m(medium) {
+    font-size: $hy-font-size-base;
+    padding: 30rpx;
+    line-height: 20px;
+  }
+
+  /* 小 */
+  @include m(small) {
+    font-size: $hy-font-size-sm;
+    padding: 25rpx;
+    line-height: 15px;
+  }
+
+  /*点击状态*/
+  @include e(clickable) {
+    background-color: $hy-background--hover;
+  }
+
+  @include e(left) {
+    @include flex(row);
+    /*左边icon*/
+    @include m(icon) {
+      @include flex;
+      align-items: center;
+      margin-right: 10px;
+    }
+    /*行头部*/
+    @include m(title) {
+      margin-right: $hy-border-margin-padding-sm;
+      display: flex;
+      flex-direction: column;
+
+      /*sub值*/
+      @include e(sub) {
+        margin-top: $hy-border-margin-padding-sm;
+        color: $hy-text-color--grey;
+        font-size: 24rpx;
+      }
+    }
+  }
+
+  /*cell值*/
+  @include e(center) {
+    @include flex;
+    max-width: 90%;
+    flex: 1;
+    @include m(value) {
+      line-height: 24px;
+      color: $hy-text-color--grey;
+      margin-right: $hy-border-margin-padding-sm;
+    }
+  }
+
+  /*右边icon*/
+  @include e(right) {
+    transition: transform 0.3s;
+    :deep(.hy-icon) {
+      color: $hy-text-color--3;
+    }
+
+    @include m(up) {
+      transform: rotate(-90deg);
+    }
+
+    @include m(left) {
+      transform: rotate(180deg);
+    }
+
+    @include m(down) {
+      transform: rotate(90deg);
+    }
+  }
+
+  @include e(disabled) {
+    color: $hy-text-color--disabled;
+    background: $hy-background--disabled;
+    /* #ifndef APP-NVUE */
+    cursor: not-allowed;
+    /* #endif */
+  }
+}

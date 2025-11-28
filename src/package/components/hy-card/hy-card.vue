@@ -2,8 +2,8 @@
     <view class="hy-card" @tap.stop="click" :class="cardClass" :style="cardStyle">
         <view
             v-if="showHead"
-            class="hy-card--head"
-            :style="[{ padding: addUnit(paddingHead || padding) }, headStyle]"
+            class="hy-card__head"
+            :style="[{ padding: paddingHead || padding }, headStyle]"
             :class="{
                 'hy-border__bottom': headBorderBottom
             }"
@@ -11,12 +11,12 @@
         >
             <!-- @slot 头部插槽 -->
             <slot v-if="$slots.header" name="header" />
-            <view v-else class="hy-card--head__flex">
-                <view class="hy-card--head__left">
+            <view v-else class="hy-card__head--flex">
+                <view class="hy-card__head--left">
                     <hy-icon
                         v-if="thumb"
                         :name="thumb"
-                        custom-class="hy-card--head__left__thumb"
+                        custom-class="hy-card__head--left__thumb"
                         :height="thumbWidth"
                         :width="thumbWidth"
                         :round="thumbCircle ? '50%' : '4px'"
@@ -24,7 +24,7 @@
                     <view>
                         <view
                             v-if="title"
-                            class="hy-card--head__left__title"
+                            class="hy-card__head--left__title"
                             :style="{
                                 fontSize: addUnit(titleSize),
                                 color: titleColor
@@ -34,7 +34,7 @@
                         </view>
                         <text
                             v-if="subTitle"
-                            class="hy-card--head__left__sub"
+                            class="hy-card__head--left__sub"
                             :style="{
                                 fontSize: addUnit(subTitleSize),
                                 color: subTitleColor
@@ -44,9 +44,9 @@
                         </text>
                     </view>
                 </view>
-                <view class="hy-card--head__right" v-if="subTitle">
+                <view class="hy-card__head--right" v-if="subTitle">
                     <text
-                        class="hy-card--head__right__text"
+                        class="hy-card__head--right__text"
                         :style="{
                             fontSize: addUnit(rightTextSize),
                             color: rightTextColor
@@ -60,7 +60,7 @@
         <view
             @tap="bodyClick"
             class="hy-card__body"
-            :style="[{ padding: addUnit(paddingBody || padding) }, bodyStyle]"
+            :style="[{ padding: paddingBody || padding }, bodyStyle]"
         >
             <!-- @slot 中间内容插槽 -->
             <slot name="body" />
@@ -69,7 +69,7 @@
             v-if="showFoot"
             class="hy-card__foot"
             @tap="footClick"
-            :style="[{ padding: $slots.footer ? addUnit(paddingFoot || padding) : 0 }, footStyle]"
+            :style="[{ padding: $slots.footer ? paddingFoot || padding : 0 }, footStyle]"
             :class="{
                 'hy-border__top': footBorderTop
             }"
@@ -113,8 +113,9 @@ const cardClass = computed(() => {
     const hasBorder = getPx(props.borderRadius) > 0
     return [
         props.border && 'hy-border',
-        props.full && 'hy-card--full',
-        hasBorder && 'hy-card--border'
+        props.full && 'hy-card__full',
+        hasBorder && 'hy-card--border',
+        props.customClass
     ].filter(Boolean)
 })
 const cardStyle = computed(() => {
