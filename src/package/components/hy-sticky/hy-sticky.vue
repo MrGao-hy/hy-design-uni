@@ -81,9 +81,9 @@ const querySentinel = (): Promise<{
                     .exec((r2: any[]) => {
                         const stickyRect = (r2 && r2[0]) || {}
                         resolve({
-                            sentinelTop: sentinelRect.top ?? 0,
-                            sentinelBottom: sentinelRect.bottom ?? 0,
-                            stickyHeight: stickyRect.height ?? 0
+                            sentinelTop: sentinelRect.top || 0,
+                            sentinelBottom: sentinelRect.bottom || 0,
+                            stickyHeight: stickyRect.height || 0
                         })
                     })
             })

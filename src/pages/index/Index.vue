@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :custom-style="themeColor" :theme="darkMode" customClass="home-page">
         <the-cell title="基础组件" :list="list_1"></the-cell>
         <the-cell title="表单组件" :list="list_2"></the-cell>
         <the-cell title="布局组件" :list="list_3"></the-cell>
@@ -47,4 +47,11 @@ function getRandomHexColor() {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+:deep(.home-page) {
+    padding: $hy-border-margin-padding-base;
+    /* ifdef H5 */
+    height: calc(100vh - 94px);
+    /* endif */
+}
+</style>

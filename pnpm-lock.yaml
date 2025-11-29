@@ -56,6 +56,9 @@ importers:
       dayjs:
         specifier: ^1.11.13
         version: 1.11.18
+      hy-app:
+        specifier: ^0.5.7
+        version: 0.5.7
       pinia:
         specifier: ^2.3.1
         version: 2.3.1(typescript@4.9.5)(vue@3.5.21(typescript@4.9.5))
@@ -3068,6 +3071,9 @@ packages:
   human-signals@2.1.0:
     resolution: {integrity: sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==}
     engines: {node: '>=10.17.0'}
+
+  hy-app@0.5.7:
+    resolution: {integrity: sha512-kAJDGnfZFzeN7WABoEvS6aatSdo3NySqUrUJThe3m59lyL9BAPYSyicnrDdK+vaLB+9T2c7Zg3iAU1tubi5FeQ==}
 
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
@@ -8697,6 +8703,8 @@ snapshots:
       - supports-color
 
   human-signals@2.1.0: {}
+
+  hy-app@0.5.7: {}
 
   iconv-lite@0.4.24:
     dependencies:

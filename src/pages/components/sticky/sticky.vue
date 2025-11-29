@@ -1,5 +1,5 @@
 <template>
-    <view scroll-y class="page-container">
+    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
         <!-- 头部占位 -->
         <view class="header-banner">
             <text class="title">首页 Banner</text>
@@ -39,13 +39,17 @@
         <view class="content-list">
             <view class="list-item" v-for="i in 20" :key="`b-${i}`">内容区块 B - {{ i }}</view>
         </view>
-    </view>
+    </hy-config-provider>
 </template>
 
 <script setup lang="ts">
 import { type Ref, ref } from 'vue'
 import StickyHeader from '@/package/components/hy-sticky/hy-sticky.vue'
+import { useThemeStore } from '@/store'
+import { storeToRefs } from 'pinia'
 
+const themeStore = useThemeStore()
+const { themeColor, darkMode } = storeToRefs(themeStore)
 // 用于控制样式变化（比如吸顶后加阴影）
 const isTabFixed = ref(false)
 let offsetTop1: Ref<number>
@@ -82,10 +86,11 @@ const onTrackEvent = (data: any) => {
 }
 </script>
 
-<style lang="scss">
-.page-container {
-    //height: calc(100vh - 44px);
-    background-color: #f5f5f5;
+<style lang="scss" scoped>
+.hy-theme--dark {
+    .filter-box {
+        background-color: #0f1a25;
+    }
 }
 
 .header-banner {
@@ -111,16 +116,15 @@ const onTrackEvent = (data: any) => {
 /* Tabs 样式 */
 .tabs-box {
     height: 88rpx; /* 对应 offset-top=0 时的自身高度 */
-    background-color: #fff;
+    background-color: $hy-background--container;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border-bottom: 1px solid #eee;
+    border-bottom: $hy-border-line;
     transition: box-shadow 0.3s;
 
     &.active-shadow {
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        background-color: rgba(255, 255, 255, 0.98); /* 微微透明 */
+        box-shadow: $hy-box-shadow;
     }
 
     .tab-item {
@@ -155,7 +159,7 @@ const onTrackEvent = (data: any) => {
     align-items: center;
     padding: 0 30rpx;
     font-size: 26rpx;
-    color: #333;
+    color: $hy-text-color--grey;
 }
 
 .content-list {
@@ -164,7 +168,7 @@ const onTrackEvent = (data: any) => {
 
 .list-item {
     height: 120rpx;
-    background-color: #fff;
+    background-color: $hy-background--container;
     margin-bottom: 20rpx;
     border-radius: 12rpx;
     display: flex;
