@@ -1,0 +1,73 @@
+@use "../../libs/css/mixin.scss" as *;
+@use "../../libs/css/theme" as *;
+
+
+@include b(card) {
+  position: relative;
+  overflow: hidden;
+  font-size: 28rpx;
+  background-color: $hy-background--container;
+  box-sizing: border-box;
+
+  @include e(full) {
+    margin-left: $hy-border-margin-padding-base !important;
+    margin-right: $hy-border-margin-padding-base !important;
+  }
+
+  @include m(border) {
+    @include pseudo(after) {
+      border-radius: 16rpx;
+    }
+  }
+
+  /* 头部 */
+  @include e(head) {
+    padding: 20rpx 20rpx 10rpx;
+    @include m(flex) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    @include m(left) {
+      display: flex;
+      align-items: center;
+      flex: 1;
+
+      @include edeep(thumb) {
+        margin-right: $hy-border-margin-padding-base;
+        flex-shrink: 0
+      }
+
+      @include e(title) {
+        max-width: 400rpx;
+        font-size: $hy-font-size-base;
+        @include lineEllipsis;
+      }
+
+      @include e(sub) {
+        color: $hy-text-color--grey;
+        font-size: $hy-font-size-sm;
+      }
+    }
+
+    @include m(right) {
+      color: $hy-text-color--grey;
+      margin-left: $hy-border-margin-padding-sm;
+
+      @include e(text) {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  /* 身体 */
+  @include e(body) {
+    padding: 10rpx 20rpx 10rpx;
+  }
+
+  /* 尾部 */
+  @include e(foot) {
+    padding: 10rpx 20rpx 20rpx;
+  }
+}

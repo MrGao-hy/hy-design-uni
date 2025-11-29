@@ -1,0 +1,13 @@
+@use "../../libs/css/theme" as *;
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(sticky) {
+  /* #ifdef APP-VUE || MP-WEIXIN || MP-TOUTIAO */
+  // 此处默认写sticky属性，是为了给微信和APP通过uni.createSelectorQuery查询是否支持css sticky使用
+  position: sticky;
+  /* #endif */
+  top: 0;
+  transition: transform 0.2s linear, opacity 0.2s linear,
+  box-shadow 0.2s linear;
+
+}
