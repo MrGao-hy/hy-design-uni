@@ -513,13 +513,20 @@
 						"enablePullDownRefresh": false
 					}
 				},
-              {
-                "path": "coupon/coupon",
-                "style": {
-                  "navigationBarTitleText": "优惠券示例",
-                  "enablePullDownRefresh": false
+                {
+                    "path": "coupon/coupon",
+                    "style": {
+                        "navigationBarTitleText": "优惠券示例",
+                        "enablePullDownRefresh": false
+                    }
+                },
+                {
+                    "path": "sticky/sticky",
+                    "style": {
+                        "navigationBarTitleText": "吸顶",
+                        "enablePullDownRefresh": false
+                    }
                 }
-              }
 			]
 		}
 	],
