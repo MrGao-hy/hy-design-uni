@@ -1,17 +1,16 @@
 <template>
-    <scroll-view scroll-y class="page-container">
+    <view scroll-y class="page-container">
         <!-- 头部占位 -->
         <view class="header-banner">
             <text class="title">首页 Banner</text>
-            <text class="subtitle">下滑查看吸顶效果</text>
+            <text class="subtitle">上滑查看吸顶效果</text>
         </view>
 
         <!-- 1. 基础吸顶：比如分类 Tabs -->
         <!-- offset-top: 0 表示吸附在最顶端 -->
         <StickyHeader
-            :offset-top="120"
-            :enable-track="true"
-            :track-params="{ moduleId: 'category_tabs', type: 'filter' }"
+            :offset-top="offsetTop1"
+            :duration="200"
             @change="onStickyChange"
             @track="onTrackEvent"
         >
@@ -29,14 +28,8 @@
         </view>
 
         <!-- 2. 二级吸顶：比如筛选栏 -->
-        <!-- offset-top: 44px (假设上面的 Tabs 高度是 44px) -->
-        <StickyHeader
-            :offset-top="44"
-            :z-index="98"
-            :enable-track="true"
-            :track-params="{ moduleId: 'sub_filter' }"
-            @track="onTrackEvent"
-        >
+        <!--         offset-top: 44px (假设上面的 Tabs 高度是 44px) -->
+        <StickyHeader :offset-top="offsetTop2" @track="onTrackEvent">
             <view class="filter-box">
                 <text>筛选条件：全部时间</text>
             </view>
@@ -46,19 +39,35 @@
         <view class="content-list">
             <view class="list-item" v-for="i in 20" :key="`b-${i}`">内容区块 B - {{ i }}</view>
         </view>
-    </scroll-view>
+    </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { type Ref, ref } from 'vue'
 import StickyHeader from '@/package/components/hy-sticky/hy-sticky.vue'
 
 // 用于控制样式变化（比如吸顶后加阴影）
 const isTabFixed = ref(false)
+let offsetTop1: Ref<number>
+// #ifndef H5
+offsetTop1 = ref(0)
+// #endif
+// #ifdef H5
+offsetTop1 = ref(44)
+// #endif
+
+let offsetTop2: Ref<number>
+// #ifndef H5
+offsetTop2 = ref(44)
+// #endif
+// #ifdef H5
+offsetTop2 = ref(88)
+// #endif
 
 // 监听吸顶状态改变
 const onStickyChange = (isFixed: boolean) => {
     isTabFixed.value = isFixed
+    uni.showToast({ title: `⚡️ 捕获埋点事件:${isFixed}`, icon: 'none' })
 }
 
 // 统一埋点处理函数
@@ -75,7 +84,7 @@ const onTrackEvent = (data: any) => {
 
 <style lang="scss">
 .page-container {
-    height: calc(100vh - 44px);
+    //height: calc(100vh - 44px);
     background-color: #f5f5f5;
 }
 

@@ -2,12 +2,28 @@
 @use "../../libs/css/mixin.scss" as *;
 
 @include b(sticky) {
-  /* #ifdef APP-VUE || MP-WEIXIN || MP-TOUTIAO */
-  // 此处默认写sticky属性，是为了给微信和APP通过uni.createSelectorQuery查询是否支持css sticky使用
+  width: 100%;
+  /* 默认 sticky（非 fixed）样式 */
+  position: -webkit-sticky;
   position: sticky;
-  /* #endif */
   top: 0;
-  transition: transform 0.2s linear, opacity 0.2s linear,
-  box-shadow 0.2s linear;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-sizing: border-box;
+
+  @include e(fixed) {
+    /* 在这里加过渡 */
+    transition:
+            box-shadow 0.18s ease,
+            transform 0.18s ease;
+  }
+
+  /* 哨兵样式：不可见但参与布局 */
+  @include e(sentinel) {
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
 
 }
