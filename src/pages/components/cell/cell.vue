@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <hy-cell
             :arrange="arrange"
             :size="size"
@@ -45,7 +45,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const arrange = ref<HyApp.RowCenterType>('right')
 const size = ref<HyApp.SizeType>('medium')
 const arrowDirection = ref<HyApp.RotateType>('right')

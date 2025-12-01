@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title">优惠券组件示例</view>
         <view class="hy-container hy-flex">
             <template v-for="item in list" :key="item.id">
@@ -80,7 +80,7 @@ import HySubsection from '../../../package/components/hy-subsection/hy-subsectio
 
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 
 const boxShadow = ref(true)
 const btnMode = ref('button')

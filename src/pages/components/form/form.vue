@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="[themeColor, { padding: '10px' }]" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :custom-style="{ padding: '10px' }" :theme="darkMode">
         <view class="demo-header">
             <text class="demo-title">表单组件示例</text>
         </view>
@@ -111,7 +111,7 @@ import type { FormItemRule } from '@/package/components/hy-form/typing'
 import { storeToRefs } from 'pinia'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 
 // 表单数据
 const formData = reactive({

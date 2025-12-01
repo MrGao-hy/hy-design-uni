@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-flex :justify="justify" :vertical="vertical" :gap="gap" :align="align">
@@ -47,7 +47,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 
 const gap = ref(0)
 const vertical = ref(false)

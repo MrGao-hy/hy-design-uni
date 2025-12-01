@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title"> 基础使用</view>
         <hy-tabbar-group v-model="current" @change="onChange">
             <hy-tabbar-item title="首页" icon="home"></hy-tabbar-item>
@@ -74,7 +74,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const current = ref(0)
 const fixedCurrent = ref(0)
 const list = [

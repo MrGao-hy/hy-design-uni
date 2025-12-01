@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="[themeColor, { padding: '10px' }]" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :custom-style="{ padding: '10px' }" :theme="darkMode">
         <view class="hy-container">
             <hy-form-group
                 ref="formGroupRef"
@@ -38,7 +38,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 
 const formData: AnyObject = reactive({
     name: '',

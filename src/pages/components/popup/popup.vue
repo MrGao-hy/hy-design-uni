@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-box">
             <the-cell :list="list" @click="onClick"></the-cell>
         </view>
@@ -19,7 +19,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 
 const show = ref(false)
 const mode = ref<HyApp.LayoutType>('center')

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode" customClass="rolling-num-page">
+    <hy-config-provider :theme-color="color" :theme="darkMode" customClass="rolling-num-page">
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">基础使用</view>
             <hy-rolling-num :value="val3" size="60rpx" height="70rpx" color="#FF5500" />
@@ -71,7 +71,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const val1 = ref<string | number>('000000')
 const val2 = ref<string | number>('000000')
 const val3 = ref<string | number>('23456')

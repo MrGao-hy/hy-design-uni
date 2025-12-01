@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title">基础按钮</view>
         <view class="hy-grid hy-container">
             <hy-button text="我是很长的按钮" size="small"></hy-button>
@@ -108,7 +108,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 </script>
 
 <style scoped lang="scss"></style>

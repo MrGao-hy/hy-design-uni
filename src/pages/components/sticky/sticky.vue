@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <!-- 头部占位 -->
         <view class="header-banner">
             <text class="title">首页 Banner</text>
@@ -44,7 +44,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 // 用于控制样式变化（比如吸顶后加阴影）
 const isTabFixed = ref(false)
 let offsetTop1: Ref<number>

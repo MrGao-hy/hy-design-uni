@@ -17,29 +17,30 @@
                 }"
             >
                 <!-- 左边 -->
-                <slot v-if="$slots.left" name="left"></slot>
                 <view
-                    v-else
                     class="hy-navbar__content__left"
                     hover-class="hy-navbar__content__left--hover"
                     hover-start-time="150"
                     @tap="leftClick"
                 >
-                    <hy-icon
-                        v-if="leftIcon"
-                        :name="leftIcon"
-                        :size="leftIconSize"
-                        :color="leftIconColor"
-                    ></hy-icon>
-                    <text
-                        v-if="leftText"
-                        :style="{
-                            color: leftIconColor
-                        }"
-                        class="hy-navbar__content__left--text"
-                    >
-                        {{ leftText }}
-                    </text>
+                    <slot v-if="$slots.left" name="left"></slot>
+                    <template v-else>
+                        <hy-icon
+                            v-if="leftIcon"
+                            :name="leftIcon"
+                            :size="leftIconSize"
+                            :color="leftIconColor"
+                        ></hy-icon>
+                        <text
+                            v-if="leftText"
+                            :style="{
+                                color: leftIconColor
+                            }"
+                            class="hy-navbar__content__left--text"
+                        >
+                            {{ leftText }}
+                        </text>
+                    </template>
                 </view>
                 <!-- 左边 -->
 
@@ -74,12 +75,14 @@
                 <!-- 中间 -->
 
                 <!-- 右边 -->
-                <slot v-if="$slots.right" name="right"></slot>
-                <view class="hy-navbar__content__right" v-else @tap="rightClick">
-                    <hy-icon v-if="rightIcon" :name="rightIcon" size="20"></hy-icon>
-                    <text v-if="rightText" class="hy-navbar__content__right--text">{{
-                        rightText
-                    }}</text>
+                <view class="hy-navbar__content__right" @tap="rightClick">
+                    <slot v-if="$slots.right" name="right"></slot>
+                    <template v-else>
+                        <hy-icon v-if="rightIcon" :name="rightIcon" size="20"></hy-icon>
+                        <text v-if="rightText" class="hy-navbar__content__right--text">{{
+                            rightText
+                        }}</text>
+                    </template>
                 </view>
                 <!-- 右边 -->
             </view>

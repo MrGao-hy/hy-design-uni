@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-picker v-model="value" :columns="columns" has-input></hy-picker>
@@ -37,7 +37,7 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 
 const value = ref('')
 const columns: string[][] = reactive([['西瓜', '香蕉', '苹果']])

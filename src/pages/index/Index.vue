@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode" customClass="home-page">
+    <hy-config-provider :theme-color="color" :theme="darkMode" customClass="home-page">
         <the-cell title="基础组件" :list="list_1"></the-cell>
         <the-cell title="表单组件" :list="list_2"></the-cell>
         <the-cell title="布局组件" :list="list_3"></the-cell>
@@ -24,7 +24,7 @@ import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 const { startShakeListener, stopShakeListener } = useShakeService()
 
-const { themeColor, darkMode, showHint } = storeToRefs(themeStore)
+const { color, darkMode, showHint } = storeToRefs(themeStore)
 
 onShow(() => {
     startShakeListener(handleShake)

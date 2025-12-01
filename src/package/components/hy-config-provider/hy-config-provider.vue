@@ -27,7 +27,6 @@ import configProviderProps from './props'
  */
 defineOptions({})
 
-// const props = withDefaults(defineProps<IProps>(), defaultProps);
 const props = defineProps(configProviderProps)
 
 const themeClass = computed(() => {
@@ -38,7 +37,10 @@ const themeStyle = computed(() => {
     return [
         {
             '--hy-theme-color': props.themeColor,
-            '--hy-theme--light': colorGradient(props.themeColor)[90],
+            '--hy-theme--light':
+                props.theme === 'light'
+                    ? colorGradient(props.themeColor)[80]
+                    : colorGradient(props.themeColor, '#000')[60],
             padding: addUnit(props.padding)
         },
         props.customStyle

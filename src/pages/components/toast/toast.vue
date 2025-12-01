@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <the-cell title="消息提示" :list="list" @click="showToast"></the-cell>
         <hy-toast></hy-toast>
 
@@ -35,7 +35,7 @@ const toast = useToast()
 
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const list = reactive([
     { title: '默认', value: 'show' },
     { title: '信息', value: 'info' },

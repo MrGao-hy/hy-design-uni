@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-container">
             <the-cell :list="list" @click="onClick"></the-cell>
         </view>
@@ -42,7 +42,7 @@ import { FormTypeEnum } from '@/package'
 import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const show = ref(false)
 const formRef = ref()
 const showAsync = ref(true)

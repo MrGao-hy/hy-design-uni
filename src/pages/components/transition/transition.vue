@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <the-cell :list="list" @click="onClick"></the-cell>
 
         <hy-transition :mode="mode" :show="show" :custom-style="style">
@@ -20,7 +20,7 @@ import HyTransition from '@/package/components/hy-transition/hy-transition.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const show = ref(false)
 const mode = ref<HyApp.TransitionMode>('fade')
 const style = computed((): CSSProperties => {

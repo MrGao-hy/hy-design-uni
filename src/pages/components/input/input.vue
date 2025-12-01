@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-input
@@ -81,7 +81,7 @@ import type { InputType } from '@uni-helper/uni-types'
 import { storeToRefs } from 'pinia'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const value = ref('')
 const value3 = ref('')
 const value2 = ref('中国速度，东风快递，使命必达，风雨无阻！！！')

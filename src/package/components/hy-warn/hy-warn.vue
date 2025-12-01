@@ -6,7 +6,7 @@
             :style="customStyle"
         >
             <view class="hy-warn__icon--left tips" v-if="showIcon">
-                <HyIcon :name="iconName(type)" size="21" :color="iconColor"></HyIcon>
+                <hy-icon :name="iconName(type)" size="21" :color="iconColor"></hy-icon>
             </view>
             <view
                 class="hy-warn__content"
@@ -51,7 +51,7 @@
                 <slot name="right"></slot>
             </view>
             <view class="hy-warn__close" v-if="closable" @tap.stop="closeHandler">
-                <HyIcon :name="IconConfig.CLOSE" :color="iconColor" size="15"></HyIcon>
+                <hy-icon :name="IconConfig.CLOSE" :color="iconColor" size="15"></hy-icon>
             </view>
         </view>
     </HyTransition>

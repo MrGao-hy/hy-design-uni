@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <the-cell :list="list" @click="onChange"></the-cell>
 
         <hy-action-sheet
@@ -45,7 +45,7 @@ import { storeToRefs } from 'pinia'
 
 const themeStore = useThemeStore()
 
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 
 const list = reactive([
     { title: '基础使用', value: false },

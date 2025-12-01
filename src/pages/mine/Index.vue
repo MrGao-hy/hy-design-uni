@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider custom-class="mine-page" :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider custom-class="mine-page" :theme-color="color" :theme="darkMode">
         <!-- 主内容区域 -->
         <scroll-view class="main-content" scroll-y :show-scrollbar="false">
             <!-- 用户信息卡片 -->
@@ -49,7 +49,7 @@ import LogoutButton from '@/components/mine/LogoutButton.vue'
 import { IconConfig } from '@/package'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const isLoggingOut = ref(false)
 const deviceInfo = ref('')
 

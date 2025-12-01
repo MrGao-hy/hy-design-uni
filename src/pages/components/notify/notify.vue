@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :custom-style="themeColor" :theme="darkMode">
+    <hy-config-provider :theme-color="color" :theme="darkMode">
         <the-cell :list="list" @click="showToast"></the-cell>
         <hy-notify ref="hyNotifyRef"></hy-notify>
     </hy-config-provider>
@@ -14,7 +14,7 @@ import { reactive, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 
 const themeStore = useThemeStore()
-const { themeColor, darkMode } = storeToRefs(themeStore)
+const { color, darkMode } = storeToRefs(themeStore)
 const hyNotifyRef = ref<InstanceType<typeof HyNotify>>(null)
 const list = reactive([
     {
