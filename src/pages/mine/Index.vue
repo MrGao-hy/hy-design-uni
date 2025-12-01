@@ -70,7 +70,7 @@ const deviceType = computed(() => {
 
 // 用户信息
 const userInfo = ref({
-    nickname: '华玥',
+    nickname: '华玥10086',
     userId: '10086',
     avatar: 'https://q1.qlogo.cn/g?b=qq&nk=123456789&s=100',
     bio: '这个人很懒，什么都没有留下',
@@ -79,8 +79,8 @@ const userInfo = ref({
 
 // 统计数据
 const stats = ref([
-    { key: 'favorites', label: '收藏', value: 128 },
-    { key: 'following', label: '关注', value: 56 },
+    { key: 'favorites', label: '组件', value: 74 },
+    { key: 'following', label: '用户', value: 700 },
     { key: 'followers', label: '粉丝', value: 1024 },
     { key: 'likes', label: '获赞', value: 520 }
 ])

@@ -79,7 +79,7 @@ import { computed, getCurrentInstance, onMounted, ref, reactive, watch } from 'v
 import type { CSSProperties } from 'vue'
 import type { IFloatButtonEmits } from './typing'
 import type { MenusType } from './typing'
-import { addUnit, getPx, getRect, guid, isH5 } from '../../libs'
+import { addUnit, debounce, getPx, getRect, guid, isH5, throttle } from '../../libs'
 import floatButtonProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -133,7 +133,7 @@ watch(
 )
 
 /**
- * @description 初始化距离
+ * 初始化距离
  * */
 const initPosition = () => {
     const { minLeft, minTop, maxLeft, maxTop } = bounding
@@ -193,7 +193,7 @@ const initPosition = () => {
 }
 
 /**
- * @description 获取组件大小
+ * 获取组件大小
  * */
 const getFloatBtnSize = computed(() => {
     if (typeof props.size === 'string' && Object.keys(btnSize).includes(props.size)) {
@@ -204,16 +204,15 @@ const getFloatBtnSize = computed(() => {
 })
 
 /**
- * @description 悬浮按钮样式
+ * 悬浮按钮样式
  * */
 const FloatButtonStyle = computed(() => {
     const style: CSSProperties = {
-        top: currentCoordinate.top + 'px',
-        left: currentCoordinate.left + 'px',
+        top: `${currentCoordinate.top}px`,
+        left: `${currentCoordinate.left}px`,
         backgroundColor: props.bgColor,
         zIndex: props.zIndex,
-        color: props.textColor,
-        transition: 'all ease 0.3s'
+        color: props.textColor
     }
     if (props.fixed) style.position = 'fixed'
 
@@ -267,7 +266,7 @@ const menusStyle = computed(() => {
 })
 
 /**
- * @description 获取悬浮按钮大小
+ * 获取悬浮按钮大小
  * */
 const getFatRect = () => {
     return new Promise((resolve, reject) => {
@@ -285,7 +284,7 @@ const getFatRect = () => {
 }
 
 /**
- * @description 点击悬浮按钮
+ * 点击悬浮按钮
  * */
 const handleClick = () => {
     emit('click')
@@ -295,7 +294,7 @@ const handleClick = () => {
 }
 
 /**
- * @description 点击单条菜单栏
+ * 点击单条菜单栏
  * */
 const handleMenuItemClick = (temp: MenusType, index: number) => {
     emit('clickItem', temp, index)

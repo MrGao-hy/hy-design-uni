@@ -1,7 +1,7 @@
 <template>
     <hy-config-provider :custom-style="themeColor" :theme="darkMode">
         <view class="hy-container">
-            <hy-cell title="基础使用" :list="list" @click="onClick"></hy-cell>
+            <the-cell :list="list" @click="onClick"></the-cell>
         </view>
 
         <hy-modal
@@ -34,9 +34,8 @@
 <script setup lang="ts">
 import HyModal from '@/package/components/hy-modal/hy-modal.vue'
 import HyFormGroup from '@/package/components/hy-form-group/hy-form-group.vue'
-import HyCell from '@/package/components/hy-cell/hy-cell.vue'
+import TheCell from '@/components/TheCell.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import type { CellContentVo } from '@/package/components/hy-cell/typing'
 import { ref, reactive } from 'vue'
 import { useThemeStore } from '@/store'
 import { FormTypeEnum } from '@/package'
@@ -66,7 +65,7 @@ const formColumns = reactive([
     }
 ])
 
-const list: CellContentVo[] = [
+const list = [
     { title: '基础使用', value: '' },
     { title: '有标题', value: 'title' },
     { title: '带取消按钮', value: 'showCancelButton' },
@@ -74,7 +73,7 @@ const list: CellContentVo[] = [
     { title: '异步弹窗', value: 'async' }
 ]
 
-const onClick = (temp: CellContentVo) => {
+const onClick = (temp: AnyObject) => {
     if (temp.value === 'async') {
         showAsync.value = true
     } else {
@@ -88,7 +87,6 @@ const onAsyncClose = () => {
     formRef.value
         .validate()
         .then(async (res) => {
-            console.log(asyncClose.value, 111)
             asyncClose.value = true
             setTimeout(() => {
                 showAsync.value = false

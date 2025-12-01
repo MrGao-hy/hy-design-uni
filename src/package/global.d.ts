@@ -58,6 +58,7 @@ declare module 'vue' {
         HyRadio: (typeof import('./components/hy-radio/hy-radio.vue'))['default']
         HyRate: (typeof import('./components/hy-rate/hy-rate.vue'))['default']
         HyReadMore: (typeof import('./components/hy-read-more/hy-read-more.vue'))['default']
+        HyRollingNum: (typeof import('./components/hy-rolling-num/hy-rolling-num.vue'))['default']
         HyScrollList: (typeof import('./components/hy-scroll-list/hy-scroll-list.vue'))['default']
         HySearch: (typeof import('./components/hy-search/hy-search.vue'))['default']
         HySignature: (typeof import('./components/hy-signature/hy-signature.vue'))['default']

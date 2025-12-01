@@ -152,7 +152,6 @@ watch(
             changeFromInner.value = false
             return
         }
-        console.log(newVal, 'newVal')
         innerValue.value = newVal
         // 在H5中，外部value变化后，修改input中的值，不会触发@input事件，此时手动调用值变化方法
         if (!firstChange.value && !changeFromInner.value) {

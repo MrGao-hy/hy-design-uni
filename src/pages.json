@@ -526,6 +526,13 @@
                         "navigationBarTitleText": "吸顶",
                         "enablePullDownRefresh": false
                     }
+                },
+                {
+                    "path": "rollingNum/rollingNum",
+                    "style": {
+                        "navigationBarTitleText": "翻滚数字",
+                        "enablePullDownRefresh": false
+                    }
                 }
             ]
         }
@@ -543,7 +550,7 @@
         "color": "#7A7E83",
         "selectedColor": "#3cc51f",
         "borderStyle": "black",
-        "backgroundColor": "#ffffff",
+        "backgroundColor": "@bgColor",
         "list": [
             {
                 "pagePath": "pages/index/Index",

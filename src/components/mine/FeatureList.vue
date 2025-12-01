@@ -24,7 +24,7 @@
                     <text v-if="item.version" class="version-text">
                         {{ item.version }}
                     </text>
-                    <uni-icons type="right" size="12" color="#999" />
+                    <hy-icon v-else :name="IconConfig.RIGHT" size="24" color="#999" />
                 </view>
             </view>
         </view>
@@ -32,6 +32,8 @@
 </template>
 
 <script setup lang="ts">
+import { IconConfig } from '@/package'
+
 interface FeatureItem {
     key: string
     label: string

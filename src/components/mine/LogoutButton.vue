@@ -90,16 +90,4 @@ $shadow-light: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
         transform: translateY(0);
     }
 }
-
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-    .logout-btn {
-        background: #2c2c2c;
-        box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.2);
-    }
-
-    .logout-btn:active {
-        background-color: #3a3a3a;
-    }
-}
 </style>

@@ -95,7 +95,6 @@ watch(
 onMounted(() => {
     nextTick(() => {
         getRect('.list', true, instance).then((res) => {
-            console.log(res, current.value)
             rectList.value = res
         })
     })

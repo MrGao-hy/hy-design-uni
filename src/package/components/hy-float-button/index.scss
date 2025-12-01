@@ -14,18 +14,18 @@
     box-shadow: $hy-box-shadow;
   }
 
-  @include e(animation) {
-    animation: floatAnimation 2s ease-in-out infinite;
-    @keyframes floatAnimation {
-      0%,
-      100% {
-        transform: translateY(0); /* 初始位置 */
-      }
-      50% {
-        transform: translateY(-20px); /* 上浮20像素 */
-      }
-    }
-  }
+  //@include e(animation) {
+  //  animation: floatAnimation 2s ease-in-out infinite;
+  //  @keyframes floatAnimation {
+  //    0%,
+  //    100% {
+  //      transform: translateY(0); /* 初始位置 */
+  //    }
+  //    50% {
+  //      transform: translateY(-20px); /* 上浮20像素 */
+  //    }
+  //  }
+  //}
 
   @include e(container) {
     border-radius: 50%;

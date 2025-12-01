@@ -20,7 +20,7 @@
 import { ref, computed, onMounted, onUnmounted, nextTick, getCurrentInstance, watch } from 'vue'
 import type { CSSProperties } from 'vue'
 import { onPageScroll } from '@dcloudio/uni-app'
-import { addUnit, getRect } from '../../libs'
+import { addUnit, getRect, guid } from '../../libs'
 import type { IStickyEmits } from './typing'
 import stickyProps from './props'
 
@@ -28,7 +28,7 @@ const props = defineProps(stickyProps)
 const emit = defineEmits<IStickyEmits>()
 
 const instance = getCurrentInstance()
-const sentinelId = `hy-sticky-sentinel-${Math.random().toString(36).slice(2, 9)}`
+const sentinelId = guid()
 const stickyRef = ref<HTMLElement | null>(null)
 const isFixed = ref(false)
 const placeholderHeight = ref(0)

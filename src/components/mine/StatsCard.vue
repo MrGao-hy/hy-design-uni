@@ -103,24 +103,4 @@ $shadow-medium: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
         transform: translateY(0);
     }
 }
-
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-    .stats-card {
-        background: #2c2c2c;
-        box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.2);
-    }
-
-    .stat-number {
-        color: #ffffff;
-    }
-
-    .stat-label {
-        color: #aaaaaa;
-    }
-
-    .stat-divider {
-        background: #404040;
-    }
-}
 </style>

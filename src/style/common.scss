@@ -23,13 +23,18 @@
 }
 .hy-container {
   flex-wrap: wrap;
-  padding: 30px $hy-border-margin-padding-base;
+  padding: $hy-border-margin-padding-base;
   border-radius: $hy-border-radius-base;
   background-color: $hy-background--container;
+  box-shadow: $hy-box-shadow;
 }
 
 .hy-margin {
   padding: 10px 0 20px;
+}
+
+.hy-margin-bottom {
+  margin-bottom: 20px;
 }
 
 .hy-setting__box {

@@ -125,14 +125,11 @@ const onChange = (e) => {
 
     // 7. 回写
     value3.value = filtered
-    console.log(value3.value)
 }
 
 watch(
     () => value3.value,
-    (newValue) => {
-        console.log(newValue, 'newValue')
-    },
+    (newValue) => {},
     { immediate: true }
 )
 </script>

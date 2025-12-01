@@ -1,12 +1,13 @@
 <template>
-    <view class="hy-title">{{ title }}</view>
+    <view v-if="title" class="hy-title">{{ title }}</view>
     <view class="hy-container">
         <hy-cell>
             <hy-cell-item
-                v-for="item in list"
-                :key="item.title"
+                v-for="(item, i) in list"
+                :key="i"
                 :title="item.title"
                 :url="item.url"
+                @click="onClick(item, i)"
             ></hy-cell-item>
         </hy-cell>
     </view>
@@ -21,9 +22,14 @@ interface ILists {
     url: string
 }
 interface IProps {
-    title: string
+    title?: string
     list: ILists[]
 }
 
 const props = withDefaults(defineProps<IProps>(), {})
+const emit = defineEmits(['click'])
+
+const onClick = (temp: AnyObject, index: number) => {
+    emit('click', temp, index)
+}
 </script>

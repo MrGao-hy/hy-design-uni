@@ -8,12 +8,7 @@
 
         <!-- 1. 基础吸顶：比如分类 Tabs -->
         <!-- offset-top: 0 表示吸附在最顶端 -->
-        <StickyHeader
-            :offset-top="offsetTop1"
-            :duration="200"
-            @change="onStickyChange"
-            @track="onTrackEvent"
-        >
+        <StickyHeader :offset-top="offsetTop1" :duration="200" @change="onStickyChange">
             <view class="tabs-box" :class="{ 'active-shadow': isTabFixed }">
                 <view class="tab-item active">推荐</view>
                 <view class="tab-item">热门</view>
@@ -29,7 +24,7 @@
 
         <!-- 2. 二级吸顶：比如筛选栏 -->
         <!--         offset-top: 44px (假设上面的 Tabs 高度是 44px) -->
-        <StickyHeader :offset-top="offsetTop2" @track="onTrackEvent">
+        <StickyHeader :offset-top="offsetTop2">
             <view class="filter-box">
                 <text>筛选条件：全部时间</text>
             </view>
@@ -72,17 +67,6 @@ offsetTop2 = ref(88)
 const onStickyChange = (isFixed: boolean) => {
     isTabFixed.value = isFixed
     uni.showToast({ title: `⚡️ 捕获埋点事件:${isFixed}`, icon: 'none' })
-}
-
-// 统一埋点处理函数
-const onTrackEvent = (data: any) => {
-    // 这里是对接真实埋点 SDK 的地方
-    // 例如: sensors.track(data.action, data);
-
-    console.log('⚡️ 捕获埋点事件:', data)
-
-    // 模拟发送埋点请求
-    // uni.request({ url: '/api/log', data, method: 'POST' });
 }
 </script>
 

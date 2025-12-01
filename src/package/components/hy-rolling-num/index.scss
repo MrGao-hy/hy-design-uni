@@ -1,0 +1,34 @@
+@use "../../libs/css/mixin.scss" as *;
+
+@include b(rolling-num) {
+  white-space: nowrap;
+
+  @include e(column) {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+
+
+    @include m(wrapper) {
+      display: flex;
+      flex-direction: column;
+      will-change: transform;
+
+      @include e(digit) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* 100% / 12 个数字 = 8.3333% */
+        height: 8.3333%;
+        flex-shrink: 0;
+      }
+
+    }
+
+    @include m(symbol) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

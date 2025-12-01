@@ -27,14 +27,12 @@
                             ]"
                         >
                             <slot v-if="$slots.icon" name="icon" :record="item" :index="index" />
-                            <template v-else>
-                                <view
-                                    class="hy-tabs__wrapper--nav__item--prefix-icon"
-                                    v-if="item.icon"
-                                >
-                                    <HyIcon :name="item.icon" :customStyle="iconStyle"></HyIcon>
-                                </view>
-                            </template>
+                            <view
+                                class="hy-tabs__wrapper--nav__item--prefix-icon"
+                                v-else-if="item.icon"
+                            >
+                                <hy-icon :name="item.icon" :customStyle="iconStyle"></hy-icon>
+                            </view>
                             <slot
                                 v-if="$slots.content"
                                 name="content"
@@ -107,17 +105,17 @@
         </view>
 
         <!-- 内容轮播图	-->
-        <slot name="main">
-            <swiper
-                :current="innerCurrent"
-                @animationfinish="animationFinish"
-                :style="{ height: swiperHeight }"
-            >
-                <swiper-item class="swiper-item" v-for="(item, i) in list" :key="i">
-                    <slot :record="item.content" />
-                </swiper-item>
-            </swiper>
-        </slot>
+        <slot v-if="$slots.main" name="main"></slot>
+        <swiper
+            v-else-if="list.length"
+            :current="innerCurrent"
+            @animationfinish="animationFinish"
+            :style="{ height: swiperHeight }"
+        >
+            <swiper-item class="swiper-item" v-for="(item, i) in list" :key="i">
+                <slot :record="item.content" />
+            </swiper-item>
+        </swiper>
     </view>
 </template>
 
@@ -197,7 +195,7 @@ onMounted(() => {
 })
 
 /**
- * @description 设置线左边距离
+ * 设置线左边距离
  */
 const setLineLeft = () => {
     const tabItem = props.list[innerCurrent.value]
@@ -263,7 +261,7 @@ const setScrollLeft = () => {
     scrollLeft.value = Math.max(0, scrollLeft_1)
 }
 /**
- * @description 获取所有标签的尺寸
+ * 获取所有标签的尺寸
  * */
 const resize = () => {
     // 如果不存在list，则不处理
@@ -300,7 +298,7 @@ const resize = () => {
     )
 }
 /**
- * @description 获取导航菜单的尺寸
+ * 获取导航菜单的尺寸
  * */
 const getTabsRect = () => {
     return new Promise((resolve) => {
@@ -308,7 +306,7 @@ const getTabsRect = () => {
     })
 }
 /**
- * @description 获取所有标签的尺寸
+ * 获取所有标签的尺寸
  * */
 const getAllItemRect = () => {
     return new Promise((resolve) => {

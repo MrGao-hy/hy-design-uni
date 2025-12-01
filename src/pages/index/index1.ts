@@ -263,6 +263,10 @@ export const list_5 = [
 
 export const list_6 = [
     {
+        title: 'RollingNum 翻滚数字',
+        url: '/pages/components/rollingNum/rollingNum'
+    },
+    {
         title: 'CodeInput 验证码输入',
         url: '/pages/components/codeInput/codeInput'
     },
