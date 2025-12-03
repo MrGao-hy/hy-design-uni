@@ -1,5 +1,5 @@
 @use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin.scss" as *;
+@use "../../libs/css/mixin" as *;
 
 /* 暗色主题 */
 @include b(theme){

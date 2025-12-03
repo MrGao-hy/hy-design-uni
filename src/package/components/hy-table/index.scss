@@ -1,0 +1,110 @@
+@use "../../libs/css/theme" as *;
+@use "../../libs/css/mixin" as *;
+
+/* 变量定义 */
+$border-color: #ebeef5;
+$header-bg: $hy-background--table-header;
+$text-color: #606266;
+$header-text-color: #909399;
+$stripe-bg: $hy-background--table-header;
+$hover-bg: #f5f7fa;
+
+/*#1d1d1d*/
+
+@include b(table) {
+  width: 100%;
+  background-color: $hy-background--container;
+  border: $hy-border-line;
+
+  @include e(scroll) {
+    height: 100%;
+  }
+
+  @include e(container) {
+    overflow-x: scroll;
+    white-space: nowrap;
+    @include flex(column);
+    height: 100%;
+
+    @include mdeep(loading) {
+      min-height: 400rpx;
+    }
+
+    @include is(border) {
+
+      /* 单元格通用样式 */
+      .hy-table__container__th,
+      .hy-table__container__td {
+        border-right: $hy-border-line;
+
+        &:last-child {
+          border-right: none;
+        }
+      }
+    }
+
+    /* 斑马纹 */
+    @include m(stripe) {
+      .hy-table__container--tr:nth-child(even) {
+        background-color: $stripe-bg;
+      }
+    }
+
+    /* 表头样式 - 粘性定位 */
+    @include m(header) {
+      background-color: $header-bg;
+      font-weight: bold;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    /* 行样式 */
+    @include m(tr) {
+      @include flex();
+      border-bottom: $hy-border-line;
+      box-sizing: border-box;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* 单元格通用样式 */
+    @include e(th, td) {
+      padding: $hy-border-margin-padding-base;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      font-size: 28rpx;
+      color: $text-color;
+    }
+
+    /* 单元格通用样式 */
+    @include e(th) {
+      color: $header-text-color;
+      font-size: 26rpx;
+      @include flex();
+      align-items: center;
+
+      @include m(text) {
+        @include lineEllipsis;
+      }
+
+      @include m(sort) {
+        @include flex(column);
+        margin-left: 8rpx;
+
+        :deep(.is-active) {
+          color: $hy-primary;
+        }
+      }
+    }
+
+    @include e(td) {
+      @include m(ellipsis) {
+        @include lineEllipsis;
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 @use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin.scss" as *;
+@use "../../libs/css/mixin" as *;
 
 
 @include b(picker) {
@@ -55,7 +55,7 @@
     }
 
     @include edeep(mask) {
-      background-image: none;
+      background-image: $hy-background-image--mask--two-flanks;
     }
 
     @include edeep(loading) {

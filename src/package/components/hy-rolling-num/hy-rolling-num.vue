@@ -29,7 +29,7 @@
             <view
                 v-else
                 class="hy-rolling-num__column--symbol"
-                :style="{ height: addUnit(height), ...textStyleObject }"
+                :style="[{ height: addUnit(height) }, textStyle]"
             >
                 {{ item.val }}
             </view>
@@ -174,23 +174,13 @@ const containerStyle = computed<CSSProperties>(() => ({
     overflow: 'hidden'
 }))
 
-const textStyleObject = computed<CSSProperties>(() => ({
+const textStyle = computed<CSSProperties>(() => ({
     fontSize: addUnit(props.size),
     color: props.color,
     fontWeight: props.fontWeight,
     lineHeight: addUnit(props.height),
     ...props.customStyle
 }))
-
-const textStyle = computed(() => {
-    let s = ''
-    const obj = textStyleObject.value
-    for (const key in obj) {
-        // @ts-ignore
-        s += `${key}:${obj[key]};`
-    }
-    return s
-})
 </script>
 
 <style lang="scss" scoped>

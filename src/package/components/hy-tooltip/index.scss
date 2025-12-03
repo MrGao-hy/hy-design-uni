@@ -1,5 +1,5 @@
 @use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin.scss" as *;
+@use "../../libs/css/mixin" as *;
 
 $hy-tooltip--z-index: 998;
 $hy-tooltip--background-color: rgb(50, 50, 51);
@@ -8,7 +8,7 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
   position: relative;
   @include flex;
 
-  @include squareArrow(6px, $hy-tooltip--background-color, $hy-tooltip--z-index, $hy-box-shadow);
+  @include squareArrow(6px, $hy-tooltip--background-color, -1, $hy-box-shadow);
 
   @include edeep(popup) {
     position: absolute;

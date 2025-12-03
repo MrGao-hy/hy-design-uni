@@ -1,5 +1,5 @@
 @use "../../libs/css/theme.scss" as *;
-@use "../../libs/css/mixin.scss" as *;
+@use "../../libs/css/mixin" as *;
 
 @include b(folding-panel-item) {
   position: relative;

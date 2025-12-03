@@ -47,10 +47,13 @@ $hy-background--disabled: var(--hy-background--disabled, rgba(0, 0, 0, 0.04)); /
 $hy-background--track: var(--hy-background--track, #F6F6F6) !default; // 轨道背景色
 $hy-background--empty: var(--hy-background--empty, #F3F3F3) !default; // 搜索背景色
 $hy-background--hover: var(--hy-background--hover, rgba(0,0,0,0.05)) !default; // 点击状态
-$hy-light-background-mask: var(--hy-light-background-mask, rgba(0, 0, 0, 0.5)); //遮罩颜色
+$hy-background-mask: var(--hy-background-mask, rgba(0, 0, 0, 0.5)); //遮罩颜色
 $hy-background--active: var(--hy-background--active, #FFFFFF); // 选中背景色
 $hy-background--close: var(--hy-background--close, #f0f0f0); // 关闭背景色
 $hy-background--box: var(--hy-background--box, #FFFFFF); // 盒子背景色
+$hy-background--table-header: var(--hy-background--table-header, #FAFAFA); // 表头背景色
+$hy-background-image--mask--two-flanks: var(--hy-background-image--mask--two-flanks, linear-gradient(180deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6)),
+        linear-gradient(0deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6))); // 向两边形成雾霾形状
 
 /* 文字尺寸 */
 $hy-font-size-sm: 24rpx; // 提示文字大小

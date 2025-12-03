@@ -66,7 +66,7 @@ const value_1 = ref('')
 const value_2 = ref('')
 const value_3 = ref('')
 const value_4 = ref('')
-const value_5 = ref('')
+const value_5 = ref('10:11')
 const value_6 = ref('')
 </script>
 

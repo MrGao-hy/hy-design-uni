@@ -1,5 +1,5 @@
 @use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin.scss" as *;
+@use "../../libs/css/mixin" as *;
 
 @include b(read-more) {
   @include e(content) {
@@ -16,7 +16,7 @@
 
     @include m(mask) {
       background-image:
-              linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, $hy-background--2 80%);
+              linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, $hy-background--container 80%);
       padding-top: 100px;
       margin-top: -100px;
     }

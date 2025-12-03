@@ -1,5 +1,5 @@
 @use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin.scss" as *;
+@use "../../libs/css/mixin" as *;
 
 
 @include b(swiper) {
@@ -24,7 +24,7 @@
         flex: 1;
 
 
-        @include m([image, video]){
+        @include m(image, video){
           flex: 1;
         }
 

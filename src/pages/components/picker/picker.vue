@@ -7,12 +7,23 @@
 
         <view class="hy-title">修改分隔符</view>
         <view class="hy-container">
-            <hy-picker v-model="value" :columns="columns_2" has-input :separator="' '"></hy-picker>
+            <hy-picker
+                v-model="value_2"
+                :columns="columns_2"
+                has-input
+                :separator="'，'"
+            ></hy-picker>
         </view>
 
         <view class="hy-title">多列联动</view>
         <view class="hy-container">
-            <hy-picker v-model="value" :columns="columns_2" has-input></hy-picker>
+            <hy-picker
+                ref="pickerRef"
+                v-model="value_3"
+                :columns="columns_3"
+                has-input
+                @change="changeHandler"
+            ></hy-picker>
         </view>
 
         <view class="hy-title">自定义插槽</view>
@@ -40,12 +51,32 @@ const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)
 
 const value = ref('')
+const value_2 = ref('欧元，票子')
+const value_3 = ref('')
+const pickerRef = ref()
 const columns: string[][] = reactive([['西瓜', '香蕉', '苹果']])
 
 const columns_2: string[][] = reactive([
+    ['欧元', '美元'],
+    ['房子', '车子', '票子', '女人']
+])
+
+const columns_3: string[][] = reactive([
     ['中国', '美国'],
     ['深圳', '厦门', '上海', '拉萨']
 ])
+const column_3Data = reactive([
+    ['深圳', '厦门', '上海', '拉萨'],
+    ['得州', '华盛顿', '纽约', '阿拉斯加']
+])
+const changeHandler = (e) => {
+    const { columnIndex, value, values, index } = e
+
+    if (columnIndex === 0) {
+        // columns_2[1] = column_2Data[index]
+        pickerRef.value.setColumnValues(1, column_3Data[index])
+    }
+}
 </script>
 
 <style scoped lang="scss"></style>

@@ -301,6 +301,10 @@ export const list_6 = [
     {
         title: 'Signature 签名',
         url: '/pages/components/signature/signature'
+    },
+    {
+        title: 'Table 表格',
+        url: '/pages/components/table/table'
     }
 ]
 

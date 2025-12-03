@@ -87,7 +87,7 @@ const onCheckbox = ({ name }: TagParamsVo) => {
 </script>
 
 <style lang="scss" scoped>
-@import '../../libs/css/mixin.scss';
+@import '../../libs/css/mixin';
 @include b(check-button) {
     display: grid;
     grid-template-columns: v-bind(col);

@@ -4,6 +4,10 @@ import type {
     InputOnFocusEvent,
     InputOnKeyboardheightchange
 } from '@uni-helper/uni-types'
+import type { ExtractPropTypes } from 'vue'
+import type inputProps from './props'
+
+export interface HyInputProps extends ExtractPropTypes<typeof inputProps> {}
 
 export interface IInputEmits {
     /** 输入框失去焦点时触发 */

@@ -533,6 +533,13 @@
                         "navigationBarTitleText": "翻滚数字",
                         "enablePullDownRefresh": false
                     }
+                },
+                {
+                    "path": "table/table",
+                    "style": {
+                        "navigationBarTitleText": "表格",
+                        "enablePullDownRefresh": false
+                    }
                 }
             ]
         }

@@ -9,20 +9,10 @@ export const useThemeStore = defineStore(
         const darkMode = ref('light')
         const showHint = ref(true)
 
-        // const lightColor = computed(() => {
-        //   return colorGradient(
-        //     color.value,
-        //     darkMode.value === "dark" ? "#000000" : "#ffffff",
-        //   )[90];
-        // });
-        const themeColor = ref({})
-
         return {
             color,
-            themeColor,
             darkMode,
             showHint
-            // lightColor,
         }
     },
     { unistorage: true }

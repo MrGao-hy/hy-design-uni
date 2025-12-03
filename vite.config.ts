@@ -26,7 +26,7 @@ export default defineConfig({
             scss: {
                 additionalData:
                     '@use "@/package/libs/css/theme.scss" as *;\n' +
-                    '@use "@/package/libs/css/mixin.scss" as *;\n'
+                    '@use "@/package/libs/css/_mixin.scss" as *;\n'
             }
         }
     }

@@ -1,6 +1,6 @@
 import type { PickerColumnVo } from './typing'
-import type HyInputProps from './typing'
 import type { PropType } from 'vue'
+import type { HyInputProps } from '../hy-input/typing'
 
 const pickerProps = {
     /** 显示到输入框值 */

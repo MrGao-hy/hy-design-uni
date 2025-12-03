@@ -47,9 +47,8 @@
                         :style="{ color: confirmColor }"
                         @tap="onConfirm"
                     >
-                        <slot name="toolbar-right">
-                            {{ confirmText }}
-                        </slot>
+                        <slot v-if="$slots['toolbar-right']" name="toolbar-right"></slot>
+                        <text v-else>{{ confirmText }}</text>
                     </view>
                 </view>
                 <!-- 头部内容 -->
@@ -78,7 +77,6 @@
                         height: `${addUnit(visibleItemCount * itemHeight)}`
                     }"
                     mask-class="hy-picker--view__mask"
-                    maskStyle="backgroundImage: none;"
                     @change="changeHandler"
                 >
                     <picker-view-column
@@ -143,21 +141,21 @@ const props = defineProps(pickerProps)
 const emit = defineEmits<IPickerEmits>()
 
 // 上一次选择的列索引
-const lastIndex = ref([])
+const lastIndex = ref<number[]>([])
 // 索引值 ，对应picker-view的value
-const innerIndex = ref<any[]>([])
+const innerIndex = ref<number[]>([])
 // 各列的值
 const innerColumns = ref<any[][]>([])
 // 上一次的变化列索引
 const columnIndex = ref<number>(0)
 const showByClickInput = ref<boolean>(false)
-const currentActiveValue = ref([]) //当前用户选中，但是还没确认的值，用户没做change操作时候，点击确认可以默认选中第一个
+const currentActiveValue = ref<number[]>([]) //当前用户选中，但是还没确认的值，用户没做change操作时候，点击确认可以默认选中第一个
 
 /**
- * @description 设置整体各列的columns的值
+ * 设置整体各列的columns的值
  * */
 const setColumns = (columns: any[]) => {
-    innerColumns.value = deepClone(columns)
+    innerColumns.value = columns
     // 如果在设置各列数据时，没有被设置默认的各列索引defaultIndex，那么用0去填充它，数组长度为列的数量
     if (innerIndex.value.length === 0) {
         innerIndex.value = new Array(columns.length).fill(0)
@@ -165,17 +163,41 @@ const setColumns = (columns: any[]) => {
 }
 
 /**
- * @description 监听默认索引的变化，重新设置对应的值
+ * 监听默认索引的变化，重新设置对应的值
  * */
 watch(
     () => props.defaultIndex,
     (newValue) => {
-        setIndexs(newValue, true)
-    }
+        setIndexs(newValue)
+    },
+    { immediate: true }
 )
 
 /**
- * @description 监听columns参数的变化
+ * 监听默认值，给索引赋值
+ * */
+watch(
+    () => props.modelValue,
+    (newValue: string | unknown[]) => {
+        if (newValue) {
+            let arr
+            if (isArray(newValue)) {
+                arr = newValue.map((item, index) => {
+                    return props.columns[index].findIndex((val) => item === val)
+                })
+            } else {
+                arr = newValue.split(props.separator).map((item, index) => {
+                    return props.columns[index].findIndex((val) => item === val)
+                })
+            }
+            setIndexs(arr)
+        }
+    },
+    { immediate: true }
+)
+
+/**
+ * 监听columns参数的变化
  * */
 watch(
     () => props.columns,
@@ -186,7 +208,7 @@ watch(
 )
 
 /**
- * @description 已选&&已确认的值显示在input上面的文案
+ * 已选&&已确认的值显示在input上面的文案
  * */
 const inputLabelValue = computed((): string => {
     let firstItem = innerColumns.value[0] && innerColumns.value[0][0]
@@ -212,7 +234,7 @@ const inputLabelValue = computed((): string => {
 })
 
 /**
- * @description 已选，待确认的值
+ * 已选，待确认的值
  * */
 const inputValue = computed(() => {
     let items = innerColumns.value.map((item, index) => item[innerIndex.value[index]])
@@ -233,7 +255,7 @@ const inputValue = computed(() => {
 })
 
 /**
- * @description 显示
+ * 显示
  * */
 const onShowByClickInput = () => {
     if (!props.input?.disabled) {
@@ -242,7 +264,7 @@ const onShowByClickInput = () => {
 }
 
 /**
- * @description 获取item需要显示的文字，判别为对象还是文本
+ * 获取item需要显示的文字，判别为对象还是文本
  * */
 const getItemText = (item: any) => {
     if (Object.prototype.toString.call(item) === '[object Object]' && props.keyName) {
@@ -253,7 +275,7 @@ const getItemText = (item: any) => {
 }
 
 /**
- * @description 关闭选择器
+ * 关闭选择器
  * */
 const closeHandler = () => {
     if (props.closeOnClickOverlay) {
@@ -266,7 +288,7 @@ const closeHandler = () => {
 }
 
 /**
- * @description 点击工具栏的取消按钮
+ * 点击工具栏的取消按钮
  * */
 const cancel = () => {
     if (props.hasInput) {
@@ -277,24 +299,23 @@ const cancel = () => {
 }
 
 /**
- * @description 点击工具栏的确定按钮
+ * 点击工具栏的确定按钮
  * */
 const onConfirm = () => {
-    //如果用户有没有触发过change
+    //如果用户还没有触发过change
     if (!currentActiveValue.value.length) {
         let arr = [0]
         //如果有默认值&&默认值的数组长度是正确的，就用默认值
         if (
             Array.isArray(props.defaultIndex) &&
-            props.defaultIndex.length == innerColumns.value.length
+            props.defaultIndex.length === innerColumns.value.length
         ) {
             arr = [...props.defaultIndex]
         } else {
             //否则默认都选中第一个
             arr = Array(innerColumns.value.length).fill(0)
         }
-        setLastIndex(arr)
-        setIndexs(arr)
+        setIndexs(arr, true)
     }
     emit('update:modelValue', inputValue.value)
     if (props.hasInput) {
@@ -309,75 +330,78 @@ const onConfirm = () => {
 }
 
 /**
- * @description 选择器某一列的数据发生变化时触发
+ * 选择器某一列的数据发生变化时触发
  * */
 const changeHandler = (e: any) => {
     const { value } = e.detail
-    let index = 0,
-        columnI = 0
-    //记录用户选中但是还没确认的值
+    // 优化：使用更高效的方式找出变化的列
+    let changedColumnIndex = -1
+    let changedItemIndex = 0
+
+    // 记录用户选中但是还没确认的值
     currentActiveValue.value = value
-    // 通过对比前后两次的列索引，得出当前变化的是哪一列
-    for (let i = 0; i < value.length; i++) {
-        let item = value[i]
-        if (item !== (lastIndex.value[i] || 0)) {
-            // 把undefined转为合法假值0
-            // 设置columnIndex为当前变化列的索引
-            columnI = i
-            // index则为变化列中的变化项的索引
-            index = item
-            break // 终止循环，即使少一次循环，也是性能的提升
+
+    // 优化循环：使用for...of循环更简洁，并且在找到变化后立即退出
+    for (let [i, newValue] of value.entries()) {
+        const oldValue = lastIndex.value[i] || 0
+        if (newValue !== oldValue) {
+            changedColumnIndex = i
+            changedItemIndex = newValue
+            break
         }
     }
-    columnIndex.value = columnI
-    const values = innerColumns.value
-    const params = {
-        value: innerColumns.value.map((item, index) => item[value[index]]),
-        index,
-        indexs: value,
-        // values为当前变化列的数组内容
-        values,
-        columnIndex: columnI
+
+    // 如果有变化的列，才执行后续操作
+    if (changedColumnIndex !== -1) {
+        columnIndex.value = changedColumnIndex
+
+        // 移除无条件重置索引的代码，仅在数据实际变化时重置
+
+        // 优化：创建params对象时使用更简洁的方式
+        const params = {
+            value: innerColumns.value.map((item, idx) => item[value[idx]]),
+            index: changedItemIndex,
+            indexs: value,
+            values: innerColumns.value,
+            columnIndex: changedColumnIndex
+        }
+
+        // 将当前的各项变化索引，设置为"上一次"的索引变化值
+        setIndexs(value, true)
+
+        //如果是非自带输入框才会在change时候触发v-model绑值的变化
+        if (!props.hasInput) {
+            emit('update:modelValue', inputValue.value)
+        }
+        emit('change', params)
     }
-    // 将当前的各项变化索引，设置为"上一次"的索引变化值
-    setLastIndex(value)
-    setIndexs(value)
-    //如果是非自带输入框才会在change时候触发v-model绑值的变化
-    //否则会非常的奇怪，用户未确认，值就变了
-    if (!props.hasInput) {
-        emit('update:modelValue', inputValue.value)
-    }
-    emit('change', params)
 }
 
 /**
- * @description 设置index索引，此方法可被外部调用设置
+ * 设置index索引，此方法可被外部调用设置
  * */
-const setIndexs = (index: number[], isSetLastIndex?: boolean) => {
-    innerIndex.value = deepClone(index)
+function setIndexs(index: number[], isSetLastIndex?: boolean) {
+    innerIndex.value = index
+    // 移除调试日志
     if (isSetLastIndex) {
         setLastIndex(index)
     }
 }
 
 /**
- * @description 记录上一次的各列索引位置
+ * 记录上一次的各列索引位置
  * */
 const setLastIndex = (index: number[]) => {
     // 当能进入此方法，意味着当前设置的各列默认索引，即为“上一次”的选中值，需要记录，是因为changeHandler中
     // 需要拿前后的变化值进行对比，得出当前发生改变的是哪一列
-    lastIndex.value = deepClone(index)
+    lastIndex.value = index
 }
 
 /**
- * @description 设置对应列选项的所有值
+ * 设置对应列选项的所有值
  * */
 const setColumnValues = (columnI: number, values: AnyObject[]) => {
-    // 替换innerColumns数组中columnIndex索引的值为values，使用的是数组的splice方法
     innerColumns.value.splice(columnI, 1, values)
-    // 替换完成之后将修改列之后的已选值置空
-    setLastIndex(innerIndex.value.slice(0, columnI))
-    // 拷贝一份原有的innerIndex做临时变量，将大于当前变化列的所有的列的默认索引设置为0
     let tmpIndex = deepClone(innerIndex.value)
     for (let i = 0; i < innerColumns.value.length; i++) {
         if (i > columnIndex.value) {
@@ -385,11 +409,11 @@ const setColumnValues = (columnI: number, values: AnyObject[]) => {
         }
     }
     // 一次性赋值，不能单个修改，否则无效
-    setIndexs(tmpIndex)
+    setIndexs(tmpIndex, true)
 }
 
 /**
- * @description 获取对应列的所有选项
+ * 获取对应列的所有选项
  * */
 const getColumnValues = (columnI: number) => {
     // 进行同步阻塞，因为外部得到change事件之后，可能需要执行setColumnValues更新列的值
@@ -398,25 +422,6 @@ const getColumnValues = (columnI: number) => {
         await sleep()
     })()
     return innerColumns.value[columnI]
-}
-
-/**
- * @description 获取各列选中值对应的索引
- * */
-const getIndexs = () => {
-    return innerIndex.value
-}
-
-/**
- * @description 获取各列选中的值
- * */
-const getValues = () => {
-    // 进行同步阻塞，因为外部得到change事件之后，可能需要执行setColumnValues更新列的值
-    // 索引如果在外部change的回调中调用getValues的话，可能无法得到变更后的列值，这里进行一定延时，保证值的准确性
-    ;(async () => {
-        await sleep()
-    })()
-    return innerColumns.value.map((item, index) => item[innerIndex.value[index]])
 }
 
 defineExpose({

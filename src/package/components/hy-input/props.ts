@@ -181,6 +181,6 @@ const inputProps = {
     },
     /** 自定义外部类名 */
     customClass: String
-}
+} as const
 
 export default inputProps

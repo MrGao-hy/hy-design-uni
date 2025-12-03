@@ -12,20 +12,33 @@
 }
 
 /* 加上-- */
-@mixin m($modifier) {
-  $selector: &;
-  $currentSelector: '';
-  @each $unit in $modifier {
-    $currentSelector: #{$currentSelector +
-      $selector +
-      config.$modifier-separator +
-      $unit +
-      ','};
+@mixin m($modifier...) {
+  $selectors: "";
+
+  @each $item in $modifier {
+    $selectors: #{$selectors + & + config.$modifier-separator + $item + ","};
   }
 
   @at-root {
-    #{$currentSelector} {
+    #{$selectors} {
       @content;
+    }
+  }
+}
+
+/* 定义状态（m） */
+@mixin mdeep($modifier...) {
+  $selectors: "";
+
+  @each $item in $modifier {
+    $selectors: #{$selectors + & + config.$modifier-separator + $item + ","};
+  }
+
+  @at-root {
+    :deep() {
+      #{$selectors} {
+        @content;
+      }
     }
   }
 }
@@ -101,14 +114,15 @@
 
 /* 状态，生成 is-$state 类名 */
 @mixin is($states...) {
-  @at-root {
-    @each $state in $states {
-      &.#{config.$state-prefix + $state} {
+  @each $state in $states {
+    @at-root {
+      #{&}.#{config.$state-prefix + $state} {
         @content;
       }
     }
   }
 }
+
 /* 添加伪类元素 */
 @mixin pseudo($pseudo) {
   @at-root #{&}#{':#{$pseudo}'} {

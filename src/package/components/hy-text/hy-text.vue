@@ -229,7 +229,7 @@ const toLink = () => {
 
 <style scoped lang="scss">
 @import './index.scss';
-@import '../../libs/css/mixin.scss';
+@import '../../libs/css/mixin';
 /*超出出现省略号*/
 .hy-text__value--lines {
     @include multiEllipsis(v-bind(lines));

@@ -2,7 +2,7 @@
     <hy-config-provider :theme-color="color" :theme="darkMode" customClass="rolling-num-page">
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">基础使用</view>
-            <hy-rolling-num :value="val3" size="60rpx" height="70rpx" color="#FF5500" />
+            <hy-rolling-num :value="val3" size="30px" height="70rpx" color="#FF5500" />
         </view>
 
         <view class="hy-container hy-margin-bottom">
