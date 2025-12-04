@@ -11,6 +11,12 @@
             "style": {
                 "navigationBarTitleText": "我的"
             }
+        },
+        {
+            "path": "pages/text/Index",
+            "style": {
+                "navigationBarTitleText": "测试模板"
+            }
         }
     ],
     "subPackages": [
