@@ -7,6 +7,11 @@
   justify-content: space-between;
   flex: 1;
   color: $hy-text-color;
+  
+  @include e(border) {
+	/* TODO: 先这样写，因为在某些pda中写$hy-border-line，边框不显示，后续排除问题 */
+  	border: 1px solid #e8e8e8;
+  }
 
   @include e(radius, square) {
     border-radius: 4px;

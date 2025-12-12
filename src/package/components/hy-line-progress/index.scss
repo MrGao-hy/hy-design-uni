@@ -6,6 +6,7 @@
   position: relative;
   @include flex(row);
   flex: 1;
+  width: 100%;
   overflow: hidden;
   border-radius: $hy-border-radius-semicircle;
 

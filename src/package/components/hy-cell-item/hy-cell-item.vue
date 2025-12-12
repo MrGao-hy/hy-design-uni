@@ -24,6 +24,7 @@
                     :stop="icon?.stop"
                     :round="icon?.round"
                     :customStyle="icon?.customStyle"
+                    :customClass="icon?.customClass"
                 ></hy-icon>
             </view>
             <view class="hy-cell-item__left--title">

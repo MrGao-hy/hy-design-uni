@@ -8,6 +8,7 @@
   @include e(content) {
     background-color: $hy-background--container;
     position: relative;
+    z-index: 9999;
 
     @include m(round) {
 

@@ -111,7 +111,7 @@ watch(
 // 组件的类名
 const textareaClass = computed(() => {
     let classes: string[] = []
-    props.border === 'surround' && (classes = classes.concat(['hy-border', 'hy-textarea__radius']))
+    props.border === 'surround' && (classes = classes.concat(['hy-textarea__border', 'hy-textarea__radius']))
     props.border === 'bottom' &&
         (classes = classes.concat(['hy-border__bottom', 'hy-textarea__no-radius']))
     props.disabled && classes.push('hy-textarea__disabled')

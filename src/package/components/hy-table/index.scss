@@ -15,96 +15,183 @@ $hover-bg: #f5f7fa;
   width: 100%;
   background-color: $hy-background--container;
   border: $hy-border-line;
-
-  @include e(scroll) {
-    height: 100%;
-  }
+  position: relative;
+  display: flex;
+  flex-direction: column;
 
   @include e(container) {
-    overflow-x: scroll;
-    white-space: nowrap;
-    @include flex(column);
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    width: 100%;
+  }
 
-    @include mdeep(loading) {
-      min-height: 400rpx;
+  /* 表头区域 */
+  @include e(header) {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: $header-bg;
+    border-bottom: $hy-border-line;
+  }
+
+  /* 左固定表头 */
+  @include e(header--left) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    background-color: $header-bg;
+    z-index: 12;
+  }
+
+  /* 中间表头 */
+  @include e(header--center) {
+    display: flex;
+    flex: 1;
+    overflow-x: hidden;
+  }
+
+  /* 右固定表头 */
+  @include e(header--right) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    background-color: $header-bg;
+    z-index: 12;
+  }
+
+  /* 表头单元格 */
+  @include e(header__th) {
+    @include flex(center);
+    padding: 0 20rpx;
+    height: 88rpx;
+    box-sizing: border-box;
+    background-color: $header-bg;
+    font-size: 28rpx;
+    color: $header-text-color;
+    font-weight: bold;
+    border-bottom: $hy-border-line;
+    border-right: $hy-border-line;
+
+    &:last-child {
+      border-right: none;
     }
+  }
 
-    @include is(border) {
+  /* 表头文本 */
+  @include e(header__th--text) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+  }
 
-      /* 单元格通用样式 */
-      .hy-table__container__th,
-      .hy-table__container__td {
-        border-right: $hy-border-line;
+  /* 表头排序 */
+  @include e(header__th--sort) {
+    @include flex(column);
+    margin-left: 8rpx;
 
-        &:last-child {
-          border-right: none;
-        }
-      }
-    }
-
-    /* 斑马纹 */
-    @include m(stripe) {
-      .hy-table__container--tr:nth-child(even) {
-        background-color: $stripe-bg;
-      }
-    }
-
-    /* 表头样式 - 粘性定位 */
-    @include m(header) {
-      background-color: $header-bg;
-      font-weight: bold;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    /* 行样式 */
-    @include m(tr) {
-      @include flex();
-      border-bottom: $hy-border-line;
-      box-sizing: border-box;
+    .hy-icon {
+      color: $text-color;
+      opacity: 0.3;
+      margin-bottom: 2rpx;
 
       &:last-child {
-        border-bottom: none;
-      }
-    }
-
-    /* 单元格通用样式 */
-    @include e(th, td) {
-      padding: $hy-border-margin-padding-base;
-      display: flex;
-      align-items: center;
-      box-sizing: border-box;
-      font-size: 28rpx;
-      color: $text-color;
-    }
-
-    /* 单元格通用样式 */
-    @include e(th) {
-      color: $header-text-color;
-      font-size: 26rpx;
-      @include flex();
-      align-items: center;
-
-      @include m(text) {
-        @include lineEllipsis;
+        margin-bottom: 0;
       }
 
-      @include m(sort) {
-        @include flex(column);
-        margin-left: 8rpx;
-
-        :deep(.is-active) {
-          color: $hy-primary;
-        }
+      &.is-active {
+        color: $hy-primary;
+        opacity: 1;
       }
     }
+  }
 
-    @include e(td) {
-      @include m(ellipsis) {
-        @include lineEllipsis;
-      }
+  /* 内容区域 */
+  @include e(body) {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 内容包装器 */
+  @include e(body__wrapper) {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  /* 左固定内容 */
+  @include e(body--left) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: $hy-background--container;
+    z-index: 11;
+  }
+
+  /* 中间内容 */
+  @include e(body--center) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-x: hidden;
+  }
+
+  /* 右固定内容 */
+  @include e(body--right) {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: $hy-background--container;
+    z-index: 11;
+  }
+
+  /* 行 */
+  @include e(body__tr) {
+    @include flex(row);
+    box-sizing: border-box;
+    width: 100%;
+
+    &:nth-child(even) {
+      background-color: $stripe-bg;
     }
+  }
+
+  /* 单元格 */
+  @include e(body__td) {
+    @include flex(center);
+    padding: 0 20rpx;
+    height: 88rpx;
+    box-sizing: border-box;
+    font-size: 28rpx;
+    color: $text-color;
+    border-bottom: $hy-border-line;
+    border-right: $hy-border-line;
+
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  /* 省略号 */
+  @include e(body__td--ellipsis) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+  }
+
+  /* 加载状态 */
+  @include e(body--loading) {
+    min-height: 400rpx;
   }
 }

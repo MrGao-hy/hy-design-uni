@@ -177,7 +177,7 @@ const isShowClear = computed(() => {
 const inputClass = computed((): string => {
     let classes: string[] = [],
         { border, shape } = props
-    border === 'surround' && (classes = classes.concat(['hy-border', 'hy-input__radius']))
+    border === 'surround' && (classes = classes.concat(['hy-input__border', 'hy-input__radius']))
     classes.push(`hy-input__${shape}`)
     border === 'bottom' && (classes = classes.concat(['hy-border__bottom', 'hy-input__no-radius']))
     props.disabled && classes.push('hy-input__disabled')

@@ -13,6 +13,7 @@
     max-width: 600rpx;
     /* #endif */
     position: relative;
+    z-index: 10090;
 
     @include m(loading) {
       flex-direction: column;

@@ -1,5 +1,5 @@
 <template>
-    <view :class="['hy-popup', customClass]">
+    <view class="hy-popup">
         <hy-overlay
             :show="show"
             @click="overlayClick"
@@ -18,7 +18,7 @@
             @click="clickHandler"
         >
             <!-- @click.stop不能去除，去除会导致居中模式下点击内容区域触发关闭弹窗 -->
-            <view class="hy-popup__content" :style="[contentStyle]">
+            <view class="hy-popup__content" @tap.stop :style="[contentStyle, customClass]">
                 <slot></slot>
                 <view
                     v-if="closeable"
@@ -184,7 +184,7 @@ const afterEnter = () => {
     emit('open')
 }
 const clickHandler = () => {
-    // 由于中部弹出时，其u-transition占据了整个页面相当于遮罩，此时需要发出遮罩点击事件，是否无法通过点击遮罩关闭弹窗
+    // 由于中部弹出时，其transition占据了整个页面相当于遮罩，此时需要发出遮罩点击事件，是否无法通过点击遮罩关闭弹窗
     if (props.mode === 'center') {
         overlayClick()
     }

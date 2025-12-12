@@ -1,89 +1,174 @@
 <template>
     <view class="hy-table" :style="{ height: addUnit(height) }">
-        <!-- 表格容器 -->
-        <scroll-view class="hy-table__scroll" scroll-y>
-            <view
-                class="hy-table__container"
-                :class="{ 'is-border': border, 'hy-table__container--stripe': stripe }"
-            >
-                <!-- 表头 (Header) -->
-                <view
-                    class="hy-table__container--tr hy-table__container--header"
-                    :style="{ minWidth: totalMinWidth + 'px' }"
-                >
+        <!-- 主容器 -->
+        <view class="hy-table__container">
+            <!-- 表头区域 -->
+            <view class="hy-table__header">
+                <!-- 固定左列表头 -->
+                <view v-if="leftFixedColumns.length > 0" class="hy-table__header--left">
                     <view
-                        class="hy-table__container__th"
-                        v-for="(col, index) in columns"
+                        class="hy-table__header__th"
+                        v-for="(col, index) in leftFixedColumns"
                         :key="col.key || index"
                         :style="[getCellStyle(col, true)]"
                         @click="handleSort(col)"
                     >
-                        <text class="hy-table__container__th--text">{{ col.title }}</text>
-
+                        <text class="hy-table__header__th--text">{{ col.title }}</text>
                         <!-- 排序图标 -->
-                        <view v-if="col.sortable" class="hy-table__container__th--sort">
+                        <view v-if="col.sortable" class="hy-table__header__th--sort">
                             <hy-icon
                                 :name="IconConfig.ARROW_UP_FILL"
                                 size="10"
-                                :custom-class="
-                                    sortKey === col.key && sortType === 'asc' ? 'is-active' : ''
-                                "
+                                :custom-class="sortKey === col.key && sortType === 'asc' ? 'is-active' : ''"
                             />
                             <hy-icon
                                 :name="IconConfig.ARROW_DOWN_FILL"
                                 size="10"
-                                :custom-class="
-                                    sortKey === col.key && sortType === 'desc' ? 'is-active' : ''
-                                "
+                                :custom-class="sortKey === col.key && sortType === 'desc' ? 'is-active' : ''"
                             />
                         </view>
                     </view>
                 </view>
-
-                <!-- 表格内容 (Body) -->
-                <view v-if="!loading && tableData.length > 0" class="uni-table-body">
+                <!-- 中间表头 -->
+                <view class="hy-table__header--center" :style="{ paddingLeft: `${leftFixedWidth}px`, paddingRight: `${rightFixedWidth}px` }">
                     <view
-                        class="hy-table__container--tr"
-                        v-for="(row, rowIndex) in tableData"
-                        :key="row[rowKey] || rowIndex"
-                        :style="{ minWidth: totalMinWidth + 'px' }"
-                        @click="handleRowClick(row, rowIndex)"
+                        class="hy-table__header__th"
+                        v-for="(col, index) in scrollColumns"
+                        :key="col.key || index"
+                        :style="[getCellStyle(col, true)]"
+                        @click="handleSort(col)"
                     >
-                        <view
-                            class="hy-table__container__td"
-                            v-for="(col, colIndex) in columns"
-                            :key="col.key || colIndex"
-                            :style="[getCellStyle(col, false)]"
-                            @click.stop="handleCellClick(row, col)"
-                        >
-                            <!-- 核心改动：默认作用域插槽，暴露 row, col, index -->
-                            <slot name="default" :row="row" :col="col" :index="rowIndex">
-                                <!-- 默认渲染逻辑（支持省略号） -->
-                                <text
-                                    :class="{ 'hy-table__container__td--ellipsis': col.ellipsis }"
-                                    >{{ row[col.key] }}</text
-                                >
-                            </slot>
+                        <text class="hy-table__header__th--text">{{ col.title }}</text>
+                        <!-- 排序图标 -->
+                        <view v-if="col.sortable" class="hy-table__header__th--sort">
+                            <hy-icon
+                                :name="IconConfig.ARROW_UP_FILL"
+                                size="10"
+                                :custom-class="sortKey === col.key && sortType === 'asc' ? 'is-active' : ''"
+                            />
+                            <hy-icon
+                                :name="IconConfig.ARROW_DOWN_FILL"
+                                size="10"
+                                :custom-class="sortKey === col.key && sortType === 'desc' ? 'is-active' : ''"
+                            />
                         </view>
                     </view>
                 </view>
-
+                <!-- 固定右列表头 -->
+                <view v-if="rightFixedColumns.length > 0" class="hy-table__header--right">
+                    <view
+                        class="hy-table__header__th"
+                        v-for="(col, index) in rightFixedColumns"
+                        :key="col.key || index"
+                        :style="[getCellStyle(col, true)]"
+                        @click="handleSort(col)"
+                    >
+                        <text class="hy-table__header__th--text">{{ col.title }}</text>
+                        <!-- 排序图标 -->
+                        <view v-if="col.sortable" class="hy-table__header__th--sort">
+                            <hy-icon
+                                :name="IconConfig.ARROW_UP_FILL"
+                                size="10"
+                                :custom-class="sortKey === col.key && sortType === 'asc' ? 'is-active' : ''"
+                            />
+                            <hy-icon
+                                :name="IconConfig.ARROW_DOWN_FILL"
+                                size="10"
+                                :custom-class="sortKey === col.key && sortType === 'desc' ? 'is-active' : ''"
+                            />
+                        </view>
+                    </view>
+                </view>
+            </view>
+            
+            <!-- 内容区域 -->
+            <scroll-view 
+                class="hy-table__body"
+                scroll-y
+                :scroll-top="scrollTop"
+                @scroll="handleScroll"
+            >
+                <!-- 内容包装器 -->
+                <view class="hy-table__body__wrapper">
+                    <!-- 固定左列内容 -->
+                    <view v-if="leftFixedColumns.length > 0" class="hy-table__body--left">
+                        <view
+                            class="hy-table__body__tr"
+                            v-for="(row, rowIndex) in tableData"
+                            :key="`left-${row[rowKey] || rowIndex}`"
+                        >
+                            <view
+                                class="hy-table__body__td"
+                                v-for="(col, colIndex) in leftFixedColumns"
+                                :key="col.key || colIndex"
+                                :style="[getCellStyle(col, false)]"
+                                @click.stop="handleCellClick(row, col)"
+                            >
+                                <slot name="default" :row="row" :col="col" :index="rowIndex">
+                                    <text :class="{ 'hy-table__body__td--ellipsis': col.ellipsis }">{{ row[col.key] }}</text>
+                                </slot>
+                            </view>
+                        </view>
+                    </view>
+                    <!-- 中间内容 -->
+                    <view class="hy-table__body--center" :style="{ paddingLeft: `${leftFixedWidth}px`, paddingRight: `${rightFixedWidth}px` }">
+                        <view
+                            class="hy-table__body__tr"
+                            v-for="(row, rowIndex) in tableData"
+                            :key="row[rowKey] || rowIndex"
+                            @click="handleRowClick(row, rowIndex)"
+                        >
+                            <view
+                                class="hy-table__body__td"
+                                v-for="(col, colIndex) in scrollColumns"
+                                :key="col.key || colIndex"
+                                :style="[getCellStyle(col, false)]"
+                                @click.stop="handleCellClick(row, col)"
+                            >
+                                <slot name="default" :row="row" :col="col" :index="rowIndex">
+                                    <text :class="{ 'hy-table__body__td--ellipsis': col.ellipsis }">{{ row[col.key] }}</text>
+                                </slot>
+                            </view>
+                        </view>
+                    </view>
+                    <!-- 固定右列内容 -->
+                    <view v-if="rightFixedColumns.length > 0" class="hy-table__body--right">
+                        <view
+                            class="hy-table__body__tr"
+                            v-for="(row, rowIndex) in tableData"
+                            :key="`right-${row[rowKey] || rowIndex}`"
+                        >
+                            <view
+                                class="hy-table__body__td"
+                                v-for="(col, colIndex) in rightFixedColumns"
+                                :key="col.key || colIndex"
+                                :style="[getCellStyle(col, false)]"
+                                @click.stop="handleCellClick(row, col)"
+                            >
+                                <slot name="default" :row="row" :col="col" :index="rowIndex">
+                                    <text :class="{ 'hy-table__body__td--ellipsis': col.ellipsis }">{{ row[col.key] }}</text>
+                                </slot>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                
                 <!-- 空状态 -->
                 <hy-empty
-                    :show="!loading && tableData.length === 0"
+                    v-if="!loading && tableData.length === 0"
                     :description="emptyText"
                 ></hy-empty>
-
+                
                 <!-- 加载状态 -->
                 <hy-loading
-                    :show="loading"
+                    v-if="loading"
                     text="加载中..."
                     mode="circle"
                     direction="column"
-                    custom-class="hy-table__container--loading"
+                    custom-class="hy-table__body--loading"
                 ></hy-loading>
-            </view>
-        </scroll-view>
+            </scroll-view>
+        </view>
     </view>
 </template>
 
@@ -121,6 +206,7 @@ const emit = defineEmits<ITableEmits>()
 const sortKey = ref<string>('')
 const sortType = ref<SortType>('normal')
 const tableData = ref<any[]>([]) // 内部维护的数据，用于排序展示
+const scrollTop = ref<number>(0) // 滚动位置，用于控制表头定位
 
 // --- 监听数据变化 ---
 watch(
@@ -135,16 +221,54 @@ watch(
     { immediate: true, deep: true }
 )
 
+// --- 计算固定列和滚动列 ---
+const leftFixedColumns = computed(() => {
+    return props.columns.filter(col => col.fixed === 'left')
+})
+
+const rightFixedColumns = computed(() => {
+    return props.columns.filter(col => col.fixed === 'right')
+})
+
+const scrollColumns = computed(() => {
+    return props.columns.filter(col => !col.fixed)
+})
+
+// --- 计算固定列总宽度 ---
+const leftFixedWidth = computed(() => {
+    let width = 0
+    leftFixedColumns.value.forEach(col => {
+        const w = parseInt(String(col.width || 100))
+        width += w
+    })
+    return width
+})
+
+const rightFixedWidth = computed(() => {
+    let width = 0
+    rightFixedColumns.value.forEach(col => {
+        const w = parseInt(String(col.width || 100))
+        width += w
+    })
+    return width
+})
+
 // --- 计算总宽度 (用于 scroll-view 横向滚动) ---
 const totalMinWidth = computed(() => {
     let width = 0
-    props.columns.forEach((col) => {
+    scrollColumns.value.forEach((col) => {
         // 简单估算：如果有明确宽度则累加，否则给个默认值 100
         const w = parseInt(String(col.width || 100))
         width += w
     })
     return width
 })
+
+// --- 事件处理 ---
+// 处理滚动事件
+const handleScroll = (e: any) => {
+    scrollTop.value = e.detail.scrollTop
+}
 
 // --- 样式计算 ---
 const getCellStyle = (col: ITableColumn, isHeader: boolean) => {

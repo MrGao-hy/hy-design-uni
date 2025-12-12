@@ -44,7 +44,7 @@
                         </text>
                     </view>
                 </view>
-                <view class="hy-card__head--right" v-if="subTitle">
+                <view class="hy-card__head--right" v-if="rightText">
                     <text
                         class="hy-card__head--right__text"
                         :style="{

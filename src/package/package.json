@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.8",
-  "description": "feat: 新增rollingNum组件",
+  "version": "0.5.10",
+  "description": "fix: 修复输入框组件边框在pda不显示的问题",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

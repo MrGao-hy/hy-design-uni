@@ -1,8 +1,8 @@
 <template>
     <view class="hy-check-button">
         <template v-for="(item, i) in columns_1" :key="i">
-            <HyTag
-                :text="item?.[fieldNames.label] as string"
+            <hy-tag
+                :text="item?.[fieldNames.label]"
                 :name="i"
                 :type="type"
                 :size="size"
@@ -10,7 +10,7 @@
                 :disabled="isDisabled(item.disabled)"
                 :plain="!item?.[fieldNames.checked]"
                 @click="onCheckbox"
-            ></HyTag>
+            ></hy-tag>
         </template>
     </view>
 </template>
