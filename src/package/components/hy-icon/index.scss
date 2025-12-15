@@ -66,9 +66,6 @@
 
   @include e(label) {
     @include lineEllipsis;
-    /* #ifndef APP-NVUE */
-    line-height: 1;
-    /* #endif */
     color: $hy-text-color--grey;
     font-size: $hy-font-size-sm;
     max-width: 150rpx;
