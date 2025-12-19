@@ -20,9 +20,13 @@ export enum FormTypeEnum {
      * */
     TEXT = 'text',
     /**
-     * 数字输入框
+     * 数字输入框，整数
      * */
     NUMBER = 'number',
+    /**
+     * 数字输入框，带有小数点
+     * */
+    DIGIT = 'digit',
     /**
      * 密码输入框
      * */

@@ -17,7 +17,7 @@
             </view>
             <text
                 :class="[
-                    'hy-toast__content--text',
+                    'hy-toast__content--test',
                     !tmpConfig.icon ? `hy-toast__content--text__${tmpConfig.type}` : ''
                 ]"
             >

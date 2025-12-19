@@ -63,7 +63,7 @@ const columns: Partial<FormColumnsType>[] = reactive([
         label: '名字（测试）',
         type: FormTypeEnum.TEXT,
         input: {
-            onChange: (value: number) => {
+            onChange: (value: string) => {
                 uni.showToast({ title: value, icon: 'none' })
             }
         },
@@ -83,8 +83,7 @@ const columns: Partial<FormColumnsType>[] = reactive([
         ],
         rules: {
             required: true,
-            message: '没有填内容',
-            trigger: ['blur', 'change']
+            message: '没有填内容'
         }
     },
     {

@@ -16,7 +16,13 @@
         <view class="hy-title">限制输入金额格式</view>
         <view class="hy-container">
             {{ value3 }}
-            <hy-input v-model="value3" type="digit" clearable @change="onChange"></hy-input>
+            <hy-input
+                v-model="value3"
+                type="digit"
+                maxlength="999"
+                clearable
+                @change="onChange"
+            ></hy-input>
         </view>
 
         <view class="hy-title">清空按钮</view>

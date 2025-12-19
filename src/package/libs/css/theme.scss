@@ -93,4 +93,5 @@ $hy-border-margin-padding-sm: var(--hy-border-margin-padding-sm, 10rpx) !default
 $hy-border-margin-padding-base: var(--hy-border-margin-padding-base, 20rpx) !default;
 $hy-border-margin-padding-lg: var(--hy-border-margin-padding-lg, 30rpx) !default;
 /* 底部线条 */
+/* TODO: 边框不能写1rpx否则在某些机型无法显示 */
 $hy-border-line: var(--hy-border-line, 1px solid #e8e8e8) !default;

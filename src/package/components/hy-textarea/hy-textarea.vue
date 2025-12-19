@@ -4,7 +4,7 @@
         :style="[textareaStyle, borderStyle(isFocus)]"
     >
         <textarea
-            :class="['hy-textarea__field', disabled && 'hy-textarea__disabled-text']"
+            :class="['hy-textarea__field', disabled && 'hy-textarea__disabled-test']"
             :value="innerValue"
             :style="`height: ${autoHeight ? 'auto' : addUnit(height)}`"
             :placeholder="placeholder || ''"
@@ -111,7 +111,8 @@ watch(
 // 组件的类名
 const textareaClass = computed(() => {
     let classes: string[] = []
-    props.border === 'surround' && (classes = classes.concat(['hy-textarea__border', 'hy-textarea__radius']))
+    props.border === 'surround' &&
+        (classes = classes.concat(['hy-textarea__border', 'hy-textarea__radius']))
     props.border === 'bottom' &&
         (classes = classes.concat(['hy-border__bottom', 'hy-textarea__no-radius']))
     props.disabled && classes.push('hy-textarea__disabled')

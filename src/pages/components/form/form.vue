@@ -163,17 +163,7 @@ const rules: FormItemRule = {
             trigger: ['change']
         }
     ],
-    age: [
-        {
-            validator: (value: string) => {
-                if (value && (Number(value) < 1 || Number(value) > 120)) {
-                    return '年龄必须在 1-120 之间'
-                }
-                return true
-            },
-            trigger: ['change']
-        }
-    ]
+    gender: { required: true, message: '请输入用户名' }
 }
 
 // 选项数据

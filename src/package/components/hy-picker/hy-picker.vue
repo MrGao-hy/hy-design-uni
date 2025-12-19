@@ -218,11 +218,13 @@ const inputLabelValue = computed((): string => {
         innerColumns.value.map((ite, i) => {
             res.push(
                 ...innerColumns.value[i]?.filter((item) => {
-                    return isArray(props.modelValue) && props.modelValue.includes(item['id'])
+                    return (
+                        isArray(props.modelValue) && props.modelValue.includes(item[props.valueKey])
+                    )
                 })
             )
         })
-        res = res.map((item) => item[props.keyName])
+        res = res.map((item) => item[props.labelKey])
         return res.join(props.separator)
     } else {
         //用户确定的值，才显示到输入框
@@ -243,7 +245,7 @@ const inputValue = computed(() => {
     if (items[0] && Object.prototype.toString.call(items[0]) === '[object Object]') {
         //对象数组返回id集合
         items.forEach((element) => {
-            res.push(element && element['id'])
+            res.push(element && element[props.valueKey])
         })
     } else {
         //非对象数组返回元素集合
@@ -267,8 +269,8 @@ const onShowByClickInput = () => {
  * 获取item需要显示的文字，判别为对象还是文本
  * */
 const getItemText = (item: any) => {
-    if (Object.prototype.toString.call(item) === '[object Object]' && props.keyName) {
-        return item[props.keyName]
+    if (Object.prototype.toString.call(item) === '[object Object]' && props.labelKey) {
+        return item[props.labelKey]
     } else {
         return item
     }

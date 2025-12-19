@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.10",
-  "description": "fix: 修复输入框组件边框在pda不显示的问题",
+  "version": "0.5.11",
+  "description": "fix: picker添加键值对",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

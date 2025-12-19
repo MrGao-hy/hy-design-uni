@@ -13,7 +13,7 @@
             }
         },
         {
-            "path": "pages/text/Index",
+            "path": "pages/test/Index",
             "style": {
                 "navigationBarTitleText": "测试模板"
             }

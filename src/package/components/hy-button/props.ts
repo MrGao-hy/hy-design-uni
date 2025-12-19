@@ -129,6 +129,14 @@ const buttonProps = {
     stop: {
         type: Boolean,
         default: true
+    },
+    /**
+     * 在支付宝小程序使用，当 open-type 为 getAuthorize 时有效。
+     * @values userInfo,phoneNumber
+     * */
+    scope: {
+        type: String,
+        default: ''
     }
 }
 

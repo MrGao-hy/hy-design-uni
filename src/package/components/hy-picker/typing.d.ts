@@ -1,12 +1,16 @@
-export interface PickerColumnVo extends AnyObject {
+export interface PickerColumnVo {
     /**
-     * @description id必填
+     * value必填,回填根据这个值判断
      * */
-    id: string
+    value: string | number
     /**
-     * @description 显示文本
+     * 显示文本
      * */
-    text?: string
+    label?: string
+    /**
+     * 任意数据
+     * */
+    [key: string]: any
 }
 
 export type SelectValueVo = {

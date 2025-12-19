@@ -77,7 +77,7 @@ const couponProps = {
     },
     /**
      * 按钮类型
-     * @values text,button,none
+     * @values test,button,none
      * */
     btnMode: {
         type: String,

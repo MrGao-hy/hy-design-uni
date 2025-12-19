@@ -10,7 +10,7 @@ const inputProps = {
     },
     /**
      * 输入框类型，见上方说明
-     * @values text,idcard,number,digit,safe-password,tel,nickname
+     * @values test,idcard,number,digit,safe-password,tel,nickname
      * */
     type: {
         type: String,
@@ -41,7 +41,7 @@ const inputProps = {
         type: Boolean,
         default: false
     },
-    /** 最大输入长度，设置为 -1 的时候不限制最大长度  */
+    /** 最大输入长度，设置为 -1 的时候不限制最大长度(注：支付宝不支持-1，需要设置其他任意值)  */
     maxlength: {
         type: Number,
         default: -1
@@ -58,7 +58,7 @@ const inputProps = {
         type: Object as PropType<CSSProperties>,
         default: () => ({})
     },
-    /** 是否显示输入字数统计，只在 type ="text"或type ="textarea"时有效 */
+    /** 是否显示输入字数统计，只在 type ="test"或type ="textarea"时有效 */
     showWordLimit: {
         type: Boolean,
         default: false

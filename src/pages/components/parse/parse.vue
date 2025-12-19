@@ -1,19 +1,19 @@
 <template>
     <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title">基础使用</view>
-        <hy-parse
-            :content="parseContent"
-            :tag-style="tagStyle"
-            lazy-load
-            scroll-table
-            selectable
-            use-anchor
-        ></hy-parse>
+        <!--        <hy-parse-->
+        <!--            :content="parseContent"-->
+        <!--            :tag-style="tagStyle"-->
+        <!--            lazy-load-->
+        <!--            scroll-table-->
+        <!--            selectable-->
+        <!--            use-anchor-->
+        <!--        ></hy-parse>-->
     </hy-config-provider>
 </template>
 
 <script setup lang="ts">
-import HyParse from '@/package/components/hy-parse/hy-parse.vue'
+// import HyParse from '@/package/components/hy-parse/hy-parse.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import parseContent from './content.js'
 import { useThemeStore } from '@/store'

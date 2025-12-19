@@ -5,17 +5,19 @@
         :hover-stay-time="Number(hoverStayTime)"
         :form-type="formType"
         :open-type="openType"
+        :lang="lang"
+        :scope="scope"
+        :data-name="dataName"
         :app-parameter="appParameter"
         :hover-stop-propagation="hoverStopPropagation"
         :send-message-title="sendMessageTitle"
         :send-message-path="sendMessagePath"
-        :lang="lang"
-        :data-name="dataName"
         :session-from="sessionFrom"
         :send-message-img="sendMessageImg"
         :show-message-card="showMessageCard"
         @getphonenumber="getphonenumber"
         @getuserinfo="getuserinfo"
+        @getAuthorize="getAuthorize"
         @error="error"
         @opensetting="opensetting"
         @launchapp="launchapp"
@@ -227,7 +229,7 @@ const nvueTextStyle = computed((): CSSProperties => {
     return style
 })
 /**
- * @description 字体大小
+ * 字体大小
  * */
 const textSize = computed((): number => {
     let fontSize = 14
@@ -248,6 +250,18 @@ const clickHandler = (e: any) => {
     }
     // 是否阻止事件传播
     props.stop && e.stopPropagation()
+}
+
+/**
+ * 支付宝小程序授权
+ * @param e
+ */
+function getAuthorize(e: any) {
+    if (props.scope === 'phoneNumber') {
+        getphonenumber(e)
+    } else if (props.scope === 'userInfo') {
+        getuserinfo(e)
+    }
 }
 
 const getphonenumber = (e: any) => {

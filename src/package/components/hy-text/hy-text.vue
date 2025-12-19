@@ -1,5 +1,5 @@
 <template>
-    <view :class="['hy-text', customClass]" v-if="show" :style="wrapStyle" @tap="clickHandler">
+    <view :class="['hy-test', customClass]" v-if="show" :style="wrapStyle" @tap="clickHandler">
         <text
             :class="['hy-text__price', type && `hy-text__value--${type}`]"
             v-if="mode === 'price'"
@@ -85,7 +85,7 @@ import HyIcon from '../hy-icon/hy-icon.vue'
 
 /**
  * 此组件集成了文本类在项目中的常用功能，包括状态，拨打电话，格式化日期，*替换，超链接...等功能。 您大可不必在使用特殊文本时自己定义，text组件几乎涵盖您能使用的大部分场景。
- * @displayName hy-text
+ * @displayName hy-test
  */
 defineOptions({})
 
@@ -152,7 +152,7 @@ const value = computed(() => {
             return formatTime(props.text, 'yyyy-MM-dd')
         case 'phone':
             // 判断是否合法的手机号
-            // !test.mobile(text) && error('手机号模式下，text参数需要为手机号码格式')
+            // !test.mobile(test) && error('手机号模式下，text参数需要为手机号码格式')
             if (typeof props.format === 'function') {
                 // 如果用户传入的是函数，使用函数格式化
                 return props.format(props.text)

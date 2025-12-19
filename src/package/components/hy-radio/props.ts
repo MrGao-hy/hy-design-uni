@@ -36,7 +36,7 @@ const radioProps = {
      * */
     shape: {
         type: String,
-        default: 'square'
+        default: 'circle'
     },
     /** 是否禁用 */
     disabled: {

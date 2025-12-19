@@ -23,7 +23,7 @@ const textProps = {
     suffixIcon: String,
     /**
      * 文本处理的匹配模式
-     * @values text,price,phone,name,date,link
+     * @values test,price,phone,name,date,link
      * */
     mode: {
         type: String,

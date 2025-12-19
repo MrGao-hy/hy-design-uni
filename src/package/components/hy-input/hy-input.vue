@@ -34,7 +34,7 @@
                     ref="input-native"
                     :class="[
                         'hy-input__content--field-wrapper__field',
-                        disabled && 'hy-input__disabled-text'
+                        disabled && 'hy-input__disabled-test'
                     ]"
                     :style="[inputStyle]"
                     :type="type"

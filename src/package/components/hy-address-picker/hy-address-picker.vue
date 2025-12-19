@@ -32,7 +32,7 @@
             :columns="columns"
             :defaultIndex="defaultIndex"
             :title="title"
-            keyName="name"
+            label-key="name"
             :itemHeight="itemHeight"
             :loading="loading"
             :showToolbar="showToolbar"

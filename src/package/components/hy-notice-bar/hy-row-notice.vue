@@ -59,7 +59,7 @@ watch(
         // 进行一定的延时
         await sleep()
         // 查询盒子和文字的宽度
-        textWidth = (await getRect('.hy-notice__content--text', false, instance)).width
+        textWidth = (await getRect('.hy-notice__content--test', false, instance)).width
         boxWidth = (await getRect('.hy-notice__content', false, instance)).width
         // 根据t=s/v(时间=路程/速度)，这里为何不需要加上#u-notice-box的宽度，因为中设置了.u-notice-content样式中设置了padding-left: 100%
         // 恰巧计算出来的结果中已经包含了#u-notice-box的宽度

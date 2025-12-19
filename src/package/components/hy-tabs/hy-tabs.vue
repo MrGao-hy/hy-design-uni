@@ -42,7 +42,7 @@
                             <text
                                 v-else
                                 :class="[
-                                    'hy-tabs__wrapper--nav__item--text',
+                                    'hy-tabs__wrapper--nav__item--test',
                                     item.disabled && 'hy-tabs__wrapper--nav__item--text__disabled'
                                 ]"
                                 :style="[textStyle(index)]"

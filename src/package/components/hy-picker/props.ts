@@ -68,9 +68,14 @@ const pickerProps = {
         default: 5
     },
     /** 显示到选项对象中，需要展示的属性键名 */
-    keyName: {
+    labelKey: {
         type: String,
-        default: 'text'
+        default: 'label'
+    },
+    /** 显示到选项对象中，需要展示的属性键名 */
+    valueKey: {
+        type: String,
+        default: 'value'
     },
     /** 是否允许点击遮罩关闭选择器 */
     closeOnClickOverlay: {

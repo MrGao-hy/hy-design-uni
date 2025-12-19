@@ -46,6 +46,7 @@ import HyPicker from '@/package/components/hy-picker/hy-picker.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
+import type { PickerColumnVo } from '@/package/components/hy-picker/typing'
 const themeStore = useThemeStore()
 
 const { color, darkMode } = storeToRefs(themeStore)
@@ -54,7 +55,18 @@ const value = ref('')
 const value_2 = ref('欧元，票子')
 const value_3 = ref('')
 const pickerRef = ref()
-const columns: string[][] = reactive([['西瓜', '香蕉', '苹果']])
+const columns: PickerColumnVo[][] = reactive([
+    [
+        {
+            label: '雪月夜',
+            value: 2021
+        },
+        {
+            label: '冷夜雨',
+            value: 804
+        }
+    ]
+])
 
 const columns_2: string[][] = reactive([
     ['欧元', '美元'],
