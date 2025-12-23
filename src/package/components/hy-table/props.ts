@@ -15,14 +15,19 @@ const tableProps = {
     /** 表格高度，如 '500rpx' */
     height: {
         type: [String, Number],
-        default: 'auto'
+        default: 400
+    },
+    /** 行高，如 '500rpx' */
+    rowHeight: {
+        type: [String, Number],
+        default: 50
     },
     /** 是否斑马纹 */
     stripe: {
         type: Boolean,
         default: false
     },
-    /** 是否带有纵向边框 */
+    /** 是否带有横向边框 */
     border: {
         type: Boolean,
         default: true
@@ -32,15 +37,25 @@ const tableProps = {
         type: Boolean,
         default: false
     },
-    /** 空数据提示 */
-    emptyText: {
-        type: String,
-        default: '暂无数据'
-    },
     /** 行数据的唯一键名 */
     rowKey: {
         type: String,
         default: 'id'
+    },
+    /** 显示表头 */
+    showHeader: {
+        type: Boolean,
+        default: true
+    },
+    /** 空状态的图片 */
+    emptyUrl: {
+        type: String,
+        default: ''
+    },
+    /** 空状态的描述 */
+    emptyDes: {
+        type: String,
+        default: ''
     }
 }
 

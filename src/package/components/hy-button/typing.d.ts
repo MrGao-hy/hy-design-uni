@@ -1,3 +1,8 @@
+import type { ExtractPropTypes } from 'vue'
+import type buttonProps from './props'
+
+export interface HyButtonProps extends ExtractPropTypes<typeof buttonProps> {}
+
 export interface IButtonEmits {
     /**
      * 点击按钮事件

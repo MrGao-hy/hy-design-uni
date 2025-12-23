@@ -1,6 +1,3 @@
-// 内部使用方法
-import { inject } from 'vue'
-
 /**
  * 生成bem规则类名
  * 由于微信小程序，H5，nvue之间绑定class的差异，无法通过:class="[bem()]"的形式进行同用
@@ -45,21 +42,6 @@ export const bem = (
 }
 
 /**
- * @description 在u-form的子组件内容发生变化，或者失去焦点时，尝试通知u-form执行校验方法
- * @param {*} instance
- * @param {*} event
- */
-export function formValidate(event) {
-    // const formItem = $parent.call(instance, "u-form-item");
-    const form = inject('uForm')
-    // 如果发生变化的input或者textarea等，其父组件中有u-form-item或者u-form等，就执行form的validate方法
-    // 同时将form-item的pros传递给form，让其进行精确对象验证
-    // if (formItem && form) {
-    //   form.validateField(formItem.prop, () => {}, event);
-    // }
-}
-
-/**
  * @description error提示
  * @param {*} err 错误内容
  */
@@ -70,7 +52,11 @@ export function error(err: string) {
     }
 }
 
-export const sleep = (value = 100) => {
+/**
+ * 定时器同步执行，等待时间
+ * @param {Number} value 等待时间
+ */
+export const sleep = (value: number = 100) => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(null)
@@ -80,10 +66,10 @@ export const sleep = (value = 100) => {
 
 /**
  * @param {Number} len uuid的长度
- * @param {Boolean} firstU 将返回的首字母置为"u"
- * @param {Nubmer} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
+ * @param {Boolean} firstU 将返回的首字母置为"hy"
+ * @param {Number | Null} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
  */
-export function guid(len = 32, firstU = true, radix = null) {
+export function guid(len: number = 32, firstU: boolean = true, radix: number | null = null) {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
     const uuid = []
     radix = radix || chars.length
@@ -304,9 +290,9 @@ export function chooseFile({
  */
 export function priceFormat(
     number: string | number,
-    decimals = 0,
-    decimalPoint = '.',
-    thousandsSeparator = ','
+    decimals: number = 0,
+    decimalPoint: string = '.',
+    thousandsSeparator: string = ','
 ) {
     number = `${number}`.replace(/[^0-9+-Ee.]/g, '')
     const n = !isFinite(+number) ? 0 : +number

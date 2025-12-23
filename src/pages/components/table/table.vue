@@ -2,20 +2,24 @@
     <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">省略号</view>
-            <hy-table height="300" :data="tableData" :columns="columns" stripe></hy-table>
+            <hy-table height="300" :data="tableData" :columns="columns"></hy-table>
         </view>
 
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">插槽</view>
-            <hy-table :data="tableData" :columns="columns" stripe>
-                <template v-slot:default="{ row, col }">
-                    <view v-if="col.key === 'action'">
-                        <hy-switch
-                            v-model="row.status"
-                            :activeValue="1"
-                            :inactiveValue="0"
-                        ></hy-switch>
-                    </view>
+            <hy-table :data="tableData" :columns="columns2" stripe>
+                <!-- 自定义操作列 -->
+                <template #right="{ row, col, index }">
+                    <hy-flex v-if="col.key === 'action'" gap="2">
+                        <hy-button text="编辑" size="mini" plain :border="false"></hy-button>
+                        <hy-button
+                            type="error"
+                            size="mini"
+                            text="删除"
+                            plain
+                            :border="false"
+                        ></hy-button>
+                    </hy-flex>
                     <text v-else>{{ row[col.key] }}</text>
                 </template>
             </hy-table>
@@ -23,24 +27,37 @@
 
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">空状态</view>
-            <hy-table :data="[]" :columns="columns" stripe></hy-table>
+            <hy-table :data="[]" :columns="columns"></hy-table>
         </view>
     </hy-config-provider>
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue'
-import HyTable from '@/package/components/hy-table/hy-table.vue'
-import HySwitch from '@/package/components/hy-switch/hy-switch.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
+
+import HyTable from '@/package/components/hy-table/hy-table.vue'
+import HyFlex from '@/package/components/hy-flex/hy-flex.vue'
+import HyButton from '@/package/components/hy-button/hy-button.vue'
+import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 
 const themeStore = useThemeStore()
 
 const { color, darkMode } = storeToRefs(themeStore)
 const columns = reactive([
-    { title: 'ID', key: 'id', width: 80, fixed: 'left', align: 'center' },
-    { title: '姓名', key: 'name', width: 120, fixed: 'left' },
+    { title: 'ID', key: 'id', width: 40, fixed: 'left', align: 'center' },
+    { title: '姓名', key: 'name', width: 80, fixed: 'left' },
+    { title: '性别', key: 'sex', width: 80 },
+    { title: '年龄', key: 'age', width: 80, sortable: true },
+    { title: '邮箱', key: 'email', width: 200, ellipsis: true },
+    { title: '地址', key: 'address', width: 300, ellipsis: true },
+    { title: '电话', key: 'phone', width: 150, ellipsis: true },
+    { title: '公司', key: 'company', width: 150, ellipsis: true },
+    { title: '职位', key: 'position', width: 150, ellipsis: true }
+])
+const columns2 = reactive([
+    { title: 'ID', key: 'id', width: 40, fixed: 'left', align: 'center' },
+    { title: '姓名', key: 'name', width: 80, fixed: 'left' },
     { title: '性别', key: 'sex', width: 80 },
     { title: '年龄', key: 'age', width: 80, sortable: true },
     { title: '邮箱', key: 'email', width: 200, ellipsis: true },
@@ -48,7 +65,7 @@ const columns = reactive([
     { title: '电话', key: 'phone', width: 150, ellipsis: true },
     { title: '公司', key: 'company', width: 150, ellipsis: true },
     { title: '职位', key: 'position', width: 150, ellipsis: true },
-    { title: '操作', key: 'action', width: 120, fixed: 'right', align: 'center' }
+    { title: '操作', key: 'action', width: 100, fixed: 'right' }
 ])
 const tableData = reactive([
     {
@@ -221,3 +238,9 @@ const tableData = reactive([
     }
 ])
 </script>
+
+<style lang="scss" scoped>
+:deep(.hy-button) {
+    min-width: 30px;
+}
+</style>

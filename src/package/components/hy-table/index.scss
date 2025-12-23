@@ -1,197 +1,172 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
-/* 变量定义 */
-$border-color: #ebeef5;
-$header-bg: $hy-background--table-header;
-$text-color: #606266;
 $header-text-color: #909399;
 $stripe-bg: $hy-background--table-header;
-$hover-bg: #f5f7fa;
-
-/*#1d1d1d*/
 
 @include b(table) {
-  width: 100%;
-  background-color: $hy-background--container;
-  border: $hy-border-line;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border: $hy-border-line;
+  @include flex(column);
 
-  @include e(container) {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-  }
-
-  /* 表头区域 */
+  /* 表格头部 */
   @include e(header) {
-    display: flex;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background-color: $header-bg;
-    border-bottom: $hy-border-line;
-  }
-
-  /* 左固定表头 */
-  @include e(header--left) {
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: flex;
-    background-color: $header-bg;
-    z-index: 12;
-  }
-
-  /* 中间表头 */
-  @include e(header--center) {
-    display: flex;
-    flex: 1;
-    overflow-x: hidden;
-  }
-
-  /* 右固定表头 */
-  @include e(header--right) {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: flex;
-    background-color: $header-bg;
-    z-index: 12;
-  }
-
-  /* 表头单元格 */
-  @include e(header__th) {
-    @include flex(center);
-    padding: 0 20rpx;
-    height: 88rpx;
-    box-sizing: border-box;
-    background-color: $header-bg;
-    font-size: 28rpx;
-    color: $header-text-color;
-    font-weight: bold;
-    border-bottom: $hy-border-line;
-    border-right: $hy-border-line;
-
-    &:last-child {
-      border-right: none;
-    }
-  }
-
-  /* 表头文本 */
-  @include e(header__th--text) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
-  }
-
-  /* 表头排序 */
-  @include e(header__th--sort) {
-    @include flex(column);
-    margin-left: 8rpx;
-
-    .hy-icon {
-      color: $text-color;
-      opacity: 0.3;
-      margin-bottom: 2rpx;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-      &.is-active {
-        color: $hy-primary;
-        opacity: 1;
-      }
-    }
-  }
-
-  /* 内容区域 */
-  @include e(body) {
-    flex: 1;
-    overflow-y: auto;
     position: relative;
-    z-index: 1;
-  }
-
-  /* 内容包装器 */
-  @include e(body__wrapper) {
-    display: flex;
-    width: 100%;
-    min-height: 100%;
-  }
-
-  /* 左固定内容 */
-  @include e(body--left) {
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    background-color: $hy-background--container;
-    z-index: 11;
-  }
-
-  /* 中间内容 */
-  @include e(body--center) {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    overflow-x: hidden;
-  }
-
-  /* 右固定内容 */
-  @include e(body--right) {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    background-color: $hy-background--container;
-    z-index: 11;
-  }
-
-  /* 行 */
-  @include e(body__tr) {
-    @include flex(row);
-    box-sizing: border-box;
-    width: 100%;
-
-    &:nth-child(even) {
-      background-color: $stripe-bg;
-    }
-  }
-
-  /* 单元格 */
-  @include e(body__td) {
-    @include flex(center);
-    padding: 0 20rpx;
-    height: 88rpx;
-    box-sizing: border-box;
-    font-size: 28rpx;
-    color: $text-color;
+    z-index: 10;
     border-bottom: $hy-border-line;
-    border-right: $hy-border-line;
 
-    &:last-child {
-      border-right: none;
+    @include m(scroll) {
+      width: 100%;
+      height: 50px;
+      white-space: nowrap;
+    }
+
+    @include m(wrapper) {
+      display: flex;
+      height: 100%;
+
+      @include e(cell) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 0 20rpx;
+        font-weight: bold;
+        color: $header-text-color;
+        font-size: 28rpx;
+        border-right: $hy-border-line;
+        box-sizing: border-box;
+        position: relative;
+        flex-shrink: 0;
+        background-color: $hy-background--table-header;
+        &:last-child {
+          border-right: none;
+        }
+
+        @include m(sortable) {
+          :deep(.is-active) {
+            color: $hy-primary;
+          }
+        }
+      }
+
+      @include e(left, center, right) {
+        display: flex;
+        height: 100%;
+      }
+
+      @include e(left, right) {
+        position: sticky;;
+      }
+
+      @include e(left) {
+        left: 0;
+        border-right: $hy-border-line;
+        @include is(shadow) {
+          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      @include e(right) {
+        right: 0;
+        border-left: $hy-border-line;
+      }
     }
   }
 
-  /* 省略号 */
-  @include e(body__td--ellipsis) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
-  }
+  /* 表格主体 */
+  @include e(body) {
+    position: relative;
+    width: 100%;
+    height: 100%;
 
-  /* 加载状态 */
-  @include e(body--loading) {
-    min-height: 400rpx;
+    /* 加载状态 */
+    @include m(loading) {
+      z-index: 999;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $hy-background--container;
+    }
+
+    /* 空状态 */
+    @include m(empty) {
+      width: 100%;
+      height: 100%;
+    }
+
+    @include m(content) {
+      display: flex;
+      flex-direction: column;
+
+      @include e(row) {
+        display: flex;
+        width: 100%;
+        border-bottom: $hy-border-line;
+        box-sizing: border-box;
+        background-color: $hy-background--container;
+        &:last-child {
+          border-right: none;
+        }
+
+        @include is(stripe) {
+          background: $stripe-bg;
+        }
+
+        @include m(cell) {
+          display: flex;
+          align-items: center;
+          padding: 0 8px;
+          font-size: 14px;
+          border-right: $hy-border-line;
+          box-sizing: border-box;
+          flex-shrink: 0;
+          white-space: nowrap;
+
+          @include e(text) {
+            width: 100%;
+            overflow: hidden;
+
+            @include is(ellipsis) {
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+
+    @include m(center) {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      overflow: scroll;
+    }
+
+    @include m(left, right) {
+      position: absolute;
+      top: 0;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    @include m(left) {
+      left: 0;
+      @include is(shadow) {
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      }
+    }
+    @include m(right) {
+      right: 0;
+      border-left: $hy-border-line;
+    }
   }
 }

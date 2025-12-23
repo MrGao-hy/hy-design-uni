@@ -1,11 +1,14 @@
 @use '../../libs/css/mixin' as *;
 @use '../../libs/css/theme.scss' as *;
 
-$hy-box-width: 180rpx;
+$hy-coupon--box-width: 180rpx;
+$hy-coupon--bg-height: 166rpx;
 @include b(coupon) {
   width: 100%;
   min-height: 190rpx;
-  max-height: 220rpx;
+  max-height: 330rpx;
+  display: flex;
+  flex-direction: row;
 
   /* 已使用/过期状态的置灰效果 */
   @include m(disabled) {
@@ -30,10 +33,10 @@ $hy-box-width: 180rpx;
   /* 不同类型优惠券的背景色 */
   @include m(moneyOff) {
     background:
-            radial-gradient(circle at $hy-box-width top, transparent 15rpx, #ff7d00 0) top / 100% 60px
+            radial-gradient(circle at $hy-coupon--box-width top, transparent 15rpx, #ff7d00 0) top / 100% $hy-coupon--bg-height
             no-repeat,
-            radial-gradient(circle at $hy-box-width bottom, transparent 15rpx, #ff7d00 0) bottom / 100%
-            51px no-repeat;
+            radial-gradient(circle at $hy-coupon--box-width bottom, transparent 15rpx, #ff7d00 0) bottom / 100%
+            $hy-coupon--bg-height no-repeat;
     //background:
     //        radial-gradient(circle at left center, transparent 15rpx, #ff7d00 0) left center / 30rpx 100% no-repeat,
     //        radial-gradient(circle at right center, transparent 15rpx, #ff7d00 0) right center / 30rpx 100% no-repeat;
@@ -42,17 +45,17 @@ $hy-box-width: 180rpx;
   }
   @include m(discount) {
     background:
-            radial-gradient(circle at $hy-box-width top, transparent 15rpx, #00c6ff 0) top / 100% 60px
+            radial-gradient(circle at $hy-coupon--box-width top, transparent 15rpx, #00c6ff 0) top / 100% $hy-coupon--bg-height
             no-repeat,
-            radial-gradient(circle at $hy-box-width bottom, transparent 15rpx, #00c6ff 0) bottom / 100%
-            51px no-repeat;
+            radial-gradient(circle at $hy-coupon--box-width bottom, transparent 15rpx, #00c6ff 0) bottom / 100%
+            $hy-coupon--bg-height no-repeat;
   }
   @include m(fixedAmount) {
     background:
-            radial-gradient(circle at $hy-box-width top, transparent 15rpx, $hy-error 0) top / 100% 60px
+            radial-gradient(circle at $hy-coupon--box-width top, transparent 15rpx, $hy-error 0) top / 100% $hy-coupon--bg-height
             no-repeat,
-            radial-gradient(circle at $hy-box-width bottom, transparent 15rpx, $hy-error 0) bottom / 100%
-            51px no-repeat;
+            radial-gradient(circle at $hy-coupon--box-width bottom, transparent 15rpx, $hy-error 0) bottom / 100%
+            $hy-coupon--bg-height no-repeat;
   }
 
   /* 优惠券内容区域 */
@@ -70,9 +73,10 @@ $hy-box-width: 180rpx;
       justify-content: center;
       align-items: center;
       height: 100%;
-      width: $hy-box-width;
+      width: $hy-coupon--box-width;
       padding: $hy-border-margin-padding-base;
       box-sizing: border-box;
+      flex-shrink: 0;
 
       @include e(block) {
         display: flex;
@@ -97,25 +101,23 @@ $hy-box-width: 180rpx;
 
     /* 右侧描述 */
     @include m(right) {
-      flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      text-align: start;
+      box-sizing: border-box;
       padding: $hy-border-margin-padding-base;
 
       @include e(name) {
         font-size: 30rpx;
         font-weight: 600;
         margin-bottom: 8rpx;
-        @include lineEllipsis;
       }
 
       @include e(desc) {
-        @include multiEllipsis(2);
+        width: 100%;
       }
 
       @include e(validity) {
+        width: 100%;
         @include lineEllipsis;
       }
 
@@ -123,24 +125,19 @@ $hy-box-width: 180rpx;
         font-size: 22rpx;
         opacity: 0.9;
         line-height: 1.4;
-        @include lineEllipsis;
       }
     }
   }
 
   /* 右侧状态标签 */
   @include e(btn) {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
   }
   @include e(tag) {
     height: 100%;
-    margin-left: 60rpx;
+    margin-left: 20rpx;
     width: 120rpx;
     display: flex;
     align-items: center;

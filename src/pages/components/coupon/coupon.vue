@@ -38,6 +38,46 @@
             />
         </view>
 
+        <view class="hy-title">长内容</view>
+
+        <view class="hy-container">
+            <hy-coupon
+                title="满28元减10元优惠券（绿标商品使用）"
+                amount="10"
+                description="1、现金券仅限绿标商品使用
+                2、现金劵需购物满额方可使用
+3、现金劵在活动期内有效，过期作废，不后补
+4、现金劵不可与其他活动共享
+5、现金券不找零，不记名，不挂失"
+                date-desc="长期有效"
+                type="fixedAmount"
+                status="unused"
+                :btnMode="btnMode"
+                :boxShadow="boxShadow"
+                :disabled-status="['used', 'expired', 'redeemed']"
+                :custom-style="{ marginBottom: '20px' }"
+                @used="onUse"
+            />
+
+            <hy-coupon
+                title="满28元减10元优惠券（绿标商品使用）"
+                amount="10"
+                description="1、现金券仅限绿标商品使用
+                2、现金劵需购物满额方可使用
+3、现金劵在活动期内有效，过期作废，不后补
+4、现金劵不可与其他活动共享
+5、现金券不找零，不记名，不挂失"
+                desEllipsis="2"
+                date-desc="长期有效"
+                type="fixedAmount"
+                status="unused"
+                :btnMode="btnMode"
+                :boxShadow="boxShadow"
+                :disabled-status="['used', 'expired', 'redeemed']"
+                @used="onUse"
+            />
+        </view>
+
         <view class="hy-title">优惠券禁用</view>
         <view class="hy-container hy-flex">
             <template v-for="item in list2" :key="item.id">

@@ -138,6 +138,6 @@ const buttonProps = {
         type: String,
         default: ''
     }
-}
+} as const
 
 export default buttonProps

@@ -35,6 +35,11 @@ const couponProps = {
         type: String,
         default: ''
     },
+    /** 描述省略行数，none不省略，1代表一行省略 */
+    desEllipsis: {
+        type: [String, Number],
+        default: 'none'
+    },
     /** 优惠券金额 */
     amount: {
         type: [String, Number],

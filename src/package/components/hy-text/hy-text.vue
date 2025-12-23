@@ -1,5 +1,5 @@
 <template>
-    <view :class="['hy-test', customClass]" v-if="show" :style="wrapStyle" @tap="clickHandler">
+    <view :class="['hy-text', customClass]" v-if="show" :style="wrapStyle" @tap="clickHandler">
         <text
             :class="['hy-text__price', type && `hy-text__value--${type}`]"
             v-if="mode === 'price'"

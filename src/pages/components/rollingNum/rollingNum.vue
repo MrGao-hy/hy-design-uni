@@ -13,7 +13,7 @@
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">千分位</view>
             <hy-rolling-num
-                :value="formatNumber(val4)"
+                :value="val4"
                 size="60rpx"
                 height="70rpx"
                 scroll-direction="alternate"
@@ -83,18 +83,12 @@ setTimeout(() => {
     val6.value = Math.floor(Math.random() * 900000 + 100000).toString()
 }, 2000)
 
-// 工具函数：生成千分位
-const formatNumber = (num: number | string) => {
-    num = Number(num)
-    return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-}
-
 const randomize = () => {
     // 生成随机6位数
     val1.value = Math.floor(Math.random() * 900000 + 100000).toString()
     val2.value = Math.floor(Math.random() * 900000 + 100000).toString()
     val3.value = Math.floor(Math.random() * 900000 + 100000).toString()
-    val4.value = Math.floor(Math.random() * 9000000 + 1000000).toString()
+    val4.value = (Math.floor(Math.random() * 90000000 + 10000000) / 100).toFixed(2)
     val5.value = Math.floor(Math.random() * 900000 + 100000).toString()
 }
 </script>

@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.11",
-  "description": "fix: picker添加键值对",
+  "version": "0.5.12",
+  "description": "feat: 优惠券新增描述省略行数",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

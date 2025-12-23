@@ -54,7 +54,13 @@
                 <slot v-if="$slots.right" name="right"></slot>
                 <template v-else>
                     <view class="hy-coupon__content--right__name">{{ title }}</view>
-                    <view class="hy-coupon__content--right__desc">{{ description }}</view>
+                    <view
+                        :class="[
+                            'hy-coupon__content--right__desc',
+                            desEllipsis !== 'none' && 'is-ellipsis'
+                        ]"
+                        >{{ description }}</view
+                    >
                     <view class="hy-coupon__content--right__validity">
                         {{
                             dateDesc
@@ -169,4 +175,9 @@ const onUsed = () => {
 
 <style scoped lang="scss">
 @import './index.scss';
+@import '../../libs/css/mixin.scss';
+
+@include is(ellipsis) {
+    @include multiEllipsis(v-bind(desEllipsis));
+}
 </style>
