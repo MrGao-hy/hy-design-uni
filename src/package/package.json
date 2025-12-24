@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.12",
-  "description": "feat: 优惠券新增描述省略行数",
+  "version": "0.5.13",
+  "description": "fix: 修复text和tag换掉",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

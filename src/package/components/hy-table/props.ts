@@ -17,7 +17,7 @@ const tableProps = {
         type: [String, Number],
         default: 400
     },
-    /** 行高，如 '500rpx' */
+    /** 行高，如 '50' */
     rowHeight: {
         type: [String, Number],
         default: 50

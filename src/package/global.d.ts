@@ -74,6 +74,7 @@ declare module 'vue' {
         HyTabbar: (typeof import('@/package/components/hy-tabbar/hy-tabbar.vue'))['default']
         HyTabbarGroup: (typeof import('./components/hy-tabbar-group/hy-tabbar-group.vue'))['default']
         HyTabbarItem: (typeof import('./components/hy-tabbar-item/hy-tabbar-item.vue'))['default']
+        HyTable: (typeof import('./components/hy-table/hy-table.vue'))['default']
         HyTabs: (typeof import('./components/hy-tabs/hy-tabs.vue'))['default']
         HyTag: (typeof import('./components/hy-tag/hy-tag.vue'))['default']
         HyTextarea: (typeof import('./components/hy-textarea/hy-textarea.vue'))['default']

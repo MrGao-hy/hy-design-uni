@@ -26,6 +26,7 @@ $hy-background--disabled);
   }
 
   @include e(text) {
+    white-space: nowrap;
 
     @include m(mini) {
       font-size: 20rpx;

@@ -375,8 +375,7 @@ const processedData = computed(() => {
 const getHeaderCellStyle = (col: ITableColumn) => {
     return {
         width: addUnit(col.width),
-        textAlign: col.align || 'left',
-        flexShrink: 0
+        textAlign: col.align || 'left'
     }
 }
 
@@ -385,9 +384,7 @@ const getBodyCellStyle = (col: ITableColumn, rowIndex: number) => {
     return {
         width: addUnit(col.width),
         textAlign: col.align || 'left',
-        flexShrink: 0,
-        height: addUnit(rowHeight),
-        lineHeight: addUnit(rowHeight)
+        height: addUnit(rowHeight)
     }
 }
 
@@ -413,8 +410,7 @@ const getRowStyle = computed(() => {
         const rowHeight = rowHeights.value[rowIndex] || props.rowHeight
         const styles: any = {
             width: addUnit(scrollWidth.value),
-            height: addUnit(rowHeight),
-            lineHeight: addUnit(rowHeight)
+            height: addUnit(rowHeight)
         }
 
         return styles

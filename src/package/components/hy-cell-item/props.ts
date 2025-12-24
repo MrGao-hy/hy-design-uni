@@ -37,13 +37,6 @@ const cellItemProps = {
         default: ''
     },
     /**
-     * 链接跳转的方式，内部使用的是uview-plus封装的route方法，可能会进行拦截操作
-     * */
-    linkType: {
-        type: String,
-        default: 'navigateTo'
-    },
-    /**
      * 点击cell是否阻止事件传播
      * */
     stop: {

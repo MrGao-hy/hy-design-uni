@@ -149,7 +149,7 @@ const clickHandler = (e: Event) => {
     emit('click', props.name)
     cellConfig?.onClick(props.name)
     if (props.url) {
-        ;(uni as any)[props.linkType]({
+        uni.navigateTo({
             url: props.url
         })
     }

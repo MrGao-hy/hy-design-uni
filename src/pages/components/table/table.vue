@@ -7,7 +7,14 @@
 
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">插槽</view>
-            <hy-table :data="tableData" :columns="columns2" stripe>
+            <hy-table :data="tableData" :columns="columns2" stripe :row-height="80">
+                <!-- 自定义操作列 -->
+                <template #default="{ row, col, index }">
+                    <view v-if="col.key === 'avatar'" :style="{ display: 'flex' }">
+                        <hy-avatar></hy-avatar>
+                    </view>
+                    <text v-else>{{ row[col.key] }}</text>
+                </template>
                 <!-- 自定义操作列 -->
                 <template #right="{ row, col, index }">
                     <hy-flex v-if="col.key === 'action'" gap="2">
@@ -39,6 +46,7 @@ import { storeToRefs } from 'pinia'
 import HyTable from '@/package/components/hy-table/hy-table.vue'
 import HyFlex from '@/package/components/hy-flex/hy-flex.vue'
 import HyButton from '@/package/components/hy-button/hy-button.vue'
+import HyAvatar from '@/package/components/hy-avatar/hy-avatar.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 
 const themeStore = useThemeStore()
@@ -50,7 +58,7 @@ const columns = reactive([
     { title: '性别', key: 'sex', width: 80 },
     { title: '年龄', key: 'age', width: 80, sortable: true },
     { title: '邮箱', key: 'email', width: 200, ellipsis: true },
-    { title: '地址', key: 'address', width: 300, ellipsis: true },
+    { title: '地址', key: 'address', width: 200, ellipsis: true },
     { title: '电话', key: 'phone', width: 150, ellipsis: true },
     { title: '公司', key: 'company', width: 150, ellipsis: true },
     { title: '职位', key: 'position', width: 150, ellipsis: true }
@@ -58,10 +66,11 @@ const columns = reactive([
 const columns2 = reactive([
     { title: 'ID', key: 'id', width: 40, fixed: 'left', align: 'center' },
     { title: '姓名', key: 'name', width: 80, fixed: 'left' },
+    { title: '头像', key: 'avatar', width: 80 },
     { title: '性别', key: 'sex', width: 80 },
     { title: '年龄', key: 'age', width: 80, sortable: true },
     { title: '邮箱', key: 'email', width: 200, ellipsis: true },
-    { title: '地址', key: 'address', width: 300, ellipsis: true },
+    { title: '地址', key: 'address', width: 200, ellipsis: true },
     { title: '电话', key: 'phone', width: 150, ellipsis: true },
     { title: '公司', key: 'company', width: 150, ellipsis: true },
     { title: '职位', key: 'position', width: 150, ellipsis: true },
