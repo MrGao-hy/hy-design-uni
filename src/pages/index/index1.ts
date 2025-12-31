@@ -258,6 +258,10 @@ export const list_5 = [
     {
         title: 'Empty 内容为空',
         url: '/pages/components/empty/empty'
+    },
+    {
+        title: 'IndexBar 索引栏',
+        url: '/pages/components/indexBar/indexBar'
     }
 ]
 

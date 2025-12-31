@@ -302,8 +302,19 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'hy-tabs',
+    options: {
+        addGlobalClass: true,
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+}
+</script>
+
 <script setup lang="ts">
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted, nextTick } from 'vue'
 import { addUnit, IconConfig, sleep, getPx } from '../../libs'
 import type { ITableColumn, ITableEmits } from './typing'
 import tableProps from './props'
@@ -311,6 +322,12 @@ import tableProps from './props'
 import HyIcon from '../hy-icon/hy-icon.vue'
 import HyEmpty from '../hy-empty/hy-empty.vue'
 import HyLoading from '../hy-loading/hy-loading.vue'
+
+/**
+ * Table是一个基于Uniapp开发的高性能表格组件，支持固定列、排序、斑马纹、自定义插槽等功能，适用于各种数据展示场景。
+ * @displayName hy-table
+ */
+defineOptions({})
 
 const props = defineProps(tableProps)
 const emit = defineEmits<ITableEmits>()
@@ -321,6 +338,7 @@ const scrollTop = ref(0)
 const rowHeights = ref<number[]>([])
 const sortField = ref<string>('')
 const sortOrder = ref<'asc' | 'desc'>('asc')
+const SLEEP_TIME = 60
 
 // 防止滚动循环触发和抖动的标志位
 const isUpdatingScroll = ref(false)
@@ -424,6 +442,9 @@ const getCellValue = (row: any, col: ITableColumn) => {
     return row[col.key] || ''
 }
 
+/**
+ * 头部横向滚动
+ * */
 const onHeaderScroll = async (e: any) => {
     if (isUpdatingScroll.value) return
 
@@ -432,7 +453,7 @@ const onHeaderScroll = async (e: any) => {
         isUpdatingScroll.value = true
         scrollLeft.value = newScrollLeft
         // 在下一个事件循环重置标志位
-        await sleep(0)
+        await sleep(SLEEP_TIME)
         isUpdatingScroll.value = false
     }
 }
@@ -450,7 +471,7 @@ const onScroll = async (e: any) => {
     }
 
     // 在下一个事件循环重置标志位
-    await sleep(0)
+    await sleep(SLEEP_TIME)
     isUpdatingScroll.value = false
 }
 
@@ -467,7 +488,7 @@ const onCrosswiseScroll = async (e: any) => {
         scrollLeft.value = newScrollLeft
     }
     // 在下一个事件循环重置标志位
-    await sleep(0)
+    await sleep(SLEEP_TIME)
     isUpdatingScroll.value = false
 }
 
@@ -482,7 +503,7 @@ const onLeftScroll = async (e: any) => {
         isUpdatingScroll.value = true
         scrollTop.value = newScrollTop
         // 在下一个事件循环重置标志位
-        await sleep(0)
+        await sleep(SLEEP_TIME)
         isUpdatingScroll.value = false
     }
 }
@@ -498,7 +519,7 @@ const onRightScroll = async (e: any) => {
         isUpdatingScroll.value = true
         scrollTop.value = newScrollTop
         // 在下一个事件循环重置标志位
-        await sleep(0)
+        await sleep(SLEEP_TIME)
         isUpdatingScroll.value = false
     }
 }

@@ -102,7 +102,7 @@
             hover-class="hy-number-box__plus--hover"
             hover-stay-time="150"
             :class="[
-                { 'hy-number-box__minus--disabled': isDisabled('plus') },
+                { 'hy-number-box__plus--disabled': isDisabled('plus') },
                 'hy-number-box__plus',
                 'cursor-pointer'
             ]"

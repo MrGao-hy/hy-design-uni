@@ -120,7 +120,7 @@ const valueStyle = computed(() => {
 })
 
 /**
- * @description 格式化值
+ * 格式化值
  * */
 const value = computed(() => {
     switch (props.mode) {

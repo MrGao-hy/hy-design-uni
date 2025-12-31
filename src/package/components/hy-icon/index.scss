@@ -1,7 +1,6 @@
 @use "../../libs/css/mixin" as *;
-@use "../../libs/css/iconfont.css" as *;
 @use "../../libs/css/theme" as *;
-
+@import "https://at.alicdn.com/t/c/font_4305932_qhqacvg5ep.css";
 
 @include b(icon) {
   /* #ifndef APP-NVUE */

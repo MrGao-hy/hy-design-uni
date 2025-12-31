@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.13",
-  "description": "fix: 修复text和tag换掉",
+  "version": "0.5.14",
+  "description": "feat: 新增indexBar索引栏功能",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

@@ -45,32 +45,23 @@ $hy-background--disabled);
 
     @include m(large) {
       font-size: $hy-font-size-lg;
-      line-height: $hy-font-size-lg;
     }
   }
 
   @include m(mini) {
-    height: 17px;
-    line-height: 17px;
-    padding: 0 $hy-border-margin-padding-sm;
+    padding: 4rpx 10rpx;
   }
 
   @include m(small) {
-    height: 22px;
-    line-height: 22px;
-    padding: 0 $hy-border-margin-padding-sm;
+    padding: 6rpx $hy-border-margin-padding-sm;
   }
 
   @include m(medium) {
-    height: 26px;
-    line-height: 26px;
-    padding: 0 $hy-border-margin-padding-base;
+    padding: 8rpx $hy-border-margin-padding-base;
   }
 
   @include m(large) {
-    height: 32px;
-    line-height: 32px;
-    padding: 0 15px;
+    padding: 10rpx $hy-border-margin-padding-lg;
   }
 
 

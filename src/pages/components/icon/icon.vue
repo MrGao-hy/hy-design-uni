@@ -224,6 +224,16 @@ const icons = reactive([
         name: 'ARROW_RIGHTWARD'
     },
     {
+        icon: 'arrow-upward',
+        label: '箭头向上',
+        name: 'ARROW_UPWARD'
+    },
+    {
+        icon: 'arrow-downward',
+        label: '箭头向下',
+        name: 'ARROW_DOWNWARD'
+    },
+    {
         icon: 'history',
         label: '历史',
         name: 'HISTORY'
@@ -354,6 +364,11 @@ const icons = reactive([
         name: 'NOTICE'
     },
     {
+        icon: 'notice-circle',
+        label: '注意-圆形',
+        name: 'NOTICE_CIRCLE'
+    },
+    {
         icon: 'notice-fill',
         label: '注意-实心',
         name: 'NOTICE_FILL'
@@ -369,7 +384,12 @@ const icons = reactive([
         name: 'SUCCESS_FILL'
     },
     {
-        icon: 'help',
+        icon: 'query',
+        label: '问号',
+        name: 'QUERY'
+    },
+    {
+        icon: 'help-circle',
         label: '帮助',
         name: 'HELP'
     },
@@ -552,6 +572,16 @@ const icons = reactive([
         icon: 'mic',
         label: '话筒',
         name: 'MIC'
+    },
+    {
+        icon: 'pie-chart',
+        label: '数据占比',
+        name: 'PIE_CHART'
+    },
+    {
+        icon: 'bar-chart',
+        label: '数据视图',
+        name: 'BAR_CHART'
     }
 ])
 </script>

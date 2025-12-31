@@ -546,6 +546,13 @@
                         "navigationBarTitleText": "表格",
                         "enablePullDownRefresh": false
                     }
+                },
+                {
+                    "path": "indexBar/indexBar",
+                    "style": {
+                        "navigationBarTitleText": "索引栏",
+                        "enablePullDownRefresh": false
+                    }
                 }
             ]
         }

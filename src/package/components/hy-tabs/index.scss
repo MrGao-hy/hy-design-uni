@@ -31,6 +31,7 @@
         /* #ifdef H5 */
         cursor: pointer;
         /* #endif */
+        flex-shrink: 0;
 
         @include m(disabled) {
           /* #ifdef H5 */
