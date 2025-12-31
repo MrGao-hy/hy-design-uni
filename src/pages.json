@@ -27,259 +27,370 @@
                     "path": "icon/icon",
                     "style": {
                         "navigationBarTitleText": "图标",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "list/list",
                     "style": {
                         "navigationBarTitleText": "虚拟列表",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "upload/upload",
                     "style": {
                         "navigationBarTitleText": "上传组件",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "form/form",
                     "style": {
                         "navigationBarTitleText": "表单组件",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "formGroup/formGroup",
                     "style": {
                         "navigationBarTitleText": "表单组件",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "button/button",
                     "style": {
                         "navigationBarTitleText": "按钮",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "cell/cell",
                     "style": {
                         "navigationBarTitleText": "单元格",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "badge/badge",
                     "style": {
                         "navigationBarTitleText": "徽标",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "tag/tag",
                     "style": {
                         "navigationBarTitleText": "标签",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "swiper/swiper",
                     "style": {
                         "navigationBarTitleText": "轮播图",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "picker/picker",
                     "style": {
                         "navigationBarTitleText": "选择器",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "datetimePicker/datetimePicker",
                     "style": {
                         "navigationBarTitleText": "时间选择器",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "addressPicker/addressPicker",
                     "style": {
                         "navigationBarTitleText": "地址选择器",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "search/search",
                     "style": {
                         "navigationBarTitleText": "搜索",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "rate/rate",
                     "style": {
                         "navigationBarTitleText": "评分",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "numberBox/numberBox",
                     "style": {
                         "navigationBarTitleText": "步进器",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "input/input",
                     "style": {
                         "navigationBarTitleText": "输入框",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "textarea/textarea",
                     "style": {
                         "navigationBarTitleText": "文本域",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "checkButton/checkButton",
                     "style": {
                         "navigationBarTitleText": "按钮选择",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "checkbox/checkbox",
                     "style": {
                         "navigationBarTitleText": "复选框",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "radio/radio",
                     "style": {
                         "navigationBarTitleText": "单选框",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "slider/slider",
                     "style": {
                         "navigationBarTitleText": "滑块",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "switch/switch",
                     "style": {
                         "navigationBarTitleText": "开关",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "lineProgress/lineProgress",
                     "style": {
                         "navigationBarTitleText": "线形进度条",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "scrollList/scrollList",
                     "style": {
                         "navigationBarTitleText": "横向滚动列表",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "line/line",
                     "style": {
                         "navigationBarTitleText": "线条",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "card/card",
                     "style": {
                         "navigationBarTitleText": "卡片",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "overlay/overlay",
                     "style": {
                         "navigationBarTitleText": "遮罩层",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "grid/grid",
                     "style": {
                         "navigationBarTitleText": "宫格布局",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "divider/divider",
                     "style": {
                         "navigationBarTitleText": "分割线",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "tooltip/tooltip",
                     "style": {
                         "navigationBarTitleText": "长按提示",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "warn/warn",
                     "style": {
                         "navigationBarTitleText": "警告提示",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "noticeBar/noticeBar",
                     "style": {
                         "navigationBarTitleText": "滚动通知",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "foldingPanel/foldingPanel",
                     "style": {
                         "navigationBarTitleText": "折叠面板",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "popup/popup",
                     "style": {
                         "navigationBarTitleText": "弹出层",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "modal/modal",
                     "style": {
                         "navigationBarTitleText": "模态框",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "readMore/readMore",
                     "style": {
                         "navigationBarTitleText": "展开阅读更多",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
@@ -292,266 +403,380 @@
                     "path": "backTop/backTop",
                     "style": {
                         "navigationBarTitleText": "返回顶部",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "tabs/tabs",
                     "style": {
                         "navigationBarTitleText": "标签栏",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "subsection/subsection",
                     "style": {
                         "navigationBarTitleText": "分段器",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "steps/steps",
                     "style": {
                         "navigationBarTitleText": "步骤条",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "empty/empty",
                     "style": {
                         "navigationBarTitleText": "空状态",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "avatar/avatar",
                     "style": {
                         "navigationBarTitleText": "头像",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "transition/transition",
                     "style": {
                         "navigationBarTitleText": "动画",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "qrcode/qrcode",
                     "style": {
                         "navigationBarTitleText": "二维码",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "loading/loading",
                     "style": {
                         "navigationBarTitleText": "加载",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "calendar/calendar",
                     "style": {
                         "navigationBarTitleText": "日历",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "swipeAction/swipeAction",
                     "style": {
                         "navigationBarTitleText": "滑动单元格",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "image/image",
                     "style": {
                         "navigationBarTitleText": "图片",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "countDown/countDown",
                     "style": {
                         "navigationBarTitleText": "倒计时",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "countTo/countTo",
                     "style": {
                         "navigationBarTitleText": "数字滚动",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "floatButton/floatButton",
                     "style": {
                         "navigationBarTitleText": "悬浮按钮",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "dropdown/dropdown",
                     "style": {
                         "navigationBarTitleText": "下拉菜单",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "text/text",
                     "style": {
                         "navigationBarTitleText": "文本",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "parse/parse",
                     "style": {
                         "navigationBarTitleText": "富文本",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "submitBar/submitBar",
                     "style": {
                         "navigationBarTitleText": "提交订单栏",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "price/price",
                     "style": {
                         "navigationBarTitleText": "金额",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "waterfall/waterfall",
                     "style": {
                         "navigationBarTitleText": "瀑布流",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "toast/toast",
                     "style": {
                         "navigationBarTitleText": "消息提示",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "configProvider/configProvider",
                     "style": {
                         "navigationBarTitleText": "页面全局配置",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "codeInput/codeInput",
                     "style": {
                         "navigationBarTitleText": "验证码输入",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "notify/notify",
                     "style": {
                         "navigationBarTitleText": "消息提示",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "signature/signature",
                     "style": {
                         "navigationBarTitleText": "签名",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "pagination/pagination",
                     "style": {
                         "navigationBarTitleText": "分页",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "menu/menu",
                     "style": {
                         "navigationBarTitleText": "侧边菜单栏",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "watermark/watermark",
                     "style": {
                         "navigationBarTitleText": "水印",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "tabBar/tabBar",
                     "style": {
                         "navigationBarTitleText": "底部导航栏",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "actionSheet/actionSheet",
                     "style": {
                         "navigationBarTitleText": "操作菜单",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "popover/popover",
                     "style": {
                         "navigationBarTitleText": "气泡",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "flex/flex",
                     "style": {
                         "navigationBarTitleText": "弹性布局",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "coupon/coupon",
                     "style": {
                         "navigationBarTitleText": "优惠券示例",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "sticky/sticky",
                     "style": {
                         "navigationBarTitleText": "吸顶",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "rollingNum/rollingNum",
                     "style": {
                         "navigationBarTitleText": "翻滚数字",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "table/table",
                     "style": {
                         "navigationBarTitleText": "表格",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 },
                 {
                     "path": "indexBar/indexBar",
                     "style": {
                         "navigationBarTitleText": "索引栏",
-                        "enablePullDownRefresh": false
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
                     }
                 }
             ]
