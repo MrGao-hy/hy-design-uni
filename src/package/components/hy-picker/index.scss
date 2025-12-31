@@ -43,7 +43,7 @@
       }
 
       @include e(item) {
-        color: $hy-text-color;
+        color: $hy-text-color !important;
         @include lineEllipsis;
         @include m(disabled) {
           /* #ifndef APP-NVUE */

@@ -4,7 +4,6 @@
             <slot name="trigger" :value="inputValue">
                 <HyInput
                     v-model="inputValue"
-                    :readonly="true"
                     :disabled="input?.disabled"
                     :disabledColor="input?.disabledColor"
                     :shape="input?.shape"
@@ -23,7 +22,6 @@
             </slot>
         </view>
         <HyPicker
-            ref="picker"
             :show="show || (hasInput && showByClickInput)"
             :popupMode="popupMode"
             :closeOnClickOverlay="closeOnClickOverlay"

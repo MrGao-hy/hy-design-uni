@@ -25,7 +25,6 @@ onUnload(() => {
 })
 
 onThemeChange((option) => {
-    console.log(option.theme, '===')
     darkMode.value = option.theme
 })
 

@@ -429,7 +429,6 @@ const getRect = <T extends boolean>(
         const method = all ? 'selectAll' : 'select'
 
         const callback = (rect: UniApp.NodeInfo | UniApp.NodeInfo[]) => {
-            console.log(rect, 'rect')
             if (all && Array.isArray(rect) && rect.length > 0) {
                 resolve(rect as RectResultType<T>)
             } else if (!all && rect) {

@@ -128,7 +128,6 @@ const handleScroll = (e: any) => {
     if (isScroll.value) {
         const index = sectionRect.value.findIndex((item) => item.top - 1 > scrollTop) - 1
         const keys = Object.keys(cityData)
-        console.log(keys[index], '==')
         currentActiveIndex.value = keys[index]
     }
 }

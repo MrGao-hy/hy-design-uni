@@ -15,11 +15,10 @@
 
         <view class="hy-title">限制输入金额格式</view>
         <view class="hy-container">
-            {{ value3 }}
             <hy-input
                 v-model="value3"
                 type="digit"
-                maxlength="999"
+                :maxlength="999"
                 clearable
                 @change="onChange"
             ></hy-input>
@@ -47,16 +46,11 @@
 
         <view class="hy-title">自定义icon</view>
         <view class="hy-container">
-            <hy-input
-                v-model="value"
-                :prefixIcon="{
-                    name: 'feishu-gray',
-                    customPrefix: 'icon',
-                    color: 'red'
-                }"
-                :disabled="disabled"
-                border="bottom"
-            ></hy-input>
+            <hy-input v-model="value" clearable :disabled="disabled">
+                <template #suffix>
+                    <hy-button text="发送验证码"></hy-button>
+                </template>
+            </hy-input>
         </view>
 
         <view class="hy-setting__box">

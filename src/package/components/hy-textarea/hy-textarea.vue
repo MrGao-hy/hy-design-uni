@@ -78,7 +78,7 @@ defineOptions({})
 
 const props = defineProps(textareaProps)
 const emit = defineEmits<ITextareaEmits>()
-const formItem = inject<FormItemContext>('formItem')
+const formItem = inject<FormItemContext | null>('formItem', null)
 
 // 输入框的值
 const innerValue = ref<string>('')

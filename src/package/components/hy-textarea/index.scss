@@ -33,6 +33,7 @@
     min-height: 50rpx;
     max-height: 200rpx;
     color: $hy-text-color;
+    caret-color: $hy-text-color;
     flex: 1;
     font-size: 15px;
     width: 100%;
@@ -50,7 +51,3 @@
     border-radius: $hy-border-radius-sm;
   }
 }
-//textarea {
-//  background-color: transparent;
-//  border: none;
-//}

@@ -5,7 +5,6 @@
             <template v-else>
                 <hy-input
                     v-model="inputLabelValue"
-                    :readonly="true"
                     :disabled="input?.disabled"
                     :disabledColor="input?.disabledColor"
                     :shape="input?.shape"

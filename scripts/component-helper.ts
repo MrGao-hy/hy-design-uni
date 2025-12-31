@@ -157,7 +157,6 @@ export function generateWebTypes(options = {} as InstallOptions) {
         const fileContent = read(path)
         const parseContent = parse(_options, fileContent)
         const content = normalize(_options, parseContent, path)
-        console.log(content)
         content.description = content.description.replace(/> /g, '')
         if (content.hasOwnProperty('props')) {
             content.props.content = content?.props.content.map((item) => {

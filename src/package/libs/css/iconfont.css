@@ -1,12 +1,14 @@
 @font-face {
-    font-family: 'iconfont';  /* Project id 4305932 */
+    font-family: 'hy-icon';  /* Project id 4305932 */
     src: url('https://at.alicdn.com/t/c/font_4305932_qhqacvg5ep.woff2?t=1767149933313') format('woff2'),
     url('https://at.alicdn.com/t/c/font_4305932_qhqacvg5ep.woff?t=1767149933313') format('woff'),
     url('https://at.alicdn.com/t/c/font_4305932_qhqacvg5ep.ttf?t=1767149933313') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
+  font-family: "hy-icon" !important;
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
@@ -14,430 +16,426 @@
 }
 
 .hy-icon-query:before {
-  content: "\e617";
+    content: "\e617";
 }
 
 .hy-icon-notice:before {
-  content: "\e61f";
+    content: "\e61f";
 }
 
 .hy-icon-telephone-fill:before {
-  content: "\e66d";
+    content: "\e66d";
 }
 
-.hy-icon-dot:before {
-  content: "\ec1e";
+.hy-icon-pie-chart:before {
+    content: "\e60c";
 }
 
-.hy-icon-shujuzhanbi:before {
-  content: "\e60c";
-}
-
-.hy-icon-shujushitu:before {
-  content: "\e60d";
+.hy-icon-bar-chart:before {
+    content: "\e60d";
 }
 
 .hy-icon-picture-fill:before {
-  content: "\e60e";
+    content: "\e60e";
 }
 
-.hy-icon-a-xiangshang3:before {
-  content: "\e60f";
+.hy-icon-arrow-upward:before {
+    content: "\e60f";
 }
 
 .hy-icon-remind-fill:before {
-  content: "\e610";
+    content: "\e610";
 }
 
-.hy-icon-a-xiangxia3:before {
-  content: "\e612";
+.hy-icon-arrow-downward:before {
+    content: "\e612";
 }
 
 .hy-icon-setting-fill:before {
-  content: "\e613";
+    content: "\e613";
 }
 
 .hy-icon-eye-close:before {
-  content: "\e671";
+    content: "\e671";
 }
 
 .hy-icon-hide:before {
-  content: "\e673";
+    content: "\e673";
 }
 
 .hy-icon-mic:before {
-  content: "\e678";
+    content: "\e678";
 }
 
 .hy-icon-telephone-out:before {
-  content: "\e68e";
+    content: "\e68e";
 }
 
 .hy-icon-telephone:before {
-  content: "\e68f";
+    content: "\e68f";
 }
 
 .hy-icon-close-circle-fill:before {
-  content: "\e6f2";
+    content: "\e6f2";
 }
 
 .hy-icon-help-fill:before {
-  content: "\e6fa";
+    content: "\e6fa";
 }
 
 .hy-icon-message:before {
-  content: "\e70c";
+    content: "\e70c";
 }
 
 .hy-icon-message-fill:before {
-  content: "\e70d";
+    content: "\e70d";
 }
 
 .hy-icon-notice-fill:before {
-  content: "\e71b";
+    content: "\e71b";
 }
 
 .hy-icon-send:before {
-  content: "\e726";
+    content: "\e726";
 }
 
 .hy-icon-share-fill:before {
-  content: "\e729";
+    content: "\e729";
 }
 
 .hy-icon-share:before {
-  content: "\e72a";
+    content: "\e72a";
 }
 
 .hy-icon-success-fill:before {
-  content: "\e72d";
+    content: "\e72d";
 }
 
 .hy-icon-systemprompt_fill:before {
-  content: "\e72f";
+    content: "\e72f";
 }
 
 .hy-icon-delete:before {
-  content: "\e738";
+    content: "\e738";
 }
 
 .hy-icon-delete-fill:before {
-  content: "\e739";
+    content: "\e739";
 }
 
 .hy-icon-warning-fill:before {
-  content: "\e73d";
+    content: "\e73d";
 }
 
 .hy-icon-search:before {
-  content: "\e741";
+    content: "\e741";
 }
 
 .hy-icon-loading:before {
-  content: "\e64a";
+    content: "\e64a";
 }
 
 .hy-icon-order:before {
-  content: "\e737";
+    content: "\e737";
 }
 
 .hy-icon-copy:before {
-  content: "\e656";
+    content: "\e656";
 }
 
 .hy-icon-collect-fill:before {
-  content: "\e631";
+    content: "\e631";
 }
 
 .hy-icon-collect:before {
-  content: "\e632";
+    content: "\e632";
 }
 
 .hy-icon-calendar:before {
-  content: "\e645";
+    content: "\e645";
 }
 
 .hy-icon-eye:before {
-  content: "\e666";
+    content: "\e666";
 }
 
 .hy-icon-download:before {
-  content: "\e667";
+    content: "\e667";
 }
 
 .hy-icon-arrow-double-left:before {
-  content: "\e665";
+    content: "\e665";
 }
 
 .hy-icon-arrow-double-right:before {
-  content: "\e668";
+    content: "\e668";
 }
 
 .hy-icon-camera:before {
-  content: "\e669";
+    content: "\e669";
 }
 
 .hy-icon-attachment:before {
-  content: "\e66a";
+    content: "\e66a";
 }
 
 .hy-icon-comment:before {
-  content: "\e66b";
+    content: "\e66b";
 }
 
 .hy-icon-customer-service:before {
-  content: "\e66c";
+    content: "\e66c";
 }
 
 .hy-icon-ellipsis:before {
-  content: "\e66e";
+    content: "\e66e";
 }
 
 .hy-icon-export:before {
-  content: "\e66f";
+    content: "\e66f";
 }
 
 .hy-icon-link:before {
-  content: "\e676";
+    content: "\e676";
 }
 
 .hy-icon-layers:before {
-  content: "\e675";
+    content: "\e675";
 }
 
 .hy-icon-print:before {
-  content: "\e67a";
+    content: "\e67a";
 }
 
 .hy-icon-navigation:before {
-  content: "\e67b";
+    content: "\e67b";
 }
 
 .hy-icon-pdf:before {
-  content: "\e67c";
+    content: "\e67c";
 }
 
 .hy-icon-picture:before {
-  content: "\e67e";
+    content: "\e67e";
 }
 
 .hy-icon-save:before {
-  content: "\e67f";
+    content: "\e67f";
 }
 
 .hy-icon-scan:before {
-  content: "\e680";
+    content: "\e680";
 }
 
 .hy-icon-security:before {
-  content: "\e681";
+    content: "\e681";
 }
 
 .hy-icon-success:before {
-  content: "\e682";
+    content: "\e682";
 }
 
 .hy-icon-smile:before {
-  content: "\e683";
+    content: "\e683";
 }
 
 .hy-icon-switch:before {
-  content: "\e684";
+    content: "\e684";
 }
 
 .hy-icon-upload:before {
-  content: "\e685";
+    content: "\e685";
 }
 
 .hy-icon-warning:before {
-  content: "\e687";
+    content: "\e687";
 }
 
 .hy-icon-arrow-up-fill:before {
-  content: "\e688";
+    content: "\e688";
 }
 
 .hy-icon-arrow-down-fill:before {
-  content: "\e689";
+    content: "\e689";
 }
 
 .hy-icon-arrow-left-fill:before {
-  content: "\e68a";
+    content: "\e68a";
 }
 
 .hy-icon-arrow-right-fill:before {
-  content: "\e68b";
+    content: "\e68b";
 }
 
 .hy-icon-smile-fill:before {
-  content: "\e68c";
+    content: "\e68c";
 }
 
 .hy-icon-cry-fill:before {
-  content: "\e68d";
+    content: "\e68d";
 }
 
 .hy-icon-minus:before {
-  content: "\e686";
+    content: "\e686";
 }
 
 .hy-icon-check-mask:before {
-  content: "\e602";
+    content: "\e602";
 }
 
 .hy-icon-close:before {
-  content: "\e611";
+    content: "\e611";
 }
 
 .hy-icon-lock:before {
-  content: "\e8b2";
+    content: "\e8b2";
 }
 
 .hy-icon-home-fill:before {
-  content: "\e8c6";
+    content: "\e8c6";
 }
 
 .hy-icon-mine:before {
-  content: "\e60b";
+    content: "\e60b";
 }
 
 .hy-icon-class-fill:before {
-  content: "\e600";
+    content: "\e600";
 }
 
 .hy-icon-setting:before {
-  content: "\e601";
+    content: "\e601";
 }
 
 .hy-icon-mine-fill:before {
-  content: "\e608";
+    content: "\e608";
 }
 
 .hy-icon-shopping-cart-fill:before {
-  content: "\e73c";
+    content: "\e73c";
 }
 
 .hy-icon-home:before {
-  content: "\e751";
+    content: "\e751";
 }
 
 .hy-icon-shopping-cart-add:before {
-  content: "\e640";
+    content: "\e640";
 }
 
 .hy-icon-map:before {
-  content: "\e64e";
+    content: "\e64e";
 }
 
 .hy-icon-class:before {
-  content: "\e638";
+    content: "\e638";
 }
 
 .hy-icon-right:before {
-  content: "\e620";
+    content: "\e620";
 }
 
 .hy-icon-close-circle:before {
-  content: "\e621";
+    content: "\e621";
 }
 
 .hy-icon-help-circle:before {
-  content: "\e622";
+    content: "\e622";
 }
 
 .hy-icon-screen:before {
-  content: "\e623";
+    content: "\e623";
 }
 
 .hy-icon-remind:before {
-  content: "\e625";
+    content: "\e625";
 }
 
 .hy-icon-plus:before {
-  content: "\e626";
+    content: "\e626";
 }
 
 .hy-icon-arrow-rightward:before {
-  content: "\e628";
+    content: "\e628";
 }
 
 .hy-icon-arrow-leftward:before {
-  content: "\e629";
+    content: "\e629";
 }
 
 .hy-icon-notice-circle:before {
-  content: "\e62a";
+    content: "\e62a";
 }
 
 .hy-icon-menu:before {
-  content: "\e62e";
+    content: "\e62e";
 }
 
 .hy-icon-list-dot:before {
-  content: "\e62f";
+    content: "\e62f";
 }
 
 .hy-icon-network:before {
-  content: "\e630";
+    content: "\e630";
 }
 
 .hy-icon-time:before {
-  content: "\e639";
+    content: "\e639";
 }
 
 .hy-icon-history:before {
-  content: "\e63b";
+    content: "\e63b";
 }
 
 .hy-icon-up:before {
-  content: "\e63c";
+    content: "\e63c";
 }
 
 .hy-icon-down:before {
-  content: "\e63d";
+    content: "\e63d";
 }
 
 .hy-icon-left:before {
-  content: "\e63e";
+    content: "\e63e";
 }
 
 .hy-icon-tag:before {
-  content: "\e63f";
+    content: "\e63f";
 }
 
 .hy-icon-task:before {
-  content: "\e641";
+    content: "\e641";
 }
 
 .hy-icon-refresh:before {
-  content: "\e642";
+    content: "\e642";
 }
 
 .hy-icon-shopping-cart:before {
-  content: "\e899";
+    content: "\e899";
 }
 
 .hy-icon-shopping-bag:before {
-  content: "\e65a";
+    content: "\e65a";
 }
 
 .hy-icon-map-fill:before {
-  content: "\e65e";
+    content: "\e65e";
 }
 
 .hy-icon-lock-open-fill:before {
-  content: "\e63a";
+    content: "\e63a";
 }
 
 .hy-icon-lock-fill:before {
-  content: "\e643";
+    content: "\e643";
 }
 
 .hy-icon-shop:before {
-  content: "\e644";
+    content: "\e644";
 }
 
 .hy-icon-edit:before {
-  content: "\e8ac";
+    content: "\e8ac";
 }
 

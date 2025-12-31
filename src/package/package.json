@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.14",
-  "description": "feat: 新增indexBar索引栏功能",
+  "version": "0.5.15",
+  "description": "feat: 新增图标",
   "main": "./index.ts",
   "private": false,
   "scripts": {},

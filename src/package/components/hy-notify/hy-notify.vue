@@ -126,7 +126,7 @@ const icon = computed(() => {
         case 'error':
             return IconConfig.CLOSE_CIRCLE
         case 'warning':
-            return IconConfig.NOTICE
+            return IconConfig.NOTICE_CIRCLE
         default:
             return ''
     }

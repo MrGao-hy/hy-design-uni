@@ -8,7 +8,7 @@
   height: calc(100vh - var(--window-top));
   height: calc(100vh - var(--window-top) - constant(safe-area-inset-bottom));
   height: calc(100vh - var(--window-top) - env(safe-area-inset-bottom));
-  //overflow-y: auto;
+  overflow-y: auto;
   //overflow-x: hidden;
   background-color: $hy-background;
   color: $hy-text-color;
