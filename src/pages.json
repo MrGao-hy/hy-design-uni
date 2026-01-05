@@ -778,6 +778,16 @@
                             "allowsBounceVertical": "NO"
                         }
                     }
+                },
+                {
+                    "path": "skeleton/skeleton",
+                    "style": {
+                        "navigationBarTitleText": "骨架屏",
+                        "enablePullDownRefresh": false,
+                        "mp-alipay": {
+                            "allowsBounceVertical": "NO"
+                        }
+                    }
                 }
             ]
         }

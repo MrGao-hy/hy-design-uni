@@ -35,15 +35,28 @@ import { storeToRefs } from 'pinia'
 const themeStore = useThemeStore()
 
 const { color, darkMode } = storeToRefs(themeStore)
-const direction = ref<HyApp.DirectionType>('row')
+const direction = ref<HyApp.DirectionType>('column')
 const dot = ref(false)
 
-const current = ref(0)
+const current = ref(3)
 const list = ref([
-    { title: '已下单', desc: '2024-10-13' },
-    { title: '发货中', desc: '2024-10-13' },
-    { title: '已发货', desc: '2024-10-13' },
-    { title: '发货失败', desc: '2024-10-14', error: true }
+    {
+        title: '已下单',
+        docs: '【深证市】您的快递正在站点，快递员正在为你打包，请耐心等待发货',
+        date: '2024-10-13'
+    },
+    { title: '发货中', date: '2024-10-13' },
+    {
+        title: '已发货',
+        docs: '【合肥市】温馨提醒：您的快递已处于运输配送途中，预计将在近期送达。本次配送快递员为李子柒，联系电话：18888888888。若您需咨询配送进度、调整收货地址或确认收货时间，可直接拨打上述电话与快递员沟通。请保持手机畅通，耐心等待包裹送达。',
+        date: '2024-10-13'
+    },
+    {
+        title: '发货失败',
+        docs: '【重要通知】您的快递在运输过程中发生意外火情，包裹已受损。我们对此次事件给您带来的不便与损失深表歉意，也对您的遭遇致以诚挚的同情。相关理赔专员将尽快与您取得联系，协助您处理后续的赔付事宜，请您保持手机畅通。',
+        date: '2024-10-14',
+        error: true
+    }
 ])
 const list_1 = [
     { name: '横向', value: 'row' },

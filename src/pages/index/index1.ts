@@ -168,6 +168,10 @@ export const list_3 = [
     {
         title: 'Sticky 吸顶',
         url: '/pages/components/sticky/sticky'
+    },
+    {
+        title: 'Skeleton 骨架屏',
+        url: '/pages/components/skeleton/skeleton'
     }
 ]
 

@@ -1,14 +1,18 @@
 export interface StepListVo {
     /**
-     * @description 标题
+     * 标题
      * */
     title?: string
     /**
-     * @description 描述
+     * 描述
      * */
-    desc?: string
+    docs?: string
     /**
-     * @description 是否错误
+     * 时间日期
+     * */
+    date?: string
+    /**
+     * 是否错误
      * */
     error?: boolean
 }

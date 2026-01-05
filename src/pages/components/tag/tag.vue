@@ -61,7 +61,15 @@
 
         <view class="hy-title">可关闭</view>
         <view class="hy-flex hy-container">
-            <hy-tag text="关闭" closable :show="close" @close="close = false"></hy-tag>
+            <hy-tag text="衣服" closable :show="close" @close="close = false"></hy-tag>
+            <hy-tag
+                text="裤子"
+                closable
+                :show="close1"
+                @close="close1 = false"
+                plain
+                shape="circle"
+            ></hy-tag>
         </view>
     </hy-config-provider>
 </template>
@@ -78,6 +86,7 @@ const themeStore = useThemeStore()
 
 const { color, darkMode } = storeToRefs(themeStore)
 const close = ref(true)
+const close1 = ref(true)
 </script>
 
 <style scoped lang="scss"></style>

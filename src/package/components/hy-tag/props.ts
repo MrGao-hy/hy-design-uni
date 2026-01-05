@@ -50,7 +50,7 @@ const tagProps = {
     /** 关闭按钮图标的颜色 */
     closeColor: {
         type: String,
-        default: '#C6C7CB'
+        default: ''
     },
     /** 镂空时是否填充背景色 */
     plainFill: {

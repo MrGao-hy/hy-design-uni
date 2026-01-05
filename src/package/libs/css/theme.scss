@@ -46,6 +46,7 @@ $hy-background--container: var(--hy-background--container, #ffffff) !default; //
 $hy-background--disabled: var(--hy-background--disabled, rgba(0, 0, 0, 0.04)); // 禁用背景色
 $hy-background--track: var(--hy-background--track, #F6F6F6) !default; // 轨道背景色
 $hy-background--empty: var(--hy-background--empty, #F3F3F3) !default; // 搜索背景色
+$hy-background--skeleton: var(--hy-background--skeleton, #eee) !default; // 骨架屏背景色
 $hy-background--hover: var(--hy-background--hover, rgba(0,0,0,0.05)) !default; // 点击状态
 $hy-background-mask: var(--hy-background-mask, rgba(0, 0, 0, 0.5)); //遮罩颜色
 $hy-background--active: var(--hy-background--active, #FFFFFF); // 选中背景色

@@ -4,11 +4,11 @@
             <view ref="hy-steps-item" :class="[`hy-steps-item--${direction}`, 'hy-steps-item']">
                 <!--	线条	-->
                 <view
-                    v-if="i > 0"
+                    v-if="i + 1 < list.length"
                     :class="[
                         `hy-steps-item__line--${direction}`,
                         'hy-steps-item__line',
-                        statusClass(i, item.error)
+                        statusClass(i + 1, list[i + 1].error, '====')
                     ]"
                     :style="lineStyle(item, i)"
                 ></view>
@@ -102,10 +102,11 @@
                         <text v-else :class="titleClass(i, item.error)">
                             {{ item.title }}
                         </text>
-                        <slot v-if="$slots.desc" name="desc" :desc="item.desc" :index="i"></slot>
+                        <slot v-if="$slots.docs" name="docs" :desc="item.docs" :index="i"></slot>
                         <text v-else :style="{ fontSize: '12px', color: '#999' }">{{
-                            item.desc
+                            item.docs
                         }}</text>
+                        <text class="hy-steps-item__content--date">{{ item.date }}</text>
                     </template>
                 </view>
                 <!-- 内容区域 -->
@@ -144,10 +145,7 @@ defineOptions({})
 const props = defineProps(stepsProps)
 const emit = defineEmits<IStepsEmits>()
 
-const size = ref<UniApp.NodeInfo>({
-    height: 0,
-    width: 0
-})
+const stepsRects = ref<UniApp.NodeInfo[]>([])
 const instance = getCurrentInstance()
 
 watch(
@@ -187,11 +185,12 @@ const textColor = computed(() => {
 const lineStyle = computed(() => {
     return (temp: StepListVo, index: number): CSSProperties => {
         const style: CSSProperties = {}
+        if (!stepsRects.value.length) return style
         if (props.direction === 'row') {
-            style.width = addUnit(size.value.width! - 25)
-            style.left = addUnit(-size.value.width! / 2 + 12)
+            style.width = addUnit(stepsRects.value[index].width! - 25)
+            style.left = addUnit(stepsRects.value[index].width! / 2 + 12)
         } else {
-            style.height = addUnit(size.value.height! - 30)
+            style.height = addUnit(stepsRects.value[index].height! - 30)
             style.top = addUnit(25)
         }
         style.backgroundColor = temp.error ? '' : index < props.current ? '' : props.inactiveColor
@@ -206,7 +205,8 @@ const itemStyleInner = computed(() => {
  * @description 状态类名
  * */
 const statusClass = computed(() => {
-    return (index: number, error: boolean = false) => {
+    return (index: number, error: boolean = false, line: string) => {
+        console.log(index, props.current, line, error)
         if (props.current == index) {
             return error ? 'error' : 'process'
         } else if (props.current > index) {
@@ -241,10 +241,10 @@ const contentStyle = computed<CSSProperties>(() => {
     const style: CSSProperties = {}
     if (props.direction === 'column') {
         style.marginLeft = props.dot ? '2px' : '6px'
-        style.marginTop = props.dot ? '0px' : '6px'
+        style.marginTop = props.dot ? '0px' : '0px'
     } else {
         style.marginTop = props.dot ? '2px' : '6px'
-        style.marginLeft = props.dot ? '2px' : '6px'
+        style.marginLeft = props.dot ? '0px' : '0px'
     }
 
     return style
@@ -256,8 +256,8 @@ onMounted(() => {
 
 // 获取组件的尺寸，用于设置横线的位置
 const getStepsItemRect = () => {
-    getRect('.hy-steps-item', false, instance).then((rect) => {
-        size.value = rect as UniApp.NodeInfo
+    getRect('.hy-steps-item', true, instance).then((rect) => {
+        stepsRects.value = rect as UniApp.NodeInfo[]
     })
 }
 </script>

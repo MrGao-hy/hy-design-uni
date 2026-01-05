@@ -4,6 +4,7 @@
   padding: $hy-border-margin-padding-base;
   color: $hy-info;
   position: relative;
+  font-size: 34rpx;
 
   &::after {
     content: "";
@@ -22,7 +23,7 @@
   justify-content: space-around;
 }
 .hy-container {
-  flex-wrap: wrap;
+  //flex-wrap: wrap;
   padding: $hy-border-margin-padding-base;
   border-radius: $hy-border-radius-base;
   background-color: $hy-background--container;

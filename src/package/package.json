@@ -1,7 +1,7 @@
 {
   "name": "hy-app",
-  "version": "0.5.15",
-  "description": "feat: 新增图标",
+  "version": "0.5.16",
+  "description": "feat: 新增骨架屏组件",
   "main": "./index.ts",
   "private": false,
   "scripts": {},
@@ -14,5 +14,64 @@
   ],
   "web-types": "./web-types.json",
   "author": "华玥作者",
-  "license": "MIT"
+  "license": "MIT",
+    "uni_modules": {
+        "dependencies": [],
+        "encrypt": [],
+        "platforms": {
+            "cloud": {
+                "tcb": "√",
+                "aliyun": "√",
+                "alipay": "√"
+            },
+            "client": {
+                "uni-app": {
+                    "vue": {
+                        "vue2": "x",
+                        "vue3": "√"
+                    },
+                    "web": {
+                        "safari": "√",
+                        "chrome": "√"
+                    },
+                    "app": {
+                        "vue": "√",
+                        "nvue": "-",
+                        "android": "√",
+                        "ios": "√",
+                        "harmony": "√"
+                    },
+                    "mp": {
+                        "weixin": "√",
+                        "alipay": "√",
+                        "toutiao": "√",
+                        "baidu": "-",
+                        "kuaishou": "-",
+                        "jd": "-",
+                        "harmony": "√",
+                        "qq": "√",
+                        "lark": "-"
+                    },
+                    "quickapp": {
+                        "huawei": "-",
+                        "union": "-"
+                    }
+                },
+                "uni-app-x": {
+                    "web": {
+                        "safari": "-",
+                        "chrome": "-"
+                    },
+                    "app": {
+                        "android": "-",
+                        "ios": "-",
+                        "harmony": "-"
+                    },
+                    "mp": {
+                        "weixin": "-"
+                    }
+                }
+            }
+        }
+    }
 }

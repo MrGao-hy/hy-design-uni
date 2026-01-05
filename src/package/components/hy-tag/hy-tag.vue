@@ -2,36 +2,36 @@
     <hy-transition mode="fade" :show="show" :custom-style="{ display: 'inline-block' }">
         <view class="hy-tag__wrapper cursor-pointer">
             <view :class="tagClass" @tap.stop="clickHandler" :style="tagStyle">
-                <slot name="icon">
-                    <hy-icon
-                        v-if="icon?.name"
-                        :name="icon?.name"
-                        :color="hyIconColor"
-                        :size="hyIconSize"
-                        :bold="icon?.bold"
-                        :customPrefix="icon?.customPrefix"
-                        :imgMode="icon?.imgMode"
-                        :width="icon?.width"
-                        :height="icon?.height"
-                        :top="icon?.top"
-                        :stop="icon?.stop"
-                        :round="icon?.round"
-                        :customStyle="Object.assign({ marginRight: '3px' }, icon?.customStyle)"
-                    ></hy-icon>
-                </slot>
+                <slot v-if="$slots.icon" name="icon"></slot>
+                <hy-icon
+                    v-else-if="icon?.name"
+                    :name="icon?.name"
+                    :color="hyIconColor"
+                    :size="hyIconSize"
+                    :bold="icon?.bold"
+                    :customPrefix="icon?.customPrefix"
+                    :imgMode="icon?.imgMode"
+                    :width="icon?.width"
+                    :height="icon?.height"
+                    :top="icon?.top"
+                    :stop="icon?.stop"
+                    :round="icon?.round"
+                    :customStyle="Object.assign({ marginRight: '3px' }, icon?.customStyle)"
+                ></hy-icon>
                 <text :class="textClass" :style="textStyle">
                     <slot>
                         {{ text }}
                     </slot>
                 </text>
-            </view>
-            <view
-                :class="['hy-tag__close', `hy-tag__close--${size}`]"
-                v-if="closable"
-                @tap.stop="closeHandler"
-                :style="{ backgroundColor: closeColor }"
-            >
-                <hy-icon :name="IconConfig.CLOSE" :size="closeSize" color="#ffffff"></hy-icon>
+                <!-- 关闭按钮 -->
+                <view
+                    :class="['hy-tag__close', `hy-tag__close--${size}`]"
+                    v-if="closable"
+                    @tap.stop="closeHandler"
+                    :style="{ backgroundColor: closeColor }"
+                >
+                    <hy-icon :name="IconConfig.CLOSE" :size="closeSize" color="#ffffff"></hy-icon>
+                </view>
             </view>
         </view>
     </hy-transition>

@@ -1,8 +1,8 @@
 <template>
     <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title">基础按钮</view>
-        <view class="hy-grid hy-container">
-            <hy-button text="我是很长的按钮" size="small"></hy-button>
+        <view class="hy-container long">
+            <hy-button text="我是很长的按钮,按着我会触发惊喜哦" size="small"></hy-button>
         </view>
         <view class="hy-title">按钮颜色</view>
         <view class="hy-grid hy-container">
@@ -111,4 +111,9 @@ const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.long {
+    display: flex;
+    gap: 10px;
+}
+</style>
