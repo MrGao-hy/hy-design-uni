@@ -22,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import HyIcon from '@/package/components/hy-icon/hy-icon.vue'
 interface UserInfo {
     nickname: string
     userId: string
@@ -48,9 +49,6 @@ const onEdit = () => {
 </script>
 
 <style lang="scss" scoped>
-$primary-color: #667eea;
-$shadow-medium: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
-
 /* 用户卡片 - 增强视觉效果 */
 .user-card {
     display: flex;
@@ -59,7 +57,7 @@ $shadow-medium: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
     border-radius: 20rpx;
     padding: 30rpx;
     margin-bottom: 20rpx;
-    box-shadow: $shadow-medium;
+    box-shadow: $hy-box-shadow;
     animation: fadeInUp 0.5s ease;
     // 添加悬浮效果
     transform: translateY(0);
@@ -123,7 +121,7 @@ $shadow-medium: 0 8rpx 30rpx rgba(0, 0, 0, 0.1);
 .edit-btn {
     display: flex;
     align-items: center;
-    background: $hy-background--box;
+    background: $hy-background--close;
     padding: 6rpx 20rpx;
     border-radius: 20rpx;
     // 添加交互动画

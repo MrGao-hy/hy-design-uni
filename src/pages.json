@@ -824,7 +824,7 @@
     "easycom": {
         "autoscan": true,
         "custom": {
-            "^hy-(.*)": "hy-app/components/hy-$1/hy-$1.vue"
+            "^hy-(.*)": "./package/components/hy-$1/hy-$1.vue"
         }
     }
 }

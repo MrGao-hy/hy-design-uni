@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import uni from '@dcloudio/vite-plugin-uni'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,20 +15,17 @@ export default defineConfig({
                     optimizeImports: false
                 }
             }
+        }),
+        visualizer({
+            filename: 'dist/stats.html', // 生成报告
+            open: true, // 打包完自动打开
+            gzipSize: true, // 同时显示 gzip 体积
+            brotliSize: true
         })
     ],
     resolve: {
         alias: {
             '@': resolve(__dirname, 'src')
-        }
-    },
-    css: {
-        preprocessorOptions: {
-            scss: {
-                additionalData:
-                    '@use "@/package/libs/css/theme.scss" as *;\n' +
-                    '@use "@/package/libs/css/_mixin.scss" as *;\n'
-            }
         }
     }
 })

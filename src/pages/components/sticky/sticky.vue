@@ -8,14 +8,14 @@
 
         <!-- 1. 基础吸顶：比如分类 Tabs -->
         <!-- offset-top: 0 表示吸附在最顶端 -->
-        <StickyHeader :offset-top="offsetTop1" :duration="200" @change="onStickyChange">
+        <hy-sticky :offset-top="offsetTop1" :duration="200" @change="onStickyChange">
             <view class="tabs-box" :class="{ 'active-shadow': isTabFixed }">
                 <view class="tab-item active">推荐</view>
                 <view class="tab-item">热门</view>
                 <view class="tab-item">最新</view>
                 <view class="tab-item">视频</view>
             </view>
-        </StickyHeader>
+        </hy-sticky>
 
         <!-- 模拟长列表内容 -->
         <view class="content-list">
@@ -24,11 +24,11 @@
 
         <!-- 2. 二级吸顶：比如筛选栏 -->
         <!--         offset-top: 44px (假设上面的 Tabs 高度是 44px) -->
-        <StickyHeader :offset-top="offsetTop2">
+        <hy-sticky :offset-top="offsetTop2">
             <view class="filter-box">
                 <text>筛选条件：全部时间</text>
             </view>
-        </StickyHeader>
+        </hy-sticky>
 
         <!-- 模拟更多内容 -->
         <view class="content-list">
@@ -39,7 +39,8 @@
 
 <script setup lang="ts">
 import { type Ref, ref } from 'vue'
-import StickyHeader from '@/package/components/hy-sticky/hy-sticky.vue'
+import HySticky from '@/package/components/hy-sticky/hy-sticky.vue'
+import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 

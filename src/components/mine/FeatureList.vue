@@ -33,6 +33,7 @@
 
 <script setup lang="ts">
 import { IconConfig } from '@/package'
+import HyIcon from '@/package/components/hy-icon/hy-icon.vue'
 
 interface FeatureItem {
     key: string
@@ -117,7 +118,7 @@ const handleFeatureClick = (item: FeatureItem) => {
     border-bottom: $hy-border-line;
 
     &:active {
-        background-color: #fafafa;
+        background-color: $hy-background--hover;
         // 添加缩放效果
         transform: scale(0.98);
     }

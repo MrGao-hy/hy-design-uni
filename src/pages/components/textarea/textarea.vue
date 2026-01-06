@@ -6,6 +6,7 @@
                 v-model="value"
                 :disabled="disabled"
                 :count="count"
+                selectionEnd="10"
                 :auto-height="autoHeight"
             ></hy-textarea>
         </view>

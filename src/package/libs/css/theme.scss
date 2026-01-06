@@ -1,4 +1,4 @@
-@use "vars" as *;
+@use "_vars" as *;
 /* 主题是相关颜色 */
 $hy-primary: var(--hy-theme-color, #2979ff) !default;
 $hy-primary-dark: var(--hy-theme--dark, #2b85e4) !default;

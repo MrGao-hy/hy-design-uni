@@ -71,14 +71,16 @@
 
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
-import HyInput from '@/package/components/hy-input/hy-input.vue'
-import HySubsection from '@/package/components/hy-subsection/hy-subsection.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { IconConfig } from '@/package'
 import { useThemeStore } from '@/store'
-import HySwitch from '../../../package/components/hy-switch/hy-switch.vue'
 import type { InputType } from '@uni-helper/uni-types'
 import { storeToRefs } from 'pinia'
+// 组件
+import HySwitch from '../../../package/components/hy-switch/hy-switch.vue'
+import HyInput from '@/package/components/hy-input/hy-input.vue'
+import HySubsection from '@/package/components/hy-subsection/hy-subsection.vue'
+import HyButton from '@/package/components/hy-button/hy-button.vue'
+import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 
 const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)

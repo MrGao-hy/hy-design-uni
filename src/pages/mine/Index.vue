@@ -1,52 +1,55 @@
 <template>
-    <hy-config-provider custom-class="mine-page" :theme-color="color" :theme="darkMode">
-        <!-- 主内容区域 -->
-        <scroll-view class="main-content" scroll-y :show-scrollbar="false">
-            <!-- 用户信息卡片 -->
-            <user-card :user-info="userInfo" edit-text="编辑资料" @edit="handleEditProfile" />
+    <view class="mine">
+        <hy-config-provider custom-class="mine-page" :theme-color="color" :theme="darkMode">
+            <!-- 主内容区域 -->
+            <scroll-view class="main-content" scroll-y :show-scrollbar="false">
+                <!-- 用户信息卡片 -->
+                <user-card :user-info="userInfo" edit-text="编辑资料" @edit="handleEditProfile" />
 
-            <!-- 统计数据卡片 -->
-            <stats-card :stats="stats" @click="handleStatClick" />
+                <!-- 统计数据卡片 -->
+                <stats-card :stats="stats" @click="handleStatClick" />
 
-            <!-- 功能列表：我的服务 -->
-            <feature-list
-                title="我的服务"
-                :features="serviceFeatures"
-                @click="handleFeatureClick"
-                @navigate="handleNavigate"
-            />
+                <!-- 功能列表：我的服务 -->
+                <feature-list
+                    title="我的服务"
+                    :features="serviceFeatures"
+                    @click="handleFeatureClick"
+                    @navigate="handleNavigate"
+                />
 
-            <!-- 功能列表：设置和帮助 -->
-            <feature-list
-                title="设置与帮助"
-                :features="settingFeatures"
-                @click="handleFeatureClick"
-                @navigate="handleNavigate"
-            />
+                <!-- 功能列表：设置和帮助 -->
+                <feature-list
+                    title="设置与帮助"
+                    :features="settingFeatures"
+                    @click="handleFeatureClick"
+                    @navigate="handleNavigate"
+                />
 
-            <!-- 退出登录按钮 -->
-            <logout-button
-                button-text="退出登录"
-                :loading="isLoggingOut"
-                :disabled="isLoggingOut"
-                loading-text="退出中..."
-                @logout="handleLogout"
-            />
-        </scroll-view>
-    </hy-config-provider>
+                <!-- 退出登录按钮 -->
+                <logout-button
+                    button-text="退出登录"
+                    :loading="isLoggingOut"
+                    :disabled="isLoggingOut"
+                    loading-text="退出中..."
+                    @logout="handleLogout"
+                />
+            </scroll-view>
+        </hy-config-provider>
+    </view>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
+import { IconConfig } from '@/package'
 
 // 导入组件
 import UserCard from '@/components/mine/UserCard.vue'
 import StatsCard from '@/components/mine/StatsCard.vue'
 import FeatureList from '@/components/mine/FeatureList.vue'
 import LogoutButton from '@/components/mine/LogoutButton.vue'
-import { IconConfig } from '@/package'
+import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 
 const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)
@@ -164,11 +167,7 @@ const navigationMap: Record<string, string> = {
 }
 
 // 处理编辑资料
-const handleEditProfile = () => {
-    uni.navigateTo({
-        url: '/pages/edit-profile/index'
-    })
-}
+const handleEditProfile = () => {}
 
 // 处理统计项点击
 const handleStatClick = (key: string) => {
@@ -307,23 +306,25 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .hy-theme--dark {
     &.mine-page {
-        background: linear-gradient(135deg, #4a5fc7 0%, #5a3a8a 100%);
+        //background: linear-gradient(135deg, #4a5fc7 0%, #5a3a8a 100%);
     }
 }
-:deep(.mine-page) {
-    /* ifdef H5 */
-    height: calc(100vh - 94px);
-    /* endif */
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.mine {
+    :deep(.mine-page) {
+        //background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        //background: resultColor(180deg, #667eea, ('dark', 'light'), (#2b85e4, #ecf5ff), (0%, 100%));
+        background: resultColor(180deg, #2979ff, ('dark', 'light'), (#2b85e4, #ecf5ff), (0%, 100%));
+        height: calc(100vh - 94px);
 
-    /* 主内容区域 */
-    .main-content {
-        height: 100%;
-        padding: $hy-border-margin-padding-base;
-        box-sizing: border-box;
+        /* 主内容区域 */
+        .main-content {
+            height: 100%;
+            padding: $hy-border-margin-padding-base;
+            box-sizing: border-box;
+        }
     }
 }
 </style>

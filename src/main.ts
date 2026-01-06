@@ -1,4 +1,4 @@
-import { useShare } from 'hy-app'
+import { useShare } from '@/package'
 import { createApp } from 'vue'
 import App from './App.vue'
 import pinia from '@/store'
