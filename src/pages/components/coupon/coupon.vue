@@ -1,7 +1,7 @@
 <template>
     <hy-config-provider :theme-color="color" :theme="darkMode">
         <view class="hy-title">优惠券组件示例</view>
-        <view class="hy-container hy-flex">
+        <view class="hy-container">
             <template v-for="item in list" :key="item.id">
                 <hy-coupon
                     :title="item.name"
@@ -79,7 +79,7 @@
         </view>
 
         <view class="hy-title">优惠券禁用</view>
-        <view class="hy-container hy-flex">
+        <view class="hy-container">
             <template v-for="item in list2" :key="item.id">
                 <hy-coupon
                     :title="item.name"
@@ -216,60 +216,4 @@ const onUse = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-.coupon-demo-page {
-    padding: 20px;
-    background-color: $hy-background;
-}
-
-.page-header {
-    margin-bottom: 24px;
-    text-align: center;
-}
-
-.page-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: $hy-text-color;
-    display: block;
-    margin-bottom: 8px;
-}
-
-.page-subtitle {
-    font-size: 14px;
-    color: $hy-text-color--2;
-    display: block;
-}
-
-.demo-section {
-    margin-bottom: 32px;
-}
-
-.section-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: $hy-text-color;
-    margin-bottom: 16px;
-    display: block;
-    padding-left: 8px;
-    border-left: 3px solid $hy-primary;
-}
-
-.coupon-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.responsive-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 16px;
-}
-
-@media (max-width: 768px) {
-    .responsive-list {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
+<style lang="scss" scoped></style>

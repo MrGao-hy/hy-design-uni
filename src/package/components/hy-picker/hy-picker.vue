@@ -182,12 +182,21 @@ watch(
             let arr
             if (isArray(newValue)) {
                 arr = newValue.map((item, index) => {
-                    return props.columns[index].findIndex((val) => item === val)
+                    return (
+                        props.columns.some(Array.isArray) &&
+                        props.columns[index]?.findIndex((val) => item === val)
+                    )
                 })
             } else {
-                arr = newValue.split(props.separator).map((item, index) => {
-                    return props.columns[index].findIndex((val) => item === val)
-                })
+                if (newValue.includes(props.separator)) {
+                    arr = newValue.split(props.separator).map((item, index) => {
+                        return props.columns[index].findIndex((val) => item === val)
+                    })
+                } else {
+                    arr = props.columns.findIndex(
+                        (val) => newValue === val || newValue === val.value
+                    )
+                }
             }
             setIndexs(arr)
         }

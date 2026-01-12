@@ -48,13 +48,14 @@ $hy-background--track: var(--hy-background--track, #F6F6F6) !default; // 轨道�
 $hy-background--empty: var(--hy-background--empty, #F3F3F3) !default; // 搜索背景色
 $hy-background--skeleton: var(--hy-background--skeleton, #eee) !default; // 骨架屏背景色
 $hy-background--hover: var(--hy-background--hover, rgba(0,0,0,0.05)) !default; // 点击状态
-$hy-background-mask: var(--hy-background-mask, rgba(0, 0, 0, 0.5)); //遮罩颜色
-$hy-background--active: var(--hy-background--active, #FFFFFF); // 选中背景色
-$hy-background--close: var(--hy-background--close, #f0f0f0); // 关闭背景色
-$hy-background--box: var(--hy-background--box, #FFFFFF); // 盒子背景色
-$hy-background--table-header: var(--hy-background--table-header, #FAFAFA); // 表头背景色
+$hy-background-mask: var(--hy-background-mask, rgba(0, 0, 0, 0.5)) !default; //遮罩颜色
+$hy-background--active: var(--hy-background--active, #FFFFFF) !default; // 选中背景色
+$hy-background--close: var(--hy-background--close, #f0f0f0) !default; // 关闭背景色
+$hy-background--box: var(--hy-background--box, #FFFFFF) !default; // 盒子背景色
+$hy-background--line: var(--hy-background--line, rgba(0, 0, 0, 0.15)) !default; // 细线背景色
+$hy-background--table-header: var(--hy-background--table-header, #FAFAFA) !default; // 表头背景色
 $hy-background-image--mask--two-flanks: var(--hy-background-image--mask--two-flanks, linear-gradient(180deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6)),
-        linear-gradient(0deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6))); // 向两边形成雾霾形状
+        linear-gradient(0deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6))) !default; // 向两边形成雾霾形状
 
 /* 文字尺寸 */
 $hy-font-size-sm: 24rpx; // 提示文字大小

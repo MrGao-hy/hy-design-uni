@@ -27,7 +27,7 @@
         @click="clickHandler"
         :class="[
             'hy-button',
-            border && 'hy-button__no-border',
+            !border && 'hy-button__no-border',
             !disabled && 'hy-button__no-disabled',
             bemClass,
             customClass

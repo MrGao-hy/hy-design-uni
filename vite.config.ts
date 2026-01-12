@@ -18,9 +18,7 @@ export default defineConfig({
         }),
         visualizer({
             filename: 'dist/stats.html', // 生成报告
-            open: true, // 打包完自动打开
-            gzipSize: true, // 同时显示 gzip 体积
-            brotliSize: true
+            gzipSize: true // 同时显示 gzip 体积
         })
     ],
     resolve: {

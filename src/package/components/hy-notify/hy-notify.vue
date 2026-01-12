@@ -101,7 +101,7 @@ const containerStyle = computed(() => {
         position: 'fixed',
         left: 0,
         right: 0,
-        zIndex: 10076
+        zIndex: 888
     }
     return style
 })

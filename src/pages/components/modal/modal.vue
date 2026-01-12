@@ -45,7 +45,7 @@ const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)
 const show = ref(false)
 const formRef = ref()
-const showAsync = ref(true)
+const showAsync = ref(false)
 const asyncClose = ref(false)
 const mode = ref('')
 const formData = ref({
@@ -70,7 +70,8 @@ const list = [
     { title: '有标题', value: 'title' },
     { title: '带取消按钮', value: 'showCancelButton' },
     { title: '对调按钮', value: 'buttonReverse' },
-    { title: '异步弹窗', value: 'async' }
+    { title: '异步弹窗', value: 'async' },
+    { title: '调用接口', value: 'hooks' }
 ]
 
 const onClick = (temp: AnyObject) => {
@@ -90,7 +91,7 @@ const onAsyncClose = () => {
             asyncClose.value = true
             setTimeout(() => {
                 showAsync.value = false
-                asyncClose.value = true
+                asyncClose.value = false
             }, 2000)
         })
         .catch((err) => {})

@@ -146,7 +146,7 @@
     /* 线条样式 */
     @include e(line) {
       position: absolute;
-      background: $hy-border-color;
+      background: $hy-background--line;
 
       &.finish {
         background-color: $hy-primary;
@@ -157,18 +157,16 @@
       &.error {
         background-color: $hy-error;
       }
-      &.wait {
-        background-color: $hy-info;
-      }
+      //&.wait {
+      //  background: $hy-background--track;
+      //}
 
       @include m(row) {
-        top: $hy-border-margin-padding-base;
         height: 1px;
       }
 
       @include m(column) {
         width: 1px;
-        left: $hy-border-margin-padding-base;
       }
     }
   }
