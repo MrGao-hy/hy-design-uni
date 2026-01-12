@@ -5,38 +5,38 @@
             <hy-picker v-model="value" :columns="columns" has-input></hy-picker>
         </view>
 
-        <view class="hy-title">修改分隔符</view>
-        <view class="hy-container">
-            <hy-picker
-                v-model="value_2"
-                :columns="columns_2"
-                has-input
-                :separator="'，'"
-            ></hy-picker>
-        </view>
+        <!--        <view class="hy-title">修改分隔符</view>-->
+        <!--        <view class="hy-container">-->
+        <!--            <hy-picker-->
+        <!--                v-model="value_2"-->
+        <!--                :columns="columns_2"-->
+        <!--                has-input-->
+        <!--                :separator="'，'"-->
+        <!--            ></hy-picker>-->
+        <!--        </view>-->
 
-        <view class="hy-title">多列联动</view>
-        <view class="hy-container">
-            <hy-picker
-                ref="pickerRef"
-                v-model="value_3"
-                :columns="columns_3"
-                has-input
-                @change="changeHandler"
-            ></hy-picker>
-        </view>
+        <!--        <view class="hy-title">多列联动</view>-->
+        <!--        <view class="hy-container">-->
+        <!--            <hy-picker-->
+        <!--                ref="pickerRef"-->
+        <!--                v-model="value_3"-->
+        <!--                :columns="columns_3"-->
+        <!--                has-input-->
+        <!--                @change="changeHandler"-->
+        <!--            ></hy-picker>-->
+        <!--        </view>-->
 
-        <view class="hy-title">自定义插槽</view>
-        <view class="hy-container">
-            <hy-picker v-model="value" :columns="columns_2" has-input>
-                <template #toolbar-right>
-                    <view>自定义按钮</view>
-                </template>
-                <template #toolbar-bottom>
-                    <view style="text-align: center; color: red">我是底部信息</view>
-                </template>
-            </hy-picker>
-        </view>
+        <!--        <view class="hy-title">自定义插槽</view>-->
+        <!--        <view class="hy-container">-->
+        <!--            <hy-picker v-model="value" :columns="columns_2" has-input>-->
+        <!--                <template #toolbar-right>-->
+        <!--                    <view>自定义按钮</view>-->
+        <!--                </template>-->
+        <!--                <template #toolbar-bottom>-->
+        <!--                    <view style="text-align: center; color: red">我是底部信息</view>-->
+        <!--                </template>-->
+        <!--            </hy-picker>-->
+        <!--        </view>-->
     </hy-config-provider>
 </template>
 
@@ -51,7 +51,7 @@ const themeStore = useThemeStore()
 
 const { color, darkMode } = storeToRefs(themeStore)
 
-const value = ref('')
+const value = ref('冷月雪')
 const value_2 = ref('欧元，票子')
 const value_3 = ref('')
 const pickerRef = ref()

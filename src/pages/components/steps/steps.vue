@@ -3,17 +3,24 @@
         <view class="hy-title">基础使用</view>
         <view style="overflow: auto; width: 400px">
             <hy-steps
-                :list="list"
+                :list="list_1"
                 v-model:current="current"
-                :direction="direction"
+                direction="row"
+                :dot="dot"
+            ></hy-steps>
+        </view>
+
+        <view class="hy-title">纵向</view>
+        <view style="overflow: auto; width: 400px">
+            <hy-steps
+                :list="list2"
+                v-model:current="current"
+                direction="column"
                 :dot="dot"
             ></hy-steps>
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">指示点</view>
-            <hy-subsection :list="list_1" v-model="direction"></hy-subsection>
-
             <view class="hy-title">指示点</view>
             <hy-switch v-model="dot"></hy-switch>
 
@@ -39,7 +46,18 @@ const direction = ref<HyApp.DirectionType>('column')
 const dot = ref(false)
 
 const current = ref(3)
-const list = ref([
+const list_1 = ref([
+    {
+        title: '注册用户'
+    },
+    {
+        title: '填写基本信息'
+    },
+    {
+        title: '登录'
+    }
+])
+const list2 = ref([
     {
         title: '已下单',
         docs: '【深证市】您的快递正在站点，快递员正在为你打包，请耐心等待发货',
@@ -58,10 +76,6 @@ const list = ref([
         error: true
     }
 ])
-const list_1 = [
-    { name: '横向', value: 'row' },
-    { name: '竖向', value: 'column' }
-]
 </script>
 
 <style scoped lang="scss"></style>

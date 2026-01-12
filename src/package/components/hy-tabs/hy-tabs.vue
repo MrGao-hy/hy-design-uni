@@ -113,7 +113,7 @@
             :style="{ height: swiperHeight }"
         >
             <swiper-item class="swiper-item" v-for="(item, i) in list" :key="i">
-                <slot :record="item.content" />
+                <slot :record="item" :index="i" />
             </swiper-item>
         </swiper>
     </view>
@@ -325,7 +325,7 @@ const animationFinish = (e: any) => {
     innerCurrent.value = e.detail.current
     resize()
     if (e.detail.source === 'touch') {
-        emit('change', props.list[props.current], props.current)
+        emit('change', props.list[innerCurrent.value], innerCurrent.value)
     }
 }
 </script>

@@ -1,248 +1,211 @@
 <template>
-    <view class="container">
-        <view class="header">
-            <text class="title">移动端表格组件示例</text>
+    <view class="test-container">
+        <text class="test-title">SwipeAction 组件测试</text>
+
+        <view class="test-section">
+            <text class="test-section-title">1. 基本用法 - 右侧滑动</text>
+            <SwipeAction
+                :right-buttons="rightButtons"
+                @swipestart="handleSwipeStart"
+                @swipeend="handleSwipeEnd"
+                @buttontap="handleButtonTap"
+            >
+                <view class="test-item">
+                    <text>向右滑动查看操作</text>
+                </view>
+            </SwipeAction>
         </view>
 
-        <sticky-table
-            :columns="columns"
-            :data="tableData"
-            :height="300"
-            :stripe="true"
-            :show-header="true"
-            :sortable="true"
-            @sort-change="handleSortChange"
-            @row-click="handleRowClick"
-        >
-            <!-- 自定义操作列 -->
-            <template #right="{ row, col, index }">
-                <hy-flex v-if="col.key === 'action'" gap="2">
-                    <hy-button text="编辑" size="mini" plain :border="false"></hy-button>
-                    <hy-button
-                        type="error"
-                        size="mini"
-                        text="删除"
-                        plain
-                        :border="false"
-                    ></hy-button>
-                </hy-flex>
-                <text v-else>{{ row[col.key] }}</text>
-            </template>
+        <view class="test-section">
+            <text class="test-section-title">2. 双侧滑动</text>
+            <SwipeAction
+                :left-buttons="leftButtons"
+                :right-buttons="rightButtons"
+                @swipestart="handleSwipeStart"
+                @swipeend="handleSwipeEnd"
+                @buttontap="handleButtonTap"
+            >
+                <view class="test-item">
+                    <text>向左或向右滑动查看操作</text>
+                </view>
+            </SwipeAction>
+        </view>
 
-            <!-- 自定义表头 -->
-            <template #head="{ col }">
-                <hy-flex :vertical="true" align="center" v-if="col.key === 'salary'">
-                    <text>{{ col.title }}</text>
-                    <text :style="{ fontSize: '10px', color: '#999' }">(点击排序)</text>
-                </hy-flex>
-                <text v-else>{{ col.title }}</text>
-            </template>
-        </sticky-table>
+        <view class="test-section">
+            <text class="test-section-title">3. 带确认操作</text>
+            <SwipeAction
+                :right-buttons="confirmButtons"
+                @swipestart="handleSwipeStart"
+                @swipeend="handleSwipeEnd"
+                @buttontap="handleButtonTap"
+            >
+                <view class="test-item">
+                    <text>向右滑动，点击删除需要确认</text>
+                </view>
+            </SwipeAction>
+        </view>
 
-        <view class="control-panel">
-            <button class="btn" @tap="addRow">添加数据</button>
-            <button class="btn" @tap="toggleStripe">切换斑马纹</button>
-            <button class="btn" @tap="changeHeight">改变高度</button>
+        <view class="test-section">
+            <text class="test-section-title">4. 禁用状态</text>
+            <SwipeAction :right-buttons="rightButtons" disabled>
+                <view class="test-item">
+                    <text>此条目已禁用，无法滑动</text>
+                </view>
+            </SwipeAction>
+        </view>
+
+        <view class="test-section">
+            <text class="test-section-title">5. 默认展开</text>
+            <SwipeAction
+                :right-buttons="rightButtons"
+                default-swiped="right"
+                @swipestart="handleSwipeStart"
+                @swipeend="handleSwipeEnd"
+                @buttontap="handleButtonTap"
+            >
+                <view class="test-item">
+                    <text>默认向右展开</text>
+                </view>
+            </SwipeAction>
+        </view>
+
+        <view class="test-log">
+            <text class="test-log-title">事件日志：</text>
+            <text v-for="(log, index) in logs" :key="index" class="test-log-item">
+                {{ log }}
+            </text>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
+import SwipeAction from '@/components/TheTest.vue'
 import { ref } from 'vue'
-import StickyTable from '@/package/components/hy-table/hy-table.vue'
-import HyFlex from '@/package/components/hy-flex/hy-flex.vue'
-import HyButton from '@/package/components/hy-button/hy-button.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
 
-interface TableData {
-    id: number
-    name: string
-    age: number
-    gender: string
-    department: string
-    salary: number
-    joinDate: string
-    status: string
-}
+const logs = ref<string[]>([])
 
-const stripe = ref(true)
-const tableHeight = ref(500)
-
-const columns = ref([
-    { title: 'ID', key: 'id', width: 80 },
-    { title: '姓名', key: 'name', width: 80, fixed: 'left', ellipsis: true },
-    { title: '年龄', key: 'age', width: 80 },
-    { title: '性别', key: 'gender', width: 80, align: 'center' },
-    { title: '部门', key: 'department', width: 120, ellipsis: true },
-    { title: '薪资', key: 'salary', width: 100, sortable: true, slotHeader: 'customHeader' },
-    { title: '操作', key: 'action', width: 100, fixed: 'right', slot: 'action' }
-])
-
-const tableData = ref<TableData[]>([
+const rightButtons = [
     {
-        id: 1,
-        name: '张三张三张三张三',
-        age: 28,
-        gender: '男',
-        department: '技术部',
-        salary: 15000,
-        joinDate: '2020-01-15',
-        status: 'active'
+        text: '编辑',
+        color: '#fff',
+        bgColor: '#1890ff'
     },
     {
-        id: 2,
-        name: '李四',
-        age: 32,
-        gender: '女',
-        department: '市场部',
-        salary: 12000,
-        joinDate: '2019-05-20',
-        status: 'inactive'
-    },
-    {
-        id: 3,
-        name: '王五',
-        age: 25,
-        gender: '男',
-        department: '产品部',
-        salary: 18000,
-        joinDate: '2021-03-10',
-        status: 'active'
-    },
-    {
-        id: 4,
-        name: '赵六',
-        age: 35,
-        gender: '女',
-        department: '人力资源部',
-        salary: 10000,
-        joinDate: '2018-08-25',
-        status: 'pending'
-    },
-    {
-        id: 5,
-        name: '孙七',
-        age: 29,
-        gender: '男',
-        department: '财务部',
-        salary: 20000,
-        joinDate: '2017-11-05',
-        status: 'active'
-    },
-    {
-        id: 6,
-        name: '周八',
-        age: 31,
-        gender: '女',
-        department: '销售部',
-        salary: 22000,
-        joinDate: '2020-06-30',
-        status: 'inactive'
-    },
-    {
-        id: 7,
-        name: '吴九',
-        age: 27,
-        gender: '男',
-        department: '研发部',
-        salary: 25000,
-        joinDate: '2022-02-14',
-        status: 'active'
-    },
-    {
-        id: 8,
-        name: '郑十',
-        age: 33,
-        gender: '女',
-        department: '运营部',
-        salary: 13000,
-        joinDate: '2019-09-18',
-        status: 'pending'
+        text: '删除',
+        color: '#fff',
+        bgColor: '#ff4d4f'
     }
-])
+]
 
-const handleSortChange = (field: string, order: 'asc' | 'desc') => {
-    console.log('排序变化:', field, order)
-    uni.showToast({
-        title: `按${field} ${order === 'asc' ? '升序' : '降序'}排序`,
-        icon: 'none'
-    })
-}
-
-const handleRowClick = (row: TableData, index: number) => {
-    console.log('点击行:', row, index)
-}
-
-const handleEdit = (row: TableData, index: number) => {
-    uni.showModal({
-        title: '编辑',
-        content: `确定要编辑 ${row.name} 吗？`,
-        success: (res) => {
-            if (res.confirm) {
-                console.log('编辑:', row)
-                uni.showToast({
-                    title: '编辑成功',
-                    icon: 'success'
-                })
-            }
-        }
-    })
-}
-
-const handleDelete = (row: TableData, index: number) => {
-    uni.showModal({
-        title: '删除',
-        content: `确定要删除 ${row.name} 吗？`,
-        success: (res) => {
-            if (res.confirm) {
-                tableData.value.splice(index, 1)
-                uni.showToast({
-                    title: '删除成功',
-                    icon: 'success'
-                })
-            }
-        }
-    })
-}
-
-const getStatusText = (status: string) => {
-    const map: Record<string, string> = {
-        active: '在职',
-        inactive: '离职',
-        pending: '待入职'
+const leftButtons = [
+    {
+        text: '置顶',
+        color: '#fff',
+        bgColor: '#52c41a'
+    },
+    {
+        text: '标记',
+        color: '#fff',
+        bgColor: '#faad14'
     }
-    return map[status] || status
+]
+
+const confirmButtons = [
+    {
+        text: '编辑',
+        color: '#fff',
+        bgColor: '#1890ff'
+    },
+    {
+        text: '删除',
+        color: '#fff',
+        bgColor: '#ff4d4f',
+        confirmType: 'tap',
+        confirmText: '确认删除?'
+    }
+]
+
+const addLog = (message: string) => {
+    logs.value.unshift(`${new Date().toLocaleTimeString()}: ${message}`)
+    if (logs.value.length > 10) {
+        logs.value.pop()
+    }
 }
 
-const addRow = () => {
-    const newId = tableData.value.length + 1
-    tableData.value.push({
-        id: newId,
-        name: `新员工${newId}`,
-        age: Math.floor(Math.random() * 20) + 20,
-        gender: Math.random() > 0.5 ? '男' : '女',
-        department: ['技术部', '市场部', '产品部'][Math.floor(Math.random() * 3)],
-        salary: Math.floor(Math.random() * 10000) + 10000,
-        joinDate: '2023-01-01',
-        status: ['active', 'inactive', 'pending'][Math.floor(Math.random() * 3)]
-    })
-    uni.showToast({
-        title: '添加成功',
-        icon: 'success'
-    })
+const handleSwipeStart = (data: any) => {
+    addLog(`swipestart: ${JSON.stringify(data)}`)
 }
 
-const toggleStripe = () => {
-    stripe.value = !stripe.value
-    uni.showToast({
-        title: stripe.value ? '开启斑马纹' : '关闭斑马纹',
-        icon: 'none'
-    })
+const handleSwipeEnd = (data: any) => {
+    addLog(`swipeend: ${JSON.stringify(data)}`)
 }
 
-const changeHeight = () => {
-    tableHeight.value = tableHeight.value === 500 ? 300 : 500
+const handleButtonTap = (data: any) => {
+    addLog(`buttontap: ${JSON.stringify(data)}`)
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.test-container {
+    padding: 20rpx;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+}
+
+.test-title {
+    font-size: 36rpx;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30rpx;
+    text-align: center;
+}
+
+.test-section {
+    margin-bottom: 30rpx;
+    background-color: #fff;
+    border-radius: 12rpx;
+    padding: 20rpx;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.test-section-title {
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 20rpx;
+}
+
+.test-item {
+    padding: 30rpx;
+    background-color: #fafafa;
+    border-radius: 8rpx;
+    font-size: 28rpx;
+    color: #333;
+}
+
+.test-log {
+    margin-top: 40rpx;
+    background-color: #fff;
+    border-radius: 12rpx;
+    padding: 20rpx;
+    box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+    max-height: 400rpx;
+    overflow-y: auto;
+}
+
+.test-log-title {
+    font-size: 28rpx;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 15rpx;
+    display: block;
+}
+
+.test-log-item {
+    font-size: 24rpx;
+    color: #999;
+    line-height: 40rpx;
+    display: block;
+    word-break: break-all;
+}
+</style>

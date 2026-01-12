@@ -47,10 +47,10 @@ import HyGrid from '@/package/components/hy-grid/hy-grid.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
+import { onNavigationBarButtonTap } from '@dcloudio/uni-app'
 const themeStore = useThemeStore()
 
 const { color, darkMode } = storeToRefs(themeStore)
-
 // 图标集合
 const icons = reactive([
     {
@@ -584,6 +584,13 @@ const icons = reactive([
         name: 'BAR_CHART'
     }
 ])
+
+onNavigationBarButtonTap((e: Page.NavigationBarButtonTapOption) => {
+    if (e.index === 0) {
+        // 用户点了“分享”
+        window.open(`${config.url}/#/pages/components/icon/icon`, '_blank')
+    }
+})
 </script>
 
 <style scoped lang="scss">

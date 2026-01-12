@@ -1,7 +1,7 @@
 <template>
     <hy-transition mode="fade" :show="show" :custom-style="{ display: 'inline-block' }">
         <view class="hy-tag__wrapper cursor-pointer">
-            <view :class="tagClass" @tap.stop="clickHandler" :style="tagStyle">
+            <view :class="tagClass" @tap="clickHandler" :style="tagStyle">
                 <slot v-if="$slots.icon" name="icon"></slot>
                 <hy-icon
                     v-else-if="icon?.name"

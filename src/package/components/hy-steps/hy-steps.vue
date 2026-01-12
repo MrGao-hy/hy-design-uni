@@ -8,7 +8,7 @@
                     :class="[
                         `hy-steps-item__line--${direction}`,
                         'hy-steps-item__line',
-                        statusClass(i + 1, list[i + 1].error, '====')
+                        statusClass(i + 1, list[i + 1].error)
                     ]"
                     :style="lineStyle(item, i)"
                 ></view>
@@ -145,6 +145,7 @@ defineOptions({})
 const props = defineProps(stepsProps)
 const emit = defineEmits<IStepsEmits>()
 
+const itemRect = ref<UniApp.NodeInfo[]>([])
 const stepsRects = ref<UniApp.NodeInfo[]>([])
 const instance = getCurrentInstance()
 
@@ -180,18 +181,22 @@ const textColor = computed(() => {
 })
 
 /**
- * @description 线条样式
+ * 线条样式
  * */
 const lineStyle = computed(() => {
     return (temp: StepListVo, index: number): CSSProperties => {
         const style: CSSProperties = {}
         if (!stepsRects.value.length) return style
         if (props.direction === 'row') {
-            style.width = addUnit(stepsRects.value[index].width! - 25)
-            style.left = addUnit(stepsRects.value[index].width! / 2 + 12)
+            style.width = addUnit(stepsRects.value[index].width! - itemRect.value[index].width!)
+            style.left = addUnit(
+                stepsRects.value[index].width! / 2 + itemRect.value[index].width! / 2
+            )
+            style.top = addUnit(itemRect.value[index].height! / 2)
         } else {
-            style.height = addUnit(stepsRects.value[index].height! - 30)
-            style.top = addUnit(25)
+            style.height = addUnit(stepsRects.value[index].height! - itemRect.value[index].height!)
+            style.left = addUnit(itemRect.value[index].width! / 2)
+            style.top = addUnit(itemRect.value[index].height)
         }
         style.backgroundColor = temp.error ? '' : index < props.current ? '' : props.inactiveColor
         return style
@@ -202,11 +207,10 @@ const itemStyleInner = computed(() => {
     return {}
 })
 /**
- * @description 状态类名
+ * 状态类名
  * */
 const statusClass = computed(() => {
-    return (index: number, error: boolean = false, line: string) => {
-        console.log(index, props.current, line, error)
+    return (index: number, error: boolean = false) => {
         if (props.current == index) {
             return error ? 'error' : 'process'
         } else if (props.current > index) {
@@ -258,6 +262,10 @@ onMounted(() => {
 const getStepsItemRect = () => {
     getRect('.hy-steps-item', true, instance).then((rect) => {
         stepsRects.value = rect as UniApp.NodeInfo[]
+    })
+
+    getRect('.hy-steps-item__wrapper', true, instance).then((rect) => {
+        itemRect.value = rect as UniApp.NodeInfo[]
     })
 }
 </script>
