@@ -148,7 +148,8 @@ const innerColumns = ref<any[][]>([])
 // 上一次的变化列索引
 const columnIndex = ref<number>(0)
 const showByClickInput = ref<boolean>(false)
-const currentActiveValue = ref<number[]>([]) //当前用户选中，但是还没确认的值，用户没做change操作时候，点击确认可以默认选中第一个
+// 当前用户选中，但是还没确认的值，用户没做change操作时候，点击确认可以默认选中第一个
+const currentActiveValue = ref<number[]>([])
 
 /**
  * 设置整体各列的columns的值
@@ -177,30 +178,21 @@ watch(
  * */
 watch(
     () => props.modelValue,
-    (newValue: string | unknown[]) => {
-        if (newValue) {
-            let arr
-            if (isArray(newValue)) {
-                arr = newValue.map((item, index) => {
-                    return (
-                        props.columns.some(Array.isArray) &&
-                        props.columns[index]?.findIndex((val) => item === val)
+    (v) =>
+        setIndexs(
+            (isArray(v)
+                ? v
+                : String(v).includes(props.separator)
+                  ? String(v).split(props.separator)
+                  : [v]
+            )
+                .map((item, i) =>
+                    props.columns[i].findIndex(
+                        (val) => (typeof val === 'object' ? val[props.valueKey] : val) === item
                     )
-                })
-            } else {
-                if (newValue.includes(props.separator)) {
-                    arr = newValue.split(props.separator).map((item, index) => {
-                        return props.columns[index].findIndex((val) => item === val)
-                    })
-                } else {
-                    arr = props.columns.findIndex(
-                        (val) => newValue === val || newValue === val.value
-                    )
-                }
-            }
-            setIndexs(arr)
-        }
-    },
+                )
+                .map((n) => (n < 0 ? 0 : n))
+        ),
     { immediate: true }
 )
 
@@ -219,16 +211,16 @@ watch(
  * 已选&&已确认的值显示在input上面的文案
  * */
 const inputLabelValue = computed((): string => {
-    let firstItem = innerColumns.value[0] && innerColumns.value[0][0]
+    let firstItem = innerColumns.value[0][0]
     // //区分是不是对象数组
     if (firstItem && Object.prototype.toString.call(firstItem) === '[object Object]') {
         let res: Record<string, any>[] = []
         innerColumns.value.map((ite, i) => {
             res.push(
                 ...innerColumns.value[i]?.filter((item) => {
-                    return (
-                        isArray(props.modelValue) && props.modelValue.includes(item[props.valueKey])
-                    )
+                    return isArray(props.modelValue)
+                        ? props.modelValue.includes(item[props.valueKey])
+                        : props.modelValue === item[props.valueKey]
                 })
             )
         })
@@ -348,15 +340,13 @@ const changeHandler = (e: any) => {
     let changedColumnIndex = -1
     let changedItemIndex = 0
 
-    // 记录用户选中但是还没确认的值
-    currentActiveValue.value = value
-
     // 优化循环：使用for...of循环更简洁，并且在找到变化后立即退出
     for (let [i, newValue] of value.entries()) {
         const oldValue = lastIndex.value[i] || 0
         if (newValue !== oldValue) {
             changedColumnIndex = i
             changedItemIndex = newValue
+            currentActiveValue.value = value
             break
         }
     }
