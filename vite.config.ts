@@ -1,12 +1,15 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
-import uni from '@dcloudio/vite-plugin-uni'
+import Uni from '@uni-helper/plugin-uni'
+import UniPages from '@uni-helper/vite-plugin-uni-pages'
 import { visualizer } from 'rollup-plugin-visualizer'
+import { useUniPages } from './src/composables/useUniPages'
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-        uni({
+        UniPages(useUniPages),
+        Uni({
             vueOptions: {
                 templateCompilerOptions: {
                     isNativeTag: () => false,
