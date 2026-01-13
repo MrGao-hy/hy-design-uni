@@ -1,332 +1,332 @@
 export const list_1 = [
     {
         title: 'ConfigProvider 全局配置',
-        url: '/pages/components/configProvider/configProvider'
+        url: '/pages-design/configProvider/configProvider'
     },
     {
         title: 'Icon 图标',
-        url: '/pages/components/icon/icon'
+        url: '/pages-design/icon/icon'
     },
     {
         title: 'Image 图片',
-        url: '/pages/components/image/image'
+        url: '/pages-design/image/image'
     },
     {
         title: 'Button 按钮',
-        url: '/pages/components/button/button'
+        url: '/pages-design/button/button'
     },
     {
         title: 'Text 文本',
-        url: '/pages/components/text/text'
+        url: '/pages-design/text/text'
     },
     {
         title: 'Cell 单元格',
-        url: '/pages/components/cell/cell'
+        url: '/pages-design/cell/cell'
     },
     {
         title: 'Badge 徽标数',
-        url: '/pages/components/badge/badge'
+        url: '/pages-design/badge/badge'
     },
     {
         title: 'Tag 标签',
-        url: '/pages/components/tag/tag'
+        url: '/pages-design/tag/tag'
     },
     {
         title: 'Swiper 轮播图',
-        url: '/pages/components/swiper/swiper'
+        url: '/pages-design/swiper/swiper'
     },
     {
         title: 'Loading 加载中',
-        url: '/pages/components/loading/loading'
+        url: '/pages-design/loading/loading'
     }
 ]
 
 export const list_2 = [
     {
         title: 'Form 表单',
-        url: '/pages/components/form/form'
+        url: '/pages-design/form/form'
     },
     {
         title: 'FormGroup 表单组',
-        url: '/pages/components/formGroup/formGroup'
+        url: '/pages-design/formGroup/formGroup'
     },
     {
         title: 'Calendar 日历',
-        url: '/pages/components/calendar/calendar'
+        url: '/pages-design/calendar/calendar'
     },
     {
         title: 'Select 下拉框',
-        url: '/pages/components/select/select'
+        url: '/pages-design/select/select'
     },
     {
         title: 'Picker 选择器',
-        url: '/pages/components/picker/picker'
+        url: '/pages-design/picker/picker'
     },
     {
         title: 'DatetimePicker 时间选择器',
-        url: '/pages/components/datetimePicker/datetimePicker'
+        url: '/pages-design/datetimePicker/datetimePicker'
     },
     {
         title: 'AddressPicker 地址选择器',
-        url: '/pages/components/addressPicker/addressPicker'
+        url: '/pages-design/addressPicker/addressPicker'
     },
     {
         title: 'Search 搜索',
-        url: '/pages/components/search/search'
+        url: '/pages-design/search/search'
     },
     {
         title: 'Rate 评分',
-        url: '/pages/components/rate/rate'
+        url: '/pages-design/rate/rate'
     },
     {
         title: 'NumberBox 步进器',
-        url: '/pages/components/numberBox/numberBox'
+        url: '/pages-design/numberBox/numberBox'
     },
     {
         title: 'Input 输入框',
-        url: '/pages/components/input/input'
+        url: '/pages-design/input/input'
     },
     {
         title: 'Textarea 文本域',
-        url: '/pages/components/textarea/textarea'
+        url: '/pages-design/textarea/textarea'
     },
     {
         title: 'CheckButton 复选框按钮',
-        url: '/pages/components/checkButton/checkButton'
+        url: '/pages-design/checkButton/checkButton'
     },
     {
         title: 'Checkbox 复选框',
-        url: '/pages/components/checkbox/checkbox'
+        url: '/pages-design/checkbox/checkbox'
     },
     {
         title: 'Radio 单选框',
-        url: '/pages/components/radio/radio'
+        url: '/pages-design/radio/radio'
     },
     {
         title: 'Slider 滑动选择器',
-        url: '/pages/components/slider/slider'
+        url: '/pages-design/slider/slider'
     },
     {
         title: 'Switch 开关选择器',
-        url: '/pages/components/switch/switch'
+        url: '/pages-design/switch/switch'
     },
     {
         title: 'Upload 上传',
-        url: '/pages/components/upload/upload'
+        url: '/pages-design/upload/upload'
     }
 ]
 
 export const list_3 = [
     {
         title: 'List 虚拟列表',
-        url: '/pages/components/list/list'
+        url: '/pages-design/list/list'
     },
     {
         title: 'Flex 弹性布局',
-        url: '/pages/components/flex/flex'
+        url: '/pages-design/flex/flex'
     },
     {
         title: 'LineProgress 线形进度条',
-        url: '/pages/components/lineProgress/lineProgress'
+        url: '/pages-design/lineProgress/lineProgress'
     },
     {
         title: 'ScrollList 横向滚动列表',
-        url: '/pages/components/scrollList/scrollList'
+        url: '/pages-design/scrollList/scrollList'
     },
     {
         title: 'Line 线条',
-        url: '/pages/components/line/line'
+        url: '/pages-design/line/line'
     },
     {
         title: 'Card 卡片',
-        url: '/pages/components/card/card'
+        url: '/pages-design/card/card'
     },
     {
         title: 'Overlay 遮罩层',
-        url: '/pages/components/overlay/overlay'
+        url: '/pages-design/overlay/overlay'
     },
     {
         title: 'Grid 宫格布局',
-        url: '/pages/components/grid/grid'
+        url: '/pages-design/grid/grid'
     },
     {
         title: 'Divider 分割线',
-        url: '/pages/components/divider/divider'
+        url: '/pages-design/divider/divider'
     },
     {
         title: 'FloatButton 悬浮按钮',
-        url: '/pages/components/floatButton/floatButton'
+        url: '/pages-design/floatButton/floatButton'
     },
     {
         title: 'Waterfall 瀑布流',
-        url: '/pages/components/waterfall/waterfall'
+        url: '/pages-design/waterfall/waterfall'
     },
     {
         title: 'Watermark 水印',
-        url: '/pages/components/watermark/watermark'
+        url: '/pages-design/watermark/watermark'
     },
     {
         title: 'Sticky 吸顶',
-        url: '/pages/components/sticky/sticky'
+        url: '/pages-design/sticky/sticky'
     },
     {
         title: 'Skeleton 骨架屏',
-        url: '/pages/components/skeleton/skeleton'
+        url: '/pages-design/skeleton/skeleton'
     }
 ]
 
 export const list_4 = [
     {
         title: 'Tooltip 长按提示',
-        url: '/pages/components/tooltip/tooltip'
+        url: '/pages-design/tooltip/tooltip'
     },
     {
         title: 'ActionSheet 操作菜单',
-        url: '/pages/components/actionSheet/actionSheet'
+        url: '/pages-design/actionSheet/actionSheet'
     },
     {
         title: 'Warn 警告提示',
-        url: '/pages/components/warn/warn'
+        url: '/pages-design/warn/warn'
     },
     {
         title: 'Toast 消息提示',
-        url: '/pages/components/toast/toast'
+        url: '/pages-design/toast/toast'
     },
     {
         title: 'Notify 消息提示',
-        url: '/pages/components/notify/notify'
+        url: '/pages-design/notify/notify'
     },
     {
         title: 'NoticeBar 滚动通知',
-        url: '/pages/components/noticeBar/noticeBar'
+        url: '/pages-design/noticeBar/noticeBar'
     },
     {
         title: 'FoldingPanel 折叠面板',
-        url: '/pages/components/foldingPanel/foldingPanel'
+        url: '/pages-design/foldingPanel/foldingPanel'
     },
     {
         title: 'Popover 气泡',
-        url: '/pages/components/popover/popover'
+        url: '/pages-design/popover/popover'
     },
     {
         title: 'Popup 弹出层',
-        url: '/pages/components/popup/popup'
+        url: '/pages-design/popup/popup'
     },
     {
         title: 'Modal 模态框',
-        url: '/pages/components/modal/modal'
+        url: '/pages-design/modal/modal'
     },
     {
         title: 'SwipeAction 滑动单元格',
-        url: '/pages/components/swipeAction/swipeAction'
+        url: '/pages-design/swipeAction/swipeAction'
     }
 ]
 
 export const list_5 = [
     {
         title: 'Dropdown 下拉菜单',
-        url: '/pages/components/dropdown/dropdown'
+        url: '/pages-design/dropdown/dropdown'
     },
     {
         title: 'Menu 侧边菜单栏',
-        url: '/pages/components/menu/menu'
+        url: '/pages-design/menu/menu'
     },
     {
         title: 'BackTop 返回顶部',
-        url: '/pages/components/backTop/backTop'
+        url: '/pages-design/backTop/backTop'
     },
     {
         title: 'Navbar 自定义导航栏',
-        url: '/pages/components/navbar/navbar'
+        url: '/pages-design/navbar/navbar'
     },
     {
         title: 'TabBar 底部导航栏',
-        url: '/pages/components/tabBar/tabBar'
+        url: '/pages-design/tabBar/tabBar'
     },
     {
-        title: 'Tabs 标签',
-        url: '/pages/components/tabs/tabs'
+        title: 'Tabs 标签页',
+        url: '/pages-design/tabs/tabs'
     },
     {
         title: 'Pagination 分页',
-        url: '/pages/components/pagination/pagination'
+        url: '/pages-design/pagination/pagination'
     },
     {
         title: 'Subsection 分段器',
-        url: '/pages/components/subsection/subsection'
+        url: '/pages-design/subsection/subsection'
     },
     {
         title: 'Steps 步骤条',
-        url: '/pages/components/steps/steps'
+        url: '/pages-design/steps/steps'
     },
     {
         title: 'Empty 内容为空',
-        url: '/pages/components/empty/empty'
+        url: '/pages-design/empty/empty'
     },
     {
         title: 'IndexBar 索引栏',
-        url: '/pages/components/indexBar/indexBar'
+        url: '/pages-design/indexBar/indexBar'
     }
 ]
 
 export const list_6 = [
     {
         title: 'RollingNum 翻滚数字',
-        url: '/pages/components/rollingNum/rollingNum'
+        url: '/pages-design/rollingNum/rollingNum'
     },
     {
         title: 'CodeInput 验证码输入',
-        url: '/pages/components/codeInput/codeInput'
+        url: '/pages-design/codeInput/codeInput'
     },
     {
         title: 'CountTo 数字滚动',
-        url: '/pages/components/countTo/countTo'
+        url: '/pages-design/countTo/countTo'
     },
     {
         title: 'CountDown 倒计时',
-        url: '/pages/components/countDown/countDown'
+        url: '/pages-design/countDown/countDown'
     },
     {
         title: 'Parse 富文本',
-        url: '/pages/components/parse/parse'
+        url: '/pages-design/parse/parse'
     },
     {
         title: 'ReadMore 展开阅读更多',
-        url: '/pages/components/readMore/readMore'
+        url: '/pages-design/readMore/readMore'
     },
     {
         title: 'Avatar 头像',
-        url: '/pages/components/avatar/avatar'
+        url: '/pages-design/avatar/avatar'
     },
     {
         title: 'Transition 动画',
-        url: '/pages/components/transition/transition'
+        url: '/pages-design/transition/transition'
     },
     {
         title: 'Qrcode 二维码',
-        url: '/pages/components/qrcode/qrcode'
+        url: '/pages-design/qrcode/qrcode'
     },
     {
         title: 'Signature 签名',
-        url: '/pages/components/signature/signature'
+        url: '/pages-design/signature/signature'
     },
     {
         title: 'Table 表格',
-        url: '/pages/components/table/table'
+        url: '/pages-design/table/table'
     }
 ]
 
 export const list_7 = [
     {
         title: 'SubmitBar 提交订单栏',
-        url: '/pages/components/submitBar/submitBar'
+        url: '/pages-design/submitBar/submitBar'
     },
     {
         title: 'Price 金额',
-        url: '/pages/components/price/price'
+        url: '/pages-design/price/price'
     },
     {
         title: 'Coupon 优惠券',
-        url: '/pages/components/coupon/coupon'
+        url: '/pages-design/coupon/coupon'
     }
 ]

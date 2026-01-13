@@ -26,6 +26,11 @@ const { startShakeListener, stopShakeListener } = useShakeService()
 
 const { color, darkMode, showHint } = storeToRefs(themeStore)
 
+definePage({
+    style: {
+        navigationBarTitleText: '首页'
+    }
+})
 onShow(() => {
     startShakeListener(handleShake)
 })
@@ -35,7 +40,7 @@ onHide(() => {
 
 const handleShake = () => {
     // 在这里执行摇一摇后的逻辑
-    themeColor.value['--hy-theme-color'] = getRandomHexColor()
+    color.value = getRandomHexColor()
 }
 
 function getRandomHexColor() {

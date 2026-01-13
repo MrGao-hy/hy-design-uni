@@ -32,9 +32,7 @@ const pickerProps = {
     title: String,
     /** 二维数组，设置每一列的数据 */
     columns: {
-        type: Array as unknown as PropType<
-            (string | PickerColumnVo)[][] | (string | PickerColumnVo)[]
-        >,
+        type: Array as unknown as PropType<(string | PickerColumnVo)[][]>,
         default: []
     },
     /** 是否显示加载中状态 */
