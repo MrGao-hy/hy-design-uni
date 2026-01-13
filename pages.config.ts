@@ -15,12 +15,22 @@ export const H5_NAV_CONFIG = {
 export default defineUniPages({
     globalStyle: {
         navigationBarTitleText: '华玥组件库',
-        enablePullDownRefresh: false
+        navigationBarBackgroundColor: '@navBgColor',
+        navigationBarTextStyle: '@navTxtStyle',
+        backgroundColor: '@bgColor',
+        backgroundTextStyle: '@bgTxtStyle',
+        backgroundColorTop: '@bgColorTop',
+        backgroundColorBottom: '@bgColorBottom',
+        enablePullDownRefresh: false,
+        'mp-alipay': {
+            allowsBounceVertical: 'NO'
+        }
     },
     tabBar: {
         color: '#7A7E83',
         selectedColor: '#3cc51f',
         borderStyle: 'black',
+        backgroundColor: '@bgColor',
         list: [
             {
                 pagePath: 'pages/index/Index',
