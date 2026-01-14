@@ -2,6 +2,9 @@
     "name": "uni-preset-vue",
     "version": "0.0.0",
     "type": "module",
+    "engines": {
+        "node": "20.x"
+    },
     "scripts": {
         "doc": "node scripts/generate-docs.mjs",
         "gen:web-types": "tsx scripts/component-helper.ts",
