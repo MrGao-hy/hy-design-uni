@@ -1,12 +1,9 @@
-import { Locale } from '../index'
-function getValue(obj, path) {
-    return path.split('.').reduce((o, k) => o?.[k], obj)
-}
-export const useTranslate = (name?: string) => {
-    if (!name) return
+import { getByPath, Locale } from '../index'
+
+export const useTranslate = (name: string) => {
     const t = (key: string, ...args: unknown[]) => {
         const currentMessages = Locale.messages()
-        const value = getValue(currentMessages[name], key)
+        const value = getByPath(currentMessages[name], key)
         return typeof value === 'function' ? value(...args) : value
     }
     return { t }

@@ -1,4 +1,4 @@
-import { Locale, useShare } from '@/package'
+import { useShare } from '@/package'
 import { createApp } from 'vue'
 import App from './App.vue'
 import pinia from '@/store'

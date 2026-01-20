@@ -334,3 +334,7 @@ export const formatName = (name: string): string => {
     }
     return value
 }
+
+export function getByPath(obj: Record<string, any>, path: string): unknown {
+    return path.split('.').reduce((o, k) => o?.[k], obj)
+}
