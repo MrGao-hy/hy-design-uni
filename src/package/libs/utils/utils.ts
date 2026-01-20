@@ -1,6 +1,6 @@
 import Base64 from './base64'
 import type { CSSProperties } from 'vue'
-import { error, isNumber } from './index'
+import { error, isNumber, isObject } from './index'
 let base64: any = new Base64()
 
 /**
@@ -402,7 +402,6 @@ const range = (min = 0, max = 0, value = 0) => {
     return Math.max(min, Math.min(max, Number(value)))
 }
 
-export type RectResultType<T extends boolean> = T extends true ? UniApp.NodeInfo[] : UniApp.NodeInfo
 /**
  * 查询节点信息
  * 目前此方法在支付宝小程序中无法获取组件跟接点的尺寸，为支付宝的bug(2020-07-21)
@@ -417,8 +416,8 @@ const getRect = <T extends boolean>(
     all?: T,
     ins?: any,
     useFields?: boolean
-): Promise<RectResultType<T>> => {
-    return new Promise<RectResultType<T>>((resolve, reject) => {
+): Promise<HyUtils.RectResultType<T>> => {
+    return new Promise<HyUtils.RectResultType<T>>((resolve, reject) => {
         let query: UniNamespace.SelectorQuery | null = null
         if (ins) {
             // TODO: 在微信小程序里，因为utils文件里面获取不到instance值所以必须通过ins这个传过来
@@ -430,9 +429,9 @@ const getRect = <T extends boolean>(
 
         const callback = (rect: UniApp.NodeInfo | UniApp.NodeInfo[]) => {
             if (all && Array.isArray(rect) && rect.length > 0) {
-                resolve(rect as RectResultType<T>)
+                resolve(rect as HyUtils.RectResultType<T>)
             } else if (!all && rect) {
-                resolve(rect as RectResultType<T>)
+                resolve(rect as HyUtils.RectResultType<T>)
             } else {
                 error(`调用getRect方法，没有找到${selector}对应的元素内容`)
                 reject(new Error('No nodes found'))
@@ -478,6 +477,29 @@ const formatObject = (obj: CSSProperties) => {
         .join('; ')
 }
 
+/**
+ * 深度合并两个对象
+ * @param target 目标对象
+ * @param source 源对象
+ * @returns 合并后的对象
+ */
+function deepMerge(
+    target: HyUtils.DeepMergeable,
+    source: HyUtils.DeepMergeable
+): HyUtils.DeepMergeable {
+    Object.keys(source).forEach((key) => {
+        const targetValue = target[key]
+        const newObjValue = source[key]
+        if (isObject(targetValue) && isObject(newObjValue)) {
+            deepMerge(targetValue, newObjValue)
+        } else {
+            target[key] = newObjValue
+        }
+    })
+
+    return target
+}
+
 export {
     encryptData,
     decryptData,
@@ -498,5 +520,6 @@ export {
     range,
     getRect,
     getPx,
-    formatObject
+    formatObject,
+    deepMerge
 }
