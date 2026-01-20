@@ -1,11 +1,12 @@
 {
     "name": "hy-app",
-    "version": "0.6.0",
+    "version": "0.6.1",
     "type": "module",
     "engines": {
         "node": "20.x"
     },
     "scripts": {
+        "release": "standard-version",
         "changelog": "tsx scripts/generate-changelog.ts",
         "doc": "node scripts/generate-docs.mjs",
         "gen:web-types": "tsx scripts/component-helper.ts",
@@ -84,6 +85,7 @@
         "prettier-plugin-organize-imports": "^4.2.0",
         "rollup-plugin-visualizer": "^6.0.5",
         "sass": "1.78.0",
+        "standard-version": "^9.5.0",
         "tsx": "^4.21.0",
         "typescript": "^4.9.4",
         "vite": "5.2.8",
