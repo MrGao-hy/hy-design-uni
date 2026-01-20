@@ -84,7 +84,7 @@ $hy-search-close-size: 20px !default;
     text-align: center;
 
     @include m(active) {
-      width: 40px;
+      width: 100rpx;
       margin-left: $hy-border-margin-padding-sm;
     }
   }

@@ -1,3 +1,7 @@
+import { useTranslate } from '../../libs'
+
+const { t } = useTranslate('modal')
+
 const modalProps = {
     /** 是否显示模态框 */
     modelValue: {
@@ -11,12 +15,12 @@ const modalProps = {
     /** 确认按钮的文字 */
     confirmText: {
         type: String,
-        default: '确认'
+        default: () => t('confirm')
     },
     /** 取消按钮的文字 */
     cancelText: {
         type: String,
-        default: '取消'
+        default: () => t('cancel')
     },
     /** 是否显示确认按钮 */
     showConfirmButton: {

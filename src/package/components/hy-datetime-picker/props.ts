@@ -1,6 +1,8 @@
-import { DateModeEnum } from '../../libs'
+import { DateModeEnum, useTranslate } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
-import type HyInputProps from '../hy-input/typing'
+import type { HyInputProps } from '../hy-input/typing'
+
+const { t } = useTranslate('datetimePicker')
 
 const datetimePickerProps = {
     /** 用于控制选择器的弹出和收起 */
@@ -83,12 +85,12 @@ const datetimePickerProps = {
     /** 取消按钮的文字 */
     cancelText: {
         type: String,
-        default: '取消'
+        default: () => t('cancel')
     },
     /** 确认按钮的文字 */
     confirmText: {
         type: String,
-        default: '确认'
+        default: () => t('confirm')
     },
     /** 取消按钮的颜色 */
     cancelColor: {

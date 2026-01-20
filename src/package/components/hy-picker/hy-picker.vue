@@ -14,7 +14,7 @@
                     :color="input?.color"
                     :fontSize="input?.fontSize"
                     :inputAlign="input?.inputAlign"
-                    :placeholder="input?.placeholder || '请选择'"
+                    :placeholder="input?.placeholder || t('placeholder')"
                     :placeholderStyle="input?.placeholderStyle"
                     :placeholderClass="input?.placeholderClass"
                     :customStyle="Object.assign({ 'pointer-events': 'none' }, input?.customStyle)"
@@ -122,7 +122,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { deepClone, sleep, addUnit, isArray } from '../../libs'
+import { deepClone, sleep, addUnit, isArray, useTranslate } from '../../libs'
 import type { IPickerEmits } from './typing'
 import pickerProps from './props'
 // 组件
@@ -139,6 +139,7 @@ defineOptions({})
 const props = defineProps(pickerProps)
 const emit = defineEmits<IPickerEmits>()
 
+const { t } = useTranslate('picker')
 // 上一次选择的列索引
 const lastIndex = ref<number[]>([])
 // 索引值 ，对应picker-view的value
@@ -187,7 +188,7 @@ watch(
                   : [v]
             )
                 .map((item, i) =>
-                    props.columns[i].findIndex(
+                    props.columns[i]?.findIndex(
                         (val) => (typeof val === 'object' ? val[props.valueKey] : val) === item
                     )
                 )

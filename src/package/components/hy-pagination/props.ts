@@ -1,4 +1,7 @@
 import type { CSSProperties, PropType } from 'vue'
+import { useTranslate } from '../../libs'
+
+const { t } = useTranslate('pagination')
 
 const paginationProps = {
     /** 当前页 */
@@ -34,12 +37,12 @@ const paginationProps = {
     /** 上一页文本 */
     prevText: {
         type: String,
-        default: '上一页'
+        default: () => t('prev')
     },
     /** 下一页文本 */
     nextText: {
         type: String,
-        default: '下一页'
+        default: () => t('next')
     },
     /** 总页数只有一页时是否隐藏 */
     hideIfOnePage: {

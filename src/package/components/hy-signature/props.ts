@@ -1,4 +1,7 @@
 import type { CSSProperties, PropType } from 'vue'
+import { useTranslate } from '../../libs'
+
+const { t } = useTranslate('signature')
 
 const signatureProps = {
     /** 签名笔颜色 */
@@ -14,22 +17,22 @@ const signatureProps = {
     /** 清空按钮的文本 */
     clearText: {
         type: String,
-        default: '清空'
+        default: () => t('clear')
     },
     /** 撤回按钮的文本 */
     revokeText: {
         type: String,
-        default: '撤销'
+        default: () => t('revoke')
     },
     /** 恢复按钮的文本 */
     restoreText: {
         type: String,
-        default: '恢复'
+        default: () => t('restore')
     },
     /** 确认按钮的文本 */
     confirmText: {
         type: String,
-        default: '确认'
+        default: () => t('confirm')
     },
     /** 目标文件的类型 */
     fileType: {

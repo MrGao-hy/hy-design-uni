@@ -1,4 +1,6 @@
-import { random } from '../../libs'
+import { random, useTranslate } from '../../libs'
+
+const { t } = useTranslate('qrCode')
 
 const qrCodeProps = {
     /** 实例ID字符串(如果有多个二维码组件必须设置不一样的cid) */
@@ -58,7 +60,7 @@ const qrCodeProps = {
     /** 加载中提示语 */
     loadingText: {
         type: String,
-        default: '二维码生成中...'
+        default: () => t('loading')
     },
     /** 是否预览 */
     allowPreview: {

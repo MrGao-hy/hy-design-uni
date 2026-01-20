@@ -1,6 +1,8 @@
 import type { CSSProperties, PropType } from 'vue'
-import { IconConfig } from '../../libs'
+import { IconConfig, useTranslate } from '../../libs'
 import type { HyIconProps } from '../hy-icon/typing'
+
+const { t } = useTranslate('search')
 
 const searchProps = {
     /** 输入框初始值 */
@@ -21,7 +23,7 @@ const searchProps = {
     /** 占位文字内容 */
     placeholder: {
         type: String,
-        default: '请输入关键字'
+        default: () => t('placeholder')
     },
     /**
      * 设置右下角按钮的文字，兼容性详见uni-app文档
@@ -59,7 +61,7 @@ const searchProps = {
     /** 右侧控件文字 */
     actionText: {
         type: String,
-        default: '搜索'
+        default: () => t('search')
     },
     /** 右侧控件的样式，对象形式 */
     actionStyle: {

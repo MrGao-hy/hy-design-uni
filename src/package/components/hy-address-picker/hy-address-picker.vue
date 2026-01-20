@@ -15,7 +15,7 @@
                     :color="input?.color"
                     :fontSize="input?.fontSize"
                     :inputAlign="input?.inputAlign"
-                    :placeholder="input?.placeholder || '请选择地址'"
+                    :placeholder="input?.placeholder || t('placeholder')"
                     :placeholderStyle="input?.placeholderStyle"
                     :placeholderClass="input?.placeholderClass"
                     :customStyle="Object.assign({ 'pointer-events': 'none' }, input?.customStyle)"
@@ -75,6 +75,7 @@ import { onMounted, ref, toRefs } from 'vue'
 import type { IAddressPickerEmits } from './typing'
 import address from '../../libs/utils/address.json'
 import addressPickerProps from './props'
+import { useTranslate } from '../../libs'
 // 组件
 import HyInput from '../hy-input/hy-input.vue'
 import HyPicker from '../hy-picker/hy-picker.vue'
@@ -89,6 +90,7 @@ const props = defineProps(addressPickerProps)
 const { show, modelValue, hasInput, input, separator, closeOnClickOverlay } = toRefs(props)
 const emit = defineEmits<IAddressPickerEmits>()
 
+const { t } = useTranslate('addressPicker')
 // 原来的日期选择器不方便，这里增加一个hasInput选项支持类似element的自带输入框的功能。
 const inputValue = ref<string>('') // 表单显示值
 const showByClickInput = ref<boolean>(false) // 是否在hasInput模式下显示日期选择

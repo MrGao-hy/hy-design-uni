@@ -21,7 +21,7 @@
                         class="hy-upload__wrap--preview__other"
                         @tap="onClickPreview(item, index)"
                     >
-                        <HyIcon
+                        <hy-icon
                             color="#80CBF9"
                             size="26"
                             :name="
@@ -29,7 +29,7 @@
                                     ? 'movie'
                                     : 'folder'
                             "
-                        ></HyIcon>
+                        ></hy-icon>
                         <text class="hy-upload__wrap--preview__other--text">
                             {{
                                 item.isVideo || (item.type && item.type === 'video')
@@ -44,15 +44,14 @@
                         class="hy-upload__wrap--preview__progress"
                         v-if="item.status === 'loading'"
                     >
-                        <progress
-                            class="hy-upload__wrap--preview__progress--number"
-                            :percent="item.schedule"
-                            stroke-width="4"
-                            activeColor="#B99C65"
+                        <hy-line-progress
+                            custom-class="hy-upload__wrap--preview__progress--number"
+                            :percentage="item.schedule"
+                            height="6"
                         />
-                        <view class="hy-upload__wrap--preview__progress--value"
-                            >上传进度{{ item.schedule }}%</view
-                        >
+                        <view class="hy-upload__wrap--preview__progress--value">{{
+                            t('progressLabel', item.schedule)
+                        }}</view>
                     </view>
                     <!-- 上传进度条	-->
 
@@ -63,22 +62,20 @@
                         @tap.stop="deleteItem(index)"
                     >
                         <view class="hy-upload__deletable--icon">
-                            <HyIcon :name="IconConfig.CLOSE" color="#ffffff" size="14"></HyIcon>
+                            <hy-icon :name="IconConfig.CLOSE" color="#ffffff" size="14"></hy-icon>
                         </view>
                     </view>
                     <!-- 删除图片图标 -->
 
                     <!-- 上传成功图标 -->
                     <view class="hy-upload__success" v-if="item.status === 'success'">
-                        <!-- #ifndef APP-NVUE -->
                         <view class="hy-upload__success--icon">
-                            <HyIcon
+                            <hy-icon
                                 :name="IconConfig.CHECK_MASK"
                                 color="#ffffff"
                                 size="12"
-                            ></HyIcon>
+                            ></hy-icon>
                         </view>
-                        <!-- #endif -->
                     </view>
                     <!-- 上传成功图标 -->
                 </view>
@@ -108,7 +105,7 @@
                         }
                     ]"
                 >
-                    <HyIcon :name="uploadIcon" size="26" :color="uploadIconColor"></HyIcon>
+                    <hy-icon :name="uploadIcon" size="26" :color="uploadIconColor"></hy-icon>
                     <text v-if="uploadText" class="hy-upload__button--text">{{ uploadText }}</text>
                 </view>
             </template>
@@ -130,10 +127,11 @@ export default {
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import type { FileVo, IUploadEmits } from './typing'
-import { addUnit, chooseFile, isArray, IconConfig } from '../../libs'
+import { addUnit, chooseFile, isArray, IconConfig, useTranslate } from '../../libs'
 import uploadProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
+import HyLineProgress from '../hy-line-progress/hy-line-progress.vue'
 
 /**
  * 该组件用于上传图片或者视频等场景
@@ -144,6 +142,7 @@ defineOptions({})
 const props = defineProps(uploadProps)
 const emit = defineEmits<IUploadEmits>()
 
+const { t } = useTranslate('upload')
 const lists = ref<FileVo[]>([])
 // 上传按钮
 const isInCount = ref<boolean>(true)

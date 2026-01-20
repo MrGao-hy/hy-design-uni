@@ -77,7 +77,16 @@ export default {
 <script setup lang="ts">
 import type { ICalendarEmits } from './typing'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { addUnit, error, isArray, isNumericString, padZero, range } from '../../libs'
+import {
+    addUnit,
+    error,
+    formatTime,
+    isArray,
+    isNumericString,
+    padZero,
+    range,
+    useTranslate
+} from '../../libs'
 import Calendar from '../../libs/utils/calendar.js'
 import calendarProps from './props'
 import dayjs from 'dayjs/esm'
@@ -96,6 +105,7 @@ defineOptions({})
 const props = defineProps(calendarProps)
 const emit = defineEmits<ICalendarEmits>()
 
+const { t } = useTranslate('calendar')
 // 需要显示的月份的数组
 const months = ref<any[]>([])
 // 在月份滚动区域中，当前视图中月份的index索引
@@ -119,14 +129,14 @@ const innerMinDate = computed(() => {
 })
 
 /**
- * @description 多个条件的变化，会引起选中日期的变化，这里统一管理监听
+ * 多个条件的变化，会引起选中日期的变化，这里统一管理监听
  * */
 const selectedChange = computed(() => {
     return [innerMinDate.value, innerMaxDate.value, props.defaultDate]
 })
 
 /**
- * @description 获得两个日期之间的月份数
+ * 获得两个日期之间的月份数
  * @param minDate 最小日期
  * @param maxDate 最大日期
  * */
@@ -139,7 +149,7 @@ const getMonths = (minDate: number | string, maxDate: number | string) => {
 }
 
 /**
- * @description 设置月份数据
+ * 设置月份数据
  * */
 const setMonth = () => {
     // 最小日期的毫秒数
@@ -221,7 +231,10 @@ watch(
 const subtitle = computed(() => {
     // 初始化时，this.months为空数组，所以需要特别判断处理
     if (months.value.length) {
-        return `${months.value[monthIndex.value].year}年${months.value[monthIndex.value].month}月`
+        return formatTime(
+            `${months.value[monthIndex.value].year}-${months.value[monthIndex.value].month}`,
+            t('monthFormat')
+        )
     } else {
         return ''
     }
@@ -247,7 +260,7 @@ const setFormatter = (e: (value: string) => string) => {
 }
 
 /**
- * @description month组件内部选择日期后，通过事件通知给父组件
+ * month组件内部选择日期后，通过事件通知给父组件
  */
 const monthSelected = (e: string[], scene = 'init') => {
     selected.value = e
@@ -287,7 +300,7 @@ const close = () => {
 }
 
 /**
- * @description 点击确定按钮
+ * 点击确定按钮
  * */
 const confirm = () => {
     if (!buttonDisabled.value) {
@@ -296,7 +309,7 @@ const confirm = () => {
 }
 
 /**
- * @description 滚动到默认设置的月份
+ * 滚动到默认设置的月份
  * @param selected 日期
  * */
 const scrollIntoDefaultMonth = (selected: string) => {

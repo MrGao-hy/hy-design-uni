@@ -47,9 +47,9 @@
             </hy-button>
         </view>
         <view class="hy-pagination__message" v-if="showMessage">
-            <text>当前页：{{ modelValue }}，</text>
-            <text v-if="total">当前数据：{{ total }}，</text>
-            <text>分页大小：{{ pageSize }}</text>
+            <text>{{ t('page', modelValue) }}，</text>
+            <text v-if="total">{{ t('total', total) }}，</text>
+            <text>{{ t('size', pageSize) }}</text>
         </view>
     </view>
 </template>
@@ -68,7 +68,7 @@ export default {
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import type { IPaginationEmits } from './typing'
-import { IconConfig } from '../../libs'
+import { IconConfig, useTranslate } from '../../libs'
 import paginationProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -83,6 +83,7 @@ defineOptions({})
 const props = defineProps(paginationProps)
 const emit = defineEmits<IPaginationEmits>()
 
+const { t } = useTranslate('pagination')
 const totalPageNum = ref<number>(0) // 总页数
 
 watch(

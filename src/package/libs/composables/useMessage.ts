@@ -41,7 +41,7 @@ export function useMessage(): UseMessageReturn {
     const normalizeOptions = (options: UseMessageOptions | string): UseMessageOptions => {
         if (typeof options === 'string') {
             return {
-                content: options
+                title: options
             }
         }
         return options

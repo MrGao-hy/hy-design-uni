@@ -42,7 +42,7 @@ export const bem = (
 }
 
 /**
- * @description error提示
+ * error提示
  * @param {*} err 错误内容
  */
 export function error(err: string) {
@@ -99,7 +99,7 @@ export function guid(len: number = 32, firstU: boolean = true, radix: number | n
 }
 
 /**
- * @description 获取设备信息
+ * 获取设备信息
  * */
 export const getWindowInfo = (): UniNamespace.GetWindowInfoResult => {
     let ret: UniNamespace.GetWindowInfoResult
@@ -281,7 +281,7 @@ export function chooseFile({
 }
 
 /**
- * @description 数字格式化
+ * 数字格式化
  * @param {number|string} number 要格式化的数字
  * @param {number} decimals 保留几位小数
  * @param {string} decimalPoint 小数点符号
@@ -315,7 +315,7 @@ export function priceFormat(
 }
 
 /**
- * @description 默认的姓名脱敏规则
+ * 默认的姓名脱敏规则
  * @param name 名字
  * @return {string}
  * */

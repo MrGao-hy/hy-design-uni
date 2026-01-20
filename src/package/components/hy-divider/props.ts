@@ -1,5 +1,8 @@
 import { IconConfig } from '../../libs/config'
 import type { CSSProperties, PropType } from 'vue'
+import { useTranslate } from '../../libs'
+
+const { t } = useTranslate('loadMore')
 
 const dividerProps = {
     /** 是否虚线 */
@@ -47,17 +50,17 @@ const dividerProps = {
     /** 加载前的提示语 */
     loadMoreText: {
         type: String,
-        default: '加载更多'
+        default: () => t('loadMore')
     },
     /** 加载中提示语 */
     loadingText: {
         type: String,
-        default: '正在加载...'
+        default: () => t('loading')
     },
     /** 没有更多的提示语 */
     noMoreText: {
         type: String,
-        default: '没有更多了'
+        default: () => t('finished')
     },
     /** 上边距 */
     marginTop: {

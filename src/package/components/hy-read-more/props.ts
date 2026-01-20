@@ -1,4 +1,7 @@
 import type { CSSProperties, PropType } from 'vue'
+import { useTranslate } from '@/package'
+
+const { t } = useTranslate('readMore')
 
 const readMoreProps = {
     /** 内容超出此高度才会显示展开全文按钮，单位px */
@@ -14,12 +17,12 @@ const readMoreProps = {
     /** 关闭时的提示文字 */
     closeText: {
         type: String,
-        default: '展开阅读全文'
+        default: () => t('expand')
     },
     /** 展开时的提示文字 */
     openText: {
         type: String,
-        default: '收起'
+        default: () => t('retract')
     },
     /** 提示文字的颜色 */
     color: String,

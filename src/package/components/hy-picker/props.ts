@@ -1,6 +1,9 @@
 import type { PickerColumnVo } from './typing'
 import type { PropType } from 'vue'
 import type { HyInputProps } from '../hy-input/typing'
+import { useTranslate } from '../../libs'
+
+const { t } = useTranslate('picker')
 
 const pickerProps = {
     /** 显示到输入框值 */
@@ -50,12 +53,12 @@ const pickerProps = {
     /** 取消按钮的文字 */
     cancelText: {
         type: String,
-        default: '取消'
+        default: () => t('cancel')
     },
     /** 确认按钮的文字 */
     confirmText: {
         type: String,
-        default: '确定'
+        default: () => t('confirm')
     },
     /** 取消按钮的颜色 */
     cancelColor: {

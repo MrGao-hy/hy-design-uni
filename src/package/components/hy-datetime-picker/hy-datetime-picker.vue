@@ -13,7 +13,7 @@
                     :color="input?.color"
                     :fontSize="input?.fontSize"
                     :inputAlign="input?.inputAlign"
-                    :placeholder="input?.placeholder || '请选择时间'"
+                    :placeholder="input?.placeholder || t('placeholder')"
                     :placeholderStyle="input?.placeholderStyle"
                     :placeholderClass="input?.placeholderClass"
                     :customStyle="Object.assign({ 'pointer-events': 'none' }, input?.customStyle)"
@@ -67,7 +67,7 @@ export default {
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import dayjs from 'dayjs/esm'
-import { error, padZero, DateModeEnum } from '../../libs'
+import { error, padZero, DateModeEnum, useTranslate } from '../../libs'
 import type { IDatetimePickerEmits } from './typing'
 import datetimePickerProps from './props'
 // 组件
@@ -83,6 +83,7 @@ defineOptions({})
 const props = defineProps(datetimePickerProps)
 const emit = defineEmits<IDatetimePickerEmits>()
 
+const { t } = useTranslate('datetimePicker')
 // 原来的日期选择器不方便，这里增加一个hasInput选项支持类似element的自带输入框的功能。
 const inputValue = ref<string | number>('') // 表单显示值
 const innerValue = ref<string | number>('') // 表单显示值

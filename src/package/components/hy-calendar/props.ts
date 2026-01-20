@@ -1,5 +1,7 @@
-import type IProps from './typing'
 import type { PropType } from 'vue'
+import { useTranslate } from '../../libs'
+
+const { t } = useTranslate('calendar')
 
 const calendarProps = {
     /** 是否显示日历弹窗 */
@@ -11,7 +13,7 @@ const calendarProps = {
     /** 标题内容 */
     title: {
         type: String,
-        default: '日期选选择'
+        default: () => t('title')
     },
     /** 是否显示标题 */
     showTitle: {
@@ -34,12 +36,12 @@ const calendarProps = {
     /** mode=range时，第一个日期底部的提示文字 */
     startText: {
         type: String,
-        default: '开始'
+        default: () => t('startTime')
     },
     /** mode=range时，最后一个日期底部的提示文字 */
     endText: {
         type: String,
-        default: '结束'
+        default: () => t('endTime')
     },
     /** 自定义列表 */
     customList: {
@@ -90,12 +92,12 @@ const calendarProps = {
     /** 确定按钮的文字 */
     confirmText: {
         type: String,
-        default: '确定'
+        default: () => t('confirm')
     },
     /** 确认按钮处于禁用状态时的文字 */
     confirmDisabledText: {
         type: String,
-        default: '确定'
+        default: () => t('confirmDisabled')
     },
     /** 是否允许点击遮罩关闭日历 */
     closeOnClickOverlay: {
@@ -142,7 +144,15 @@ const calendarProps = {
     /** 星期文案 */
     weekText: {
         type: Array as PropType<string[]>,
-        default: () => ['一', '二', '三', '四', '五', '六', '日']
+        default: () => [
+            t('weeks.sun'),
+            t('weeks.mon'),
+            t('weeks.tue'),
+            t('weeks.wed'),
+            t('weeks.thu'),
+            t('weeks.fri'),
+            t('weeks.sat')
+        ]
     },
     /** 单选与多选禁止选中的日期列表，mode!=range时有效。 */
     forbidDays: {
