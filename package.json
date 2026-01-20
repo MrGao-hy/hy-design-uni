@@ -1,13 +1,12 @@
 {
     "name": "hy-app",
-    "version": "0.6.1",
+    "version": "0.6.0",
     "type": "module",
     "engines": {
         "node": "20.x"
     },
     "scripts": {
-        "release": "standard-version",
-        "changelog": "tsx scripts/generate-changelog.ts",
+        "changelog": "npx tsx scripts/generate-changelog.ts",
         "doc": "node scripts/generate-docs.mjs",
         "gen:web-types": "tsx scripts/component-helper.ts",
         "dev:custom": "uni -p",
