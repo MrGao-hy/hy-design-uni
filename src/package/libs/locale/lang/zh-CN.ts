@@ -21,7 +21,7 @@ export default {
         endWeek: '结束周',
         startMonth: '开始月',
         endMonth: '结束月',
-        monthFormat: 'YYYY年MM月',
+        monthFormat: 'yyyy年MM月',
         weeks: {
             sun: '日',
             mon: '一',
