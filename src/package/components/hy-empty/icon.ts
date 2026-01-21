@@ -1,72 +1,72 @@
-import type { IEmptyIcon } from "./typing";
+import type { IEmptyIcon } from './typing'
 
-const url = "https://hy-design-uni.oss-cn-hangzhou.aliyuncs.com/image/";
+const url = 'https://pic.imgdd.cc/item/'
 
 const emptyIcon: IEmptyIcon = {
-  content: {
-    desc: "暂无内容",
-    icon: url + "content.png",
-  },
-  search: {
-    desc: "没有搜索结果",
-    icon: url + "search.png",
-  },
-  address: {
-    desc: "没有收货地址",
-    icon: url + "address.png",
-  },
-  network: {
-    desc: "没有网络",
-    icon: url + "network.png",
-  },
-  order: {
-    desc: "订单为空",
-    icon: url + "order.png",
-  },
-  coupon: {
-    desc: "没有优惠券",
-    icon: url + "coupon.png",
-  },
-  collect: {
-    desc: "暂无收藏",
-    icon: url + "collect.png",
-  },
-  history: {
-    desc: "无历史记录",
-    icon: url + "history.png",
-  },
-  message: {
-    desc: "消息列表为空",
-    icon: url + "message.png",
-  },
-  comment: {
-    desc: "暂无评论",
-    icon: url + "comment.png",
-  },
-  integral: {
-    desc: "暂无积分",
-    icon: url + "integral.png",
-  },
-  card: {
-    desc: "暂无银行卡",
-    icon: url + "card.png",
-  },
-  notification: {
-    desc: "暂无通知",
-    icon: url + "notification.png",
-  },
-  shop: {
-    desc: "暂无购物车",
-    icon: url + "shop.png",
-  },
-  activity: {
-    desc: "暂无活动",
-    icon: url + "activity.png",
-  },
-  loading: {
-    desc: "加载中",
-    icon: url + "loading.png",
-  },
-};
+    content: {
+        desc: '暂无内容',
+        icon: url + '695f8d4ffa2f0e88008de857.png'
+    },
+    search: {
+        desc: '暂无搜索结果',
+        icon: url + '695f8d89fa2f0e88008debc3.png'
+    },
+    address: {
+        desc: '暂无收货地址',
+        icon: url + '695f8d4efa2f0e88008de847.png'
+    },
+    network: {
+        desc: '暂无网络',
+        icon: url + '695f8d6dfa2f0e88008dea15.png'
+    },
+    order: {
+        desc: '暂无订单',
+        icon: url + '695f8d89fa2f0e88008debbc.png'
+    },
+    coupon: {
+        desc: '暂无优惠券',
+        icon: url + '695f8d4efa2f0e88008de84b.png'
+    },
+    collect: {
+        desc: '暂无收藏',
+        icon: url + '695f8d4efa2f0e88008de846.png'
+    },
+    history: {
+        desc: '无历史记录',
+        icon: url + 'history.png'
+    },
+    message: {
+        desc: '暂无消息',
+        icon: url + '695f8d4efa2f0e88008de852.png'
+    },
+    comment: {
+        desc: '暂无评论',
+        icon: url + '695f8d6cfa2f0e88008dea09.png'
+    },
+    integral: {
+        desc: '暂无积分',
+        icon: url + '695f8d6dfa2f0e88008dea0d.png'
+    },
+    card: {
+        desc: '暂无银行卡',
+        icon: url + '695f8d4efa2f0e88008de851.png'
+    },
+    notification: {
+        desc: '暂无通知',
+        icon: url + '695f8d6dfa2f0e88008dea16.png'
+    },
+    shop: {
+        desc: '暂无购物车',
+        icon: url + '695f8d8afa2f0e88008debcb.png'
+    },
+    activity: {
+        desc: '暂无活动',
+        icon: url + '695f8f60fa2f0e88008e068c.png'
+    },
+    loading: {
+        desc: '加载中',
+        icon: url + '695f8d6dfa2f0e88008dea13.png'
+    }
+}
 
-export default emptyIcon;
+export default emptyIcon
