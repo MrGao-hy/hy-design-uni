@@ -89,6 +89,6 @@ const modalProps = {
         type: String,
         default: 'left'
     }
-}
+} as const
 
 export default modalProps

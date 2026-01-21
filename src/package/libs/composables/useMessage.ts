@@ -1,24 +1,7 @@
-import { ref, reactive, provide, inject } from 'vue'
+import { ref, reactive, provide, inject, type Ref } from 'vue'
+import type { HyModalProps } from '../../components/hy-modal/typing'
 
-interface UseMessageOptions {
-    title?: string
-    content?: string
-    confirmText?: string
-    cancelText?: string
-    showConfirmButton?: boolean
-    showCancelButton?: boolean
-    confirmColor?: string
-    cancelColor?: string
-    buttonReverse?: boolean
-    zoom?: boolean
-    round?: string | number
-    autoClose?: boolean
-    loading?: boolean
-    closeOnClickOverlay?: boolean
-    negativeTop?: number
-    width?: string | number
-    confirmButtonShape?: string
-    contentTextAlign?: string
+interface UseMessageOptions extends Partial<HyModalProps> {
     confirm?: () => void | Promise<void>
     cancel?: () => void
     close?: () => void
@@ -29,8 +12,17 @@ interface UseMessageReturn {
     confirm: (options: UseMessageOptions | string) => Promise<boolean>
 }
 
+interface IMessageConfig {
+    showModal: Ref<boolean>
+    loading: Ref<boolean>
+    modalOptions: UseMessageOptions
+    confirmHandler: () => void
+    cancelHandler: () => void
+    closeHandler: () => void
+}
+
 // 注入键
-const UseMessageKey = Symbol('hy-message')
+const UseMessageKey = 'hy-message'
 
 export function useMessage(): UseMessageReturn {
     const showModal = ref(false)
@@ -153,7 +145,5 @@ export function useMessage(): UseMessageReturn {
 
 // 注入函数，供 hy-modal 组件使用
 export function useMessageInject() {
-    return inject(UseMessageKey, null)
+    return inject<IMessageConfig | null>(UseMessageKey, null)
 }
-
-export default useMessage

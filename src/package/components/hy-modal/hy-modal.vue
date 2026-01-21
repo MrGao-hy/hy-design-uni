@@ -140,7 +140,7 @@ const modalOptions = computed(() => {
 
 watch(
     () => props.loading,
-    (newVal) => {
+    () => {
         load.value = props.loading
     }
 )
@@ -153,7 +153,7 @@ watch(
 )
 
 /**
- * @description 点击确定按钮
+ * 点击确定按钮
  * */
 const confirmHandler = async () => {
     if (modalLoading.value) return
@@ -173,7 +173,7 @@ const confirmHandler = async () => {
 }
 
 /**
- * @description 点击取消按钮
+ * 点击取消按钮
  * */
 const cancelHandler = () => {
     // 优先使用注入的取消处理
@@ -186,7 +186,7 @@ const cancelHandler = () => {
 }
 
 /**
- * @description 点击遮罩
+ * 点击遮罩
  * */
 const clickHandler = () => {
     const closeOnClickOverlay = modalOptions.value.closeOnClickOverlay || props.closeOnClickOverlay

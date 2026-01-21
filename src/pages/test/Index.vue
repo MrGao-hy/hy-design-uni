@@ -19,7 +19,7 @@ const onClick = () => {
     message.alert({
         title: '首页',
         confirm: async () => {
-            return await sleep(3000)
+            await sleep(3000)
         }
     })
 }
