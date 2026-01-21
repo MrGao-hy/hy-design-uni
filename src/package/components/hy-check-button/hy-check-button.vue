@@ -1,16 +1,20 @@
 <template>
     <view class="hy-check-button">
-        <template v-for="(item, i) in columns_1" :key="i">
+        <template v-for="(item, i) in columns" :key="i">
             <hy-tag
                 :text="item?.[fieldNames.label]"
-                :name="i"
+                :name="item?.[fieldNames.value]"
                 :type="type"
                 :size="size"
                 :shape="shape"
                 :disabled="isDisabled(item.disabled)"
-                :plain="!item?.[fieldNames.checked]"
+                :plain="!isSelect(item?.[fieldNames.value])"
                 @click="onCheckbox"
-            ></hy-tag>
+            >
+                <template #default>
+                    <slot :record="item"></slot>
+                </template>
+            </hy-tag>
         </template>
     </view>
 </template>
@@ -27,7 +31,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { watch, ref } from 'vue'
+import { watch, ref, computed } from 'vue'
 import type { ICheckButtonEmits } from './typing'
 import type { CheckboxColumnsVo } from './typing'
 import HyTag from '../hy-tag/hy-tag.vue'
@@ -46,48 +50,83 @@ const emit = defineEmits<ICheckButtonEmits>()
 
 const isDisabled = (disabledVal?: boolean): boolean => props.disabled || !!disabledVal
 
-const columns_1 = ref<CheckboxColumnsVo[]>()
+type CurrentValue = string | number | (string | number)[]
+
+const current = ref<CurrentValue>([])
+
+/**
+ * 判断是否有选中值，true选中、false未选中
+ * */
+const isSelect = computed(() => {
+    return (check: string | number) => {
+        if (isArray(current.value)) {
+            return current.value.includes(check)
+        } else {
+            return current.value === check
+        }
+    }
+})
+/**
+ * 获取当前索引
+ * */
+const index = computed(() => {
+    return (check: string | number) => {
+        return props.columns?.findIndex((item: any) => item[props.fieldNames?.value] === check)
+    }
+})
 
 watch(
     () => props.modelValue,
-    (newValue: string | number | (string | number)[]) => {
-        if (!isArray(props.columns) || !props.columns.length) return
-        columns_1.value = props.columns.map((item) => {
-            if (isArray(newValue)) {
-                item[props.fieldNames.checked] = newValue.includes(
-                    item[props.fieldNames.value] as string
-                )
-            } else {
-                item[props.fieldNames.checked] = newValue === item[props.fieldNames.value]
-            }
-            return item
-        })
+    (newValue: CurrentValue) => {
+        current.value = newValue
     },
     { immediate: true }
 )
 
+/**
+ * 点击执行函数
+ * */
 const onCheckbox = ({ name }: TagParamsVo) => {
-    if (name !== undefined && isNumber(name)) {
-        const index = Number(name)
-        if (props.selectType === 'checkbox') {
-            props.columns[index][props.fieldNames.checked] =
-                !props.columns[index][props.fieldNames.checked]
-            emit(
-                'update:modelValue',
-                props.columns
-                    .filter((item) => item[props.fieldNames.checked])
-                    .map((item) => item[props.fieldNames.value])
-            )
-        } else {
-            emit('update:modelValue', props.columns[index][props.fieldNames.value])
+    if (name === undefined) return
+    changeCheckFn(name)
+    changeRadioFn(name)
+
+    emit('update:modelValue', current.value)
+}
+
+/**
+ * 单选框执行函数
+ * @param check 选择的值
+ * */
+const changeRadioFn = (check: string | number) => {
+    if (props.selectType === 'radio') {
+        if (check !== current.value) {
+            current.value = check
+            emit('change', props.columns[index.value(check)])
         }
-        emit('change', props.columns[index])
+    }
+}
+
+/**
+ * 多选框执行函数
+ * @param check 选择的值
+ * */
+const changeCheckFn = (check: string | number) => {
+    if (props.selectType === 'checkbox') {
+        if (!isArray(current.value)) current.value = []
+        if (current.value.includes(check)) {
+            current.value = current.value.filter((item) => item !== check)
+        } else {
+            current.value.push(check)
+        }
+        emit('change', props.columns[index.value(check)])
     }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../../libs/css/mixin';
+
 @include b(check-button) {
     display: grid;
     grid-template-columns: v-bind(col);
