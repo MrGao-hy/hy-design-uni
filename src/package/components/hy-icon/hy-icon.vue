@@ -41,6 +41,7 @@ import type { CSSProperties } from 'vue'
 import { addUnit } from '../../libs'
 import type { IIconEmits } from './typing'
 import iconProps from './props'
+import { onPageScroll } from '@dcloudio/uni-app'
 
 /**
  * 基于字体的图标集，包含了大多数常见场景的图标，使用简单，开箱即用，无需自己再写每个图标的样式，直接简单配置即可。支持自定义图标。
