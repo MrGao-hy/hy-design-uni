@@ -4,24 +4,26 @@
         :text="['欢迎使用华悦组件库, 这是集合vue3+ts+uniapp多框架组件适合你的第一个项目']"
     ></hy-notice-bar>
 
-    <view @tap="onClick">111</view>
+    <hy-button text="点击测试" @click="onClick"></hy-button>
+    <hy-toast></hy-toast>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useMessage, sleep } from '@/package'
+import { useToast, sleep } from '@/package'
 
-const message = useMessage()
+const toast = useToast()
 
-onMounted(() => {})
+onMounted(() => {
+    toast.error('测u哦呜')
+})
 
-const onClick = () => {
-    message.alert({
-        title: '首页',
-        confirm: async () => {
-            await sleep(3000)
-        }
-    })
+const onClick = async () => {
+    toast.loading()
+    await sleep(2000)
+    toast.close()
+    await sleep(2000)
+    toast.success('成功')
 }
 </script>
 

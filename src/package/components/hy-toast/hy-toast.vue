@@ -18,7 +18,9 @@
             <text
                 :class="[
                     'hy-toast__content--test',
-                    !tmpConfig.icon ? `hy-toast__content--text__${tmpConfig.type}` : ''
+                    !tmpConfig.icon && !tmpConfig.loading
+                        ? `hy-toast__content--text__${tmpConfig.type}`
+                        : ''
                 ]"
             >
                 {{ tmpConfig.message }}
@@ -42,7 +44,7 @@ export default {
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
 import type { CSSProperties } from 'vue'
 import type ToastOptions from './typing'
-import { ColorConfig, iconName, getWindowInfo, hexToRgb } from '../../libs'
+import { ColorConfig, iconName, getWindowInfo, hexToRgb, deepMerge } from '../../libs'
 // 组件
 import HyOverlay from '../hy-overlay/hy-overlay.vue'
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -99,7 +101,7 @@ const iconNameCom = computed(() => {
 })
 
 /**
- * @description 内容盒子的样式
+ * 内容盒子的样式
  * */
 const contentStyle = computed(() => {
     const windowHeight = getWindowInfo().windowHeight,
@@ -145,13 +147,12 @@ onUnmounted(() => {
 })
 
 /**
- * @description 显示toast组件，由父组件通过xxx.show(options)形式调用
+ * 显示toast组件，由父组件通过xxx.show(options)形式调用
  * */
 const show = (options: ToastOptions) => {
-    // 不将结果合并到this.config变量，避免多次调用u-toast，前后的配置造成混乱
-    tmpConfig.value = Object.assign(config, options)
     // 清除定时器
     clearTimer()
+    tmpConfig.value = { ...config, ...options }
     isShow.value = true
     // -1时不自动关闭
     if (tmpConfig.value.duration !== -1 && !tmpConfig.value.loading) {
@@ -164,19 +165,22 @@ const show = (options: ToastOptions) => {
     }
 }
 
-// 隐藏toast组件，由父组件通过this.$refs.xxx.hide()形式调用
+/**
+ * 隐藏toast组件，由父组件通过ref形式调用
+ * */
 const hide = () => {
-    config.loading = false
     clearTimer()
 }
 /**
- * @description 清除定时任务
+ * 清除定时任务
  * */
 const clearTimer = () => {
     isShow.value = false
     // 清除定时器
     clearTimeout(timer)
     timer = null
+    // 防止后面请求还是loading状态
+    // config.loading = false
 }
 
 defineExpose({

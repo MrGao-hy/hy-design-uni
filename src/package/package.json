@@ -1,6 +1,6 @@
 {
     "name": "hy-app",
-    "version": "0.6.2",
+    "version": "0.6.3",
     "description": "📱一个基于vue3+ts构建的uni-app组件库,拥有八十多个精美组件，适配多端，支持自定义主题",
     "main": "./index.ts",
     "private": false,
@@ -12,9 +12,9 @@
         "适配多端小程序",
         "暗黑模式"
     ],
-    "vetur":{
-        "tags":"./tags.json",
-        "attributes":"./attributes.json"
+    "vetur": {
+        "tags": "./tags.json",
+        "attributes": "./attributes.json"
     },
     "web-types": "./web-types.json",
     "author": "华玥作者",
