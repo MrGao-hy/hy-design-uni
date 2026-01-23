@@ -1,5 +1,27 @@
 # 📝 更新日志 (CHANGELOG)
 
+## 🚀 v0.6.3 (2026-01-23)
+### 🐞 修复问题
+- 修复useToast隐藏loading卡一下的问题，禁止了改变基本config变量值 ([5425c5c](https://github.com/MrGao-hy/hy-design-uni/commit/5425c5c))
+- 修复中文下日历组件不显示年份 ([df3ebff](https://github.com/MrGao-hy/hy-design-uni/commit/df3ebff))
+- 修复useMessage函数调用不显示问题 ([602dfc4](https://github.com/MrGao-hy/hy-design-uni/commit/602dfc4))
+- 替换空状态地址 ([50a3a48](https://github.com/MrGao-hy/hy-design-uni/commit/50a3a48))
+- 修复row-notice找不到hy-notice__content--text元素 ([a336b11](https://github.com/MrGao-hy/hy-design-uni/commit/a336b11))
+
+### 🔧 构建 | 工具变更
+- 版本更新0.6.2 ([6ba144f](https://github.com/MrGao-hy/hy-design-uni/commit/6ba144f))
+- 重构上传仓库限制 ([6a0f2b9](https://github.com/MrGao-hy/hy-design-uni/commit/6a0f2b9))
+- checkButton代码重构 ([255ddc0](https://github.com/MrGao-hy/hy-design-uni/commit/255ddc0))
+- vite版本升级 ([31e5fc1](https://github.com/MrGao-hy/hy-design-uni/commit/31e5fc1))
+- 工具新增，修改类型 ([dd172dd](https://github.com/MrGao-hy/hy-design-uni/commit/dd172dd))
+- 新增更新日志脚本 ([a0aa92a](https://github.com/MrGao-hy/hy-design-uni/commit/a0aa92a))
+
+### ✅ 测试
+- 测试版本 ([9997d1a](https://github.com/MrGao-hy/hy-design-uni/commit/9997d1a))
+
+### ✨ 新功能
+- 主题新增自定义容器高度 ([3eac78d](https://github.com/MrGao-hy/hy-design-uni/commit/3eac78d))
+
 ## 🚀 v0.6.1 (2026-01-20)
 ### ✨ 新功能
 - 新增自定义国际语言，组件自带中文和英文 ([f79ec57](https://github.com/MrGao-hy/hy-design-uni/commit/f79ec57))
