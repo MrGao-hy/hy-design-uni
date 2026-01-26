@@ -36,4 +36,5 @@ onLaunch(() => {
 </script>
 <style lang="scss">
 @import '@/style/common.scss';
+@import '@/static/icon/font_1/iconfont.css';
 </style>

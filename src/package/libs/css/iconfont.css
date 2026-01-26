@@ -7,8 +7,8 @@
     font-style: normal;
 }
 
-.iconfont {
-  font-family: "hy-icon" !important;
+.hy-icon {
+  font-family: "hy-icon";
   font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;

@@ -28,6 +28,11 @@
             <hy-icon :name="IconConfig.LOCK" color="#FFD04B" />
         </view>
 
+        <view class="hy-title">自定义图标</view>
+        <view class="hy-flex">
+            <hy-icon name="renzheng" customPrefix="icon" />
+        </view>
+
         <view class="hy-title">图标集</view>
         <view class="hy-container">
             <hy-grid :list="icons" border></hy-grid>

@@ -7,7 +7,7 @@
             :mode="imgMode"
             :style="[imgStyle, customStyle]"
         ></image>
-        <text v-else :class="uClasses" :style="[iconStyle, customStyle]"></text>
+        <text v-else :class="iconClass" :style="[iconStyle, customStyle]"></text>
         <!-- 这里进行空字符串判断，如果仅仅是v-if="label"，可能会出现传递0的时候，结果也无法显示 -->
         <text
             v-if="label"
@@ -41,7 +41,6 @@ import type { CSSProperties } from 'vue'
 import { addUnit } from '../../libs'
 import type { IIconEmits } from './typing'
 import iconProps from './props'
-import { onPageScroll } from '@dcloudio/uni-app'
 
 /**
  * 基于字体的图标集，包含了大多数常见场景的图标，使用简单，开箱即用，无需自己再写每个图标的样式，直接简单配置即可。支持自定义图标。
@@ -52,10 +51,10 @@ defineOptions({})
 const props = defineProps(iconProps)
 const emit = defineEmits<IIconEmits>()
 
-const uClasses = computed(() => {
+const iconClass = computed(() => {
     let classes: string | string[] = [
         'hy-icon__icon',
-        'iconfont',
+        props.customPrefix,
         `${props.customPrefix}-${props.name}`
     ]
     if (props.isRotate) classes.push('hy-rotate')
@@ -84,7 +83,7 @@ const iconStyle = computed<CSSProperties>(() => {
 })
 
 /**
- * @description 判断传入的name属性，是否图片路径，只要带有"/"均认为是图片形式
+ * 判断传入的name属性，是否图片路径，只要带有"/"均认为是图片形式
  * */
 const isImg = computed(() => {
     return props.name?.indexOf('/') !== -1
@@ -99,7 +98,7 @@ const imgStyle = computed((): CSSProperties => {
 })
 
 /**
- * @description 点击
+ * 点击icon图标执行
  * */
 const clickHandler = (e: Event) => {
     emit('click', props.index, e)

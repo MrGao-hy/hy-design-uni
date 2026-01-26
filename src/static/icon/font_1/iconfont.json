@@ -1,0 +1,51 @@
+{
+  "id": "5075211",
+  "name": "越科-中为",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11239041",
+      "name": "企业",
+      "font_class": "qiye",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "730870",
+      "name": "认证",
+      "font_class": "renzheng",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "19225441",
+      "name": "金额单位",
+      "font_class": "jinedanwei",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "6560946",
+      "name": "订单",
+      "font_class": "dingdan",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "6560949",
+      "name": "服务条款",
+      "font_class": "fuwutiaokuan",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "6560954",
+      "name": "金额",
+      "font_class": "jine",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    }
+  ]
+}
