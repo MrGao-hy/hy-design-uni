@@ -2,7 +2,7 @@
     <view :class="['hy-datetime-picker', customClass]" :style="customStyle">
         <view v-if="hasInput" class="hy-datetime-picker__has-input" @click="onShowByClickInput">
             <slot name="trigger" :value="inputValue">
-                <HyInput
+                <hy-input
                     v-model="inputValue"
                     :disabled="input?.disabled"
                     :disabledColor="input?.disabledColor"
@@ -17,11 +17,11 @@
                     :placeholderStyle="input?.placeholderStyle"
                     :placeholderClass="input?.placeholderClass"
                     :customStyle="Object.assign({ 'pointer-events': 'none' }, input?.customStyle)"
-                ></HyInput>
+                ></hy-input>
                 <view class="input-cover"></view>
             </slot>
         </view>
-        <HyPicker
+        <hy-picker
             :show="show || (hasInput && showByClickInput)"
             :popupMode="popupMode"
             :closeOnClickOverlay="closeOnClickOverlay"
@@ -49,7 +49,7 @@
             <template #toolbar-bottom>
                 <slot name="toolbar-bottom"></slot>
             </template>
-        </HyPicker>
+        </hy-picker>
     </view>
 </template>
 
@@ -99,7 +99,7 @@ const validModes = new Set([
 ])
 
 /**
- * @description 更新各列的值
+ * 更新各列的值
  * */
 const updateColumns = () => {
     const formatterFn = props.formatter || innerFormatter
@@ -110,7 +110,7 @@ const updateColumns = () => {
 }
 
 /**
- * @description 更新各列的值，进行补0、格式化等操作
+ * 更新各列的值，进行补0、格式化等操作
  * */
 const updateColumnValue = (value: string | number) => {
     innerValue.value = value
@@ -215,7 +215,7 @@ const times = (n: number, iteratee: Function) => {
 }
 
 /**
- * @description 关闭选择器
+ * 关闭选择器
  * */
 const close = () => {
     if (props.closeOnClickOverlay) {
@@ -227,7 +227,7 @@ const close = () => {
 }
 
 /**
- * @description 点击工具栏的取消按钮
+ * 点击工具栏的取消按钮
  * */
 const cancel = () => {
     if (props.hasInput) {
@@ -237,9 +237,25 @@ const cancel = () => {
 }
 
 /**
- * @description 点击工具栏的确定按钮
+ * 点击工具栏的确定按钮
  * */
 const confirm = () => {
+    //如果用户还没有触发过change
+    if (!innerValue.value) {
+        let arr = [0]
+        //如果有默认值&&默认值的数组长度是正确的，就用默认值
+        if (
+            Array.isArray(props.defaultIndex) &&
+            props.defaultIndex.length === columns.value.length
+        ) {
+            arr = [...props.defaultIndex]
+        } else {
+            //否则默认都选中第一个
+            arr = Array(columns.value.length).fill(0)
+        }
+        console.log(arr)
+        getInputValue(arr)
+    }
     emit('update:modelValue', innerValue.value)
     if (props.hasInput) {
         getInputValue(innerValue.value)
@@ -252,7 +268,7 @@ const confirm = () => {
 }
 
 /**
- * @description 用正则截取输出值,当出现多组数字时,抛出错误
+ * 用正则截取输出值,当出现多组数字时,抛出错误
  * */
 const intercept = (e: any, type?: string) => {
     let judge = e.match(/\d+/g)
@@ -272,7 +288,7 @@ const intercept = (e: any, type?: string) => {
 }
 
 /**
- * @description 列发生变化时触发
+ * 列发生变化时触发
  * */
 const change = (e: any) => {
     const { indexs, values } = e
@@ -315,7 +331,7 @@ const change = (e: any) => {
 }
 
 /**
- * @description 更新索引
+ * 更新索引
  * */
 const updateIndexes = (value: number | string) => {
     let values: string[] = []
@@ -375,7 +391,7 @@ const updateIndexes = (value: number | string) => {
 }
 
 /**
- * @description 获取每列数据
+ * 获取每列数据
  * */
 const getOriginColumns = () => {
     // 生成各列的值
@@ -397,7 +413,7 @@ const getOriginColumns = () => {
 }
 
 /**
- * @description 得出合法的时间
+ * 得出合法的时间
  * */
 const correctValue = (value: number | string | Date): string | number => {
     const isDateMode = props.mode !== DateModeEnum.TIME
@@ -417,7 +433,7 @@ const correctValue = (value: number | string | Date): string | number => {
     }
 }
 /**
- * @description 获取每列的最大和最小值
+ * 获取每列的最大和最小值
  * */
 const getRanges = () => {
     if (props.mode === DateModeEnum.TIME) {
@@ -470,7 +486,7 @@ const getRanges = () => {
     return arr
 }
 /**
- * @description 根据minDate、maxDate、minHour、maxHour等边界值，判断各列的开始和结束边界值
+ * 根据minDate、maxDate、minHour、maxHour等边界值，判断各列的开始和结束边界值
  * */
 const getBoundary = (type: string, innerVal: string | number) => {
     const value = new Date(innerVal)
