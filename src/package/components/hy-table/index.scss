@@ -67,13 +67,17 @@ $stripe-bg: $hy-background--table-header;
         border-right: $hy-border-line;
 
         @include is(shadow) {
-          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
         }
       }
 
       @include e(right) {
         right: 0;
         border-left: $hy-border-line;
+
+        @include is(shadow) {
+          box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+        }
       }
     }
   }
@@ -165,13 +169,21 @@ $stripe-bg: $hy-background--table-header;
       left: 0;
 
       @include is(shadow) {
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
       }
     }
 
     @include m(right) {
       right: 0;
       border-left: $hy-border-line;
+
+      @include is(shadow) {
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }
+
+//.is-shadow {
+//  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+//}
