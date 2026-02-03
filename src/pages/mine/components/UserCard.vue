@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import HyIcon from '@/package/components/hy-icon/hy-icon.vue'
+import HyIcon from '../../../package/components/hy-icon/hy-icon.vue'
 interface UserInfo {
     nickname: string
     userId: string

@@ -45,10 +45,10 @@ import { storeToRefs } from 'pinia'
 import { IconConfig } from '@/package'
 
 // 导入组件
-import UserCard from '@/components/mine/UserCard.vue'
-import StatsCard from '@/components/mine/StatsCard.vue'
-import FeatureList from '@/components/mine/FeatureList.vue'
-import LogoutButton from '@/components/mine/LogoutButton.vue'
+import UserCard from './components/UserCard.vue'
+import StatsCard from './components/StatsCard.vue'
+import FeatureList from './components/FeatureList.vue'
+import LogoutButton from './components/LogoutButton.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 
 const themeStore = useThemeStore()
@@ -83,9 +83,9 @@ const userInfo = ref({
 // 统计数据
 const stats = ref([
     { key: 'favorites', label: '组件', value: 74 },
-    { key: 'following', label: '用户', value: 700 },
-    { key: 'followers', label: '粉丝', value: 1024 },
-    { key: 'likes', label: '获赞', value: 520 }
+    { key: 'following', label: '用户', value: '80万' },
+    { key: 'followers', label: '粉丝', value: '18万' },
+    { key: 'likes', label: '获赞', value: '200万' }
 ])
 
 // 服务功能列表

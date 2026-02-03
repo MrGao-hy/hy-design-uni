@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { IconConfig } from '@/package'
-import HyIcon from '@/package/components/hy-icon/hy-icon.vue'
+import HyIcon from '../../../package/components/hy-icon/hy-icon.vue'
 
 interface FeatureItem {
     key: string
