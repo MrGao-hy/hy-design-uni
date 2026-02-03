@@ -67,7 +67,7 @@ const watermarkProps = {
     /** 水印字体大小，单位px */
     size: {
         type: Number,
-        default: 14
+        default: 24
     },
     /** 水印字体样式（仅微信和h5支持） */
     fontStyle: {

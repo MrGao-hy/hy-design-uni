@@ -604,15 +604,6 @@ function drawTextOffScreen(
     waterMarkUrl.value = canvas.toDataURL()
 }
 
-/**
- * 绘制在屏文字canvas
- * @param ctx canvas上下文
- * @param content 水印内容
- * @param contentWidth 水印宽度
- * @param rotate 水印内容倾斜角度
- * @param fontSize 水印字体大小
- * @param color 水印字体颜色
- */
 // 简化版本的文字换行（UniApp CanvasContext不支持measureText）
 function simpleWrapText(text: string, maxLength: number) {
     const lines: string[] = []
@@ -632,6 +623,17 @@ function simpleWrapText(text: string, maxLength: number) {
     return lines
 }
 
+/**
+ * 绘制在屏文字canvas
+ * @param ctx canvas上下文
+ * @param title 标题
+ * @param content 水印内容
+ * @param contentWidth 水印宽度
+ * @param rotate 水印内容倾斜角度
+ * @param fontSize 水印字体大小
+ * @param color 水印字体颜色
+ * @param titleFontSize 标题字体大小
+ */
 function drawTextOnScreen(
     ctx: UniApp.CanvasContext,
     title: string,
