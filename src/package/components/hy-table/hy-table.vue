@@ -5,15 +5,20 @@
             <scroll-view
                 class="hy-table__header--scroll"
                 scroll-x
-                :scroll-left="scrollLeft"
+                :scroll-left="topScrollLeft"
                 :scroll-y="false"
+                lower-threshold="0"
                 @scroll="onHeaderScroll"
+                @scrolltolower="isReachBottom = true"
             >
                 <view class="hy-table__header--wrapper" :style="{ width: addUnit(totalWidth) }">
                     <!-- 左侧固定列头 -->
                     <view
                         v-if="leftFixedColumns.length > 0"
-                        :class="['hy-table__header--wrapper__left', scrollLeft && 'is-shadow']"
+                        :class="[
+                            'hy-table__header--wrapper__left',
+                            isShadow('left') && 'is-shadow'
+                        ]"
                         :style="{ width: addUnit(leftFixedWidth), zIndex: 3 }"
                     >
                         <view
@@ -103,7 +108,10 @@
                     <!-- 右侧固定列头 -->
                     <view
                         v-if="rightFixedColumns.length > 0"
-                        class="hy-table__header--wrapper__right"
+                        :class="[
+                            'hy-table__header--wrapper__right',
+                            isShadow('right') && 'is-shadow'
+                        ]"
                         :style="{ width: addUnit(rightFixedWidth), zIndex: 3 }"
                     >
                         <view
@@ -161,9 +169,9 @@
             <!-- 左侧固定列 -->
             <scroll-view
                 v-if="processedData.length"
-                :class="['hy-table__body--left', scrollLeft && 'is-shadow']"
+                :class="['hy-table__body--left', isShadow('left') && 'is-shadow']"
                 scroll-y
-                :scroll-top="scrollTop"
+                :scroll-top="leftScrollTop"
                 :style="{ width: addUnit(leftFixedWidth), height: addUnit(bodyHeight) }"
                 @scroll="onLeftScroll"
             >
@@ -205,7 +213,7 @@
                 v-if="processedData.length"
                 class="hy-table__body--center"
                 scroll-y
-                :scroll-top="scrollTop"
+                :scroll-top="centerScrollTop"
                 @scroll="onScroll"
                 :style="{
                     width: `calc(100% - ${leftFixedWidth + rightFixedWidth}px)`,
@@ -216,9 +224,12 @@
             >
                 <scroll-view
                     scroll-x
-                    :scroll-left="scrollLeft"
+                    :scroll-y="false"
+                    :scroll-left="centerScrollLeft"
                     class="hy-table__body--content"
+                    lower-threshold="5"
                     @scroll="onCrosswiseScroll"
+                    @scrolltolower="isReachBottom = true"
                 >
                     <view
                         v-for="(row, rowIndex) in processedData"
@@ -256,9 +267,9 @@
             <!-- 右侧固定列 -->
             <scroll-view
                 v-if="processedData.length"
-                class="hy-table__body--right"
+                :class="['hy-table__body--right', isShadow('right') && 'is-shadow']"
                 scroll-y
-                :scroll-top="scrollTop"
+                :scroll-top="rightScrollTop"
                 :style="{
                     width: addUnit(rightFixedWidth),
                     height: addUnit(bodyHeight),
@@ -314,8 +325,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, nextTick } from 'vue'
-import { addUnit, IconConfig, sleep, getPx } from '../../libs'
+import { ref, computed, watch, onMounted } from 'vue'
+import { addUnit, IconConfig, getPx } from '../../libs'
 import type { ITableColumn, ITableEmits } from './typing'
 import tableProps from './props'
 // 组件
@@ -333,15 +344,19 @@ const props = defineProps(tableProps)
 const emit = defineEmits<ITableEmits>()
 
 // 响应式数据
-const scrollLeft = ref(0)
-const scrollTop = ref(0)
 const rowHeights = ref<number[]>([])
 const sortField = ref<string>('')
 const sortOrder = ref<'asc' | 'desc'>('asc')
 const SLEEP_TIME = 60
-
 // 防止滚动循环触发和抖动的标志位
-const isUpdatingScroll = ref(false)
+const activeScroller = ref('')
+const isSyncing = ref(false)
+const leftScrollTop = ref(0)
+const centerScrollTop = ref(0)
+const rightScrollTop = ref(0)
+const centerScrollLeft = ref(0)
+const topScrollLeft = ref(0)
+const isReachBottom = ref(false)
 
 // 计算属性
 const leftFixedColumns = computed(() => props.columns.filter((col) => col.fixed === 'left'))
@@ -361,12 +376,22 @@ const rightFixedWidth = computed(() =>
 const scrollWidth = computed(() => scrollColumns.value.reduce((sum, col) => sum + col.width, 0))
 
 const totalWidth = computed(() => leftFixedWidth.value + scrollWidth.value + rightFixedWidth.value)
-
+// 表格高度
 const containerHeight = computed(() => props.height)
-
+// 表格高度
 const bodyHeight = computed(() => {
     // 减去表头高度
     return props.showHeader ? getPx(props.height) - 50 : props.height
+})
+
+const isShadow = computed(() => {
+    return (type: 'left' | 'right') => {
+        if (type === 'left') {
+            return topScrollLeft.value !== 0 || centerScrollLeft.value !== 0
+        } else {
+            return !isReachBottom.value
+        }
+    }
 })
 
 const processedData = computed(() => {
@@ -388,6 +413,8 @@ const processedData = computed(() => {
 
     return data
 })
+
+onMounted(() => {})
 
 // 方法
 const getHeaderCellStyle = (col: ITableColumn) => {
@@ -445,83 +472,51 @@ const getCellValue = (row: any, col: ITableColumn) => {
 /**
  * 头部横向滚动
  * */
-const onHeaderScroll = async (e: any) => {
-    if (isUpdatingScroll.value) return
-
-    const newScrollLeft = e.detail.scrollLeft
-    if (Math.abs(newScrollLeft - scrollLeft.value) > 1) {
-        isUpdatingScroll.value = true
-        scrollLeft.value = newScrollLeft
-        // 在下一个事件循环重置标志位
-        await sleep(SLEEP_TIME)
-        isUpdatingScroll.value = false
-    }
+const onHeaderScroll = (e: any) => {
+    if (activeScroller.value && activeScroller.value !== 'top') return
+    syncScroll('top', {
+        scrollLeft: e.detail.scrollLeft
+    })
 }
 
 /**
  * 中间内容竖直滚动
  * */
-const onScroll = async (e: any) => {
-    if (isUpdatingScroll.value) return
-
-    const newScrollTop = e.detail.scrollTop
-    isUpdatingScroll.value = true
-    if (Math.abs(newScrollTop - scrollTop.value) > 1) {
-        scrollTop.value = newScrollTop
-    }
-
-    // 在下一个事件循环重置标志位
-    await sleep(SLEEP_TIME)
-    isUpdatingScroll.value = false
+const onScroll = (e: any) => {
+    if (activeScroller.value && activeScroller.value !== 'center') return
+    syncScroll('center', {
+        scrollTop: e.detail.scrollTop
+    })
 }
 
 /**
  * 中间内容横向滚动
  * */
-const onCrosswiseScroll = async (e: any) => {
-    if (isUpdatingScroll.value) return
-
-    const newScrollLeft = e.detail.scrollLeft
-    isUpdatingScroll.value = true
-    // 使用阈值来减少频繁更新，避免抖动
-    if (Math.abs(newScrollLeft - scrollLeft.value) > 1) {
-        scrollLeft.value = newScrollLeft
-    }
-    // 在下一个事件循环重置标志位
-    await sleep(SLEEP_TIME)
-    isUpdatingScroll.value = false
+const onCrosswiseScroll = (e: any) => {
+    if (activeScroller.value && activeScroller.value !== 'bottom') return
+    syncScroll('bottom', {
+        scrollLeft: e.detail.scrollLeft
+    })
 }
 
 /**
- * 左侧列表滚动
+ * 左侧列表竖向滚动
  * */
-const onLeftScroll = async (e: any) => {
-    if (isUpdatingScroll.value) return
-
-    const newScrollTop = e.detail.scrollTop
-    if (Math.abs(newScrollTop - scrollTop.value) > 1) {
-        isUpdatingScroll.value = true
-        scrollTop.value = newScrollTop
-        // 在下一个事件循环重置标志位
-        await sleep(SLEEP_TIME)
-        isUpdatingScroll.value = false
-    }
+const onLeftScroll = (e: any) => {
+    if (activeScroller.value && activeScroller.value !== 'left') return
+    syncScroll('left', {
+        scrollTop: e.detail.scrollTop
+    })
 }
 
 /**
- * 右侧列表滚动
+ * 右侧列表竖向滚动
  * */
-const onRightScroll = async (e: any) => {
-    if (isUpdatingScroll.value) return
-
-    const newScrollTop = e.detail.scrollTop
-    if (Math.abs(newScrollTop - scrollTop.value) > 1) {
-        isUpdatingScroll.value = true
-        scrollTop.value = newScrollTop
-        // 在下一个事件循环重置标志位
-        await sleep(SLEEP_TIME)
-        isUpdatingScroll.value = false
-    }
+const onRightScroll = (e: any) => {
+    if (activeScroller.value && activeScroller.value != 'right') return
+    syncScroll('right', {
+        scrollTop: e.detail.scrollTop
+    })
 }
 
 /**
@@ -569,6 +564,45 @@ watch(
     },
     { deep: true }
 )
+
+/**
+ * 通用滚动同步函数
+ * @param source 哪组滚动数据
+ * @param payload 滚动实例
+ * */
+const syncScroll = (source: string, payload: { scrollTop?: number; scrollLeft?: number }) => {
+    if (isSyncing.value) return
+
+    isSyncing.value = true
+    activeScroller.value = source
+
+    if (payload.scrollTop !== undefined) {
+        if (activeScroller.value !== 'left') leftScrollTop.value = payload.scrollTop
+        if (activeScroller.value !== 'center') centerScrollTop.value = payload.scrollTop
+        if (activeScroller.value !== 'right') rightScrollTop.value = payload.scrollTop
+    }
+
+    if (payload.scrollLeft !== undefined) {
+        isReachBottom.value = false
+        // centerScrollLeft.value = payload.scrollLeft
+        if (activeScroller.value !== 'top') topScrollLeft.value = payload.scrollLeft
+        if (activeScroller.value !== 'bottom') centerScrollLeft.value = payload.scrollLeft
+    }
+
+    // 下一帧解锁
+    nextFrame(() => {
+        isSyncing.value = false
+        activeScroller.value = ''
+    })
+}
+
+const nextFrame = (cb: () => void) => {
+    if (typeof requestAnimationFrame !== 'undefined') {
+        requestAnimationFrame(cb)
+    } else {
+        setTimeout(cb, SLEEP_TIME)
+    }
+}
 </script>
 
 <style scoped lang="scss">
