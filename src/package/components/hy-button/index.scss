@@ -17,7 +17,7 @@
   /* 防止文字内容被压缩换行 */
   flex-shrink: 0;
 
-  @include e(no-disabled) {
+  @include m(active) {
     /* 亮光效果 */
     &::before {
       content: '';

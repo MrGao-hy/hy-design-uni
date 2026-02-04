@@ -25,13 +25,7 @@
         :hover-class="!disabled && !loading ? 'hy-button--active' : ''"
         :style="[baseColor, customStyle]"
         @click="clickHandler"
-        :class="[
-            'hy-button',
-            !border && 'hy-button__no-border',
-            !disabled && 'hy-button__no-disabled',
-            bemClass,
-            customClass
-        ]"
+        :class="['hy-button', !border && 'hy-button__no-border', bemClass, customClass]"
     >
         <template v-if="loading">
             <HyLoading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></HyLoading>

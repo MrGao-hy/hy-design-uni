@@ -3,6 +3,7 @@
         <view class="hy-title">基础按钮</view>
         <view class="hy-container long">
             <hy-button text="我是很长的按钮,按着我会触发惊喜哦" size="small"></hy-button>
+            <hy-button text="按钮" size="small" disabled></hy-button>
         </view>
         <view class="hy-title">按钮颜色</view>
         <view class="hy-grid hy-container">
