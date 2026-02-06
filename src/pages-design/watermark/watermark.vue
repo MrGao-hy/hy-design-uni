@@ -15,6 +15,7 @@
                 :gutter-y="space"
                 titleColor="yellow"
                 :titleSize="20"
+                :isAntiTheft="isAntiTheft"
             ></hy-watermark>
 
             <view class="hy-title">水印旋转角度</view>
@@ -22,6 +23,9 @@
 
             <view class="hy-title">是否全屏</view>
             <hy-switch v-model="fullScreen"></hy-switch>
+
+            <view class="hy-title">是否开启防盗</view>
+            <hy-switch v-model="isAntiTheft"></hy-switch>
 
             <view class="hy-title">边距</view>
             <hy-slider v-model="space" :min="0" :max="150" show-value />
@@ -59,6 +63,7 @@ const space = ref(0)
 const opacity = ref(0.5)
 const rotate = ref(-25)
 const fullScreen = ref(false)
+const isAntiTheft = ref(true)
 const list_2 = [-45, -25, 0, 25, 45]
 
 useShareButton()

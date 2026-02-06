@@ -98,6 +98,11 @@ const watermarkProps = {
     opacity: {
         type: Number,
         default: 0.5
+    },
+    /** 是否防盗 */
+    isAntiTheft: {
+        type: Boolean,
+        default: false
     }
 }
 

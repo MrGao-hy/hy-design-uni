@@ -2,15 +2,6 @@
 @use "../../libs/css/mixin" as *;
 
 @include b(watermark) {
-  position: absolute;
-  z-index: 1100;
-  opacity: 0.5;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  pointer-events: none;
-  background-repeat: repeat;
   @include is(fullscreen) {
     position: fixed;
   }

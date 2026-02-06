@@ -26,7 +26,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch, nextTick } from 'vue'
+import { computed, onMounted, ref, watch, nextTick, onUnmounted } from 'vue'
 import type { CSSProperties } from 'vue'
 import { addUnit, guid } from '../../libs'
 import watermarkProps from './props'
@@ -39,14 +39,16 @@ defineOptions({})
 
 const props = defineProps(watermarkProps)
 
-watch(
-    () => props,
-    () => {
-        doReset()
-    },
-    { deep: true }
-)
+// watch(
+//     () => props,
+//     () => {
+//         doReset()
+//     },
+//     { deep: true }
+// )
 
+const observer = ref<MutationObserver | null>(null)
+const WATERMARK_SELECTOR = '.hy-watermark'
 const canvasId = ref<string>(`watermark--${guid()}`) // canvas 组件的唯一标识符
 const waterMarkUrl = ref<string>('') // canvas生成base64水印
 const canvasOffScreenable = ref<boolean>(
@@ -58,7 +60,7 @@ const canvasWidth = ref<number>((props.width + props.gutterX) * pixelRatio.value
 const showCanvas = ref<boolean>(true) // 是否展示canvas
 
 /**
- * @description 水印css类
+ * 水印css类
  */
 const rootClass = computed(() => {
     const classes: string[] = ['hy-watermark']
@@ -69,21 +71,28 @@ const rootClass = computed(() => {
 })
 
 /**
- * @description 水印样式
+ * 水印样式
  */
 const rootStyle = computed(() => {
     const style: CSSProperties = {
+        // width、height、display, left, top, visibility, transform, margin为了防止在控制台通过修改这些属性导致水印被隐藏
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        left: 0,
+        top: 0,
+        pointerEvents: 'none',
+        visibility: 'visible',
         opacity: props.opacity,
+        zIndex: props.zIndex,
+        backgroundRepeat: 'repeat',
+        backgroundPosition: '0px 0px',
         backgroundSize: addUnit(props.width + props.gutterX)
     }
     if (waterMarkUrl.value) {
         style['backgroundImage'] = `url('${waterMarkUrl.value}')`
     }
     return style
-})
-
-onMounted(() => {
-    doInit()
 })
 
 function doReset() {
@@ -255,6 +264,8 @@ function createWaterMark(
  * @param image canvas图片
  * @param imageHeight canvas图片高度
  * @param imageWidth canvas图片宽度
+ * @param title 标题文本
+ * @param titleFontSize 标题字体大小
  */
 function createOffscreenCanvas(
     canvasHeight: number,
@@ -351,6 +362,8 @@ function createOffscreenCanvas(
  * @param image canvas图片
  * @param imageHeight canvas图片高度
  * @param imageWidth canvas图片宽度
+ * @param title 标题文本
+ * @param titleFontSize 标题字体大小
  */
 function createCanvas(
     contentHeight: number,
@@ -426,6 +439,8 @@ function createCanvas(
  * @param image canvas图片
  * @param imageHeight canvas图片高度
  * @param imageWidth canvas图片宽度
+ * @param title 标题文本
+ * @param titleFontSize 标题字体大小
  */
 function createH5Canvas(
     canvasHeight: number,
@@ -508,20 +523,12 @@ function createH5Canvas(
 }
 
 /**
- * 绘制离屏文字canvas
+ * 测量文本宽度并自动换行
  * @param ctx canvas上下文
- * @param content 水印内容
- * @param contentWidth 水印宽度
- * @param contentHeight 水印高度
- * @param rotate 水印内容倾斜角度
- * @param fontSize 水印字体大小
- * @param fontFamily 水印字体系列
- * @param fontStyle 水印字体样式
- * @param fontWeight 水印字体字重
- * @param color 水印字体颜色
- * @param canvas canvas实例
+ * @param text 文本
+ * @param maxWidth 最大宽度
+ * @param fontSize 文字大小
  */
-// 测量文本宽度并自动换行
 function wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number, fontSize: number) {
     const words = text.split('')
     const lines: string[] = []
@@ -973,6 +980,77 @@ function drawImageOnScreen(
         // #endif
     })
 }
+/**
+ * 启动监听
+ * */
+function startObserve() {
+    // #ifdef H5
+    const target = document.querySelector(WATERMARK_SELECTOR) as HTMLElement
+    if (!target || observer.value) return
+
+    // 观察目标节点的属性变化、子节点变化、以及自身被删除
+    observer.value = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            let el = document.querySelector('.hy-watermark') as HTMLElement
+            if (mutation.type === 'attributes' || mutation.removedNodes.length > 0) {
+                // 检查节点是否被删除
+                if (!el) {
+                    // 手动创建一个新的 div
+                    el = document.createElement('div') as HTMLElement
+                    parent.appendChild(target)
+                }
+                el.className = rootClass.value.join(' ') // 加上你需要的初始类名
+                el.style.cssText = Object.entries(rootStyle.value)
+                    .map(([key, val]) => {
+                        // 将 camelCase 转为 kebab-case (例如: backgroundImage -> background-image)
+                        const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase()
+                        return `${cssKey}: ${val};` // 强制加上 !important 增加删除难度
+                    })
+                    .join(' ')
+                console.warn('检测到安全策略违规，正在恢复水印...')
+
+                // 停止旧监听，防止死循环
+                stopObserve()
+                nextTick(() => startObserve())
+            }
+        })
+    })
+
+    // 监听父级节点，防止整个 .hy-watermark 被删除
+    const parent = target.parentElement || document.body
+    observer.value.observe(parent, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        attributeFilter: ['style', 'class'] // 仅监听样式和类名改动
+    })
+    // #endif
+}
+
+/**
+ * 停止监听
+ * */
+function stopObserve() {
+    if (observer.value) {
+        observer.value.disconnect()
+        observer.value = null
+    }
+}
+
+onMounted(() => {
+    doInit()
+    // 初始化完成后开启监听
+    // #ifdef H5
+    props.isAntiTheft && nextTick(() => startObserve())
+    // #endif
+})
+
+// 组件销毁前必须断开监听，否则会导致内存泄漏
+onUnmounted(() => {
+    // #ifdef H5
+    stopObserve()
+    // #endif
+})
 </script>
 
 <style lang="scss" scoped>
