@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">复选按钮</view>
         <view class="hy-container">
             <hy-check-button
@@ -9,7 +9,8 @@
                 :shape="shape"
                 :size="size"
                 selectType="checkbox"
-            ></hy-check-button>
+            >
+            </hy-check-button>
         </view>
 
         <view class="hy-title">单选按钮</view>
@@ -34,16 +35,11 @@
             <view class="hy-title">大小</view>
             <hy-subsection :list="list_3" v-model="size"></hy-subsection>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyCheckButton from '../../package/components/hy-check-button/hy-check-button.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { reactive, ref } from 'vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -52,8 +48,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value_1 = ref('')
 const value_2 = ref('')
 const type = ref<HyApp.ThemeType>('primary')

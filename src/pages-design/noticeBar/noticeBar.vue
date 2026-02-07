@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-notice-bar
@@ -31,19 +31,12 @@
             >
             <hy-slider v-model="speed" :min="50" :max="300" showValue></hy-slider>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import hyNoticeBar from '../../package/components/hy-notice-bar/hy-notice-bar.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
 import { reactive, ref } from 'vue'
 import type { NoticeBarModeVo } from '@/package/components/hy-notice-bar/typing'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -52,8 +45,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const direction = ref<HyApp.DirectionType>('column')
 const mode = ref<NoticeBarModeVo>('')
 const justifyContent = ref<HyApp.JustifyContentType>('flex-start')

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <hy-submit-bar
             :menus="menus"
             :left-loading="true"
@@ -14,16 +14,12 @@
             right-btn-color="linear-gradient(to right, #4bfcfc, #FB39F5)"
         ></hy-submit-bar>
         <hy-submit-bar :menus="menus" :fixed="false" :show-right-btn="false"></hy-submit-bar>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HySubmitBar from '@/package/components/hy-submit-bar/hy-submit-bar.vue'
 import { reactive } from 'vue'
 import { IconConfig } from '@/package'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import type { SubmitBarIconMenus } from '@/package/components/hy-submit-bar/typing'
 import { useShareButton } from '@/composables'
 
@@ -33,8 +29,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const menus = reactive([
     { icon: IconConfig.HOME, text: '首页' },
     { icon: IconConfig.CUSTOMER_SERVICE, text: '客服' },

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">优惠券组件示例</view>
         <view class="hy-container">
             <template v-for="item in list" :key="item.id">
@@ -106,17 +106,11 @@
             <view class="hy-title">按钮样式</view>
             <hy-subsection :list="btnModeOptions" v-model="btnMode"></hy-subsection>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyCoupon from '@/package/components/hy-coupon/hy-coupon.vue'
 import { reactive, ref } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -125,8 +119,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const boxShadow = ref(true)
 const btnMode = ref('button')
 const btnModeOptions = reactive([

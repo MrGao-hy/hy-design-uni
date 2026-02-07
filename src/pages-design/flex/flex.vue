@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-flex :justify="justify" :vertical="vertical" :gap="gap" :align="align">
@@ -31,20 +31,12 @@
             <view class="hy-title">网格间隙</view>
             <hy-slider :list="list_1" v-model="gap"></hy-slider>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import HyFlex from '@/package/components/hy-flex/hy-flex.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import type { FlexAlign, FlexJustify } from '@/package/components/hy-flex/typing'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -53,8 +45,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const gap = ref(0)
 const vertical = ref(false)
 const justify = ref<FlexJustify>('flex-start')

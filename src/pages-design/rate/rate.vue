@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-rate v-model="value"></hy-rate>
@@ -40,15 +40,11 @@
         <view class="hy-container">
             <hy-rate v-model="value" allowHalf></hy-rate>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import HyRate from '../../package/components/hy-rate/hy-rate.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -57,8 +53,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value = ref(3)
 
 useShareButton()

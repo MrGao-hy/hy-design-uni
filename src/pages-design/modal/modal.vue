@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-container">
             <the-cell :list="list" @click="onClick"></the-cell>
         </view>
@@ -28,18 +28,12 @@
                 label-width="60"
             ></hy-form-group>
         </hy-modal>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyModal from '../../package/components/hy-modal/hy-modal.vue'
-import HyFormGroup from '@/package/components/hy-form-group/hy-form-group.vue'
-import TheCell from '@/components/TheCell.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { ref, reactive } from 'vue'
-import { useThemeStore } from '@/store'
 import { FormTypeEnum } from '@/package'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -48,8 +42,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const show = ref(false)
 const formRef = ref()
 const showAsync = ref(false)

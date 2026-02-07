@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">设置暗色</view>
         <view class="hy-container">
             <hy-switch v-model="darkMode" activeValue="dark" inactiveValue="light"></hy-switch>
@@ -14,13 +14,10 @@
                 @change="changeFn"
             ></hy-check-button>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HyCheckButton from '../../package/components/hy-check-button/hy-check-button.vue'
 import { reactive } from 'vue'
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'

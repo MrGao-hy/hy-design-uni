@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <the-cell :list="list" @click="onChange"></the-cell>
 
         <hy-action-sheet
@@ -31,17 +31,12 @@
             titleAlign="left"
             @select="onClick"
         ></hy-action-sheet>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyActionSheet from '@/package/components/hy-action-sheet/hy-action-sheet.vue'
-import TheCell from '@/components/TheCell.vue'
-import { useThemeStore } from '@/store'
 import { ref, reactive } from 'vue'
 import type { IActionSheetAction } from '@/package/components/hy-action-sheet/typing'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -50,8 +45,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const list = reactive([
     { title: '基础使用', value: false },
     { title: '带标题', value: false },

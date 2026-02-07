@@ -1,9 +1,5 @@
 <template>
-    <hy-config-provider
-        :theme-color="color"
-        :custom-style="{ height: '10000px' }"
-        :theme="darkMode"
-    >
+    <the-root-page :custom-style="{ height: '10000px' }">
         <hy-back-top
             :scrollTop="scrollTop"
             :mode="mode"
@@ -24,18 +20,12 @@
             <view class="hy-title">距离底部距离</view>
             <hy-slider v-model="bottom" :max="500" show-value></hy-slider>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HyBackTop from '../../package/components/hy-back-top/hy-back-top.vue'
 import { ref } from 'vue'
 import { onPageScroll } from '@dcloudio/uni-app'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -44,8 +34,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const mode = ref<HyApp.ShapeType>('circle')
 const duration = ref(500)
 const right = ref(20)

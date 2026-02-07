@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-count-down :time="30 * 60 * 60 * 1000"></hy-count-down>
@@ -58,16 +58,12 @@
                 <hy-button text="暂停" type="error" @click="pause"></hy-button>
             </view>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyCountDown from '../../package/components/hy-count-down/hy-count-down.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
+import HyCountDown from '@/package/components/hy-count-down/hy-count-down.vue'
 import { ref } from 'vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -76,8 +72,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const countDownRef = ref<InstanceType<typeof HyCountDown>>()
 
 // methods

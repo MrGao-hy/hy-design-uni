@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-margin">
             <hy-swiper
                 :list="list"
@@ -39,17 +39,11 @@
             <view class="hy-title">轮播图自动切换间隔</view>
             <hy-slider v-model="interval" :min="1000" :max="5000"></hy-slider>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import HySwiper from '../../package/components/hy-swiper/hy-swiper.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -58,8 +52,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const list = ref([
     'https://img0.baidu.com/it/u=1913990970,584854398&fm=253&id=1',
     'http://mms2.baidu.com/it/u=204741874,3444396868&fm=253&id=2',

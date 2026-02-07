@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <hy-float-button
             :shape="shape"
             :size="size"
@@ -38,17 +38,11 @@
             <view class="hy-title">是否打开</view>
             <hy-switch v-model="expandable"></hy-switch>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyFloatButton from '@/package/components/hy-float-button/hy-float-button.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { reactive, ref } from 'vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -57,8 +51,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const menus = ['菜单1', '菜单2', '菜单3']
 const shape = ref('circle')
 const size = ref('medium')

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础示例</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom :beforeClose="beforeClose">
@@ -26,15 +26,11 @@
                 </template>
             </hy-swipe-action>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HySwipeAction from '@/package/components/hy-swipe-action/hy-swipe-action.vue'
 import { ref } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -43,8 +39,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const show = ref(false)
 
 const options = [

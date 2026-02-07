@@ -18,11 +18,10 @@
                     :round="icon?.round"
                     :customStyle="Object.assign({ marginRight: '3px' }, icon?.customStyle)"
                 ></hy-icon>
-                <text :class="textClass" :style="textStyle">
-                    <slot>
-                        {{ text }}
-                    </slot>
-                </text>
+                <view :class="textClass" :style="textStyle">
+                    <slot v-if="$slots.default"></slot>
+                    <template v-else>{{ text }}</template>
+                </view>
                 <!-- 关闭按钮 -->
                 <view
                     :class="['hy-tag__close', `hy-tag__close--${size}`]"

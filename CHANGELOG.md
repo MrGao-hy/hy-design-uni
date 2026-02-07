@@ -1,12 +1,35 @@
 # 📝 更新日志 (CHANGELOG)
 
-## 🚀 v0.6.3 (2026-01-23)
+## 🚀 v0.6.4 (2026-02-06)
+### ✨ 新功能
+- 给水印组件添加防删除元素、防修改样式的功能 ([74cf703](https://github.com/MrGao-hy/hy-design-uni/commit/74cf703))
+- 主题新增自定义容器高度 ([3eac78d](https://github.com/MrGao-hy/hy-design-uni/commit/3eac78d))
+
+### ♻️ 重构优化
+- 添加忽略文件 ([222c96a](https://github.com/MrGao-hy/hy-design-uni/commit/222c96a))
+- 我的页面组件文件位置调整 ([3e4f094](https://github.com/MrGao-hy/hy-design-uni/commit/3e4f094))
+
 ### 🐞 修复问题
+- 解决按钮在加载中出现点击动画问题 ([634d7d5](https://github.com/MrGao-hy/hy-design-uni/commit/634d7d5))
+- 修改表格部分滚动问题 ([edb90dd](https://github.com/MrGao-hy/hy-design-uni/commit/edb90dd))
+- 修复icon自定义问题 ([59872f2](https://github.com/MrGao-hy/hy-design-uni/commit/59872f2))
 - 修复useToast隐藏loading卡一下的问题，禁止了改变基本config变量值 ([5425c5c](https://github.com/MrGao-hy/hy-design-uni/commit/5425c5c))
 - 修复中文下日历组件不显示年份 ([df3ebff](https://github.com/MrGao-hy/hy-design-uni/commit/df3ebff))
 - 修复useMessage函数调用不显示问题 ([602dfc4](https://github.com/MrGao-hy/hy-design-uni/commit/602dfc4))
 - 替换空状态地址 ([50a3a48](https://github.com/MrGao-hy/hy-design-uni/commit/50a3a48))
 - 修复row-notice找不到hy-notice__content--text元素 ([a336b11](https://github.com/MrGao-hy/hy-design-uni/commit/a336b11))
+
+### 📚 文档变更
+- 修改注释 ([830665d](https://github.com/MrGao-hy/hy-design-uni/commit/830665d))
+- 更新日志文档 ([31de9bf](https://github.com/MrGao-hy/hy-design-uni/commit/31de9bf))
+
+### ✅ 测试
+- 测试组件 ([a4625e7](https://github.com/MrGao-hy/hy-design-uni/commit/a4625e7))
+- 测试版本 ([9997d1a](https://github.com/MrGao-hy/hy-design-uni/commit/9997d1a))
+
+### 💄 样式调整
+- 添加表格固定阴影样式 ([4a87d73](https://github.com/MrGao-hy/hy-design-uni/commit/4a87d73))
+- 时间组件样式 ([dd71df7](https://github.com/MrGao-hy/hy-design-uni/commit/dd71df7))
 
 ### 🔧 构建 | 工具变更
 - 版本更新0.6.2 ([6ba144f](https://github.com/MrGao-hy/hy-design-uni/commit/6ba144f))
@@ -15,12 +38,6 @@
 - vite版本升级 ([31e5fc1](https://github.com/MrGao-hy/hy-design-uni/commit/31e5fc1))
 - 工具新增，修改类型 ([dd172dd](https://github.com/MrGao-hy/hy-design-uni/commit/dd172dd))
 - 新增更新日志脚本 ([a0aa92a](https://github.com/MrGao-hy/hy-design-uni/commit/a0aa92a))
-
-### ✅ 测试
-- 测试版本 ([9997d1a](https://github.com/MrGao-hy/hy-design-uni/commit/9997d1a))
-
-### ✨ 新功能
-- 主题新增自定义容器高度 ([3eac78d](https://github.com/MrGao-hy/hy-design-uni/commit/3eac78d))
 
 ## 🚀 v0.6.1 (2026-01-20)
 ### ✨ 新功能

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container hy-flex">
             <hy-price text="10.234567"></hy-price>
@@ -45,14 +45,10 @@
             <hy-price text="10.22"></hy-price>
             <hy-price text="10.22" :ratio="1.6"></hy-price>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyPrice from '@/package/components/hy-price/hy-price.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -60,9 +56,6 @@ definePage({
         navigationBarTitleText: '金额'
     }
 })
-
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 
 useShareButton()
 </script>

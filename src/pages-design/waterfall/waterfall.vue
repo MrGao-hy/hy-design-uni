@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <hy-waterfall v-model="flowList" ref="waterfallRef">
             <template v-slot:left="{ leftList }">
                 <view class="demo-water" v-for="(item, index) in leftList" :key="index">
@@ -52,24 +52,15 @@
             </template>
         </hy-waterfall>
         <hy-divider :text="loadStatus"></hy-divider>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { guid, random } from '@/package'
-import list from './data'
+import { guid, random, IconConfig } from '@/package'
 import { onReachBottom } from '@dcloudio/uni-app'
-import { IconConfig } from '@/package'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
-
-import HyWaterfall from '@/package/components/hy-waterfall/hy-waterfall.vue'
-import HyImage from '../../package/components/hy-image/hy-image.vue'
-import HyIcon from '../../package/components/hy-icon/hy-icon.vue'
-import HyDivider from '../../package/components/hy-divider/hy-divider.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useShareButton } from '@/composables'
+import list from './data'
 
 definePage({
     style: {
@@ -77,8 +68,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const flowList = ref<Record<string, any>[]>([])
 const waterfallRef = ref()
 const loadStatus = ref('noMore')

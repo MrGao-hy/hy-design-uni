@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">省略号</view>
             <hy-table height="300" :data="tableData" :columns="columns"></hy-table>
@@ -36,18 +36,10 @@
             <view class="hy-title">空状态</view>
             <hy-table :data="[]" :columns="columns"></hy-table>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
-
-import HyTable from '@/package/components/hy-table/hy-table.vue'
-import HyFlex from '@/package/components/hy-flex/hy-flex.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
-import HyAvatar from '../../package/components/hy-avatar/hy-avatar.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -56,8 +48,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const columns = reactive([
     { title: 'ID', key: 'id', width: 40, fixed: 'left', align: 'center' },
     { title: '姓名', key: 'name', width: 80, fixed: 'left' },

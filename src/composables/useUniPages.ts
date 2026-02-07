@@ -5,13 +5,14 @@ export const useUniPages = {
     subPackages: ['src/pages-design'],
     homePage: 'pages/index/Index',
     onBeforeWriteFile(ctx: PageContext) {
+        if (!ctx.subPageMetaData) return
         ctx.subPageMetaData.forEach((item) => {
             if (item.root === 'pages-design') {
                 item.pages.forEach((p) => {
                     if (!p.style) p.style = {}
                     p.style.h5 = {
                         titleNView: {
-                            buttons: [{ type: 'share', color: '#892FE8' }]
+                            buttons: [{ type: 'share' }]
                         }
                     }
                 })

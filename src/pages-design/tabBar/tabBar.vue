@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title"> 基础使用</view>
         <hy-tabbar-group v-model="current" @change="onChange">
             <hy-tabbar-item title="首页" icon="home"></hy-tabbar-item>
@@ -58,20 +58,13 @@
 
         <!-- 底部固定的tabbar测试 -->
         <hy-tabbar v-model="fixedCurrent" :list="list"></hy-tabbar>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import HyTabbarGroup from '@/package/components/hy-tabbar-group/hy-tabbar-group.vue'
-import HyTabbarItem from '@/package/components/hy-tabbar-item/hy-tabbar-item.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyTabbar from '@/package/components/hy-tabbar/hy-tabbar.vue'
-import HyImage from '../../package/components/hy-image/hy-image.vue'
 import { IconConfig } from '@/package'
 import { config } from '@/config/config'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -80,8 +73,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const current = ref(0)
 const fixedCurrent = ref(0)
 const list = [

@@ -7,7 +7,6 @@ type _LocationUrl =
   "/pages/index/Index" |
   "/pages/mine/Index" |
   "/pages/test/Index" |
-  "/pages-design/a/a" |
   "/pages-design/actionSheet/actionSheet" |
   "/pages-design/addressPicker/addressPicker" |
   "/pages-design/avatar/avatar" |

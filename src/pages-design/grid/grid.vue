@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-grid
@@ -21,20 +21,14 @@
             <view class="hy-title">边距</view>
             <hy-slider v-model="gap" :min="0" :max="20" />
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { config } from '@/config/config'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HyGrid from '../../package/components/hy-grid/hy-grid.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
+import { useToast } from '@/package'
 
 definePage({
     style: {
@@ -42,12 +36,11 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 type Menus = {
     icon: string
     name: string
 }
+const toast = useToast()
 const list: Menus[] = reactive([])
 
 for (let i = 0; i < 12; i++) {
@@ -63,7 +56,7 @@ const border = ref(false)
 const list_1 = [2, 3, 4, 5]
 
 const onClick = (e) => {
-    uni.showToast({ title: e.name, icon: 'none' })
+    toast.show(`点击${e.name}`)
 }
 
 useShareButton()

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :custom-style="{ padding: '10px' }" :theme="darkMode">
+    <the-root-page :custom-style="{ padding: '10px' }">
         <view class="hy-container">
             <hy-form-group
                 ref="formGroupRef"
@@ -23,19 +23,14 @@
             <text class="result-title">表单数据：</text>
             <text class="result-content">{{ JSON.stringify(formData, null, 2) }}</text>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import { FormTypeEnum } from '@/package'
+import { FormTypeEnum, useToast } from '@/package'
 import type { FormColumnsType } from '@/package'
 import HyFormGroup from '@/package/components/hy-form-group/hy-form-group.vue'
-import HyInput from '../../package/components/hy-input/hy-input.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { reactive, ref } from 'vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -44,8 +39,7 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
+const toast = useToast()
 const formData: AnyObject = reactive({
     name: '',
     label: '',
@@ -238,26 +232,24 @@ const columns: Partial<FormColumnsType>[] = reactive([
 const handleSubmit = async (data: any) => {
     const isSuccess = await formGroupRef.value?.submit()
     if (isSuccess) {
-        await uni.showToast({
-            title: '提交成功',
-            icon: 'success'
-        })
+        toast.success('提交成功')
     }
 }
 
 // 验证表单
 const handleValidate = async () => {
-    const isValid = await formGroupRef.value.validate()
-    await uni.showToast({ title: `表单校验成功${isValid}`, icon: 'none' })
+    try {
+        await formGroupRef.value.validate()
+        toast.success('校验成功')
+    } catch (err) {
+        toast.error('表单校验成功')
+    }
 }
 
 // 重置表单
 const handleReset = async () => {
     await formGroupRef.value?.resetFields()
-    await uni.showToast({
-        title: '重置成功',
-        icon: 'none'
-    })
+    toast.show('重置成功')
 }
 
 useShareButton()

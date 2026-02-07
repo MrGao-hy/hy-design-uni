@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <hy-cell
             :arrange="arrange"
             :size="size"
@@ -31,18 +31,12 @@
             <view class="hy-title">右侧icon方向</view>
             <hy-subsection :list="list_3" v-model="arrowDirection"></hy-subsection>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyCell from '../../package/components/hy-cell/hy-cell.vue'
-import HyCellItem from '@/package/components/hy-cell-item/hy-cell-item.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { reactive, ref } from 'vue'
 import { IconConfig } from '@/package'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -51,8 +45,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const arrange = ref<HyApp.RowCenterType>('right')
 const size = ref<HyApp.SizeType>('medium')
 const arrowDirection = ref<HyApp.RotateType>('right')

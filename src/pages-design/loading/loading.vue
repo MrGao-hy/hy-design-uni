@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-loading></hy-loading>
@@ -26,14 +26,10 @@
             <hy-loading mode="circle" text="加载中..." direction="column"></hy-loading>
             <hy-loading mode="circle" text="加载中..." direction="row"></hy-loading>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyLoading from '../../package/components/hy-loading/hy-loading.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -41,9 +37,6 @@ definePage({
         navigationBarTitleText: '加载中'
     }
 })
-
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 
 useShareButton()
 </script>

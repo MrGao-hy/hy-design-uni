@@ -21,6 +21,11 @@ const overlayProps = {
         type: Number,
         default: 0.5
     },
+    /** 使用的动画过渡函数 */
+    LockScroll: {
+        type: Boolean,
+        default: true
+    },
     /** 定义需要用到的外部样式 */
     customStyle: {
         type: Object as PropType<CSSProperties>,

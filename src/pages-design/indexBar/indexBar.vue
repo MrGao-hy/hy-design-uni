@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <scroll-view class="hy-scroll-view" scroll-y :scroll-top="scrollTop" @scroll="handleScroll">
             <view
                 v-for="item in indexList"
@@ -28,16 +28,11 @@
             @click="handleIndexClick"
             @scroll="handleIndexScroll"
         />
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyIndexBar from '@/package/components/hy-index-bar/hy-index-bar.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
 import { ref, reactive, computed, getCurrentInstance, nextTick, onMounted } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { getRect, sleep } from '@/package'
 import { useShareButton } from '@/composables'
 
@@ -47,8 +42,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const instance = getCurrentInstance()
 // 索引栏位置
 const position = ref<string>('right')
@@ -121,7 +114,7 @@ const indexs = computed(() => {
 
 onMounted(() => {
     nextTick(() => {
-        getRect('.hy-index-section', true).then((rect) => {
+        getRect('.hy-index-section', true, instance).then((rect) => {
             sectionRect.value = rect
         })
     })

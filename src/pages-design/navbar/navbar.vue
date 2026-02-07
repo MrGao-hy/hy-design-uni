@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :custom-style="{ height: '2000px' }" :theme="darkMode">
+    <the-root-page>
         <hy-navbar title="自定义导航栏" autoBack placeholder></hy-navbar>
 
         <view class="hy-title">基础使用</view>
@@ -38,17 +38,11 @@
                 </template>
             </hy-navbar>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyNavbar from '../../package/components/hy-navbar/hy-navbar.vue'
-import HyLine from '../../package/components/hy-line/hy-line.vue'
-import HyIcon from '../../package/components/hy-icon/hy-icon.vue'
 import { IconConfig } from '@/package'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -56,9 +50,6 @@ definePage({
         navigationBarTitleText: '自定义导航栏'
     }
 })
-
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 
 useShareButton()
 </script>

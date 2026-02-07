@@ -1,22 +1,16 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <the-cell :list="list" @click="onClick"></the-cell>
 
         <hy-transition :mode="mode" :show="show" :custom-style="style">
             <view class="transition"></view>
         </hy-transition>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { computed, type CSSProperties, reactive, ref } from 'vue'
 import { getWindowInfo } from '@/package'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
-// 组件
-import TheCell from '@/components/TheCell.vue'
-import HyTransition from '../../package/components/hy-transition/hy-transition.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -25,8 +19,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const show = ref(false)
 const mode = ref<HyApp.TransitionMode>('fade')
 const style = computed((): CSSProperties => {

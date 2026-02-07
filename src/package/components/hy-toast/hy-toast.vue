@@ -1,5 +1,10 @@
 <template>
-    <HyOverlay :show="isShow" :zIndex="tmpConfig.overlay ? 10070 : -1" :custom-style="overlayStyle">
+    <hy-overlay
+        :show="isShow"
+        :zIndex="tmpConfig.overlay ? 10070 : -1"
+        :LockScroll="false"
+        :custom-style="overlayStyle"
+    >
         <view :style="[contentStyle]" :class="contentClass">
             <hy-loading
                 v-if="tmpConfig.loading"
@@ -26,7 +31,7 @@
                 {{ tmpConfig.message }}
             </text>
         </view>
-    </HyOverlay>
+    </hy-overlay>
 </template>
 
 <script lang="ts">
@@ -77,7 +82,8 @@ const overlayStyle = computed(() => {
     const style: CSSProperties = {
         justifyContent: 'center',
         alignItems: 'center',
-        display: 'flex'
+        display: 'flex',
+        flexDirection: 'column'
     }
     // 将遮罩设置为100%透明度，避免出现灰色背景
     style.backgroundColor = 'rgba(0, 0, 0, 0)'

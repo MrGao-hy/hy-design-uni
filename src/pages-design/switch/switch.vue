@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <hy-switch v-model="value"></hy-switch>
 
@@ -31,16 +31,12 @@
         <hy-switch v-model="value">
             <view style="font-size: 16rpx">禁用</view>
         </hy-switch>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { ref } from 'vue'
 import { IconConfig } from '@/package'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -49,8 +45,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value = ref(true)
 
 useShareButton()

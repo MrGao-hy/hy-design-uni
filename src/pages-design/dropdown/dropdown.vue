@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <hy-dropdown>
             <hy-dropdown-item
                 title="全部"
@@ -20,16 +20,11 @@
                 @change="handleChange"
             ></hy-dropdown-item>
         </hy-dropdown>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyDropdownItem from '../../package/components/hy-dropdown-item/hy-dropdown-item.vue'
-import HyDropdown from '../../package/components/hy-dropdown/hy-dropdown.vue'
 import { ref } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -38,8 +33,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value1 = ref()
 const value_2 = ref()
 const value_3 = ref()

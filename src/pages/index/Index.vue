@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import TheCell from '@/components/TheCell.vue'
+import TheCell from '@/components/the-cell.vue'
 import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import HyModal from '@/package/components/hy-modal/hy-modal.vue'
 import { list_1, list_2, list_3, list_4, list_5, list_6, list_7 } from './index1'

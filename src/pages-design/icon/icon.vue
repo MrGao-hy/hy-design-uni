@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">图标图片(带圆角)</view>
         <view class="hy-flex">
             <hy-icon :name="config.avatar" size="80" round="5px" />
@@ -37,19 +37,13 @@
         <view class="hy-container">
             <hy-grid :list="icons" border></hy-grid>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { IconConfig } from '@/package'
 import { config } from '@/config/config'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
-// 组件
-import HyIcon from '../../package/components/hy-icon/hy-icon.vue'
-import HyGrid from '../../package/components/hy-grid/hy-grid.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -58,8 +52,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 // 图标集合
 const icons = reactive([
     {

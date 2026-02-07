@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础示例</view>
         <view class="hy-container">
             <hy-pagination v-model="current" :total="999"></hy-pagination>
@@ -14,15 +14,11 @@
         <view class="hy-container">
             <hy-pagination v-model="current" showMessage :total="999"></hy-pagination>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyPagination from '@/package/components/hy-pagination/hy-pagination.vue'
-import { useThemeStore } from '@/store'
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -31,8 +27,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const current = ref(1)
 
 useShareButton()

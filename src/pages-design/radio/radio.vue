@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-radio :columns="columns" v-model="value" :size="size" :shape="shape"></hy-radio>
@@ -57,16 +57,11 @@
             <view class="hy-title">大小</view>
             <hy-subsection :list="list_2" v-model="size"></hy-subsection>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import HyRadio from '../../package/components/hy-radio/hy-radio.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -75,8 +70,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value = ref('')
 const size = ref<HyApp.SizeType>('medium')
 const shape = ref<HyApp.ShapeType>('circle')

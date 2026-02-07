@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <hy-upload
             :fileList="list"
@@ -32,18 +32,14 @@
             upload-text="上传视频"
             accept="video"
         ></hy-upload>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyUpload from '../../package/components/hy-upload/hy-upload.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import type { FileVo, UploadFileParams } from '@/package/components/hy-upload/typing'
 import { ref } from 'vue'
-import { useThemeStore } from '@/store'
 import { bytesToSize, isArray } from '@/package'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
+import type { FileVo, UploadFileParams } from '@/package/components/hy-upload/typing'
 
 definePage({
     style: {
@@ -51,8 +47,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const maxSize = ref(500000)
 const list = ref<FileVo[]>([
     {

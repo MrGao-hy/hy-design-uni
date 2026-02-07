@@ -37,7 +37,8 @@ export default defineUniPages({
     easycom: {
         autoscan: true,
         custom: {
-            '^hy-(.*)': '@/package/components/hy-$1/hy-$1.vue'
+            '^hy-(.*)': '@/package/components/hy-$1/hy-$1.vue',
+            '^the-(.*)': '@/components/the-$1.vue'
         }
     }
 })

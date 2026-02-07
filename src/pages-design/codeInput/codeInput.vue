@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-code-input
@@ -62,20 +62,11 @@
             <view class="hy-title">自动获取焦点</view>
             <hy-switch v-model="focus"></hy-switch>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import { useThemeStore } from '@/store'
-import { reactive, ref } from 'vue'
-
-// 组件
-import HyCodeInput from '@/package/components/hy-code-input/hy-code-input.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
-import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -84,8 +75,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value = ref('')
 const value_1 = ref('123')
 const dot = ref(false)

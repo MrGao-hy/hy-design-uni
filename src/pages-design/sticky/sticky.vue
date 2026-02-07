@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <!-- 头部占位 -->
         <view class="header-banner">
             <text class="title">首页 Banner</text>
@@ -34,15 +34,11 @@
         <view class="content-list">
             <view class="list-item" v-for="i in 20" :key="`b-${i}`">内容区块 B - {{ i }}</view>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { type Ref, ref } from 'vue'
-import HySticky from '@/package/components/hy-sticky/hy-sticky.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -51,8 +47,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 // 用于控制样式变化（比如吸顶后加阴影）
 const isTabFixed = ref(false)
 let offsetTop1: Ref<number>

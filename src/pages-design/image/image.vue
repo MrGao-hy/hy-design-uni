@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-image :src="config.avatar"></hy-image>
@@ -29,15 +29,11 @@
         <view class="hy-container">
             <hy-image :src="config.avatar" width="100px" height="100px" shape="circle"></hy-image>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyImage from '../../package/components/hy-image/hy-image.vue'
 import { config } from '@/config/config'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -45,9 +41,6 @@ definePage({
         navigationBarTitleText: '图片'
     }
 })
-
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 
 useShareButton()
 </script>

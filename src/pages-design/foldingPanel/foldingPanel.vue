@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <hy-folding-panel
             v-model="activeIndex"
             :accordion="accordion"
@@ -44,19 +44,11 @@
             <view class="hy-title">内容高度</view>
             <hy-slider v-model="height" :min="50" :max="300" showValue></hy-slider>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyFoldingPanel from '../../package/components/hy-folding-panel/hy-folding-panel.vue'
-import HyFoldingPanelItem from '@/package/components/hy-folding-panel-item/hy-folding-panel-item.vue'
 import { ref } from 'vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -65,8 +57,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const size = ref<HyApp.SizeType>('medium')
 const border = ref(true)
 const disabled = ref(false)

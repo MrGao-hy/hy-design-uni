@@ -1,17 +1,13 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <the-cell :list="list" @click="showToast"></the-cell>
         <hy-notify ref="hyNotifyRef"></hy-notify>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import HyNotify from '@/package/components/hy-notify/hy-notify.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import TheCell from '@/components/TheCell.vue'
-import { useThemeStore } from '@/store'
 import { reactive, ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -20,8 +16,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const hyNotifyRef = ref<InstanceType<typeof HyNotify>>(null)
 const list = reactive([
     {

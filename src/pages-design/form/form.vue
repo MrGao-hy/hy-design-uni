@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :custom-style="{ padding: '10px' }" :theme="darkMode">
+    <the-root-page :custom-style="{ padding: '10px' }">
         <view class="demo-header">
             <text class="demo-title">表单组件示例</text>
         </view>
@@ -91,25 +91,14 @@
             <text class="result-title">表单数据：</text>
             <text class="result-content">{{ JSON.stringify(formData, null, 2) }}</text>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { useThemeStore } from '@/store'
-// 组件
-import HyForm from '@/package/components/hy-form/hy-form.vue'
-import HyFormItem from '../../package/components/hy-form-item/hy-form-item.vue'
-import HyInput from '../../package/components/hy-input/hy-input.vue'
-import HyRadio from '../../package/components/hy-radio/hy-radio.vue'
-import HyCheckButton from '../../package/components/hy-check-button/hy-check-button.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HyTextarea from '../../package/components/hy-textarea/hy-textarea.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import type { FormItemRule } from '@/package/components/hy-form/typing'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
+import { useToast } from '@/package'
 
 definePage({
     style: {
@@ -117,8 +106,7 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
+const toast = useToast()
 // 表单数据
 const formData = reactive({
     username: '',
@@ -201,17 +189,18 @@ const handleSubmit = async (data: any) => {
 
 // 验证表单
 const handleValidate = async () => {
-    const isValid = await formRef.value?.validate()
-    await uni.showToast({ title: '表单校验成功', icon: 'none' })
+    try {
+        await formRef.value?.validate()
+        toast.success('表单校验成功')
+    } catch (err) {
+        toast.error('表单校验失败')
+    }
 }
 
 // 重置表单
 const handleReset = () => {
     formRef.value?.resetFields()
-    uni.showToast({
-        title: '重置成功',
-        icon: 'success'
-    })
+    toast.show('重置成功')
 }
 
 useShareButton()

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-count-to :startVal="30" :endVal="500"></hy-count-to>
@@ -39,16 +39,12 @@
                 <hy-button text="继续" type="info" @click="resume"></hy-button>
             </view>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyCountTo from '../../package/components/hy-count-to/hy-count-to.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
+import HyCountTo from '@/package/components/hy-count-to/hy-count-to.vue'
 import { ref } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -57,8 +53,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const countToRef = ref<InstanceType<typeof HyCountTo>>()
 
 // methods

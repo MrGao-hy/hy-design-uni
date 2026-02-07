@@ -1,7 +1,6 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <the-cell title="消息提示" :list="list" @click="showToast"></the-cell>
-        <hy-toast></hy-toast>
 
         <view class="hy-setting__box">
             <view class="hy-title">显示图标</view>
@@ -16,19 +15,11 @@
             <view class="hy-title">显示位置</view>
             <hy-subsection :list="list_1" v-model="position"></hy-subsection>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
-
-import HyToast from '@/package/components/hy-toast/hy-toast.vue'
-import TheCell from '@/components/TheCell.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useToast } from '@/package'
 import { useShareButton } from '@/composables'
 
@@ -39,8 +30,6 @@ definePage({
 })
 
 const toast = useToast()
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const list = reactive([
     { title: '默认', value: 'show' },
     { title: '信息', value: 'info' },

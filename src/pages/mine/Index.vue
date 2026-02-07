@@ -49,7 +49,6 @@ import UserCard from './components/UserCard.vue'
 import StatsCard from './components/StatsCard.vue'
 import FeatureList from './components/FeatureList.vue'
 import LogoutButton from './components/LogoutButton.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 
 const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)

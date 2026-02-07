@@ -12,7 +12,8 @@
                 @click="onCheckbox"
             >
                 <template #default>
-                    <slot :record="item"></slot>
+                    <slot v-if="$slots.default" :record="item"></slot>
+                    <text v-else>{{ item?.[fieldNames.label] }}</text>
                 </template>
             </hy-tag>
         </template>
@@ -33,9 +34,8 @@ export default {
 <script setup lang="ts">
 import { watch, ref, computed } from 'vue'
 import type { ICheckButtonEmits } from './typing'
-import type { CheckboxColumnsVo } from './typing'
 import HyTag from '../hy-tag/hy-tag.vue'
-import { isArray, isNumber } from '../../libs'
+import { isArray } from '../../libs'
 import type { TagParamsVo } from '../hy-tag/typing'
 import checkButtonProps from './props'
 

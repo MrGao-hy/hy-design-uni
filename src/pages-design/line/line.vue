@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-line></hy-line>
@@ -24,14 +24,10 @@
         <view class="hy-container">
             <hy-line :hairline="false" color="red"></hy-line>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyLine from '../../package/components/hy-line/hy-line.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -39,9 +35,6 @@ definePage({
         navigationBarTitleText: '线条'
     }
 })
-
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 
 useShareButton()
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-qrcode text="我是文本111"></hy-qrcode>
@@ -30,15 +30,11 @@
                 pdGround="blue"
             ></hy-qrcode>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyQrcode from '../../package/components/hy-qrcode/hy-qrcode.vue'
 import logo from '@/static/hy_logo_light.png'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
 
@@ -48,8 +44,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const showCode = ref(false)
 const textContent = ref('')
 

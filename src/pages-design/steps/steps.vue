@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view style="overflow: auto; width: 400px">
             <hy-steps
@@ -27,18 +27,11 @@
             <view class="hy-title">前进</view>
             <hy-number-step v-model="current" :min="0"></hy-number-step>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HySteps from '../../package/components/hy-steps/hy-steps.vue'
-import HyNumberStep from '../../package/components/hy-number-step/hy-number-step.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
 import { ref } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -47,8 +40,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const dot = ref(false)
 const current = ref(3)
 const list_1 = ref([

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-input
@@ -66,21 +66,13 @@
             <view class="hy-title">边框</view>
             <hy-subsection :list="list_3" v-model="border"></hy-subsection>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, watch } from 'vue'
 import { IconConfig } from '@/package'
-import { useThemeStore } from '@/store'
 import type { InputType } from '@uni-helper/uni-types'
-import { storeToRefs } from 'pinia'
-// 组件
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HyInput from '../../package/components/hy-input/hy-input.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -89,8 +81,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value = ref('')
 const value3 = ref('')
 const value2 = ref('中国速度，东风快递，使命必达，风雨无阻！！！')

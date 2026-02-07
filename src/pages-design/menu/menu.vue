@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="menu">
             <hy-menu v-model="current" :list="list" @change="onChange"></hy-menu>
 
@@ -30,22 +30,15 @@
                 </view>
             </scroll-view>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { getCurrentInstance, nextTick, onMounted, ref } from 'vue'
-import { useThemeStore } from '@/store'
-import { data } from './data'
-import { debounce, IconConfig } from '@/package'
-import { storeToRefs } from 'pinia'
-// 组件
-import HyMenu from '@/package/components/hy-menu/hy-menu.vue'
-import HyGrid from '../../package/components/hy-grid/hy-grid.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import type { MenusType } from '@/package/components/hy-menu/typing'
-import { getRect } from '@/package'
+import { getRect, debounce, IconConfig } from '@/package'
 import { useShareButton } from '@/composables'
+import { data } from './data'
 
 definePage({
     style: {
@@ -58,8 +51,6 @@ interface ItemTopVo {
     top: number
 }
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const scrollTop = ref<number>(0)
 const itemScrollTop = ref<ItemTopVo[]>([])
 const current = ref<string | number>(1)

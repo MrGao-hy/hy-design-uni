@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-box">
             <the-cell :list="list" @click="onClick"></the-cell>
         </view>
@@ -7,16 +7,11 @@
         <hy-popup :show="show" :mode="mode" closeable closeOnClickOverlay @close="show = false">
             <view style="padding: 20px">我是弹窗</view>
         </hy-popup>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import TheCell from '@/components/TheCell.vue'
-import HyPopup from '../../package/components/hy-popup/hy-popup.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { ref } from 'vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -25,8 +20,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const show = ref(false)
 const mode = ref<HyApp.LayoutType>('center')
 const list = [

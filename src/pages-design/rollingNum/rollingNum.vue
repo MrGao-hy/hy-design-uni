@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode" customClass="rolling-num-page">
+    <the-root-page custom-class="rolling-num-page">
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">基础使用</view>
             <hy-rolling-num :value="val3" size="30px" height="70rpx" color="#FF5500" />
@@ -59,16 +59,11 @@
         </view>
 
         <hy-button text="随机变化数值" @click="randomize"></hy-button>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import HyRollingNum from '@/package/components/hy-rolling-num/hy-rolling-num.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -77,8 +72,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const val1 = ref<string | number>('000000')
 const val2 = ref<string | number>('000000')
 const val3 = ref<string | number>('23456')

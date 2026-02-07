@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-container">
             <hy-empty :show="true" :mode="mode"></hy-empty>
         </view>
@@ -19,18 +19,11 @@
             <view class="hy-title">边距</view>
             <!--            <hy-slider v-model="gap" :min="0" :max="20" />-->
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyEmpty from '@/package/components/hy-empty/hy-empty.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
-import HyCheckButton from '@/package/components/hy-check-button/hy-check-button.vue'
 import { reactive, ref } from 'vue'
 
 definePage({
@@ -39,8 +32,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const mode = ref('content')
 const list = reactive([
     {

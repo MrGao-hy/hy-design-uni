@@ -2,10 +2,10 @@
     <view
         v-if="hasInit"
         class="hy-transition"
-        ref="u-transition"
-        @tap.stop="clickHandler"
+        ref="hy-transition"
         :class="[classes, customClass]"
         :style="[mergeStyle]"
+        @tap.stop="clickHandler"
     >
         <slot />
     </view>

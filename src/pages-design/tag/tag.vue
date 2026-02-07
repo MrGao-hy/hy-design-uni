@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">主题色</view>
         <view class="hy-grid hy-container">
             <hy-tag text="标签" type="primary"></hy-tag>
@@ -71,16 +71,12 @@
                 shape="circle"
             ></hy-tag>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { IconConfig } from '@/package'
-import HyTag from '../../package/components/hy-tag/hy-tag.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -89,8 +85,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const close = ref(true)
 const close1 = ref(true)
 

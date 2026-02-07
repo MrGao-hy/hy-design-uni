@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">边角形状</view>
         <view class="hy-flex hy-container">
             <hy-badge :value="123" shape="circle"></hy-badge>
@@ -45,16 +45,11 @@
                 <hy-avatar size="large" shape="square" :src="config.avatar"></hy-avatar>
             </view>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyBadge from '../../package/components/hy-badge/hy-badge.vue'
-import HyAvatar from '../../package/components/hy-avatar/hy-avatar.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { config } from '@/config/config'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -62,9 +57,6 @@ definePage({
         navigationBarTitleText: '徽标数'
     }
 })
-
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 
 useShareButton()
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-setting__box">
             <hy-watermark
                 title="华玥组件库"
@@ -36,18 +36,11 @@
             <view class="hy-title">透明度</view>
             <hy-slider v-model="opacity" :min="0" :max="1" :step="0.1" show-value></hy-slider>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyWatermark from '@/package/components/hy-watermark/hy-watermark.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
-import HySwitch from '../../package/components/hy-switch/hy-switch.vue'
-import HySlider from '../../package/components/hy-slider/hy-slider.vue'
 import { ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -56,8 +49,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const size = ref(12)
 const space = ref(0)
 const opacity = ref(0.5)

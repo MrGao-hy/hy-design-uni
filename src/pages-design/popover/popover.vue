@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider @click="closeOutside" :theme-color="color" :theme="darkMode">
+    <the-root-page @click="closeOutside">
         <hy-card>
             <template #header>
                 <view class="header">
@@ -80,21 +80,14 @@
                 <hy-button text="自定义" :stop="false"></hy-button>
             </hy-popover>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import { IconConfig } from '@/package'
-import { useThemeStore } from '@/store'
 import { ref, reactive } from 'vue'
-import { useQueue } from '@/package'
+import { useQueue, IconConfig } from '@/package'
 // 组件
-import HyPopover from '@/package/components/hy-popover/hy-popover.vue'
-import HyIcon from '../../package/components/hy-icon/hy-icon.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyCard from '../../package/components/hy-card/hy-card.vue'
 import HyButton from '../../package/components/hy-button/hy-button.vue'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -103,9 +96,7 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
 const { closeOutside } = useQueue()
-const { color, darkMode } = storeToRefs(themeStore)
 const content = ref('华玥组件库，我为自己代言，华玥组件库是一款集合了所以需求的现代化的组件库')
 const count = ref(0)
 const menus = reactive([

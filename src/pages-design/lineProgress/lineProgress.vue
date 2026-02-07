@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-line-progress :percentage="value"></hy-line-progress>
@@ -22,18 +22,12 @@
                 <hy-button text="增加" @click="computedWidth('plus')"></hy-button>
             </hy-flex>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyLineProgress from '../../package/components/hy-line-progress/hy-line-progress.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import HyFlex from '@/package/components/hy-flex/hy-flex.vue'
-import HyButton from '../../package/components/hy-button/hy-button.vue'
 import { ref } from 'vue'
 import { range } from '@/package'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -42,8 +36,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value = ref(20)
 
 const computedWidth = (type: 'plus' | 'minus') => {

@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <hy-text text="我用十年青春,赴你最后之约"></hy-text>
 
@@ -53,15 +53,11 @@
 
         <view class="hy-title">小程序开放能力</view>
         <hy-text text="分享到微信" openType="share" type="success" @click="clickHandler"></hy-text>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyText from '@/package/components/hy-text/hy-text.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { IconConfig } from '@/package'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -70,8 +66,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const clickHandler = () => {
     // #ifndef MP-WEIXIN
     uni.showToast({ title: '请在微信小程序内查看效果' })

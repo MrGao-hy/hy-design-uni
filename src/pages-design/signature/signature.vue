@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-signature @confirm="onConfirmImage"></hy-signature>
@@ -22,18 +22,12 @@
                 :height="imageBase.height"
             ></hy-image>
         </hy-popup>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import HySignature from '@/package/components/hy-signature/hy-signature.vue'
-import HyPopup from '../../package/components/hy-popup/hy-popup.vue'
-import HyImage from '../../package/components/hy-image/hy-image.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
 import type { SignatureResult } from '@/package/components/hy-signature/typing'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -42,8 +36,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const showImage = ref(false)
 const imageBase = ref<Partial<SignatureResult>>({})
 

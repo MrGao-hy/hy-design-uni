@@ -1,24 +1,33 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <hy-tabs :list="list" swiperHeight="calc(100vh - 88px)">
             <template #default="{ record, index }">
-                <scroll-view class="scroll-view" scroll-y>
+                <scroll-view class="scroll-view" style="height: calc(100vh - 88px)" scroll-y>
                     <the-order-dom v-for="(item, i) in orderList[index]" :key="i" :order="item">
                     </the-order-dom>
                 </scroll-view>
             </template>
         </hy-tabs>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
+<!--<script lang="ts">-->
+<!--export default {-->
+<!--    name: 'tabs',-->
+<!--    options: {-->
+<!--        addGlobalClass: true,-->
+<!--        virtualHost: true,-->
+<!--        styleIsolation: 'shared'-->
+<!--    }-->
+<!--}-->
+<!--</script>-->
+
 <script setup lang="ts">
-import HyTabs from '../../package/components/hy-tabs/hy-tabs.vue'
 import { onMounted, reactive, ref } from 'vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import TheOrderDom from './components/TheOrderDom.vue'
 import { useShareButton } from '@/composables'
+import type { OrderItem } from '@/pages-design/tabs/components/types'
+import TheRootPage from '@/components/the-root-page.vue'
 
 definePage({
     style: {
@@ -26,8 +35,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const list = reactive([
     { name: '关注', content: '我是内容' },
     { name: '推荐', badge: { isDot: true } },
@@ -39,7 +46,7 @@ const list = reactive([
     { name: '财经' },
     { name: '手工' }
 ])
-const orderList = ref([])
+const orderList = ref<OrderItem[][]>([])
 
 onMounted(() => {
     orderList.value = generateOrders()
@@ -82,6 +89,11 @@ useShareButton()
 
 <style scoped lang="scss">
 .scroll-view {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-height: 100%;
+    width: 100%;
+    box-sizing: border-box;
 }
 </style>

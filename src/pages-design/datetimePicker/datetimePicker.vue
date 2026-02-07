@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">完整时间</view>
         <view class="hy-container">
             <hy-datetime-picker v-model="value_1" has-input></hy-datetime-picker>
@@ -49,16 +49,12 @@
                 :mode="DateModeEnum.HOUR_MINUTE"
             ></hy-datetime-picker>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { DateModeEnum } from '@/package'
-import HyDatetimePicker from '../../package/components/hy-datetime-picker/hy-datetime-picker.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -67,8 +63,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const value_1 = ref('')
 const value_2 = ref('')
 const value_3 = ref('')

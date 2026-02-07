@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础按钮</view>
         <view class="hy-container long">
             <hy-button text="我是很长的按钮,按着我会触发惊喜哦" size="small"></hy-button>
@@ -98,15 +98,11 @@
             <hy-button text="方形按钮" shape="square"></hy-button>
             <hy-button text="圆形按钮" shape="circle"></hy-button>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyButton from '../../package/components/hy-button/hy-button.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import { IconConfig } from '@/package/libs/config'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -114,9 +110,6 @@ definePage({
         navigationBarTitleText: '按钮'
     }
 })
-
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 
 useShareButton()
 </script>

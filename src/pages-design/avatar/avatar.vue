@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode">
+    <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
             <hy-avatar :src="config.avatar" :size="size" :shape="shape"></hy-avatar>
@@ -19,17 +19,12 @@
             <view class="hy-title">头像大小</view>
             <hy-subsection :list="list_2" v-model="size"></hy-subsection>
         </view>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
-import HyAvatar from '../../package/components/hy-avatar/hy-avatar.vue'
-import HySubsection from '../../package/components/hy-subsection/hy-subsection.vue'
 import { reactive, ref } from 'vue'
 import { config } from '@/config/config'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
-import { useThemeStore } from '@/store'
-import { storeToRefs } from 'pinia'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -38,8 +33,6 @@ definePage({
     }
 })
 
-const themeStore = useThemeStore()
-const { color, darkMode } = storeToRefs(themeStore)
 const size = ref<HyApp.SizeType>('medium')
 const shape = ref<HyApp.ShapeType>('circle')
 
