@@ -21,7 +21,7 @@ const overlayProps = {
         type: Number,
         default: 0.5
     },
-    /** 使用的动画过渡函数 */
+    /** 是否锁住底部滚动 */
     LockScroll: {
         type: Boolean,
         default: true

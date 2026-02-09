@@ -4,7 +4,7 @@
             <hy-watermark
                 title="华玥组件库"
                 content="基于vue3+ts的ui组件库"
-                image="https://pic1.imgdb.cn/item/67f8dfea88c538a9b5caea38.png"
+                image="/static/logo.png"
                 :width="150"
                 :height="120"
                 :size="size"
@@ -13,7 +13,7 @@
                 :fullScreen="fullScreen"
                 :gutter-x="space"
                 :gutter-y="space"
-                titleColor="yellow"
+                titleColor="red"
                 :titleSize="20"
                 :isAntiTheft="isAntiTheft"
             ></hy-watermark>
@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
+import TheRootPage from '@/components/the-root-page.vue'
 
 definePage({
     style: {
@@ -63,5 +64,6 @@ useShareButton()
 <style scoped lang="scss">
 .hy-setting__box {
     position: relative;
+    overflow: hidden;
 }
 </style>

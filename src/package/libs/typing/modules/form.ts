@@ -87,90 +87,90 @@ export interface FormColumnsType {
      * */
     right?: boolean
     /**
-     * @description 表单类型
+     * 表单类型
      * */
     type: FormTypeEnum
     /**
-     * @description 文件最大上传数据
+     * 文件最大上传数据
      * */
     maxCount?: number
     /**
-     * @description 是否禁用
+     * 是否禁用
      * */
     disabled?: boolean
 
     /**
-     * @description type = select时候必填
+     * type = select时候必填
      * */
     select?: string[][] | { text: string; id: string }[][]
     /**
-     * @description type = radio时候必填
+     * type = radio时候必填
      * */
     actions?: CheckboxColumnsVo[]
     /**
-     * @description 输入框属性api集合
+     * 输入框属性api集合
      * */
     input?: Partial<HyInputProps>
     /**
-     * @description 文本域属性api集合
+     * 文本域属性api集合
      * */
     textarea?: Partial<HyTextareaProps>
     /**
-     * @description 开关属性api集合
+     * 开关属性api集合
      * */
     switchItem?: Partial<HySwitchProps>
     /**
-     * @description 选择器属性api集合
+     * 选择器属性api集合
      * */
     picker?: Partial<HyPickerProps>
     /**
-     * @description 单选属性api集合
+     * 单选属性api集合
      * */
     radio?: Partial<HyRadioProps>
     /**
-     * @description 选择按钮属性api集合
+     * 选择按钮属性api集合
      * */
     checkButton?: Partial<HyCheckButtonProps>
     /**
-     * @description 日期展示的格式
+     * 日期展示的格式
      * */
     mode?: DateModeEnum
     /**
-     * @description 规则校验
+     * 规则校验
      * */
     rules?: RulesVo | RulesVo[]
 }
 
 export interface RulesVo {
     /**
-     * @description 是否必填
+     * 是否必填
      * */
     required?: boolean
     /**
-     * @description 校验不通过时的提示信息
+     * 校验不通过时的提示信息
      * */
     message?: string
     /**
-     * @description 表单事件校验
+     * 表单事件校验
      * */
     trigger?: ('blur' | 'change')[]
     /**
-     * @description 最小值
+     * 最小值
      * */
     min?: number
     /**
-     * @description 最大值
+     * 最大值
      * */
     max?: number
     /**
-     * @description 基础正则校验
+     * 基础正则校验
      * phone - 手机号校验
      * email - 邮箱校验
      * password - 复杂密码校验
      * */
     type?: 'phone' | 'email' | 'password'
     /**
-     * @description 自定义校验规则
+     * 自定义校验规则
      * */
     validator?: (rule: any, value: string, callback?: Function) => boolean
 }
