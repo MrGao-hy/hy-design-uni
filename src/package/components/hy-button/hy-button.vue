@@ -18,7 +18,9 @@
         @getphonenumber="getphonenumber"
         @getuserinfo="getuserinfo"
         @getAuthorize="getAuthorize"
+        @chooseavatar="chooseavatar"
         @error="error"
+        @contact="contact"
         @opensetting="opensetting"
         @launchapp="launchapp"
         @agreeprivacyauthorization="agreeprivacyauthorization"
@@ -28,7 +30,7 @@
         :class="['hy-button', !border && 'hy-button__no-border', bemClass, customClass]"
     >
         <template v-if="loading">
-            <HyLoading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></HyLoading>
+            <hy-loading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></hy-loading>
             <text class="hy-button__loading-text" :style="[{ fontSize: textSize + 'px' }]">
                 {{ loadingText || text }}
             </text>
@@ -75,7 +77,7 @@
         :style="[baseColor, customStyle]"
     >
         <template v-if="loading">
-            <HyLoading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></HyLoading>
+            <hy-loading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></hy-loading>
             <text
                 class="hy-button__loading-text"
                 :style="[nvueTextStyle]"
@@ -263,24 +265,53 @@ function getAuthorize(e: any) {
         getuserinfo(e)
     }
 }
-
+/**
+ * 获取用户手机号回调
+ * */
 const getphonenumber = (e: any) => {
     emit('getphonenumber', e)
 }
+/**
+ * 用户点击该按钮时，会返回获取到的用户信息，从返回参数的detail中获取到的值同uni.getUserInfo
+ * */
 const getuserinfo = (e: any) => {
     emit('getuserinfo', e)
 }
+/**
+ * 当使用开放能力时，发生错误的回调
+ * */
 const error = (e: any) => {
     emit('error', e)
 }
+/**
+ * 在打开授权设置页并关闭后回调
+ * */
 const opensetting = (e: any) => {
     emit('opensetting', e)
 }
+/**
+ * 从小程序打开 App 成功的回调
+ * */
 const launchapp = (e: any) => {
     emit('launchapp', e)
 }
+/**
+ * 用户同意隐私协议事件回调，open-type="agreePrivacyAuthorization"时有效
+ * */
 const agreeprivacyauthorization = (e: any) => {
     emit('agreeprivacyauthorization', e)
+}
+/**
+ * 获取用户头像回调
+ * */
+const chooseavatar = (e: any) => {
+    emit('chooseavatar', e)
+}
+/**
+ * 客服消息回调
+ * */
+const contact = (e: any) => {
+    emit('contact', e)
 }
 </script>
 

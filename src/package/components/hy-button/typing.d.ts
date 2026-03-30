@@ -32,4 +32,12 @@ export interface IButtonEmits {
      * 仅限微信小程序，用户同意隐私协议事件回调，open-type="agreePrivacyAuthorization"时有效
      * */
     (e: 'agreeprivacyauthorization', event: Event): void
+    /**
+     * 获取用户头像回调
+     * */
+    (e: 'chooseavatar', event: Event): void
+    /**
+     * 客服消息回调
+     * */
+    (e: 'contact', event: Event): void
 }
