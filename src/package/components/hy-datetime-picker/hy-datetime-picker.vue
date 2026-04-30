@@ -219,9 +219,7 @@ const times = (n: number, iteratee: Function) => {
  * */
 const close = () => {
     if (props.closeOnClickOverlay) {
-        if (props.hasInput) {
-            showByClickInput.value = false
-        }
+        props.hasInput ? (showByClickInput.value = false) : emit('update:show', false)
         emit('close')
     }
 }
@@ -230,37 +228,54 @@ const close = () => {
  * 点击工具栏的取消按钮
  * */
 const cancel = () => {
-    if (props.hasInput) {
-        showByClickInput.value = false
-    }
+    props.hasInput ? (showByClickInput.value = false) : emit('update:show', false)
     emit('cancel')
+}
+
+/**
+ * 根据索引和列数据获取选中值
+ * */
+const getSelectValue = (indexs: number[], values: any[][]): string | number => {
+    let selectValue: string | number = ''
+    if (validModes.has(props.mode) && props.mode !== DateModeEnum.MONTH_DAY) {
+        selectValue = `${intercept(values[0][indexs[0]])}:${intercept(values[1][indexs[1]])}`
+    } else if (props.mode === DateModeEnum.MONTH_DAY) {
+        selectValue = `${intercept(values[0][indexs[0]])}-${intercept(values[1][indexs[1]])}`
+    } else {
+        const year = parseInt(intercept(values[0][indexs[0]], 'year'))
+        const month = parseInt(intercept(values[1][indexs[1]]))
+        let date = parseInt(values[2] ? intercept(values[2][indexs[2]]) : 1)
+        let hour = 0,
+            minute = 0,
+            second = 0
+        const maxDate = dayjs(`${year}-${month}`).daysInMonth()
+        date = Math.min(maxDate, date)
+        if (props.mode === DateModeEnum.DATETIME) {
+            hour = parseInt(intercept(values[3][indexs[3]]))
+            minute = parseInt(intercept(values[4][indexs[4]]))
+            second = parseInt(intercept(values[5][indexs[5]]))
+        }
+        selectValue = Number(new Date(year, month - 1, date, hour, minute, second))
+    }
+    return correctValue(selectValue)
 }
 
 /**
  * 点击工具栏的确定按钮
  * */
 const confirm = () => {
-    //如果用户还没有触发过change
     if (!innerValue.value) {
-        let arr = [0]
-        //如果有默认值&&默认值的数组长度是正确的，就用默认值
-        if (
-            Array.isArray(props.defaultIndex) &&
-            props.defaultIndex.length === columns.value.length
-        ) {
-            arr = [...props.defaultIndex]
-        } else {
-            //否则默认都选中第一个
-            arr = Array(columns.value.length).fill(0)
-        }
-        console.log(arr)
-        getInputValue(arr)
+        const indexs =
+            innerDefaultIndex.value.length > 0
+                ? innerDefaultIndex.value
+                : Array(columns.value.length).fill(0)
+        const values = columns.value.map((column: any[]) => column)
+        const selectValue = getSelectValue(indexs, values)
+        innerValue.value = selectValue
     }
-    emit('update:modelValue', innerValue.value)
-    if (props.hasInput) {
-        getInputValue(innerValue.value)
-        showByClickInput.value = false
-    }
+    getInputValue(innerValue.value)
+    emit('update:modelValue', inputValue.value)
+    props.hasInput ? (showByClickInput.value = false) : emit('update:show', false)
     emit('confirm', {
         value: innerValue.value,
         mode: props.mode
@@ -292,38 +307,9 @@ const intercept = (e: any, type?: string) => {
  * */
 const change = (e: any) => {
     const { indexs, values } = e
-    let selectValue: string | number = ''
-    if (validModes.has(props.mode) && props.mode !== DateModeEnum.MONTH_DAY) {
-        // 根据value各列索引，从各列数组中，取出当前时间的选中值
-        selectValue = `${intercept(values[0][indexs[0]])}:${intercept(values[1][indexs[1]])}`
-    } else if (props.mode === DateModeEnum.MONTH_DAY) {
-        // 根据value各列索引，从各列数组中，取出当前时间的选中值
-        selectValue = `${intercept(values[0][indexs[0]])}-${intercept(values[1][indexs[1]])}`
-    } else {
-        // 将选择的值转为数值，比如'03'转为数值的3，'2019'转为数值的2019
-        const year = parseInt(intercept(values[0][indexs[0]], 'year'))
-        const month = parseInt(intercept(values[1][indexs[1]]))
-        let date = parseInt(values[2] ? intercept(values[2][indexs[2]]) : 1)
-        let hour = 0,
-            minute = 0,
-            second = 0
-        // 此月份的最大天数
-        const maxDate = dayjs(`${year}-${month}`).daysInMonth()
-        // 不允许超过maxDate值
-        date = Math.min(maxDate, date)
-        if (props.mode === DateModeEnum.DATETIME) {
-            hour = parseInt(intercept(values[3][indexs[3]]))
-            minute = parseInt(intercept(values[4][indexs[4]]))
-            second = parseInt(intercept(values[5][indexs[5]]))
-        }
-        // 转为时间模式
-        selectValue = Number(new Date(year, month - 1, date, hour, minute, second))
-    }
-    // 取出准确的合法值，防止超越边界的情况
-    selectValue = correctValue(selectValue)
+    const selectValue = getSelectValue(indexs, values)
     innerValue.value = selectValue
     updateColumnValue(selectValue)
-    // 发出change时间，value为当前选中的时间戳
     emit('change', {
         value: selectValue,
         mode: props.mode

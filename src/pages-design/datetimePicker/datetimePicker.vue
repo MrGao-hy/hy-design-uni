@@ -49,6 +49,16 @@
                 :mode="DateModeEnum.HOUR_MINUTE"
             ></hy-datetime-picker>
         </view>
+
+        <view class="hy-title">按钮</view>
+        <view class="hy-container">
+            <hy-button @click="showPicker = true" :text="value_7 || '选择日期'"></hy-button>
+            <hy-datetime-picker
+                v-model="value_7"
+                v-model:show="showPicker"
+                :mode="DateModeEnum.DATE"
+            ></hy-datetime-picker>
+        </view>
     </the-root-page>
 </template>
 
@@ -56,6 +66,7 @@
 import { ref } from 'vue'
 import { DateModeEnum } from '@/package'
 import { useShareButton } from '@/composables'
+import TheRootPage from '@/components/the-root-page.vue'
 
 definePage({
     style: {
@@ -69,6 +80,8 @@ const value_3 = ref('')
 const value_4 = ref('')
 const value_5 = ref('10:11')
 const value_6 = ref('')
+const value_7 = ref('')
+const showPicker = ref(false)
 
 useShareButton()
 </script>

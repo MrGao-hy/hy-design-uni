@@ -17,4 +17,6 @@ export interface IDatetimePickerEmits {
     (e: 'change', param: IParam): void
     /** 更新值触发 */
     (e: 'update:modelValue', value: IParam['value']): void
+    /** 更新值关闭值 */
+    (e: 'update:show', value: boolean): void
 }
