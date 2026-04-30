@@ -55,7 +55,7 @@ const tabsProps = {
     /** 轮播图高度 */
     swiperHeight: {
         type: [String, Number],
-        default: 'calc(100vh - 44px)'
+        default: 'calc(100% - 44px)'
     },
     /** 菜单是否可滚动 */
     scrollable: {
@@ -63,9 +63,16 @@ const tabsProps = {
         default: true
     },
     /**
-     * @description 徽标props全局定义
+     * 徽标props全局定义
      * */
-    propsBadge: Object as PropType<HyBadgeProps>,
+    badgeProps: Object as PropType<HyBadgeProps>,
+    /**
+     * 是否出现内容轮播
+     * */
+    isSwiper: {
+        type: Boolean,
+        default: false
+    },
     /** 标签左侧图标样式自定义 */
     iconStyle: Object as PropType<CSSProperties>,
     /** 定义需要用到的外部样式 */

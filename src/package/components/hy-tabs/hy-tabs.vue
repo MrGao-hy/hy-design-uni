@@ -58,24 +58,24 @@
                                             item?.badge?.value)
                                     )
                                 "
-                                :isDot="(item?.badge && item?.badge?.isDot) || propsBadge?.isDot"
-                                :value="(item?.badge && item?.badge?.value) || propsBadge?.value"
-                                :max="(item?.badge && item?.badge?.max) || propsBadge?.max"
-                                :type="(item?.badge && item?.badge?.type) || propsBadge?.type"
+                                :isDot="(item?.badge && item?.badge?.isDot) || badgeProps?.isDot"
+                                :value="(item?.badge && item?.badge?.value) || badgeProps?.value"
+                                :max="(item?.badge && item?.badge?.max) || badgeProps?.max"
+                                :type="(item?.badge && item?.badge?.type) || badgeProps?.type"
                                 :showZero="
-                                    (item?.badge && item?.badge?.showZero) || propsBadge?.showZero
+                                    (item?.badge && item?.badge?.showZero) || badgeProps?.showZero
                                 "
                                 :bgColor="
-                                    (item?.badge && item?.badge?.bgColor) || propsBadge?.bgColor
+                                    (item?.badge && item?.badge?.bgColor) || badgeProps?.bgColor
                                 "
-                                :color="(item?.badge && item?.badge?.color) || propsBadge?.color"
-                                :shape="(item?.badge && item?.badge?.shape) || propsBadge?.shape"
+                                :color="(item?.badge && item?.badge?.color) || badgeProps?.color"
+                                :shape="(item?.badge && item?.badge?.shape) || badgeProps?.shape"
                                 :numberType="
                                     (item?.badge && item?.badge?.numberType) ||
-                                    propsBadge?.numberType
+                                    badgeProps?.numberType
                                 "
                                 :inverted="
-                                    (item?.badge && item?.badge?.inverted) || propsBadge?.inverted
+                                    (item?.badge && item?.badge?.inverted) || badgeProps?.inverted
                                 "
                                 :customStyle="{
                                     marginLeft: '4px'
@@ -103,20 +103,20 @@
             </view>
             <slot name="right" />
         </view>
-
-        <!-- 内容轮播图	-->
-        <slot v-if="$slots.main" name="main"></slot>
-        <swiper
-            v-else-if="list.length"
-            :current="innerCurrent"
-            @animationfinish="animationFinish"
-            :style="{ height: swiperHeight }"
-        >
-            <swiper-item class="swiper-item" v-for="(item, i) in list" :key="i">
-                <slot :record="item" :index="i" />
-            </swiper-item>
-        </swiper>
     </view>
+
+    <!-- 内容轮播图	-->
+    <slot v-if="$slots.main" name="main"></slot>
+    <swiper
+        v-else-if="isSwiper || list.length"
+        :current="innerCurrent"
+        @animationfinish="animationFinish"
+        :style="{ height: swiperHeight }"
+    >
+        <swiper-item class="swiper-item" v-for="(item, i) in list" :key="i">
+            <slot :record="item" :index="i" />
+        </swiper-item>
+    </swiper>
 </template>
 
 <script lang="ts">
@@ -325,6 +325,7 @@ const animationFinish = (e: any) => {
     innerCurrent.value = e.detail.current
     resize()
     if (e.detail.source === 'touch') {
+        emit('update:current', innerCurrent.value)
         emit('change', props.list[innerCurrent.value], innerCurrent.value)
     }
 }

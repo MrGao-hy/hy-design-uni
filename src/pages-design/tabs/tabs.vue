@@ -1,8 +1,8 @@
 <template>
     <the-root-page>
-        <hy-tabs :list="list" swiperHeight="calc(100vh - 88px)">
+        <hy-tabs :list="list">
             <template #default="{ record, index }">
-                <scroll-view class="scroll-view" style="height: calc(100vh - 88px)" scroll-y>
+                <scroll-view class="scroll-view" scroll-y>
                     <the-order-dom v-for="(item, i) in orderList[index]" :key="i" :order="item">
                     </the-order-dom>
                 </scroll-view>
@@ -92,7 +92,7 @@ useShareButton()
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-height: 100%;
+    height: 100%;
     width: 100%;
     box-sizing: border-box;
 }
