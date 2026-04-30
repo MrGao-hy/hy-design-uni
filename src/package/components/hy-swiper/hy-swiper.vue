@@ -35,55 +35,59 @@
                 v-for="(item, index) in list"
                 :key="index"
             >
-                <slot :record="item" :index="index">
-                    <view class="hy-swiper__wrapper--item__wrapper" :style="[itemStyle(index)]">
-                        <!-- 在nvue中，image图片的宽度默认为屏幕宽度，需要通过flex:1撑开，另外必须设置高度才能显示图片 -->
-                        <image
-                            class="hy-swiper__wrapper--item__wrapper--image"
-                            v-if="getItemType(item) === 'image'"
-                            :src="getSource(item)"
-                            :mode="imgMode"
-                            @tap="clickHandler(index)"
-                            :style="{
-                                height: addUnit(height),
-                                borderRadius: addUnit(radius)
-                            }"
-                        ></image>
-                        <video
-                            class="hy-swiper__wrapper--item__wrapper--video"
-                            v-if="getItemType(item) === 'video'"
-                            :id="`video-${index}`"
-                            :enable-progress-gesture="false"
-                            :src="getSource(item)"
-                            :poster="getPoster(item)"
-                            :title="showTitle && hasTitle(item)"
-                            :style="{
-                                height: addUnit(height)
-                            }"
-                            controls
-                            @tap="clickHandler(index)"
-                        ></video>
-                        <view
-                            v-if="showTitle && hasTitle(item)"
-                            class="hy-swiper__wrapper--item__wrapper--title"
-                        >
-                            <text class="hy-line-1">{{ hasTitle(item) }}</text>
-                        </view>
+                <slot v-if="$slots.default" :record="item" :index="index"> </slot>
+                <view v-else class="hy-swiper__wrapper--item__wrapper" :style="[itemStyle(index)]">
+                    <!-- 在nvue中，image图片的宽度默认为屏幕宽度，需要通过flex:1撑开，另外必须设置高度才能显示图片 -->
+                    <image
+                        class="hy-swiper__wrapper--item__wrapper--image"
+                        v-if="getItemType(item) === 'image'"
+                        :src="getSource(item)"
+                        :mode="imgMode"
+                        @tap="clickHandler(index)"
+                        :style="{
+                            height: addUnit(height),
+                            borderRadius: addUnit(radius)
+                        }"
+                    ></image>
+                    <video
+                        class="hy-swiper__wrapper--item__wrapper--video"
+                        v-if="getItemType(item) === 'video'"
+                        :id="`video-${index}`"
+                        :enable-progress-gesture="false"
+                        :src="getSource(item)"
+                        :poster="getPoster(item)"
+                        :title="showTitle && hasTitle(item)"
+                        :style="{
+                            height: addUnit(height)
+                        }"
+                        controls
+                        @tap="clickHandler(index)"
+                    ></video>
+                    <view
+                        v-if="showTitle && hasTitle(item)"
+                        class="hy-swiper__wrapper--item__wrapper--title"
+                    >
+                        <text class="hy-line-1">{{ hasTitle(item) }}</text>
                     </view>
-                </slot>
+                </view>
             </swiper-item>
         </swiper>
         <view class="hy-swiper__indicator" :style="[indicatorStyle]">
-            <slot name="indicator" :current="currentIndex" :length="list.length">
-                <hy-swiper-indicator
-                    v-if="!loading && indicator && !showTitle"
-                    :indicatorActiveColor="indicatorActiveColor"
-                    :indicatorInactiveColor="indicatorInactiveColor"
-                    :length="list.length"
-                    :current="currentIndex"
-                    :indicatorMode="indicatorMode"
-                ></hy-swiper-indicator>
+            <slot
+                v-if="$slots.indicator"
+                name="indicator"
+                :current="currentIndex"
+                :length="list.length"
+            >
             </slot>
+            <hy-swiper-indicator
+                v-else-if="!loading && indicator && !showTitle"
+                :indicatorActiveColor="indicatorActiveColor"
+                :indicatorInactiveColor="indicatorInactiveColor"
+                :length="list.length"
+                :current="currentIndex"
+                :indicatorMode="indicatorMode"
+            ></hy-swiper-indicator>
         </view>
     </view>
 </template>

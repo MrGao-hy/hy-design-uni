@@ -42,7 +42,7 @@
         </view>
 
         <view class="hy-title">自定义指示器</view>
-        <hy-swiper :list="list" :autoplay="false">
+        <hy-swiper :list="list" :autoplay="false" height="300">
             <template #indicator="{ current, length }">
                 <view class="indicator">
                     <text>{{ current }}</text>
