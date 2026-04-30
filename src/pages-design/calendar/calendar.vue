@@ -1,61 +1,51 @@
 <template>
     <the-root-page>
         <the-cell :list="list" @click="onClick"></the-cell>
-        <HyCalendar
-            :show="show1"
-            defaultDate="2022-02-15"
-            @confirm="confirm"
-            @close="close"
-        ></HyCalendar>
-        <HyCalendar
-            :show="show2"
+        <hy-calendar v-model:show="show1" defaultDate="2022-02-15" @confirm="confirm"></hy-calendar>
+        <hy-calendar
+            v-model:show="show2"
             mode="multiple"
             :defaultDate="['2022-03-01']"
             @confirm="confirm"
-            @close="close"
-        ></HyCalendar>
-        <HyCalendar :show="show3" mode="range" @confirm="confirm" @close="close"></HyCalendar>
-        <HyCalendar
-            :show="show4"
+        ></hy-calendar>
+        <hy-calendar
+            v-model:show="show3"
             mode="range"
             @confirm="confirm"
             @close="close"
+        ></hy-calendar>
+        <hy-calendar
+            v-model:show="show4"
+            mode="range"
+            @confirm="confirm"
             color="#f56c6c"
             defaultDate="2025-02-01"
-        ></HyCalendar>
-        <HyCalendar
-            :show="show5"
+        ></hy-calendar>
+        <hy-calendar
+            v-model:show="show5"
             mode="range"
             @confirm="confirm"
-            @close="close"
             defaultDate="2025-08-09"
             startText="住店"
             endText="离店"
             confirmDisabledText="请选择离店日期"
             :formatter="formatter"
-        ></HyCalendar>
-        <HyCalendar
-            :show="show6"
+        ></hy-calendar>
+        <hy-calendar v-model:show="show6" @confirm="confirm" maxDate="2025-05-05"></hy-calendar>
+        <hy-calendar v-model:show="show7" @confirm="confirm" @close="close" showLunar></hy-calendar>
+        <hy-calendar
+            v-model:show="show8"
             @confirm="confirm"
-            @close="close"
-            maxDate="2025-05-05"
-        ></HyCalendar>
-        <HyCalendar :show="show7" @confirm="confirm" @close="close" showLunar></HyCalendar>
-        <HyCalendar
-            :show="show8"
-            @confirm="confirm"
-            @close="close"
             mode="multiple"
             :defaultDate="['2025-04-25', '2025-04-30']"
-        ></HyCalendar>
-        <HyCalendar
-            :show="show9"
+        ></hy-calendar>
+        <hy-calendar
+            v-model:show="show9"
             @confirm="confirm"
-            @close="close"
             minDate="2022-05-09"
             maxDate="2023-07-05"
             defaultDate="2022-09-09"
-        ></HyCalendar>
+        ></hy-calendar>
     </the-root-page>
 </template>
 
@@ -128,11 +118,8 @@ const list = reactive([
         value: ''
     }
 ])
-const close = () => {
-    controller(index.value)
-}
+
 const confirm = (e: string[]) => {
-    controller(index.value)
     switch (index.value) {
         case 0:
             list[index.value].value = e[0]

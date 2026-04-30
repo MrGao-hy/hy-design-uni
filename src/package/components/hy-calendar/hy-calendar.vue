@@ -8,13 +8,13 @@
         :closeOnClickOverlay="closeOnClickOverlay"
     >
         <view class="hy-calendar">
-            <HyHeader
+            <hy-header
                 :title="title"
                 :subtitle="subtitle"
                 :showSubtitle="showSubtitle"
                 :showTitle="showTitle"
                 :weekText="weekText"
-            ></HyHeader>
+            ></hy-header>
             <scroll-view
                 :style="{
                     height: addUnit(listHeight)
@@ -24,7 +24,7 @@
                 :scroll-top="scrollTop"
                 :scrollIntoView="scrollIntoView"
             >
-                <HyMount
+                <hy-mount
                     :color="color"
                     :rowHeight="rowHeight"
                     :showMark="showMark"
@@ -47,17 +47,17 @@
                     ref="month"
                     @monthSelected="monthSelected"
                     @updateMonthTop="updateMonthTop"
-                ></HyMount>
+                ></hy-mount>
             </scroll-view>
             <slot name="footer" v-if="showConfirm">
                 <view class="hy-calendar__confirm">
-                    <HyButton
+                    <hy-button
                         shape="circle"
                         :text="buttonDisabled ? confirmDisabledText : confirmText"
                         :color="color"
                         @click="confirm"
                         :disabled="buttonDisabled"
-                    ></HyButton>
+                    ></hy-button>
                 </view>
             </slot>
         </view>
@@ -297,6 +297,7 @@ const init = () => {
 
 const close = () => {
     emit('close')
+    emit('update:show', false)
 }
 
 /**
@@ -305,6 +306,7 @@ const close = () => {
 const confirm = () => {
     if (!buttonDisabled.value) {
         emit('confirm', selected.value)
+        emit('update:show', false)
     }
 }
 

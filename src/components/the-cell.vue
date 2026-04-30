@@ -6,6 +6,7 @@
                 v-for="(item, i) in list"
                 :key="i"
                 :title="item.title"
+                :value="item.value"
                 :url="item.url"
                 @click="onClick(item, i)"
             ></hy-cell-item>

@@ -42,4 +42,6 @@ export interface ICalendarEmits {
     (e: 'confirm', selected: string[]): void
     /** 日历关闭时触发 */
     (e: 'close'): void
+    /** 触发关闭属性 */
+    (e: 'update:show', value: boolean): void
 }
