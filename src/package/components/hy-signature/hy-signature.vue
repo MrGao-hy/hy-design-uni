@@ -525,7 +525,11 @@ function getContext() {
         // #ifndef MP-WEIXIN
         getRect(`#${canvasId.value}`, false, instance).then((canvasRect) => {
             setCanvasState(canvasRect.width!, canvasRect.height!)
+            // #ifdef MP-ALIPAY
+            canvasState.ctx = uni.createCanvasContext(canvasId.value)
+            // #else
             canvasState.ctx = uni.createCanvasContext(canvasId.value, instance.proxy)
+            // #endif
             if (canvasState.ctx) {
                 canvasState.ctx.scale(pixelRatio.value, pixelRatio.value)
             }
@@ -579,40 +583,42 @@ function setLine() {
 function canvasToImage() {
     const { fileType, quality, exportScale } = props
     const { canvasWidth, canvasHeight } = canvasState
-    uni.canvasToTempFilePath(
-        {
-            width: canvasWidth * exportScale,
-            height: canvasHeight * exportScale,
-            destWidth: canvasWidth * exportScale,
-            destHeight: canvasHeight * exportScale,
-            fileType,
-            quality,
-            canvasId: canvasId.value,
-            canvas: canvas,
-            success: (res) => {
-                const result: SignatureResult = {
-                    tempFilePath: res.tempFilePath,
-                    width: (canvasWidth * exportScale) / pixelRatio.value,
-                    height: (canvasHeight * exportScale) / pixelRatio.value,
-                    success: true
-                }
-                // #ifdef MP-DINGTALK
-                result.tempFilePath = (res as any).filePath
-                // #endif
-                emit('confirm', result)
-            },
-            fail: () => {
-                const result: SignatureResult = {
-                    tempFilePath: '',
-                    width: (canvasWidth * exportScale) / pixelRatio.value,
-                    height: (canvasHeight * exportScale) / pixelRatio.value,
-                    success: false
-                }
-                emit('confirm', result)
+    const options = {
+        width: canvasWidth * exportScale,
+        height: canvasHeight * exportScale,
+        destWidth: canvasWidth * exportScale,
+        destHeight: canvasHeight * exportScale,
+        fileType,
+        quality,
+        canvasId: canvasId.value,
+        canvas: canvas,
+        success: (res: any) => {
+            const result: SignatureResult = {
+                tempFilePath: res.tempFilePath,
+                width: (canvasWidth * exportScale) / pixelRatio.value,
+                height: (canvasHeight * exportScale) / pixelRatio.value,
+                success: true
             }
+            // #ifdef MP-DINGTALK
+            result.tempFilePath = (res as any).filePath
+            // #endif
+            emit('confirm', result)
         },
-        instance.proxy
-    )
+        fail: () => {
+            const result: SignatureResult = {
+                tempFilePath: '',
+                width: (canvasWidth * exportScale) / pixelRatio.value,
+                height: (canvasHeight * exportScale) / pixelRatio.value,
+                success: false
+            }
+            emit('confirm', result)
+        }
+    }
+    // #ifdef MP-ALIPAY
+    uni.canvasToTempFilePath(options)
+    // #else
+    uni.canvasToTempFilePath(options, instance.proxy)
+    // #endif
 }
 
 function clearCanvas() {
