@@ -74,15 +74,15 @@
             </swiper-item>
         </swiper>
         <view class="hy-swiper__indicator" :style="[indicatorStyle]">
-            <slot name="indicator">
-                <HySwiperIndicator
+            <slot name="indicator" :current="currentIndex" :length="list.length">
+                <hy-swiper-indicator
                     v-if="!loading && indicator && !showTitle"
                     :indicatorActiveColor="indicatorActiveColor"
                     :indicatorInactiveColor="indicatorInactiveColor"
                     :length="list.length"
                     :current="currentIndex"
                     :indicatorMode="indicatorMode"
-                ></HySwiperIndicator>
+                ></hy-swiper-indicator>
             </slot>
         </view>
     </view>

@@ -1,6 +1,5 @@
 import type { SwiperList } from './typing'
 import type { CSSProperties, PropType } from 'vue'
-import type { SwiperEasingFunction } from '@uni-helper/uni-types'
 
 const swiperProps = {
     /** 轮播图数据 */
