@@ -1,5 +1,5 @@
 export type ModelValueVo = string | number
-export interface MenusType {
+export interface MenuParamsType {
     /**
      *  唯一id
      * */
@@ -28,7 +28,7 @@ export interface MenusType {
 
 export interface IMenuEmits {
     /** 选中触发 */
-    (e: 'change', temp: MenusType): void
+    (e: 'change', temp: MenusType, index: number): void
     /** 选中触发 */
     (e: 'update:modelValue', id: MenusType['id']): void
 }

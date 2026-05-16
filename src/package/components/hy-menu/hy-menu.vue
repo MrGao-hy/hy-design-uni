@@ -1,11 +1,7 @@
 <template>
     <view class="hy-menu" :style="{ width: addUnit(width) }">
         <template v-for="(item, i) in list">
-            <view
-                @click="handleClick(item, i)"
-                :class="menuItemClass(item, i)"
-                :style="customStyle"
-            >
+            <view @click="handleClick(item, i)" :class="menuItemClass(item)" :style="customStyle">
                 <template v-if="item.icon">
                     <slot v-if="$slots.icon" name="icon" :value="item.icon"></slot>
                     <hy-icon
@@ -60,12 +56,13 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import type { IMenuEmits, MenusType } from './typing'
+import type { IMenuEmits, MenuParamsType } from './typing'
 import { addUnit } from '../../libs'
 import menuProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
 import HyBadge from '../hy-badge/hy-badge.vue'
+import index from '@/pages/mine/Index.vue'
 
 /**
  * 垂直展示的导航栏，用于在不同的内容区域之间进行切换。
@@ -87,13 +84,8 @@ watch(
 )
 
 const menuItemClass = computed(() => {
-    return (temp: MenusType, i: number) => {
-        const classes = [
-            'hy-menu__item',
-            prefix.value && 'hy-menu__item--prefix',
-            suffix.value && 'hy-menu__item--suffix',
-            temp.disabled && 'hy-menu__item--disabled'
-        ]
+    return (temp: MenuParamsType) => {
+        const classes = ['hy-menu__item', temp.disabled && 'hy-menu__item--disabled']
         if (current.value === temp[props.id]) {
             classes.push('hy-menu__item--active', props.color && 'hy-menu__item--active__color')
         }
@@ -102,49 +94,15 @@ const menuItemClass = computed(() => {
     }
 })
 
-const prefix = computed(() => {
-    let prefix: boolean = false
-    // if (sidebar) {
-    //   let activeIndex: number = sidebar.children.findIndex((c: any) => {
-    //     return c.value === sidebar.props.modelValue;
-    //   });
-    //
-    //   let currentIndex: number = sidebar.children.findIndex((c: any) => {
-    //     return c.value === props.value;
-    //   });
-    //
-    //   if (currentIndex === activeIndex - 1) {
-    //     prefix = true;
-    //   }
-    // }
-    return prefix
-})
-
-const suffix = computed(() => {
-    let suffix: boolean = false
-    // if (sidebar) {
-    //   let activeIndex: number = sidebar.children.findIndex((c: any) => {
-    //     return c.value === sidebar.props.modelValue;
-    //   });
-    //
-    //   let currentIndex: number = sidebar.children.findIndex((c: any) => {
-    //     return c.value === props.value;
-    //   });
-    //
-    //   if (currentIndex === activeIndex + 1) {
-    //     suffix = true;
-    //   }
-    // }
-    return suffix
-})
-
-function handleClick(temp: MenusType, i: number) {
+function handleClick(temp: MenuParamsType, i: number) {
     if (temp?.disabled) {
         return
     }
-    current.value = i
-    emit('update:modelValue', temp.id)
-    emit('change', temp)
+    if (current.value !== temp.id) {
+        current.value = temp.id
+        emit('update:modelValue', temp.id)
+        emit('change', temp, i)
+    }
 }
 </script>
 
