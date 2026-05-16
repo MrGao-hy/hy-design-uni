@@ -433,6 +433,7 @@ const getRect = <T extends boolean>(
             } else if (!all && rect) {
                 resolve(rect as HyUtils.RectResultType<T>)
             } else {
+                console.log(rect)
                 error(`调用getRect方法，没有找到${selector}对应的元素内容`)
                 reject(new Error('No nodes found'))
             }

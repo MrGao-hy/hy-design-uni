@@ -127,7 +127,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, getCurrentInstance, watch } from 'vue'
+import { computed, ref, onMounted, getCurrentInstance, watch, nextTick } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { IStepsEmits } from './typing'
 import type { StepListVo } from './typing'
@@ -186,7 +186,9 @@ const textColor = computed(() => {
 const lineStyle = computed(() => {
     return (temp: StepListVo, index: number): CSSProperties => {
         const style: CSSProperties = {}
-        if (!stepsRects.value.length) return style
+        style.backgroundColor = temp.error ? '' : index < props.current ? '' : props.inactiveColor
+
+        if (!stepsRects.value.length || !itemRect.value[index]) return style
         if (props.direction === 'row') {
             style.width = addUnit(stepsRects.value[index].width! - itemRect.value[index].width!)
             style.left = addUnit(
@@ -198,7 +200,6 @@ const lineStyle = computed(() => {
             style.left = addUnit(itemRect.value[index].width! / 2)
             style.top = addUnit(itemRect.value[index].height)
         }
-        style.backgroundColor = temp.error ? '' : index < props.current ? '' : props.inactiveColor
         return style
     }
 })

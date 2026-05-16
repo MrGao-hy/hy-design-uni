@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, getCurrentInstance, nextTick, onMounted } from 'vue'
+import { ref, reactive, computed, nextTick, onMounted } from 'vue'
 import { getRect, sleep } from '@/package'
 import { useShareButton } from '@/composables'
 
@@ -42,7 +42,6 @@ definePage({
     }
 })
 
-const instance = getCurrentInstance()
 // 索引栏位置
 const position = ref<string>('right')
 const sectionRect = ref<UniNamespace.NodeInfo[]>([])
@@ -114,7 +113,7 @@ const indexs = computed(() => {
 
 onMounted(() => {
     nextTick(() => {
-        getRect('.hy-index-section', true, instance).then((rect) => {
+        getRect('.hy-index-section', true).then((rect) => {
             sectionRect.value = rect
         })
     })

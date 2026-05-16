@@ -143,7 +143,7 @@ const hasTitle = computed(() => {
 })
 
 /**
- * @description 轮播图3D效果
+ * 轮播图3D效果
  * */
 const itemStyle = computed(() => {
     return (index: number): CSSProperties => {
@@ -161,7 +161,7 @@ const itemStyle = computed(() => {
 })
 
 /**
- * @description 获取目标路径，可能数组中为字符串，对象的形式，额外可指定对象的目标属性名keyName
+ * 获取目标路径，可能数组中为字符串，对象的形式，额外可指定对象的目标属性名keyName
  * */
 const getSource = (item: string | Record<string, any>): string => {
     if (typeof item === 'string') return item
@@ -170,7 +170,7 @@ const getSource = (item: string | Record<string, any>): string => {
 }
 
 /**
- * @description 轮播切换事件
+ * 轮播切换事件
  */
 const change = (e: SwiperVo) => {
     // 当前的激活索引
@@ -182,33 +182,35 @@ const change = (e: SwiperVo) => {
 }
 
 /**
- * @description 切换轮播时，暂停视频播放
+ * 切换轮播时，暂停视频播放
  * */
 const pauseVideo = (index: number | string) => {
     const lastItem = getSource(props.list[Number(index)])
     if (isVideo(lastItem)) {
         // 当视频隐藏时，暂停播放
+        // #ifdef MP-WEIXIN
         const video = uni.createVideoContext(`video-${index}`, instance)
         video.pause()
+        // #endif
     }
 }
 
 /**
- * @description 当一个轮播item为视频时，获取它的视频海报
+ * 当一个轮播item为视频时，获取它的视频海报
  * */
 const getPoster = (item: string | SwiperList): string => {
     return typeof item === 'object' && item.poster ? item.poster : ''
 }
 
 /**
- * @description 点击某个item
+ * 点击某个item
  * */
 const clickHandler = (index: number) => {
     emit('click', index)
 }
 
 /**
- * @description 判断链接是视频还是图片
+ * 判断链接是视频还是图片
  * */
 const getItemType = computed(() => {
     return (item: string | Record<string, unknown>) => {

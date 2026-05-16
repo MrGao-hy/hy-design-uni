@@ -44,7 +44,6 @@
                     :allowSameDay="allowSameDay"
                     :forbidDays="forbidDays"
                     :forbidDaysToast="forbidDaysToast"
-                    ref="month"
                     @monthSelected="monthSelected"
                     @updateMonthTop="updateMonthTop"
                 ></hy-mount>
@@ -317,8 +316,8 @@ const confirm = () => {
 const scrollIntoDefaultMonth = (selected: string) => {
     // 查询默认日期在可选列表的下标
     const _index = months.value.findIndex(({ year, month }) => {
-        month = padZero(month)
-        return `${year}-${month}` === selected
+        let mt = padZero(month)
+        return `${year}-${mt}` === selected
     })
     if (_index !== -1) {
         // #ifndef MP-WEIXIN

@@ -1,5 +1,9 @@
 # 📝 更新日志 (CHANGELOG)
 
+## 🚀 v0.6.7 (2026-04-30)
+### 🔧 构建 | 工具变更
+- 在版本更新前进行更新 ([4ca19f6](https://github.com/MrGao-hy/hy-design-uni/commit/4ca19f6))
+
 ## 🚀 v0.6.6 (2026-04-30)
 ### 📦 其他
 - 版本更新0.6.6 ([11f680a](https://github.com/MrGao-hy/hy-design-uni/commit/11f680a))
@@ -13,6 +17,7 @@
 ### 💄 样式调整
 - 轮播图组件指示器点不显示问题 ([a7db3b8](https://github.com/MrGao-hy/hy-design-uni/commit/a7db3b8))
 
+## 🚀 v0.6.5 (2026-03-30)
 ### ✨ 新功能
 - 添加按钮的contact和chooseavatar回调事件 ([3df814f](https://github.com/MrGao-hy/hy-design-uni/commit/3df814f))
 

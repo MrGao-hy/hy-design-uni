@@ -12,7 +12,7 @@ const cellItemProps = {
         default: false
     },
     /** 右侧的内容 */
-    value: String,
+    value: [String, Number],
     /** 图标，接收icon对象 */
     icon: {
         type: Object as PropType<HyIconProps>

@@ -24,6 +24,7 @@
 }
 .hy-container {
   //flex-wrap: wrap;
+  margin: 0 hy.$hy-border-margin-padding-base;
   padding: hy.$hy-border-margin-padding-base;
   border-radius: hy.$hy-border-radius-base;
   background-color: hy.$hy-background--container;

@@ -8,12 +8,7 @@
             :defaultDate="['2022-03-01']"
             @confirm="confirm"
         ></hy-calendar>
-        <hy-calendar
-            v-model:show="show3"
-            mode="range"
-            @confirm="confirm"
-            @close="close"
-        ></hy-calendar>
+        <hy-calendar v-model:show="show3" mode="range" @confirm="confirm"></hy-calendar>
         <hy-calendar
             v-model:show="show4"
             mode="range"
@@ -32,7 +27,7 @@
             :formatter="formatter"
         ></hy-calendar>
         <hy-calendar v-model:show="show6" @confirm="confirm" maxDate="2025-05-05"></hy-calendar>
-        <hy-calendar v-model:show="show7" @confirm="confirm" @close="close" showLunar></hy-calendar>
+        <hy-calendar v-model:show="show7" @confirm="confirm" showLunar></hy-calendar>
         <hy-calendar
             v-model:show="show8"
             @confirm="confirm"

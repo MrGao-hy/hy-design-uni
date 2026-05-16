@@ -16,7 +16,7 @@
         >
             <hy-tabbar-item title="首页" icon="home"></hy-tabbar-item>
             <hy-tabbar-item title="分类" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item title="我的" icon="mine" :value="true"></hy-tabbar-item>
+            <hy-tabbar-item title="我的" icon="mine" :value="1"></hy-tabbar-item>
         </hy-tabbar-group>
 
         <hy-tabbar-group v-model="current" @change="onChange">

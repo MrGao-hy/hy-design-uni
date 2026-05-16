@@ -6,7 +6,7 @@
                 v-for="(item, i) in list"
                 :key="i"
                 :title="item.title"
-                :value="item.value"
+                :value="item.value && String(item.value)"
                 :url="item.url"
                 @click="onClick(item, i)"
             ></hy-cell-item>
@@ -21,6 +21,7 @@ interface ILists {
     title: string
     icon?: string
     url: string
+    value?: string | number | boolean
 }
 interface IProps {
     title?: string

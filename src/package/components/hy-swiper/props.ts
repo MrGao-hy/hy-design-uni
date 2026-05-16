@@ -99,7 +99,7 @@ const swiperProps = {
     },
     /** 组件高度 */
     height: {
-        type: Number,
+        type: [String, Number],
         default: 130
     },
     /** 背景颜色 */

@@ -1,7 +1,7 @@
 <template>
     <the-root-page>
         <view class="hy-title">基础使用</view>
-        <view style="overflow: auto; width: 400px">
+        <view class="hy-container">
             <hy-steps
                 :list="list_1"
                 v-model:current="current"
@@ -11,7 +11,7 @@
         </view>
 
         <view class="hy-title">纵向</view>
-        <view style="overflow: auto; width: 400px">
+        <view class="hy-container">
             <hy-steps
                 :list="list2"
                 v-model:current="current"

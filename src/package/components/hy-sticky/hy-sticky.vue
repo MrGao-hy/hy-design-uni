@@ -188,9 +188,10 @@ onMounted(() => {
 
         // 始终绑定 page scroll 回退（能兼容大多数场景）
         // 注意：如果页面使用 scroll-view（而非页面滚动），你应传入 scrollSelector 以使用 relativeTo(container)
-        onPageScroll && onPageScroll(onPageScrollListener)
+        // onPageScroll && onPageScroll(onPageScrollListener)
     })
 })
+onPageScroll && onPageScroll(onPageScrollListener)
 
 onUnmounted(() => {
     observer?.disconnect()

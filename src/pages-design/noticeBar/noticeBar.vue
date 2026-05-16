@@ -11,6 +11,16 @@
                 :speed="speed"
                 url="/pages/index/Index"
             ></hy-notice-bar>
+
+            <hy-notice-bar
+                text="这是一个重要的通知, 你好"
+                :direction="direction"
+                :mode="mode"
+                :step="step"
+                :justifyContent="justifyContent"
+                :speed="speed"
+                url="/pages/index/Index"
+            ></hy-notice-bar>
         </view>
 
         <view class="hy-setting__box">
