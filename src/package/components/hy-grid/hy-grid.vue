@@ -2,7 +2,7 @@
     <view class="hy-grid" ref="hy-grid" :style="gridStyle">
         <template v-for="(item, i) in list" :key="i">
             <view
-                class="hy-grid__item"
+                :class="getItemClass(i)"
                 hover-class="hy-grid__item--hover-class"
                 :hover-stay-time="200"
                 @tap="childClick(item)"
@@ -46,7 +46,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
-import type { IGridEmits } from './typing'
+import type { GridItemVo, IGridEmits } from './typing'
 import { addUnit } from '../../libs'
 import gridProps from './props'
 // 组件
@@ -62,10 +62,13 @@ const props = defineProps(gridProps)
 const emit = defineEmits<IGridEmits>()
 
 /**
- * @description 宫格对齐方式
+ * 宫格对齐方式
  * */
 const gridStyle = computed<CSSProperties>(() => {
-    let style: CSSProperties = {}
+    let style: CSSProperties = {
+        gap: addUnit(props.gap),
+        gridTemplateColumns: `repeat(${props.col}, 1fr)`
+    }
     switch (props.align) {
         case 'left':
             style.justifyContent = 'flex-start'
@@ -86,24 +89,42 @@ const itemStyle = computed<CSSProperties>(() => {
     const style: CSSProperties = {
         background: props.bgColor,
         height: addUnit(props.itemHeight),
-        width: '100%',
-        border: props.border ? '0.5px solid #c8c7cc66' : ''
+        width: '100%'
     }
     return style
 })
 
 /**
- * @description 点击事件
+ * 获取宫格项的类名
+ * @param index 当前项的索引
+ * @returns 类名数组
+ */
+const getItemClass = computed(() => {
+    return (index: number): string[] => {
+        const classes: string[] = ['hy-grid__item']
+        if (props.border) {
+            classes.push('hy-grid__item--border')
+            // 判断是否为最后一列
+            if (index % props.col === props.col - 1) {
+                classes.push('hy-grid__item--border__last-col')
+            }
+            // 判断是否为最后一行
+            if (index >= props.list.length - props.col) {
+                classes.push('hy-grid__item--border__last-row')
+            }
+        }
+        return classes
+    }
+})
+
+/**
+ * 点击事件
  * */
-const childClick = (temp: string | Record<string, any>) => {
+const childClick = (temp: string | GridItemVo) => {
     emit('click', temp)
 }
 </script>
 
 <style lang="scss" scoped>
-.hy-grid {
-    grid-gap: v-bind(gap);
-    grid-template-columns: repeat(v-bind(col), 1fr);
-}
 @import './index.scss';
 </style>

@@ -2,13 +2,7 @@
     <the-root-page>
         <view class="hy-title">基础使用</view>
         <view class="hy-container">
-            <hy-grid
-                :list="list"
-                :col="col"
-                :gap="gap + 'px'"
-                :border="border"
-                @click="onClick"
-            ></hy-grid>
+            <hy-grid :list="list" :col="col" :gap="gap" :border="border" @click="onClick"></hy-grid>
         </view>
 
         <view class="hy-setting__box">

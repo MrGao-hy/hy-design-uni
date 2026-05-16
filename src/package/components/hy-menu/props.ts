@@ -1,14 +1,14 @@
-import type { MenusType, ModelValueVo } from './typing'
+import type { MenuParamsVo } from './typing'
 import type { CSSProperties, PropType } from 'vue'
 import type { HyIconProps } from '../hy-icon/typing'
 import type { HyBadgeProps } from '../hy-badge/typing'
 
 const menuProps = {
     /** 当前值 */
-    modelValue: [String, Number] as PropType<ModelValueVo>,
+    modelValue: [String, Number] as PropType<MenuParamsVo['id']>,
     /** 菜单数据集 */
     list: {
-        type: Array as PropType<Array<MenusType>>,
+        type: Array as PropType<Array<MenuParamsVo>>,
         default: []
     },
     /** 对应的键 */

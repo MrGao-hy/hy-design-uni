@@ -11,6 +11,7 @@
   /* #ifndef APP-NVUE */
   display: grid;
   /* #endif */
+
   @include e(item) {
     align-items: center;
     justify-content: center;
@@ -26,6 +27,23 @@
     position: relative;
     float: left;
     /* #endif */
+
+    // 只有当有 border 类时才显示边框
+    @include m(border) {
+      // 添加右边框和下边框
+      border-right: $hy-border-line;
+      border-bottom: $hy-border-line;
+  
+      // 最后一列不显示右边框
+      @include e(last-col) {
+        border-right: none;
+      }
+  
+      // 最后一行不显示下边框
+      @include e(last-row) {
+        border-bottom: none;
+      }
+    }
 
     @include m(hover-class) {
       opacity: 0.7;

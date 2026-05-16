@@ -56,7 +56,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
-import type { IMenuEmits, MenuParamsType } from './typing'
+import type { IMenuEmits, MenuParamsVo } from './typing'
 import { addUnit } from '../../libs'
 import menuProps from './props'
 // 组件
@@ -84,7 +84,7 @@ watch(
 )
 
 const menuItemClass = computed(() => {
-    return (temp: MenuParamsType) => {
+    return (temp: MenuParamsVo) => {
         const classes = ['hy-menu__item', temp.disabled && 'hy-menu__item--disabled']
         if (current.value === temp[props.id]) {
             classes.push('hy-menu__item--active', props.color && 'hy-menu__item--active__color')
@@ -94,7 +94,7 @@ const menuItemClass = computed(() => {
     }
 })
 
-function handleClick(temp: MenuParamsType, i: number) {
+function handleClick(temp: MenuParamsVo, i: number) {
     if (temp?.disabled) {
         return
     }
