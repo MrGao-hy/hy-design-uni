@@ -28,7 +28,7 @@ export interface MenuParamsType {
 
 export interface IMenuEmits {
     /** 选中触发 */
-    (e: 'change', temp: MenusType, index: number): void
+    (e: 'change', temp: MenuParamsType, index: number): void
     /** 选中触发 */
-    (e: 'update:modelValue', id: MenusType['id']): void
+    (e: 'update:modelValue', id: MenuParamsType['id']): void
 }

@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 import { getCurrentInstance, nextTick, onMounted, ref } from 'vue'
-import type { MenusType } from '@/package/components/hy-menu/typing'
+import type { MenuParamsType } from '@/package/components/hy-menu/typing'
 import { getRect, debounce, IconConfig } from '@/package'
 import { useShareButton } from '@/composables'
 import { data } from './data'
@@ -96,7 +96,7 @@ function onScroll(e: any) {
     current.value = res?.id || 1
 }
 
-const onChange = (temp: MenusType) => {
+const onChange = (temp: MenuParamsType) => {
     const res: ItemTopVo | undefined = itemScrollTop.value.find((item) => item.id === temp.id)
     scrollTop.value = res?.top || 0
     execute.value = true
