@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { useTranslate } from '@/package'
+import { useTranslate } from '../../libs'
 
 const { t } = useTranslate('readMore')
 
