@@ -63,7 +63,8 @@
             :style="[{ padding: paddingBody || padding }, bodyStyle]"
         >
             <!-- @slot 中间内容插槽 -->
-            <slot name="body" />
+            <slot v-if="$slots.default" name="default" />
+            <slot v-else name="body" />
         </view>
         <view
             v-if="showFoot"

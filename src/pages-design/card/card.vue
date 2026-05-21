@@ -41,7 +41,7 @@
                 </template>
                 <template #footer>
                     <view>
-                        <HyIcon :name="IconConfig.MESSAGE" size="25" label="30评论"></HyIcon>
+                        <hy-icon :name="IconConfig.MESSAGE" size="25" label="30评论"></hy-icon>
                     </view>
                 </template>
             </hy-card>
