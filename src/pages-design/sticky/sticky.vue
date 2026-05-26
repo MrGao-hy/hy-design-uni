@@ -112,7 +112,7 @@ useShareButton()
     transition: box-shadow 0.3s;
 
     &.active-shadow {
-        box-shadow: $hy-box-shadow;
+        box-shadow: $hy-shadow-base;
     }
 
     .tab-item {

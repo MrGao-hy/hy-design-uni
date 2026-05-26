@@ -40,7 +40,7 @@
       align-items: center;
       position: relative;
       background-color: transparent;
-      border-radius: $hy-border-radius-semicircle;
+      border-radius: $hy-radius-semicircle;
 
       /* 选择 */
       &.process {
@@ -70,7 +70,7 @@
         @include e(item) {
           width: 10px;
           height: 10px;
-          border-radius: $hy-border-radius-circle;
+          border-radius: $hy-radius-circle;
           background-color: $hy-info;
           border: none;
         }
@@ -89,7 +89,7 @@
         box-sizing: border-box;
         flex-shrink: 0;
         /* #endif */
-        border-radius: $hy-border-radius-semicircle;
+        border-radius: $hy-radius-semicircle;
         border: $hy-border-line;
         @include flex(row);
         align-items: center;

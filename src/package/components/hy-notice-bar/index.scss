@@ -13,7 +13,7 @@
     flex: 1;
     background-color: #FFF6C8;
     color: $hy-warning;
-    border-radius: $hy-border-radius-sm;
+    border-radius: $hy-radius-sm;
   }
 
   @include e(left-icon) {

@@ -13,23 +13,23 @@
     @include m(round) {
 
       &-top {
-        border-radius: 0 0 $hy-border-radius-lg $hy-border-radius-lg;
+        border-radius: 0 0 $hy-radius-lg $hy-radius-lg;
       }
 
       &-left {
-        border-radius: 0 $hy-border-radius-lg $hy-border-radius-lg 0;
+        border-radius: 0 $hy-radius-lg $hy-radius-lg 0;
       }
 
       &-right {
-        border-radius: $hy-border-radius-lg 0 0 $hy-border-radius-lg;
+        border-radius: $hy-radius-lg 0 0 $hy-radius-lg;
       }
 
       &-bottom {
-        border-radius: $hy-border-radius-lg $hy-border-radius-lg 0 0;
+        border-radius: $hy-radius-lg $hy-radius-lg 0 0;
       }
 
       &-center {
-        border-radius: $hy-border-radius-lg;
+        border-radius: $hy-radius-lg;
       }
     }
 

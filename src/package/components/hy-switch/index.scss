@@ -8,7 +8,7 @@
   /* #endif */
   background-color: $hy-background--3;
   position: relative;
-  border-radius: $hy-border-radius-semicircle;
+  border-radius: $hy-radius-semicircle;
   transition: background-color 0.4s;
   border: 1px solid rgba(0, 0, 0, 0.12);
   justify-content: flex-end;
@@ -25,7 +25,7 @@
     align-items: center;
     justify-content: center;
     background-color: $hy-background--container;
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.25);
     transition-property: transform;
     transition-duration: 0.4s;
@@ -34,7 +34,7 @@
 
   @include e(bg) {
     position: absolute;
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     background-color: $hy-background--3;
     transition-property: transform;
     transition-duration: 0.4s;

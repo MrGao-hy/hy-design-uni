@@ -19,8 +19,8 @@
   @include m(circle) {
     margin-left: $hy-border-margin-padding-lg;
     margin-right: $hy-border-margin-padding-lg;
-    border-radius: $hy-border-radius-semicircle;
-    box-shadow: $hy-box-shadow;
+    border-radius: $hy-radius-semicircle;
+    box-shadow: $hy-shadow-base;
 
     @include is(fixed) {
       @include is(safe) {

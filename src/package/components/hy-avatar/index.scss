@@ -7,7 +7,7 @@
   justify-content: center;
 
   @include m(circle) {
-    border-radius: $hy-border-radius-circle;
+    border-radius: $hy-radius-circle;
   }
 
   @include m(square) {
@@ -34,7 +34,7 @@
     height: 100%;
 
     @include m(circle) {
-      border-radius: $hy-border-radius-circle;
+      border-radius: $hy-radius-circle;
       overflow: hidden;
     }
 

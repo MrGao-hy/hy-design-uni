@@ -1,6 +1,27 @@
 # 📝 更新日志 (CHANGELOG)
 
-## 🚀 v0.6.7 (2026-04-30)
+## 🚀 v0.6.8 (2026-05-21)
+### 🐞 修复问题
+- 修复引入问题 ([39c5ba5](https://github.com/MrGao-hy/hy-design-uni/commit/39c5ba5))
+
+### ✨ 新功能
+- 增加默认插槽 ([cf8c2b0](https://github.com/MrGao-hy/hy-design-uni/commit/cf8c2b0))
+
+### 📦 其他
+- 升级版本 ([dccb70b](https://github.com/MrGao-hy/hy-design-uni/commit/dccb70b))
+
+## 🚀 v0.6.7 (2026-05-16)
+### 🐞 修复问题
+- 修改类型 ([304b9c4](https://github.com/MrGao-hy/hy-design-uni/commit/304b9c4))
+- 类型报错 ([2552ab2](https://github.com/MrGao-hy/hy-design-uni/commit/2552ab2))
+- 修复点击同一行数据，change执行多次问题 ([29dfe45](https://github.com/MrGao-hy/hy-design-uni/commit/29dfe45))
+- 修改签名组件在支付宝小程序异常提示 ([5eb4d2c](https://github.com/MrGao-hy/hy-design-uni/commit/5eb4d2c))
+- 修改qrcode在支付宝小程序异常提示 ([4270a3c](https://github.com/MrGao-hy/hy-design-uni/commit/4270a3c))
+
+### ♻️ 重构优化
+- 修改部分问题 ([6ac46df](https://github.com/MrGao-hy/hy-design-uni/commit/6ac46df))
+- 修改部分问题 ([3254344](https://github.com/MrGao-hy/hy-design-uni/commit/3254344))
+
 ### 🔧 构建 | 工具变更
 - 在版本更新前进行更新 ([4ca19f6](https://github.com/MrGao-hy/hy-design-uni/commit/4ca19f6))
 

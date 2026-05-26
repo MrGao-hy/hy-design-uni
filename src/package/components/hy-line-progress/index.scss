@@ -8,11 +8,11 @@
   flex: 1;
   width: 100%;
   overflow: hidden;
-  border-radius: $hy-border-radius-semicircle;
+  border-radius: $hy-radius-semicircle;
 
   @include e(background) {
     background-color: $hy-background--empty;
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     flex: 1;
   }
 
@@ -24,7 +24,7 @@
     align-items: center;
     @include flex(row);
     color: #ffffff;
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     transition: width 0.5s ease;
     justify-content: flex-end;
     background-color: $hy-primary;

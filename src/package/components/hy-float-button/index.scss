@@ -11,7 +11,7 @@
   @include borderRadio(square);
 
   @include e(shadow) {
-    box-shadow: $hy-box-shadow;
+    box-shadow: $hy-shadow-base;
   }
 
   //@include e(animation) {

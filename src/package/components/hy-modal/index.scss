@@ -3,7 +3,7 @@
 
 @include b(modal) {
   max-width: 650rpx;
-  border-radius: $hy-border-radius-base;
+  border-radius: $hy-radius-base;
   overflow: hidden;
 
   /* 标题 */
@@ -65,7 +65,7 @@
         justify-content: center;
         align-items: center;
         height: 43px;
-        border-radius: $hy-border-radius-semicircle;
+        border-radius: $hy-radius-semicircle;
 
         /* 确认 */
         @include m(confirm) {

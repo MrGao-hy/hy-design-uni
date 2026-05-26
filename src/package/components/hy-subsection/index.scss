@@ -15,12 +15,12 @@
     height: 35px;
     background-color: $hy-background--3;
     padding: 3px;
-    border-radius: $hy-border-radius-sm;
+    border-radius: $hy-radius-sm;
     align-items: stretch;
 
     @include m(bar) {
       background-color: $hy-background--container !important;
-      border-radius: $hy-border-radius-sm;
+      border-radius: $hy-radius-sm;
     }
   }
 
@@ -38,7 +38,7 @@
     background-color: $hy-primary;
 
     @include m(first) {
-      border-radius: $hy-border-radius-sm 0 0 $hy-border-radius-sm;
+      border-radius: $hy-radius-sm 0 0 $hy-radius-sm;
     }
 
     @include m(center) {
@@ -46,7 +46,7 @@
     }
 
     @include m(last) {
-      border-radius: 0 $hy-border-radius-sm $hy-border-radius-sm 0;
+      border-radius: 0 $hy-radius-sm $hy-radius-sm 0;
     }
   }
 
@@ -67,13 +67,13 @@
     }
 
     @include m(first) {
-      border-top-left-radius: $hy-border-radius-sm;
-      border-bottom-left-radius: $hy-border-radius-sm;
+      border-top-left-radius: $hy-radius-sm;
+      border-bottom-left-radius: $hy-radius-sm;
     }
 
     @include m(last) {
-      border-top-right-radius: $hy-border-radius-sm;
-      border-bottom-right-radius: $hy-border-radius-sm;
+      border-top-right-radius: $hy-radius-sm;
+      border-bottom-right-radius: $hy-radius-sm;
     }
 
     @include m(text) {

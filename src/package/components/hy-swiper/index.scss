@@ -61,7 +61,7 @@
       @include e(bar) {
         width: 22px;
         height: 4px;
-        border-radius: $hy-border-radius-semicircle;
+        border-radius: $hy-radius-semicircle;
         background-color: #ffffff;
         transition: transform 0.3s;
       }
@@ -70,7 +70,7 @@
     @include m(dot) {
       width: 5px;
       height: 5px;
-      border-radius: $hy-border-radius-semicircle;
+      border-radius: $hy-radius-semicircle;
       margin: 0 $hy-border-margin-padding-sm;
 
       @include e(active) {

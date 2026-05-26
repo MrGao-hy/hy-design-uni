@@ -110,7 +110,7 @@ useShareButton()
     width: 90rpx;
     height: 40rpx;
     background: rgba(128, 128, 128, 0.7);
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     color: #fff;
 }
 </style>

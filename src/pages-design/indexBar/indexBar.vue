@@ -174,7 +174,7 @@ useShareButton()
 
     @include e(container) {
         padding: $hy-border-margin-padding-base 0;
-        border-radius: $hy-border-radius-base;
+        border-radius: $hy-radius-base;
         background: $hy-background--container;
     }
 }

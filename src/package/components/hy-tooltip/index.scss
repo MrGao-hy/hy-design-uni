@@ -8,7 +8,7 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
   position: relative;
   @include flex;
 
-  @include squareArrow(6px, $hy-tooltip--background-color, -1, $hy-box-shadow);
+  @include squareArrow(6px, $hy-tooltip--background-color, -1, $hy-shadow-base);
 
   @include edeep(popup) {
     position: absolute;
@@ -17,8 +17,8 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
     text-align: center;
     min-height: 36px;
     transition: opacity 0.2s;
-    box-shadow: $hy-box-shadow;
-    border-radius: $hy-border-radius-sm;
+    box-shadow: $hy-shadow-base;
+    border-radius: $hy-radius-sm;
   }
 
 
@@ -29,7 +29,7 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
 
   @include e(container) {
     position: relative;
-    border-radius: $hy-border-radius-sm;
+    border-radius: $hy-radius-sm;
   }
 
   @include e(inner) {
@@ -37,7 +37,7 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
     padding: $hy-border-margin-padding-base;
     line-height: 22px;
     z-index: $hy-tooltip--z-index;
-    border-radius: $hy-border-radius-sm;
+    border-radius: $hy-radius-sm;
     box-sizing: content-box;
     width: 200px;
   }
@@ -58,7 +58,7 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
       background-color: $hy-tooltip--background-color;
       position: relative;
       flex: 1;
-      border-radius: $hy-border-radius-sm;
+      border-radius: $hy-radius-sm;
       padding: 0;
       @include flex(row);
       align-items: center;

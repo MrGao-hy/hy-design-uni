@@ -2,7 +2,7 @@
 @use "../../libs/css/mixin" as *;
 
 @include b(textarea) {
-  border-radius: $hy-border-radius-sm;
+  border-radius: $hy-radius-sm;
   position: relative;
   @include flex;
   flex: 1;
@@ -13,11 +13,11 @@
   }
 
   @include e(radius) {
-    border-radius: $hy-border-radius-sm;
+    border-radius: $hy-radius-sm;
   }
 
   @include e(no-radius) {
-    border-radius: $hy-border-radius-no;
+    border-radius: $hy-radius-no;
   }
 
   @include e(disabled) {
@@ -48,6 +48,6 @@
     font-size: 12px;
     background-color: $hy-background--3;
     padding: 1px 4px;
-    border-radius: $hy-border-radius-sm;
+    border-radius: $hy-radius-sm;
   }
 }

@@ -3,7 +3,7 @@
         :theme-color="color"
         :theme="darkMode"
         :custom-style="customStyle"
-        :custom-class="customClass"
+        :custom-class="`${customClass} custom-class`"
     >
         <slot />
 

@@ -34,7 +34,7 @@
         justify-content: center;
         color: $hy-text-color--3;
         margin: 2rpx 0;
-        border-radius: $hy-border-radius-sm;
+        border-radius: $hy-radius-sm;
 
         @include is(active) {
           position: relative;

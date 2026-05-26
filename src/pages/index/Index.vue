@@ -1,5 +1,5 @@
 <template>
-    <hy-config-provider :theme-color="color" :theme="darkMode" customClass="home-page">
+    <the-root-page>
         <the-cell title="基础组件" :list="list_1"></the-cell>
         <the-cell title="表单组件" :list="list_2"></the-cell>
         <the-cell title="布局组件" :list="list_3"></the-cell>
@@ -9,22 +9,22 @@
         <the-cell title="业务组件" :list="list_7"></the-cell>
 
         <hy-modal v-model="showHint" title="摇一摇更换主题色"></hy-modal>
-    </hy-config-provider>
+    </the-root-page>
 </template>
 
 <script setup lang="ts">
 import TheCell from '@/components/the-cell.vue'
-import HyConfigProvider from '@/package/components/hy-config-provider/hy-config-provider.vue'
 import HyModal from '@/package/components/hy-modal/hy-modal.vue'
 import { list_1, list_2, list_3, list_4, list_5, list_6, list_7 } from './index1'
 import { useThemeStore } from '@/store'
 import { useShakeService } from '@/package'
 import { onHide, onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
+import TheRootPage from '@/components/the-root-page.vue'
 const themeStore = useThemeStore()
 const { startShakeListener, stopShakeListener } = useShakeService()
 
-const { color, darkMode, showHint } = storeToRefs(themeStore)
+const { color, showHint } = storeToRefs(themeStore)
 
 definePage({
     style: {

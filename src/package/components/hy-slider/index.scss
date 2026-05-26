@@ -15,7 +15,7 @@
     flex: 1;
     @include flex(column);
     position: relative;
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     padding: $hy-border-margin-padding-base $hy-border-margin-padding-lg;
     justify-content: center;
   }
@@ -34,7 +34,7 @@
 
   @include e(base) {
     background-color: $hy-background--empty;
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
   }
 
   /* #ifndef APP-NVUE */
@@ -51,7 +51,7 @@
 
   @include e(gap) {
     position: relative;
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     transition: width 0.2s;
     background-color: $hy-primary;
     &-0 {

@@ -151,13 +151,13 @@
 @mixin borderRadio($shape) {
   @include m($shape) {
     @if $shape == circle {
-      border-radius:  theme.$hy-border-radius-semicircle;
+      border-radius:  theme.$hy-radius-semicircle;
     }
     @else if($shape == square) {
-      border-radius: theme.$hy-border-radius-sm;
+      border-radius: theme.$hy-radius-sm;
     }
     @else {
-      border-radius: 28rpx theme.$hy-border-radius-sm;
+      border-radius: 28rpx theme.$hy-radius-sm;
     }
   }
 }

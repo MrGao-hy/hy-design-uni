@@ -7,7 +7,7 @@
   padding: $hy-border-margin-padding-base;
   @include flex(row);
   align-items: center;
-  border-radius: $hy-border-radius-sm;
+  border-radius: $hy-radius-sm;
 
   @include e(primary) {
 

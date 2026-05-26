@@ -57,7 +57,7 @@ const onEdit = () => {
     border-radius: 20rpx;
     padding: 30rpx;
     margin-bottom: 20rpx;
-    box-shadow: $hy-box-shadow;
+    box-shadow: $hy-shadow-base;
     animation: fadeInUp 0.5s ease;
     // 添加悬浮效果
     transform: translateY(0);
@@ -78,9 +78,9 @@ const onEdit = () => {
 .user-avatar {
     width: 160rpx;
     height: 160rpx;
-    border-radius: $hy-border-radius-circle;
+    border-radius: $hy-radius-circle;
     border: 4rpx solid $hy-border-color;
-    box-shadow: $hy-box-shadow;
+    box-shadow: $hy-shadow-base;
 }
 
 .vip-badge {
@@ -93,7 +93,7 @@ const onEdit = () => {
     align-items: center;
     background: linear-gradient(180deg, #121212 0%, #000 100%);
     box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.6);
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     padding: $hy-border-margin-padding-sm;
     .vip-text {
         color: #e6c35c;

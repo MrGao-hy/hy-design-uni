@@ -15,7 +15,7 @@
     width: 4px;
     height: 18px;
     background: hy.$hy-primary;
-    border-radius: hy.$hy-border-radius-semicircle;
+    border-radius: hy.$hy-radius-semicircle;
   }
 }
 .hy-flex {
@@ -26,9 +26,9 @@
   //flex-wrap: wrap;
   margin: 0 hy.$hy-border-margin-padding-base;
   padding: hy.$hy-border-margin-padding-base;
-  border-radius: hy.$hy-border-radius-base;
+  border-radius: hy.$hy-radius-base;
   background-color: hy.$hy-background--container;
-  box-shadow: hy.$hy-box-shadow;
+  box-shadow: hy.$hy-shadow-base;
 }
 
 .hy-margin {
@@ -42,9 +42,9 @@
 .hy-setting__box {
   background-color: hy.$hy-background--container;
   border: hy.$hy-border-line;
-  box-shadow: hy.$hy-box-shadow;
+  box-shadow: hy.$hy-shadow-base;
   margin: 120px hy.$hy-border-margin-padding-base 0;
-  border-radius: hy.$hy-border-radius-base;
+  border-radius: hy.$hy-radius-base;
   padding: hy.$hy-border-margin-padding-lg;
 }
 

@@ -8,7 +8,7 @@ const configProviderProps = {
      * */
     theme: {
         type: String,
-        default: 'light'
+        default: ''
     },
     /** 主题色 */
     themeColor: {

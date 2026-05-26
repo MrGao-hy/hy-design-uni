@@ -88,7 +88,7 @@ $hy-background--disabled);
 
   /* 关闭按钮 */
   @include e(close) {
-    border-radius: $hy-border-radius-semicircle;
+    border-radius: $hy-radius-semicircle;
     background-color: #C6C7CB;
     margin-left: $hy-border-margin-padding-sm;
     @include flex(row);

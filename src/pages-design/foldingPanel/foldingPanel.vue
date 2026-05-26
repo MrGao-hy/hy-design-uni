@@ -97,6 +97,6 @@ useShareButton()
     //width: 100%;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: $hy-box-shadow;
+    box-shadow: $hy-shadow-base;
 }
 </style>

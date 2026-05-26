@@ -75,7 +75,7 @@
     top: 20px;
     right: 15px;
     background-color: rgba(128, 128, 128, 0.25);
-    border-radius: $hy-border-radius-circle;
+    border-radius: $hy-radius-circle;
     padding: $hy-border-margin-padding-sm;
   }
 
@@ -112,7 +112,7 @@
     width: $hy-img-size-base;
     height: $hy-img-size-base;
     margin: 0 auto 7px;
-    border-radius: $hy-border-radius-base;
+    border-radius: $hy-radius-base;
   }
 
   @include e(panel-title) {

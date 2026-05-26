@@ -38,9 +38,9 @@ const themeStyle = computed(() => {
         {
             '--hy-theme-color': props.themeColor,
             '--hy-theme--light':
-                props.theme === 'light'
-                    ? colorGradient(props.themeColor)[80]
-                    : colorGradient(props.themeColor, '#000')[60],
+                props.theme === 'dark'
+                    ? colorGradient(props.themeColor, '#000')[60]
+                    : colorGradient(props.themeColor)[80],
             padding: addUnit(props.padding)
         },
         props.customStyle

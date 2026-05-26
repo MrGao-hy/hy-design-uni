@@ -80,10 +80,10 @@ const handleFeatureClick = (item: FeatureItem) => {
 /* 功能组 - 增强视觉效果 */
 .feature-group {
     background: $hy-background--container;
-    border-radius: $hy-border-radius-base;
+    border-radius: $hy-radius-base;
     margin-bottom: $hy-border-margin-padding-base;
     overflow: hidden;
-    box-shadow: $hy-box-shadow;
+    box-shadow: $hy-shadow-base;
     animation: fadeInUp 0.7s ease;
     // 添加轻微的悬浮效果
     transition: box-shadow 0.3s ease;
@@ -128,7 +128,7 @@ const handleFeatureClick = (item: FeatureItem) => {
 .feature-icon {
     width: 60rpx;
     height: 60rpx;
-    border-radius: $hy-border-radius-sm;
+    border-radius: $hy-radius-sm;
     display: flex;
     align-items: center;
     justify-content: center;

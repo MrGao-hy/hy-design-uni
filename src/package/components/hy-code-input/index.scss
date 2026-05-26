@@ -27,7 +27,7 @@
     /* 无边框 */
     @include e(no) {
       background-color: $hy-background--track;
-      border-radius: $hy-border-radius-sm;
+      border-radius: $hy-radius-sm;
       @include m(active) {
         &:before {
           content: "";
@@ -67,7 +67,7 @@
         content: "";
         position: absolute;
         bottom: 0;
-        border-radius: $hy-border-radius-semicircle;
+        border-radius: $hy-radius-semicircle;
         width: 40px;
         background-color: $hy-border-color--2;
       }

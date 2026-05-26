@@ -42,7 +42,7 @@ $hy-search-close-size: 20px !default;
     @include e(close) {
       width: $hy-search-close-size;
       height: $hy-search-close-size;
-      border-radius: $hy-border-radius-circle;
+      border-radius: $hy-radius-circle;
       background-color: $hy-background--track;
       @include flex(row);
       align-items: center;
