@@ -12,22 +12,22 @@
   /* 大 */
   @include m(large) {
     font-size: $hy-font-size-lg;
-    padding: 35rpx;
-    line-height: 25px;
+    padding: $hy-border-margin-padding-lg;
+    line-height: $hy-line-height-lg;
   }
 
   /* 默认 */
   @include m(medium) {
     font-size: $hy-font-size-base;
-    padding: 30rpx;
-    line-height: 20px;
+    padding: $hy-border-margin-padding-base;
+    line-height: $hy-line-height-base;
   }
 
   /* 小 */
   @include m(small) {
     font-size: $hy-font-size-sm;
-    padding: 25rpx;
-    line-height: 15px;
+    padding: $hy-border-margin-padding-sm;
+    line-height: $hy-line-height-sm;
   }
 
   /*点击状态*/
@@ -51,9 +51,8 @@
 
       /*sub值*/
       @include e(sub) {
-        margin-top: $hy-border-margin-padding-sm;
         color: $hy-text-color--grey;
-        font-size: 24rpx;
+        font-size: $hy-font-size-sm;
       }
     }
   }
@@ -64,7 +63,7 @@
     max-width: 90%;
     flex: 1;
     @include m(value) {
-      line-height: 24px;
+      line-height: $hy-line-height-base;
       color: $hy-text-color--grey;
       margin-right: $hy-border-margin-padding-sm;
     }
