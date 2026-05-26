@@ -1,7 +1,7 @@
 <template>
     <the-root-page>
         <view class="hy-title">基础使用</view>
-        <view class="hy-container">
+        <view class="hy-container hy-gap">
             <hy-notice-bar
                 :text="text"
                 :direction="direction"
@@ -14,12 +14,8 @@
 
             <hy-notice-bar
                 text="这是一个重要的通知, 你好"
-                :direction="direction"
-                :mode="mode"
-                :step="step"
-                :justifyContent="justifyContent"
-                :speed="speed"
-                url="/pages/index/Index"
+                mode="link"
+                url="/pages-design/icon/icon"
             ></hy-notice-bar>
         </view>
 
