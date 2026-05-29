@@ -1273,7 +1273,25 @@
                             }
                         }
                     }
+                },
+                // #ifdef H5 || MP-WEIXIN
+                {
+                    "path": "cascader/cascader",
+                    "type": "page",
+                    "style": {
+                        "navigationBarTitleText": "级联选择器",
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
                 }
+                // #endif
             ]
         }
     ],
