@@ -18,6 +18,13 @@ export interface TabsItemVo extends AnyObject {
     content?: any
 }
 
+export interface ITabsExpose {
+    /**
+     * 计算滑块距离左边距离
+     * */
+    resize: () => void
+}
+
 export interface TabsParamsVo extends TabsParamsVo {
     index: number
 }

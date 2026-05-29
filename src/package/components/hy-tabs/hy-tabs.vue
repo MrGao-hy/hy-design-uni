@@ -133,7 +133,7 @@ export default {
 <script setup lang="ts">
 import { computed, ref, watch, nextTick, onMounted, getCurrentInstance } from 'vue'
 import type { CSSProperties } from 'vue'
-import type { ITabsEmits, TabsItemVo } from './typing'
+import type { ITabsEmits, ITabsExpose, TabsItemVo } from './typing'
 import { addUnit, getPx, getRect, sleep } from '../../libs'
 import tabsProps from './props'
 // 组件
@@ -165,16 +165,14 @@ watch(
         // 内外部值不相等时，才尝试移动滑块
         if (newValue !== innerCurrent.value) {
             innerCurrent.value = newValue
-            nextTick(() => {
-                resize()
-            })
+            nextTick(() => resize())
         }
     },
     { immediate: true }
 )
 watch(
     () => props.list,
-    () => resize()
+    () => nextTick(() => resize())
 )
 
 const textStyle = computed(() => {
@@ -191,7 +189,7 @@ const textStyle = computed(() => {
 })
 
 onMounted(() => {
-    resize()
+    nextTick(() => resize())
 })
 
 /**
@@ -289,7 +287,7 @@ const resize = () => {
                 // 计算scroll-view的宽度，这里
                 scrollViewWidth.value += item.width || 0
                 // 另外计算每一个item的中心点X轴坐标
-                props.list[index].rect = item
+                if (props.list[index]) props.list[index].rect = item
             })
             // 获取了tabs的尺寸之后，设置滑块的位置
             setLineLeft()
@@ -329,6 +327,10 @@ const animationFinish = (e: any) => {
         emit('change', props.list[innerCurrent.value], innerCurrent.value)
     }
 }
+
+defineExpose<ITabsExpose>({
+    resize
+})
 </script>
 
 <style lang="scss" scoped>
