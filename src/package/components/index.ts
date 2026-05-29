@@ -6,6 +6,7 @@ import HyBackTop from './hy-back-top/hy-back-top.vue'
 import HyBadge from './hy-badge/hy-badge.vue'
 import HyButton from './hy-button/hy-button.vue'
 import HyCard from './hy-card/hy-card.vue'
+import HyCascader from './hy-cascader/hy-cascader.vue'
 import HyCell from './hy-cell/hy-cell.vue'
 import HyCheckButton from './hy-check-button/hy-check-button.vue'
 import HyCheckbox from './hy-checkbox/hy-checkbox.vue'
@@ -68,6 +69,7 @@ const install = (Vue: any) => {
     Vue.component('HyBadge', HyBadge)
     Vue.component('HyButton', HyButton)
     Vue.component('HyCard', HyCard)
+    Vue.component('HyCascader', HyCascader)
     Vue.component('HyCell', HyCell)
     Vue.component('HyCheckButton', HyCheckButton)
     Vue.component('HyCheckbox', HyCheckbox)
@@ -129,6 +131,7 @@ export {
     HyBadge,
     HyButton,
     HyCard,
+    HyCascader,
     HyCell,
     HyCheckButton,
     HyCheckbox,

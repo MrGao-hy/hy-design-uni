@@ -1,6 +1,6 @@
 {
     "name": "hy-app",
-    "version": "0.6.9",
+    "version": "0.7.0",
     "type": "module",
     "engines": {
         "node": "20.x"

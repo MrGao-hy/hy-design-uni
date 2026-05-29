@@ -64,6 +64,10 @@ export default {
         confirm: 'Done',
         placeholder: 'Please select an address'
     },
+    cascader: {
+        title: 'Please select',
+        placeholder: 'Please select'
+    },
     search: {
         search: 'Search',
         placeholder: 'Search content'

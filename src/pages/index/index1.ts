@@ -55,12 +55,12 @@ export const list_2 = [
         url: '/pages-design/calendar/calendar'
     },
     {
-        title: 'Select 下拉框',
-        url: '/pages-design/select/select'
-    },
-    {
         title: 'Picker 选择器',
         url: '/pages-design/picker/picker'
+    },
+    {
+        title: 'Cascader 级联选择器',
+        url: '/pages-design/cascader/cascader'
     },
     {
         title: 'DatetimePicker 时间选择器',

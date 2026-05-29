@@ -67,6 +67,10 @@ export default {
         confirm: '完成',
         placeholder: '请选择地址'
     },
+    cascader: {
+        title: '请选择',
+        placeholder: '请选择'
+    },
     search: {
         search: '搜索',
         placeholder: '搜索内容'

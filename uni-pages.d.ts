@@ -15,6 +15,7 @@ type _LocationUrl =
   "/pages-design/button/button" |
   "/pages-design/calendar/calendar" |
   "/pages-design/card/card" |
+  "/pages-design/cascader/cascader" |
   "/pages-design/cell/cell" |
   "/pages-design/checkbox/checkbox" |
   "/pages-design/checkButton/checkButton" |
