@@ -1,6 +1,23 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+@include b(theme--dark) {
+  .hy-skeleton--animation-gradient {
+    &::after {
+      content: ' ';
+      position: absolute;
+      animation: wd-skeleton-gradient 1.5s linear 2s infinite;
+      background: linear-gradient(
+                      90deg,
+                      transparent,
+                      rgba(255, 255, 255, 0.1),
+                      transparent
+      );
+      inset: 0;
+    }
+  }
+}
+
 
 @include b(skeleton) {
   box-sizing: border-box;
