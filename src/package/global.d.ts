@@ -9,6 +9,7 @@ declare module 'vue' {
         HyButton: (typeof import('./components/hy-button/hy-button.vue'))['default']
         HyCalendar: (typeof import('./components/hy-calendar/hy-calendar.vue'))['default']
         HyCard: (typeof import('./components/hy-card/hy-card.vue'))['default']
+        HyCascader: (typeof import('./components/hy-cascader/hy-cascader.vue'))['default']
         HyCell: (typeof import('./components/hy-cell/hy-cell.vue'))['default']
         HyCellItem: (typeof import('./components/hy-cell-item/hy-cell-item.vue'))['default']
         HyCheckButton: (typeof import('./components/hy-check-button/hy-check-button.vue'))['default']
