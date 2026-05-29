@@ -9,6 +9,7 @@
     background-color: $hy-background--container;
     position: relative;
     z-index: 9999;
+    overflow: hidden;
 
     @include m(round) {
 
