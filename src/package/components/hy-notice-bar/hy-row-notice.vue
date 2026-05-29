@@ -2,7 +2,11 @@
     <view class="hy-notice" @tap="clickHandler">
         <slot name="icon">
             <view class="hy-notice__left-icon" v-if="icon">
-                <hy-icon :name="icon" :color="color" size="19"></hy-icon>
+                <hy-icon
+                    :name="icon?.name || icon"
+                    :color="icon?.color || color"
+                    :size="icon?.size || 19"
+                ></hy-icon>
             </view>
         </slot>
         <view class="hy-notice__content" ref="hy-notice__content">

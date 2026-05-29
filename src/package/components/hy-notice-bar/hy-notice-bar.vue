@@ -1,6 +1,6 @@
 <template>
     <view
-        class="hy-notice-bar"
+        :class="`hy-notice-bar ${customClass}`"
         v-if="show"
         :style="[
             {
