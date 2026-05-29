@@ -1,5 +1,10 @@
 # 📝 更新日志 (CHANGELOG)
 
+## 🚀 v0.6.9 (2026-05-26)
+### 💄 样式调整
+- 修改单元格字体替换成共同变量 ([7a106ad](https://github.com/MrGao-hy/hy-design-uni/commit/7a106ad))
+- 新增css变量值，更改变量名称 ([1e3a822](https://github.com/MrGao-hy/hy-design-uni/commit/1e3a822))
+
 ## 🚀 v0.6.8 (2026-05-21)
 ### 🐞 修复问题
 - 修复引入问题 ([39c5ba5](https://github.com/MrGao-hy/hy-design-uni/commit/39c5ba5))
