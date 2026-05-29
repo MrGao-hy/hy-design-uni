@@ -29,6 +29,7 @@
                         <view
                             class="hy-swipe-action__right--action__btn"
                             v-for="(item, i) in options"
+                            :key="i"
                             :style="item.style"
                             @tap.stop="onActiveClick(item, i)"
                         >

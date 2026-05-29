@@ -19,7 +19,12 @@
                 </view>
                 <template #left>
                     <view class="action">
-                        <view class="action-btn" :style="item.style" v-for="item in options">
+                        <view
+                            class="action-btn"
+                            :style="item.style"
+                            v-for="item in options"
+                            :key="item.text"
+                        >
                             {{ item.text }}
                         </view>
                     </view>
