@@ -44,22 +44,16 @@ $default-theme: #4d80f0 !default; // 正常色
  * @params $mix-color 自己设置的混色
  */
 @function themeColor($theme-color, $type: "", $mix-color: "") {
-  @if $default-theme == #4d80f0 {
-    @if $type=="dark" {
-      @return darken($theme-color, 10%);
-    }
+  @if $type=="dark" {
+    @return darken($theme-color, 10%);
+  }
 
-    @else if $type=="light" {
-      @return lighten($theme-color, 30%);
-    }
-
-    @else {
-      @return $theme-color;
-    }
+  @else if $type=="light" {
+    @return lighten($theme-color, 30%);
   }
 
   @else {
-    @return $mix-color;
+    @return $theme-color;
   }
 }
 
