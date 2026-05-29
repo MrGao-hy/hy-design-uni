@@ -68,11 +68,11 @@
       }
     }
   }
+}
 
-  .swiper-item {
-    width: 100%;
-    height: 100%;
-    @include flex(column);
-    box-sizing: border-box;
-  }
+.swiper-item {
+  width: 100%;
+  height: 100%;
+  @include flex(column);
+  box-sizing: border-box;
 }
