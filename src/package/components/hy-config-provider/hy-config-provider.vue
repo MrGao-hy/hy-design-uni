@@ -17,7 +17,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, provide, toRefs } from 'vue'
 import { addUnit, colorGradient } from '../../libs'
 import configProviderProps from './props'
 
@@ -45,6 +45,11 @@ const themeStyle = computed(() => {
         },
         props.customStyle
     ]
+})
+
+// 提供给所有后代组件
+provide('hy-config-provider', {
+    ...toRefs(props)
 })
 </script>
 
