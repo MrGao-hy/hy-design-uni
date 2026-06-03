@@ -583,6 +583,11 @@ const icons = reactive([
         icon: 'bar-chart',
         label: '数据视图',
         name: 'BAR_CHART'
+    },
+    {
+        icon: 'clear',
+        label: '清除',
+        name: 'CLEAR'
     }
 ])
 
