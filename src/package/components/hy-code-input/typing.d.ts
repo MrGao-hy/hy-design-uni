@@ -5,4 +5,8 @@ export interface ICodeInputEmits {
     (e: 'finish', value: string | number): void
     /** 更新值 */
     (e: 'update:modelValue', value: string | number): void
+    /** 输入框获取焦点时触发 */
+    (e: 'focus'): void
+    /** 输入框失去焦点时触发 */
+    (e: 'blur'): void
 }

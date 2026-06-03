@@ -1,3 +1,8 @@
+import type { ExtractPropTypes } from 'vue'
+import type pickerProps from './props'
+
+export interface HyPickerProps extends ExtractPropTypes<typeof pickerProps> {}
+
 export interface PickerColumnVo {
     /**
      * value必填,回填根据这个值判断

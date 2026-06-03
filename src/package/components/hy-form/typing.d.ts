@@ -1,3 +1,9 @@
+import type { ExtractPropTypes } from 'vue'
+import type formProps from './props'
+
+export interface HyFormProps extends ExtractPropTypes<typeof formProps> {}
+export type HyFormSimpleProps = HyFormProps
+
 export interface FormRule {
     /**
      * 是否必填

@@ -1,4 +1,4 @@
-import { DateModeEnum } from '../../typing'
+import type { DateModeEnum } from '../../index'
 
 type IParam = {
     /** 值 */

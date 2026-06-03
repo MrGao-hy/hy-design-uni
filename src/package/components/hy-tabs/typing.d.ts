@@ -1,4 +1,4 @@
-import BadgeProps from '../hy-badge/typing'
+import type { HyBadgeProps } from '../../index'
 export interface TabsItemVo extends AnyObject {
     /**
      * @description tab名称
@@ -7,7 +7,7 @@ export interface TabsItemVo extends AnyObject {
     /**
      * @description 徽标接收的props
      * */
-    badge?: BadgeProps
+    badge?: HyBadgeProps
     /**
      * @description 是否禁用
      * */

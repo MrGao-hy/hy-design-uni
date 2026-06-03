@@ -3,6 +3,10 @@ import type {
     InputOnConfirmEvent,
     InputOnFocusEvent
 } from '@uni-helper/uni-types'
+import type { ExtractPropTypes } from 'vue'
+import type textareaProps from './props'
+
+export interface HyTextareaProps extends ExtractPropTypes<typeof textareaProps> {}
 
 export interface ITextareaEmits {
     /** 输入框失去焦点时触发 */

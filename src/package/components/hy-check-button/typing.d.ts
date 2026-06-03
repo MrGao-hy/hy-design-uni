@@ -1,3 +1,8 @@
+import type { ExtractPropTypes } from 'vue'
+import type checkButtonProps from './props'
+
+export interface HyCheckButtonProps extends ExtractPropTypes<typeof checkButtonProps> {}
+
 export interface CheckboxColumnsVo extends FieldNamesType {
     /**
      * @description 显示文本内容

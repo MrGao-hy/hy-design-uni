@@ -1,4 +1,4 @@
-import HyFormSimpleProps, { type FormRule } from '../hy-form/typing'
+import type { HyFormSimpleProps, FormRule } from '../../index'
 import type { ToRefs } from 'vue'
 
 export interface IFormContext extends ToRefs<HyFormSimpleProps> {

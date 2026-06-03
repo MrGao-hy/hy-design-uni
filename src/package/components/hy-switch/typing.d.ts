@@ -1,3 +1,7 @@
+import type { ExtractPropTypes } from 'vue'
+import type switchProps from './props'
+
+export interface HySwitchProps extends ExtractPropTypes<typeof switchProps> {}
 export type SwitchValue = boolean | number | string
 
 export interface ISwitchEmits {

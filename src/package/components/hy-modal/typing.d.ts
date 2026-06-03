@@ -1,7 +1,7 @@
 import type { ExtractPropTypes } from 'vue'
-import modalProps from '@/package/components/hy-modal/props'
+// import modalProps from './props'
 
-export interface HyModalProps extends ExtractPropTypes<typeof modalProps> {}
+// export interface HyModalProps extends ExtractPropTypes<typeof modalProps> {}
 
 export interface IModalEmits {
     /** 点击确认按钮时触发 */
