@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { CheckboxColumnsVo, IFieldNames } from '../hy-check-button/typing'
+import type { CheckboxColumnsVo, IFieldNames } from '../../index'
 
 const radioProps = {
     /** 双向绑定值，数组类型 */

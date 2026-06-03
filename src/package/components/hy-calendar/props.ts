@@ -156,7 +156,7 @@ const calendarProps = {
     },
     /** 单选与多选禁止选中的日期列表，mode!=range时有效。 */
     forbidDays: {
-        type: Array as PropType<Date[]>,
+        type: Array as PropType<string[]>,
         default: () => []
     },
     /** 单选与多选禁止选中的日期选择时提示 */

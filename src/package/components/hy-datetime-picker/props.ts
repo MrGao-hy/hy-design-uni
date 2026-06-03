@@ -1,6 +1,6 @@
 import { DateModeEnum, useTranslate } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
-import type { HyInputProps } from '../hy-input/typing'
+import type { HyInputProps } from '../../index'
 
 const { t } = useTranslate('datetimePicker')
 

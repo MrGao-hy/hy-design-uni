@@ -29,7 +29,7 @@ const gridProps = {
     /** 单个宫格高度 */
     itemHeight: {
         type: [Number, String],
-        default: '80px'
+        default: '100%'
     },
     /**
      * 宫格对齐方式，表现为数量少的时候，靠左，居中，还是靠右

@@ -41,7 +41,7 @@ const avatarProps = {
     },
     /** 文字大小 */
     fontSize: {
-        type: Number,
+        type: [String, Number],
         default: 18
     },
     /** 显示的图标 */
@@ -72,7 +72,9 @@ const avatarProps = {
     customStyle: {
         type: Object as PropType<CSSProperties>,
         default: () => {}
-    }
+    },
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default avatarProps
