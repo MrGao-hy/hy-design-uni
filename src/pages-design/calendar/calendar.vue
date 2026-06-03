@@ -1,45 +1,122 @@
 <template>
     <the-root-page>
         <the-cell :list="list" @click="onClick"></the-cell>
-        <hy-calendar v-model:show="show1" defaultDate="2022-02-15" @confirm="confirm"></hy-calendar>
+
+        <!-- 1. 单个日期 -->
+        <hy-calendar
+            v-model:show="show1"
+            defaultDate="2022-02-15"
+            @confirm="(e) => confirm(0, e)"
+        ></hy-calendar>
+
+        <!-- 2. 多个日期 -->
         <hy-calendar
             v-model:show="show2"
             mode="multiple"
             :defaultDate="['2022-03-01']"
-            @confirm="confirm"
+            @confirm="(e) => confirm(1, e)"
         ></hy-calendar>
-        <hy-calendar v-model:show="show3" mode="range" @confirm="confirm"></hy-calendar>
+
+        <!-- 3. 日期范围 -->
+        <hy-calendar
+            v-model:show="show3"
+            mode="range"
+            @confirm="(e) => confirm(2, e)"
+        ></hy-calendar>
+
+        <!-- 4. 自定义主题颜色 -->
         <hy-calendar
             v-model:show="show4"
             mode="range"
-            @confirm="confirm"
             color="#f56c6c"
-            defaultDate="2025-02-01"
+            @confirm="(e) => confirm(3, e)"
         ></hy-calendar>
+
+        <!-- 5. 自定义文案 -->
         <hy-calendar
             v-model:show="show5"
             mode="range"
-            @confirm="confirm"
-            defaultDate="2025-08-09"
             startText="住店"
             endText="离店"
             confirmDisabledText="请选择离店日期"
             :formatter="formatter"
+            @confirm="(e) => confirm(4, e)"
         ></hy-calendar>
-        <hy-calendar v-model:show="show6" @confirm="confirm" maxDate="2025-05-05"></hy-calendar>
-        <hy-calendar v-model:show="show7" @confirm="confirm" showLunar></hy-calendar>
+
+        <!-- 6. 日期最大范围 -->
+        <hy-calendar
+            v-model:show="show6"
+            maxDate="2025-05-05"
+            @confirm="(e) => confirm(5, e)"
+        ></hy-calendar>
+
+        <!-- 7. 显示农历 -->
+        <hy-calendar v-model:show="show7" showLunar @confirm="(e) => confirm(6, e)"></hy-calendar>
+
+        <!-- 8. 默认日期 -->
         <hy-calendar
             v-model:show="show8"
-            @confirm="confirm"
             mode="multiple"
+            minDate="2025-04-09"
+            maxDate="2025-05-05"
             :defaultDate="['2025-04-25', '2025-04-30']"
+            @confirm="(e) => confirm(7, e)"
         ></hy-calendar>
+
+        <!-- 9. 日期范围限制 -->
         <hy-calendar
             v-model:show="show9"
-            @confirm="confirm"
-            minDate="2022-05-09"
-            maxDate="2023-07-05"
-            defaultDate="2022-09-09"
+            minDate="2025-05-09"
+            maxDate="2025-07-05"
+            defaultDate="2025-06-09"
+            @confirm="(e) => confirm(8, e)"
+        ></hy-calendar>
+
+        <!-- 10. 范围选择限制 -->
+        <hy-calendar
+            v-model:show="show10"
+            mode="range"
+            :maxRange="7"
+            rangePrompt="最多选择7天"
+            allowSameDay
+            @confirm="(e) => confirm(9, e)"
+        ></hy-calendar>
+
+        <!-- 11. 禁用日期 -->
+        <hy-calendar
+            v-model:show="show11"
+            mode="single"
+            minDate="2025-05-09"
+            maxDate="2025-07-05"
+            :forbidDays="forbidDays"
+            forbidDaysToast="该日期已被预约"
+            @confirm="(e) => confirm(10, e)"
+        ></hy-calendar>
+
+        <!-- 12. 只读模式 -->
+        <hy-calendar
+            v-model:show="show12"
+            readonly
+            mode="range"
+            minDate="2025-05-09"
+            maxDate="2025-07-05"
+            :defaultDate="['2025-06-01', '2025-06-15']"
+            @confirm="(e) => confirm(11, e)"
+        ></hy-calendar>
+
+        <!-- 13. 多选限制数量 -->
+        <hy-calendar
+            v-model:show="show13"
+            mode="multiple"
+            :maxCount="3"
+            @confirm="(e) => confirm(12, e)"
+        ></hy-calendar>
+
+        <!-- 14. 自定义星期文案 -->
+        <hy-calendar
+            v-model:show="show14"
+            :weekText="weekText"
+            @confirm="(e) => confirm(13, e)"
         ></hy-calendar>
     </the-root-page>
 </template>
@@ -64,6 +141,18 @@ const show6 = ref(false)
 const show7 = ref(false)
 const show8 = ref(false)
 const show9 = ref(false)
+const show10 = ref(false)
+const show11 = ref(false)
+const show12 = ref(false)
+const show13 = ref(false)
+const show14 = ref(false)
+
+// 禁用日期列表
+const forbidDays = ref(['2025-06-01', '2025-06-02', '2025-06-03'])
+
+// 自定义星期文案（英文）
+const weekText = ref(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
+
 const formatter = (day: any) => {
     const d = new Date()
     let month = d.getMonth() + 1
@@ -76,122 +165,52 @@ const formatter = (day: any) => {
 }
 
 const list = reactive([
-    {
-        title: '单个日期',
-        value: ''
-    },
-    {
-        title: '多个日期',
-        value: ''
-    },
-    {
-        title: '日期范围',
-        value: ''
-    },
-    {
-        title: '自定义主题颜色',
-        value: ''
-    },
-    {
-        title: '自定义文案',
-        value: ''
-    },
-    {
-        title: '日期最大范围',
-        value: ''
-    },
-    {
-        title: '显示农历',
-        value: ''
-    },
-    {
-        title: '默认日期',
-        value: ''
-    },
-    {
-        title: '日期最小范围',
-        value: ''
-    }
+    { title: '单个日期', value: '' },
+    { title: '多个日期', value: '' },
+    { title: '日期范围', value: '' },
+    { title: '自定义主题颜色', value: '' },
+    { title: '自定义文案', value: '' },
+    { title: '日期最大范围', value: '' },
+    { title: '显示农历', value: '' },
+    { title: '默认日期', value: '' },
+    { title: '日期范围限制', value: '' },
+    { title: '范围选择限制（7天）', value: '' },
+    { title: '禁用日期', value: '' },
+    { title: '只读模式', value: '' },
+    { title: '多选限制数量', value: '' },
+    { title: '自定义星期文案', value: '' }
 ])
 
-const confirm = (e: string[]) => {
-    switch (index.value) {
-        case 0:
-            list[index.value].value = e[0]
-            break
-        case 1:
-            e.forEach((value, i) => {
-                i === 0
-                    ? (list[index.value].value = value)
-                    : (list[index.value].value += ';' + value)
-            })
-            break
-        case 2:
-            list[index.value].value = e[0] + '~' + e[e.length - 1]
-            break
-        case 3:
-            list[index.value].value = e[0] + '~' + e[e.length - 1]
-            break
-        case 4:
-            list[index.value].value = e[0] + '~' + e[e.length - 1]
-            break
-        case 5:
-            list[index.value].value = e[0]
-            break
-        case 6:
-            list[index.value].value = e[0]
-            break
-        case 7:
-            e.forEach((value, i) => {
-                i === 0
-                    ? (list[index.value].value = value)
-                    : (list[index.value].value += ';' + value)
-            })
-            break
-        case 8:
-            list[index.value].value = e[0]
-            break
-        default:
-            break
+const confirm = (idx: number, dates: string[]) => {
+    index.value = idx
+    if (dates.length === 1) {
+        list[idx].value = dates[0]
+    } else if (list[idx].title.includes('范围')) {
+        list[idx].value = `${dates[0]} ~ ${dates[dates.length - 1]}`
+    } else {
+        list[idx].value = dates.join('; ')
     }
-}
-const onClick = (temp: AnyObject[], i: number) => {
-    index.value = i
-    controller(i)
 }
 
-const controller = (index: number) => {
-    switch (index) {
-        case 0:
-            show1.value = !show1.value
-            break
-        case 1:
-            show2.value = !show2.value
-            break
-        case 2:
-            show3.value = !show3.value
-            break
-        case 3:
-            show4.value = !show4.value
-            break
-        case 4:
-            show5.value = !show5.value
-            break
-        case 5:
-            show6.value = !show6.value
-            break
-        case 6:
-            show7.value = !show7.value
-            break
-        case 7:
-            show8.value = !show8.value
-            break
-        case 8:
-            show9.value = !show9.value
-            break
-        default:
-            break
-    }
+const onClick = (_: any, i: number) => {
+    index.value = i
+    const shows = [
+        show1,
+        show2,
+        show3,
+        show4,
+        show5,
+        show6,
+        show7,
+        show8,
+        show9,
+        show10,
+        show11,
+        show12,
+        show13,
+        show14
+    ]
+    shows[i].value = !shows[i].value
 }
 
 useShareButton()

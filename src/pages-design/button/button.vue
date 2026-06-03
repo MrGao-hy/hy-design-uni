@@ -65,7 +65,12 @@
 
         <view class="hy-title">加载按钮</view>
         <view class="hy-container">
-            <hy-button text="主要按钮" loading :custom-style="{ marginBottom: '20px' }"></hy-button>
+            <hy-button
+                text="主要按钮"
+                loading
+                loadingText="提交中..."
+                :custom-style="{ marginBottom: '20px' }"
+            ></hy-button>
             <hy-button text="主要按钮" plain loading></hy-button>
         </view>
 

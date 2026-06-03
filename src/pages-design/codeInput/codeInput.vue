@@ -46,6 +46,34 @@
             <hy-code-input v-model="value_1" :border="false" size="50"></hy-code-input>
         </view>
 
+        <view class="hy-title">自定义长度</view>
+        <view class="hy-container">
+            <hy-code-input v-model="value_2" :maxlength="4"></hy-code-input>
+        </view>
+
+        <view class="hy-title">与键盘联动</view>
+        <view class="hy-container">
+            <hy-code-input
+                v-model="keyboardValue"
+                mode="box"
+                @finish="showKeyboard = false"
+                @focus="showKeyboard = true"
+            ></hy-code-input>
+            <view class="hy-tip">点击输入框即可打开自定义键盘</view>
+        </view>
+        {{ keyboardValue }}
+
+        <hy-keyboard
+            v-model:show="showKeyboard"
+            mode="default"
+            v-model="keyboardValue"
+            :show-dot-key="false"
+            close-text="完成"
+            @input="handleKeyboardInput"
+            @delete="handleKeyboardDelete"
+            @close="showKeyboard = false"
+        ></hy-keyboard>
+
         <view class="hy-setting__box">
             <view class="hy-title">字符距离</view>
             <hy-slider v-model="space" :min="0" :max="20" />
@@ -77,11 +105,22 @@ definePage({
 
 const value = ref('')
 const value_1 = ref('123')
+const value_2 = ref('')
+const keyboardValue = ref('')
 const dot = ref(false)
 const bold = ref(false)
 const hairline = ref(false)
 const focus = ref(false)
 const space = ref(10)
+const showKeyboard = ref(false)
+
+const handleKeyboardInput = (value: string) => {
+    console.log('键盘输入:', value)
+}
+
+const handleKeyboardDelete = () => {
+    console.log('键盘删除')
+}
 
 useShareButton()
 </script>
