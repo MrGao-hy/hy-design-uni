@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-avatar" :class="avatarClass" :style="avatarStyle" @tap="clickHandler">
+    <view :class="avatarClass" :style="avatarStyle" @tap="clickHandler">
         <slot v-if="$slots.default"></slot>
         <template v-else>
             <!-- #ifdef MP-WEIXIN || MP-QQ || MP-BAIDU  -->
@@ -24,7 +24,7 @@
                     justifyContent: 'center',
                     textAlign: 'center',
                     color: color,
-                    fontSize: fontSize
+                    fontSize: addUnit(fontSize)
                 }"
             >
                 {{ text }}
@@ -127,7 +127,7 @@ const avatarStyle = computed<CSSProperties>(() => {
     return Object.assign(style, props.customStyle)
 })
 const avatarClass = computed<string[]>(() => {
-    const classes: string[] = [`hy-avatar--${props.shape}`]
+    const classes: string[] = ['hy-avatar', `hy-avatar--${props.shape}`, props.customClass || '']
     if (typeof props.size === 'string') {
         classes.push(`hy-avatar--${props.size}`)
     }
@@ -151,10 +151,17 @@ function errorHandler() {
 }
 
 /**
- * @description 点击头像
+ * 点击头像
  * */
 const clickHandler = (e: Event) => {
-    emit('click', props.name, e)
+    emit(
+        'click',
+        {
+            name: props.name,
+            url: avatarUrl.value
+        },
+        e
+    )
 }
 </script>
 
