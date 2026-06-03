@@ -5,6 +5,7 @@
         closeable
         @close="close"
         :round="round"
+        :z-index="998"
         :closeOnClickOverlay="closeOnClickOverlay"
     >
         <view class="hy-calendar">
