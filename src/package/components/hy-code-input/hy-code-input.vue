@@ -35,8 +35,8 @@
             :style="{
                 height: boxSize
             }"
-            @focus="isFocus = true"
-            @blur="isFocus = false"
+            @focus="handleFocus"
+            @blur="handleBlur"
         />
     </view>
 </template>
@@ -80,9 +80,19 @@ const boxSize = addUnit(props.size)
 
 watch(
     () => props.modelValue,
-    (newValue: string | number) => {
-        inputValue.value = String(newValue).substring(0, props.maxlength)
-        current.value = newValue.toString().length
+    (newValue: string | number | undefined, oldValue: string | number | undefined) => {
+        const newValueStr = String(newValue).substring(0, props.maxlength)
+        inputValue.value = newValueStr
+        current.value = newValueStr.length
+
+        // 当值从外部更新时（如键盘组件），也触发change事件
+        if (newValue !== oldValue) {
+            emit('change', newValueStr)
+        }
+
+        if (String(inputValue.value).length >= Number(props.maxlength)) {
+            emit('finish', inputValue.value)
+        }
     },
 
     { immediate: true }
@@ -178,14 +188,30 @@ const itemClass = computed(() => {
 })
 
 /**
- * @description 将输入的值，转为数组，给item历遍时，根据当前的索引显示数组的元素
+ * 将输入的值，转为数组，给item历遍时，根据当前的索引显示数组的元素
  */
 const codeArray = computed(() => {
     return String(inputValue.value).split('')
 })
 
 /**
- * @description 监听输入框的值发生变化
+ * 输入框获取焦点时触发
+ * */
+const handleFocus = () => {
+    isFocus.value = true
+    emit('focus')
+}
+
+/**
+ * 输入框失去焦点时触发
+ * */
+const handleBlur = () => {
+    isFocus.value = false
+    emit('blur')
+}
+
+/**
+ * 监听输入框的值发生变化
  * */
 const inputHandler = (e: InputOnInputEvent) => {
     const value = e.detail.value
@@ -200,10 +226,6 @@ const inputHandler = (e: InputOnInputEvent) => {
     emit('change', value)
     // 修改通过v-model双向绑定的值
     emit('update:modelValue', value)
-    // 达到用户指定输入长度时，发出完成事件
-    if (String(value).length >= Number(props.maxlength)) {
-        emit('finish', value)
-    }
 }
 </script>
 
