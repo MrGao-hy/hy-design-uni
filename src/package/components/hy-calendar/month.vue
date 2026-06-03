@@ -312,9 +312,9 @@ const clickHandler = (item: DateItem) => {
             if (dayjs(dateStr).isBefore(dayjs(startDate))) {
                 newSelected = [dateStr]
             } else if (dayjs(dateStr).isAfter(dayjs(startDate))) {
-                // 范围限制校验
-                const daysDiff = dayjs(dateStr).diff(dayjs(startDate), 'day')
-                if (daysDiff >= (props.maxRange as number) && props.showRangePrompt) {
+                // 范围限制校验（计算包含两端的总天数）
+                const daysDiff = dayjs(dateStr).diff(dayjs(startDate), 'day') + 1
+                if (daysDiff > (props.maxRange as number) && props.showRangePrompt) {
                     uni.showToast({
                         title: props.rangePrompt || `选择天数不能超过 ${props.maxRange} 天`,
                         icon: 'none'
@@ -359,9 +359,29 @@ const setDefaultDate = () => {
         dates = Array.isArray(props.defaultDate)
             ? [props.defaultDate[0]]
             : [dayjs(props.defaultDate).format('YYYY-MM-DD')]
+    } else if (props.mode === 'range') {
+        if (Array.isArray(props.defaultDate) && props.defaultDate.length >= 2) {
+            // range 模式下，如果默认日期是数组且包含两个日期，填充中间所有日期
+            const startDate = dayjs(props.defaultDate[0]).format('YYYY-MM-DD')
+            const endDate = dayjs(props.defaultDate[1]).format('YYYY-MM-DD')
+            const arr = []
+            let curr = dayjs(startDate)
+            const end = dayjs(endDate)
+            while (curr.isBefore(end) || curr.isSame(end, 'day')) {
+                arr.push(curr.format('YYYY-MM-DD'))
+                curr = curr.add(1, 'day')
+            }
+            dates = arr
+        } else if (Array.isArray(props.defaultDate)) {
+            dates = props.defaultDate
+        }
     } else {
-        if (!Array.isArray(props.defaultDate)) return
-        dates = props.defaultDate
+        // multiple 模式
+        if (Array.isArray(props.defaultDate)) {
+            dates = props.defaultDate
+        } else {
+            dates = [dayjs(props.defaultDate).format('YYYY-MM-DD')]
+        }
     }
 
     const min = props.minDate || dayjs().format('YYYY-MM-DD')

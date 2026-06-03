@@ -38,6 +38,7 @@ type _LocationUrl =
   "/pages-design/image/image" |
   "/pages-design/indexBar/indexBar" |
   "/pages-design/input/input" |
+  "/pages-design/keyboard/keyboard" |
   "/pages-design/line/line" |
   "/pages-design/lineProgress/lineProgress" |
   "/pages-design/list/list" |

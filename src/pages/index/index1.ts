@@ -313,6 +313,10 @@ export const list_6 = [
     {
         title: 'Table 表格',
         url: '/pages-design/table/table'
+    },
+    {
+        title: 'Keyboard 键盘',
+        url: '/pages-design/keyboard/keyboard'
     }
 ]
 

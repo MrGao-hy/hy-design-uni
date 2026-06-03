@@ -1098,6 +1098,42 @@
                         }
                     }
                 },
+                // #ifdef MP-ALIPAY || MP-WEIXIN
+                {
+                    "path": "keyboard/keyboard",
+                    "type": "page",
+                    "style": {
+                        "navigationBarTitleText": "键盘",
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                // #endif
+                // #ifdef H5
+                {
+                    "path": "keyboard/keyboard",
+                    "type": "page",
+                    "style": {
+                        "navigationBarTitleText": "Keyboard 键盘",
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                // #endif
                 {
                     "path": "tabs/tabs",
                     "type": "page",

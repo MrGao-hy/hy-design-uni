@@ -53,6 +53,7 @@ import HySubsection from './hy-subsection/hy-subsection.vue'
 import HySwiper from './hy-swiper/hy-swiper.vue'
 import HySwitch from './hy-switch/hy-switch.vue'
 import HyTabs from './hy-tabs/hy-tabs.vue'
+import HyKeyboard from './hy-keyboard/hy-keyboard.vue'
 import HyTag from './hy-tag/hy-tag.vue'
 import HyTextarea from './hy-textarea/hy-textarea.vue'
 import HyTooltip from './hy-tooltip/hy-tooltip.vue'
@@ -115,6 +116,7 @@ const install = (Vue: any) => {
     Vue.component('HySwiper', HySwiper)
     Vue.component('HySwitch', HySwitch)
     Vue.component('HyTabs', HyTabs)
+    Vue.component('HyKeyboard', HyKeyboard)
     Vue.component('HyTag', HyTag)
     Vue.component('HyTextarea', HyTextarea)
     Vue.component('HyTooltip', HyTooltip)
@@ -177,6 +179,7 @@ export {
     HySwiper,
     HySwitch,
     HyTabs,
+    HyKeyboard,
     HyTag,
     HyTextarea,
     HyTooltip,
