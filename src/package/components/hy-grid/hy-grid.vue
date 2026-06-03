@@ -16,7 +16,7 @@
                     :label="item[customKeys?.name]"
                     :space="item?.iconConfig?.space || iconConfig?.space || 8"
                     :color="item?.iconConfig?.color || iconConfig?.color"
-                    :size="item?.iconConfig?.size || iconConfig?.size || 30"
+                    :size="item?.iconConfig?.size || iconConfig?.size || 44"
                     :bold="item?.iconConfig?.bold || iconConfig?.bold"
                     :customPrefix="item?.iconConfig?.customPrefix"
                     :imgMode="item?.iconConfig?.imgMode || iconConfig?.imgMode"
