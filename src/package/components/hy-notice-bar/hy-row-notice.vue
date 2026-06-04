@@ -1,39 +1,13 @@
 <template>
-    <view class="hy-notice" @tap="clickHandler">
-        <slot name="icon">
-            <view class="hy-notice__left-icon" v-if="icon">
-                <hy-icon
-                    :name="icon?.name || icon"
-                    :color="icon?.color || color"
-                    :size="icon?.size || 19"
-                ></hy-icon>
-            </view>
-        </slot>
-        <view class="hy-notice__content" ref="hy-notice__content">
-            <view
-                ref="hy-notice__content--text"
-                class="hy-notice__content--text"
-                :style="animationStyle"
-            >
-                <text v-for="(item, index) in innerText" :key="index" :style="textStyle">{{
-                    item
-                }}</text>
-            </view>
-        </view>
-        <view class="hy-notice__right-icon" v-if="['link', 'closable'].includes(mode)">
-            <hy-icon
-                v-if="mode === 'link'"
-                :name="IconConfig.RIGHT"
-                :size="17"
-                :color="color"
-            ></hy-icon>
-            <hy-icon
-                v-if="mode === 'closable'"
-                @click="close"
-                :name="IconConfig.CLOSE"
-                :size="16"
-                :color="color"
-            ></hy-icon>
+    <view class="hy-notice__content" ref="hy-notice__content">
+        <view
+            ref="hy-notice__content--text"
+            class="hy-notice__content--text"
+            :style="animationStyle"
+        >
+            <text v-for="(item, index) in innerText" :key="index" :style="textStyle">{{
+                item
+            }}</text>
         </view>
     </view>
 </template>
@@ -41,13 +15,11 @@
 <script setup lang="ts">
 import { ref, watch, toRefs, computed, type CSSProperties, getCurrentInstance } from 'vue'
 import noticeBarProps from './props'
-import { addUnit, getRect, sleep, IconConfig } from '../../libs'
-// 组件
-import HyIcon from '../hy-icon/hy-icon.vue'
+import { addUnit, getRect, sleep } from '../../libs'
 
 const props = defineProps(noticeBarProps)
 const { text, speed, fontSize, color } = toRefs(props)
-const emit = defineEmits(['click', 'close'])
+const emit = defineEmits(['change'])
 
 const instance = getCurrentInstance()
 const animationDuration = ref<string>('0') // 动画执行时间
@@ -86,6 +58,7 @@ const textStyle = computed<CSSProperties>(() => {
     style.fontSize = addUnit(fontSize.value)
     return style
 })
+
 /**
  * @description 动画的样式
  * */
@@ -95,6 +68,7 @@ const animationStyle = computed<CSSProperties>(() => {
     style.animationPlayState = animationPlayState.value
     return style
 })
+
 // 内部对用户传入的数据进一步分割，放到多个text标签循环，否则如果用户传入的字符串很长（100个字符以上）
 // 放在一个text标签中进行滚动，在低端安卓机上，动画可能会出现抖动现象，需要分割到多个text中可解决此问题
 const innerText = computed(() => {
@@ -108,16 +82,6 @@ const innerText = computed(() => {
     }
     return result
 })
-
-// 点击通告栏
-const clickHandler = (index: number) => {
-    emit('click', index)
-}
-
-// 点击关闭按钮
-const close = () => {
-    emit('close')
-}
 </script>
 
 <style lang="scss" scoped>
