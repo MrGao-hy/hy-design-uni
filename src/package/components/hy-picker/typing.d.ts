@@ -41,3 +41,20 @@ export interface IPickerEmits {
     /** 选中值触发 */
     (e: 'update:modelValue', value: any): void
 }
+
+export interface IPickerExpose {
+    /**
+     * 设置某一列的值
+     * @param columnIndex 列索引，从0开始
+     * @param values 该列的选项数组
+     */
+    setColumnValues: (columnIndex: number, values: Array<string | PickerColumnVo>) => void
+    /**
+     * 手动触发确认选择
+     */
+    onConfirm: () => void
+    /**
+     * 关闭选择器弹窗
+     */
+    cancel: () => void
+}

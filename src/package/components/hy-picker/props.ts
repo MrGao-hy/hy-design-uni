@@ -16,7 +16,10 @@ const pickerProps = {
         type: Boolean,
         default: false
     },
-    /** 弹窗弹出模式 */
+    /**
+     * 弹窗弹出模式
+     * @values bottom, top
+     */
     popupMode: {
         type: String,
         default: 'bottom'

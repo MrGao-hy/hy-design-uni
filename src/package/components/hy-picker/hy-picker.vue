@@ -122,8 +122,8 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { deepClone, sleep, addUnit, isArray, useTranslate } from '../../libs'
-import type { IPickerEmits } from './typing'
+import { addUnit, isArray, useTranslate } from '../../libs'
+import type { IPickerEmits, IPickerExpose, PickerColumnVo } from './typing'
 import pickerProps from './props'
 // 组件
 import HyInput from '../hy-input/hy-input.vue'
@@ -175,25 +175,47 @@ watch(
 )
 
 /**
+ * 解析 modelValue 为数组形式
+ * @param value 原始值
+ * @returns 解析后的数组
+ */
+const parseModelValue = (value: string | number | any[]): any[] => {
+    if (isArray(value)) {
+        return value
+    }
+    const strValue = String(value)
+    return strValue.includes(props.separator) ? strValue.split(props.separator) : [value]
+}
+
+/**
+ * 根据值查找对应列的索引
+ * @param values 值数组
+ * @returns 索引数组
+ */
+const findColumnIndexs = (values: any[]): number[] => {
+    return values.map((item, columnIndex) => {
+        const column = props.columns[columnIndex]
+        if (!column) return 0
+
+        const index = column.findIndex((option) => {
+            const optionValue = typeof option === 'object' ? option[props.valueKey] : option
+            return optionValue === item
+        })
+        // 未找到时默认返回 0
+        return index < 0 ? 0 : index
+    })
+}
+
+/**
  * 监听默认值，给索引赋值
  * */
 watch(
     () => props.modelValue,
-    (v) =>
-        setIndexs(
-            (isArray(v)
-                ? v
-                : String(v).includes(props.separator)
-                  ? String(v).split(props.separator)
-                  : [v]
-            )
-                .map((item, i) =>
-                    props.columns[i]?.findIndex(
-                        (val) => (typeof val === 'object' ? val[props.valueKey] : val) === item
-                    )
-                )
-                .map((n) => (n < 0 ? 0 : n))
-        ),
+    (value) => {
+        const values = parseModelValue(value)
+        const indexs = findColumnIndexs(values)
+        setIndexs(indexs)
+    },
     { immediate: true }
 )
 
@@ -212,49 +234,37 @@ watch(
  * 已选&&已确认的值显示在input上面的文案
  * */
 const inputLabelValue = computed((): string => {
-    let firstItem = innerColumns.value[0][0]
-    // //区分是不是对象数组
-    if (firstItem && Object.prototype.toString.call(firstItem) === '[object Object]') {
-        let res: Record<string, any>[] = []
-        innerColumns.value.map((ite, i) => {
-            res.push(
-                ...innerColumns.value[i]?.filter((item) => {
-                    return isArray(props.modelValue)
-                        ? props.modelValue.includes(item[props.valueKey])
-                        : props.modelValue === item[props.valueKey]
-                })
-            )
-        })
-        res = res.map((item) => item[props.labelKey])
-        return res.join(props.separator)
-    } else {
-        //用户确定的值，才显示到输入框
-        if (props.modelValue.length && isArray(props.modelValue)) {
-            return props.modelValue.join(props.separator)
-        }
-        return props.modelValue as string
+    const firstItem = innerColumns.value[0]?.[0]
+    if (!isObjectOption(firstItem)) {
+        // 非对象数组，直接返回值
+        return isArray(props.modelValue)
+            ? props.modelValue.join(props.separator)
+            : String(props.modelValue || '')
     }
+
+    // 对象数组，查找匹配项并返回label
+    const labels: string[] = []
+    const values = isArray(props.modelValue) ? props.modelValue : [props.modelValue]
+
+    innerColumns.value.forEach((column) => {
+        column?.forEach((item) => {
+            if (values.includes(getItemValue(item))) {
+                labels.push(getItemText(item))
+            }
+        })
+    })
+
+    return labels.join(props.separator)
 })
 
 /**
  * 已选，待确认的值
  * */
 const inputValue = computed(() => {
-    let items = innerColumns.value.map((item, index) => item[innerIndex.value[index]])
-    let res: any[] = []
-    //区分是不是对象数组
-    if (items[0] && Object.prototype.toString.call(items[0]) === '[object Object]') {
-        //对象数组返回id集合
-        items.forEach((element) => {
-            res.push(element && element[props.valueKey])
-        })
-    } else {
-        //非对象数组返回元素集合
-        items.forEach((element) => {
-            res.push(element)
-        })
-    }
-    return res
+    return innerColumns.value.map((column, index) => {
+        const item = column[innerIndex.value[index]]
+        return getItemValue(item)
+    })
 })
 
 /**
@@ -267,14 +277,34 @@ const onShowByClickInput = () => {
 }
 
 /**
+ * 判断选项是否为对象类型
+ * */
+const isObjectOption = (item: any): boolean => {
+    return item && Object.prototype.toString.call(item) === '[object Object]'
+}
+
+/**
  * 获取item需要显示的文字，判别为对象还是文本
  * */
 const getItemText = (item: any) => {
-    if (Object.prototype.toString.call(item) === '[object Object]' && props.labelKey) {
-        return item[props.labelKey]
-    } else {
-        return item
+    return isObjectOption(item) && props.labelKey ? item[props.labelKey] : item
+}
+
+/**
+ * 获取选项的值
+ * */
+const getItemValue = (item: any) => {
+    return isObjectOption(item) ? item[props.valueKey] : item
+}
+
+/**
+ * 关闭选择器的公共逻辑
+ * */
+const closePicker = () => {
+    if (props.hasInput) {
+        showByClickInput.value = false
     }
+    emit('update:show', false)
 }
 
 /**
@@ -282,10 +312,7 @@ const getItemText = (item: any) => {
  * */
 const closeHandler = () => {
     if (props.closeOnClickOverlay) {
-        if (props.hasInput) {
-            showByClickInput.value = false
-        }
-        emit('update:show', false)
+        closePicker()
         emit('close')
     }
 }
@@ -294,10 +321,7 @@ const closeHandler = () => {
  * 点击工具栏的取消按钮
  * */
 const cancel = () => {
-    if (props.hasInput) {
-        showByClickInput.value = false
-    }
-    emit('update:show', false)
+    closePicker()
     emit('cancel')
 }
 
@@ -305,26 +329,18 @@ const cancel = () => {
  * 点击工具栏的确定按钮
  * */
 const onConfirm = () => {
-    //如果用户还没有触发过change
+    // 如果用户还没有触发过change，使用默认索引
     if (!currentActiveValue.value.length) {
-        let arr = [0]
-        //如果有默认值&&默认值的数组长度是正确的，就用默认值
-        if (
+        const defaultIndexs =
             Array.isArray(props.defaultIndex) &&
             props.defaultIndex.length === innerColumns.value.length
-        ) {
-            arr = [...props.defaultIndex]
-        } else {
-            //否则默认都选中第一个
-            arr = Array(innerColumns.value.length).fill(0)
-        }
-        setIndexs(arr, true)
+                ? [...props.defaultIndex]
+                : Array(innerColumns.value.length).fill(0)
+        setIndexs(defaultIndexs, true)
     }
+
     emit('update:modelValue', inputValue.value)
-    if (props.hasInput) {
-        showByClickInput.value = false
-    }
-    emit('update:show', false)
+    closePicker()
     emit('confirm', {
         indexs: innerIndex.value,
         value: innerColumns.value.map((item, index) => item[innerIndex.value[index]]),
@@ -337,45 +353,29 @@ const onConfirm = () => {
  * */
 const changeHandler = (e: any) => {
     const { value } = e.detail
-    // 优化：使用更高效的方式找出变化的列
-    let changedColumnIndex = -1
-    let changedItemIndex = 0
+    // 找出变化的列
+    const changedIndex = value.findIndex((newValue, i) => newValue !== (lastIndex.value[i] ?? 0))
 
-    // 优化循环：使用for...of循环更简洁，并且在找到变化后立即退出
-    for (let [i, newValue] of value.entries()) {
-        const oldValue = lastIndex.value[i] || 0
-        if (newValue !== oldValue) {
-            changedColumnIndex = i
-            changedItemIndex = newValue
-            currentActiveValue.value = value
-            break
-        }
+    if (changedIndex === -1) return
+
+    currentActiveValue.value = value
+    columnIndex.value = changedIndex
+
+    const params = {
+        value: innerColumns.value.map((item, idx) => item[value[idx]]),
+        index: value[changedIndex],
+        indexs: value,
+        values: innerColumns.value,
+        columnIndex: changedIndex
     }
 
-    // 如果有变化的列，才执行后续操作
-    if (changedColumnIndex !== -1) {
-        columnIndex.value = changedColumnIndex
+    setIndexs(value, true)
 
-        // 移除无条件重置索引的代码，仅在数据实际变化时重置
-
-        // 优化：创建params对象时使用更简洁的方式
-        const params = {
-            value: innerColumns.value.map((item, idx) => item[value[idx]]),
-            index: changedItemIndex,
-            indexs: value,
-            values: innerColumns.value,
-            columnIndex: changedColumnIndex
-        }
-
-        // 将当前的各项变化索引，设置为"上一次"的索引变化值
-        setIndexs(value, true)
-
-        //如果是非自带输入框才会在change时候触发v-model绑值的变化
-        if (!props.hasInput) {
-            emit('update:modelValue', inputValue.value)
-        }
-        emit('change', params)
+    // 如果是非自带输入框才会在change时候触发v-model绑值的变化
+    if (!props.hasInput) {
+        emit('update:modelValue', inputValue.value)
     }
+    emit('change', params)
 }
 
 /**
@@ -383,50 +383,27 @@ const changeHandler = (e: any) => {
  * */
 function setIndexs(index: number[], isSetLastIndex?: boolean) {
     innerIndex.value = index
-    // 移除调试日志
     if (isSetLastIndex) {
-        setLastIndex(index)
+        lastIndex.value = index
     }
-}
-
-/**
- * 记录上一次的各列索引位置
- * */
-const setLastIndex = (index: number[]) => {
-    // 当能进入此方法，意味着当前设置的各列默认索引，即为“上一次”的选中值，需要记录，是因为changeHandler中
-    // 需要拿前后的变化值进行对比，得出当前发生改变的是哪一列
-    lastIndex.value = index
 }
 
 /**
  * 设置对应列选项的所有值
  * */
-const setColumnValues = (columnI: number, values: AnyObject[]) => {
+const setColumnValues = (columnI: number, values: Array<string | PickerColumnVo>) => {
     innerColumns.value.splice(columnI, 1, values)
-    let tmpIndex = deepClone(innerIndex.value)
-    for (let i = 0; i < innerColumns.value.length; i++) {
-        if (i > columnIndex.value) {
-            tmpIndex[i] = 0
-        }
-    }
-    // 一次性赋值，不能单个修改，否则无效
+    // 重置当前列之后的索引为0
+    const tmpIndex = innerIndex.value.map((_, i) =>
+        i > columnIndex.value ? 0 : innerIndex.value[i]
+    )
     setIndexs(tmpIndex, true)
 }
 
-/**
- * 获取对应列的所有选项
- * */
-const getColumnValues = (columnI: number) => {
-    // 进行同步阻塞，因为外部得到change事件之后，可能需要执行setColumnValues更新列的值
-    // 索引如果在外部change的回调中调用getColumnValues的话，可能无法得到变更后的列值，这里进行一定延时，保证值的准确性
-    ;(async () => {
-        await sleep()
-    })()
-    return innerColumns.value[columnI]
-}
-
-defineExpose({
-    setColumnValues
+defineExpose<IPickerExpose>({
+    setColumnValues,
+    onConfirm,
+    cancel
 })
 </script>
 
