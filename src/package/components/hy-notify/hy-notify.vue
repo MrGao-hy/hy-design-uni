@@ -42,7 +42,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type HyNotifyProps from './typing'
+import type { NotifyOptions } from './typing'
 import { computed, ref } from 'vue'
 import type { CSSProperties } from 'vue'
 import { addUnit, IconConfig } from '../../libs'
@@ -60,7 +60,7 @@ defineOptions({})
 
 const props = defineProps(notifyProps)
 
-const config = ref<HyNotifyProps>({
+const config = ref<NotifyOptions>({
     // 到顶部的距离
     top: props.top,
     // type主题，primary，success，warning，error
@@ -78,12 +78,12 @@ const config = ref<HyNotifyProps>({
     // 是否留出顶部安全距离（状态栏高度）
     safeAreaInsetTop: props.safeAreaInsetTop
 })
-const tmpConfig = ref<HyNotifyProps>({})
+const tmpConfig = ref<NotifyOptions>({})
 const open = ref(false)
 let timer: ReturnType<typeof setTimeout>
 
 /**
- * @description 容器样式
+ * 容器样式
  * */
 const containerStyle = computed(() => {
     let top = 0
@@ -106,7 +106,7 @@ const containerStyle = computed(() => {
     return style
 })
 /**
- * @description 组件背景颜色
+ * 组件背景颜色
  */
 const backgroundColor = computed(() => {
     const style: CSSProperties = {}
@@ -117,7 +117,7 @@ const backgroundColor = computed(() => {
 })
 
 /**
- * @description 默认主题下的图标
+ * 默认主题下的图标
  * */
 const icon = computed(() => {
     switch (tmpConfig.value.type) {
@@ -132,7 +132,7 @@ const icon = computed(() => {
     }
 })
 
-const show = (options: HyNotifyProps) => {
+const show = (options: NotifyOptions) => {
     // 不将结果合并到this.config变量，避免多次调用hy-toast，前后的配置造成混乱
     tmpConfig.value = Object.assign(config.value, options)
     // 任何定时器初始化之前，都要执行清除操作，否则可能会造成混乱
@@ -149,13 +149,13 @@ const show = (options: HyNotifyProps) => {
     }
 }
 /**
- * @description 关闭notify
+ * 关闭notify
  * */
 const close = () => {
     clearTimer()
 }
 /**
- * @description 清除定时任务
+ * 清除定时任务
  * */
 const clearTimer = () => {
     open.value = false

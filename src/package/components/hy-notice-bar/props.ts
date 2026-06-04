@@ -24,12 +24,8 @@ const noticeBarProps = {
     },
     /** 是否显示左侧的音量图标 */
     icon: {
-        type: [String, Object] as PropType<string | HyIconProps>,
+        type: [String, Object] as PropType<string | Partial<HyIconProps>>,
         default: IconConfig.NOTIFICATION_FILL
-    },
-    /** 左侧的图标颜色 */
-    iconColor: {
-        type: String
     },
     /**
      * 通告模式，link-显示右箭头，closable-显示右侧关闭图标

@@ -17,6 +17,14 @@
                 mode="link"
                 url="/pages-design/icon/icon"
             ></hy-notice-bar>
+
+            <hy-notice-bar
+                text="使用自定义图标"
+                :icon="{
+                    name: IconConfig.SCAN,
+                    color: 'red'
+                }"
+            ></hy-notice-bar>
         </view>
 
         <view class="hy-setting__box">
@@ -42,8 +50,9 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { NoticeBarModeVo } from '@/package/components/hy-notice-bar/typing'
+import type { NoticeBarModeVo } from '@/package'
 import { useShareButton } from '@/composables'
+import { IconConfig } from '@/package'
 
 definePage({
     style: {
