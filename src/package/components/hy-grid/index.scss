@@ -26,6 +26,7 @@
     position: relative;
     float: left;
     /* #endif */
+    padding: $hy-border-margin-padding-base 0;
 
     // 只有当有 border 类时才显示边框
     @include m(border) {
