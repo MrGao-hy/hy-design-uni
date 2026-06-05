@@ -33,7 +33,11 @@
         <!-- 分段器模式 -->
         <view class="hy-title">分段器模式</view>
         <view class="hy-container">
-            <hy-subsection :list="stringList" v-model="subsectionValue" mode="subsection"></hy-subsection>
+            <hy-subsection
+                :list="stringList"
+                v-model="subsectionValue"
+                mode="subsection"
+            ></hy-subsection>
         </view>
 
         <!-- 自定义激活和未激活颜色 -->
@@ -95,9 +99,9 @@
         <!-- 事件监听 -->
         <view class="hy-title">事件监听</view>
         <view class="hy-container">
-            <hy-subsection 
-                :list="stringList" 
-                v-model="eventValue" 
+            <hy-subsection
+                :list="stringList"
+                v-model="eventValue"
                 @change="handleChange"
             ></hy-subsection>
             <view class="info-box">
@@ -109,8 +113,8 @@
         <!-- 配合内容切换 -->
         <view class="hy-title">配合内容切换</view>
         <view class="hy-container">
-            <hy-subsection 
-                :list="statusList" 
+            <hy-subsection
+                :list="statusList"
                 v-model="statusValue"
                 mode="subsection"
             ></hy-subsection>
@@ -137,8 +141,8 @@
         <!-- 配合 Tab 切换 -->
         <view class="hy-title">配合列表筛选</view>
         <view class="hy-container">
-            <hy-subsection 
-                :list="filterList" 
+            <hy-subsection
+                :list="filterList"
                 v-model="filterValue"
                 mode="subsection"
             ></hy-subsection>
@@ -152,6 +156,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useShareButton } from '@/composables'
+import TheRootPage from '@/components/TheRootPage.vue'
 
 definePage({
     style: {
@@ -234,7 +239,7 @@ const filterList = [
 const filterValue = ref('default')
 
 const filterText = computed(() => {
-    const item = filterList.find(i => i.value === filterValue.value)
+    const item = filterList.find((i) => i.value === filterValue.value)
     return item ? item.name : ''
 })
 
@@ -250,7 +255,7 @@ useShareButton()
     display: flex;
     flex-direction: column;
     gap: 8rpx;
-    
+
     text {
         font-size: 24rpx;
         color: #666;
@@ -265,14 +270,14 @@ useShareButton()
     background: #fff;
     border-radius: 8rpx;
     padding: 30rpx;
-    
+
     .content-title {
         font-size: 32rpx;
         font-weight: 600;
         color: #333;
         margin-bottom: 12rpx;
     }
-    
+
     .content-desc {
         font-size: 26rpx;
         color: #666;
@@ -282,12 +287,12 @@ useShareButton()
 .filter-result {
     margin-top: 20rpx;
     padding: 20rpx;
-    background: #E6F7FF;
+    background: #e6f7ff;
     border-radius: 8rpx;
-    
+
     text {
         font-size: 24rpx;
-        color: #1890FF;
+        color: #1890ff;
     }
 }
 </style>

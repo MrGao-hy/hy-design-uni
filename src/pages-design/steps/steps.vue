@@ -3,11 +3,7 @@
         <!-- 基础横向步骤条 -->
         <view class="hy-title">基础横向步骤条</view>
         <view class="hy-container">
-            <hy-steps
-                :list="basicList"
-                v-model:current="currentStep"
-                direction="row"
-            ></hy-steps>
+            <hy-steps :list="basicList" v-model:current="currentStep" direction="row"></hy-steps>
         </view>
 
         <!-- 点状模式 -->
@@ -45,11 +41,7 @@
         <!-- 带错误状态 -->
         <view class="hy-title">错误状态</view>
         <view class="hy-container">
-            <hy-steps
-                :list="errorList"
-                v-model:current="errorStep"
-                direction="column"
-            ></hy-steps>
+            <hy-steps :list="errorList" v-model:current="errorStep" direction="column"></hy-steps>
         </view>
 
         <!-- 自定义图标 -->
@@ -105,7 +97,7 @@
                     <view class="custom-content">
                         <view class="content-header">
                             <text class="content-title">{{ item.title }}</text>
-                            <text 
+                            <text
                                 :class="[
                                     'status-tag',
                                     index < currentStep ? 'status-done' : '',
@@ -113,7 +105,13 @@
                                     index > currentStep ? 'status-pending' : ''
                                 ]"
                             >
-                                {{ index < currentStep ? '已完成' : index === currentStep ? '进行中' : '待开始' }}
+                                {{
+                                    index < currentStep
+                                        ? '已完成'
+                                        : index === currentStep
+                                          ? '进行中'
+                                          : '待开始'
+                                }}
                             </text>
                         </view>
                         <view class="content-info" v-if="item?.docs">
@@ -132,14 +130,14 @@
         <view class="hy-container">
             <hy-steps :list="basicList" v-model:current="currentStep"></hy-steps>
             <view class="control-buttons">
-                <hy-button 
-                    text="上一步" 
+                <hy-button
+                    text="上一步"
                     size="small"
                     :disabled="currentStep <= 0"
                     @click="currentStep--"
                 ></hy-button>
-                <hy-button 
-                    text="下一步" 
+                <hy-button
+                    text="下一步"
                     type="primary"
                     size="small"
                     :disabled="currentStep >= basicList.length - 1"
@@ -147,13 +145,13 @@
                 ></hy-button>
             </view>
         </view>
-
     </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
+import TheRootPage from '@/components/TheRootPage.vue'
 
 definePage({
     style: {
@@ -164,11 +162,7 @@ definePage({
 const currentStep = ref(1)
 const errorStep = ref(2)
 
-const basicList = ref([
-    { title: '注册用户' },
-    { title: '填写基本信息' },
-    { title: '登录' }
-])
+const basicList = ref([{ title: '注册用户' }, { title: '填写基本信息' }, { title: '登录' }])
 
 const verticalList = ref([
     {
@@ -240,20 +234,20 @@ useShareButton()
     width: 40rpx;
     height: 40rpx;
     border-radius: 50%;
-    background: #E8E8E8;
+    background: #e8e8e8;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20rpx;
     color: #999;
-    
+
     &.error {
-        background: #FF4D4F;
+        background: #ff4d4f;
         color: #fff;
     }
-    
+
     :deep(.hy-steps__item--active) & {
-        background: #4F8EF7;
+        background: #4f8ef7;
         color: #fff;
     }
 }
@@ -263,9 +257,9 @@ useShareButton()
     align-items: center;
     gap: 8rpx;
     font-weight: 600;
-    
+
     .step-num {
-        color: #4F8EF7;
+        color: #4f8ef7;
     }
 }
 
@@ -274,12 +268,12 @@ useShareButton()
     flex-direction: column;
     gap: 4rpx;
     margin-top: 8rpx;
-    
+
     .desc-text {
         font-size: 24rpx;
         color: #666;
     }
-    
+
     .desc-date {
         font-size: 22rpx;
         color: #999;
@@ -290,47 +284,47 @@ useShareButton()
     padding: 16rpx;
     border-radius: 8rpx;
     background: $hy-background--track;
-    
+
     .content-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    
+
     .content-title {
         font-weight: 600;
         font-size: 28rpx;
     }
-    
+
     .content-info {
         margin-top: 8rpx;
         font-size: 24rpx;
         color: #666;
     }
-    
+
     .content-date {
         margin-top: 4rpx;
         font-size: 22rpx;
         color: #999;
     }
-    
+
     .status-tag {
         font-size: 22rpx;
         padding: 4rpx 16rpx;
         border-radius: 20rpx;
-        
+
         &.status-done {
-            background: #F6FFED;
-            color: #52C41A;
+            background: #f6ffed;
+            color: #52c41a;
         }
-        
+
         &.status-active {
-            background: #E6F7FF;
-            color: #1890FF;
+            background: #e6f7ff;
+            color: #1890ff;
         }
-        
+
         &.status-pending {
-            background: #F5F5F5;
+            background: #f5f5f5;
             color: #999;
         }
     }

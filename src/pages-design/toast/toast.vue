@@ -165,6 +165,7 @@ import { ref } from 'vue'
 import type { HyIconProps } from '@/package/components/hy-icon/typing'
 import { useToast } from '@/package'
 import { useShareButton } from '@/composables'
+import TheRootPage from '@/components/TheRootPage.vue'
 
 definePage({
     style: {

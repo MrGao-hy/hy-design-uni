@@ -112,6 +112,7 @@ import { ref } from 'vue'
 import { bytesToSize, isArray } from '@/package'
 import { useShareButton } from '@/composables'
 import type { FileVo, UploadFileParams } from '@/package/components/hy-upload/typing'
+import TheRootPage from '@/components/TheRootPage.vue'
 
 definePage({
     style: {

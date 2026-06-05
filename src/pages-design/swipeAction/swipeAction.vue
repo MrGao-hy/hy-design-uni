@@ -164,6 +164,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
+import TheRootPage from '@/components/TheRootPage.vue'
 
 definePage({
     style: {
@@ -289,7 +290,7 @@ const handleDelete = (index: number) => {
     })
 }
 
-const handleMultiAction = (item: any, index: number) => {
+const handleMultiAction = (item: any) => {
     const actions: Record<string, string> = {
         收藏: '已收藏',
         编辑: '进入编辑',
