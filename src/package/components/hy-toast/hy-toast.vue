@@ -1,8 +1,8 @@
 <template>
     <hy-overlay
         :show="isShow"
-        :zIndex="tmpConfig.overlay ? 10070 : -1"
-        :LockScroll="false"
+        :LockScroll="!tmpConfig.overlay"
+        :opacity="tmpConfig.cover ? 0.5 : 0"
         :custom-style="overlayStyle"
     >
         <view :style="[contentStyle]" :class="contentClass">
@@ -18,7 +18,13 @@
                 v-else-if="iconNameCom"
                 :class="['hy-toast__content--icon', `hy-toast__content--icon__${tmpConfig.type}`]"
             >
-                <hy-icon :name="iconNameCom" size="17" color="#FFFFFF"></hy-icon>
+                <hy-icon
+                    :name="iconNameCom"
+                    :size="(typeof tmpConfig.icon === 'object' && tmpConfig.icon?.size) || 17"
+                    :color="
+                        (typeof tmpConfig.icon === 'object' && tmpConfig.icon?.color) || '#FFFFFF'
+                    "
+                ></hy-icon>
             </view>
             <text
                 :class="[
@@ -85,8 +91,6 @@ const overlayStyle = computed(() => {
         display: 'flex',
         flexDirection: 'column'
     }
-    // 将遮罩设置为100%透明度，避免出现灰色背景
-    style.backgroundColor = 'rgba(0, 0, 0, 0)'
     return style
 })
 
@@ -102,7 +106,11 @@ const iconNameCom = computed(() => {
             return ''
         }
     } else {
-        return tmpConfig.value.icon
+        const icon = tmpConfig.value.icon
+        if (typeof icon === 'string') {
+            return icon
+        }
+        return icon?.name
     }
 })
 
