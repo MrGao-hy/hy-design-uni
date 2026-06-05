@@ -91,7 +91,7 @@
                     :class="[`hy-steps-item__content--${direction}`]"
                     :style="[contentStyle]"
                 >
-                    <slot v-if="$slots.content" name="content" :record="item" :index="i"></slot>
+                    <slot v-if="$slots.content" name="content" :item="item" :index="i"></slot>
                     <template v-else>
                         <slot
                             v-if="$slots.title"
