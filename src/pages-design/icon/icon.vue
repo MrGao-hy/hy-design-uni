@@ -45,7 +45,6 @@ import { reactive } from 'vue'
 import { IconConfig } from '@/package'
 import { config } from '@/config/config'
 import { useShareButton } from '@/composables'
-import TheRootPage from '@/components/TheRootPage.vue'
 
 definePage({
     style: {

@@ -164,7 +164,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
-import TheRootPage from '@/components/TheRootPage.vue'
 
 definePage({
     style: {
