@@ -1,11 +1,11 @@
 <template>
     <text :class="['hy-price', customClass]" :style="priceStyle" @tap="handleClick">
         <text class="hy-price__prefix">{{ symbol }}</text>
-        <text class="hy-price__text" :style="[{ 'font-size': addUnit(getPx(size) * ratio) }]">
-            {{ priceOne?.[0] }}
+        <text class="hy-price__text" :style="integerStyle">
+            {{ priceData.integer }}
         </text>
         <text class="hy-price__decimal">
-            {{ '.' + addZero(priceOne?.[1], num) }}
+            {{ priceData.decimal }}
         </text>
     </text>
 </template>
@@ -37,34 +37,63 @@ defineOptions({})
 const props = defineProps(priceProps)
 const emit = defineEmits<IPriceEmits>()
 
-// 价格整体样式
+/**
+ * 格式化数字为千分位
+ */
+const formatThousand = (value: string): string => {
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+
+/**
+ * 处理价格数据
+ */
+const priceData = computed(() => {
+    const text = props.text
+    if (text === undefined || text === null) {
+        error('text值不能为空')
+        return { integer: '0', decimal: '.00' }
+    }
+
+    const value = typeof text === 'string' ? text : String(text)
+    const hasDecimal = /\./g.test(value)
+
+    if (hasDecimal) {
+        const [integer, decimal] = value.split('.', 2)
+        return {
+            integer: formatThousand(integer),
+            decimal: '.' + addZero(decimal, props.num)
+        }
+    } else {
+        return {
+            integer: formatThousand(value),
+            decimal: '.' + addZero('', props.num)
+        }
+    }
+})
+
+/**
+ * 价格整体样式
+ */
 const priceStyle = computed<CSSProperties>(() => {
-    const style: CSSProperties = {
+    const baseStyle: CSSProperties = {
         color: props.color,
         fontWeight: props.weight,
-        fontStyle: props.slant ? 'oblique' : '',
         fontSize: addUnit(props.size)
     }
 
-    return Object.assign(style, props.customStyle)
-})
-
-// 价格处理
-const priceOne = computed(() => {
-    if (props.text === undefined || props.text === null) return error('text值不能为空')
-
-    let value = typeof props.text === 'string' ? props.text : props.text.toString()
-
-    // 格式化整数部分为千分位
-    const formatValue = (val: string) => {
-        return val.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    if (props.slant) {
+        baseStyle.fontStyle = 'oblique'
     }
 
-    if (/\./g.test(value)) {
-        const [integer, decimal] = value.split('.')
-        return [formatValue(integer), decimal]
-    } else {
-        return [formatValue(value), '000000']
+    return { ...baseStyle, ...props.customStyle }
+})
+
+/**
+ * 整数部分样式
+ */
+const integerStyle = computed<CSSProperties>(() => {
+    return {
+        fontSize: addUnit(getPx(props.size) * props.ratio)
     }
 })
 
