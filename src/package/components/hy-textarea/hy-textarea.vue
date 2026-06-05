@@ -125,7 +125,7 @@ const textareaStyle = computed(() => {
     return Object.assign(style, props.customStyle)
 })
 /**
- * @description 边框颜色
+ * 边框颜色
  * */
 const borderStyle = computed(() => {
     return (isFocus: boolean) => {
@@ -173,7 +173,7 @@ const onInput = (e: any) => {
     })
 }
 /**
- * @description 内容发生变化，进行处理
+ * 内容发生变化，进行处理
  * */
 const valueChange = () => {
     const value = innerValue.value
