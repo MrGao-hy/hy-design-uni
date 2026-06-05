@@ -76,6 +76,7 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
         @include m(text) {
           font-size: 13px;
           color: #ffffff;
+          white-space: nowrap;
         }
       }
     }
