@@ -35,7 +35,7 @@
 
         <view class="hy-title">图标集</view>
         <view class="hy-container">
-            <hy-grid :list="icons" border></hy-grid>
+            <hy-grid :list="icons" size="30" border></hy-grid>
         </view>
     </the-root-page>
 </template>
