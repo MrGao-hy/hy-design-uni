@@ -22,7 +22,6 @@
 
     @include m(action) {
       display: flex;
-      align-items: center;
       height: 100%;
 
       @include e(btn) {
