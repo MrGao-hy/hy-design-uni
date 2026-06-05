@@ -68,10 +68,25 @@
                     <!-- 删除图片图标 -->
 
                     <!-- 上传成功图标 -->
-                    <view class="hy-upload__success" v-if="item.status === 'success'">
+                    <view
+                        class="hy-upload__status hy-upload__success"
+                        v-if="item.status === 'success'"
+                    >
                         <view class="hy-upload__success--icon">
                             <hy-icon
                                 :name="IconConfig.CHECK_MASK"
+                                color="#ffffff"
+                                size="12"
+                            ></hy-icon>
+                        </view>
+                    </view>
+                    <view
+                        class="hy-upload__status hy-upload__error"
+                        v-if="item.status === 'failed'"
+                    >
+                        <view class="hy-upload__success--icon">
+                            <hy-icon
+                                :name="IconConfig.CLOSE_CIRCLE"
                                 color="#ffffff"
                                 size="12"
                             ></hy-icon>
