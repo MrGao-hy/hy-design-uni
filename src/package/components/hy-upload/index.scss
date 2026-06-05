@@ -86,20 +86,21 @@ $hy-upload-text-font-size: 11px !default;
     }
   }
 
-  @include e(success) {
+  @include e(status) {
     position: absolute;
     bottom: 0;
     right: 0;
     @include flex;
-    // 由于weex(nvue)为阿里巴巴的KPI(部门业绩考核)的laji产物，不支持css绘制三角形
-    // 所以在nvue下使用图片，非nvue下使用css实现
     /* #ifndef APP-NVUE */
     border-style: solid;
-    border-color: transparent $hy-success $hy-success transparent;
     border-width: 9px;
     align-items: center;
     justify-content: center;
     /* #endif */
+  }
+
+  @include e(success) {
+    border-color: transparent $hy-success $hy-success transparent;
 
     @include m(icon) {
       /* #ifndef APP-NVUE */
@@ -113,6 +114,10 @@ $hy-upload-text-font-size: 11px !default;
       height: 16px;
       /* #endif */
     }
+  }
+
+  @include e(error) {
+    border-color: transparent $hy-error $hy-error transparent;
   }
 
   @include e(button) {
