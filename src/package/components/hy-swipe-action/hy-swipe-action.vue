@@ -2,6 +2,7 @@
     <!--注意阻止横向滑动的穿透：横向移动时阻止冒泡-->
     <view
         class="hy-swipe-action"
+        :style="touchActionStyle"
         @click.stop="onClick"
         @touchstart="startDrag"
         @touchmove="onDrag"
@@ -17,7 +18,13 @@
             <!--左侧操作-->
 
             <!--内容-->
-            <view :class="['hy-swipe-action__center', borderBottom && 'hy-border__bottom']">
+            <view
+                :class="[
+                    'hy-swipe-action__center',
+                    centerClass,
+                    borderBottom && 'hy-border__bottom'
+                ]"
+            >
                 <slot></slot>
             </view>
             <!--内容-->
@@ -84,11 +91,13 @@ const props = defineProps(swipeActionProps)
 const emit = defineEmits<ISwipeActionEmits>()
 const leftClass = `hy-swipe-action__left--${guid()}`
 const rightClass = `hy-swipe-action__right--${guid()}`
+const centerClass = `hy-swipe-action__center--${guid()}`
 
 const slots = useSlots()
 const wrapperStyle = ref<string>('')
+const touchActionStyle = ref<Record<string, string>>({ touchAction: 'pan-y' })
 
-// 滑动开始时，wrapper的偏移量
+// 滑动开始时，wrapper 的偏移量
 const originOffset = ref<number>(0)
 // wrapper现在的偏移量
 const wrapperOffset = ref<number>(0)
@@ -151,7 +160,7 @@ function changeState(value?: SwipeActionStatus, old?: SwipeActionStatus) {
 }
 
 /**
- * @description 获取左/右操作按钮的宽度
+ * 获取左/右操作按钮的宽度
  * @return {Promise<[Number, Number]>} 左宽度、右宽度
  */
 const getWidths = (): Promise<number[]> => {
@@ -165,7 +174,7 @@ const getWidths = (): Promise<number[]> => {
     ])
 }
 /**
- * @description wrapper滑动函数
+ * wrapper滑动函数
  * @param {Number} offset 滑动漂移量
  */
 function swipeMove(offset = 0) {
@@ -183,7 +192,7 @@ function swipeMove(offset = 0) {
     wrapperOffset.value = offset
 }
 /**
- * @description click的handler
+ * click的handler
  * @param position
  */
 function onClick(position?: SwipeActionPosition) {
@@ -196,7 +205,7 @@ function onClick(position?: SwipeActionPosition) {
     emit('click', position)
 }
 /**
- * @description 开始滑动
+ * 开始滑动
  */
 function startDrag(event: TouchEvent) {
     if (props.disabled) return
@@ -204,9 +213,13 @@ function startDrag(event: TouchEvent) {
     originOffset.value = wrapperOffset.value
     touch.touchStart(event)
     closeOther(proxy)
+
+    // 设置 touch-action 为 none，阻止默认的滚动行为
+    // 这样可以在 touchmove 中安全调用 preventDefault 而不产生警告
+    touchActionStyle.value = { touchAction: 'none' }
 }
 /**
- * @description 滑动时，逐渐展示按钮
+ * 滑动时，逐渐展示按钮
  * @param event
  */
 function onDrag(event: TouchEvent) {
@@ -215,22 +228,24 @@ function onDrag(event: TouchEvent) {
     touch.touchMove(event)
     if (touch.direction.value === 'vertical') {
         return
-    } else {
-        event.preventDefault()
-        event.stopPropagation()
     }
+
+    // 阻止默认行为和事件冒泡
+    // 由于在 touchstart 时设置了 touch-action: none，这里可以安全调用 preventDefault
+    event.preventDefault()
+    event.stopPropagation()
 
     touching.value = true
 
-    // 本次滑动，wrapper应该设置的偏移量
+    // 本次滑动，wrapper 应该设置的偏移量
     const offset = originOffset.value + touch.deltaX.value
     getWidths().then(([leftWidth, rightWidth]) => {
-        // 如果需要想滑出来的按钮不存在，对应的按钮肯定滑不出来，容器处于初始状态。此时需要模拟一下位于此处的start事件。
+        // 如果需要想滑出来的按钮不存在，对应的按钮肯定滑不出来，容器处于初始状态。此时需要模拟一下位于此处的 start 事件。
         if ((leftWidth === 0 && offset > 0) || (rightWidth === 0 && offset < 0)) {
             swipeMove(0)
             return startDrag(event)
         }
-        // 按钮已经展示完了，再滑动没有任何意义，相当于滑动结束。此时需要模拟一下位于此处的start事件。
+        // 按钮已经展示完了，再滑动没有任何意义，相当于滑动结束。此时需要模拟一下位于此处的 start 事件。
         if (leftWidth !== 0 && offset >= leftWidth) {
             swipeMove(leftWidth)
             return startDrag(event)
@@ -242,13 +257,16 @@ function onDrag(event: TouchEvent) {
     })
 }
 /**
- * @description 滑动结束，自动修正位置
+ * 滑动结束，自动修正位置
  */
 function endDrag() {
     if (props.disabled) return
     // 滑出"操作按钮"的阈值
     const THRESHOLD = 0.3
     touching.value = false
+
+    // 恢复 touch-action，允许正常滚动
+    touchActionStyle.value = { touchAction: 'pan-y' }
 
     getWidths().then(([leftWidth, rightWidth]) => {
         if (
@@ -288,7 +306,7 @@ function endDrag() {
     })
 }
 /**
- * @description 关闭操过按钮，并在合适的时候调用 beforeClose
+ * 关闭操过按钮，并在合适的时候调用 beforeClose
  */
 function close(reason: SwipeActionReason, position?: SwipeActionPosition) {
     if (reason === 'swipe' && originOffset.value === 0) {
