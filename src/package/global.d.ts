@@ -39,6 +39,7 @@ declare module 'vue' {
         HyImage: (typeof import('./components/hy-image/hy-image.vue'))['default']
         HyIndexBar: (typeof import('./components/hy-index-bar/hy-index-bar.vue'))['default']
         HyInput: (typeof import('./components/hy-input/hy-input.vue'))['default']
+        HyKeyboard: (typeof import('./components/hy-keyboard/hy-keyboard.vue'))['default']
         HyLine: (typeof import('./components/hy-line/hy-line.vue'))['default']
         HyLineProgress: (typeof import('./components/hy-line-progress/hy-line-progress.vue'))['default']
         HyList: (typeof import('./components/hy-list/hy-list.vue'))['default']

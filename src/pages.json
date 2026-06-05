@@ -1098,7 +1098,7 @@
                         }
                     }
                 },
-                // #ifdef MP-ALIPAY || MP-WEIXIN
+                // #ifdef MP-ALIPAY
                 {
                     "path": "keyboard/keyboard",
                     "type": "page",
@@ -1116,7 +1116,7 @@
                     }
                 },
                 // #endif
-                // #ifdef H5
+                // #ifdef H5 || MP-WEIXIN
                 {
                     "path": "keyboard/keyboard",
                     "type": "page",

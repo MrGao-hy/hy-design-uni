@@ -61,7 +61,6 @@
             ></hy-code-input>
             <view class="hy-tip">点击输入框即可打开自定义键盘</view>
         </view>
-        {{ keyboardValue }}
 
         <hy-keyboard
             v-model:show="showKeyboard"
