@@ -1,0 +1,1 @@
+export type NumberKeyType = '' | 'delete' | 'extra' | 'close'

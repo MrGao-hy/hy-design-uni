@@ -1,0 +1,73 @@
+@use "../../libs/css/theme" as *;
+@use "../../libs/css/mixin" as *;
+
+$keyboard-header-height: 80rpx;
+$keyboard-title-font-size: 32rpx;
+$keyboard-close-font-size: 28rpx;
+$keyboard-key-gap: $hy-border-margin-padding-sm;
+
+@include b(keyboard) {
+  background: $hy-background--track;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  @include e(header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $keyboard-header-height;
+    padding: 0 32rpx;
+    background: $hy-background--track;
+    border-bottom: $hy-border-line;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @include e(title) {
+    font-size: $keyboard-title-font-size;
+    font-weight: 500;
+    color: $hy-primary;
+  }
+
+  @include e(close) {
+    font-size: $keyboard-close-font-size;
+    padding: 10rpx 20rpx;
+
+    &--hover:active {
+      opacity: 0.7;
+    }
+  }
+
+  @include e(body) {
+    display: flex;
+    gap: $keyboard-key-gap;
+    width: 100%;
+    padding: $hy-border-margin-padding-sm;
+    box-sizing: border-box;
+  }
+
+  @include e(keys) {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 3;
+    gap: $keyboard-key-gap;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+
+  @include e(sidebar) {
+    width: 160rpx;
+    display: flex;
+    flex-direction: column;
+    gap: $keyboard-key-gap;
+  }
+
+  @include e(car-keys) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $keyboard-key-gap;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

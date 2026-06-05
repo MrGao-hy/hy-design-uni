@@ -1,0 +1,79 @@
+@use "../../../libs/css/theme" as *;
+@use "../../../libs/css/mixin" as *;
+
+$keyboard-key-height: 100rpx;
+$keyboard-key-border-radius: 12rpx;
+$keyboard-key-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+
+@include b(keyboard) {
+  @include e(key) {
+    flex-basis: 32%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $keyboard-key-height;
+    background: $hy-background--container;
+    border-radius: $keyboard-key-border-radius;
+    box-shadow: $keyboard-key-shadow;
+    box-sizing: border-box;
+    transition: all 0.15s;
+
+    @include m(large) {
+      flex: 1;
+      align-self: stretch;
+    }
+
+    @include m(car) {
+      flex-basis: 8.7%;
+      height: 88rpx;
+      font-size: 28rpx;
+    }
+
+    @include m(wider) {
+      flex: 1;
+    }
+
+    @include m(delete) {
+      color: #FFFFFF;
+      background: $hy-error;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @include m(extra) {
+      background: $hy-background--3;
+    }
+
+    @include m(close) {
+      color: #ffffff;
+      background: $hy-primary;
+    }
+
+    &:active {
+      background: $hy-background--hover;
+    }
+
+    &-text {
+      font-size: $hy-font-size-lg;
+    }
+
+    @include e(delete-line) {
+      position: absolute;
+      width: 18rpx;
+      height: 2rpx;
+      background: #999999;
+      top: 50%;
+      left: 50%;
+
+      @include m(left) {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      @include m(right) {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+}
