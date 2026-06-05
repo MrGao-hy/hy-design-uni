@@ -21,6 +21,11 @@ const gridProps = {
         type: Number,
         default: 5
     },
+    /** 图标大小 */
+    size: {
+        type: [Number, String],
+        default: 44
+    },
     /** 是否显示宫格的边框 */
     border: {
         type: Boolean,
@@ -50,7 +55,7 @@ const gridProps = {
         default: 'transparent'
     },
     /** 图标属性api配置集合 */
-    iconConfig: Object as PropType<HyIconProps>,
+    iconProps: Object as PropType<HyIconProps>,
     /** 定义需要用到的外部样式 */
     customStyle: Object as PropType<CSSProperties>,
     /** 自定义外部类名 */
