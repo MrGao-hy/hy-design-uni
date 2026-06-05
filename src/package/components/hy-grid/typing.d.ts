@@ -12,7 +12,7 @@ export interface GridItemVo {
     /**
      * 图标属性api配置
      * */
-    iconConfig?: Partial<HyIconProps>
+    iconProps?: Partial<HyIconProps>
     /**
      * 自定义内容键值对
      * */

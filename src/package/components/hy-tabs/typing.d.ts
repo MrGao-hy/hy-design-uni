@@ -1,21 +1,22 @@
 import type { HyBadgeProps } from '../../index'
-export interface TabsItemVo extends AnyObject {
+export interface TabsItemVo {
     /**
-     * @description tab名称
+     * tab名称
      * */
     name: string
     /**
-     * @description 徽标接收的props
+     * 徽标接收的props
      * */
     badge?: HyBadgeProps
     /**
-     * @description 是否禁用
+     * 是否禁用
      * */
     disabled?: boolean
     /**
-     * @description swiper内容值
+     * swiper内容值
      * */
     content?: any
+    [key: string]: any
 }
 
 export interface ITabsExpose {

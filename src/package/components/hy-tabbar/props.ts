@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { HyBadgeProps } from '../hy-badge/typing'
+import type { TabBarItem } from './typing'
 
 const tabBarProps = {
     /** 选中项的索引值 */
@@ -9,7 +10,7 @@ const tabBarProps = {
     },
     /** 导航栏数据集合 */
     list: {
-        type: Array,
+        type: Array as PropType<TabBarItem[]>,
         default: () => []
     },
     /** 是否固定在底部 */

@@ -2,15 +2,15 @@ import type BadgeProps from '../hy-badge/props'
 
 export interface SubmitBarIconMenus {
     /**
-     * @description icon图标
+     * icon图标
      * */
     icon: string
     /**
-     * @description 文本
+     * 文本
      * */
     text: string
     /**
-     * @description 徽标值
+     * 徽标值
      * */
     badge?: BadgeProps['badge']
     [key: string]: any

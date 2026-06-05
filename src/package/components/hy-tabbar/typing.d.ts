@@ -1,14 +1,15 @@
-export interface TabListVo {
+/** 导航栏列表项类型 */
+export interface TabBarItem {
     /**
-     * @description 标题
+     * 标题
      * */
     name: string
     /**
-     * @description icon图标或者图片
+     * icon 图标或者图片
      * */
     icon: string
     /**
-     * @description 徽标值
+     * 徽标值
      * */
     badge?: number
 }

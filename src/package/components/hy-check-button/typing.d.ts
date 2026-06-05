@@ -5,34 +5,34 @@ export interface HyCheckButtonProps extends ExtractPropTypes<typeof checkButtonP
 
 export interface CheckboxColumnsVo extends FieldNamesType {
     /**
-     * @description 显示文本内容
+     * 显示文本内容
      * */
     label?: string
     /**
-     * @description 值
+     * 值
      * */
     value?: string | number
     /**
-     * @description 是否选中
+     * 是否选中
      * */
     checked?: boolean
 
     /**
-     * @description 是否禁用
+     * 是否禁用
      * */
     disabled?: boolean
 }
 export interface IFieldNames {
     /**
-     * @description 自定义columns的文本键
+     * 自定义columns的文本键
      * */
     label: string
     /**
-     * @description 自定义columns的值键
+     * 自定义columns的值键
      * */
     value: string
     /**
-     * @description 自定义columns的选中键
+     * 自定义columns的选中键
      * */
     checked: string
 }
