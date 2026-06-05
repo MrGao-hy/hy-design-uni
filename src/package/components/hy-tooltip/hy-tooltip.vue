@@ -2,7 +2,7 @@
     <view class="hy-tooltip">
         <hy-overlay
             :show="showTooltip && tooltipTop !== -10000 && overlay"
-            :customStyle="{ backgroundColor: 'rgba(0, 0, 0, 0)' }"
+            :opacity="0"
             @click="closeHandler"
         ></hy-overlay>
         <!-- 文本内容区域 -->
