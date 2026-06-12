@@ -62,7 +62,10 @@ export class Http {
      * @param options 请求配置
      */
     async request<T = any>(options: UniNamespace.RequestOptions): Promise<T> {
-        options.url = this.config.baseURL + options.url || this.config.url
+        options.url =
+            options.url && /^https?:\/\//.test(options.url)
+                ? options.url
+                : this.config.baseURL + options.url
         options.data = options.data || this.config.data
         options.header = options.header || this.config.header
         options.method = options.method || this.config.method
