@@ -20,6 +20,18 @@
             <hy-number-step v-model="value" :min="10" :max="20"></hy-number-step>
         </view>
 
+        <view class="hy-title">隐藏减号</view>
+        <view class="hy-container hidden">
+            <hy-number-step
+                v-model="item.quantity"
+                :min="0"
+                :miniMode="true"
+                input-bg-color="transparent"
+                :plusIcon="{ color: '#ffffff' }"
+                button-radius="50%"
+            ></hy-number-step>
+        </view>
+
         <view class="hy-title">自定义样式</view>
         <view class="hy-container">
             <hy-number-step v-model="value" :showMinus="!!value" :min="0">
@@ -53,6 +65,7 @@ definePage({
 })
 
 const value = ref(10)
+const value2 = ref(0)
 
 useShareButton()
 </script>
@@ -81,5 +94,16 @@ useShareButton()
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.hidden {
+    :deep(.hy-number-box__plus) {
+        background-color: red;
+    }
+
+    :deep(.hy-number-box__minus) {
+        border: $hy-border-line;
+        background-color: transparent;
+    }
 }
 </style>

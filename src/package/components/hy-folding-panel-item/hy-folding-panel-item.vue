@@ -67,7 +67,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, inject, onMounted } from 'vue'
-import type { IFoldingPanelConfig, IFoldingPanelItemEmits } from './typing'
+import type { IFoldingPanelConfig, IFoldingPanelItemEmits, IFoldingPanelItemExpose } from './typing'
 import { addUnit, IconConfig } from '../../libs'
 import foldingPanelItemProps from './props'
 // 组件
@@ -124,7 +124,7 @@ const handleClick = () => {
 }
 
 // 对外暴露的方法
-defineExpose({
+defineExpose<IFoldingPanelItemExpose>({
     /**
      * 打开面板
      */

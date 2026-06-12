@@ -64,7 +64,7 @@ export interface Point {
  * @property restore - 恢复上一步操作
  * @property revoke - 撤销上一步操作
  */
-export type SignatureExpose = {
+export type ISignatureExpose = {
     /** 初始化签名板
      * @param forceUpdate - 是否强制更新
      */

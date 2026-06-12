@@ -13,7 +13,7 @@ export type IPlacementVo =
     | 'right-end'
 export type IOffset = number | number[] | Record<'x' | 'y', number>
 
-export type PopoverExpose = {
+export type IPopoverExpose = {
     open: () => void
     close: () => void
 }

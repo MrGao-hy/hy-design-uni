@@ -42,7 +42,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type { NotifyOptions } from './typing'
+import type { NotifyOptions, INotifyExpose } from './typing'
 import { computed, ref } from 'vue'
 import type { CSSProperties } from 'vue'
 import { addUnit, IconConfig } from '../../libs'
@@ -163,7 +163,7 @@ const clearTimer = () => {
     clearTimeout(timer)
 }
 
-defineExpose({
+defineExpose<INotifyExpose>({
     show,
     close
 })

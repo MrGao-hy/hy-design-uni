@@ -26,7 +26,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type { ICountToEmits } from './typing'
+import type { ICountToEmits, ICountToExpose } from './typing'
 import { computed, onMounted, ref, watch } from 'vue'
 import { addUnit, isNumber } from '../../libs'
 import countToProps from './props'
@@ -107,7 +107,7 @@ const cancelAnimationFrame = (id?: number) => {
 }
 
 /**
- * @description 开始滚动数字
+ * 开始滚动数字
  * */
 const start = () => {
     localStartVal.value = props.startVal
@@ -118,7 +118,7 @@ const start = () => {
 }
 
 /**
- * @description 暂定状态，重新再开始滚动；或者滚动状态下，暂停
+ * 暂定状态，重新再开始滚动；或者滚动状态下，暂停
  * */
 const reStart = () => {
     if (paused.value) {
@@ -131,14 +131,14 @@ const reStart = () => {
 }
 
 /**
- * @description 暂停
+ * 暂停
  * */
 const stop = () => {
     cancelAnimationFrame(rAF.value)
 }
 
 /**
- * @description 重新开始(暂停的情况下)
+ * 重新开始(暂停的情况下)
  * */
 const resume = () => {
     if (!remaining.value) return
@@ -151,7 +151,7 @@ const resume = () => {
 }
 
 /**
- * @description 重置
+ * 重置
  * */
 const reset = () => {
     startTime.value = null
@@ -204,7 +204,7 @@ const destroyed = () => {
     cancelAnimationFrame(rAF.value)
 }
 
-defineExpose({
+defineExpose<ICountToExpose>({
     start,
     stop,
     reStart,

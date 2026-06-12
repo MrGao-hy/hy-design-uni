@@ -19,7 +19,7 @@ const listProps = {
     /** 子容器的底部，会计算到容器内 */
     marginBottom: {
         type: [String, Number],
-        default: 10
+        default: 0
     },
     /** 子容器的内边距 */
     padding: {

@@ -45,3 +45,12 @@ export interface ICalendarEmits {
     /** 触发关闭属性 */
     (e: 'update:show', value: boolean): void
 }
+
+/** HyCalendar 组件实例暴露的方法 */
+export interface ICalendarExpose {
+    /**
+     * 设置日期格式化函数
+     * @param formatter 格式化函数，接收日期字符串参数，返回格式化后的值
+     */
+    setFormatter: (formatter: (value: string) => string) => void
+}

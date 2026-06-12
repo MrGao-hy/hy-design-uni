@@ -54,8 +54,8 @@ export default {
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
 import type { CSSProperties } from 'vue'
-import type ToastOptions from './typing'
-import { ColorConfig, iconName, getWindowInfo, hexToRgb, deepMerge } from '../../libs'
+import type { IToastExpose, ToastOptions } from './typing'
+import { ColorConfig, iconName, getWindowInfo, hexToRgb } from '../../libs'
 // 组件
 import HyOverlay from '../hy-overlay/hy-overlay.vue'
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -197,7 +197,7 @@ const clearTimer = () => {
     // config.loading = false
 }
 
-defineExpose({
+defineExpose<IToastExpose>({
     show,
     hide
 })

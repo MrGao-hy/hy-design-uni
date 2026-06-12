@@ -114,7 +114,6 @@ const waterfall: {
 })
 // 排列方式
 const arrange = computed(() => (props.line === 1 ? 'column' : 'row'))
-const boxHeight = getPx(props.itemHeight) + getPx(props.marginBottom)
 const listHeight = addUnit(props.containerHeight)
 const instance = getCurrentInstance()
 
@@ -125,6 +124,9 @@ onMounted(() => {
     })
 })
 
+const boxHeight = computed(() => {
+    return getPx(props.itemHeight) + getPx(props.marginBottom)
+})
 const itemStyle = computed((): CSSProperties => {
     return {
         height: addUnit(props.itemHeight),
@@ -137,32 +139,32 @@ const itemStyle = computed((): CSSProperties => {
 })
 
 /**
- * @description 虚拟列表真实展示数据：起始下标
+ * 虚拟列表真实展示数据：起始下标
  */
 const start = computed(() => {
-    const s = Math.floor(scrollTop.value / boxHeight)
+    const s = Math.floor(scrollTop.value / boxHeight.value)
     return Math.max(0, s * props.line)
 })
 
 /**
- * @description 虚拟列表真实展示数据：结束下标
+ * 虚拟列表真实展示数据：结束下标
  */
 const over = computed(() => {
-    const o = Math.floor((scrollTop.value + viewHeight.value + 1) / boxHeight + 5)
+    const o = Math.floor((scrollTop.value + viewHeight.value + 1) / boxHeight.value + 5)
     return Math.min(props.list.length, o * props.line)
 })
 
 /**
- * @description 计算虚拟列表的padding(保持列表高度完整且滚动条能正常滚动)
+ * 计算虚拟列表的padding(保持列表高度完整且滚动条能正常滚动)
  */
 const paddingAttr = computed(() => {
-    const paddingTop = start.value * boxHeight
-    const paddingBottom = (props.list.length - over.value) * boxHeight
+    const paddingTop = start.value * boxHeight.value
+    const paddingBottom = (props.list.length - over.value) * boxHeight.value
     return `${paddingTop / props.line}px 0 ${paddingBottom / props.line}px`
 })
 
 /**
- * @description 虚拟列表真实展示数据
+ * 虚拟列表真实展示数据
  */
 const virtualData = computed<(string | Record<string, any>)[]>(() => {
     return props.list.slice(start.value, over.value)
@@ -187,28 +189,28 @@ watch(
 )
 
 /**
- * @description 监听滚动条距离顶部距离，实时更新
+ * 监听滚动条距离顶部距离，实时更新
  */
 const onScroll = async (e: any) => {
     scrollTop.value = e.detail.scrollTop || 0
 }
 
 /**
- * @description 滚动底部函数
+ * 滚动底部函数
  * */
 const scrollToLower = () => {
     emit('scrollToLower')
 }
 
 /**
- * @description 点击行触发函数
+ * 点击行触发函数
  * */
 const handleClick = (temp: string | AnyObject) => {
     emit('click', temp)
 }
 
 /**
- * @description 获取默认插槽
+ * 获取默认插槽
  */
 const slotDefault = useSlots().default
 </script>

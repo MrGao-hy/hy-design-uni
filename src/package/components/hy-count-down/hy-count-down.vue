@@ -24,7 +24,7 @@ export default {
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { isSameSecond, parseFormat, parseTimeData } from './index'
-import type { ICountDownEmits } from './typing'
+import type { ICountDownEmits, ICountDownExpose } from './typing'
 import countDownProps from './props'
 
 /**
@@ -62,7 +62,7 @@ onUnmounted(() => {
 })
 
 /**
- * @description 开始倒计时
+ * 开始倒计时
  */
 const start = () => {
     if (runing.value) return
@@ -74,7 +74,7 @@ const start = () => {
 }
 
 /**
- * @description 根据是否展示毫秒，执行不同操作函数
+ * 根据是否展示毫秒，执行不同操作函数
  */
 const toTick = () => {
     if (props.millisecond) {
@@ -112,14 +112,14 @@ const microTick = () => {
 }
 
 /**
- * @description 获取剩余的时间
+ * 获取剩余的时间
  */
 const getRemainTime = () => {
     // 取最大值，防止出现小于0的剩余时间值
     return Math.max(endTime.value - Date.now(), 0)
 }
 /**
- * @description 设置剩余的时间
+ * 设置剩余的时间
  */
 const setRemainTime = (remain: number) => {
     remainTime.value = remain
@@ -144,21 +144,21 @@ const reset = () => {
     }
 }
 /**
- * @description 暂停倒计时
+ * 暂停倒计时
  * */
 const pause = () => {
     runing.value = false
     clearTimeoutFn()
 }
 /**
- * @description 清空定时器
+ * 清空定时器
  * */
 const clearTimeoutFn = () => {
     clearTimeout(timer)
     timer = null
 }
 
-defineExpose({
+defineExpose<ICountDownExpose>({
     reset,
     start,
     pause

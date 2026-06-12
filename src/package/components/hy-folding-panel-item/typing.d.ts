@@ -35,3 +35,24 @@ export interface IFoldingPanelItemEmits {
      */
     (e: 'child-click', index: number | string): void
 }
+
+/** HyFoldingPanelItem 组件实例暴露的方法 */
+export interface IFoldingPanelItemExpose {
+    /**
+     * 打开面板
+     */
+    open: () => void
+    /**
+     * 关闭面板
+     */
+    close: () => void
+    /**
+     * 切换面板状态
+     */
+    toggle: () => void
+    /**
+     * 获取当前展开状态
+     * @returns 当前展开状态
+     */
+    getExpanded: () => boolean
+}

@@ -172,8 +172,8 @@ const onSelect = (item: DropdownMenuItem, index: number) => {
     isOpen.value = false
     if (index !== currentIndex.value) {
         currentIndex.value = index
-        emit('change', item, index)
         emit('update:modelValue', item.value)
+        emit('change', item, index)
     }
 }
 

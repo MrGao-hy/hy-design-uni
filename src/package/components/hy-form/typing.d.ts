@@ -45,3 +45,34 @@ export interface IFormEmits {
     /** 表单校验 */
     (e: 'validate', valid: boolean, errors: AnyObject): void
 }
+
+/** HyForm 组件实例暴露的方法和属性 */
+export interface IFormExpose {
+    /**
+     * 验证所有表单字段
+     * @returns Promise，验证成功时 resolve，失败时 reject 并返回错误信息
+     */
+    validate: () => Promise<unknown>
+    /**
+     * 重置表单所有字段到初始值
+     */
+    resetFields: () => void
+    /**
+     * 清除表单验证错误
+     * @param fields 可选，指定要清除的字段名数组，不传则清除所有
+     */
+    clearValidate: (fields?: string[]) => void
+    /**
+     * 提交表单（会先执行验证）
+     * @returns Promise，验证成功时返回表单数据，失败时返回 false
+     */
+    submit: () => Promise<AnyObject | false>
+    /**
+     * 表单数据对象
+     */
+    formData: AnyObject
+    /**
+     * 表单错误信息
+     */
+    errors: Record<string, string>
+}

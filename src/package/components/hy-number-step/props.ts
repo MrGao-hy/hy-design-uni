@@ -11,7 +11,7 @@ const numberStepProps = {
     /** 最小值 */
     min: {
         type: Number,
-        default: 1
+        default: 0
     },
     /** 最大值 */
     max: {

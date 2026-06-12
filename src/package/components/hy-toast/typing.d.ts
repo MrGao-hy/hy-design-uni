@@ -1,6 +1,6 @@
 import type { HyIconProps } from '../hy-icon/typing'
 
-export default interface ToastOptions {
+export interface ToastOptions {
     /**
      * 显示文本
      * */
@@ -41,4 +41,17 @@ export default interface ToastOptions {
      * 执行完后的回调函数
      * */
     complete?: Function | null
+}
+
+/** HyToast 组件实例暴露的方法 */
+export interface IToastExpose {
+    /**
+     * 显示 Toast
+     * @param options Toast 配置选项
+     */
+    show: (options: ToastOptions) => void
+    /**
+     * 隐藏 Toast
+     */
+    hide: () => void
 }

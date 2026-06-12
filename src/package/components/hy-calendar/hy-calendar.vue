@@ -75,7 +75,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import type { ICalendarEmits } from './typing'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import {
     addUnit,
@@ -87,6 +86,7 @@ import {
     range,
     useTranslate
 } from '../../libs'
+import type { ICalendarEmits, ICalendarExpose } from './typing'
 import Calendar from '../../libs/utils/calendar.js'
 import calendarProps from './props'
 import dayjs from 'dayjs/esm'
@@ -367,7 +367,7 @@ const updateMonthTop = (topArr = []) => {
     scrollIntoDefaultMonth(selected)
 }
 
-defineExpose({
+defineExpose<ICalendarExpose>({
     setFormatter
 })
 </script>

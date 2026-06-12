@@ -19,7 +19,7 @@ export default {
 import { provide, reactive, ref, toRefs } from 'vue'
 import { clearVal, isArray } from '../../libs'
 import formProps from './props'
-import type { IFormEmits } from './typing'
+import type { IFormEmits, IFormExpose } from './typing'
 
 /**
  * 表单组件父组件，需要搭配hy-form-item
@@ -203,7 +203,7 @@ const submit = async () => {
     return false
 }
 
-defineExpose({
+defineExpose<IFormExpose>({
     validate,
     resetFields,
     clearValidate,

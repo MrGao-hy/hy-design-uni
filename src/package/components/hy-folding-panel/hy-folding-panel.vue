@@ -12,7 +12,7 @@ export default {
 
 <script setup lang="ts">
 import { provide, ref, watch, toRefs } from 'vue'
-import type { IFoldingPanelGroupEmits } from './typing'
+import type { IFoldingPanelGroupEmits, IFoldingPanelExpose } from './typing'
 import foldingPanelProps from './props'
 
 const props = defineProps(foldingPanelProps)
@@ -36,7 +36,7 @@ watch(activeIndex, (newVal) => {
 })
 
 // 提供给子组件的方法
-const updateActiveIndex = (index: number) => {
+const updateActiveIndex = (index: number | string) => {
     if (props.disabled) return
 
     if (props.accordion) {
@@ -63,7 +63,7 @@ provide('hy-folding-panel', {
     updateActiveIndex
 })
 // 对外暴露的方法
-defineExpose({
+defineExpose<IFoldingPanelExpose>({
     /**
      * 打开指定索引的面板
      */

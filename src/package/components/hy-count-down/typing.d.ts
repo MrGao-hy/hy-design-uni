@@ -12,3 +12,19 @@ export interface ICountDownEmits {
     /** 倒计时结束触发 */
     (e: 'finish'): void
 }
+
+/** HyCountDown 组件实例暴露的方法 */
+export interface ICountDownExpose {
+    /**
+     * 重置倒计时
+     */
+    reset: () => void
+    /**
+     * 开始倒计时
+     */
+    start: () => void
+    /**
+     * 暂停倒计时
+     */
+    pause: () => void
+}

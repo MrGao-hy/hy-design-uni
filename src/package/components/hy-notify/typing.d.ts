@@ -11,7 +11,7 @@ export interface NotifyOptions {
     icon?: string
     /** 展示的文字内容 */
     message?: string
-    /** 展示时长，为0时不消失 */
+    /** 展示时长，为 0 时不消失 */
     duration?: number
     /** 字体大小 */
     fontSize?: number | string
@@ -19,4 +19,17 @@ export interface NotifyOptions {
     safeAreaInsetTop?: boolean
     /** 关闭后的回调函数 */
     complete?: () => void
+}
+
+/** HyNotify 组件实例暴露的方法 */
+export interface INotifyExpose {
+    /**
+     * 显示 Notify 提示
+     * @param options Notify 配置选项
+     */
+    show: (options: NotifyOptions) => void
+    /**
+     * 关闭 Notify 提示
+     */
+    close: () => void
 }

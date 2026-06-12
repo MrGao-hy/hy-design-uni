@@ -115,7 +115,7 @@ import {
     inject,
     nextTick
 } from 'vue'
-import type { IPopoverEmits, PopoverExpose } from './typing'
+import type { IPopoverEmits, IPopoverExpose } from './typing'
 import {
     type Queue,
     queueKey,
@@ -241,7 +241,7 @@ function updateModelValue(value: boolean) {
     emit('update:modelValue', value)
 }
 
-defineExpose<PopoverExpose>({
+defineExpose<IPopoverExpose>({
     open,
     close
 })

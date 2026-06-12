@@ -99,7 +99,7 @@ export default {
 import { computed, getCurrentInstance, onBeforeMount, onMounted, reactive, ref, watch } from 'vue'
 import type { CSSProperties } from 'vue'
 import { addUnit, getRect, guid } from '../../libs'
-import type { SignatureExpose, SignatureResult, Point, Line, ISignatureEmits } from './typing'
+import type { ISignatureExpose, SignatureResult, Point, Line, ISignatureEmits } from './typing'
 // #ifdef MP-WEIXIN
 import { canvas2dAdapter } from './canvasHelper'
 // #endif
@@ -165,7 +165,7 @@ const currentLine = ref<Line>() // 当前正在绘制的线
 const currentStep = ref(0) // 当前步骤
 
 /**
- * @description 添加计算笔画宽度的方法
+ * 添加计算笔画宽度的方法
  * */
 function calculateLineWidth(speed: number): number {
     if (!props.pressure) return props.lineWidth
@@ -178,7 +178,7 @@ function calculateLineWidth(speed: number): number {
 }
 
 /**
- * @description 获取默认笔画宽度
+ * 获取默认笔画宽度
  * */
 const getDefaultLineWidth = () => {
     if (props.pressure) {
@@ -189,7 +189,7 @@ const getDefaultLineWidth = () => {
 }
 
 /**
- * @description 开始画线
+ * 开始画线
  * */
 const startDrawing = (e: any) => {
     e.preventDefault()
@@ -219,7 +219,7 @@ const startDrawing = (e: any) => {
 }
 
 /**
- * @description 结束画线
+ * 结束画线
  * */
 const stopDrawing = (e: TouchEvent) => {
     e.preventDefault()
@@ -250,7 +250,7 @@ const stopDrawing = (e: TouchEvent) => {
 }
 
 /**
- * @description 初始化 canvas
+ * 初始化 canvas
  * @param forceUpdate 是否强制更新
  */
 const initCanvas = (forceUpdate: boolean = false) => {
@@ -269,7 +269,7 @@ const initCanvas = (forceUpdate: boolean = false) => {
 }
 
 /**
- * @description 清空 canvas
+ * 清空 canvas
  * */
 const clear = () => {
     lines.value = []
@@ -285,7 +285,7 @@ const confirmSignature = () => {
 }
 
 /**
- * @description canvas划线
+ * canvas划线
  * */
 const draw = (e: any) => {
     e.preventDefault()
@@ -349,7 +349,7 @@ const draw = (e: any) => {
 }
 
 /**
- * @description 重绘整个画布
+ * 重绘整个画布
  * */
 const redrawCanvas = () => {
     const { ctx } = canvasState
@@ -422,7 +422,7 @@ const redrawCanvas = () => {
 }
 
 /**
- * @description 修改撤销功能
+ * 修改撤销功能
  * */
 const revoke = () => {
     if (!lines.value.length) return
@@ -434,7 +434,7 @@ const revoke = () => {
 }
 
 /**
- * @description 修改恢复功能
+ * 修改恢复功能
  * */
 const restore = () => {
     if (!redoLines.value.length) return
@@ -446,7 +446,7 @@ const restore = () => {
 }
 
 /**
- * @description 添加平滑线条绘制方法
+ * 添加平滑线条绘制方法
  * */
 function drawSmoothLine(prePoint: Point, point: Point) {
     const { ctx } = canvasState
@@ -513,7 +513,7 @@ onBeforeMount(() => {
 })
 
 /**
- * @description 获取canvas上下文
+ * 获取canvas上下文
  */
 function getContext() {
     return new Promise<UniApp.CanvasContext>((resolve) => {
@@ -557,7 +557,7 @@ function getContext() {
 }
 
 /**
- * @description 设置 canvasState
+ * 设置 canvasState
  */
 function setCanvasState(width: number, height: number) {
     canvasState.canvasHeight = height * pixelRatio.value
@@ -565,7 +565,7 @@ function setCanvasState(width: number, height: number) {
 }
 
 /**
- * @description 设置线段
+ * 设置线段
  * */
 function setLine() {
     const { ctx } = canvasState
@@ -578,7 +578,7 @@ function setLine() {
 }
 
 /**
- *  @description canvas 绘制图片输出成文件类型
+ *  canvas 绘制图片输出成文件类型
  */
 function canvasToImage() {
     const { fileType, quality, exportScale } = props
@@ -633,7 +633,7 @@ function clearCanvas() {
     }
 }
 
-defineExpose<SignatureExpose>({
+defineExpose<ISignatureExpose>({
     init: initCanvas,
     clear,
     confirm: confirmSignature,
