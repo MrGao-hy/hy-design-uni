@@ -1,102 +1,285 @@
+export interface UpdateVersionOptions {
+    /** 最新版本号 */
+    version: string
+    /** 更新内容 */
+    description: string
+    /** 下载地址 */
+    url: string
+    /** 是否强制更新 */
+    force?: boolean
+    /** iOS AppStore地址 */
+    iosStoreUrl?: string
+    /** 下载进度 */
+    onProgress?: (progress: OnProgressDownloadResult) => void
+    /** 更新前回调 */
+    beforeUpdate?: (version: string) => boolean | void
+    /** 更新成功 */
+    onSuccess?: () => void
+    /** 更新失败 */
+    onFail?: (error: string) => void
+    /** 点击确认回调 */
+    onConfirm?: () => void
+    /** 点击取消回调 */
+    onCancel?: () => void
+}
+
 export const appInit = {
-    data() {
-        return {
-            version: ""
-        }
-    },
     /**
-     * app更新下载版本
-     * @param version 最新版本号
-     * @param description 版本描述
-     * @param url 最新版本下载链接
-     * @returns
-     * */
-    updateVersion(content):void {
-        const { version, description, url } = content
+     * 检查更新
+     */
+    updateVersion(options: UpdateVersionOptions) {
+        const {
+            version,
+            description,
+            url,
+            force = false,
+            iosStoreUrl,
+            onProgress,
+            beforeUpdate,
+            onSuccess,
+            onFail,
+            onConfirm,
+            onCancel
+        } = options
+
+        if (!version) {
+            console.error('version不能为空')
+            return
+        }
+
         plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
-            this.version = widgetInfo.version as string
-            let _this = this
-
-            // 1代表app新包版本号大于本地版本号
-            if (this.compareVersion(version, this.version) === 1) {
-                uni.showModal({
-                    title: `发现新版本V${version}`,
-                    content: `更新内容：${description}`,
-                    success: function (res1) {
-                        if (res1.confirm) {
-                            _this.downloadApp(url)
-                        }
-                    }
-                });
+            const localVersion = widgetInfo.version
+            const compareResult = this.compareVersion(version, localVersion)
+            if (compareResult !== 1) {
+                return uni.showToast({ title: '已是最新版本', icon: 'none' })
             }
-        });
-    },
-    /**
-     * 进行版本更新检查操作
-     * */
-    compareVersion(version1: string, version2: string) {
-        const newVersion1 = `${version1}`.split('.').length < 3 ? `${version1}`.concat('.0') : `${version1}`;
-        const newVersion2 = `${version2}`.split('.').length < 3 ? `${version2}`.concat('.0') : `${version2}`;
 
-        return this.isUpdateVersion(newVersion1 ,newVersion2);
-    },
-    /**
-     * 计算版本号大小,转化大小
-     * */
-    toNum(a: number | string){
-        const c = a.toString().split('.');
-        const num_place = ["", "0", "00", "000", "0000"],
-            r = num_place.reverse();
-        for (let i = 0; i < c.length; i++){
-            const len=c[i].length;
-            c[i]=r[len]+c[i];
-        }
-        return c.join('');
-    },
-    /**
-     * 检测版本号是否需要更新
-     * */
-    isUpdateVersion(a: number | string, b: number | string) {
-        const numA = this.toNum(a);
-        const numB = this.toNum(b);
-        return numA > numB ? 1 : numA < numB ? -1 : 0;
-    },
-    /**
-     * 下载新的app版本
-     * */
-    downloadApp(downloadUrl: string) {
-        uni.showLoading({
-            title: '更新中……'
-        })
-        uni.downloadFile({
-            // 存放最新安装包的地址
-            url: downloadUrl,
-            success: (downloadResult) => {
-                uni.hideLoading();
-                if (downloadResult.statusCode === 200) {
-                    plus.runtime.install(downloadResult.tempFilePath,{
-                        force: false
-                    }, function() {
-                        plus.runtime.restart();
-                    }, function(e) {
-                        uni.showToast({
-                            title: "安装失败",
-                            icon: "none"
-                        })
-                    });
-                } else {
-                    uni.showToast({
-                        title: "更新失败",
-                        icon: "none"
+            if (typeof beforeUpdate === 'function') {
+                const result = beforeUpdate(version)
+
+                if (result === false) {
+                    return
+                }
+            }
+
+            uni.showModal({
+                title: `发现新版本 V${version}`,
+                content: description,
+                showCancel: !force,
+                confirmText: '立即更新',
+                success: (res) => {
+                    if (!res.confirm) {
+                        if (typeof onCancel === 'function') {
+                            onCancel()
+                        }
+                        return
+                    }
+
+                    if (typeof onConfirm === 'function') {
+                        onConfirm()
+                    }
+
+                    const platform = uni.getSystemInfoSync().platform
+
+                    // iOS
+                    if (platform === 'ios') {
+                        if (iosStoreUrl) {
+                            plus.runtime.openURL(iosStoreUrl)
+                        } else {
+                            uni.showToast({
+                                title: '请配置AppStore地址',
+                                icon: 'none'
+                            })
+                        }
+                        return
+                    }
+
+                    // Android
+                    this.downloadApp(url, {
+                        onProgress,
+                        onSuccess,
+                        onFail
                     })
                 }
-            },
-            fail: (err) => {
-                uni.showToast({
-                    title: "下载失败",
-                    icon: "none"
-                })
+            })
+        })
+    },
+
+    /**
+     * 比较版本号
+     * 1:服务器版本大
+     * 0:相等
+     * -1:本地版本大
+     * @param serverVersion 最新版本
+     * @param localVersion 本地版本
+     */
+    compareVersion(serverVersion: string, localVersion: string) {
+        if (!serverVersion || !localVersion) return 0
+        const v1 = serverVersion.split('.').map(Number)
+        const v2 = localVersion.split('.').map(Number)
+        const length = Math.max(v1.length, v2.length)
+
+        for (let i = 0; i < length; i++) {
+            const n1 = v1[i] || 0
+            const n2 = v2[i] || 0
+
+            if (n1 > n2) {
+                return 1
             }
-        });
+
+            if (n1 < n2) {
+                return -1
+            }
+        }
+
+        return 0
+    },
+
+    /**
+     * 下载更新包
+     */
+    downloadApp(
+        downloadUrl: string,
+        callbacks?: {
+            onProgress?: (progress: OnProgressDownloadResult) => void
+            onSuccess?: () => void
+            onFail?: (error: string) => void
+        }
+    ) {
+        const { onProgress, onSuccess, onFail } = callbacks || {}
+
+        if (!downloadUrl) {
+            const msg = '下载地址不能为空'
+
+            uni.showToast({
+                title: msg,
+                icon: 'none'
+            })
+
+            onFail?.(msg)
+
+            return
+        }
+
+        const downloadTask = uni.downloadFile({
+            url: downloadUrl,
+
+            success: (res) => {
+                if (res.statusCode !== 200) {
+                    const msg = '下载失败'
+
+                    uni.showToast({
+                        title: msg,
+                        icon: 'none'
+                    })
+
+                    onFail?.(msg)
+
+                    return
+                }
+
+                this.installPackage(res.tempFilePath, downloadUrl, onSuccess, onFail)
+            },
+
+            fail: (err) => {
+                console.error('下载失败', err)
+
+                const msg = '下载失败'
+
+                uni.showToast({
+                    title: msg,
+                    icon: 'none'
+                })
+
+                onFail?.(msg)
+            }
+        })
+
+        downloadTask.onProgressUpdate((res) => {
+            onProgress?.(res)
+        })
+    },
+
+    /**
+     * 安装更新包
+     */
+    installPackage(
+        filePath: string,
+        downloadUrl: string,
+        onSuccess?: () => void,
+        onFail?: (error: string) => void
+    ) {
+        const isWgt = downloadUrl.toLowerCase().endsWith('.wgt')
+
+        const isApk = downloadUrl.toLowerCase().endsWith('.apk')
+
+        // WGT热更新
+        if (isWgt) {
+            plus.runtime.install(
+                filePath,
+                {
+                    force: false
+                },
+                () => {
+                    uni.showToast({
+                        title: '更新成功'
+                    })
+
+                    onSuccess?.()
+
+                    setTimeout(() => {
+                        plus.runtime.restart()
+                    }, 1000)
+                },
+                (err) => {
+                    console.error('安装失败', err)
+
+                    const msg = `安装失败:${err.message}`
+
+                    uni.showToast({
+                        title: msg,
+                        icon: 'none'
+                    })
+
+                    onFail?.(msg)
+                }
+            )
+
+            return
+        }
+
+        // APK整包更新
+        if (isApk) {
+            plus.runtime.openFile(
+                filePath,
+                {},
+                () => {
+                    onSuccess?.()
+                },
+                (err) => {
+                    console.error('APK安装失败', err)
+
+                    const msg = 'APK安装失败'
+
+                    uni.showToast({
+                        title: msg,
+                        icon: 'none'
+                    })
+
+                    onFail?.(msg)
+                }
+            )
+
+            return
+        }
+
+        const msg = '未知安装包格式'
+
+        uni.showToast({
+            title: msg,
+            icon: 'none'
+        })
+
+        onFail?.(msg)
     }
 }
