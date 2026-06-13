@@ -92,7 +92,7 @@
             v-if="showPlus && $slots.plus"
             @touchend.stop="onClearTimeout"
         >
-            <slot name="plus" />
+            <slot name="plus" :disabled="isDisabled('plus')" />
         </view>
         <view
             v-else-if="showPlus"
