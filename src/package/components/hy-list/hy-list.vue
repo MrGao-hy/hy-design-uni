@@ -79,13 +79,14 @@ import {
     getCurrentInstance,
     nextTick,
     onMounted,
+    onUnmounted,
     reactive,
     ref,
     useSlots,
     watch
 } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, getPx, getRect } from '../../libs'
+import { addUnit, getPx, getRect, throttle } from '../../libs'
 import type { IListEmits } from './typing'
 import listProps from './props'
 // 组件
@@ -101,10 +102,13 @@ const props = defineProps(listProps)
 const emit = defineEmits<IListEmits>()
 
 const slots = useSlots()
+// 滚动容器引用
+const hyVirtualContainer = ref<UniApp.NodeInfo | null>(null)
 // 滚动条距离顶部距离
 const scrollTop = ref(0)
 // 可视区域的高度
 const viewHeight = ref(0)
+// 瀑布流数据
 const waterfall: {
     left: AnyObject[]
     right: AnyObject[]
@@ -116,6 +120,10 @@ const waterfall: {
 const arrange = computed(() => (props.line === 1 ? 'column' : 'row'))
 const listHeight = addUnit(props.containerHeight)
 const instance = getCurrentInstance()
+// 高度缓存映射表（支持动态高度）
+const heightCache = reactive<Record<number, number>>({})
+// 预估高度（用于首屏渲染）
+const estimatedHeight = computed(() => getPx(props.itemHeight) + getPx(props.marginBottom))
 
 onMounted(() => {
     nextTick(async () => {
@@ -124,8 +132,29 @@ onMounted(() => {
     })
 })
 
-const boxHeight = computed(() => {
-    return getPx(props.itemHeight) + getPx(props.marginBottom)
+/**
+ * 获取指定索引的实际高度（优先从缓存获取）
+ */
+const getItemHeight = (index: number): number => {
+    return heightCache[index] ?? estimatedHeight.value
+}
+
+/**
+ * 计算从0到指定索引的累计高度
+ */
+const getCumulativeHeight = (endIndex: number): number => {
+    let total = 0
+    for (let i = 0; i < endIndex && i < props.list.length; i++) {
+        total += getItemHeight(i)
+    }
+    return total
+}
+
+/**
+ * 计算虚拟列表的总高度
+ */
+const totalHeight = computed(() => {
+    return getCumulativeHeight(props.list.length)
 })
 const itemStyle = computed((): CSSProperties => {
     return {
@@ -139,28 +168,56 @@ const itemStyle = computed((): CSSProperties => {
 })
 
 /**
- * 虚拟列表真实展示数据：起始下标
+ * 虚拟列表真实展示数据：起始下标（支持动态高度）
  */
 const start = computed(() => {
-    const s = Math.floor(scrollTop.value / boxHeight.value)
-    return Math.max(0, s * props.line)
+    if (props.list.length === 0) return 0
+
+    let cumulativeHeight = 0
+    let startIndex = 0
+
+    // 向后查找第一个累计高度超过scrollTop的位置
+    for (let i = 0; i < props.list.length; i++) {
+        cumulativeHeight += getItemHeight(i)
+        if (cumulativeHeight > scrollTop.value) {
+            startIndex = i
+            break
+        }
+    }
+
+    // 向上多取几个作为缓冲，避免快速滚动时出现空白
+    const buffer = props.line * 2
+    return Math.max(0, startIndex - buffer)
 })
 
 /**
- * 虚拟列表真实展示数据：结束下标
+ * 虚拟列表真实展示数据：结束下标（支持动态高度）
  */
 const over = computed(() => {
-    const o = Math.floor((scrollTop.value + viewHeight.value + 1) / boxHeight.value + 5)
-    return Math.min(props.list.length, o * props.line)
+    if (props.list.length === 0) return 0
+
+    const targetHeight = scrollTop.value + viewHeight.value + 100 // 额外缓冲高度
+    let cumulativeHeight = 0
+
+    // 从start开始查找第一个累计高度超过targetHeight的位置
+    for (let i = start.value; i < props.list.length; i++) {
+        cumulativeHeight += getItemHeight(i)
+        if (cumulativeHeight > targetHeight) {
+            // 多取几个作为缓冲
+            return Math.min(props.list.length, i + props.line * 2)
+        }
+    }
+
+    return props.list.length
 })
 
 /**
  * 计算虚拟列表的padding(保持列表高度完整且滚动条能正常滚动)
  */
 const paddingAttr = computed(() => {
-    const paddingTop = start.value * boxHeight.value
-    const paddingBottom = (props.list.length - over.value) * boxHeight.value
-    return `${paddingTop / props.line}px 0 ${paddingBottom / props.line}px`
+    const paddingTop = getCumulativeHeight(start.value)
+    const paddingBottom = Math.max(0, totalHeight.value - getCumulativeHeight(over.value))
+    return `${paddingTop}px 0 ${paddingBottom}px`
 })
 
 /**
@@ -170,30 +227,46 @@ const virtualData = computed<(string | Record<string, any>)[]>(() => {
     return props.list.slice(start.value, over.value)
 })
 
+/**
+ * 更新瀑布流数据
+ */
+const updateWaterfall = (data: (string | Record<string, any>)[]) => {
+    // 使用splice替代length=0，性能更好
+    waterfall.left.splice(0, waterfall.left.length)
+    waterfall.right.splice(0, waterfall.right.length)
+
+    if (props.line === 2 && data.length > 0 && typeof data[0] !== 'string') {
+        // 优化：使用push批量添加
+        const leftItems: AnyObject[] = []
+        const rightItems: AnyObject[] = []
+
+        for (let i = 0; i < data.length; i++) {
+            if (i % 2 === 0) {
+                leftItems.push(data[i] as AnyObject)
+            } else {
+                rightItems.push(data[i] as AnyObject)
+            }
+        }
+
+        waterfall.left.push(...leftItems)
+        waterfall.right.push(...rightItems)
+    }
+}
+
 watch(
     () => virtualData.value,
     (newVal) => {
-        waterfall.left.length = 0
-        waterfall.right.length = 0
-        if (props.line === 2 && newVal!.every((item) => typeof item !== 'string')) {
-            newVal.forEach((item, i) => {
-                if (i % 2 === 0) {
-                    waterfall.left.push(item as AnyObject)
-                } else {
-                    waterfall.right.push(item as AnyObject)
-                }
-            })
-        }
+        updateWaterfall(newVal)
     },
-    { immediate: true, deep: true }
+    { immediate: true }
 )
 
 /**
- * 监听滚动条距离顶部距离，实时更新
+ * 监听滚动条距离顶部距离，实时更新（带节流）
  */
-const onScroll = async (e: any) => {
+const onScroll = throttle((e: any) => {
     scrollTop.value = e.detail.scrollTop || 0
-}
+}, 50)
 
 /**
  * 滚动底部函数
@@ -213,6 +286,51 @@ const handleClick = (temp: string | AnyObject) => {
  * 获取默认插槽
  */
 const slotDefault = useSlots().default
+
+/**
+ * 滚动到指定索引位置
+ * @param index 目标索引
+ * @param offset 偏移量（可选）
+ */
+const scrollToIndex = (index: number, offset: number = 0) => {
+    if (index < 0 || index >= props.list.length) {
+        console.warn(`hy-list: scrollToIndex index ${index} out of bounds`)
+        return
+    }
+
+    const scrollPosition = getCumulativeHeight(index) + offset
+    uni.createSelectorQuery().select('.hy-virtual-container').scrollIntoView({
+        scrollTop: scrollPosition,
+        duration: 300
+    })
+}
+
+/**
+ * 滚动到顶部
+ */
+const scrollToTop = () => {
+    uni.createSelectorQuery().select('.hy-virtual-container').scrollIntoView({
+        scrollTop: 0,
+        duration: 300
+    })
+}
+
+/**
+ * 刷新高度缓存（当列表内容变化时调用）
+ */
+const refreshHeightCache = () => {
+    // 清除缓存，下次渲染时重新计算
+    Object.keys(heightCache).forEach((key) => {
+        delete heightCache[parseInt(key)]
+    })
+}
+
+// 暴露方法给父组件
+defineExpose({
+    scrollToIndex,
+    scrollToTop,
+    refreshHeightCache
+})
 </script>
 
 <style lang="scss" scoped>
