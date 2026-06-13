@@ -2,7 +2,6 @@
 @use "../../libs/css/mixin" as *;
 
 @include b(virtual-container) {
-  padding: 0 $hy-border-margin-padding-base;
   box-sizing: border-box;
 
   @include e(list) {
