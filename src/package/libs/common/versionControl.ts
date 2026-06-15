@@ -107,11 +107,12 @@ export const appInit = {
 
     /**
      * 比较版本号
-     * 1:服务器版本大
-     * 0:相等
-     * -1:本地版本大
-     * @param serverVersion 最新版本
+     * @param serverVersion 服务端版本
      * @param localVersion 本地版本
+     * @returns
+     *  1: 服务端版本更高
+     *  0: 版本相同
+     * -1: 本地版本更高
      */
     compareVersion(serverVersion: string, localVersion: string) {
         if (!serverVersion || !localVersion) return 0

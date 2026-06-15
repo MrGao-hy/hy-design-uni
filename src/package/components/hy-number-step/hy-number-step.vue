@@ -175,7 +175,6 @@ const format = (value: number | string): number => {
     // 对比最大最小值，取在min和max之间的值
     value = Math.max(Math.min(props.max, value), props.min)
     // 如果设定了最大的小数位数，使用toFixed去进行格式化
-    console.log(value, 111)
     if (props.decimalLength !== null) {
         value = parseFloat(value.toFixed(props.decimalLength))
     }
@@ -197,7 +196,6 @@ watch(
         if (newValue !== currentValue.value) {
             currentValue.value = format(props.modelValue)
         }
-        console.log(currentValue.value)
     },
     { immediate: true }
 )

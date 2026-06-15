@@ -1,6 +1,5 @@
 ## 在线使用文档地址
 - [华玥组件库文档(需要翻墙)](https://hy-component-docs.vercel.app/)
-- [华玥组件库文档(国内旧地址，2025-11-12之后域名过期)](https://www.gxh151.top)
 - [华玥组件库文档(国内新地址)](https://www.hy-design-uni.top)
 
 ## 📱 移动端预览
@@ -43,8 +42,19 @@ export function createApp () {
 </template>
 ```
 
+## 让 Volar/VS Code 识别组件
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": ["hy-app/global"]
+  }
+}
+```
+
 ## 在page.json文件里面配置按需引入组件
 ```json
+// page.json文件
 {
   "easycom": {
     "custom": {
@@ -52,4 +62,10 @@ export function createApp () {
     }
   }
 }
+```
+
+## 全局导入组件库样式（修改 uni.scss）
+```scss ./uni.scss
+// uni.scss文件
+@use "hy-app/index.scss" as *;
 ```

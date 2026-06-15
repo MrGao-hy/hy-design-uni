@@ -14,8 +14,24 @@
 
 ## 📓 官网链接
 - [华玥组件库文档(需科学上网)](https://hy-component-docs.vercel.app/)
-- [华玥组件库文档(国内旧地址，2025-11-12之后域名过期)](https://www.gxh151.top)
 - [华玥组件库文档(国内新地址)](https://www.hy-design-uni.top)
+
+## ✨ 组件特性
+
+- 80+ 组件
+- Vue3 + TS
+- 暗黑模式
+- 主题定制
+- 国际化语言
+- AI 友好文档
+
+## 📱 移动端预览
+<p style="display:flex;gap:24px">
+<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f37.png" width="200" height="200" />
+<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f38.jpg" width="200" height="200" />
+<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f36.png" width="200" height="200" />
+
+</p>
 
 
 ## 🔧 安装
@@ -28,10 +44,30 @@ $ pnpm add hy-app
 $ pnpm add dayjs
 ```
 
-## 📱 移动端预览
-<p style="display:flex;gap:24px">
-<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f37.png" width="200" height="200" />
-<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f38.jpg" width="200" height="200" />
-<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f36.png" width="200" height="200" />
+## 让 Volar/VS Code 识别组件
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": ["hy-app/global"]
+  }
+}
+```
 
-</p>
+## 在page.json文件里面配置按需引入组件
+```json
+// page.json文件
+{
+  "easycom": {
+    "custom": {
+      "^hy-(.*)": "hy-app/components/hy-$1/hy-$1.vue"
+    }
+  }
+}
+```
+
+## 全局导入组件库样式（修改 uni.scss）
+```scss ./uni.scss
+// uni.scss文件
+@use "hy-app/index.scss" as *;
+```

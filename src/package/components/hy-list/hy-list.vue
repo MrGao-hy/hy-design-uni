@@ -125,6 +125,20 @@ const heightCache = reactive<Record<number, number>>({})
 // 预估高度（用于首屏渲染）
 const estimatedHeight = computed(() => getPx(props.itemHeight) + getPx(props.marginBottom))
 
+/**
+ * 节流函数（返回新函数版本）
+ */
+const throttleFn = <T extends (...args: any[]) => void>(fn: T, wait: number = 16): T => {
+    let lastTime = 0
+    return ((...args: any[]) => {
+        const now = Date.now()
+        if (now - lastTime >= wait) {
+            lastTime = now
+            fn(...args)
+        }
+    }) as T
+}
+
 onMounted(() => {
     nextTick(async () => {
         const res = await getRect('.hy-virtual-container', false, instance)
@@ -264,9 +278,9 @@ watch(
 /**
  * 监听滚动条距离顶部距离，实时更新（带节流）
  */
-const onScroll = throttle((e: any) => {
+const onScroll = throttleFn((e: any) => {
     scrollTop.value = e.detail.scrollTop || 0
-}, 50)
+}, 16)
 
 /**
  * 滚动底部函数
