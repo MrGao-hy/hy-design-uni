@@ -28,7 +28,7 @@ const list = reactive([
     { title: '警告', value: 'warning' }
 ])
 
-const showToast = (params) => {
+const showToast = (params: { title: string; value: string }) => {
     hyNotifyRef.value.show({
         message: `${params.title}提示信息`,
         type: params.value

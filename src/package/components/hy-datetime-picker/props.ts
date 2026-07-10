@@ -35,7 +35,7 @@ const datetimePickerProps = {
      * @values date,time,year-month,datetime
      * */
     mode: {
-        type: String,
+        type: String as PropType<DateModeEnum>,
         default: DateModeEnum.DATETIME
     },
     /** 可选的最大时间  默认值为后10年 */

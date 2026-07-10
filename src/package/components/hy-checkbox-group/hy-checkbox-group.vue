@@ -26,7 +26,7 @@ const bemClass = computed(() => {
 const context = {
     ...toRefs(props),
     setCheckedStatus(value: string | number) {
-        let arr = [...props.modelValue]
+        let arr = props.modelValue ? [...props.modelValue] : []
         if (props.modelValue?.includes(value)) {
             arr = props.modelValue?.filter((item) => item !== value)
         } else {

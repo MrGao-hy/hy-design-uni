@@ -41,9 +41,9 @@ export interface FormItemRule {
 
 export interface IFormEmits {
     /** 提交表单 */
-    (e: 'submit', data: FormRule): void
+    submit: [data: FormRule]
     /** 表单校验 */
-    (e: 'validate', valid: boolean, errors: AnyObject): void
+    validate: [valid: boolean, errors: AnyObject]
 }
 
 /** HyForm 组件实例暴露的方法和属性 */

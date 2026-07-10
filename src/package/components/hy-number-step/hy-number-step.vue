@@ -317,7 +317,11 @@ const onChange = () => {
     const diff = stepType.value === 'minus' ? -props.step : +props.step
     const value = format(add(+currentValue.value, diff))
     emitChange(value)
-    emit(stepType.value, value)
+    if (stepType.value === 'plus') {
+        emit('plus', value)
+    } else {
+        emit('minus', value)
+    }
 }
 /**
  * @description 对值扩大后进行四舍五入，再除以扩大因子，避免出现浮点数操作的精度问题
@@ -358,7 +362,7 @@ const onTouchEnd = () => {
 }
 // 清除定时器
 const onClearTimeout = () => {
-    clearTimeout(longPressTimer as number)
+    if (longPressTimer) clearTimeout(longPressTimer)
     longPressTimer = null
 }
 </script>

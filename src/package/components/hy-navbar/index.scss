@@ -21,9 +21,6 @@
 
     @include e(left, right) {
       padding: 0 13px;
-      position: absolute;
-      top: 0;
-      bottom: 0;
       @include flex(row);
       align-items: center;
     }

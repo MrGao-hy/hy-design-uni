@@ -1,10 +1,12 @@
 import type { FormColumnsType } from '../../libs'
-import type HyInputProps from '../hy-input/typing'
-import type HyTextareaProps from '../hy-textarea/typing'
-import type HySwitchProps from '../hy-switch/typing'
-import type HyPickerProps from '../hy-picker/typing'
-import type HyRadioProps from '../hy-radio/typing'
-import type HyCheckButtonProps from '../hy-check-button/typing'
+import type {
+    HyInputProps,
+    HyTextareaProps,
+    HyPickerProps,
+    HySwitchProps,
+    HyRadioProps,
+    HyCheckButtonProps
+} from '../../index'
 import type { PropType } from 'vue'
 
 const formGroupProps = {

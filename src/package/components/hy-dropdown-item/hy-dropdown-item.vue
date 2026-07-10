@@ -69,7 +69,7 @@ export default {
 <script setup lang="ts">
 import { computed, inject, ref, onMounted, watch, useSlots, getCurrentInstance } from 'vue'
 import type { IDropdownItemEmits, DropdownMenuItem } from './typing'
-import type FatherIProps from '../hy-dropdown/typing'
+import type { HyDropdownProps } from '../../index'
 import { addUnit, getRect, throttle, IconConfig } from '../../libs'
 import dropdownItemProps from './props'
 // 组件
@@ -92,8 +92,8 @@ const hasSlot = computed(() => {
 })
 const instance = getCurrentInstance()
 //父的props值
-const dropdownProps: FatherIProps | undefined = inject('dropdownProps')
-const { titleSize, menuIcon, menuIconSize, inactiveColor } = dropdownProps as FatherIProps
+const dropdownProps: HyDropdownProps | undefined = inject('dropdownProps')
+const { titleSize, menuIcon, menuIconSize, inactiveColor } = dropdownProps as HyDropdownProps
 //当前打开的dropItem项（标签名）
 const currentDropItem: any = inject('currentDropItem')
 //当前文字/箭头颜色

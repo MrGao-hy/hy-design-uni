@@ -1,89 +1,110 @@
 <template>
     <the-root-page>
-        <hy-list
-            :list="list"
-            container-height="100vh"
-            @scrollToLower="scrollButton"
-            load="loading"
-            padding="0"
-            item-height="300"
-            border-radius="10"
-            :line="2"
-        >
-            <!--	#ifdef H5 || APP_PLUS	-->
-            <template v-slot:left="{ record }">
-                <view class="container" style="width: 100%; height: 100%">
-                    <image
-                        :src="record.url"
-                        style="width: 100%; height: 70%"
-                        mode="aspectFill"
-                    ></image>
-                    <view class="container-bottom">
-                        <view>{{ record.name }}</view>
-                        <view class="container-bottom__info"
-                            >价格:<text style="color: red">{{ record.price }}</text></view
-                        >
-                    </view>
+        <!-- 顶部搜索栏 -->
+        <view class="page-header">
+            <view class="search-bar" @click="onSearch">
+                <hy-icon name="search" size="16" color="#94a3b8"></hy-icon>
+                <text class="search-bar__text">搜索商品</text>
+            </view>
+            <view class="filter-bar">
+                <view
+                    v-for="(tab, index) in tabs"
+                    :key="index"
+                    class="filter-bar__item"
+                    :class="{ 'filter-bar__item--active': activeTab === index }"
+                    @click="activeTab = index"
+                >
+                    <text>{{ tab.label }}</text>
                 </view>
-            </template>
-            <template #right="{ record }">
-                <view class="container" style="width: 100%; height: 100%">
-                    <image
-                        :src="record.url"
-                        style="width: 100%; height: 70%"
-                        mode="aspectFill"
-                    ></image>
-                    <view class="container-bottom">
-                        <view>{{ record.name }}</view>
-                        <view class="container-bottom__info"
-                            >价格:<text style="color: red">{{ record.price }}</text></view
-                        >
-                    </view>
-                </view>
-            </template>
-            <!--	#endif	-->
-            <!--	#ifndef H5 || APP_PLUS	-->
-            <!-- 推荐使用这个写法，通用 -->
-            <template #left-list="{ record }">
-                <view class="list" v-for="item in record" :key="item.id">
-                    <view class="list-item">
-                        <view class="container" style="width: 100%; height: 100%">
-                            <image
-                                :src="item.url"
-                                style="width: 100%; height: 70%"
-                                mode="aspectFill"
-                            ></image>
-                            <view class="container-bottom">
-                                <view>{{ item.name }}</view>
-                                <view class="container-bottom__info"
-                                    >价格:<text style="color: red">{{ item.price }}</text></view
-                                >
-                            </view>
+            </view>
+        </view>
+
+        <!-- 列表区域 -->
+        <view class="page-body">
+            <!-- 首次加载骨架屏 -->
+            <view v-if="firstLoading" class="skeleton-wrapper">
+                <view v-for="i in 6" :key="i" class="skeleton-card">
+                    <view class="skeleton-card__image skeleton-animate"></view>
+                    <view class="skeleton-card__content">
+                        <view class="skeleton-card__title skeleton-animate"></view>
+                        <view
+                            class="skeleton-card__desc skeleton-animate"
+                            style="width: 60%"
+                        ></view>
+                        <view class="skeleton-card__price-row">
+                            <view class="skeleton-card__price skeleton-animate"></view>
+                            <view class="skeleton-card__tag skeleton-animate"></view>
                         </view>
                     </view>
                 </view>
-            </template>
-            <template #right-list="{ record }">
-                <view class="list" v-for="item in record" :key="item.id">
-                    <view class="list-item">
-                        <view class="container" style="width: 100%; height: 100%">
-                            <image
-                                :src="item.url"
-                                style="width: 100%; height: 70%"
-                                mode="aspectFill"
-                            ></image>
-                            <view class="container-bottom">
-                                <view>{{ item.name }}</view>
-                                <view class="container-bottom__info"
-                                    >价格:<text style="color: red">{{ item.price }}</text></view
-                                >
+            </view>
+
+            <!-- 列表 -->
+            <hy-list
+                v-else
+                ref="listRef"
+                :list="list"
+                container-height="100%"
+                :item-height="itemCardHeight"
+                :margin-bottom="16"
+                padding="0"
+                border-radius="12"
+                :line="2"
+                :load="loadStatus"
+                :show-divider="list.length > 0"
+                @scroll-to-lower="loadMore"
+                @click="onItemClick"
+            >
+                <template #left="{ record }">
+                    <view class="product-card">
+                        <image
+                            :src="record.image"
+                            class="product-card__image"
+                            mode="aspectFill"
+                            lazy-load
+                        ></image>
+                        <view class="product-card__info">
+                            <text class="product-card__name">{{ record.name }}</text>
+                            <text class="product-card__desc">{{ record.description }}</text>
+                            <view class="product-card__bottom">
+                                <text class="product-card__price">
+                                    <text class="product-card__symbol">¥</text>{{ record.price }}
+                                </text>
+                                <text class="product-card__sold">{{ record.sold }}人付款</text>
                             </view>
                         </view>
                     </view>
-                </view>
-            </template>
-            <!--	#endif	-->
-        </hy-list>
+                </template>
+                <template #right="{ record }">
+                    <view class="product-card">
+                        <image
+                            :src="record.image"
+                            class="product-card__image"
+                            mode="aspectFill"
+                            lazy-load
+                        ></image>
+                        <view class="product-card__info">
+                            <text class="product-card__name">{{ record.name }}</text>
+                            <text class="product-card__desc">{{ record.description }}</text>
+                            <view class="product-card__bottom">
+                                <text class="product-card__price">
+                                    <text class="product-card__symbol">¥</text>{{ record.price }}
+                                </text>
+                                <text class="product-card__sold">{{ record.sold }}人付款</text>
+                            </view>
+                        </view>
+                    </view>
+                </template>
+            </hy-list>
+
+            <!-- 空状态 -->
+            <hy-empty
+                v-if="!firstLoading && list.length === 0 && !isLoading"
+                mode="search"
+                description="暂无相关商品"
+                :custom-style="{ marginTop: '120px' }"
+            ></hy-empty>
+        </view>
     </the-root-page>
 </template>
 
@@ -93,61 +114,388 @@ import { useShareButton } from '@/composables'
 
 definePage({
     style: {
-        navigationBarTitleText: '虚拟列表'
+        navigationBarTitleText: '商品列表',
+        enablePullDownRefresh: false
     }
 })
-
-const list = ref<AnyObject[]>([])
-const page = reactive({
-    current: 1,
-    pageSize: 20
-})
-
-onMounted(() => {
-    queryData()
-})
-
-const scrollButton = () => {
-    page.current++
-    queryData()
-}
-
-const queryData = () => {
-    for (let i = (page.current - 1) * page.pageSize; i < page.current * page.pageSize; i++) {
-        list.value.push({
-            id: i,
-            name: `阿莫西林胶囊_${i}`,
-            url: 'https://img1.baidu.com/it/u=3643087685,1203558480&fm=253',
-            price: '10.88'
-        })
-    }
-}
 
 useShareButton()
+
+// ====== 列表引用 ======
+const listRef = ref()
+
+// ====== 筛选标签 ======
+const tabs = reactive([
+    { label: '推荐', value: 'recommend' },
+    { label: '销量', value: 'sales' },
+    { label: '价格', value: 'price' },
+    { label: '新品', value: 'new' }
+])
+const activeTab = ref(0)
+
+// ====== 列表数据 ======
+const list = ref<AnyObject[]>([])
+const itemCardHeight = ref(280)
+
+// ====== 分页 ======
+const pagination = reactive({
+    current: 1,
+    pageSize: 20,
+    total: 0,
+    hasMore: true
+})
+
+// ====== 加载状态 ======
+const firstLoading = ref(true)
+const isLoading = ref(false)
+const loadStatus = ref<'loadMore' | 'loading' | 'noMore'>('loadMore')
+
+// ====== 模拟数据源 ======
+const categories = [
+    '阿莫西林胶囊',
+    '布洛芬缓释片',
+    '维生素C泡腾片',
+    '复方氨酚烷胺',
+    '板蓝根颗粒',
+    '藿香正气水',
+    '连花清瘟胶囊',
+    '六味地黄丸',
+    '健胃消食片',
+    '云南白药气雾剂',
+    '风油精',
+    '创可贴',
+    '体温计',
+    '血压计',
+    '血糖仪',
+    '按摩器'
+]
+const descriptions = [
+    '家庭常备 疗效显著',
+    '正品保障 品质优选',
+    '限时特惠 品质之选',
+    '热销爆款 好评如潮',
+    '新品上市 医师推荐',
+    '厂家直销 物美价廉'
+]
+
+/**
+ * 模拟异步请求，延迟 800~1200ms
+ */
+const fakeRequest = <T = any,>(data: T, delay?: number): Promise<T> => {
+    const ms = delay ?? 800 + Math.random() * 400
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(data), ms)
+    })
+}
+
+/**
+ * 生成单条商品数据
+ */
+const generateItem = (index: number): AnyObject => {
+    const category = categories[index % categories.length]
+    const desc = descriptions[index % descriptions.length]
+    const price = (Math.random() * 200 + 5).toFixed(2)
+    const sold = Math.floor(Math.random() * 10000)
+    // 随机图片，使用 picsum
+    const seed = `product-${index}-${Date.now()}`
+    return {
+        id: index,
+        name: category,
+        description: desc,
+        price,
+        sold: sold > 9999 ? `${(sold / 10000).toFixed(1)}万` : String(sold),
+        image: `https://picsum.photos/seed/${seed}/400/400`
+    }
+}
+
+/**
+ * 请求列表数据
+ */
+const fetchList = async (isRefresh = false) => {
+    if (isLoading.value) return
+
+    if (isRefresh) {
+        pagination.current = 1
+        pagination.hasMore = true
+        list.value = []
+    }
+
+    isLoading.value = true
+    loadStatus.value = 'loading'
+
+    try {
+        const start = (pagination.current - 1) * pagination.pageSize
+        const end = start + pagination.pageSize
+        const mockData: AnyObject[] = []
+
+        for (let i = start; i < end; i++) {
+            mockData.push(generateItem(i))
+        }
+
+        const result = await fakeRequest({
+            list: mockData,
+            total: 200 // 模拟总共200条
+        })
+
+        if (isRefresh) {
+            list.value = result.list
+        } else {
+            list.value.push(...result.list)
+        }
+
+        pagination.total = result.total
+        pagination.hasMore = list.value.length < result.total
+        loadStatus.value = pagination.hasMore ? 'loadMore' : 'noMore'
+        pagination.current++
+    } catch {
+        loadStatus.value = 'loadMore'
+    } finally {
+        isLoading.value = false
+        firstLoading.value = false
+    }
+}
+
+/**
+ * 滚动到底部加载更多
+ */
+const loadMore = () => {
+    if (!pagination.hasMore || isLoading.value) return
+    fetchList()
+}
+
+/**
+ * 点击商品
+ */
+const onItemClick = (item: AnyObject) => {
+    uni.showToast({
+        title: `点击了: ${item.name}`,
+        icon: 'none'
+    })
+}
+
+/**
+ * 点击搜索栏
+ */
+const onSearch = () => {
+    uni.showToast({
+        title: '搜索功能',
+        icon: 'none'
+    })
+}
+
+// ====== 初始化加载 ======
+onMounted(() => {
+    fetchList(true)
+})
 </script>
 
 <style scoped lang="scss">
-.container {
-    box-sizing: border-box;
-    &-bottom {
-        padding: 15rpx;
-        background: $hy-background--container;
-        height: 30%;
-        box-sizing: border-box;
-        transform: translateY(-10rpx);
-        &__info {
-            color: grey;
-            font-size: 25rpx;
+.page {
+    &-header {
+        padding: 24rpx 24rpx 0;
+        background: #fff;
+    }
+
+    &-body {
+        padding: 16rpx 16rpx 0;
+        height: calc(100vh - 180rpx);
+    }
+}
+
+/* 搜索栏 */
+.search-bar {
+    display: flex;
+    align-items: center;
+    height: 64rpx;
+    padding: 0 24rpx;
+    background: #f1f5f9;
+    border-radius: 32rpx;
+
+    &__text {
+        margin-left: 12rpx;
+        font-size: 26rpx;
+        color: #94a3b8;
+    }
+}
+
+/* 筛选标签 */
+.filter-bar {
+    display: flex;
+    gap: 0;
+    margin-top: 20rpx;
+    border-bottom: 1rpx solid #f1f5f9;
+
+    &__item {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 72rpx;
+        font-size: 26rpx;
+        color: #64748b;
+        position: relative;
+        transition: color 0.2s ease;
+
+        &--active {
+            color: #1e293b;
+            font-weight: 600;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 48rpx;
+                height: 4rpx;
+                background: #2563eb;
+                border-radius: 2rpx;
+            }
         }
     }
 }
-.list {
-    &-item {
-        height: 300px;
+
+/* 骨架屏 */
+.skeleton-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16rpx;
+    padding: 8rpx;
+}
+
+.skeleton-card {
+    width: calc(50% - 8rpx);
+    background: #fff;
+    border-radius: 16rpx;
+    overflow: hidden;
+
+    &__image {
+        width: 100%;
+        height: 260rpx;
+    }
+
+    &__content {
+        padding: 16rpx;
+    }
+
+    &__title {
+        height: 28rpx;
+        border-radius: 6rpx;
+        background: #e2e8f0;
+        margin-bottom: 12rpx;
+    }
+
+    &__desc {
+        height: 22rpx;
+        border-radius: 6rpx;
+        background: #e2e8f0;
+        margin-bottom: 16rpx;
+    }
+
+    &__price-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__price {
+        width: 100rpx;
+        height: 28rpx;
+        border-radius: 6rpx;
+        background: #e2e8f0;
+    }
+
+    &__tag {
+        width: 64rpx;
+        height: 22rpx;
+        border-radius: 6rpx;
+        background: #e2e8f0;
+    }
+}
+
+.skeleton-animate {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* 商品卡片 */
+.product-card {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 16rpx;
+    overflow: hidden;
+    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease;
+
+    &:active {
+        transform: scale(0.98);
+    }
+
+    &__image {
+        width: 100%;
+        height: 55%;
+        display: block;
+    }
+
+    &__info {
+        padding: 16rpx;
+        display: flex;
+        flex-direction: column;
+        height: 45%;
         box-sizing: border-box;
-        border-radius: 10rpx;
-        border: $hy-border-line;
-        margin-bottom: 20rpx;
+    }
+
+    &__name {
+        font-size: 26rpx;
+        font-weight: 500;
+        color: #1e293b;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__desc {
+        font-size: 22rpx;
+        color: #94a3b8;
+        margin-top: 6rpx;
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 8rpx;
+    }
+
+    &__price {
+        font-size: 32rpx;
+        font-weight: 700;
+        color: #ef4444;
+    }
+
+    &__symbol {
+        font-size: 22rpx;
+        font-weight: 600;
+    }
+
+    &__sold {
+        font-size: 20rpx;
+        color: #94a3b8;
     }
 }
 </style>

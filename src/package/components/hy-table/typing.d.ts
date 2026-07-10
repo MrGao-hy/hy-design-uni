@@ -23,7 +23,7 @@ export type SortType = 'asc' | 'desc' | 'normal'
 
 export interface ITableEmits {
     /** 当某一行被点击时会触发该事件 */
-    (e: 'row-click', row: any, index: number): void
+    'row-click': [row: any, index: number]
     /** 触发本地排序或远程排序事件 */
-    (e: 'sort-change', key: string, sort: SortType): void
+    'sort-change': [key: string, sort: SortType]
 }

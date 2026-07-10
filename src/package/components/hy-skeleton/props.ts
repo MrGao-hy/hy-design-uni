@@ -18,7 +18,7 @@ const skeletonProps = {
      * 【示例三】，`[1, 2, [{ width, height }, { width, height, marginLeft }]]` 表示第三行有两列，且自定义宽度、高度和间距
      */
     rowCol: {
-        type: Array as PropType<SkeletonRowCol>
+        type: Array as PropType<SkeletonRowCol[]>
     },
     /**
      * 是否为加载状态，如果是则显示骨架图，如果不是则显示加载完成的内容

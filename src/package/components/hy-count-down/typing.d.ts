@@ -8,9 +8,9 @@ type TimeDataVo = {
 
 export interface ICountDownEmits {
     /** 过程中，倒计时变化时触发 */
-    (e: 'change', time: TimeDataVo): void
+    change: [time: TimeDataVo]
     /** 倒计时结束触发 */
-    (e: 'finish'): void
+    finish: []
 }
 
 /** HyCountDown 组件实例暴露的方法 */

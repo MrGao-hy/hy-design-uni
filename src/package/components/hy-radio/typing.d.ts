@@ -6,7 +6,7 @@ export interface HyRadioProps extends ExtractPropTypes<typeof radioProps> {}
 
 export interface IRadioEmits {
     /** 选择触发 */
-    (e: 'change', temp: CheckboxColumnsVo): void
+    change: [temp: CheckboxColumnsVo]
     /** 更新值触发 */
-    (e: 'update:modelValue', temp: any): void
+    'update:modelValue': [temp: any]
 }

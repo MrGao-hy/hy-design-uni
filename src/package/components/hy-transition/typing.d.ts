@@ -1,16 +1,16 @@
 export interface ITransitionEmits {
     /** 进入中触发 */
-    (e: 'enter'): void
+    enter: []
     /** 离开中触发 */
-    (e: 'leave'): void
+    leave: []
     /** 点击触发 */
-    (e: 'click'): void
+    click: []
     /** 进入后触发 */
-    (e: 'afterEnter'): void
+    afterEnter: []
     /** 离开后触发 */
-    (e: 'afterLeave'): void
+    afterLeave: []
     /** 进入前触发 */
-    (e: 'beforeEnter'): void
+    beforeEnter: []
     /** 离开前触发 */
-    (e: 'beforeLeave'): void
+    beforeLeave: []
 }

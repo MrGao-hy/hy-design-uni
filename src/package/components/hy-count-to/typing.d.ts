@@ -1,6 +1,6 @@
 export interface ICountToEmits {
     /** 结束执行函数 */
-    (e: 'end'): void
+    end: []
 }
 
 /** HyCountTo 组件实例暴露的方法 */

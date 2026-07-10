@@ -46,8 +46,8 @@ const list = reactive([
     { title: '缩放退出', value: 'zoom-out' }
 ])
 
-const onClick = (temp: CellContentVo) => {
-    mode.value = temp.value!
+const onClick = (temp: CommonType.CellItem) => {
+    mode.value = temp.value as HyApp.TransitionMode
     show.value = true
     setTimeout(() => {
         show.value = false

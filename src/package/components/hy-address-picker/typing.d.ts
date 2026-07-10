@@ -4,13 +4,13 @@ export type ConfirmParams = {
 }
 export interface IAddressPickerEmits {
     /** 关闭选择器时触发 */
-    (e: 'close'): void
+    close: []
     /** 点击取消按钮触发 */
-    (e: 'cancel'): void
+    cancel: []
     /** 点击确认按钮触发 */
-    (e: 'confirm', params: ConfirmParams): void
+    confirm: [params: ConfirmParams]
     /** 当选择值变化时触发 */
-    (e: 'change', args: any): void
+    change: [args: any]
     /** 当选择值变化时触发 */
-    (e: 'update:modelValue', value: ConfirmParams['value']): void
+    'update:modelValue': [value: ConfirmParams['value']]
 }

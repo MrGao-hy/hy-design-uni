@@ -29,7 +29,7 @@ export type FloatPositionVo =
 
 export interface IFloatButtonEmits {
     /** 点击悬浮按钮触发 */
-    (e: 'click'): void
+    click: []
     /** 点击菜单按钮触发 */
-    (e: 'clickItem', item: MenusType, index: number): void
+    clickItem: [item: MenusType, index: number]
 }

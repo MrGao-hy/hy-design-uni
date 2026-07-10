@@ -1,10 +1,10 @@
 export interface IPopupEmits {
     /** 弹出层打开触发 */
-    (e: 'open'): void
+    open: []
     /** 弹出层关闭触发 */
-    (e: 'close'): void
+    close: []
     /** 弹出层点击触发 */
-    (e: 'click'): void
+    click: []
     /** 显示隐藏触发 */
-    (e: 'update:show', visible: boolean): void
+    'update:show': [visible: boolean]
 }

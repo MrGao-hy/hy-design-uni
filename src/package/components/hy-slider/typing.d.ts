@@ -1,10 +1,10 @@
 export interface ISliderEmits {
     /** 开始滑动触发 */
-    (e: 'start'): void
+    start: []
     /** 触发事件（拖动过程中） */
-    (e: 'changing', value: number | number[]): void
+    changing: [value: number | number[]]
     /** 触发事件 */
-    (e: 'change', value: number | number[]): void
+    change: [value: number | number[]]
     /** 数值改变触发 */
-    (e: 'update:modelValue', value: number | number[]): void
+    'update:modelValue': [value: number | number[]]
 }

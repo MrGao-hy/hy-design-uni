@@ -18,7 +18,7 @@ export interface SubmitBarIconMenus {
 
 export interface ISubmitBarEmits {
     /** 点击按钮触发 */
-    (e: 'click', index: number): void
+    click: [index: number]
     /** 点击左侧小菜单图标触发 */
-    (e: 'menuClick', temp: SubmitBarIconMenus, index: number): void
+    menuClick: [temp: SubmitBarIconMenus, index: number]
 }

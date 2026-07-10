@@ -48,5 +48,5 @@ export interface HyIconProps {
 
 export interface IIconEmits {
     /** 点击图标触发 */
-    (e: 'click', index: string, e: Event): void
+    click: [index: string, e: Event]
 }

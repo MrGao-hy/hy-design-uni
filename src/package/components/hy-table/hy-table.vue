@@ -398,7 +398,7 @@ const processedData = computed(() => {
     let data = [...props.data]
 
     if (sortField.value) {
-        data.sort((a, b) => {
+        data.sort((a: any, b: any) => {
             const aVal = a[sortField.value]
             const bVal = b[sortField.value]
 

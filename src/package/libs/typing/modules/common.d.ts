@@ -46,6 +46,7 @@ declare namespace HyApp {
      * @description 布局方式：top-上，bottom-下，center-中间
      * */
     type ColumnCenterType = TopBottomType | 'center'
+    type UDLRType = LeftRightType | TopBottomType
     /**
      * @description 布局方式：top-上，bottom-下
      * */

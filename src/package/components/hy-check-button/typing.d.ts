@@ -43,7 +43,7 @@ export type FieldNamesType = {
 
 export interface ICheckButtonEmits {
     /** 选择触发 */
-    (e: 'change', value: any): void
+    change: [value: any]
     /** 更新值触发 */
-    (e: 'update:modelValue', value: any): void
+    'update:modelValue': [value: any]
 }

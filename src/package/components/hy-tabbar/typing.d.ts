@@ -16,7 +16,7 @@ export interface TabBarItem {
 
 export interface ITabBarEmits {
     /** 更新选中索引 */
-    (e: 'update:modelValue', index: number): void
+    'update:modelValue': [index: number]
     /** 变化事件 */
-    (e: 'change', index: number): void
+    change: [index: number]
 }

@@ -10,7 +10,7 @@ export type ParamType = {
 // ITabBarGroupEmits 接口定义组件的自定义事件
 export interface ITabBarGroupEmits {
     /** 更新选中索引 */
-    (e: 'update:modelValue', value: string | number): void
+    'update:modelValue': [value: string | number]
     /** 变化事件 */
-    (e: 'change', param: ParamType): void
+    change: [param: ParamType]
 }

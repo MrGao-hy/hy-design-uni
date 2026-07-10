@@ -115,7 +115,7 @@ import {
     inject,
     nextTick
 } from 'vue'
-import type { IPopoverEmits, IPopoverExpose } from './typing'
+import type { IPlacementVo, IPopoverEmits, IPopoverExpose } from './typing'
 import {
     type Queue,
     queueKey,
@@ -160,7 +160,7 @@ watch(
 
 watch(
     () => props.placement,
-    (newVal) => {
+    (newVal: IPlacementVo) => {
         nextTick(() => {
             popover.init(newVal, visibleArrow.value, selector)
         })
@@ -188,7 +188,7 @@ watch(
         }
         popover.showStyle.value = newValue ? 'display: inline-block;' : 'display: none;'
         emit('change', { show: newValue })
-        emit(`${newValue ? 'open' : 'close'}`)
+        newValue ? emit('open') : emit('close')
     }
 )
 

@@ -32,5 +32,5 @@ export interface CustomKeysVo {
 
 export interface IGridEmits {
     /** 点击小菜单触发 */
-    (e: 'click', name: string | GridItemVo): void
+    click: [name: string | GridItemVo]
 }

@@ -73,6 +73,6 @@ const tabbarGroupProps = {
     customStyle: Object as PropType<CSSProperties>,
     /** 自定义外部类名 */
     customClass: String
-} as const
+}
 
 export default tabbarGroupProps

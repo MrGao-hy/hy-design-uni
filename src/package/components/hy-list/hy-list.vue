@@ -150,16 +150,32 @@ onMounted(() => {
  * 获取指定索引的实际高度（优先从缓存获取）
  */
 const getItemHeight = (index: number): number => {
-    return heightCache[index] ?? estimatedHeight.value
+    return heightCache[index] || estimatedHeight.value
 }
 
 /**
- * 计算从0到指定索引的累计高度
+ * 计算从0到指定索引对应的视觉累计高度
+ * line=2 时，两个 item 占同一行，高度按行计算
  */
 const getCumulativeHeight = (endIndex: number): number => {
+    if (props.line <= 1) {
+        let total = 0
+        for (let i = 0; i < endIndex && i < props.list.length; i++) {
+            total += getItemHeight(i)
+        }
+        return total
+    }
+    // 多列：每 line 个 item 为一行，取每行中的最大高度
     let total = 0
-    for (let i = 0; i < endIndex && i < props.list.length; i++) {
-        total += getItemHeight(i)
+    for (let row = 0; row * props.line < endIndex && row * props.line < props.list.length; row++) {
+        let maxRowHeight = 0
+        for (let col = 0; col < props.line; col++) {
+            const idx = row * props.line + col
+            if (idx < endIndex && idx < props.list.length) {
+                maxRowHeight = Math.max(maxRowHeight, getItemHeight(idx))
+            }
+        }
+        total += maxRowHeight
     }
     return total
 }
@@ -238,7 +254,7 @@ const paddingAttr = computed(() => {
  * 虚拟列表真实展示数据
  */
 const virtualData = computed<(string | Record<string, any>)[]>(() => {
-    return props.list.slice(start.value, over.value)
+    return props.list.slice(start.value, over.value) as (string | Record<string, any>)[]
 })
 
 /**
@@ -275,17 +291,29 @@ watch(
     { immediate: true }
 )
 
+// 触底锁，防止连续触发
+const isLowerLocked = ref(false)
+
 /**
  * 监听滚动条距离顶部距离，实时更新（带节流）
  */
 const onScroll = throttleFn((e: any) => {
     scrollTop.value = e.detail.scrollTop || 0
+    // 滚动离开底部区域后解锁
+    if (isLowerLocked.value) {
+        const scrollHeight = e.detail.scrollHeight || 0
+        if (scrollTop.value + viewHeight.value < scrollHeight - 10) {
+            isLowerLocked.value = false
+        }
+    }
 }, 16)
 
 /**
  * 滚动底部函数
  * */
 const scrollToLower = () => {
+    if (isLowerLocked.value) return
+    isLowerLocked.value = true
     emit('scrollToLower')
 }
 
@@ -313,20 +341,14 @@ const scrollToIndex = (index: number, offset: number = 0) => {
     }
 
     const scrollPosition = getCumulativeHeight(index) + offset
-    uni.createSelectorQuery().select('.hy-virtual-container').scrollIntoView({
-        scrollTop: scrollPosition,
-        duration: 300
-    })
+    scrollTop.value = scrollPosition
 }
 
 /**
  * 滚动到顶部
  */
 const scrollToTop = () => {
-    uni.createSelectorQuery().select('.hy-virtual-container').scrollIntoView({
-        scrollTop: 0,
-        duration: 300
-    })
+    scrollTop.value = 0
 }
 
 /**

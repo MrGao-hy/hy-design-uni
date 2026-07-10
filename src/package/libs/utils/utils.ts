@@ -461,7 +461,7 @@ function getPx(value: string | number, unit: boolean = false): string | number {
     }
     // 如果带有rpx，先取出其数值部分，再转为px值
     if (/(rpx|upx)$/.test(value)) {
-        return unit ? `${uni.rpx2px(parseInt(value))}px` : Number(uni.rpx2px(parseInt(value)))
+        return unit ? `${uni.upx2px(parseInt(value))}px` : Number(uni.upx2px(parseInt(value)))
     } else if (/(px)$/.test(value)) {
         return unit ? value : Number(value.replace('px', ''))
     } else {

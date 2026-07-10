@@ -135,7 +135,7 @@ const handleTouchMove = (event: any) => {
         props.indexList.length - 1
     )
 
-    const clickedIndex = props.indexList[index]?.index || props.indexList[index]
+    const clickedIndex = props.indexList[index]?.index
     if (clickedIndex) {
         // 只有当索引发生变化时才更新activeIndex
         if (clickedIndex !== props.modelValue) {

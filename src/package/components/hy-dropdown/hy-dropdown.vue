@@ -36,13 +36,13 @@ const dropdownStyle = computed(() => {
               position: 'fixed',
               left: 0,
               // #ifdef H5
-              top: '44px',
-              // #endif
-              // #ifndef H5
-              top: '0px'
+              top: '44px'
               // #endif
           }
         : {}
+    // #ifndef H5
+    if (props.sticky) style.top = '0px'
+    // #endif
     style.height = addUnit(props.height)
     if (props.borderBottom) style.borderBottom = '1px solid #dadbde'
 

@@ -17,9 +17,9 @@ export type SwipeActionBeforeClose = (
 
 export interface ISwipeActionEmits {
     /** 当滑动按钮打开时，点击整个滑动操作容器触发 click 事件 */
-    (e: 'click', value: SwipeActionPosition): void
+    click: [value: SwipeActionPosition]
     /** 点击动作执行函数 */
-    (e: 'clickAction', temp: any, index: number): void
+    clickAction: [temp: any, index: number]
     /** 点击动作 */
-    (e: 'update:modelValue', value: SwipeActionStatus): void
+    'update:modelValue': [value: SwipeActionStatus]
 }

@@ -91,10 +91,8 @@ definePage({
 const showAvatar = ref(false)
 
 const previewImage = ({ url }: IAvatarClickConfig) => {
-    console.log(url)
-
     uni.previewImage({
-        urls: [url],
+        urls: [url as string],
         longPressActions: {
             itemList: ['发送给朋友', '保存图片', '收藏'],
             success: function () {},

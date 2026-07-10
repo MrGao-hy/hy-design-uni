@@ -135,7 +135,7 @@ const onConfirm = (params: any) => {
     showCascader.value = false
 }
 
-const asyncOptions = {
+const asyncOptions: any = {
     root: [
         { value: 'beijing', label: '北京市' },
         { value: 'shanghai', label: '上海市' },

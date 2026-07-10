@@ -1,16 +1,16 @@
 export interface INumberStepEmits {
     /** 输入框得到焦点触发 */
-    (e: 'focus', value: string): void
+    focus: [value: string]
     /** 输入框失去焦点时触发 */
-    (e: 'blur', value: string): void
+    blur: [value: string]
     /** 超过范围阈值时触发 */
-    (e: 'overLimit', type: 'minus' | 'plus'): void
+    overLimit: [type: 'minus' | 'plus']
     /** 输入框内容发生变化时触发 */
-    (e: 'change', value: string | number): void
+    change: [value: string | number]
     /** 点击增加按钮触发 */
-    (e: 'plus', value: string): void
+    plus: [value: string | number]
     /** 点击减少按钮触发 */
-    (e: 'minus', value: string): void
+    minus: [value: string | number]
     /** 值更新触发 */
-    (e: 'update:modelValue', value: string | number): void
+    'update:modelValue': [value: string | number]
 }

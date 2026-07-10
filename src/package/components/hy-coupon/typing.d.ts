@@ -8,7 +8,7 @@ export type CouponType = 'moneyOff' | 'discount' | 'fixedAmount'
 
 export interface ICouponEmits {
     /** 点击优惠券 */
-    (e: 'click'): void
+    click: []
     /** 点击使用优惠券 */
-    (e: 'used'): void
+    used: []
 }

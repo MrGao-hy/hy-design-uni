@@ -52,13 +52,13 @@ interface SelectEventParams {
 }
 export interface IActionSheetEmits {
     /** 选中了某个动作时触发 */
-    (e: 'select', params: SelectEventParams): void
+    select: [params: SelectEventParams]
     /** 点击取消按钮时触发 */
-    (e: 'cancel'): void
+    cancel: []
     /** 点击遮罩或关闭按钮时触发 */
-    (e: 'close'): void
+    close: []
     /** 打开面板时触发 */
-    (e: 'open'): void
+    open: []
     /** 手动更新弹窗显示隐藏 */
-    (e: 'update:modelValue', visible: boolean): void
+    'update:modelValue': [visible: boolean]
 }

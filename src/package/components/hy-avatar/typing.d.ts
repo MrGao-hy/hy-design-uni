@@ -7,5 +7,5 @@ export interface IAvatarClickConfig {
 
 export interface IAvatarEmit {
     /** 点击头像触发 */
-    (e: 'click', config: IAvatarClickConfig, e: Event): void
+    click: [config: IAvatarClickConfig, e: Event]
 }

@@ -124,7 +124,7 @@ const handleScroll = (e: any) => {
     // 使用uni.createSelectorQuery()获取所有索引section的位置信息
     const scrollTop = e.detail.scrollTop
     if (isScroll.value) {
-        const index = sectionRect.value.findIndex((item) => item.top - 1 > scrollTop) - 1
+        const index = sectionRect.value.findIndex((item) => item.top! - 1 > scrollTop) - 1
         const keys = Object.keys(cityData)
         currentActiveIndex.value = keys[index]
     }

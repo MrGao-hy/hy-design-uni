@@ -27,7 +27,7 @@ export interface MenuParamsVo {
 
 export interface IMenuEmits {
     /** 选中触发 */
-    (e: 'change', temp: MenuParamsVo, index: number): void
+    change: [temp: MenuParamsVo, index: number]
     /** 选中触发 */
-    (e: 'update:modelValue', id: MenuParamsVo['id']): void
+    'update:modelValue': [id: MenuParamsVo['id']]
 }

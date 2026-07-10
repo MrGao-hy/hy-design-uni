@@ -87,7 +87,7 @@ import {
     useTranslate
 } from '../../libs'
 import type { ICalendarEmits, ICalendarExpose } from './typing'
-import Calendar from '../../libs/utils/calendar.js'
+import { Calendar } from '../../libs'
 import calendarProps from './props'
 import dayjs from 'dayjs/esm'
 // 组件

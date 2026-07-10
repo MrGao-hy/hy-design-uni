@@ -9,19 +9,19 @@ export const isNumericString = (text: string | number): boolean => {
 
 /**
  * @description 判断是否是数字
- * @param {String | Number} text 值
+ * @param {unknown} text 值
  * @return {Boolean}
  * */
-export const isNumber = (text: string | number): boolean => {
-    return typeof text === 'number' || isNumericString(text)
+export const isNumber = (text: unknown): boolean => {
+    return typeof text === 'number' || (typeof text === 'string' && isNumericString(text))
 }
 
 /**
  * @description 判断是否数组
- * @param {any} arr 传入数组值
+ * @param {unknown} arr 传入数组值
  * @return {Boolean}
  */
-export const isArray = (arr: any): arr is Array<any> => {
+export const isArray = (arr: unknown): arr is Array<any> => {
     // 如果 Array.isArray 函数可用，直接使用该函数检查
     if (typeof Array.isArray === 'function') {
         return Array.isArray(arr)

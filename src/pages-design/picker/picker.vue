@@ -2,7 +2,7 @@
     <the-root-page>
         <view class="hy-title">基础使用（单列模式）</view>
         <view class="hy-container">
-            <hy-picker :show="show1" :columns="columns1" @confirm="onConfirm1"></hy-picker>
+            <hy-picker v-model:show="show1" :columns="columns1" @confirm="onConfirm1"></hy-picker>
             <hy-cell clickable @click="onCellClick">
                 <hy-cell-item title="打开选择器" name="show1" :value="value1"></hy-cell-item>
             </hy-cell>
@@ -93,9 +93,7 @@
                 :columns="columns8"
                 :input="{
                     placeholder: '请选择选项',
-                    fontSize: 16,
-                    border: false,
-                    suffixIcon: 'arrow-down'
+                    fontSize: 16
                 }"
             ></hy-picker>
         </view>
@@ -103,20 +101,18 @@
         <view class="hy-title">设置默认选中项</view>
         <view class="hy-container">
             <hy-picker
-                :show="show9"
+                v-model="value9"
                 :columns="columns9"
                 :defaultIndex="[1, 2]"
+                has-input
                 @confirm="onConfirm9"
             ></hy-picker>
-            <hy-cell clickable @click="onCellClick">
-                <hy-cell-item title="默认选中" name="show9" :value="value9"></hy-cell-item>
-            </hy-cell>
         </view>
 
         <view class="hy-title">禁用点击遮罩关闭</view>
         <view class="hy-container">
             <hy-picker
-                :show="show10"
+                v-model:show="show10"
                 :columns="columns10"
                 :closeOnClickOverlay="false"
                 title="必须点击按钮关闭"
@@ -178,7 +174,7 @@ const columns3 = reactive([
 ])
 
 // 4. 多列联动
-const pickerRef = ref(null)
+const pickerRef = ref<IPickerExpose>()
 // 11. 自定义插槽 ref
 const pickerRef11 = ref<IPickerExpose>()
 const value4 = ref([])
@@ -186,7 +182,10 @@ const columns4 = reactive([
     ['中国', '美国'],
     ['北京', '上海', '广州']
 ])
-const cityData = reactive({
+type CountryMap = {
+    [key: string]: string[]
+}
+const cityData: CountryMap = reactive({
     中国: ['北京', '上海', '广州', '深圳'],
     美国: ['纽约', '洛杉矶', '芝加哥', '休斯顿']
 })
@@ -216,8 +215,7 @@ const value8 = ref('')
 const columns8 = reactive([['选项1', '选项2', '选项3']])
 
 // 9. 默认选中项
-const show9 = ref(false)
-const value9 = ref('')
+const value9 = ref(['B', '4'])
 const columns9 = reactive([
     ['A', 'B', 'C', 'D'],
     ['1', '2', '3', '4']
@@ -232,43 +230,43 @@ const columns10 = reactive([['选项1', '选项2', '选项3']])
 const value11 = ref('')
 const columns11 = reactive([['选项1', '选项2', '选项3']])
 
-const onConfirm1 = (e) => {
+const onConfirm1 = (e: any) => {
     console.log('基础使用:', e.value)
     value1.value = e.value.join('')
     show1.value = false
 }
 
-const onConfirm2 = (e) => {
+const onConfirm2 = (e: any) => {
     console.log('输入框模式:', e.value)
 }
 
-const onConfirm3 = (e) => {
+const onConfirm3 = (e: any) => {
     console.log('多列模式:', e.value)
 }
 
-const changeHandler = (e) => {
+const changeHandler = (e: any) => {
     const { columnIndex, value } = e
     if (columnIndex === 0) {
-        const selectedCountry = value[0]
-        pickerRef.value.setColumnValues(1, cityData[selectedCountry])
+        const selectedCountry: string = value[0]
+        pickerRef.value && pickerRef.value.setColumnValues(1, cityData[selectedCountry])
     }
 }
 
-const onConfirm4 = (e) => {
+const onConfirm4 = (e: any) => {
     console.log('联动选择:', e.value)
 }
 
-const onConfirm5 = (e) => {
+const onConfirm5 = (e: any) => {
     console.log('对象数据:', e.value)
 }
 
-const onConfirm6 = (e) => {
+const onConfirm6 = (e: any) => {
     console.log('居中弹窗:', e.value)
     value6.value = e.value.join('')
     show6.value = false
 }
 
-const onConfirm7 = (e) => {
+const onConfirm7 = (e: any) => {
     console.log('自定义按钮:', e.value)
     value7.value = e.value.join('')
     show7.value = false
@@ -279,23 +277,21 @@ const onCancel7 = () => {
     show7.value = false
 }
 
-const onConfirm9 = (e) => {
+const onConfirm9 = (e: any) => {
     console.log('默认选中:', e.value)
     value9.value = e.value.join(' / ')
-    show9.value = false
 }
 
-const onConfirm10 = (e) => {
+const onConfirm10 = (e: any) => {
     console.log('禁用遮罩:', e.value)
     value10.value = e.value.join('')
     show10.value = false
 }
 
-const onCellClick = (name: string) => {
+const onCellClick = (name: string | number) => {
     if (name === 'show1') show1.value = true
     else if (name === 'show6') show6.value = true
     else if (name === 'show7') show7.value = true
-    else if (name === 'show9') show9.value = true
     else if (name === 'show10') show10.value = true
 }
 

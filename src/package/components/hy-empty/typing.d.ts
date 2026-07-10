@@ -34,5 +34,5 @@ export type IEmptyIcon = {
 
 export interface IEmptyEmits {
     /** 点击按钮触发 */
-    (e: 'click'): void
+    click: []
 }

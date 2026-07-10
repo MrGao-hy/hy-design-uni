@@ -50,16 +50,17 @@ export interface UploadFileParams {
 }
 
 export interface IUploadEmits {
-    /** 点击预览大图触发 */
-    (e: 'clickPreview', params: UploadFileParams): void
+    // (e: 'clickPreview', params: UploadFileParams): void
     /** 上传前触发 */
-    (e: 'beforeRead', params: UploadFileParams): void
+    beforeRead: [params: UploadFileParams]
     /** 上传错误触发 */
-    (e: 'error', error: any): void
+    error: [error: any]
     /** 删除触发 */
-    (e: 'delete', params: UploadFileParams): void
+    delete: [params: UploadFileParams]
     /** 上传完成触发 */
-    (e: 'afterRead', params: UploadFileParams): void
+    afterRead: [params: UploadFileParams]
+    /** 点击预览大图触发 */
+    clickPreview: [payload: PreviewItem]
     /** 超出最大值 */
-    (e: 'oversize', params: UploadFileParams): void
+    oversize: [val: PreviewItem | FileVo]
 }

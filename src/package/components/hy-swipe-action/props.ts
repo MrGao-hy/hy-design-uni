@@ -1,4 +1,4 @@
-import type { SwipeActionOptionsVo, SwipeActionStatus } from './typing'
+import type { SwipeActionOptionsVo, SwipeActionReason, SwipeActionStatus } from './typing'
 import type { PropType } from 'vue'
 
 const swipeActionProps = {
@@ -6,7 +6,7 @@ const swipeActionProps = {
      * 滑动按钮的状态，使用v-model进行双向绑定。
      * @values left,close,right
      * */
-    modelValue: String,
+    modelValue: String as PropType<SwipeActionStatus>,
     /** 是否禁用滑动操作 */
     disabled: {
         type: Boolean,

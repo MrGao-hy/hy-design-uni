@@ -11,21 +11,21 @@ export interface HyInputProps extends ExtractPropTypes<typeof inputProps> {}
 
 export interface IInputEmits {
     /** 输入框失去焦点时触发 */
-    (e: 'blur', event: InputOnBlurEvent, value: string | number): void
+    blur: [event: InputOnBlurEvent, value: string | number]
     /** 输入框聚焦时触发 */
-    (e: 'focus', event: InputOnFocusEvent): void
+    focus: [event: InputOnFocusEvent]
     /** 点击完成按钮时触发 */
-    (e: 'confirm', event: InputOnConfirmEvent, value: string | number): void
+    confirm: [event: InputOnConfirmEvent, value: string | number]
     /** 键盘高度发生变化的时候触发此事件 */
-    (e: 'keyboardheightchange', event: InputOnKeyboardheightchange): void
+    keyboardheightchange: [event: InputOnKeyboardheightchange]
     /** 内容发生变化触发此事件 */
-    (e: 'change', value: string | number): void
+    change: [value: string | number]
     /** 内容发生变化触发此事件 */
-    (e: 'update:modelValue', value: string | number): void
+    'update:modelValue': [value: string | number]
     /** 点击清空内容 */
-    (e: 'clear'): void
+    clear: []
     /** 点击前缀触发 */
-    (e: 'onPrefix'): void
+    onPrefix: []
     /** 点击后缀触发 */
-    (e: 'onSuffix'): void
+    onSuffix: []
 }

@@ -38,7 +38,7 @@ export default {
 <script setup lang="ts">
 import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, getRect, range, type RectResultType, sleep, getPx } from '../../libs'
+import { addUnit, getRect, range, sleep, getPx } from '../../libs'
 import lineProgressProps from './props'
 
 /**
@@ -78,7 +78,7 @@ const init = async () => {
     await sleep(20)
     await resizeProgressWidth()
 }
-const getProgressWidth = (): Promise<RectResultType<false>> => {
+const getProgressWidth = (): Promise<HyUtils.RectResultType<false>> => {
     return new Promise((resolve) => {
         // #ifndef APP-NVUE
         resolve(getRect('.hy-line-progress__background', false, instance))

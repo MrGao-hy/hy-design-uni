@@ -90,7 +90,7 @@ const options_3 = ref([
         value: 4
     }
 ])
-const handleChange = (e) => {}
+const handleChange = () => {}
 
 useShareButton()
 </script>

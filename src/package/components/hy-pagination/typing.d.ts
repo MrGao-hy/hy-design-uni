@@ -4,7 +4,7 @@ type PaginationVo = {
 
 export interface IPaginationEmits {
     /** 改变值触发 */
-    (e: 'change', param: PaginationVo): void
+    change: [param: PaginationVo]
     /** 改变值触发 */
-    (e: 'update:modelValue', value: PaginationVo['value']): void
+    'update:modelValue': [value: PaginationVo['value']]
 }

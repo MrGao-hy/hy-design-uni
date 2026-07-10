@@ -41,12 +41,12 @@ export interface HyModalProps {
 
 export interface IModalEmits {
     /** 点击确认按钮时触发 */
-    (e: 'confirm'): void
+    confirm: []
     /** 点击取消按钮时触发 */
-    (e: 'cancel'): void
+    cancel: []
     /** 点击遮罩关闭时触发 */
-    (e: 'close'): void
+    close: []
     /** 更新值触发 */
-    (e: 'update:modelValue', show: boolean): void
-    (e: 'update:loading', show: boolean): void
+    'update:modelValue': [show: boolean]
+    'update:loading': [show: boolean]
 }

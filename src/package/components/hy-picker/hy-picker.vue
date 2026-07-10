@@ -193,8 +193,13 @@ const parseModelValue = (value: string | number | any[]): any[] => {
  * @returns 索引数组
  */
 const findColumnIndexs = (values: any[]): number[] => {
+    // columns 可能是一维（单列）或二维（多列），统一归一化为二维
+    const normalizedColumns: (string | PickerColumnVo)[][] = isArray(props.columns[0])
+        ? (props.columns as (string | PickerColumnVo)[][])
+        : [props.columns as (string | PickerColumnVo)[]]
+
     return values.map((item, columnIndex) => {
-        const column = props.columns[columnIndex]
+        const column = normalizedColumns[columnIndex]
         if (!column) return 0
 
         const index = column.findIndex((option) => {
@@ -354,7 +359,9 @@ const onConfirm = () => {
 const changeHandler = (e: any) => {
     const { value } = e.detail
     // 找出变化的列
-    const changedIndex = value.findIndex((newValue, i) => newValue !== (lastIndex.value[i] ?? 0))
+    const changedIndex = value.findIndex(
+        (newValue: number, i: number) => newValue !== (lastIndex.value[i] || 0)
+    )
 
     if (changedIndex === -1) return
 

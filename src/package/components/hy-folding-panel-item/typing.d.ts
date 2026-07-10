@@ -17,23 +17,23 @@ export interface IFoldingPanelItemEmits {
     /**
      * 点击面板时触发
      */
-    (e: 'click', index: number | string): void
+    click: [index: number | string]
     /**
      * 面板打开时触发
      */
-    (e: 'open', index: number | string): void
+    open: [index: number | string]
     /**
      * 面板关闭时触发
      */
-    (e: 'close', index: number | string): void
+    close: [index: number | string]
     /**
      * 面板状态改变时触发
      */
-    (e: 'change', expanded: boolean, index: number | string): void
+    change: [expanded: boolean, index: number | string]
     /**
      * 子项点击时通知父组件
      */
-    (e: 'child-click', index: number | string): void
+    'child-click': [index: number | string]
 }
 
 /** HyFoldingPanelItem 组件实例暴露的方法 */

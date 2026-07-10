@@ -109,10 +109,9 @@ const list_3 = reactive([
 ])
 
 // 实时过滤
-const onChange = (e) => {
-    const val = e
+const onChange = (e: string) => {
     // 1. 只保留数字和小数点
-    let filtered = val.replace(/[^\d.]/g, '')
+    let filtered = e.replace(/[^\d.]/g, '')
     // 2. 保证只有一个小数点
     filtered = filtered.replace(/\.{2,}/g, '.')
     // 3. 去掉开头的小数点

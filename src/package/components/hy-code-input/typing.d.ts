@@ -1,12 +1,12 @@
 export interface ICodeInputEmits {
     /** 输入内容发生改变时触发 */
-    (e: 'change', value: string | number): void
+    change: [value: string | number]
     /** 输入字符个数达maxlength值时触发确认 */
-    (e: 'finish', value: string | number): void
+    finish: [value: string | number]
     /** 更新值 */
-    (e: 'update:modelValue', value: string | number): void
+    'update:modelValue': [value: string | number]
     /** 输入框获取焦点时触发 */
-    (e: 'focus'): void
+    focus: []
     /** 输入框失去焦点时触发 */
-    (e: 'blur'): void
+    blur: []
 }

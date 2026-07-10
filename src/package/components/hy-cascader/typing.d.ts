@@ -25,10 +25,10 @@ export type CascaderLazyLoad = (
 ) => void
 
 export interface ICascaderEmits {
-    (e: 'close'): void
-    (e: 'cancel'): void
-    (e: 'confirm', params: CascaderEmitValue): void
-    (e: 'change', params: CascaderEmitValue): void
-    (e: 'update:show', show: boolean): void
-    (e: 'update:modelValue', value: CascaderValue): void
+    close: []
+    cancel: []
+    confirm: [params: CascaderEmitValue]
+    change: [params: CascaderEmitValue]
+    'update:show': [show: boolean]
+    'update:modelValue': [value: CascaderValue]
 }

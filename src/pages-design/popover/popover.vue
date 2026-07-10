@@ -85,7 +85,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { useQueue, IconConfig } from '@/package'
+import { useQueue, IconConfig, type PopoverItemParamsVo } from '@/package'
 // 组件
 import HyButton from '../../package/components/hy-button/hy-button.vue'
 import { useShareButton } from '@/composables'
@@ -121,7 +121,7 @@ const show = ref(false)
 
 setTimeout(() => (count.value = 10), 2000)
 
-const onMenu = ({ index, item }) => {
+const onMenu = ({ index, item }: PopoverItemParamsVo) => {
     uni.showToast({ title: `点击了第${index}个`, icon: 'none' })
 }
 

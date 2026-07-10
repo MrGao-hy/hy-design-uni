@@ -10,7 +10,7 @@ export interface UpdateVersionOptions {
     /** iOS AppStore地址 */
     iosStoreUrl?: string
     /** 下载进度 */
-    onProgress?: (progress: OnProgressDownloadResult) => void
+    onProgress?: (progress: UniNamespace.OnProgressDownloadResult) => void
     /** 更新前回调 */
     beforeUpdate?: (version: string) => boolean | void
     /** 更新成功 */
@@ -47,62 +47,63 @@ export const appInit = {
             return
         }
 
-        plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
-            const localVersion = widgetInfo.version
-            const compareResult = this.compareVersion(version, localVersion)
-            if (compareResult !== 1) {
-                return uni.showToast({ title: '已是最新版本', icon: 'none' })
-            }
-
-            if (typeof beforeUpdate === 'function') {
-                const result = beforeUpdate(version)
-
-                if (result === false) {
-                    return
+        if (plus.runtime.appid)
+            plus.runtime.getProperty(plus.runtime.appid, (widgetInfo) => {
+                const localVersion = widgetInfo.version
+                const compareResult = this.compareVersion(version, localVersion || '')
+                if (compareResult !== 1) {
+                    return uni.showToast({ title: '已是最新版本', icon: 'none' })
                 }
-            }
 
-            uni.showModal({
-                title: `发现新版本 V${version}`,
-                content: description,
-                showCancel: !force,
-                confirmText: '立即更新',
-                success: (res) => {
-                    if (!res.confirm) {
-                        if (typeof onCancel === 'function') {
-                            onCancel()
-                        }
+                if (typeof beforeUpdate === 'function') {
+                    const result = beforeUpdate(version)
+
+                    if (result === false) {
                         return
                     }
-
-                    if (typeof onConfirm === 'function') {
-                        onConfirm()
-                    }
-
-                    const platform = uni.getSystemInfoSync().platform
-
-                    // iOS
-                    if (platform === 'ios') {
-                        if (iosStoreUrl) {
-                            plus.runtime.openURL(iosStoreUrl)
-                        } else {
-                            uni.showToast({
-                                title: '请配置AppStore地址',
-                                icon: 'none'
-                            })
-                        }
-                        return
-                    }
-
-                    // Android
-                    this.downloadApp(url, {
-                        onProgress,
-                        onSuccess,
-                        onFail
-                    })
                 }
+
+                uni.showModal({
+                    title: `发现新版本 V${version}`,
+                    content: description,
+                    showCancel: !force,
+                    confirmText: '立即更新',
+                    success: (res) => {
+                        if (!res.confirm) {
+                            if (typeof onCancel === 'function') {
+                                onCancel()
+                            }
+                            return
+                        }
+
+                        if (typeof onConfirm === 'function') {
+                            onConfirm()
+                        }
+
+                        const platform = uni.getSystemInfoSync().platform
+
+                        // iOS
+                        if (platform === 'ios') {
+                            if (iosStoreUrl) {
+                                plus.runtime.openURL(iosStoreUrl)
+                            } else {
+                                uni.showToast({
+                                    title: '请配置AppStore地址',
+                                    icon: 'none'
+                                })
+                            }
+                            return
+                        }
+
+                        // Android
+                        this.downloadApp(url, {
+                            onProgress,
+                            onSuccess,
+                            onFail
+                        })
+                    }
+                })
             })
-        })
     },
 
     /**
@@ -142,7 +143,7 @@ export const appInit = {
     downloadApp(
         downloadUrl: string,
         callbacks?: {
-            onProgress?: (progress: OnProgressDownloadResult) => void
+            onProgress?: (progress: UniNamespace.OnProgressDownloadResult) => void
             onSuccess?: () => void
             onFail?: (error: string) => void
         }
@@ -251,25 +252,18 @@ export const appInit = {
 
         // APK整包更新
         if (isApk) {
-            plus.runtime.openFile(
-                filePath,
-                {},
-                () => {
-                    onSuccess?.()
-                },
-                (err) => {
-                    console.error('APK安装失败', err)
+            plus.runtime.openFile(filePath, {}, (err) => {
+                console.error('APK安装失败', err)
 
-                    const msg = 'APK安装失败'
+                const msg = 'APK安装失败'
 
-                    uni.showToast({
-                        title: msg,
-                        icon: 'none'
-                    })
+                uni.showToast({
+                    title: msg,
+                    icon: 'none'
+                })
 
-                    onFail?.(msg)
-                }
-            )
+                onFail?.(msg)
+            })
 
             return
         }

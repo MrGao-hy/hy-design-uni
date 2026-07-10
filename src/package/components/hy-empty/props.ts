@@ -9,7 +9,7 @@ const emptyProps = {
     },
     /**
      * 缺省页内容
-     * @values content,search,address,network,order,coupon,favor,history,message,comment,integral
+     * @values content,search,address,network,order,coupon,collect,history,message,comment,integral,card,notification,shop,activity,loading
      * */
     mode: {
         type: String,
@@ -45,7 +45,7 @@ const emptyProps = {
     imgMargin: String,
     /** 按钮属性值 */
     button: {
-        type: Object as PropType<HyButtonProps>
+        type: Object as PropType<Partial<HyButtonProps>>
     },
     navigateUrl: String,
     /** 定义需要用到的外部样式 */

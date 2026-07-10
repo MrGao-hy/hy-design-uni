@@ -81,13 +81,13 @@ export type ISignatureExpose = {
 
 export interface ISignatureEmits {
     /** 开始签名时触发 */
-    (e: 'start', event: TouchEvent): void
+    start: [event: TouchEvent]
     /** 结束签名时触发 */
-    (e: 'end', event: TouchEvent): void
+    end: [event: TouchEvent]
     /** 签名过程中触发 */
-    (e: 'signing', event: TouchEvent): void
+    signing: [event: TouchEvent]
     /** 确认签名时触发 */
-    (e: 'confirm', result: SignatureResult): void
+    confirm: [result: SignatureResult]
     /** 清空签名时触发 */
-    (e: 'clear'): void
+    clear: []
 }

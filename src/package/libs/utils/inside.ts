@@ -1,3 +1,5 @@
+import { isArray } from './inspect'
+
 /**
  * 生成bem规则类名
  * 由于微信小程序，H5，nvue之间绑定class的差异，无法通过:class="[bem()]"的形式进行同用
@@ -101,8 +103,10 @@ export function guid(len: number = 32, firstU: boolean = true, radix: number | n
 /**
  * 获取设备信息
  * */
-export const getWindowInfo = (): UniNamespace.GetWindowInfoResult => {
-    let ret: UniNamespace.GetWindowInfoResult
+export const getWindowInfo = ():
+    | UniNamespace.GetWindowInfoResult
+    | UniNamespace.GetSystemInfoResult => {
+    let ret: UniNamespace.GetWindowInfoResult | UniNamespace.GetSystemInfoResult
     // #ifdef APP || H5
     ret = uni.getWindowInfo()
     // #endif
@@ -112,12 +116,11 @@ export const getWindowInfo = (): UniNamespace.GetWindowInfoResult => {
     return ret
 }
 
-function pickExclude(obj, keys) {
-    // 某些情况下，type可能会为
+function pickExclude(obj: Record<string, any>, keys: string[]): Record<string, any> {
     if (!['[object Object]', '[object File]'].includes(Object.prototype.toString.call(obj))) {
         return {}
     }
-    return Object.keys(obj).reduce((prev, key) => {
+    return Object.keys(obj).reduce<Record<string, any>>((prev, key) => {
         if (!keys.includes(key)) {
             prev[key] = obj[key]
         }
@@ -125,27 +128,31 @@ function pickExclude(obj, keys) {
     }, {})
 }
 
-function formatImage(res) {
-    return res.tempFiles.map((item) => ({
-        ...pickExclude(item, ['path']),
-        type: 'image',
-        url: item.path,
-        thumb: item.path,
-        size: item.size,
+function formatImage(res: UniApp.ChooseImageSuccessCallbackResult) {
+    const files = isArray(res.tempFiles) ? res.tempFiles : [res.tempFiles]
+    return files.map((item) => {
+        const file = item as Record<string, any>
+        const base = {
+            ...pickExclude(file, ['path']),
+            type: 'image' as const,
+            url: file.path,
+            thumb: file.path,
+            size: file.size
+        }
         // #ifdef H5
-        name: item.name,
-        file: item
+        Object.assign(base, { name: file.name, file: file.file })
         // #endif
-    }))
+        return base
+    })
 }
 
-function formatVideo(res) {
+function formatVideo(res: UniApp.ChooseVideoSuccess) {
     return [
         {
             ...pickExclude(res, ['tempFilePath', 'thumbTempFilePath', 'errMsg']),
             type: 'video',
             url: res.tempFilePath,
-            thumb: res.thumbTempFilePath,
+            thumb: res.tempFilePath,
             size: res.size,
             // #ifdef H5
             name: res.name,
@@ -155,7 +162,7 @@ function formatVideo(res) {
     ]
 }
 
-function formatMedia(res) {
+function formatMedia(res: WechatMiniprogram.ChooseMediaSuccessCallbackResult) {
     return res.tempFiles.map((item) => ({
         ...pickExclude(item, ['fileType', 'thumbTempFilePath', 'tempFilePath']),
         type: res.type,
@@ -168,8 +175,15 @@ function formatMedia(res) {
     }))
 }
 
-function formatFile(res) {
-    return res.tempFiles.map((item) => ({
+function formatFile(
+    res: UniApp.ChooseFileSuccessCallbackResult | UniApp.ChooseMessageFileSuccessCallbackResult
+) {
+    const files: any[] = isArray(
+        res.tempFiles
+    )
+        ? res.tempFiles
+        : [res.tempFiles]
+    return files.map((item) => ({
         ...pickExclude(item, ['path']),
         url: item.path,
         size: item.size,
@@ -184,22 +198,23 @@ function formatFile(res) {
 export function chooseFile({
     accept,
     multiple,
-    capture,
+    sourceType,
     compressed,
     maxDuration,
     sizeType,
     camera,
-    maxCount,
+    maxCount = 9,
     extension
-}: any) {
+}: HyMediaType.ChooseFileOption) {
     return new Promise((resolve, reject) => {
         switch (accept) {
             case 'image':
                 uni.chooseImage({
                     count: multiple ? Math.min(maxCount, 9) : 1,
-                    sourceType: capture,
+                    sourceType,
                     sizeType,
-                    success: (res) => resolve(formatImage(res)),
+                    success: (res: UniApp.ChooseImageSuccessCallbackResult) =>
+                        resolve(formatImage(res)),
                     fail: reject
                 })
                 break
@@ -208,22 +223,23 @@ export function chooseFile({
             case 'media':
                 wx.chooseMedia({
                     count: multiple ? Math.min(maxCount, 9) : 1,
-                    sourceType: capture,
+                    sourceType,
                     maxDuration,
                     sizeType,
                     camera,
-                    success: (res) => resolve(formatMedia(res)),
+                    success: (res: WechatMiniprogram.ChooseMediaSuccessCallbackResult) =>
+                        resolve(formatMedia(res)),
                     fail: reject
                 })
                 break
             // #endif
             case 'video':
                 uni.chooseVideo({
-                    sourceType: capture,
+                    sourceType,
                     compressed,
                     maxDuration,
                     camera,
-                    success: (res) => resolve(formatVideo(res)),
+                    success: (res: UniApp.ChooseVideoSuccess) => resolve(formatVideo(res)),
                     fail: reject
                 })
                 break
@@ -234,19 +250,20 @@ export function chooseFile({
                 wx.chooseMessageFile({
                     count: multiple ? maxCount : 1,
                     type: accept,
-                    success: (res) => resolve(formatFile(res)),
+                    success: (res: UniApp.ChooseMessageFileSuccessCallbackResult) =>
+                        resolve(formatFile(res)),
                     fail: reject
                 })
                 // #endif
                 // #ifdef H5
                 // 需要hx2.9.9以上才支持uni.chooseFile
-                let params = {
+                let params: UniNamespace.ChooseFileOptions = {
                     count: multiple ? maxCount : 1,
                     type: accept,
                     success: (res) => resolve(formatFile(res)),
                     fail: reject
                 }
-                if (extension.length && extension.length > 0) {
+                if (extension && extension.length && extension.length > 0) {
                     params.extension = extension
                 }
                 uni.chooseFile(params)
@@ -265,13 +282,14 @@ export function chooseFile({
                 // #endif
                 // #ifdef H5
                 // 需要hx2.9.9以上才支持uni.chooseFile
-                let paramsFile = {
+                let paramsFile: UniNamespace.ChooseFileOptions = {
                     count: multiple ? maxCount : 1,
                     type: 'all',
-                    success: (res) => resolve(formatFile(res)),
+                    success: (res: UniApp.ChooseFileSuccessCallbackResult) =>
+                        resolve(formatFile(res)),
                     fail: reject
                 }
-                if (extension.length && extension.length > 0) {
+                if (extension && extension.length && extension.length > 0) {
                     paramsFile.extension = extension
                 }
                 uni.chooseFile(paramsFile)
@@ -299,7 +317,7 @@ export function priceFormat(
     const prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
     const sep = typeof thousandsSeparator === 'undefined' ? ',' : thousandsSeparator
     const dec = typeof decimalPoint === 'undefined' ? '.' : decimalPoint
-    let s = ''
+    let s: string[] = []
 
     s = (prec ? n + '' : `${Math.round(n)}`).split('.')
     const re = /(-?\d+)(\d{3})/

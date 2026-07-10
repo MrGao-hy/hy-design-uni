@@ -177,7 +177,7 @@ const toast = useToast()
 // 配置项
 const icon = ref(true)
 const loading = ref(false)
-const loadMode = ref('circle')
+const loadMode = ref<HyApp.LoadingMode>('circle')
 const position = ref('center')
 const callbackMessage = ref('')
 
@@ -213,7 +213,7 @@ const handleDuration = (duration: number) => {
 }
 
 // 加载提示
-const handleLoading = (message?: string, mode?: string) => {
+const handleLoading = (message?: string, mode?: HyApp.LoadingMode) => {
     toast.loading(message || '加载中...', {
         loadMode: mode || loadMode.value,
         position: position.value as any

@@ -337,7 +337,7 @@ const onTouchEnd2 = (e: TouchEvent, index = 1) => {
         // this.onTouchEnd(event, index);
     }
 }
-const onClick = (e: TouchEvent) => {
+const onClick = (e: any) => {
     if (props.disabled) return
     // 直接点击滑块的情况，计算方式与onTouchMove方法相同
     // #ifndef APP-NVUE

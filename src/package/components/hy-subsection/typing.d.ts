@@ -7,7 +7,7 @@ export type SubSectionVo = string | number | SubSectionItemVo
 
 export interface ISubsectionEmits {
     /** 改变触发 */
-    (e: 'change', index: number): void
+    change: [index: number]
     /** 改变触发 */
-    (e: 'update:modelValue', value: any): void
+    'update:modelValue': [value: any]
 }

@@ -162,12 +162,12 @@ const touchEnd = (e: TouchEvent) => {
     getActiveIndex(x)
 }
 // 通过点击，直接选中
-const clickHandler = (e: TouchEvent) => {
+const clickHandler = (e: any) => {
     // if (moving.value) {
     //   return;
     // }
     e.stopPropagation()
-    let x = 0
+    let x: number = 0
     // #ifndef APP-NVUE || MP-ALIPAY
     x = e.detail.x
     // #endif

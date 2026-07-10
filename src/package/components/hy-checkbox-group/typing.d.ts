@@ -1,6 +1,6 @@
 export interface ICheckBoxGroupEmits {
     /** 选择触发 */
-    (e: 'change', temp: CheckboxColumnsVo): void
+    change: [temp: CheckboxColumnsVo]
     /** 更新值触发 */
-    (e: 'update:modelValue', value: any): void
+    'update:modelValue': [value: any]
 }

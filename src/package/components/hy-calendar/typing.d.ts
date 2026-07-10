@@ -39,11 +39,11 @@ export interface IMonthProps {
 
 export interface ICalendarEmits {
     /** 日期选择完成后触发，则点击确认按钮后触发 */
-    (e: 'confirm', selected: string[]): void
+    confirm: [selected: string[]]
     /** 日历关闭时触发 */
-    (e: 'close'): void
+    close: []
     /** 触发关闭属性 */
-    (e: 'update:show', value: boolean): void
+    'update:show': [value: boolean]
 }
 
 /** HyCalendar 组件实例暴露的方法 */

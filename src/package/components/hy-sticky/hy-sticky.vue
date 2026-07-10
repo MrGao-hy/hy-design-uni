@@ -66,27 +66,19 @@ const querySentinel = (): Promise<{
 }> => {
     return new Promise((resolve) => {
         const query = uni.createSelectorQuery().in(instance!)
-        query
-            .select(`#${sentinelId}`)
-            .boundingClientRect()
-            .selectViewport()
-            .exec((res: any[]) => {
-                // res 结构：[ sentinelRect, viewportRect ]
-                const sentinelRect = res[0] || {}
-                const viewportRect = res[1] || {}
-                const stickyRectQuery = uni.createSelectorQuery().in(instance!)
-                stickyRectQuery
-                    .select('.hy-sticky')
-                    .boundingClientRect()
-                    .exec((r2: any[]) => {
-                        const stickyRect = (r2 && r2[0]) || {}
-                        resolve({
-                            sentinelTop: sentinelRect.top || 0,
-                            sentinelBottom: sentinelRect.bottom || 0,
-                            stickyHeight: stickyRect.height || 0
-                        })
-                    })
+        query.select(`#${sentinelId}`).boundingClientRect()
+        query.selectViewport()
+        query.exec(async (res: any[]) => {
+            // res 结构：[ sentinelRect, viewportRect ]
+            const sentinelRect = res[0] || {}
+            const viewportRect = res[1] || {}
+            const stickyRect = await getRect('.hy-sticky', false, instance)
+            resolve({
+                sentinelTop: sentinelRect.top || 0,
+                sentinelBottom: sentinelRect.bottom || 0,
+                stickyHeight: stickyRect.height || 0
             })
+        })
     })
 }
 

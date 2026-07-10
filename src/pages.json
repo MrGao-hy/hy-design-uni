@@ -554,6 +554,7 @@
                         }
                     }
                 },
+                // #ifdef MP-ALIPAY || MP-WEIXIN
                 {
                     "path": "list/list",
                     "type": "page",
@@ -570,6 +571,26 @@
                         }
                     }
                 },
+                // #endif
+                // #ifdef H5
+                {
+                    "path": "list/list",
+                    "type": "page",
+                    "style": {
+                        "navigationBarTitleText": "商品列表",
+                        "enablePullDownRefresh": false,
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                // #endif
                 {
                     "path": "loading/loading",
                     "type": "page",
@@ -1098,25 +1119,6 @@
                         }
                     }
                 },
-                // #ifdef MP-ALIPAY
-                {
-                    "path": "keyboard/keyboard",
-                    "type": "page",
-                    "style": {
-                        "navigationBarTitleText": "键盘",
-                        "h5": {
-                            "titleNView": {
-                                "buttons": [
-                                    {
-                                        "type": "share"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                // #endif
-                // #ifdef H5 || MP-WEIXIN
                 {
                     "path": "keyboard/keyboard",
                     "type": "page",
@@ -1133,7 +1135,6 @@
                         }
                     }
                 },
-                // #endif
                 {
                     "path": "tabs/tabs",
                     "type": "page",
@@ -1310,7 +1311,6 @@
                         }
                     }
                 },
-                // #ifdef H5 || MP-WEIXIN
                 {
                     "path": "cascader/cascader",
                     "type": "page",
@@ -1327,7 +1327,6 @@
                         }
                     }
                 }
-                // #endif
             ]
         }
     ],

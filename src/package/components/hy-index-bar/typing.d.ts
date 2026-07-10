@@ -24,13 +24,13 @@ export interface IIndexBarEmits {
     /**
      * 点击索引时触发的事件
      */
-    (e: 'click', index: string, event: Event): void
+    click: [index: string, event: Event]
     /**
      * 滚动到指定索引时触发的事件
      */
-    (e: 'scroll', index: string): void
+    scroll: [index: string]
     /**
      * 改变索引值
      */
-    (e: 'update:modelValue', index: string): void
+    'update:modelValue': [index: string]
 }

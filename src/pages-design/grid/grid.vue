@@ -90,7 +90,7 @@ for (let i = 0; i < 12; i++) {
 type Course = {
     image: string
     title: string
-    count: number
+    count: string
 }
 
 const courseList: Course[] = reactive([
@@ -121,7 +121,7 @@ const gap = ref(10)
 const border = ref(false)
 const list_1 = [2, 3, 4, 5]
 
-const onClick = (e) => {
+const onClick = (e: any) => {
     toast.show(`点击${e.name}`)
 }
 

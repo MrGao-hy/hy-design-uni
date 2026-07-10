@@ -16,7 +16,7 @@ const popupProps = {
      * @values left,right,top,bottom,center
      * */
     mode: {
-        type: String,
+        type: String as unknown as PropType<HyApp.LayoutType>,
         default: 'bottom'
     },
     /** 动画时长，单位ms */

@@ -24,7 +24,7 @@ const tooltipProps = {
      * @values top,bottom,left,right
      * */
     placement: {
-        type: String,
+        type: String as unknown as PropType<HyApp.UDLRType>,
         default: 'bottom'
     },
     /** 文本大小 */

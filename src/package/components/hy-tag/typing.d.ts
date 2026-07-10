@@ -7,7 +7,7 @@ export type TagParamsVo = {
 
 export interface ITagEmits {
     /** 点击标签触发 */
-    (e: 'click', params: TagParamsVo): void
+    click: [params: TagParamsVo]
     /** 关闭标签触发 */
-    (e: 'close', value?: string): void
+    close: [value?: string]
 }

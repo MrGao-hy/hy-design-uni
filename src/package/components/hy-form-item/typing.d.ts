@@ -24,7 +24,7 @@ export interface FormItemContext {
 
 export interface IFormItemEmits {
     /** 提交表单 */
-    (e: 'change', value: any): void
+    change: [value: any]
     /** 表单校验 */
-    (e: 'blur', value: any): void
+    blur: [value: any]
 }

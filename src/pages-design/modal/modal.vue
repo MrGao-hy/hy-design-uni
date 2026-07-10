@@ -86,14 +86,14 @@ const onClick = (temp: AnyObject) => {
 const onAsyncClose = () => {
     formRef.value
         .validate()
-        .then(async (res) => {
+        .then(async () => {
             asyncClose.value = true
             setTimeout(() => {
                 showAsync.value = false
                 asyncClose.value = false
             }, 2000)
         })
-        .catch((err) => {})
+        .catch(() => {})
 
     return false
 }

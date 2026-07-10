@@ -77,8 +77,8 @@ const index = computed(() => {
 
 watch(
     () => props.modelValue,
-    (newValue: CurrentValue) => {
-        current.value = newValue
+    (newValue) => {
+        if(newValue) current.value = newValue
     },
     { immediate: true }
 )

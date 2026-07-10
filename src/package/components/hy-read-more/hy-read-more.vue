@@ -95,7 +95,7 @@ onMounted(() => {
 })
 
 /**
- * @description 获取内容的高度
+ * 获取内容的高度
  * */
 const getContentHeight = async () => {
     const instance = getCurrentInstance()
@@ -114,14 +114,14 @@ const getContentHeight = async () => {
     })
 }
 /**
- * @description 展开或者收起
+ * 展开或者收起
  * */
 const toggleReadMore = () => {
     status.value = status.value === 'close' ? 'open' : 'close'
     // 如果toggle为false，隐藏"收起"部分的内容
     if (!props.toggle) isLongContent.value = false
     // 发出打开或者收齐的事件
-    emit(status.value, props.name)
+    status.value === 'open' ? emit('open', props.name!) : emit('close', props.name!)
 }
 </script>
 

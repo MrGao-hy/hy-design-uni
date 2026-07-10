@@ -95,7 +95,7 @@ const sizeType: AnyObject = reactive({
 
 watch(
     () => props.modelValue,
-    (newValue: boolean | (string | number)[]) => {
+    (newValue) => {
         // 判断数组长度为1可以传true/false
         if (props.columns?.length === 1 && typeof newValue === 'boolean') {
             props.columns[0][props.fieldNames.checked] = newValue

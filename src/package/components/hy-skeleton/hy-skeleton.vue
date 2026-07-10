@@ -67,7 +67,7 @@ const parsedRowCols = computed(() => {
                 }
             ]
         }
-        if (Array.isArray(item)) {
+        if (isArray(item)) {
             return item.map((col) => {
                 return {
                     ...col,
@@ -128,7 +128,7 @@ watch(
     () => props.rowCol,
     (rowCol) => {
         rowCols.value = [
-            ...(isArray(rowCol) && rowCol.length ? props.rowCol : themeMap[props.theme])
+            ...((isArray(rowCol) && rowCol.length ? props.rowCol : themeMap[props.theme]) || [])
         ]
     },
     { immediate: true }

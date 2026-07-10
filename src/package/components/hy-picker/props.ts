@@ -112,7 +112,7 @@ const pickerProps = {
     },
     /** 输入框集合属性 */
     input: {
-        type: Object as PropType<HyInputProps>,
+        type: Object as PropType<Partial<HyInputProps>>,
         default: () => {}
     },
     /** 是否自定义选择器nav左边内容 */

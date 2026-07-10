@@ -97,10 +97,10 @@ watch(
 )
 
 watch(
-    () => checkboxGroup?.modelValue.value,
+    () => checkboxGroup?.modelValue,
     (newVal) => {
-        if (newVal?.length) {
-            isChecked.value = newVal.includes(props.value)
+        if (newVal?.value?.length) {
+            isChecked.value = newVal.value.includes(props.value)
         } else {
             isChecked.value = false
         }

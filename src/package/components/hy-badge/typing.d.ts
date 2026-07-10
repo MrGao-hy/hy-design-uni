@@ -5,5 +5,5 @@ export interface HyBadgeProps extends ExtractPropTypes<typeof badgeProps> {}
 
 export interface IBadgeEmit {
     /** 点击触发 */
-    (e: 'click', event: Event): void
+    click: [event: Event]
 }

@@ -31,9 +31,14 @@ export type PopoverItemParamsVo = {
     index: number
 }
 export interface IPopoverEmits {
-    (e: 'menuClick', params: PopoverItemParamsVo): void
-    (e: 'change', params: PopoverParamsVo): void
-    (e: 'open'): void
-    (e: 'close'): void
-    (e: 'update:modelValue', value: boolean): void
+    /** 点击菜单项触发 */
+    menuClick: [params: PopoverItemParamsVo]
+    /** 气泡框状态变化时触发 */
+    change: [params: PopoverParamsVo]
+    /** 打开气泡框时触发 */
+    open: []
+    /** 关闭气泡框时触发 */
+    close: []
+    /** 手动更新显示隐藏 */
+    'update:modelValue': [value: boolean]
 }

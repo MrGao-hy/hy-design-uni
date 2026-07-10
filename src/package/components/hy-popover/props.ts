@@ -16,7 +16,7 @@ const popoverProps = {
      * @values top,top-start,top-end,bottom,bottom-start,bottom-end,left,left-start,left-end,right,right-start,right-end
      * */
     placement: {
-        type: String,
+        type: String as unknown as PropType<IPlacementVo>,
         default: 'bottom'
     },
     /** 控制 popover 的显示状态 */

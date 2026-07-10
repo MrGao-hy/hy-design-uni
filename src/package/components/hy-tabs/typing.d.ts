@@ -31,11 +31,11 @@ export interface TabsParamsVo extends TabsParamsVo {
 }
 export interface ITabsEmits {
     /** 点击标签时触发 */
-    (e: 'click', params: TabsParamsVo): void
+    click: [params: TabsParamsVo]
     /** 标签索引改变时触发 */
-    (e: 'change', item: TabsItemVo, index: number): void
+    change: [item: TabsItemVo, index: number]
     /** 长按标签时触发 */
-    (e: 'longPress', params: TabsParamsVo): void
+    longPress: [params: TabsParamsVo]
     /** 标签索引改变时触发 */
-    (e: 'update:current', index: number): void
+    'update:current': [index: number]
 }

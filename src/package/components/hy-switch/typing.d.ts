@@ -6,7 +6,7 @@ export type SwitchValue = boolean | number | string
 
 export interface ISwitchEmits {
     /** 改变值触发 */
-    (e: 'change', value: SwitchValue): void
+    change: [value: SwitchValue]
     /** 改变值触发 */
-    (e: 'update:modelValue', value: SwitchValue): void
+    'update:modelValue': [value: SwitchValue]
 }

@@ -29,17 +29,17 @@ export type SelectValueVo = {
 
 export interface IPickerEmits {
     /** 关闭选择器时触发 */
-    (e: 'close'): void
+    close: []
     /** 点击取消按钮 */
-    (e: 'cancel'): void
+    cancel: []
     /** 点击确定按钮，返回当前选择的值	 */
-    (e: 'confirm', params: SelectValueVo): void
+    confirm: [params: SelectValueVo]
     /** 当选择值变化时触发 */
-    (e: 'change', params: SelectValueVo): void
+    change: [params: SelectValueVo]
     /** 显示隐藏触发 */
-    (e: 'update:show', show: boolean): void
+    'update:show': [show: boolean]
     /** 选中值触发 */
-    (e: 'update:modelValue', value: any): void
+    'update:modelValue': [value: any]
 }
 
 export interface IPickerExpose {

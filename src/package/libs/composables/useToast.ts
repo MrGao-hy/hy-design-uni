@@ -2,8 +2,7 @@
  * 消息提示hooks
  * */
 
-import type ToastOptions from '../../components/hy-toast/typing'
-import { error } from '../../libs'
+import type { ToastOptions } from '../../index'
 
 // 用于缓存全局唯一实例
 let toastInstance: any = null

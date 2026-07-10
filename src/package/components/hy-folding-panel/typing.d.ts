@@ -3,19 +3,19 @@ export interface IFoldingPanelGroupEmits {
     /**
      * v-model 同步事件
      */
-    (e: 'update:modelValue', value: number | string): void
+    'update:modelValue': [value: number | string]
     /**
      * 面板状态改变时触发
      */
-    (e: 'change', index: number | string): void
+    change: [index: number | string]
     /**
      * 面板打开时触发
      */
-    (e: 'open', index: number | string): void
+    open: [index: number | string]
     /**
      * 面板关闭时触发
      */
-    (e: 'close', index: number | string): void
+    close: [index: number | string]
 }
 
 /** HyFoldingPanel 组件实例暴露的方法 */

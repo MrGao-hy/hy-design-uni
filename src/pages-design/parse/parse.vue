@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import parseContent from './content.js'
 import { useShareButton } from '@/composables'
 
 definePage({

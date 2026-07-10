@@ -17,21 +17,15 @@
 import HyCellItem from '@/package/components/hy-cell-item/hy-cell-item.vue'
 import HyCell from '@/package/components/hy-cell/hy-cell.vue'
 
-interface ILists {
-    title: string
-    icon?: string
-    url: string
-    value?: string | number | boolean
-}
 interface IProps {
     title?: string
-    list: ILists[]
+    list: CommonType.CellItem[]
 }
 
 const props = withDefaults(defineProps<IProps>(), {})
 const emit = defineEmits(['click'])
 
-const onClick = (temp: AnyObject, index: number) => {
+const onClick = (temp: CommonType.CellItem, index: number) => {
     emit('click', temp, index)
 }
 </script>

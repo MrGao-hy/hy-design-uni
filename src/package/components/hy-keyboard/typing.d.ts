@@ -9,10 +9,10 @@ export interface Key {
 }
 
 export interface IKeyboardEmits {
-  (e: 'update:show', value: boolean): void
-  (e: 'input', value: string): void
-  (e: 'close'): void
-  (e: 'delete'): void
-  (e: 'update:modelValue', value: string): void
-  (e: 'update:carLang', value: CarKeyboardLang): void
+  'update:show': [value: boolean]
+  input: [value: string]
+  close: []
+  delete: []
+  'update:modelValue': [value: string]
+  'update:carLang': [value: CarKeyboardLang]
 }

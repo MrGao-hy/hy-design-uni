@@ -18,9 +18,9 @@ export interface SwiperVo {
 
 export interface ISwiperEmits {
     /** 点击轮播图触发 */
-    (e: 'click', index: number): void
+    click: [index: number]
     /** 滑动轮播图触发 */
-    (e: 'change', temp: SwiperVo['detail']): void
+    change: [temp: SwiperVo['detail']]
     /** 滑动轮播图触发 */
-    (e: 'update:current', value: string | number): void
+    'update:current': [value: string | number]
 }

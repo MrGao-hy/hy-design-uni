@@ -76,12 +76,14 @@ const showValue = computed(() => {
             return Number(props.value) > Number(props.max) ? props.max + '+' : props.value
         case 'ellipsis':
             return Number(props.value) > Number(props.max) ? '...' : props.value
-        case 'limit':
-            return Number(props.value) > 999
-                ? Number(props.value) >= 9999
-                    ? Math.floor((props.value / 1e4) * 100) / 100 + 'w'
-                    : Math.floor((props.value / 1e3) * 100) / 100 + 'k'
+        case 'limit': {
+            const num = Number(props.value)
+            return num > 999
+                ? num >= 9999
+                    ? Math.floor((num / 1e4) * 100) / 100 + 'w'
+                    : Math.floor((num / 1e3) * 100) / 100 + 'k'
                 : props.value
+        }
         default:
             return Number(props.value)
     }

@@ -19,7 +19,7 @@ export interface StepListVo {
 
 export interface IStepsEmits {
     /** 值改成触发 */
-    (e: 'change', index: number): void
+    change: [index: number]
     /** 值改成触发 */
-    (e: 'update:current', index: number): void
+    'update:current': [index: number]
 }

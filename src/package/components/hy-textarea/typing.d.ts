@@ -10,17 +10,17 @@ export interface HyTextareaProps extends ExtractPropTypes<typeof textareaProps> 
 
 export interface ITextareaEmits {
     /** 输入框失去焦点时触发 */
-    (e: 'blur', event: InputOnBlurEvent): void
+    blur: [event: InputOnBlurEvent]
     /** 输入框聚焦时触发 */
-    (e: 'focus', event: InputOnFocusEvent): void
+    focus: [event: InputOnFocusEvent]
     /** 当键盘输入时，触发 input 事件 */
-    (e: 'change', value: string): void
+    change: [value: string]
     /** 点击完成时， 触发 confirm 事件 */
-    (e: 'confirm', event: InputOnConfirmEvent): void
+    confirm: [event: InputOnConfirmEvent]
     /** 输入框行数变化时调用 */
-    (e: 'lineChange', event: any): void
+    lineChange: [event: any]
     /** 当键盘输入时，触发 input 事件 */
-    (e: 'update:modelValue', value: string): void
+    'update:modelValue': [value: string]
     /** 键盘高度发生变化的时候触发此事件 */
-    (e: 'keyboardheightchange', event: InputOnKeyboardheightchangeEvent): void
+    keyboardheightchange: [event: InputOnKeyboardheightchangeEvent]
 }
