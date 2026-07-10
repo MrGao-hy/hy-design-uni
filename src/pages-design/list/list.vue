@@ -2,21 +2,8 @@
     <the-root-page>
         <!-- 顶部搜索栏 -->
         <view class="page-header">
-            <view class="search-bar" @click="onSearch">
-                <hy-icon name="search" size="16" color="#94a3b8"></hy-icon>
-                <text class="search-bar__text">搜索商品</text>
-            </view>
-            <view class="filter-bar">
-                <view
-                    v-for="(tab, index) in tabs"
-                    :key="index"
-                    class="filter-bar__item"
-                    :class="{ 'filter-bar__item--active': activeTab === index }"
-                    @click="activeTab = index"
-                >
-                    <text>{{ tab.label }}</text>
-                </view>
-            </view>
+            <hy-search placeholder="搜索商品" @search="onSearch"></hy-search>
+            <hy-tabs :list="tabs"></hy-tabs>
         </view>
 
         <!-- 列表区域 -->
@@ -121,17 +108,13 @@ definePage({
 
 useShareButton()
 
-// ====== 列表引用 ======
-const listRef = ref()
-
 // ====== 筛选标签 ======
 const tabs = reactive([
-    { label: '推荐', value: 'recommend' },
-    { label: '销量', value: 'sales' },
-    { label: '价格', value: 'price' },
-    { label: '新品', value: 'new' }
+    { name: '推荐', value: 'recommend' },
+    { name: '销量', value: 'sales' },
+    { name: '价格', value: 'price' },
+    { name: '新品', value: 'new' }
 ])
-const activeTab = ref(0)
 
 // ====== 列表数据 ======
 const list = ref<AnyObject[]>([])
@@ -290,68 +273,16 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+
 .page {
     &-header {
-        padding: 24rpx 24rpx 0;
-        background: #fff;
+        padding: $hy-border-margin-padding-base $hy-border-margin-padding-base 0;
+        background: $hy-background--container;
     }
 
     &-body {
-        padding: 16rpx 16rpx 0;
+        padding: $hy-border-margin-padding-sm $hy-border-margin-padding-sm 0;
         height: calc(100vh - 180rpx);
-    }
-}
-
-/* 搜索栏 */
-.search-bar {
-    display: flex;
-    align-items: center;
-    height: 64rpx;
-    padding: 0 24rpx;
-    background: #f1f5f9;
-    border-radius: 32rpx;
-
-    &__text {
-        margin-left: 12rpx;
-        font-size: 26rpx;
-        color: #94a3b8;
-    }
-}
-
-/* 筛选标签 */
-.filter-bar {
-    display: flex;
-    gap: 0;
-    margin-top: 20rpx;
-    border-bottom: 1rpx solid #f1f5f9;
-
-    &__item {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 72rpx;
-        font-size: 26rpx;
-        color: #64748b;
-        position: relative;
-        transition: color 0.2s ease;
-
-        &--active {
-            color: #1e293b;
-            font-weight: 600;
-
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 48rpx;
-                height: 4rpx;
-                background: #2563eb;
-                border-radius: 2rpx;
-            }
-        }
     }
 }
 
@@ -360,14 +291,14 @@ onMounted(() => {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 16rpx;
+    gap: $hy-border-margin-padding-sm;
     padding: 8rpx;
 }
 
 .skeleton-card {
     width: calc(50% - 8rpx);
-    background: #fff;
-    border-radius: 16rpx;
+    background: $hy-background--container;
+    border-radius: $hy-radius-base;
     overflow: hidden;
 
     &__image {
@@ -376,21 +307,21 @@ onMounted(() => {
     }
 
     &__content {
-        padding: 16rpx;
+        padding: $hy-border-margin-padding-sm;
     }
 
     &__title {
         height: 28rpx;
         border-radius: 6rpx;
-        background: #e2e8f0;
+        background: $hy-background--skeleton;
         margin-bottom: 12rpx;
     }
 
     &__desc {
         height: 22rpx;
         border-radius: 6rpx;
-        background: #e2e8f0;
-        margin-bottom: 16rpx;
+        background: $hy-background--skeleton;
+        margin-bottom: $hy-border-margin-padding-sm;
     }
 
     &__price-row {
@@ -403,19 +334,24 @@ onMounted(() => {
         width: 100rpx;
         height: 28rpx;
         border-radius: 6rpx;
-        background: #e2e8f0;
+        background: $hy-background--skeleton;
     }
 
     &__tag {
         width: 64rpx;
         height: 22rpx;
         border-radius: 6rpx;
-        background: #e2e8f0;
+        background: $hy-background--skeleton;
     }
 }
 
 .skeleton-animate {
-    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background: linear-gradient(
+        90deg,
+        $hy-background--skeleton 25%,
+        $hy-background--track 50%,
+        $hy-background--skeleton 75%
+    );
     background-size: 200% 100%;
     animation: skeleton-shimmer 1.5s ease-in-out infinite;
 }
@@ -433,10 +369,10 @@ onMounted(() => {
 .product-card {
     width: 100%;
     height: 100%;
-    background: #fff;
-    border-radius: 16rpx;
+    background: $hy-background--container;
+    border-radius: $hy-radius-base;
     overflow: hidden;
-    box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+    box-shadow: $hy-shadow-sm;
     transition: transform 0.2s ease;
 
     &:active {
@@ -450,7 +386,7 @@ onMounted(() => {
     }
 
     &__info {
-        padding: 16rpx;
+        padding: $hy-border-margin-padding-sm;
         display: flex;
         flex-direction: column;
         height: 45%;
@@ -458,10 +394,10 @@ onMounted(() => {
     }
 
     &__name {
-        font-size: 26rpx;
-        font-weight: 500;
-        color: #1e293b;
-        line-height: 1.3;
+        font-size: $hy-font-size-sm;
+        font-weight: $hy-font-weight-medium;
+        color: $hy-text-color;
+        line-height: $hy-line-height-sm;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -469,8 +405,8 @@ onMounted(() => {
     }
 
     &__desc {
-        font-size: 22rpx;
-        color: #94a3b8;
+        font-size: $hy-font-size-xs;
+        color: $hy-text-color--3;
         margin-top: 6rpx;
     }
 
@@ -483,19 +419,19 @@ onMounted(() => {
     }
 
     &__price {
-        font-size: 32rpx;
-        font-weight: 700;
-        color: #ef4444;
+        font-size: $hy-font-size-md;
+        font-weight: $hy-font-weight-bold;
+        color: $hy-error;
     }
 
     &__symbol {
-        font-size: 22rpx;
-        font-weight: 600;
+        font-size: $hy-font-size-xs;
+        font-weight: $hy-font-weight-medium;
     }
 
     &__sold {
-        font-size: 20rpx;
-        color: #94a3b8;
+        font-size: $hy-font-size-xs;
+        color: $hy-text-color--3;
     }
 }
 </style>
