@@ -1,28 +1,49 @@
-@use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin" as *;
+@use '../../libs/css/theme' as *;
+@use '../../libs/css/mixin' as *;
 
 @include b(virtual-container) {
-  box-sizing: border-box;
-
-  @include e(list) {
-    overflow-anchor: none;
-    @include m(item) {
-      box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+    // overflow-anchor: none; // 彻底禁用浏览器 scroll anchoring
+    // 撑杆：绝对定位，只负责撑出 scrollHeight
+    &__spacer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        pointer-events: none;
     }
 
-    @include m(left) {
-      margin-right: $hy-border-margin-padding-base;
+    @include e(list) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        will-change: transform;
+        @include m(item) {
+            box-sizing: border-box;
+        }
+
+        @include m(left) {
+            margin-right: $hy-border-margin-padding-base;
+        }
+        @include m(box) {
+            box-sizing: border-box;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            &-item {
+                box-sizing: border-box;
+                position: relative;
+                overflow: hidden;
+            }
+        }
     }
-    @include m(box) {
-      box-sizing: border-box;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      &-item {
-        box-sizing: border-box;
-        position: relative;
-        overflow: hidden;
-      }
+
+    @include e(footer) {
+        position: absolute;
+        left: 0;
+        right: 0;
     }
-  }
 }

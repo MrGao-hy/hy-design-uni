@@ -1,6 +1,6 @@
 export interface IListEmits {
     /** 点击行触发 */
-    click: [temp: string | AnyObject]
+    click: [temp: unknown]
     /** 滚动底部触发 */
     scrollToLower: []
 }
