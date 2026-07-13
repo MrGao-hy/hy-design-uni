@@ -18,8 +18,8 @@
                 <!-- ====== 单列模式（无默认插槽时才走组件内置渲染） ====== -->
                 <template v-if="!slotDefault && line === 1">
                     <view
-                        v-for="(item, i) in visibleData"
-                        :key="typeof item === 'string' ? i : item[keyField]"
+                        v-for="item in visibleData"
+                        :key="item[keyField]"
                         class="hy-virtual-container__list--item"
                         :style="getItemStyle(item)"
                         @click="handleClick(item)"
@@ -93,7 +93,6 @@ import { addUnit, getPx, getRect } from '../../libs'
 import type { IListEmits } from './typing'
 import listProps from './props'
 import HyDivider from '../hy-divider/hy-divider.vue'
-import HyLoading from '../hy-loading/hy-loading.vue'
 
 const props = defineProps(listProps)
 const emit = defineEmits<IListEmits>()
@@ -203,7 +202,7 @@ const waterfall = computed(() => ({
     right: waterfallRight.value
 }))
 
-const getItemStyle = (item: any): CSSProperties => {
+const getItemStyle = (): CSSProperties => {
     return {
         height: addUnit(props.itemHeight),
         padding: addUnit(props.padding),
