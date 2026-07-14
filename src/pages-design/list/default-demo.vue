@@ -138,7 +138,7 @@ const fetchList = async (isRefresh = false) => {
         pagination.hasMore = list.value.length < result.total
         loadStatus.value = pagination.hasMore ? 'loadMore' : 'noMore'
         pagination.current++
-    } catch {
+    } catch (e) {
         loadStatus.value = 'loadMore'
     } finally {
         isLoading.value = false
