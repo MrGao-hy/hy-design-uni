@@ -51,6 +51,7 @@ definePage({
 
     &-body {
         height: calc(100% - 170rpx);
+        padding: 10rpx $hy-border-margin-padding-base 0;
     }
 }
 </style>

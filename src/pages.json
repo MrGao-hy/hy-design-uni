@@ -554,25 +554,6 @@
                         }
                     }
                 },
-                // #ifdef MP-ALIPAY || MP-WEIXIN
-                {
-                    "path": "list/list",
-                    "type": "page",
-                    "style": {
-                        "navigationBarTitleText": "虚拟列表",
-                        "h5": {
-                            "titleNView": {
-                                "buttons": [
-                                    {
-                                        "type": "share"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                // #endif
-                // #ifdef H5
                 {
                     "path": "list/list",
                     "type": "page",
@@ -590,7 +571,6 @@
                         }
                     }
                 },
-                // #endif
                 {
                     "path": "loading/loading",
                     "type": "page",
@@ -1316,6 +1296,36 @@
                     "type": "page",
                     "style": {
                         "navigationBarTitleText": "级联选择器",
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "path": "list/default-demo",
+                    "type": "page",
+                    "style": {
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "path": "list/waterfall-demo",
+                    "type": "page",
+                    "style": {
                         "h5": {
                             "titleNView": {
                                 "buttons": [
