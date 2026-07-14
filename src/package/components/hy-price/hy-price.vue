@@ -24,7 +24,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, getPx, error, addZero } from '../../libs'
+import { addUnit, getPx, error, addZero, isString } from '../../libs'
 import priceProps from './props'
 import type { IPriceEmits } from './typing'
 
@@ -54,7 +54,7 @@ const priceData = computed(() => {
         return { integer: '0', decimal: '.00' }
     }
 
-    const value = typeof text === 'string' ? text : String(text)
+    const value = isString(text) ? text : String(text)
     const hasDecimal = /\./g.test(value)
 
     if (hasDecimal) {

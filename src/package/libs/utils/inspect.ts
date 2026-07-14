@@ -1,23 +1,32 @@
 /**
- * @description 判断字符串是否是数字
- * @param {String | Number} text 值
+ * 判断字符串是否是数字
+ * @param {String | Number} val 值
  * @return {Boolean}
  * */
-export const isNumericString = (text: string | number): boolean => {
-    return typeof text === 'string' && !isNaN(Number(text))
+export const isNumericString = (val: string | number): val is number => {
+    return typeof val === 'string' && !isNaN(Number(val))
 }
 
 /**
- * @description 判断是否是数字
- * @param {unknown} text 值
+ * 判断是否是数字
+ * @param {unknown} val 值
  * @return {Boolean}
  * */
-export const isNumber = (text: unknown): boolean => {
-    return typeof text === 'number' || (typeof text === 'string' && isNumericString(text))
+export const isNumber = (val: unknown): val is number => {
+    return typeof val === 'number' || (typeof val === 'string' && isNumericString(val))
 }
 
 /**
- * @description 判断是否数组
+ * 判断是否是字符串
+ * @param {unknown} val 值
+ * @return {Boolean}
+ * */
+export const isString = (val: unknown): val is string => {
+    return typeof val === 'string'
+}
+
+/**
+ * 判断是否数组
  * @param {unknown} arr 传入数组值
  * @return {Boolean}
  */
@@ -31,7 +40,7 @@ export const isArray = (arr: unknown): arr is Array<any> => {
 }
 
 /**
- * @description 判断是否对象
+ * 判断是否对象
  * @param obj 传入对象值
  * @return {Boolean}
  */
@@ -40,7 +49,7 @@ export const isObject = (obj: any): obj is Object => {
 }
 
 /**
- * @description 是否为base64图片
+ * 是否为base64图片
  * @param {String} url
  * @return
  */
@@ -50,7 +59,7 @@ export function isBase64Image(url: string): boolean {
 }
 
 /**
- * @description 是否图片
+ * 是否图片
  * @param {String} url
  * @return
  */
@@ -77,7 +86,7 @@ export const isDate = (val: unknown): val is Date =>
     !Number.isNaN((val as Date).getTime())
 
 /**
- * @description 验证是否是手机号格式
+ * 验证是否是手机号格式
  * @param {unknown} phone 手机号
  */
 export const isPhone = (phone: unknown): boolean => {
@@ -91,7 +100,7 @@ export const isPhone = (phone: unknown): boolean => {
 }
 
 /**
- * @description 验证身份证号码
+ * 验证身份证号码
  * @param {unknown} idCard 身份证号
  * @return {Boolean}
  */
@@ -119,7 +128,7 @@ export const isIdCard = (idCard: unknown): boolean => {
 }
 
 /**
- * @description 验证是否是中文
+ * 验证是否是中文
  * @param {String} zh 校验值
  * @return {Boolean}
  */
@@ -129,7 +138,7 @@ export const isChinese = (zh: string): boolean => {
 }
 
 /**
- * @description 判断环境是否是H5
+ * 判断环境是否是H5
  */
 export const isH5 = (() => {
     let isH5 = false
