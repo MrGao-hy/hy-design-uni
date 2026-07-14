@@ -14,7 +14,7 @@
 
 ```angular2html
 <!-- 只支持vue3+uniapp+ts的项目 -->
-pnpm add hy-app
+pnpm add @hy-app/ui
 
 <!-- 没有需要下载 -->
 pnpm add dayjs
@@ -47,7 +47,7 @@ export function createApp () {
 // tsconfig.json
 {
   "compilerOptions": {
-    "types": ["hy-app/global"]
+    "types": ["=@hy-app/ui/global"]
   }
 }
 ```
@@ -58,7 +58,7 @@ export function createApp () {
 {
   "easycom": {
     "custom": {
-      "^hy-(.*)": "hy-app/components/hy-$1/hy-$1.vue"
+      "^hy-(.*)": "@hy-app/ui/components/hy-$1/hy-$1.vue"
     }
   }
 }
@@ -67,5 +67,5 @@ export function createApp () {
 ## 全局导入组件库样式（修改 uni.scss）
 ```scss ./uni.scss
 // uni.scss文件
-@use "hy-app/index.scss" as *;
+@use "@hy-app/ui/index.scss" as *;
 ```
