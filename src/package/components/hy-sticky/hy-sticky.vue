@@ -213,7 +213,6 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

@@ -2,11 +2,12 @@
     <view :class="rootClass" :style="rootStyle">
         <canvas
             v-if="!canvasOffScreenable && showCanvas"
-            type="2d"
             :style="{
                 height: canvasHeight + 'px',
                 width: canvasWidth + 'px',
-                visibility: 'hidden'
+                position: 'fixed',
+                left: '-9999px',
+                top: '-9999px'
             }"
             :canvas-id="canvasId"
             :id="canvasId"
@@ -39,25 +40,24 @@ defineOptions({})
 
 const props = defineProps(watermarkProps)
 
-// watch(
-//     () => props,
-//     () => {
-//         doReset()
-//     },
-//     { deep: true }
-// )
-
 const observer = ref<MutationObserver | null>(null)
 const WATERMARK_SELECTOR = '.hy-watermark'
-const canvasId = ref<string>(`watermark--${guid()}`) // canvas 组件的唯一标识符
-const waterMarkUrl = ref<string>('') // canvas生成base64水印
+const canvasId = ref<string>(`watermark--${guid()}`)
+const waterMarkUrl = ref<string>('')
+// 支付宝小程序的 createOffscreenCanvas 存在 API 差异（不支持 toDataURL），
+// 必须强制走 on-screen canvas 路径。
 const canvasOffScreenable = ref<boolean>(
+    // #ifdef MP-ALIPAY
+    false
+    // #endif
+    // #ifndef MP-ALIPAY
     uni.canIUse('createOffscreenCanvas') && Boolean(uni.createOffscreenCanvas)
-) // 是否可以使用离屏canvas
-const pixelRatio = ref<number>(uni.getSystemInfoSync().pixelRatio) // 像素比
-const canvasHeight = ref<number>((props.height + props.gutterY) * pixelRatio.value) // canvas画布高度
-const canvasWidth = ref<number>((props.width + props.gutterX) * pixelRatio.value) // canvas画布宽度
-const showCanvas = ref<boolean>(true) // 是否展示canvas
+    // #endif
+)
+const pixelRatio = ref<number>(uni.getSystemInfoSync().pixelRatio)
+const canvasHeight = ref<number>((props.height + props.gutterY) * pixelRatio.value)
+const canvasWidth = ref<number>((props.width + props.gutterX) * pixelRatio.value)
+const showCanvas = ref<boolean>(true)
 
 /**
  * 水印css类
@@ -75,7 +75,6 @@ const rootClass = computed(() => {
  */
 const rootStyle = computed(() => {
     const style: CSSProperties = {
-        // width、height、display, left, top, visibility, transform, margin为了防止在控制台通过修改这些属性导致水印被隐藏
         position: 'absolute',
         width: '100%',
         height: '100%',
@@ -187,7 +186,6 @@ function createWaterMark(
     const contentWidth = width * pixelRatio.value
     const contentHeight = height * pixelRatio.value
     const fontSize = size * pixelRatio.value
-    // 标题字体大小：如果设置了titleSize则使用titleSize，否则使用size的1.2倍
     const titleFontSize = props.titleSize > 0 ? props.titleSize * pixelRatio.value : fontSize * 1.2
 
     // #ifndef H5
@@ -214,6 +212,7 @@ function createWaterMark(
         createCanvas(
             canvasHeight,
             contentWidth,
+            contentHeight,
             rotate,
             fontSize,
             color,
@@ -285,7 +284,6 @@ function createOffscreenCanvas(
     title: string,
     titleFontSize: number
 ) {
-    // 创建离屏canvas
     const canvas: any = uni.createOffscreenCanvas({
         height: canvasHeight,
         width: canvasWidth,
@@ -294,7 +292,6 @@ function createOffscreenCanvas(
     const ctx: any = canvas.getContext('2d')
     if (ctx) {
         if (image && (title || content)) {
-            // 图片和文字同时显示
             const img = canvas.createImage() as HTMLImageElement
             drawImageAndTextOffScreen(
                 ctx,
@@ -366,8 +363,9 @@ function createOffscreenCanvas(
  * @param titleFontSize 标题字体大小
  */
 function createCanvas(
-    contentHeight: number,
+    canvasHeight: number,
     contentWidth: number,
+    contentHeight: number,
     rotate: number,
     fontSize: number,
     color: string,
@@ -381,7 +379,6 @@ function createCanvas(
     const ctx = uni.createCanvasContext(canvasId.value)
     if (ctx) {
         if (image && (title || content)) {
-            // 图片和文字同时显示
             drawImageAndTextOnScreen(
                 ctx,
                 image,
@@ -411,6 +408,7 @@ function createCanvas(
                 ctx,
                 title,
                 contentWidth,
+                contentHeight,
                 rotate,
                 fontSize,
                 color,
@@ -466,7 +464,6 @@ function createH5Canvas(
     canvas.setAttribute('height', `${canvasHeight}px`)
     if (ctx) {
         if (image && (title || content)) {
-            // 图片和文字同时显示
             const img = new Image()
             drawImageAndTextOffScreen(
                 ctx,
@@ -539,7 +536,6 @@ function wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number,
         const metrics = ctx.measureText(testLine)
         const testWidth = metrics.width
 
-        // 当文字宽度超过容器宽度的80%时换行
         if (testWidth > maxWidth * 0.8 && currentLine !== '') {
             lines.push(currentLine)
             currentLine = words[i]
@@ -566,24 +562,21 @@ function drawTextOffScreen(
     content: string = '',
     titleFontSize: number = 0
 ) {
+    ctx.save()
     ctx.textBaseline = 'middle'
     ctx.textAlign = 'center'
     ctx.translate(contentWidth / 2, contentHeight / 2)
     ctx.rotate((Math.PI / 180) * rotate)
 
-    // 计算总高度
     let totalTextHeight = titleFontSize
     if (content) {
-        totalTextHeight += fontSize + 5 // 标题和副标题之间的间距
+        totalTextHeight += fontSize + 5
     }
 
-    // 起始Y坐标
     let startY = -totalTextHeight / 2
 
-    // 绘制主标题（支持自动换行）
     if (title) {
         ctx.font = `${fontStyle} normal ${fontWeight} ${titleFontSize}px/${contentHeight}px ${fontFamily}`
-        // 使用titleColor或默认color
         ctx.fillStyle = props.titleColor || color
         const titleLines = wrapText(ctx, title, contentWidth, titleFontSize)
         const titleLineHeight = titleFontSize * 1.2
@@ -595,7 +588,6 @@ function drawTextOffScreen(
         startY += titleLines.length * titleLineHeight + 5
     }
 
-    // 绘制副标题（支持自动换行）
     if (content) {
         ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px/${contentHeight}px ${fontFamily}`
         ctx.fillStyle = color
@@ -611,12 +603,10 @@ function drawTextOffScreen(
     waterMarkUrl.value = canvas.toDataURL()
 }
 
-// 简化版本的文字换行（UniApp CanvasContext不支持measureText）
 function simpleWrapText(text: string, maxLength: number) {
     const lines: string[] = []
     let currentLine = ''
 
-    // 基于字符数估算换行（适用于UniApp CanvasContext）
     for (let i = 0; i < text.length; i++) {
         currentLine += text[i]
         if (currentLine.length >= maxLength) {
@@ -645,32 +635,31 @@ function drawTextOnScreen(
     ctx: UniApp.CanvasContext,
     title: string,
     contentWidth: number,
+    contentHeight: number,
     rotate: number,
     fontSize: number,
     color: string,
     content: string = '',
     titleFontSize: number = 0
 ) {
+    // [FIX] 缺少 save() 会导致后续 restore() 报错 / 旋转残留
+    ctx.save()
     ctx.setTextBaseline('middle')
     ctx.setTextAlign('center')
-    ctx.translate(contentWidth / 2, contentWidth / 2)
+    // [FIX] 原代码 Y 轴也用了 contentWidth，应为 contentHeight
+    ctx.translate(contentWidth / 2, contentHeight / 2)
     ctx.rotate((Math.PI / 180) * rotate)
 
-    // 估算每行最大字符数
     const maxChars = Math.floor(contentWidth / (fontSize * 0.5))
 
-    // 计算总高度
     let totalTextHeight = titleFontSize
     if (content) {
         totalTextHeight += fontSize + 5
     }
 
-    // 起始Y坐标
     let startY = -totalTextHeight / 2
 
-    // 绘制主标题（支持自动换行）
     if (title) {
-        // 使用titleColor或默认color
         ctx.setFillStyle(props.titleColor || color)
         ctx.setFontSize(titleFontSize)
         const titleLines = simpleWrapText(title, maxChars)
@@ -683,7 +672,6 @@ function drawTextOnScreen(
         startY += titleLines.length * titleLineHeight + 5
     }
 
-    // 绘制副标题（支持自动换行）
     if (content) {
         ctx.setFillStyle(color)
         ctx.setFontSize(fontSize)
@@ -696,25 +684,28 @@ function drawTextOnScreen(
     }
 
     ctx.restore()
-    ctx.draw()
-    // #ifdef MP-DINGTALK
-    // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
-    ;(ctx as any).toTempFilePath({
-        success(res: any) {
-            showCanvas.value = false
-            waterMarkUrl.value = res.filePath
-        }
+
+    // [FIX] draw 是异步的，必须在回调中导出图片，否则支付宝等平台拿到空白
+    ctx.draw(false, () => {
+        // #ifdef MP-DINGTALK
+        ;(ctx as any).toTempFilePath({
+            success(res: any) {
+                showCanvas.value = false
+                waterMarkUrl.value = res.filePath
+            }
+        })
+        // #endif
+        // #ifndef MP-DINGTALK
+        uni.canvasToTempFilePath({
+            canvasId: canvasId.value,
+            success: (res: any) => {
+                showCanvas.value = false
+                // [FIX] 支付宝的返回字段可能叫 apFilePath
+                waterMarkUrl.value = res.tempFilePath || res.apFilePath
+            }
+        })
+        // #endif
     })
-    // #endif
-    // #ifndef MP-DINGTALK
-    uni.canvasToTempFilePath({
-        canvasId: canvasId.value,
-        success: (res) => {
-            showCanvas.value = false
-            waterMarkUrl.value = res.tempFilePath
-        }
-    })
-    // #endif
 }
 
 /**
@@ -740,6 +731,7 @@ async function drawImageOffScreen(
     contentHeight: number,
     canvas: HTMLCanvasElement
 ) {
+    ctx.save()
     ctx.translate(contentWidth / 2, contentHeight / 2)
     ctx.rotate((Math.PI / 180) * Number(rotate))
     img.crossOrigin = 'anonymous'
@@ -759,7 +751,6 @@ async function drawImageOffScreen(
     }
 }
 
-// 绘制图片和文字（离屏）
 async function drawImageAndTextOffScreen(
     ctx: CanvasRenderingContext2D,
     img: HTMLImageElement,
@@ -779,6 +770,7 @@ async function drawImageAndTextOffScreen(
     color: string,
     canvas: HTMLCanvasElement
 ) {
+    ctx.save()
     ctx.translate(contentWidth / 2, contentHeight / 2)
     ctx.rotate((Math.PI / 180) * Number(rotate))
     img.crossOrigin = 'anonymous'
@@ -789,29 +781,23 @@ async function drawImageAndTextOffScreen(
 
     img.src = image
     img.onload = () => {
-        // 计算总高度
         let totalHeight = imgHeight
         const textSpacing = 10
 
         if (title) totalHeight += textSpacing + titleFontSize
         if (content) totalHeight += fontSize
 
-        // 起始Y坐标
         let startY = -totalHeight / 2
 
-        // 绘制图片
         ctx.drawImage(img, -imgWidth / 2, startY, imgWidth, imgHeight)
 
         startY += imgHeight + textSpacing
 
-        // 设置文字样式
         ctx.textBaseline = 'top'
         ctx.textAlign = 'center'
 
-        // 绘制主标题
         if (title) {
             ctx.font = `${fontStyle} normal ${fontWeight} ${titleFontSize}px/${contentHeight}px ${fontFamily}`
-            // 使用titleColor或默认color
             ctx.fillStyle = props.titleColor || color
             const titleLines = wrapText(ctx, title, contentWidth * 0.9, titleFontSize)
             const titleLineHeight = titleFontSize * 1.2
@@ -823,7 +809,6 @@ async function drawImageAndTextOffScreen(
             startY += titleLines.length * titleLineHeight + 5
         }
 
-        // 绘制副标题
         if (content) {
             ctx.font = `${fontStyle} normal ${fontWeight} ${fontSize}px/${contentHeight}px ${fontFamily}`
             ctx.fillStyle = color
@@ -840,7 +825,6 @@ async function drawImageAndTextOffScreen(
     }
 }
 
-// 绘制图片和文字（在屏）
 function drawImageAndTextOnScreen(
     ctx: UniApp.CanvasContext,
     image: string,
@@ -855,33 +839,30 @@ function drawImageAndTextOnScreen(
     titleFontSize: number,
     color: string
 ) {
+    ctx.save()
     ctx.setTextBaseline('top')
     ctx.setTextAlign('center')
-    ctx.translate(contentWidth / 2, contentWidth / 2)
+    // [FIX] Y 轴应使用 contentHeight
+    ctx.translate(contentWidth / 2, contentHeight / 2)
     ctx.rotate((Math.PI / 180) * Number(rotate))
 
     const imgHeight = imageHeight * pixelRatio.value
     const imgWidth = imageWidth * pixelRatio.value
     const maxChars = Math.floor(contentWidth / (fontSize * 0.5))
 
-    // 计算总高度
     let totalHeight = imgHeight
     const textSpacing = 10
 
     if (title) totalHeight += textSpacing + titleFontSize
     if (content) totalHeight += fontSize
 
-    // 起始Y坐标
     let startY = -totalHeight / 2
 
-    // 绘制图片
     ctx.drawImage(image, -imgWidth / 2, startY, imgWidth, imgHeight)
 
     startY += imgHeight + textSpacing
 
-    // 绘制主标题
     if (title) {
-        // 使用titleColor或默认color
         ctx.setFillStyle(props.titleColor || color)
         ctx.setFontSize(titleFontSize)
         const titleLines = simpleWrapText(title, maxChars)
@@ -894,7 +875,6 @@ function drawImageAndTextOnScreen(
         startY += titleLines.length * titleLineHeight + 5
     }
 
-    // 绘制副标题
     if (content) {
         ctx.setFillStyle(color)
         ctx.setFontSize(fontSize)
@@ -909,7 +889,6 @@ function drawImageAndTextOnScreen(
     ctx.restore()
     ctx.draw(false, () => {
         // #ifdef MP-DINGTALK
-        // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
         ;(ctx as any).toTempFilePath({
             success(res: any) {
                 showCanvas.value = false
@@ -920,9 +899,9 @@ function drawImageAndTextOnScreen(
         // #ifndef MP-DINGTALK
         uni.canvasToTempFilePath({
             canvasId: canvasId.value,
-            success: (res) => {
+            success: (res: any) => {
                 showCanvas.value = false
-                waterMarkUrl.value = res.tempFilePath
+                waterMarkUrl.value = res.tempFilePath || res.apFilePath
             }
         })
         // #endif
@@ -948,6 +927,7 @@ function drawImageOnScreen(
     contentWidth: number,
     contentHeight: number
 ) {
+    ctx.save()
     ctx.translate(contentWidth / 2, contentHeight / 2)
     ctx.rotate((Math.PI / 180) * Number(rotate))
 
@@ -961,7 +941,6 @@ function drawImageOnScreen(
     ctx.restore()
     ctx.draw(false, () => {
         // #ifdef MP-DINGTALK
-        // 钉钉小程序的canvasToTempFilePath接口与其他平台不一样
         ;(ctx as any).toTempFilePath({
             success(res: any) {
                 showCanvas.value = false
@@ -972,9 +951,9 @@ function drawImageOnScreen(
         // #ifndef MP-DINGTALK
         uni.canvasToTempFilePath({
             canvasId: canvasId.value,
-            success: (res) => {
+            success: (res: any) => {
                 showCanvas.value = false
-                waterMarkUrl.value = res.tempFilePath
+                waterMarkUrl.value = res.tempFilePath || res.apFilePath
             }
         })
         // #endif
@@ -988,41 +967,36 @@ function startObserve() {
     const target = document.querySelector(WATERMARK_SELECTOR) as HTMLElement
     if (!target || observer.value) return
 
-    // 观察目标节点的属性变化、子节点变化、以及自身被删除
     observer.value = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             let el = document.querySelector('.hy-watermark') as HTMLElement
             if (mutation.type === 'attributes' || mutation.removedNodes.length > 0) {
-                // 检查节点是否被删除
                 if (!el) {
-                    // 手动创建一个新的 div
                     el = document.createElement('div') as HTMLElement
+                    const parent = target.parentElement || document.body
                     parent.appendChild(target)
                 }
-                el.className = rootClass.value.join(' ') // 加上你需要的初始类名
+                el.className = rootClass.value.join(' ')
                 el.style.cssText = Object.entries(rootStyle.value)
                     .map(([key, val]) => {
-                        // 将 camelCase 转为 kebab-case (例如: backgroundImage -> background-image)
                         const cssKey = key.replace(/([A-Z])/g, '-$1').toLowerCase()
-                        return `${cssKey}: ${val};` // 强制加上 !important 增加删除难度
+                        return `${cssKey}: ${val};`
                     })
                     .join(' ')
                 console.warn('检测到安全策略违规，正在恢复水印...')
 
-                // 停止旧监听，防止死循环
                 stopObserve()
                 nextTick(() => startObserve())
             }
         })
     })
 
-    // 监听父级节点，防止整个 .hy-watermark 被删除
     const parent = target.parentElement || document.body
     observer.value.observe(parent, {
         attributes: true,
         childList: true,
         subtree: true,
-        attributeFilter: ['style', 'class'] // 仅监听样式和类名改动
+        attributeFilter: ['style', 'class']
     })
     // #endif
 }
@@ -1039,13 +1013,11 @@ function stopObserve() {
 
 onMounted(() => {
     doInit()
-    // 初始化完成后开启监听
     // #ifdef H5
     props.isAntiTheft && nextTick(() => startObserve())
     // #endif
 })
 
-// 组件销毁前必须断开监听，否则会导致内存泄漏
 onUnmounted(() => {
     // #ifdef H5
     stopObserve()
@@ -1053,6 +1025,6 @@ onUnmounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

@@ -173,9 +173,9 @@ const onUsed = () => {
 }
 </script>
 
-<style scoped lang="scss">
-@import './index.scss';
-@import '../../libs/css/mixin.scss';
+<style lang="scss">
+@use './index.scss';
+@use '../../libs/css/mixin.scss';
 
 @include is(ellipsis) {
     @include multiEllipsis(v-bind(desEllipsis));

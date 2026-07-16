@@ -55,6 +55,6 @@ provide('dropdownProps', props)
 provide('currentDropItem', currentDropItem)
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

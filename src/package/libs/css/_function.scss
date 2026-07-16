@@ -1,41 +1,38 @@
+@use 'sass:meta';
+@use 'sass:string';
 @use 'config';
 
 $default-theme: #4d80f0 !default; // 正常色
 
 /* 转换成字符串 */
 @function selectorToString($selector) {
-  $selector: inspect($selector);
-  $selector: str-slice($selector, 2, -2);
+    $selector: meta.inspect($selector);
+    $selector: string.slice($selector, 2, -2);
 
-  @return $selector;
+    @return $selector;
 }
 
 /* 判断是否存在 Modifier */
 @function containsModifier($selector) {
-  $selector: selectorToString($selector);
+    $selector: selectorToString($selector);
 
-  @if str-index($selector, config.$modifier-separator) {
-    @return true;
-  }
-
-  @else {
-    @return false;
-  }
+    @if string.index($selector, config.$modifier-separator) {
+        @return true;
+    } @else {
+        @return false;
+    }
 }
 
 /* 判断是否存在伪类 */
 @function containsPseudo($selector) {
-  $selector: selectorToString($selector);
+    $selector: selectorToString($selector);
 
-  @if str-index($selector, ':') {
-    @return true;
-  }
-
-  @else {
-    @return false;
-  }
+    @if string.index($selector, ':') {
+        @return true;
+    } @else {
+        @return false;
+    }
 }
-
 
 /**
  * 主题色切换
@@ -43,18 +40,14 @@ $default-theme: #4d80f0 !default; // 正常色
  * @params $type 变暗’dark‘ 变亮 'light'
  * @params $mix-color 自己设置的混色
  */
-@function themeColor($theme-color, $type: "", $mix-color: "") {
-  @if $type=="dark" {
-    @return darken($theme-color, 10%);
-  }
-
-  @else if $type=="light" {
-    @return lighten($theme-color, 30%);
-  }
-
-  @else {
-    @return $theme-color;
-  }
+@function themeColor($theme-color, $type: '', $mix-color: '') {
+    @if $type== 'dark' {
+        @return darken($theme-color, 10%);
+    } @else if $type== 'light' {
+        @return lighten($theme-color, 30%);
+    } @else {
+        @return $theme-color;
+    }
 }
 
 /**
@@ -67,15 +60,18 @@ $default-theme: #4d80f0 !default; // 正常色
  * @params [Array] $per-list 渐变色比例
  */
 @function resultColor($deg, $theme-color, $set, $color-list, $per-list) {
-  // 开启渐变
+    // 开启渐变
 
-  $len: length($color-list);
-  $arg: $deg;
+    $len: length($color-list);
+    $arg: $deg;
 
-  @for $i from 1 through $len {
-    $arg: $arg + ","+ themeColor($theme-color, nth($set, $i), nth($color-list, $i)) + " "+ nth($per-list, $i);
-  }
+    @for $i from 1 through $len {
+        $arg: $arg +
+            ',' +
+            themeColor($theme-color, nth($set, $i), nth($color-list, $i)) +
+            ' ' +
+            nth($per-list, $i);
+    }
 
-  @return linear-gradient(unquote($arg));
-
+    @return linear-gradient(unquote($arg));
 }

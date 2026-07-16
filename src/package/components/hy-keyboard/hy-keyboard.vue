@@ -371,5 +371,5 @@ const handlePress = (text: string, type: NumberKeyType) => {
 </script>
 
 <style lang="scss">
-@import './index.scss';
+@use './index.scss';
 </style>

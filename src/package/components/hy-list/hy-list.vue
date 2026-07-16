@@ -308,8 +308,9 @@ defineExpose({
 })
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
+
 .hy-virtual-container {
     height: v-bind(listHeight);
 

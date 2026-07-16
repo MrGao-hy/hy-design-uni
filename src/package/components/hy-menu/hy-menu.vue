@@ -106,8 +106,9 @@ function handleClick(temp: MenuParamsVo, i: number) {
 }
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
+
 .hy-menu__item--active__color {
     color: v-bind(color);
     &::before {

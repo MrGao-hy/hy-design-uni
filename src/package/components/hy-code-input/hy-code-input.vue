@@ -229,8 +229,8 @@ const inputHandler = (e: InputOnInputEvent) => {
 }
 </script>
 
-<style scoped lang="scss">
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 @import '../../libs/css/mixin';
 @import '../../libs/css/theme';
 @include b(code-input) {

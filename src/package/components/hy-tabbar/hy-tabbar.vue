@@ -119,8 +119,9 @@ const checkItem = (index: number) => {
 }
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
+
 .hy-tabbar {
     background: v-bind(baseBackgroundColor);
     &--indicator {

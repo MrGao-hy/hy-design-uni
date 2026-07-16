@@ -414,6 +414,6 @@ defineExpose<IPickerExpose>({
 })
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

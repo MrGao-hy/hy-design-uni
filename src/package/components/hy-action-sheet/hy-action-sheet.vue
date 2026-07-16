@@ -20,7 +20,11 @@
                 } ${customStyle}`"
             >
                 <!-- 标题 -->
-                <view v-if="title" :class="`hy-action-sheet__header ${customHeaderClass}`">
+                <view
+                    v-if="title"
+                    :class="`hy-action-sheet__header ${customHeaderClass}`"
+                    :style="{ textAlign: titleAlign }"
+                >
                     {{ title }}
                     <hy-icon
                         customClass="hy-action-sheet__close"
@@ -192,9 +196,6 @@ function onOpen() {
 }
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
-.hy-action-sheet__header {
-    text-align: v-bind(titleAlign);
-}
+<style lang="scss">
+@use './index.scss';
 </style>

@@ -234,6 +234,6 @@ const getActiveIndex = (x: number, isClick = false) => {
 }
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

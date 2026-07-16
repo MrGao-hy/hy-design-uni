@@ -337,6 +337,6 @@ const onActiveClick = (item: any, index: number) => {
 
 defineExpose({ close })
 </script>
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

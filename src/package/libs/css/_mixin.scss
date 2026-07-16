@@ -1,147 +1,142 @@
-@use "theme";
-@use "config";
-@use "function";
-
+@use 'theme';
+@use 'config';
+@use 'function';
+$B: null;
 
 @mixin b($block) {
-  $B: config.$namespace + '-' + $block !global;
+    $B: config.$namespace + '-' + $block !global;
 
-  .#{$B} {
-    @content;
-  }
+    .#{$B} {
+        @content;
+    }
 }
 
 /* 加上-- */
 @mixin m($modifier...) {
-  $selectors: "";
+    $selectors: '';
 
-  @each $item in $modifier {
-    $selectors: #{$selectors + & + config.$modifier-separator + $item + ","};
-  }
-
-  @at-root {
-    #{$selectors} {
-      @content;
+    @each $item in $modifier {
+        $selectors: #{$selectors + & + config.$modifier-separator + $item + ','};
     }
-  }
+
+    @at-root {
+        #{$selectors} {
+            @content;
+        }
+    }
 }
 
 /* 定义状态（m） */
 @mixin mdeep($modifier...) {
-  $selectors: "";
+    $selectors: '';
 
-  @each $item in $modifier {
-    $selectors: #{$selectors + & + config.$modifier-separator + $item + ","};
-  }
-
-  @at-root {
-    :deep() {
-      #{$selectors} {
-        @content;
-      }
+    @each $item in $modifier {
+        $selectors: #{$selectors + & + config.$modifier-separator + $item + ','};
     }
-  }
+
+    @at-root {
+        :deep() {
+            #{$selectors} {
+                @content;
+            }
+        }
+    }
 }
 
 /* 定义元素（e）__，对于伪类，会自动将 e 嵌套在 伪类 底下 */
 @mixin e($element...) {
-  $selector: &;
-  $selectors: "";
+    $selector: &;
+    $selectors: '';
 
-  @if function.containsPseudo($selector) {
-    @each $item in $element {
-      $selectors: #{$selectors + "." + $B + config.$element-separator + $item + ","};
-    }
-
-    @at-root {
-      #{$selector} {
-        #{$selectors} {
-          @content;
+    @if function.containsPseudo($selector) {
+        @each $item in $element {
+            $selectors: #{$selectors + '.' + $B + config.$element-separator + $item + ','};
         }
-      }
-    }
-  }
 
-  @else {
-    @each $item in $element {
-      $selectors: #{$selectors + $selector + config.$element-separator + $item + ","};
-    }
+        @at-root {
+            #{$selector} {
+                #{$selectors} {
+                    @content;
+                }
+            }
+        }
+    } @else {
+        @each $item in $element {
+            $selectors: #{$selectors + $selector + config.$element-separator + $item + ','};
+        }
 
-    @at-root {
-      #{$selectors} {
-        @content;
-      }
+        @at-root {
+            #{$selectors} {
+                @content;
+            }
+        }
     }
-  }
 }
-
 
 /* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
 @mixin edeep($element...) {
-  $selector: &;
-  $selectors: "";
+    $selector: &;
+    $selectors: '';
 
-  @if function.containsPseudo($selector) {
-    @each $item in $element {
-      $selectors: #{$selectors + "." + $B + config.$element-separator + $item + ","};
-    }
-
-    @at-root {
-      #{$selector} {
-        :deep() {
-          #{$selectors} {
-            @content;
-          }
+    @if function.containsPseudo($selector) {
+        @each $item in $element {
+            $selectors: #{$selectors + '.' + $B + config.$element-separator + $item + ','};
         }
-      }
-    }
-  }
 
-  @else {
-    @each $item in $element {
-      $selectors: #{$selectors + $selector + config.$element-separator + $item + ","};
-    }
-
-    @at-root {
-      :deep() {
-        #{$selectors} {
-          @content;
+        @at-root {
+            #{$selector} {
+                :deep() {
+                    #{$selectors} {
+                        @content;
+                    }
+                }
+            }
         }
-      }
+    } @else {
+        @each $item in $element {
+            $selectors: #{$selectors + $selector + config.$element-separator + $item + ','};
+        }
+
+        @at-root {
+            :deep() {
+                #{$selectors} {
+                    @content;
+                }
+            }
+        }
     }
-  }
 }
 
 /* 状态，生成 is-$state 类名 */
 @mixin is($states...) {
-  @each $state in $states {
-    @at-root {
-      #{&}.#{config.$state-prefix + $state} {
-        @content;
-      }
+    @each $state in $states {
+        @at-root {
+            #{&}.#{config.$state-prefix + $state} {
+                @content;
+            }
+        }
     }
-  }
 }
 
 /* 添加伪类元素 */
 @mixin pseudo($pseudo) {
-  @at-root #{&}#{':#{$pseudo}'} {
-    @content;
-  }
+    @at-root #{&}#{':#{$pseudo}'} {
+        @content;
+    }
 }
 
-@mixin themeColor($type, $bg-color: transparent, $border-color: transparent, $color: #FFFFFF) {
-  @include m($type) {
-    background-color: $bg-color;
-    border: 1px solid $border-color;
-    color: $color;
-
-    :deep() {
-      @include b(icon) {
+@mixin themeColor($type, $bg-color: transparent, $border-color: transparent, $color: #ffffff) {
+    @include m($type) {
+        background-color: $bg-color;
+        border: 1px solid $border-color;
         color: $color;
-      }
+
+        :deep() {
+            @include b(icon) {
+                color: $color;
+            }
+        }
     }
-  }
 }
 
 /**
@@ -149,17 +144,15 @@
   * @param $shape circle-半圆形，square-方形带圆角
 */
 @mixin borderRadio($shape) {
-  @include m($shape) {
-    @if $shape == circle {
-      border-radius:  theme.$hy-radius-semicircle;
+    @include m($shape) {
+        @if $shape == circle {
+            border-radius: theme.$hy-radius-semicircle;
+        } @else if($shape == square) {
+            border-radius: theme.$hy-radius-sm;
+        } @else {
+            border-radius: 28rpx theme.$hy-radius-sm;
+        }
     }
-    @else if($shape == square) {
-      border-radius: theme.$hy-radius-sm;
-    }
-    @else {
-      border-radius: 28rpx theme.$hy-radius-sm;
-    }
-  }
 }
 
 /**
@@ -170,103 +163,102 @@
   * @param $box-shadow 阴影
 */
 @mixin squareArrow($size, $bg, $z-index, $box-shadow) {
-  @include e(arrow) {
-    position: absolute;
-    width: $size;
-    height: $size;
-    z-index: $z-index;
-  }
-
-  @include e(arrow-down) {
-    transform: translateX(-50%);
-    bottom: 0;
-
-    &:after {
-      content: "";
-      width: $size;
-      height: $size;
-      background-color: $bg;
-      position: absolute;
-      left: 0;
-      bottom: calc(-1 * $size / 2);
-      transform: rotateZ(45deg);
-      box-shadow: $box-shadow;
+    @include e(arrow) {
+        position: absolute;
+        width: $size;
+        height: $size;
+        z-index: $z-index;
     }
-  }
 
-  @include e(arrow-up) {
-    transform: translateX(-50%);
-    top: 0;
+    @include e(arrow-down) {
+        transform: translateX(-50%);
+        bottom: 0;
 
-    &:after {
-      content: "";
-      width: $size;
-      height: $size;
-      background-color: $bg;
-      position: absolute;
-      left: 0;
-      top: calc(-1 * $size / 2);
-      transform: rotateZ(45deg);
-      box-shadow: $box-shadow;
+        &:after {
+            content: '';
+            width: $size;
+            height: $size;
+            background-color: $bg;
+            position: absolute;
+            left: 0;
+            bottom: calc(-1 * $size / 2);
+            transform: rotateZ(45deg);
+            box-shadow: $box-shadow;
+        }
     }
-  }
 
-  @include e(arrow-left) {
-    transform: translateY(-50%);
-    left: 0;
+    @include e(arrow-up) {
+        transform: translateX(-50%);
+        top: 0;
 
-    &:after {
-      content: "";
-      width: $size;
-      height: $size;
-      background-color: $bg;
-      position: absolute;
-      left: calc(-1 * $size / 2);
-      top: 0;
-      transform: rotateZ(45deg);
-      box-shadow: $box-shadow;
+        &:after {
+            content: '';
+            width: $size;
+            height: $size;
+            background-color: $bg;
+            position: absolute;
+            left: 0;
+            top: calc(-1 * $size / 2);
+            transform: rotateZ(45deg);
+            box-shadow: $box-shadow;
+        }
     }
-  }
 
-  @include e(arrow-right) {
-    transform: translateY(-50%);
-    right: 0;
+    @include e(arrow-left) {
+        transform: translateY(-50%);
+        left: 0;
 
-    &:after {
-      content: "";
-      width: $size;
-      height: $size;
-      background-color: $bg;
-      position: absolute;
-      right: calc(-1 * $size / 2);
-      top: 0;
-      transform: rotateZ(45deg);
-      box-shadow: $box-shadow;
+        &:after {
+            content: '';
+            width: $size;
+            height: $size;
+            background-color: $bg;
+            position: absolute;
+            left: calc(-1 * $size / 2);
+            top: 0;
+            transform: rotateZ(45deg);
+            box-shadow: $box-shadow;
+        }
     }
-  }
+
+    @include e(arrow-right) {
+        transform: translateY(-50%);
+        right: 0;
+
+        &:after {
+            content: '';
+            width: $size;
+            height: $size;
+            background-color: $bg;
+            position: absolute;
+            right: calc(-1 * $size / 2);
+            top: 0;
+            transform: rotateZ(45deg);
+            box-shadow: $box-shadow;
+        }
+    }
 }
-
 
 /* flex布局 */
 @mixin flex($direction: row) {
-  /* #ifndef APP-NVUE */
-  display: flex;
-  /* #endif */
-  flex-direction: $direction;
+    /* #ifndef APP-NVUE */
+    display: flex;
+    /* #endif */
+    flex-direction: $direction;
 }
 
 /* 单行超出隐藏 */
 @mixin lineEllipsis {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* 多行超出隐藏 */
 @mixin multiEllipsis($lineNumber: 3) {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: $lineNumber;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lineNumber;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

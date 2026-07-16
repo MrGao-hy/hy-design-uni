@@ -137,6 +137,6 @@ watch(
 const show = computed(() => props.loading == undefined || props.loading === true)
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

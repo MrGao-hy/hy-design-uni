@@ -364,8 +364,8 @@ function handleTouchEnd() {
 }
 </script>
 
-<style scoped lang="scss">
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 .hy-float-button {
     &__container {
         rotate: v-bind(rotate);

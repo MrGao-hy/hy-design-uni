@@ -203,8 +203,9 @@ const clickHandler = () => {
 }
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
+
 .modal__content__text {
     text-align: v-bind(contentTextAlign);
 }

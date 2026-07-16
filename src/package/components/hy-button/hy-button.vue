@@ -315,6 +315,6 @@ const contact = (e: any) => {
 }
 </script>
 
-<style lang="scss" scoped>
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

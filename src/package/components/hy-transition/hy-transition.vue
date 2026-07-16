@@ -149,9 +149,9 @@ const onTransitionEnd = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 /* #ifndef APP-NVUE */
 // vue版本动画相关的样式抽离在外部文件
-@import './index.scss';
+@use './index.scss';
 /* #endif */
 </style>

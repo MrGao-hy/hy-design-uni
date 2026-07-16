@@ -34,6 +34,6 @@ const statusBarStyle = computed(() => {
 })
 </script>
 
-<style scoped lang="scss">
-@import './index.scss';
+<style lang="scss">
+@use './index.scss';
 </style>

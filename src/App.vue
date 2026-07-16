@@ -35,6 +35,6 @@ onLaunch(() => {
 })
 </script>
 <style lang="scss">
-@import '@/style/common.scss';
-@import '@/static/icon/font_1/iconfont.css';
+@use '@/style/common.scss';
+@use '@/static/icon/font_1/iconfont.css';
 </style>
