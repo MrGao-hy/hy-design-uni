@@ -1,13 +1,24 @@
 {
     "extends": "@vue/tsconfig/tsconfig.json",
     "compilerOptions": {
-        "sourceMap": true,
-        "baseUrl": ".",
+        "verbatimModuleSyntax": false,
+        "ignoreDeprecations": "5.0",
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "paths": {
-            "@/*": ["src/*"]
+            "@/*": ["./src/*"]
         },
-        "lib": ["esnext", "dom"],
-        "types": ["@dcloudio/types", "@uni-helper/uni-types", "@types/wechat-miniprogram"]
+        "types": [
+            "node",
+            "@dcloudio/types",
+            "@uni-helper/uni-types",
+            "@uni-helper/uni-app-types",
+            "@types/node"
+        ],
+        "sourceMap": true,
+        "module": "ESNext"
     },
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+    "vueCompilerOptions": {
+        "plugins": ["@uni-helper/uni-types/volar-plugin"]
+    },
+    "exclude": ["node_modules", "unpackage", "src/**/*.nvue", "docs", "packages"]
 }
