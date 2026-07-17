@@ -1,6 +1,7 @@
 import type { CSSProperties, PropType } from 'vue'
 import { IconConfig, useTranslate } from '../../libs'
 import type { HyIconProps } from '../hy-icon/typing'
+import { InputConfirmType } from '@uni-helper/uni-types'
 
 const { t } = useTranslate('search')
 
@@ -30,7 +31,7 @@ const searchProps = {
      * @valuse send,search,next,go,done
      * */
     confirmType: {
-        type: String,
+        type: String as PropType<InputConfirmType>,
         default: 'search'
     },
     /** 是否启用清除控件 */
@@ -97,7 +98,7 @@ const searchProps = {
     },
     /** 输入框左边的图标属性集合，可以为图标名称或图片路径 */
     searchIcon: {
-        type: [Boolean, Object] as PropType<HyIconProps | boolean>,
+        type: [Boolean, Object] as PropType<Partial<HyIconProps> | boolean>,
         default: { name: IconConfig.SEARCH }
     },
     /** 组件与其他上下左右之间的距离，带单位的字符串形式，如"30px" */

@@ -15,11 +15,13 @@ export interface MonthData {
     date: DateItem[]
 }
 
+export type MonthMode = 'single' | 'multiple' | 'range'
+
 export interface IMonthProps {
     showMark?: boolean
     color?: string
     months?: MonthData[]
-    mode?: 'single' | 'multiple' | 'range'
+    mode?: MonthMode
     rowHeight?: string | number
     maxCount?: number
     startText?: string

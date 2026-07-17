@@ -4,7 +4,7 @@
             class="hy-navbar__placeholder"
             v-if="fixed && placeholder"
             :style="{
-                height: addUnit(getPx(height) + statusBarHeight)
+                height: addUnit(getPx(height) + Number(statusBarHeight))
             }"
         ></view>
         <view :class="[fixed && 'hy-navbar__fixed']">
@@ -20,7 +20,7 @@
                 <view
                     class="hy-navbar__content__left"
                     hover-class="hy-navbar__content__left--hover"
-                    hover-start-time="150"
+                    :hover-start-time="150"
                     @tap="leftClick"
                 >
                     <slot v-if="$slots.left" name="left"></slot>

@@ -10,7 +10,7 @@
         <hy-slider v-model="value" active-color="red" block-color="red"></hy-slider>
 
         <view class="hy-title">自定义大小</view>
-        <hy-slider v-model="value" blockSize="30" height="8"></hy-slider>
+        <hy-slider v-model="value" :blockSize="30" height="8"></hy-slider>
 
         <view class="hy-title">小数点</view>
         <hy-slider v-model="value_3" :min="0" :max="1" :step="0.1" show-value></hy-slider>

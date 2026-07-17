@@ -1307,25 +1307,12 @@
                         }
                     }
                 },
+                // #ifdef MP-ALIPAY || MP-WEIXIN
                 {
-                    "path": "list/default-demo",
+                    "path": "bezierFly/bezierFly",
                     "type": "page",
                     "style": {
-                        "h5": {
-                            "titleNView": {
-                                "buttons": [
-                                    {
-                                        "type": "share"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                {
-                    "path": "list/waterfall-demo",
-                    "type": "page",
-                    "style": {
+                        "navigationBarTitleText": "贝塞尔飞入动画",
                         "h5": {
                             "titleNView": {
                                 "buttons": [
@@ -1337,6 +1324,7 @@
                         }
                     }
                 }
+                // #endif
             ]
         }
     ],

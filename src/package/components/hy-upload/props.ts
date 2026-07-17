@@ -1,6 +1,7 @@
 import type { FileVo, ReadFunctionVo } from './typing'
 import { IconConfig } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
+import { ImageMode } from '@uni-helper/uni-app-types'
 
 const uploadProps = {
     /**
@@ -71,7 +72,7 @@ const uploadProps = {
      * @values scaleToFill,aspectFit,aspectFill,widthFix,heightFix,top,bottom,center,left,right,top left,top right,bottom left,bottom right
      * */
     imageMode: {
-        type: String,
+        type: String as PropType<ImageMode>,
         default: 'aspectFill'
     },
     /** 标识符，可以在回调函数的第二项参数中获取 */

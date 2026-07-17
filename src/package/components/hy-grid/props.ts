@@ -5,7 +5,7 @@ import type { CustomKeysVo, GridItemVo } from './typing'
 const gridProps = {
     /** 数据列表 */
     list: {
-        type: Array as PropType<(GridItemVo | string)[]>,
+        type: Array as PropType<GridItemVo[]>,
         default: () => []
     },
     /** 自定义键值 */
@@ -55,7 +55,7 @@ const gridProps = {
         default: 'transparent'
     },
     /** 图标属性api配置集合 */
-    iconProps: Object as PropType<HyIconProps>,
+    iconProps: Object as PropType<Partial<HyIconProps>>,
     /** 定义需要用到的外部样式 */
     customStyle: Object as PropType<CSSProperties>,
     /** 自定义外部类名 */

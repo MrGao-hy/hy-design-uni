@@ -75,7 +75,7 @@ import { onMounted, ref, toRefs } from 'vue'
 import type { IAddressPickerEmits } from './typing'
 import address from '../../libs/utils/address.json'
 import addressPickerProps from './props'
-import { useTranslate } from '../../libs'
+import { isObject, SelectValueVo, useTranslate } from '../../libs'
 // 组件
 import HyInput from '../hy-input/hy-input.vue'
 import HyPicker from '../hy-picker/hy-picker.vue'
@@ -195,8 +195,13 @@ const cancel = () => {
 /**
  * @description 点击工具栏的确定按钮
  * */
-const confirm = ({ value }: { value: Record<string, any>[] }) => {
-    inputValue.value = value.map((item) => item.name).join(separator.value)
+const confirm = ({ value }: SelectValueVo) => {
+    console.log(value)
+    inputValue.value = value
+        .map((item) => {
+            if (isObject(item)) return item.name
+        })
+        .join(separator.value)
 
     showByClickInput.value = false
     emit('update:modelValue', inputValue.value)

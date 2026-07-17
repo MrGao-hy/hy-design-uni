@@ -161,8 +161,8 @@ const closeHandler = () => {
 const clickHandler = () => {
     if (!props.disabled) {
         emit('click', {
-            value: props.text,
-            name: props.name
+            value: props.name,
+            name: props.text
         })
     }
 }

@@ -4,7 +4,6 @@
             :menus="menus"
             :left-loading="true"
             @menu-click="clickMenuFn"
-            @click="clickMenuFn"
         ></hy-submit-bar>
         <view class="hy-title">显示一个按钮</view>
         <hy-submit-bar

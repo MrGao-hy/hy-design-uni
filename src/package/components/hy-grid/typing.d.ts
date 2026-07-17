@@ -34,3 +34,7 @@ export interface IGridEmits {
     /** 点击小菜单触发 */
     click: [name: string | GridItemVo]
 }
+
+export interface IGridSlots {
+    default: (props: { record: Record<string, any> }) => any
+}

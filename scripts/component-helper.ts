@@ -157,8 +157,8 @@ export function generateWebTypes(options = {} as InstallOptions) {
         const fileContent = read(path)
         const parseContent = parse(_options, fileContent)
         const content = normalize(_options, parseContent, path)
-        content.description = content.description.replace(/> /g, '')
-        if (content.hasOwnProperty('props')) {
+        content.description = content.description?.replace(/> /g, '')
+        if (content.hasOwnProperty('props') && content?.props) {
             content.props.content = content?.props.content.map((item) => {
                 // 去除多余标点符号
                 item.Values = item.Values?.replace(/`|(?<![a-zA-Z0-9])-(?![a-zA-Z0-9])/g, '')

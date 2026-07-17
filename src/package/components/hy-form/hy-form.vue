@@ -17,7 +17,7 @@ export default {
 
 <script setup lang="ts">
 import { provide, reactive, ref, toRefs } from 'vue'
-import { clearVal, isArray } from '../../libs'
+import { clearVal, error, isArray } from '../../libs'
 import formProps from './props'
 import type { IFormEmits, IFormExpose } from './typing'
 
@@ -147,7 +147,7 @@ const formContext = {
 provide('formContext', formContext)
 
 // 验证所有字段
-const validate = () => {
+const validate = (): Promise<boolean> => {
     return new Promise((resolve, reject) => {
         let isValid = true
         const allErrors: Record<string, string> = {}
@@ -168,7 +168,8 @@ const validate = () => {
         if (isValid) {
             resolve(isValid)
         } else {
-            reject(allErrors)
+            reject(isValid)
+            error(JSON.stringify(allErrors))
         }
     })
 }

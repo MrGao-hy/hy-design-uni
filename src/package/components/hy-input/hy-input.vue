@@ -36,7 +36,7 @@
                         'hy-input__content--field-wrapper__field',
                         disabled && 'hy-input__disabled-test'
                     ]"
-                    :style="[inputStyle]"
+                    :style="inputStyle"
                     :type="type"
                     :focus="focus"
                     :cursor="cursor"
@@ -119,7 +119,7 @@ import type {
     InputOnBlurEvent,
     InputOnConfirmEvent,
     InputOnFocusEvent,
-    InputOnKeyboardheightchange
+    InputOnKeyboardheightchangeEvent
 } from '@uni-helper/uni-types'
 import inputProps from './props'
 
@@ -136,7 +136,7 @@ const formItem = inject<FormItemContext | null>('formItem', null)
 // 清除操作
 const clearInput = ref<boolean>(false)
 // 输入框的值
-const innerValue = ref<string | number>('')
+const innerValue = ref<string>('')
 // 是否处于获得焦点状态
 const focused = ref<boolean>(false)
 // value是否第一次变化，在watch中，由于加入immediate属性，会在第一次触发，此时不应该认为value发生了变化
@@ -202,7 +202,7 @@ const wrapperStyle = computed((): CSSProperties => {
 /**
  * 输入框的样式
  * */
-const inputStyle = computed(() => {
+const inputStyle = computed((): CSSProperties => {
     return {
         color: props.color,
         fontSize: addUnit(props.fontSize),
@@ -270,13 +270,13 @@ const onConfirm = (e: InputOnConfirmEvent) => {
  * 键盘高度发生变化的时候触发此事件
  * 兼容性：微信小程序2.7.0+、App 3.1.0+
  * */
-const onkeyboardheightchange = (event: InputOnKeyboardheightchange) => {
+const onkeyboardheightchange = (event: InputOnKeyboardheightchangeEvent) => {
     emit('keyboardheightchange', event)
 }
 /**
  * 内容发生变化，进行处理
  */
-const valueChange = (value: string | number, isOut = false) => {
+const valueChange = (value: string, isOut = false) => {
     if (clearInput.value) {
         innerValue.value = ''
         clearInput.value = false

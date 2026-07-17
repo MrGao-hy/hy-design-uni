@@ -61,8 +61,8 @@ const badgeStyle = computed<CSSProperties>(() => {
             // top和right分为为offset的第一个和第二个值，如果没有第二个值，则right等于top
             const top = props.offset[0]
             const right = props.offset[1] || top
-            style.top = addUnit(top)
-            style.left = addUnit(right)
+            style.top = addUnit(Number(top))
+            style.left = addUnit(Number(right))
         }
     }
     return style

@@ -23,7 +23,7 @@
                 <view
                     v-if="title"
                     :class="`hy-action-sheet__header ${customHeaderClass}`"
-                    :style="{ textAlign: titleAlign }"
+                    :style="titleStyle"
                 >
                     {{ title }}
                     <hy-icon
@@ -117,7 +117,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { watch, ref } from 'vue'
+import { watch, ref, computed, CSSProperties } from 'vue'
 import { isArray } from '../../libs'
 import type { IActionSheetPanel, IActionSheetEmits } from './typing'
 import actionSheetProps from './props'
@@ -148,6 +148,12 @@ watch(
     },
     { deep: true, immediate: true }
 )
+
+const titleStyle = computed((): CSSProperties => {
+    return {
+        textAlign: props.titleAlign
+    }
+})
 
 function isPanelArray() {
     return props.panels.length && !isArray(props.panels[0])

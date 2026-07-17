@@ -5,7 +5,7 @@
                 <view class="header">
                     <view class="hy-title">基础使用</view>
                     <hy-popover v-model="show" content="我是提示信息" placement="bottom-end">
-                        <hy-icon :name="IconConfig.HELP"></hy-icon>
+                        <hy-icon :name="IconConfig.HELP_CIRCLE"></hy-icon>
                     </hy-popover>
                 </view>
             </template>

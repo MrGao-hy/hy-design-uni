@@ -7,7 +7,7 @@ export interface TabsItemVo {
     /**
      * 徽标接收的props
      * */
-    badge?: HyBadgeProps
+    badge?: Partial<HyBadgeProps>
     /**
      * 是否禁用
      * */
@@ -15,7 +15,7 @@ export interface TabsItemVo {
     /**
      * swiper内容值
      * */
-    content?: any
+    content?: unknown
     [key: string]: any
 }
 

@@ -98,7 +98,7 @@ function handleClick(temp: MenuParamsVo, i: number) {
     if (temp?.disabled) {
         return
     }
-    if (current.value !== temp.id) {
+    if (temp.id && current.value !== temp.id) {
         current.value = temp.id
         emit('update:modelValue', temp.id)
         emit('change', temp, i)

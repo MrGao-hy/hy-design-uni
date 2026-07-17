@@ -62,7 +62,7 @@ const tabbarGroupProps = {
     },
     /** 徽标部分属性 */
     badgeProps: {
-        type: Object as PropType<HyBadgeProps>
+        type: Object as PropType<Partial<HyBadgeProps>>
     },
     /** z-index层级 */
     zIndex: {

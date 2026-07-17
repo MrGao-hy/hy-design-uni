@@ -1,11 +1,11 @@
 import type { FormColumnsType } from '../../libs'
 import type {
-    HyInputProps,
     HyTextareaProps,
     HyPickerProps,
     HySwitchProps,
     HyRadioProps,
-    HyCheckButtonProps
+    HyCheckButtonProps,
+    HyInputProps
 } from '../../index'
 import type { PropType } from 'vue'
 
@@ -64,31 +64,31 @@ const formGroupProps = {
      * 文本域属性api集合
      * */
     textarea: {
-        type: Array as PropType<Partial<HyTextareaProps>>
+        type: Object as PropType<Partial<HyTextareaProps>>
     },
     /**
      * 选择器属性api集合
      * */
     picker: {
-        type: Array as PropType<Partial<HyPickerProps>>
+        type: Object as PropType<Partial<HyPickerProps>>
     },
     /**
      * 开关属性api集合
      * */
     switchItem: {
-        type: Array as PropType<Partial<HySwitchProps>>
+        type: Object as PropType<Partial<HySwitchProps>>
     },
     /**
      * 单选属性api集合
      * */
     radio: {
-        type: Array as PropType<Partial<HyRadioProps>>
+        type: Object as PropType<Partial<HyRadioProps>>
     },
     /**
      * 选择按钮属性api集合
      * */
     checkButton: {
-        type: Array as PropType<Partial<HyCheckButtonProps>>
+        type: Object as PropType<Partial<HyCheckButtonProps>>
     },
     /**
      * 表单配置

@@ -56,7 +56,7 @@ const itemScrollTop = ref<ItemTopVo[]>([])
 const current = ref<string | number>(1)
 const execute = ref(false) // 防止点击change事件时候执行onScroll事件
 const list = [
-    { id: 1, title: '盖浇饭', icon: IconConfig.PHOTO },
+    { id: 1, title: '盖浇饭', value: 'buttonReverse', icon: IconConfig.PHOTO },
     { id: 2, title: '炒菜', value: 'title', disabled: true },
     { id: 3, title: '米粉面条', value: 'showCancelButton', badge: 6 },
     { id: 4, title: '汉堡披萨', value: 'buttonReverse' },

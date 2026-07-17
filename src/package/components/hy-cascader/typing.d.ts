@@ -1,10 +1,10 @@
 export interface CascaderOption {
-    value: string | number
-    label: string
+    value?: string | number
+    label?: string
     children?: CascaderOption[]
     disabled?: boolean
     isLeaf?: boolean
-    [key: string]: any
+    [key: string]: any | CascaderOption[]
 }
 
 export interface CascaderValue {

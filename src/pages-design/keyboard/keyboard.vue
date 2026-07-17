@@ -109,7 +109,7 @@
         <hy-keyboard
             v-model:show="showCarUncontrolledKeyboard"
             mode="car"
-            auto-switch-lang="true"
+            :auto-switch-lang="true"
             v-model="carUncontrolledValue"
             @input="handleInput"
             @delete="handleDelete"

@@ -40,7 +40,7 @@ export default {
 import { computed, ref, onMounted, getCurrentInstance, nextTick } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { IIndexBarEmits, IIndexItem } from './typing'
-import { addUnit, getRect, sleep } from '../../libs'
+import { addUnit, getRect, isObject, sleep } from '../../libs'
 import indexBarProps from './props'
 // 组件
 import HyTransition from '../hy-transition/hy-transition.vue'
@@ -59,7 +59,7 @@ const instance = getCurrentInstance()
 
 // 使用props中的activeIndex，同时保持内部状态用于点击事件
 const isTouching = ref<boolean>(false)
-const lastIndex = ref<string>('')
+const lastIndex = ref<string | number>('')
 const toastStyle = ref<CSSProperties>({
     position: 'absolute',
     left: '-150rpx',
@@ -109,11 +109,11 @@ const indexItemStyles = computed(() => {
 })
 
 // 获取索引项样式的便捷方法
-const getIndexItemStyle = (index: string) => {
+const getIndexItemStyle = (index: string | number) => {
     return indexItemStyles.value[index] || {}
 }
 
-const handleIndexClick = (index: string, event: any) => {
+const handleIndexClick = (index: string | number, event: any) => {
     emit('update:modelValue', index)
     emit('click', index, event)
 }
@@ -135,7 +135,9 @@ const handleTouchMove = (event: any) => {
         props.indexList.length - 1
     )
 
-    const clickedIndex = props.indexList[index]?.index
+    const clickedIndex = isObject(props.indexList[index])
+        ? props.indexList[index].index
+        : props.indexList[index]
     if (clickedIndex) {
         // 只有当索引发生变化时才更新activeIndex
         if (clickedIndex !== props.modelValue) {

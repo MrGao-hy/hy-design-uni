@@ -35,7 +35,7 @@ export interface FormRule {
     type?: 'phone' | 'email' | 'password'
 }
 
-export interface FormItemRule {
+export interface FieldRuleMap {
     [key: string]: FormRule | FormRule[]
 }
 
@@ -52,7 +52,7 @@ export interface IFormExpose {
      * 验证所有表单字段
      * @returns Promise，验证成功时 resolve，失败时 reject 并返回错误信息
      */
-    validate: () => Promise<unknown>
+    validate: () => Promise<boolean>
     /**
      * 重置表单所有字段到初始值
      */
@@ -66,13 +66,13 @@ export interface IFormExpose {
      * 提交表单（会先执行验证）
      * @returns Promise，验证成功时返回表单数据，失败时返回 false
      */
-    submit: () => Promise<AnyObject | false>
+    submit: () => Promise<AnyObject | boolean>
     /**
      * 表单数据对象
      */
-    formData: AnyObject
+    formData?: AnyObject
     /**
      * 表单错误信息
      */
-    errors: Record<string, string>
+    errors?: Record<string, string>
 }

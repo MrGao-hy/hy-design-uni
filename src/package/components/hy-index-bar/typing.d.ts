@@ -7,7 +7,7 @@ export interface IndexType {
     /**
      * 索引值
      */
-    index: string
+    index: string | number
     /**
      * 索引对应的内容
      */
@@ -18,19 +18,19 @@ export interface IndexType {
     data?: any[]
 }
 
-export interface IIndexItem extends IndexType {}
+export type IIndexItem = IndexType | string | number
 
 export interface IIndexBarEmits {
     /**
      * 点击索引时触发的事件
      */
-    click: [index: string, event: Event]
+    click: [index: string | number, event: Event]
     /**
      * 滚动到指定索引时触发的事件
      */
-    scroll: [index: string]
+    scroll: [index: string | number]
     /**
      * 改变索引值
      */
-    'update:modelValue': [index: string]
+    'update:modelValue': [index: string | number]
 }

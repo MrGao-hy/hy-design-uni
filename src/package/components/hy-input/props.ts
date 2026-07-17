@@ -1,11 +1,11 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { InputConfirmType } from '@uni-helper/uni-types'
+import type { InputConfirmType, InputType } from '@uni-helper/uni-types'
 import type { HyIconProps } from '../hy-icon/typing'
 
 const inputProps = {
     /** 输入的值 */
     modelValue: {
-        type: [String, Number],
+        type: String,
         required: true
     },
     /**
@@ -13,7 +13,7 @@ const inputProps = {
      * @values test,idcard,number,digit,safe-password,tel,nickname
      * */
     type: {
-        type: String,
+        type: String as PropType<InputType>,
         default: 'text'
     },
     /** 如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true，兼容性：微信小程序、百度小程序、字节跳动小程序、QQ小程序 */
@@ -123,7 +123,7 @@ const inputProps = {
      * @values left,center,right
      * */
     inputAlign: {
-        type: String,
+        type: String as PropType<CSSProperties['textAlign']>,
         default: 'left'
     },
     /** 输入框字体的大小 */
@@ -138,12 +138,12 @@ const inputProps = {
     },
     /** 输入框前置图标 */
     prefixIcon: {
-        type: Object as PropType<HyIconProps>,
+        type: Object as PropType<Partial<HyIconProps>>,
         default: () => {}
     },
     /** 输入框后置图标 */
     suffixIcon: {
-        type: Object as PropType<HyIconProps>,
+        type: Object as PropType<Partial<HyIconProps>>,
         default: () => {}
     },
     /**

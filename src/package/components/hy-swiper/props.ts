@@ -1,10 +1,13 @@
 import type { SwiperList } from './typing'
 import type { CSSProperties, PropType } from 'vue'
+import { SwiperEasingFunction } from '@uni-helper/uni-types'
+import { ImageMode } from '@uni-helper/uni-app-types'
+import { IndicatorMode } from './hy-swiper-indicator.vue'
 
 const swiperProps = {
     /** 轮播图数据 */
     list: {
-        type: Array as PropType<string[] | SwiperList[]>,
+        type: Array as PropType<(string | SwiperList)[]>,
         default: () => []
     },
     /** list数组中指定对象的目标属性名 */
@@ -34,7 +37,7 @@ const swiperProps = {
      * @values line,dot
      * */
     indicatorMode: {
-        type: String,
+        type: String as PropType<IndicatorMode>,
         default: 'line'
     },
     /** 是否自动切换 */
@@ -89,12 +92,12 @@ const swiperProps = {
      * @values default,linear,easeInCubic,easeOutCubic,easeInOutCubic
      * */
     easingFunction: {
-        type: String,
+        type: String as PropType<SwiperEasingFunction>,
         default: 'default'
     },
     /** 图片的裁剪模式 */
     imgMode: {
-        type: String,
+        type: String as PropType<ImageMode>,
         default: 'aspectFill'
     },
     /** 组件高度 */

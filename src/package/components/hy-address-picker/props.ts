@@ -15,7 +15,7 @@ const addressPickerProps = {
      * @values top,bottom
      * */
     popupMode: {
-        type: String,
+        type: String as PropType<HyApp.TopBottomType>,
         default: 'bottom'
     },
     /** 是否显示顶部的操作栏 */
@@ -87,7 +87,7 @@ const addressPickerProps = {
     },
     /** 输入框集合属性 */
     input: {
-        type: Object as PropType<HyInputProps>
+        type: Object as PropType<Partial<HyInputProps>>
     },
     /** 右边插槽 */
     toolbarRightSlot: {

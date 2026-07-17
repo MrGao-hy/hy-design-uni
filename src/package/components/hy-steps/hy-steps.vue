@@ -31,9 +31,7 @@
                                 `hy-steps-item__wrapper--dot__${statusClass(i, item.error)}`
                             ]"
                             v-if="dot"
-                            :style="{
-                                backgroundColor: statusColor(i, item?.error)
-                            }"
+                            :style="dotStyle(item, i)"
                         ></view>
                         <view
                             class="hy-steps-item__wrapper__icon"
@@ -47,13 +45,7 @@
                         </view>
                         <view
                             v-else
-                            :style="{
-                                backgroundColor:
-                                    statusClass(i, item.error) === 'process'
-                                        ? activeColor
-                                        : 'transparent',
-                                borderColor: statusColor(i, item?.error)
-                            }"
+                            :style="circleStyle(item, i)"
                             class="hy-steps-item__wrapper__circle"
                         >
                             <text
@@ -127,7 +119,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, getCurrentInstance, watch, nextTick } from 'vue'
+import { computed, ref, onMounted, getCurrentInstance, watch } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { IStepsEmits } from './typing'
 import type { StepListVo } from './typing'
@@ -162,7 +154,7 @@ watch(
 
 // 字体标题类名
 const titleClass = computed(() => {
-    return (index: number, error: boolean) => {
+    return (index: number, error?: boolean) => {
         const classes = ['hy-steps-item__content__title']
         if (props.current === index) {
             classes.push('hy-steps-item__content__title--active')
@@ -178,6 +170,24 @@ const titleClass = computed(() => {
 // 字体颜色
 const textColor = computed(() => {
     return (index: number) => (index === props.current ? '#ffffff' : props.inactiveColor)
+})
+
+const dotStyle = computed(() => {
+    return (item: StepListVo, i: number): CSSProperties => {
+        return {
+            backgroundColor: statusColor.value(i, item?.error)
+        }
+    }
+})
+
+const circleStyle = computed(() => {
+    return (item: StepListVo, i: number): CSSProperties => {
+        return {
+            backgroundColor:
+                statusClass.value(i, item.error) === 'process' ? props.activeColor : 'transparent',
+            borderColor: statusColor.value(i, item?.error)
+        }
+    }
 })
 
 /**
@@ -222,8 +232,8 @@ const statusClass = computed(() => {
     }
 })
 const statusColor = computed(() => {
-    return (index: number, error?: boolean) => {
-        let colorTmp: string | number
+    return (index: number, error?: boolean): string => {
+        let colorTmp: string
         switch (statusClass.value(index, error)) {
             case 'finish':
                 colorTmp = props.activeColor
@@ -232,7 +242,7 @@ const statusColor = computed(() => {
                 colorTmp = ColorConfig.error
                 break
             case 'process':
-                colorTmp = props.dot ? props.current : 'transparent'
+                colorTmp = props.dot ? props.inactiveColor : 'transparent'
                 break
             default:
                 colorTmp = props.inactiveColor

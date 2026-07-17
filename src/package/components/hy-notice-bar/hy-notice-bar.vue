@@ -14,13 +14,13 @@
             <slot name="icon">
                 <view class="hy-notice__left-icon" v-if="icon">
                     <hy-icon
-                        :name="icon?.name || icon"
-                        :color="icon?.color || color"
-                        :size="icon?.size || 19"
+                        :name="isObject(icon) ? icon.name : icon"
+                        :color="isObject(icon) ? icon?.color : color"
+                        :size="isObject(icon) ? icon?.size : 19"
                     ></hy-icon>
                 </view>
             </slot>
-            
+
             <!-- 中间内容区域 -->
             <template v-if="direction === 'column' || (direction === 'row' && step)">
                 <hy-column-notice
@@ -43,9 +43,9 @@
                     @change="noticeChange"
                 ></hy-row-notice>
             </template>
-            
+
             <!-- 右侧图标 -->
-            <view class="hy-notice__right-icon" v-if="['link', 'closable'].includes(mode)">
+            <view class="hy-notice__right-icon" v-if="mode && ['link', 'closable'].includes(mode)">
                 <hy-icon
                     v-if="mode === 'link'"
                     :name="IconConfig.RIGHT"
@@ -79,7 +79,7 @@ export default {
 import { ref } from 'vue'
 import type { INoticeBarEmits } from './typing'
 import noticeBarProps from './props'
-import { IconConfig } from '../../libs'
+import { IconConfig, isObject } from '../../libs'
 // 组件
 import HyRowNotice from './hy-row-notice.vue'
 import HyColumnNotice from './hy-column-notice.vue'

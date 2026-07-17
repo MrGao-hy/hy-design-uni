@@ -1,4 +1,4 @@
-/// <reference types="vite/client" />
+// <reference types="vite/client" />
 
 declare module '*.vue' {
     import { DefineComponent } from 'vue'
@@ -6,3 +6,10 @@ declare module '*.vue' {
     const component: DefineComponent<{}, {}, any>
     export default component
 }
+
+declare namespace UniApp {
+    interface Uni {
+        wx: any
+    }
+}
+declare var wx: UniApp.Uni

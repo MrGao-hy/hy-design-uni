@@ -1,6 +1,13 @@
-export interface SubSectionItemVo extends AnyObject {
+export type SubSectionCustomKeys = {
     name: string
-    value: string | number
+    value: string
+}
+type CustomKeyField = SubSectionCustomKeys['name'] | SubSectionCustomKeys['value']
+
+export interface SubSectionItemVo {
+    name?: string
+    value?: string | number
+    [key: CustomKeyField]: string | number
 }
 
 export type SubSectionVo = string | number | SubSectionItemVo

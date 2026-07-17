@@ -108,7 +108,7 @@ const isDisabled = (disabledVal?: boolean): boolean => props.disabled || !!disab
  * @description icon颜色
  * */
 const iconColorCom = computed(() => {
-    return (check: boolean) => {
+    return (check?: boolean) => {
         if (props.disabled) {
             if (check) {
                 return '#c8c9cc'

@@ -114,9 +114,9 @@ const _saveCode = () => {
     }
 }
 /**
- * @description 预览
+ * 预览
  * */
-const preview = (e: Event) => {
+const preview = (url: string) => {
     // 预览图片
     // console.log(this.result)
     if (props.allowPreview) {
@@ -138,7 +138,7 @@ const preview = (e: Event) => {
             }
         })
     }
-    emit('preview', result.value, e)
+    emit('preview', result.value, url)
 }
 
 const onLongPress = () => {

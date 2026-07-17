@@ -4,7 +4,7 @@ import type { ITableColumn } from './typing'
 const tableProps = {
     /** 数据源 */
     data: {
-        type: Array,
+        type: Array as PropType<Record<string, any>[]>,
         default: () => []
     },
     /** 列配置 */

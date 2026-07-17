@@ -164,6 +164,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
+import { SwipeActionStatus } from '@/package'
 
 definePage({
     style: {
@@ -172,7 +173,7 @@ definePage({
 })
 
 const show = ref(false)
-const controlStatus = ref('close')
+const controlStatus = ref<SwipeActionStatus>('close')
 
 // 右侧操作按钮
 const rightOptions = [

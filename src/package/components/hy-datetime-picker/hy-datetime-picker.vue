@@ -3,7 +3,7 @@
         <view v-if="hasInput" class="hy-datetime-picker__has-input" @click="onShowByClickInput">
             <slot name="trigger" :value="inputValue">
                 <hy-input
-                    v-model="inputValue"
+                    v-model="String(inputValue)"
                     :disabled="input?.disabled"
                     :disabledColor="input?.disabledColor"
                     :shape="input?.shape"

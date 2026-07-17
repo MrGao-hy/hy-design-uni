@@ -46,7 +46,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
-import type { GridItemVo, IGridEmits } from './typing'
+import { GridItemVo, IGridEmits, IGridSlots } from './typing'
 import { addUnit } from '../../libs'
 import gridProps from './props'
 // 组件
@@ -123,6 +123,8 @@ const getItemClass = computed(() => {
 const childClick = (temp: string | GridItemVo) => {
     emit('click', temp)
 }
+
+defineSlots<IGridSlots>()
 </script>
 
 <style lang="scss">

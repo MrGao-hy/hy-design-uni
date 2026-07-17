@@ -46,14 +46,14 @@ const canvasId = ref<string>(`watermark--${guid()}`)
 const waterMarkUrl = ref<string>('')
 // 支付宝小程序的 createOffscreenCanvas 存在 API 差异（不支持 toDataURL），
 // 必须强制走 on-screen canvas 路径。
-const canvasOffScreenable = ref<boolean>(
-    // #ifdef MP-ALIPAY
-    false
-    // #endif
-    // #ifndef MP-ALIPAY
-    uni.canIUse('createOffscreenCanvas') && Boolean(uni.createOffscreenCanvas)
-    // #endif
-)
+let initCanvasOffScreen: boolean
+// #ifdef MP-ALIPAY
+initCanvasOffScreen = false
+// #endif
+// #ifndef MP-ALIPAY
+initCanvasOffScreen = uni.canIUse('createOffscreenCanvas') && Boolean(uni.createOffscreenCanvas)
+// #endif
+const canvasOffScreenable = ref<boolean>(initCanvasOffScreen)
 const pixelRatio = ref<number>(uni.getSystemInfoSync().pixelRatio)
 const canvasHeight = ref<number>((props.height + props.gutterY) * pixelRatio.value)
 const canvasWidth = ref<number>((props.width + props.gutterX) * pixelRatio.value)

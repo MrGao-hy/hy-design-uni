@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { HyIconProps } from '../hy-icon/typing'
+import { ButtonFormType, ButtonLang, ButtonOpenType } from '@uni-helper/uni-types'
 
 const buttonProps = {
     /** 是否显示按钮的细边框 */
@@ -67,9 +68,9 @@ const buttonProps = {
         default: 13
     },
     /** 开放能力，具体请看uniapp稳定关于button组件部分说明 */
-    openType: String,
+    openType: String as PropType<ButtonOpenType>,
     /** 用于 <form> 组件，点击分别会触发 <form> 组件的 submit/reset 事件 */
-    formType: String,
+    formType: String as PropType<ButtonFormType>,
     /** 打开 APP 时，向 APP 传递的参数，open-type=launchApp时有效 （注：只微信小程序、QQ小程序有效） */
     appParameter: String,
     /** 指定是否阻止本节点的祖先节点出现点击态，微信小程序有效 */
@@ -82,7 +83,7 @@ const buttonProps = {
      * @values zh_CN,zh_TW,en
      * */
     lang: {
-        type: String,
+        type: String as PropType<ButtonLang>,
         default: 'en'
     },
     /** 会话来源，openType="contact"时有效 */
@@ -118,7 +119,7 @@ const buttonProps = {
     /** 按钮文字，之所以通过props传入，是因为slot传入的话（注：nvue中无法控制文字的样式） */
     text: String,
     /** 按钮图标api集合 */
-    icon: Object as PropType<HyIconProps>,
+    icon: Object as PropType<Partial<HyIconProps>>,
     /** 按钮颜色，支持传入linear-gradient渐变色 */
     color: String,
     /** 定义需要用到的外部样式 */

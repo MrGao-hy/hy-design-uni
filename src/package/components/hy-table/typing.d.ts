@@ -4,7 +4,7 @@ export interface ITableColumn {
     /** 对应数据字段名 */
     key: string
     /** 列宽 (数字默认 px) */
-    width: number
+    width?: number
     /** 对齐方式 */
     align?: HyApp.RowCenterType
     /** 是否开启排序 */
@@ -26,4 +26,25 @@ export interface ITableEmits {
     'row-click': [row: any, index: number]
     /** 触发本地排序或远程排序事件 */
     'sort-change': [key: string, sort: SortType]
+}
+
+export interface ITableSlots {
+    /** 左边头部插槽 */
+    'left-head': (props: { col: ITableColumn }) => any
+    /** 左边头部插槽 */
+    head: (props: { col: ITableColumn }) => any
+    /** 左边头部插槽 */
+    'right-head': (props: { col: ITableColumn }) => any
+    /** 左边插槽 */
+    left: (props: { row: unknown; col: ITableColumn; index: number }) => any
+    /** 默认插槽 */
+    default: (props: {
+        row: { [key: ITableColumn['key']]: any }
+        col: ITableColumn
+        index: number
+    }) => any
+    /** 右边插槽 */
+    right: (props: { row: Record<string, any>; col: ITableColumn; index: number }) => any
+    /** 空状态 */
+    empty: () => any
 }

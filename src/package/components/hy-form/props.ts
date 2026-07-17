@@ -1,11 +1,11 @@
 import type { PropType } from 'vue'
-import type { FormItemRule } from './typing'
+import type { FieldRuleMap } from './typing'
 
 const formProps = {
     /** 表单数据对象 */
     model: Object as PropType<AnyObject>,
     /** 表单校验规则 */
-    rules: Object as PropType<FormItemRule>,
+    rules: Object as PropType<Partial<FieldRuleMap>>,
     /** 表单底部边框 */
     border: {
         type: Boolean,
@@ -13,7 +13,7 @@ const formProps = {
     },
     /** label标签的宽度，单位rpx */
     labelWidth: {
-        type: String,
+        type: [String, Number],
         default: 'auto'
     },
     /**

@@ -16,7 +16,7 @@ const tabBarItemProps = {
     },
     /** 徽标显示值，当为徽标为点时候，必须要value设置true或者有值 */
     value: {
-        type: [String, Number, Boolean],
+        type: [String, Number],
         default: ''
     }
 }

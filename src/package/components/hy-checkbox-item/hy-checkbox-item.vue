@@ -19,7 +19,9 @@
                     :name="IconConfig.CHECK_MASK"
                     :size="
                         addUnit(
-                            sizeType[checkboxGroup?.size?.value] || checkboxGroup?.iconSize?.value
+                            checkboxGroup?.size
+                                ? sizeType[checkboxGroup.size.value]
+                                : checkboxGroup?.iconSize?.value
                         )
                     "
                     :color="checkboxGroup?.iconColor?.value || '#ffffff'"
@@ -39,7 +41,9 @@
                     :style="{
                         color: checkboxGroup?.labelColor?.value,
                         fontSize: addUnit(
-                            sizeType[checkboxGroup?.size?.value] || checkboxGroup?.labelSize?.value
+                            checkboxGroup?.size
+                                ? sizeType[checkboxGroup.size.value]
+                                : checkboxGroup?.labelSize?.value
                         )
                     }"
                 >

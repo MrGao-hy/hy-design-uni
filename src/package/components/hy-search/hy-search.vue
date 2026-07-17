@@ -22,10 +22,14 @@
                 <text v-else-if="label" class="hy-search__content__label">{{ label }}</text>
             </template>
             <view class="hy-search__content__icon" v-if="searchIcon">
+                <template v-if="isBoolean(searchIcon)">
+                    <hy-icon :name="IconConfig.SEARCH" :color="color"></hy-icon>
+                </template>
                 <hy-icon
-                    :name="searchIcon?.name || IconConfig.SEARCH"
+                    v-else
+                    :name="searchIcon?.name"
                     :size="searchIcon?.size"
-                    :color="searchIcon?.color || color"
+                    :color="searchIcon?.color"
                     :bold="searchIcon?.bold"
                     :customPrefix="searchIcon?.customPrefix"
                     :imgMode="searchIcon?.imgMode"
@@ -62,7 +66,7 @@
                         color: color,
                         backgroundColor: bgColor,
                         height: addUnit(height)
-                    },
+                    } as CSSProperties,
                     inputStyle
                 ]"
                 @blur="onBlur"
@@ -101,9 +105,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, CSSProperties, nextTick, ref, watch } from 'vue'
 import type { ISearchEmits } from './typing'
-import { addUnit, IconConfig } from '../../libs'
+import { addUnit, IconConfig, isBoolean } from '../../libs'
 import type {
     InputOnBlurEvent,
     InputOnConfirmEvent,

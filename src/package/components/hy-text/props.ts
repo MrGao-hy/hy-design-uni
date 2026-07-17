@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import { ButtonOpenType } from '@uni-helper/uni-types'
 
 const textProps = {
     /** 显示的值 */
@@ -45,7 +46,7 @@ const textProps = {
         default: false
     },
     /** 小程序的打开方式 */
-    openType: String,
+    openType: String as PropType<ButtonOpenType>,
     /** 是否粗体，默认normal */
     bold: {
         type: Boolean,

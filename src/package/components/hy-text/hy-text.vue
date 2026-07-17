@@ -20,21 +20,7 @@
             <button
                 class="hy-reset-button hy-text__value"
                 :style="[valueStyle]"
-                :data-index="index"
                 :openType="openType"
-                @getuserinfo="onGetUserInfo"
-                @contact="onContact"
-                @getphonenumber="onGetPhoneNumber"
-                @error="onError"
-                @launchapp="onLaunchApp"
-                @opensetting="onOpenSetting"
-                :lang="lang"
-                :session-from="sessionFrom"
-                :send-message-title="sendMessageTitle"
-                :send-message-path="sendMessagePath"
-                :send-message-img="sendMessageImg"
-                :show-message-card="showMessageCard"
-                :app-parameter="appParameter"
             >
                 {{ value }}
             </button>

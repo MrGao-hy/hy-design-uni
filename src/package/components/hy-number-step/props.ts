@@ -99,9 +99,9 @@ const numberStepProps = {
         default: false
     },
     /** 减号按钮图标 */
-    minusIcon: Object as PropType<HyIconProps>,
+    minusIcon: Object as PropType<Partial<HyIconProps>>,
     /** 加号按钮图标 */
-    plusIcon: Object as PropType<HyIconProps>,
+    plusIcon: Object as PropType<Partial<HyIconProps>>,
     /** 迷你模式 */
     miniMode: {
         type: Boolean,

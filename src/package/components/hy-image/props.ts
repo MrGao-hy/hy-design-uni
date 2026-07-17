@@ -1,5 +1,6 @@
 import { IconConfig } from '../../libs/config'
 import type { CSSProperties, PropType } from 'vue'
+import { ImageMode } from '@uni-helper/uni-app-types'
 
 const imageProps = {
     /** 图片地址 */
@@ -13,7 +14,7 @@ const imageProps = {
      * @values scaleToFill,aspectFit,aspectFill,widthFix,heightFix,top,bottom,center,left,right,top left,top right,bottom left,bottom right
      * */
     mode: {
-        type: String,
+        type: String as PropType<ImageMode>,
         default: 'aspectFill'
     },
     /** 宽度，单位任意，如果为数值，则为px单位 */

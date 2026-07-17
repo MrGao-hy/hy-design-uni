@@ -110,7 +110,7 @@
                     v-else
                     class="hy-upload__button"
                     :hover-class="!disabled ? 'hy-upload__button--hover' : ''"
-                    hover-stay-time="150"
+                    :hover-stay-time="150"
                     @tap="chooseFileFn"
                     :class="[disabled && 'hy-upload__button--disabled']"
                     :style="[
@@ -304,7 +304,7 @@ const onAfterRead = (file: FileVo) => {
 }
 
 /**
- * @description 删除文件
+ * 删除文件
  * */
 const deleteItem = (index: number) => {
     props.fileList.splice(index, 1)
@@ -318,7 +318,7 @@ const deleteItem = (index: number) => {
 }
 
 /**
- * @description 预览图片
+ * 预览图片
  * */
 const onPreviewImage = (previewItem: FileVo, index: number) => {
     if (!previewItem.isImage || !props.previewFullImage) return
@@ -346,7 +346,7 @@ const onPreviewImage = (previewItem: FileVo, index: number) => {
 }
 
 /**
- * @description 预览视频
+ * 预览视频
  * */
 const onPreviewVideo = (index: number) => {
     if (!props.previewFullImage) return
@@ -370,15 +370,6 @@ const onPreviewVideo = (index: number) => {
     if (sources.length < 1) {
         return
     }
-    // #ifdef MP-WEIXIN
-    wx.previewMedia({
-        sources: sources,
-        current: current,
-        fail() {
-            uni.showToast({ title: '预览视频失败' })
-        }
-    })
-    // #endif
 }
 
 const onClickPreview = (item: FileVo, index: number) => {

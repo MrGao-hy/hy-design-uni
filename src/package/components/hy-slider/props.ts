@@ -8,7 +8,7 @@ const sliderProps = {
     },
     /** 滑块的大小，取值范围为 12 - 28 */
     blockSize: {
-        type: [String, Number],
+        type: Number,
         default: 18
     },
     /** 最小值 */

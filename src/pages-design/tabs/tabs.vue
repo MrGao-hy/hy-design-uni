@@ -11,23 +11,13 @@
     </the-root-page>
 </template>
 
-<!--<script lang="ts">-->
-<!--export default {-->
-<!--    name: 'tabs',-->
-<!--    options: {-->
-<!--        addGlobalClass: true,-->
-<!--        virtualHost: true,-->
-<!--        styleIsolation: 'shared'-->
-<!--    }-->
-<!--}-->
-<!--</script>-->
-
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import TheOrderDom from './components/TheOrderDom.vue'
 import { useShareButton } from '@/composables'
 import type { OrderItem } from '@/pages-design/tabs/components/types'
 import TheRootPage from '@/components/the-root-page.vue'
+import type { TabsItemVo } from '@/package'
 
 definePage({
     style: {
@@ -35,9 +25,9 @@ definePage({
     }
 })
 
-const list = reactive([
+const list: TabsItemVo[] = reactive([
     { name: '关注', content: '我是内容' },
-    { name: '推荐', badge: { isDot: true } },
+    { name: '推荐', badge: { value: 1, isDot: true } },
     { name: '电影', badge: { value: 5 } },
     { name: '科技' },
     { name: '音乐' },

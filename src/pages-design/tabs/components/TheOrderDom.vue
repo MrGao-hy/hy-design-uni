@@ -4,7 +4,7 @@
         :title="order.store.name"
         :sub-title="order.store.address"
         :rightText="order.order.status"
-        :right-text-color="orderStatusColor[order.order.status]"
+        :right-text-color="statusTextColor"
         show-foot
     >
         <template #body>
@@ -41,6 +41,7 @@ import HyImage from '../../../package/components/hy-image/hy-image.vue'
 import HyFlex from '@/package/components/hy-flex/hy-flex.vue'
 import HyButton from '../../../package/components/hy-button/hy-button.vue'
 import type { OrderItem } from './types'
+import { computed } from 'vue'
 
 interface IProps {
     order: OrderItem
@@ -52,7 +53,11 @@ const orderStatusColor = {
     待支付: '#909399',
     配送中: '#ff9900',
     已删除: '#fa3534'
-}
+} as Record<string, string>
+
+const statusTextColor = computed(() => {
+    return orderStatusColor[props.order.order.status] ?? '#909399'
+})
 </script>
 
 <style lang="scss" scoped>

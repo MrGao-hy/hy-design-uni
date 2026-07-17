@@ -21,7 +21,7 @@ const pickerProps = {
      * @values bottom, top
      */
     popupMode: {
-        type: String,
+        type: String as PropType<HyApp.TopBottomType>,
         default: 'bottom'
     },
     /** 分割数组条件 */

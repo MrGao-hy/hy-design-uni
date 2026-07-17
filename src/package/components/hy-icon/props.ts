@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import { ImageMode } from '@uni-helper/uni-app-types'
 
 const iconProps = {
     /** 图标名称 */
@@ -45,7 +46,7 @@ const iconProps = {
         default: '2px'
     },
     /** 图片的mode */
-    imgMode: String,
+    imgMode: String as PropType<ImageMode>,
     /** 显示图片小图标时的宽度 */
     width: [String, Number],
     /** 显示图片小图标时的高度 */

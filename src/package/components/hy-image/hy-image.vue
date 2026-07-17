@@ -151,7 +151,7 @@ onMounted(() => {
 })
 
 const clickHandler = () => {
-    emit('click')
+    emit('click', props.src)
 
     if (props.previewImage) {
         uni.previewImage({

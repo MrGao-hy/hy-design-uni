@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import { TextareaConfirmType } from '@uni-helper/uni-app-types'
 
 const textareaProps = {
     /** 输入框的内容 */
@@ -14,15 +15,18 @@ const textareaProps = {
         default: 'textarea-placeholder'
     },
     /** 指定placeholder的样式，对象形式 */
-    placeholderStyle: Object as PropType<CSSProperties>,
+    placeholderStyle: String,
     /** 输入框高度 */
     height: {
         type: [String, Number],
         default: 70
     },
-    /** 设置键盘右下角按钮的文字，仅微信小程序，App-vue和H5有效 */
+    /**
+     * 设置键盘右下角按钮的文字，仅微信小程序，App-vue和H5有效
+     * @values send,search,next,go,done,return
+     * */
     confirmType: {
-        type: String,
+        type: String as PropType<TextareaConfirmType>,
         default: 'done'
     },
     /** 是否禁用 */
@@ -57,7 +61,7 @@ const textareaProps = {
     },
     /** 指定focus时的光标位置 */
     cursor: {
-        type: [String, Number],
+        type: Number,
         default: ''
     },
     /** 是否显示键盘上方带有”完成“按钮那一栏 */

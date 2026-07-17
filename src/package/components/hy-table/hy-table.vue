@@ -327,7 +327,7 @@ export default {
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
 import { addUnit, IconConfig, getPx } from '../../libs'
-import type { ITableColumn, ITableEmits } from './typing'
+import type { ITableColumn, ITableEmits, ITableSlots } from './typing'
 import tableProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -366,14 +366,16 @@ const rightFixedColumns = computed(() => props.columns.filter((col) => col.fixed
 const scrollColumns = computed(() => props.columns.filter((col) => !col?.fixed))
 
 const leftFixedWidth = computed(() =>
-    leftFixedColumns.value.reduce((sum, col) => sum + col.width, 0)
+    leftFixedColumns.value.reduce((sum, col) => sum + (col.width || 0), 0)
 )
 
 const rightFixedWidth = computed(() =>
-    rightFixedColumns.value.reduce((sum, col) => sum + col.width, 0)
+    rightFixedColumns.value.reduce((sum, col) => sum + (col.width || 0), 0)
 )
 
-const scrollWidth = computed(() => scrollColumns.value.reduce((sum, col) => sum + col.width, 0))
+const scrollWidth = computed(() =>
+    scrollColumns.value.reduce((sum, col) => sum + (col.width || 0), 0)
+)
 
 const totalWidth = computed(() => leftFixedWidth.value + scrollWidth.value + rightFixedWidth.value)
 // 表格高度
@@ -462,7 +464,7 @@ const getRowStyle = computed(() => {
     }
 })
 
-const getCellValue = (row: any, col: ITableColumn) => {
+const getCellValue = (row: Record<string, any>, col: ITableColumn) => {
     if (col.formatter) {
         return col.formatter(row[col.key], row)
     }
@@ -547,7 +549,7 @@ const handleSort = (col: ITableColumn, sort?: 'asc' | 'desc') => {
  * @param row 行数据
  * @param index 第几列
  * */
-const onCellClick = (row: AnyObject, index: number) => {
+const onCellClick = (row: unknown, index: number) => {
     emit('row-click', row, index)
 }
 
@@ -603,6 +605,8 @@ const nextFrame = (cb: () => void) => {
         setTimeout(cb, SLEEP_TIME)
     }
 }
+
+defineSlots<ITableSlots>()
 </script>
 
 <style lang="scss">

@@ -2,7 +2,7 @@
     <view class="hy-check-button">
         <template v-for="(item, i) in columns" :key="i">
             <hy-tag
-                :text="item?.[fieldNames.label]"
+                :text="String(item?.[fieldNames.label])"
                 :name="item?.[fieldNames.value]"
                 :type="type"
                 :size="size"
@@ -35,7 +35,7 @@ export default {
 import { watch, ref, computed } from 'vue'
 import type { ICheckButtonEmits } from './typing'
 import HyTag from '../hy-tag/hy-tag.vue'
-import { isArray } from '../../libs'
+import { isArray, isBoolean } from '../../libs'
 import type { TagParamsVo } from '../hy-tag/typing'
 import checkButtonProps from './props'
 
@@ -58,8 +58,8 @@ const current = ref<CurrentValue>([])
  * 判断是否有选中值，true选中、false未选中
  * */
 const isSelect = computed(() => {
-    return (check: string | number) => {
-        if (isArray(current.value)) {
+    return (check?: string | number | boolean) => {
+        if (check && !isBoolean(check) && isArray(current.value)) {
             return current.value.includes(check)
         } else {
             return current.value === check
@@ -78,7 +78,7 @@ const index = computed(() => {
 watch(
     () => props.modelValue,
     (newValue) => {
-        if(newValue) current.value = newValue
+        if (newValue) current.value = newValue
     },
     { immediate: true }
 )

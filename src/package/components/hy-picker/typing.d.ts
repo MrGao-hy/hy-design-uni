@@ -7,7 +7,7 @@ export interface PickerColumnVo {
     /**
      * value必填,回填根据这个值判断
      * */
-    value: string | number
+    value?: string | number
     /**
      * 显示文本
      * */
@@ -18,8 +18,10 @@ export interface PickerColumnVo {
     [key: string]: any
 }
 
+export type PickerValue = PickerColumnVo | string
+
 export type SelectValueVo = {
-    value: string[]
+    value: PickerValue[]
     index?: number
     indexs?: number[]
     // values为当前变化列的数组内容
@@ -48,7 +50,7 @@ export interface IPickerExpose {
      * @param columnIndex 列索引，从0开始
      * @param values 该列的选项数组
      */
-    setColumnValues: (columnIndex: number, values: Array<string | PickerColumnVo>) => void
+    setColumnValues: (columnIndex: number, values: PickerValue[]) => void
     /**
      * 手动触发确认选择
      */

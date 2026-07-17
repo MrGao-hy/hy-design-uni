@@ -16,13 +16,13 @@
             @touchstart="onTouchStart('minus')"
             @touchend.stop="onClearTimeout"
             hover-class="hy-number-box__minus--hover"
-            hover-stay-time="150"
+            :hover-stay-time="150"
             :class="[
                 { 'hy-number-box__minus--disabled': isDisabled('minus') },
                 'hy-number-box__minus',
                 'cursor-pointer'
             ]"
-            :style="buttonStyle('minus')"
+            :style="buttonStyle()"
         >
             <hy-icon
                 :name="minusIcon?.name || IconConfig.MINUS"
@@ -55,7 +55,7 @@
                         },
                         'hy-number-box__input'
                     ]"
-                    :value="currentValue"
+                    :value="String(currentValue)"
                     @blur="onBlur"
                     @focus="onFocus"
                     @input="onInput"
@@ -100,13 +100,13 @@
             @touchstart="onTouchStart('plus')"
             @touchend.stop="onClearTimeout"
             hover-class="hy-number-box__plus--hover"
-            hover-stay-time="150"
+            :hover-stay-time="150"
             :class="[
                 { 'hy-number-box__plus--disabled': isDisabled('plus') },
                 'hy-number-box__plus',
                 'cursor-pointer'
             ]"
-            :style="[buttonStyle('plus')]"
+            :style="[buttonStyle()]"
         >
             <hy-icon
                 :name="plusIcon?.name || IconConfig.PLUS"
@@ -209,7 +209,7 @@ const getCursorSpacing = computed(() => {
 })
 // 按钮的样式
 const buttonStyle = computed(() => {
-    return (type: string) => {
+    return () => {
         const style: CSSProperties = {
             backgroundColor: props.bgColor,
             width: addUnit(props.buttonWidth),
@@ -247,7 +247,6 @@ onMounted(() => {
 })
 
 const init = () => {
-    console.log(format(props.modelValue), '===')
     currentValue.value = format(props.modelValue)
 }
 const check = () => {

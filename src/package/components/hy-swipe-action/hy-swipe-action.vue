@@ -70,7 +70,6 @@ import {
     watch,
     useSlots
 } from 'vue'
-import type { PropType } from 'vue'
 import type {
     ISwipeActionEmits,
     SwipeActionStatus,

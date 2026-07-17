@@ -71,7 +71,7 @@
                                             !item[isLeafKey]
                                         "
                                         :name="IconConfig.CHECK_MASK"
-                                        :color="themeConfig?.themeColor.value"
+                                        :color="ColorConfig.primary"
                                     />
                                 </view>
                             </scroll-view>
@@ -105,7 +105,8 @@ import type { CascaderOption, CascaderValue, CascaderEmitValue } from './typing'
 import type { ICascaderEmits } from './typing'
 import type { ITabsExpose, TabsItemVo } from '../hy-tabs/typing'
 import cascaderProps from './props'
-import { useTranslate, IconConfig } from '../../libs'
+import { useTranslate, IconConfig, ColorConfig } from '../../libs'
+
 // 组件
 import HyTabs from '../hy-tabs/hy-tabs.vue'
 import HyPopup from '../hy-popup/hy-popup.vue'
@@ -128,7 +129,6 @@ const innerOptions = ref<CascaderOption[]>([...props.options])
 const loadingTabs = ref<number[]>([])
 const isRestoring = ref(false)
 const tabsRef = ref<ITabsExpose>()
-console.log(themeConfig)
 
 /**
  * 生成标签页列表，用于显示已选择的路径层级

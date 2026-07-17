@@ -5,7 +5,7 @@
             {{ label }}
         </view>
         <view class="hy-form-item__content">
-            <view :class="[formContext.border.value && 'hy-border__bottom']">
+            <view :class="[formContext?.border.value && 'hy-border__bottom']">
                 <slot></slot>
             </view>
             <view v-if="errorMessage" class="hy-form-item__error">
@@ -28,7 +28,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, inject, onMounted, onUnmounted, provide, ref } from 'vue'
-import type { IFormItemEmits, IFormContext } from './typing'
+import { IFormItemEmits, IFormContext, IFormItemExpose, FormValidateTrigger } from './typing'
 import { addUnit } from '../../libs'
 import formItemProps from './props'
 
@@ -117,7 +117,7 @@ const labelPos = computed(() => {
 // )
 
 // 验证字段
-const validate = (trigger?: 'blur' | 'change') => {
+const validate = (trigger?: FormValidateTrigger) => {
     if (!formContext || !props.prop) return true
 
     const value = formContext.getFieldValue(props.prop)
@@ -164,7 +164,7 @@ onUnmounted(() => {
 })
 
 // 暴露方法给父组件
-defineExpose({
+defineExpose<IFormItemExpose>({
     validate,
     resetField,
     clearValidate

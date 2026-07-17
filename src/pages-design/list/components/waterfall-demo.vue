@@ -17,7 +17,6 @@
     <!-- 两列插槽示例：left-list / right-list -->
     <hy-list
         v-else
-        ref="listRef"
         :list="list"
         container-height="100%"
         :item-height="itemCardHeight"

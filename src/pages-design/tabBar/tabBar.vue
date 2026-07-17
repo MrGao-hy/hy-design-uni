@@ -82,7 +82,7 @@ const list = [
     { name: '我的', icon: IconConfig.HOME }
 ]
 
-const onChange = ({ value }: { value: number }) => {
+const onChange = ({ value }: { value: number | string }) => {
     uni.showToast({ title: `切换第${value}个`, icon: 'none' })
 }
 

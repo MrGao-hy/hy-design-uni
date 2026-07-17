@@ -163,7 +163,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { HyIconProps } from '@/package/components/hy-icon/typing'
-import { useToast } from '@/package'
+import { isString, useToast } from '@/package'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -228,9 +228,9 @@ const handleLoading = (message?: string, mode?: HyApp.LoadingMode) => {
 }
 
 // 自定义图标
-const handleCustomIcon = (iconName: string | HyIconProps) => {
+const handleCustomIcon = (icon: string | Partial<HyIconProps>) => {
     toast.info('自定义图标', {
-        icon: iconName,
+        icon: isString(icon) ? icon : icon.name,
         position: position.value as any
     })
 }

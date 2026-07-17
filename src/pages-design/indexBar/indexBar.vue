@@ -131,16 +131,16 @@ const handleScroll = (e: any) => {
 }
 
 // 处理索引点击事件
-const handleIndexClick = (index: string, event: Event) => {
+const handleIndexClick = (index: string | number, event: Event) => {
     scrollToSection(index)
 }
 
 // 处理索引滚动事件
-const handleIndexScroll = (index: string) => {
+const handleIndexScroll = (index: string | number) => {
     scrollToSection(index)
 }
 
-const scrollToSection = async (i: string) => {
+const scrollToSection = async (i: string | number) => {
     isScroll.value = false
     const index = Object.keys(cityData).findIndex((item) => item === i)
     scrollTop.value = sectionRect.value[index]?.top!

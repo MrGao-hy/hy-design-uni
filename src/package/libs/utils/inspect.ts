@@ -26,6 +26,15 @@ export const isString = (val: unknown): val is string => {
 }
 
 /**
+ * 判断是否是布尔值
+ * @param {unknown} val 值
+ * @return {Boolean}
+ * */
+export const isBoolean = (val: unknown): val is boolean => {
+    return typeof val === 'boolean'
+}
+
+/**
  * 判断是否数组
  * @param {unknown} arr 传入数组值
  * @return {Boolean}
@@ -44,7 +53,7 @@ export const isArray = (arr: unknown): arr is Array<any> => {
  * @param obj 传入对象值
  * @return {Boolean}
  */
-export const isObject = (obj: any): obj is Object => {
+export const isObject = (obj: any): obj is Record<string, any> => {
     return Object.prototype.toString.call(obj) === '[object Object]'
 }
 

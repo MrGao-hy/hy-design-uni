@@ -2,11 +2,11 @@ export interface MenuParamsVo {
     /**
      *  唯一id
      * */
-    id: string | number
+    id?: string | number
     /**
      *  标题
      * */
-    title: string
+    title?: string
     /**
      *  是否禁用
      * */
@@ -22,7 +22,7 @@ export interface MenuParamsVo {
     /**
      *  键值
      * */
-    [key: string]: string | number
+    [key: string]: any
 }
 
 export interface IMenuEmits {

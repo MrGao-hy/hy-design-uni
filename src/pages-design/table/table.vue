@@ -41,6 +41,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { useShareButton } from '@/composables'
+import { ITableColumn } from '@/package'
 
 definePage({
     style: {
@@ -48,7 +49,7 @@ definePage({
     }
 })
 
-const columns = reactive([
+const columns: ITableColumn[] = reactive([
     { title: 'ID', key: 'id', width: 40, fixed: 'left', align: 'center' },
     { title: '姓名', key: 'name', width: 80, fixed: 'left' },
     { title: '性别', key: 'sex', width: 80 },
@@ -59,7 +60,7 @@ const columns = reactive([
     { title: '公司', key: 'company', width: 150, ellipsis: true },
     { title: '职位', key: 'position', width: 150, ellipsis: true }
 ])
-const columns2 = reactive([
+const columns2: ITableColumn[] = reactive([
     { title: 'ID', key: 'id', width: 40, fixed: 'left', align: 'center' },
     { title: '姓名', key: 'name', width: 80, fixed: 'left' },
     { title: '头像', key: 'avatar', width: 80 },

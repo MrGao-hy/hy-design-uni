@@ -96,7 +96,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import type { FormItemRule } from '@/package/components/hy-form/typing'
+import type { FieldRuleMap } from '@/package/components/hy-form/typing'
 import { useShareButton } from '@/composables'
 import { useToast } from '@/package'
 
@@ -122,7 +122,7 @@ const formData = reactive({
 })
 
 // 表单验证规则
-const rules: FormItemRule = {
+const rules: FieldRuleMap = {
     username: [
         { required: true, message: '请输入用户名' },
         {

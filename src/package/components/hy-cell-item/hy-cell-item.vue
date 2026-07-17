@@ -9,7 +9,7 @@
         <view class="hy-cell-item__left">
             <view v-if="icon || $slots.icon" class="hy-cell-item__left--icon">
                 <!-- @slot 图标插槽 -->
-                <slot v-if="$slots.icon" name="icon" :icon="item?.icon"></slot>
+                <slot v-if="$slots.icon" name="icon"></slot>
                 <hy-icon
                     v-else
                     :size="iconSize"
@@ -29,12 +29,12 @@
             </view>
             <view class="hy-cell-item__left--title">
                 <!-- @slot 列表标题插槽 -->
-                <slot v-if="$slots.title" name="title" :title="title"></slot>
+                <slot v-if="$slots.title" name="title"></slot>
                 <text v-else class="hy-cell-item__left--title__text">
                     {{ title }}
                 </text>
                 <!-- @slot 列表小标题插槽 -->
-                <slot v-if="$slots.sub" name="sub" :sub="sub"></slot>
+                <slot v-if="$slots.sub" name="sub"></slot>
                 <text v-else-if="sub" class="hy-cell-item__left--title__sub">
                     {{ sub }}
                 </text>
@@ -52,7 +52,7 @@
             }"
         >
             <!-- @slot 值内容插槽 -->
-            <slot v-if="$slots.value" name="value" :record="item"></slot>
+            <slot v-if="$slots.value" name="value"></slot>
             <text v-else-if="value" class="hy-cell-item__center--value">
                 {{ value }}
             </text>
@@ -65,7 +65,7 @@
             v-if="cellConfig?.isRightIcon.value"
         >
             <!-- @slot 右边按钮插槽 -->
-            <slot v-if="$slots['right-icon']" name="right-icon" :icon="rightIcon"></slot>
+            <slot v-if="$slots['right-icon']" name="right-icon"></slot>
             <hy-icon
                 v-else
                 :name="rightIcon?.name || IconConfig.RIGHT"
@@ -97,7 +97,7 @@ export default {
 <script setup lang="ts">
 import { computed, inject } from 'vue'
 import cellItemProps from './props'
-import type { ICellContext } from './typing'
+import type { ICellContext, ICellItemSlots } from './typing'
 import { IconConfig } from '../../libs'
 import type { ICellEmits } from '../hy-cell/typing'
 // 组件
@@ -154,6 +154,8 @@ const clickHandler = (e: Event) => {
         })
     }
 }
+
+defineSlots<ICellItemSlots>()
 </script>
 
 <style lang="scss">

@@ -23,7 +23,7 @@
         <view class="hy-title">隐藏减号</view>
         <view class="hy-container hidden">
             <hy-number-step
-                v-model="item.quantity"
+                v-model="value2"
                 :min="0"
                 :miniMode="true"
                 input-bg-color="transparent"

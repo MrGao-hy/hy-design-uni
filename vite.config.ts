@@ -9,16 +9,7 @@ import { useUniPages } from './src/composables/useUniPages'
 export default defineConfig({
     plugins: [
         UniPages(useUniPages),
-        Uni({
-            vueOptions: {
-                templateCompilerOptions: {
-                    isNativeTag: () => false,
-                    isBuiltInComponent: () => false,
-                    // 关键配置：强制解析字面量类型
-                    optimizeImports: false
-                }
-            }
-        }),
+        Uni(),
         visualizer({
             filename: 'dist/stats.html', // 生成报告
             gzipSize: true // 同时显示 gzip 体积
@@ -27,6 +18,13 @@ export default defineConfig({
     resolve: {
         alias: {
             '@': resolve(__dirname, 'src')
+        }
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler'
+            }
         }
     }
 })

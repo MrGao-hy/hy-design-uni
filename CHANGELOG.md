@@ -1,8 +1,117 @@
 # 📝 更新日志 (CHANGELOG)
 
-## 🚀 v0.6.9 (2026-05-26)
+## 🚀 v0.7.4 (2026-07-13)
+### ♻️ 重构优化
+- list去掉多余的代码 ([a586564](https://github.com/MrGao-hy/hy-design-uni/commit/a586564))
+
+### 📦 其他
+- 修改issue功能建议别名 ([16dec7f](https://github.com/MrGao-hy/hy-design-uni/commit/16dec7f))
+
+### 🐞 修复问题
+- 修复list虚拟列表异步加载问题 ([b023b79](https://github.com/MrGao-hy/hy-design-uni/commit/b023b79))
+- 修复类型定义报错问题 ([2a55898](https://github.com/MrGao-hy/hy-design-uni/commit/2a55898))
+- 步进按钮加入插槽禁用属性值 ([a994eaa](https://github.com/MrGao-hy/hy-design-uni/commit/a994eaa))
+- 虚拟滚动 ([3375721](https://github.com/MrGao-hy/hy-design-uni/commit/3375721))
+
 ### 💄 样式调整
+- list设置主题色 ([ef23df8](https://github.com/MrGao-hy/hy-design-uni/commit/ef23df8))
+
+### 📚 文档变更
+- 说明文档优化 ([9425b33](https://github.com/MrGao-hy/hy-design-uni/commit/9425b33))
+
+## 🚀 v0.7.3 (2026-06-13)
+### 🐞 修复问题
+- 更新app优化方法 ([0087dae](https://github.com/MrGao-hy/hy-design-uni/commit/0087dae))
+- 虚拟列表修复一直触底问题 ([6493b6a](https://github.com/MrGao-hy/hy-design-uni/commit/6493b6a))
+
+## 🚀 v0.7.2 (2026-06-12)
+### ✨ 新功能
+- 露出方法加类型 ([c1dab6b](https://github.com/MrGao-hy/hy-design-uni/commit/c1dab6b))
+
+### 🐞 修复问题
+- http接收完整的地址 ([dbd719d](https://github.com/MrGao-hy/hy-design-uni/commit/dbd719d))
+
+## 🚀 v0.7.1 (2026-06-08)
+### 📦 其他
+- Pull Request提交规范文档定义 ([bffd7b4](https://github.com/MrGao-hy/hy-design-uni/commit/bffd7b4))
+
+### 🐞 修复问题
+- 缺少的文档 ([97b6994](https://github.com/MrGao-hy/hy-design-uni/commit/97b6994))
+
+### 🔧 构建 | 工具变更
+- 添加更多描述 ([d2a5487](https://github.com/MrGao-hy/hy-design-uni/commit/d2a5487))
+
+### 💄 样式调整
+- 添加padding的xl和xxl值 ([ae7f993](https://github.com/MrGao-hy/hy-design-uni/commit/ae7f993))
+
+## 🚀 v0.7.0 (2026-06-05)
+### ✨ 新功能
+- 键盘组件 ([6e938bd](https://github.com/MrGao-hy/hy-design-uni/commit/6e938bd))
+- configProvider提供给所有后代值 ([0af2c39](https://github.com/MrGao-hy/hy-design-uni/commit/0af2c39))
+- 新增icon图标 ([1dea4fa](https://github.com/MrGao-hy/hy-design-uni/commit/1dea4fa))
+- 类型 ([e9fe04d](https://github.com/MrGao-hy/hy-design-uni/commit/e9fe04d))
+- 添加属性值 ([95c8327](https://github.com/MrGao-hy/hy-design-uni/commit/95c8327))
+- tabs导出resize方法 ([51071ae](https://github.com/MrGao-hy/hy-design-uni/commit/51071ae))
+- 级联类型定义 ([d726757](https://github.com/MrGao-hy/hy-design-uni/commit/d726757))
+- 级联选择器组件 ([c69a25e](https://github.com/MrGao-hy/hy-design-uni/commit/c69a25e))
+
+### 🐞 修复问题
+- 键盘导入ts ([2ef522d](https://github.com/MrGao-hy/hy-design-uni/commit/2ef522d))
+- 页面导入问题 ([847af9e](https://github.com/MrGao-hy/hy-design-uni/commit/847af9e))
+- 解决滑动控制台报错提示，修改默认触发，但是不影响效果 ([dcadf78](https://github.com/MrGao-hy/hy-design-uni/commit/dcadf78))
+- icon图标修改大小 ([d900199](https://github.com/MrGao-hy/hy-design-uni/commit/d900199))
+- 验证码添加获取焦点和失去焦点事件 ([1bf48cb](https://github.com/MrGao-hy/hy-design-uni/commit/1bf48cb))
+- 日历组件修复层级问题 ([01e62ab](https://github.com/MrGao-hy/hy-design-uni/commit/01e62ab))
+- 头像组件 ([3c2c769](https://github.com/MrGao-hy/hy-design-uni/commit/3c2c769))
+- 循环添加key值 ([124cd8d](https://github.com/MrGao-hy/hy-design-uni/commit/124cd8d))
+- 滚动通告栏加入icon组件属性props ([efbe861](https://github.com/MrGao-hy/hy-design-uni/commit/efbe861))
+
+### 🔧 构建 | 工具变更
+- 解决报黄问题 ([66c683c](https://github.com/MrGao-hy/hy-design-uni/commit/66c683c))
+- 注释去掉@description ([e1dfce3](https://github.com/MrGao-hy/hy-design-uni/commit/e1dfce3))
+- 无关紧要的修改 ([05b8ea4](https://github.com/MrGao-hy/hy-design-uni/commit/05b8ea4))
+- 其他修改 ([0636c88](https://github.com/MrGao-hy/hy-design-uni/commit/0636c88))
+- 无关数据修改 ([8baf0d5](https://github.com/MrGao-hy/hy-design-uni/commit/8baf0d5))
+
+### 💄 样式调整
+- 加上错误元素 ([a063bc8](https://github.com/MrGao-hy/hy-design-uni/commit/a063bc8))
+- 九宫格加上图标size属性，iconConfig改为iconProps ([b533505](https://github.com/MrGao-hy/hy-design-uni/commit/b533505))
+- 加上上传错误提示内容 ([46a5ce3](https://github.com/MrGao-hy/hy-design-uni/commit/46a5ce3))
+- 解决提示组件在flex布局下会文字换行 ([674e907](https://github.com/MrGao-hy/hy-design-uni/commit/674e907))
+- 滑块去掉align-items: center;，防止高度没有撑起来 ([893aab6](https://github.com/MrGao-hy/hy-design-uni/commit/893aab6))
+- 九宫格加上padding属性值 ([f7b7309](https://github.com/MrGao-hy/hy-design-uni/commit/f7b7309))
+- 主题色修改 ([376e104](https://github.com/MrGao-hy/hy-design-uni/commit/376e104))
+- 弹窗隐藏超出部分 ([26c4166](https://github.com/MrGao-hy/hy-design-uni/commit/26c4166))
+- tabs轮播图样式 ([8184f6c](https://github.com/MrGao-hy/hy-design-uni/commit/8184f6c))
+- 骨架屏暗色主题 ([b527d1d](https://github.com/MrGao-hy/hy-design-uni/commit/b527d1d))
 - 修改单元格字体替换成共同变量 ([7a106ad](https://github.com/MrGao-hy/hy-design-uni/commit/7a106ad))
+
+### 💡 性能优化
+- 设置遮罩层为0 ([7a2726b](https://github.com/MrGao-hy/hy-design-uni/commit/7a2726b))
+- 设置遮罩层为0 ([918c281](https://github.com/MrGao-hy/hy-design-uni/commit/918c281))
+- 金额优化代码 ([6e152db](https://github.com/MrGao-hy/hy-design-uni/commit/6e152db))
+- 减少选择器代码冗余，提高代码质量 ([28e133c](https://github.com/MrGao-hy/hy-design-uni/commit/28e133c))
+- 提取公共的icon减少代码量 ([f7ca58a](https://github.com/MrGao-hy/hy-design-uni/commit/f7ca58a))
+- 提取公共的icon减少代码量 ([32e0217](https://github.com/MrGao-hy/hy-design-uni/commit/32e0217))
+- 提取公共的icon减少代码量 ([8ad75d7](https://github.com/MrGao-hy/hy-design-uni/commit/8ad75d7))
+
+### 📦 其他
+- 删除多余文件 ([fb0ac41](https://github.com/MrGao-hy/hy-design-uni/commit/fb0ac41))
+
+### ✅ 测试
+- 图标示例变小点 ([c87ace0](https://github.com/MrGao-hy/hy-design-uni/commit/c87ace0))
+- 增加丰富的测试用例 ([7fb894e](https://github.com/MrGao-hy/hy-design-uni/commit/7fb894e))
+- 增加丰富的测试用例 ([7f13a6b](https://github.com/MrGao-hy/hy-design-uni/commit/7f13a6b))
+- 测试用例 ([379c8e1](https://github.com/MrGao-hy/hy-design-uni/commit/379c8e1))
+
+### 📚 文档变更
+- 文档修改 ([238cfe7](https://github.com/MrGao-hy/hy-design-uni/commit/238cfe7))
+
+## 🚀 v0.6.9 (2026-05-26)
+### 📦 其他
+- 单元格样式改成公共的 ([1d4d389](https://github.com/MrGao-hy/hy-design-uni/commit/1d4d389))
+
+### 💄 样式调整
 - 新增css变量值，更改变量名称 ([1e3a822](https://github.com/MrGao-hy/hy-design-uni/commit/1e3a822))
 
 ## 🚀 v0.6.8 (2026-05-21)

@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import { ImageMode } from '@uni-helper/uni-app-types'
 
 const avatarProps = {
     /** 头像路径 */
@@ -24,7 +25,7 @@ const avatarProps = {
      * @values scaleToFill,aspectFit,aspectFill,widthFix,heightFix,top,bottom,center,left,right,top left,top right,bottom left,bottom right
      * */
     mode: {
-        type: String,
+        type: String as PropType<ImageMode>,
         default: 'scaleToFill'
     },
     /** 用文字替代图片，级别优先于src */

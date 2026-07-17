@@ -54,12 +54,7 @@
             <hy-tooltip text="操作" :buttons="['收藏']" @click="onClick">
                 <text class="tooltip-text">单个扩展按钮</text>
             </hy-tooltip>
-            <hy-tooltip
-                text="操作"
-                :buttons="['收藏', '分享']"
-                placement="bottom-start"
-                @click="onClick"
-            >
+            <hy-tooltip text="操作" :buttons="['收藏', '分享']" @click="onClick">
                 <text class="tooltip-text">多个扩展按钮</text>
             </hy-tooltip>
             <hy-tooltip text="操作" :buttons="['编辑', '删除']" :showCopy="false" @click="onClick">

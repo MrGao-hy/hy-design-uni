@@ -38,7 +38,7 @@ export interface FileVo {
     /**
      * 进度条
      * */
-    schedule?: string | number
+    schedule?: number
 }
 
 export type ReadFunctionVo = (file: FileVo, detail: { name: string; index: number }) => void

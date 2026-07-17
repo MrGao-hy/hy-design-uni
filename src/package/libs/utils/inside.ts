@@ -104,8 +104,7 @@ export function guid(len: number = 32, firstU: boolean = true, radix: number | n
  * 获取设备信息
  * */
 export const getWindowInfo = ():
-    | UniNamespace.GetWindowInfoResult
-    | UniNamespace.GetSystemInfoResult => {
+    UniNamespace.GetWindowInfoResult | UniNamespace.GetSystemInfoResult => {
     let ret: UniNamespace.GetWindowInfoResult | UniNamespace.GetSystemInfoResult
     // #ifdef APP || H5
     ret = uni.getWindowInfo()
@@ -162,7 +161,7 @@ function formatVideo(res: UniApp.ChooseVideoSuccess) {
     ]
 }
 
-function formatMedia(res: WechatMiniprogram.ChooseMediaSuccessCallbackResult) {
+function formatMedia(res: UniNamespace.ChooseMediaSuccessCallbackResult) {
     return res.tempFiles.map((item) => ({
         ...pickExclude(item, ['fileType', 'thumbTempFilePath', 'tempFilePath']),
         type: res.type,
@@ -178,11 +177,7 @@ function formatMedia(res: WechatMiniprogram.ChooseMediaSuccessCallbackResult) {
 function formatFile(
     res: UniApp.ChooseFileSuccessCallbackResult | UniApp.ChooseMessageFileSuccessCallbackResult
 ) {
-    const files: any[] = isArray(
-        res.tempFiles
-    )
-        ? res.tempFiles
-        : [res.tempFiles]
+    const files: any[] = isArray(res.tempFiles) ? res.tempFiles : [res.tempFiles]
     return files.map((item) => ({
         ...pickExclude(item, ['path']),
         url: item.path,
@@ -227,7 +222,7 @@ export function chooseFile({
                     maxDuration,
                     sizeType,
                     camera,
-                    success: (res: WechatMiniprogram.ChooseMediaSuccessCallbackResult) =>
+                    success: (res: UniNamespace.ChooseMediaSuccessCallbackResult) =>
                         resolve(formatMedia(res)),
                     fail: reject
                 })

@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { FormTypeEnum } from '@/package'
+import { FormColumnsType, FormTypeEnum } from '@/package'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -51,7 +51,7 @@ const formData = ref({
     price: '',
     summary: ''
 })
-const formColumns = reactive([
+const formColumns: FormColumnsType[] = reactive([
     {
         field: 'price',
         label: '价格',

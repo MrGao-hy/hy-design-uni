@@ -7,8 +7,8 @@
                 :form-data="formData"
                 label-position="top"
             >
-                <template #custom="{ record, errorStyle }">
-                    <HyInput v-model="formData[record.field]" :custom-style="errorStyle"></HyInput>
+                <template #custom="{ record }">
+                    <hy-input v-model="formData[record.field]"></hy-input>
                 </template>
             </hy-form-group>
         </view>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { FormTypeEnum, useToast } from '@/package'
+import { FormTypeEnum, IFormExpose, useToast } from '@/package'
 import type { FormColumnsType } from '@/package'
 import HyFormGroup from '@/package/components/hy-form-group/hy-form-group.vue'
 import { reactive, ref } from 'vue'
@@ -55,9 +55,9 @@ const formData: AnyObject = reactive({
     age: '',
     remark: ''
 })
-const formGroupRef = ref<InstanceType<typeof HyFormGroup> | null>(null)
+const formGroupRef = ref<InstanceType<typeof HyFormGroup> | IFormExpose | null>(null)
 
-const columns: Partial<FormColumnsType>[] = reactive([
+const columns: FormColumnsType[] = reactive([
     {
         field: 'name',
         label: '名字（测试）',
@@ -196,17 +196,21 @@ const handleSubmit = async (data: any) => {
 // 验证表单
 const handleValidate = async () => {
     try {
-        await formGroupRef.value.validate()
+        await (formGroupRef.value && formGroupRef.value.validate())
         toast.success('校验成功')
     } catch (err) {
-        toast.error('表单校验成功')
+        toast.error('表单校验失败')
     }
 }
 
 // 重置表单
-const handleReset = async () => {
-    await formGroupRef.value?.resetFields()
-    toast.show('重置成功')
+const handleReset = () => {
+    try {
+        formGroupRef.value && formGroupRef.value.resetFields()
+        toast.show('重置成功')
+    } catch (err) {
+        toast.error('表单重置失败')
+    }
 }
 
 useShareButton()

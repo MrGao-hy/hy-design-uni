@@ -122,7 +122,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { addUnit, isArray, useTranslate } from '../../libs'
+import { addUnit, isArray, PickerValue, useTranslate } from '../../libs'
 import type { IPickerEmits, IPickerExpose, PickerColumnVo } from './typing'
 import pickerProps from './props'
 // 组件
@@ -398,7 +398,7 @@ function setIndexs(index: number[], isSetLastIndex?: boolean) {
 /**
  * 设置对应列选项的所有值
  * */
-const setColumnValues = (columnI: number, values: Array<string | PickerColumnVo>) => {
+const setColumnValues = (columnI: number, values: PickerValue[]) => {
     innerColumns.value.splice(columnI, 1, values)
     // 重置当前列之后的索引为0
     const tmpIndex = innerIndex.value.map((_, i) =>

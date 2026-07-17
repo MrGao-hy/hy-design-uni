@@ -105,7 +105,7 @@ const initObserver = async () => {
         }
 
         io.observe(`#${sentinelId}`, (res) => {
-            const fixed = res.boundingClientRect.top <= props.offsetTop
+            const fixed = res.boundingClientRect.top <= Number(props.offsetTop)
             if (fixed !== isFixed.value) {
                 // 当切换为 fixed，记录占位高度
                 if (fixed) {
@@ -134,7 +134,7 @@ const pageScrollHandler = () => {
         rafTimer = 0
 
         const { sentinelBottom, stickyHeight } = await querySentinel()
-        const offset = props.offsetTop
+        const offset = Number(props.offsetTop)
 
         // 用 bottom 判断，保证吸顶时位置保持 offset
         const fixed = sentinelBottom <= offset

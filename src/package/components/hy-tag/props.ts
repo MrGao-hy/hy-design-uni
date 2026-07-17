@@ -9,7 +9,7 @@ const tagProps = {
     },
     /** 点击需要传得值 */
     name: {
-        type: [String, Number],
+        type: [String, Number, Boolean],
         default: ''
     },
     /**
@@ -73,7 +73,7 @@ const tagProps = {
         default: true
     },
     /** 组件内置图标，或绝对路径的图片 */
-    icon: Object as PropType<HyIconProps>,
+    icon: Object as PropType<Partial<HyIconProps>>,
     /** 定义需要用到的外部样式 */
     customStyle: {
         type: Object as PropType<CSSProperties>,

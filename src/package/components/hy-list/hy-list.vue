@@ -21,7 +21,7 @@
                         v-for="item in visibleData"
                         :key="item[keyField]"
                         class="hy-virtual-container__list--item"
-                        :style="getItemStyle(item)"
+                        :style="getItemStyle()"
                         @click="handleClick(item)"
                     >
                         <slot name="content" :record="item"></slot>
@@ -37,7 +37,7 @@
                             v-for="item in waterfallLeft"
                             :key="item[keyField]"
                             class="hy-virtual-container__list--box-item"
-                            :style="getItemStyle(item)"
+                            :style="getItemStyle()"
                             @click="handleClick(item)"
                         >
                             <slot name="left" :record="item"></slot>
@@ -54,7 +54,7 @@
                             v-for="item in waterfallRight"
                             :key="item[keyField]"
                             class="hy-virtual-container__list--box-item"
-                            :style="getItemStyle(item)"
+                            :style="getItemStyle()"
                             @click="handleClick(item)"
                         >
                             <slot name="right" :record="item"></slot>
@@ -89,7 +89,7 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, onMounted, ref, useSlots, watch } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, getPx, getRect } from '../../libs'
+import { addUnit, getPx, getRect, IListExpose, IListSlots } from '../../libs'
 import type { IListEmits } from './typing'
 import listProps from './props'
 import HyDivider from '../hy-divider/hy-divider.vue'
@@ -171,7 +171,9 @@ const offsetTop = computed(() => cumulativeToRow(visibleStartRow.value))
 const startIndex = computed(() => visibleStartRow.value * props.line)
 const endIndex = computed(() => Math.min(props.list.length, visibleEndRow.value * props.line))
 
-const visibleData = computed(() => props.list.slice(startIndex.value, endIndex.value))
+const visibleData = computed<Record<string, any>[]>(() =>
+    props.list.slice(startIndex.value, endIndex.value)
+)
 
 const waterfallLeft = computed(() => {
     const data = visibleData.value
@@ -197,7 +199,7 @@ const waterfallRight = computed(() => {
     return right
 })
 
-const waterfall = computed(() => ({
+const waterfall = computed<Record<string, any>>(() => ({
     left: waterfallLeft.value,
     right: waterfallRight.value
 }))
@@ -301,11 +303,12 @@ watch(
     }
 )
 
-defineExpose({
+defineExpose<IListExpose>({
     scrollToIndex,
     scrollToTop,
     refreshHeightCache
 })
+defineSlots<IListSlots>()
 </script>
 
 <style lang="scss">

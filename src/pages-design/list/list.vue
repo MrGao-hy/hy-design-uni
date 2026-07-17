@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import DefaultDemo from './default-demo.vue'
-import WaterfallDemo from './waterfall-demo.vue'
+import DefaultDemo from './components/default-demo.vue'
+import WaterfallDemo from './components/waterfall-demo.vue'
 
 import { useShareButton } from '@/composables'
 

@@ -17,7 +17,6 @@
     <!-- 默认插槽示例：横向 tabs 切换 -->
     <hy-list
         v-else
-        ref="listRef"
         :list="list"
         container-height="100%"
         :item-height="100"

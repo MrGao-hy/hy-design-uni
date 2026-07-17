@@ -91,8 +91,6 @@
                     :formatter="item?.textarea?.formatter || textarea?.formatter"
                     :border="item?.textarea?.border || textarea?.border"
                     :height="textarea?.height || item?.textarea?.height"
-                    @change="handleChange($event, item)"
-                    @blur="handleBlur($event, item)"
                 ></hy-textarea>
             </view>
             <!--	文本域	-->
@@ -108,7 +106,7 @@
                     :col="item?.checkButton?.col || checkButton?.col"
                     :gap="item?.checkButton?.gap || checkButton?.gap"
                     :fieldNames="item?.checkButton?.fieldNames || checkButton?.fieldNames"
-                    :disabled="disabled || item?.checkButton?.size || checkButton?.disabled"
+                    :disabled="disabled || item?.checkButton?.disabled || checkButton?.disabled"
                     :selectType="item?.checkButton?.selectType || checkButton?.selectType"
                 ></hy-check-button>
             </template>
@@ -258,9 +256,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import formGroupProps from './props'
-import { type FormColumnsType, FormTypeEnum, type RulesVo } from '../../libs'
+import type { FieldRuleMap, FormColumnsType, IFormExpose } from '../../libs'
+import { FormTypeEnum } from '../../libs'
 
 // 组件
 import HyInput from '../hy-input/hy-input.vue'
@@ -276,56 +275,65 @@ import HyForm from '../hy-form/hy-form.vue'
 import HyFormItem from '../hy-form-item/hy-form-item.vue'
 
 const props = defineProps(formGroupProps)
-const hyFormRef = ref<InstanceType<typeof HyForm> | null>(null)
+const hyFormRef = ref<InstanceType<typeof HyForm> & IFormExpose>()
+
+// 确保 formData 不为 undefined，缺失字段自动初始化为空字符串
+const formData = computed<Record<string, any>>(() => {
+    const data = props.formData || {}
+    if (props.columns) {
+        for (const col of props.columns) {
+            if (!(col.field in data)) {
+                data[col.field] = ''
+            }
+        }
+    }
+    return data
+})
 
 const isInput = (type: FormTypeEnum) =>
     type === FormTypeEnum.TEXT || type === FormTypeEnum.NUMBER || type === FormTypeEnum.PASSWORD
 
 // 提取规则
-function extractRules(formConfig: FormColumnsType[]): Record<string, RulesVo | RulesVo[]> {
-    return formConfig.reduce(
-        (acc, field) => {
-            if (field.rules) {
-                acc[field.field] = field.rules
-            }
-            return acc
-        },
-        {} as Record<string, RulesVo | RulesVo[]>
-    )
+function extractRules(formConfig?: FormColumnsType[]): FieldRuleMap {
+    return formConfig
+        ? formConfig.reduce((acc, field) => {
+              if (field.rules) {
+                  acc[field.field] = field.rules
+              }
+              return acc
+          }, {} as FieldRuleMap)
+        : {}
 }
 
 // 验证表单
-const validate = () => {
-    return new Promise((resolve, reject) => {
-        hyFormRef.value
-            .validate()
-            .then((isValid: boolean) => resolve(isValid))
-            .catch((isValid: boolean) => reject(isValid))
-    })
+const validate = (): Promise<boolean> => {
+    if (!hyFormRef.value) return Promise.reject(false)
+    return hyFormRef.value.validate()
 }
 
-// 验证表单
-const submit = () => {
-    return new Promise((resolve, reject) => {
-        hyFormRef.value
-            .submit()
-            .then((isValid: boolean) => resolve(isValid))
-            .catch((allErrors: string[]) => reject(allErrors))
-    })
+// 提交表单
+const submit = (): Promise<AnyObject | boolean> => {
+    if (!hyFormRef.value) return Promise.reject(false)
+    return hyFormRef.value.submit()
 }
 
-// 清楚字段值
-const resetFields = () => hyFormRef.value.resetFields()
+// 清除字段值
+const resetFields = () => hyFormRef.value?.resetFields()
 
-// 清楚校验
-const clearValidate = () => hyFormRef.value.clearValidate()
+// 清除校验
+const clearValidate = (fields?: string[]) => hyFormRef.value?.clearValidate(fields)
 
-defineExpose({
+defineExpose<IFormExpose>({
     validate,
     resetFields,
     clearValidate,
     submit
 })
+
+// defineSlots<{
+//     // 任意字符串插槽名，参数统一是 FormItemSlotProps
+//     \[field: string\]: (props: FormItemSlotProps) => any
+// }>()
 </script>
 
 <style lang="scss">

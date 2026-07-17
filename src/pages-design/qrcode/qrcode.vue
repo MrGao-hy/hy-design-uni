@@ -12,7 +12,11 @@
 
         <view class="hy-title">带logo</view>
         <view class="hy-container">
-            <hy-qrcode cid="qrcode_3" text="https://www.hy-design-uni.top" :icon="logo"></hy-qrcode>
+            <hy-qrcode
+                cid="qrcode_3"
+                text="https://www.hy-design-uni.top"
+                icon="../../static/hy_logo_light.png"
+            ></hy-qrcode>
         </view>
 
         <view class="hy-title">预览</view>
@@ -34,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import logo from '@/static/hy_logo_light.png'
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
 

@@ -5,15 +5,15 @@
                 :value="value"
                 :show="!!value"
                 absolute
-                :offset="tabbarConfig?.badgeProps.value?.offset || [-10, 18]"
-                :isDot="tabbarConfig?.badgeProps.value?.isDot"
-                :max="tabbarConfig?.badgeProps.value?.max"
-                :type="tabbarConfig?.badgeProps.value?.type"
-                :bgColor="tabbarConfig?.badgeProps.value?.bgColor"
-                :color="tabbarConfig?.badgeProps.value?.color"
-                :shape="tabbarConfig?.badgeProps.value?.shape"
-                :numberType="tabbarConfig?.badgeProps.value?.numberType"
-                :inverted="tabbarConfig?.badgeProps.value?.inverted"
+                :offset="tabbarConfig?.badgeProps?.value?.offset || [-10, 18]"
+                :isDot="tabbarConfig?.badgeProps?.value?.isDot"
+                :max="tabbarConfig?.badgeProps?.value?.max"
+                :type="tabbarConfig?.badgeProps?.value?.type"
+                :bgColor="tabbarConfig?.badgeProps?.value?.bgColor"
+                :color="tabbarConfig?.badgeProps?.value?.color"
+                :shape="tabbarConfig?.badgeProps?.value?.shape"
+                :numberType="tabbarConfig?.badgeProps?.value?.numberType"
+                :inverted="tabbarConfig?.badgeProps?.value?.inverted"
             >
             </hy-badge>
             <slot v-if="$slots.icon" name="icon" :active="active"></slot>

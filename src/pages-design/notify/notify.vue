@@ -9,6 +9,7 @@
 import HyNotify from '@/package/components/hy-notify/hy-notify.vue'
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
+import type { INotifyExpose } from '@/package/components/hy-notify/typing'
 
 definePage({
     style: {
@@ -16,7 +17,7 @@ definePage({
     }
 })
 
-const hyNotifyRef = ref<InstanceType<typeof HyNotify>>(null)
+const hyNotifyRef = ref<InstanceType<typeof HyNotify> | INotifyExpose>()
 const list = reactive([
     {
         title: '默认',
@@ -29,10 +30,11 @@ const list = reactive([
 ])
 
 const showToast = (params: { title: string; value: string }) => {
-    hyNotifyRef.value.show({
-        message: `${params.title}提示信息`,
-        type: params.value
-    })
+    hyNotifyRef.value &&
+        hyNotifyRef.value.show({
+            message: `${params.title}提示信息`,
+            type: params.value
+        })
 }
 
 useShareButton()

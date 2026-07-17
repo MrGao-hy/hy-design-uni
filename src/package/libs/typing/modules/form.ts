@@ -1,13 +1,15 @@
 import type { DateModeEnum } from './enum'
 import type { CheckboxColumnsVo } from '../../../components/hy-check-button/typing'
-import type {
+import {
     HyInputProps,
     HyTextareaProps,
     HySwitchProps,
     HyPickerProps,
     HyRadioProps,
-    HyCheckButtonProps
+    HyCheckButtonProps,
+    FormRule
 } from '../../index'
+import { HyInputInstance } from '@/package/components/hy-form-group/typing'
 
 /**
  * 类型
@@ -32,7 +34,7 @@ export enum FormTypeEnum {
     /**
      * 密码输入框
      * */
-    PASSWORD = 'password',
+    PASSWORD = 'safe-password',
     /**
      * 身份证id输入框
      * */
@@ -85,6 +87,10 @@ export interface FormColumnsType {
      * */
     field: string
     /**
+     * 必填
+     * */
+    required?: boolean
+    /**
      * 右固定
      * */
     right?: boolean
@@ -112,7 +118,7 @@ export interface FormColumnsType {
     /**
      * 输入框属性api集合
      * */
-    input?: Partial<HyInputProps>
+    input?: Partial<HyInputInstance>
     /**
      * 文本域属性api集合
      * */
@@ -140,39 +146,5 @@ export interface FormColumnsType {
     /**
      * 规则校验
      * */
-    rules?: RulesVo | RulesVo[]
-}
-
-export interface RulesVo {
-    /**
-     * 是否必填
-     * */
-    required?: boolean
-    /**
-     * 校验不通过时的提示信息
-     * */
-    message?: string
-    /**
-     * 表单事件校验
-     * */
-    trigger?: ('blur' | 'change')[]
-    /**
-     * 最小值
-     * */
-    min?: number
-    /**
-     * 最大值
-     * */
-    max?: number
-    /**
-     * 基础正则校验
-     * phone - 手机号校验
-     * email - 邮箱校验
-     * password - 复杂密码校验
-     * */
-    type?: 'phone' | 'email' | 'password'
-    /**
-     * 自定义校验规则
-     * */
-    validator?: (rule: any, value: string, callback?: Function) => boolean
+    rules?: FormRule | FormRule[]
 }

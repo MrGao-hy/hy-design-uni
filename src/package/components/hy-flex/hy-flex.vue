@@ -16,7 +16,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, CSSProperties } from 'vue'
 import { addUnit, isArray } from '../../libs'
 import flexProps from './props'
 
@@ -30,7 +30,7 @@ const flexClass = computed(() => [
 ])
 
 // 计算 style
-const flexStyle = computed(() => {
+const flexStyle = computed((): CSSProperties => {
     const gap = isArray(props.gap) ? props.gap : [props.gap, props.gap]
     const [rowGap, colGap] = gap.map((v) => addUnit(v))
 

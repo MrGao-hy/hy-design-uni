@@ -1,5 +1,4 @@
 export interface SwiperList {
-    [key: string]: any
     /** 线上地址 */
     url?: string
     /** 标题 */
@@ -8,6 +7,7 @@ export interface SwiperList {
     poster?: string
     /** 轮播图展示类型 */
     type?: 'image' | 'video'
+    [key: string]: any
 }
 
 export interface SwiperVo {

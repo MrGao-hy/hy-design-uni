@@ -1,8 +1,8 @@
 export type TagParamsVo = {
     /** 值 */
-    value?: string
+    value?: string | number | boolean
     /** 名称 */
-    name?: string | number
+    name?: string
 }
 
 export interface ITagEmits {

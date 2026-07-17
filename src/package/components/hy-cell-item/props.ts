@@ -15,11 +15,11 @@ const cellItemProps = {
     value: [String, Number],
     /** 图标，接收icon对象 */
     icon: {
-        type: Object as PropType<HyIconProps>
+        type: Object as PropType<Partial<HyIconProps>>
     },
     /** 右边图标，默认是向左图标 */
     rightIcon: {
-        type: Object as PropType<HyIconProps>
+        type: Object as PropType<Partial<HyIconProps>>
     },
     /**
      * 右侧箭头的方向

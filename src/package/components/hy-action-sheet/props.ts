@@ -30,7 +30,7 @@ const actionSheetProps = {
      * @values left,center,right
      * */
     titleAlign: {
-        type: String,
+        type: String as PropType<CSSProperties['text-align']>,
         default: 'center'
     },
     /** 取消按钮的提示文字,不为空时显示按钮 */

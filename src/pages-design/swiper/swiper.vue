@@ -58,6 +58,7 @@
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
 import TheRootPage from '@/components/the-root-page.vue'
+import type { SwiperList } from '@/package'
 
 definePage({
     style: {
@@ -75,7 +76,7 @@ const list = ref([
     'https://img2.baidu.com/it/u=2237681987,1998118702&fm=253&id=7',
     'https://img1.baidu.com/it/u=2494879897,1602792615&fm=253&id=8'
 ])
-const list_2 = ref([
+const list_2 = ref<SwiperList[]>([
     {
         url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
         title: '昨夜星辰昨夜风，画楼西畔桂堂东',
