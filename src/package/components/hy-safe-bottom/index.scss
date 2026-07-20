@@ -1,0 +1,5 @@
+@use "../../libs/css/mixin" as *;
+
+@include b(safe-bottom) {
+    width: 100%;
+}

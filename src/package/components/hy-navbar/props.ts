@@ -67,6 +67,23 @@ const navbarProps = {
     titleStyle: {
         type: Object as PropType<CSSProperties>
     },
+    /** 导航栏内容区域的内边距 */
+    contentPadding: {
+        type: [String, Number],
+        default: '0 13px'
+    },
+    /** 左侧区域的样式 */
+    leftStyle: {
+        type: Object as PropType<CSSProperties>
+    },
+    /** 右侧区域的样式 */
+    rightStyle: {
+        type: Object as PropType<CSSProperties>
+    },
+    /** 中间区域的样式 */
+    centerStyle: {
+        type: Object as PropType<CSSProperties>
+    },
     /** 定义需要用到的外部样式 */
     customStyle: {
         type: Object as PropType<CSSProperties>

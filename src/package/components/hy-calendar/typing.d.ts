@@ -56,3 +56,10 @@ export interface ICalendarExpose {
      */
     setFormatter: (formatter: (value: string) => string) => void
 }
+
+export interface IMonthExpose {
+    /**
+     * 获取元素
+     */
+    initLayout: () => void
+}

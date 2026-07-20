@@ -16,10 +16,6 @@ const menuProps = {
         type: String,
         default: 'id'
     },
-    name: {
-        type: String,
-        default: 'id'
-    },
     /** 侧边菜单栏宽度 */
     width: {
         type: [String, Number],

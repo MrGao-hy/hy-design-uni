@@ -1,63 +1,71 @@
-@use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin" as *;
-
+@use '../../libs/css/theme' as *;
+@use '../../libs/css/mixin' as *;
 
 @include b(navbar) {
-  @include e(fixed) {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 11;
-  }
 
-  @include e(content) {
-    @include flex(row);
-    align-items: center;
-    height: 44px;
-    background-color: $hy-background--container;
-    position: relative;
-    justify-content: center;
-
-    @include e(left, right) {
-      padding: 0 13px;
-      @include flex(row);
-      align-items: center;
+    @include e(placeholder) {
     }
 
-    @include e(left){
-      left: 0;
-
-      @include m(hover) {
-        opacity: 0.7;
-      }
-
-      @include m(text) {
-        font-size: 15px;
-        margin-left: 3px;
-      }
+    @include e(fixed) {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 11;
+        background-color: $hy-background--container;
+        
     }
 
-    @include e(center) {
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      @include m(title) {
-        font-size: $hy-font-size-base;
-      }
-      @include m(sub) {
-        font-size: $hy-font-size-sm;
-        color: $hy-text-color--grey;
-      }
-    }
+    @include e(content) {
+        @include flex(row);
+        align-items: center;
+        height: 44px;
+        background-color: $hy-background--container;
+        position: relative;
+        justify-content: center;
 
-    @include e(right) {
-      right: 0;
+        @include e(left, right) {
+            @include flex(row);
+            align-items: center;
+        }
 
-      @include m(text) {
-        font-size: 15px;
-        margin-left: 3px;
-      }
+        @include e(left) {
+            left: 0;
+
+            @include m(hover) {
+                opacity: 0.7;
+            }
+
+            @include m(text) {
+                font-size: 15px;
+                margin-left: 3px;
+            }
+        }
+
+        @include e(center) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            @include m(title) {
+                font-size: $hy-font-size-base;
+                text-align: center;
+            }
+            @include m(sub) {
+                font-size: $hy-font-size-sm;
+                color: $hy-text-color--grey;
+                text-align: center;
+            }
+        }
+
+        @include e(right) {
+            right: 0;
+
+            @include m(text) {
+                font-size: 15px;
+                margin-left: 3px;
+            }
+        }
     }
-  }
 }

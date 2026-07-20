@@ -13,7 +13,7 @@
         <view @tap.stop="iconClickHandler" :class="iconClasses" :style="iconWrapStyle">
             <template v-if="isChecked">
                 <slot v-if="$slots.icon" name="icon"></slot>
-                <HyIcon
+                <hy-icon
                     v-else
                     class="hy-checkbox--icon-wrap__icon"
                     :name="IconConfig.CHECK_MASK"

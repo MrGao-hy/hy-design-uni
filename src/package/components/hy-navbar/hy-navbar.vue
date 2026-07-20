@@ -13,7 +13,8 @@
                 :class="[border && 'hy-border__bottom', 'hy-navbar__content']"
                 :style="{
                     height: addUnit(height),
-                    backgroundColor: bgColor
+                    backgroundColor: bgColor,
+                    padding: contentPadding
                 }"
             >
                 <!-- 左边 -->
@@ -21,6 +22,7 @@
                     class="hy-navbar__content__left"
                     hover-class="hy-navbar__content__left--hover"
                     :hover-start-time="150"
+                    :style="[leftStyle]"
                     @tap="leftClick"
                 >
                     <slot v-if="$slots.left" name="left"></slot>
@@ -46,36 +48,41 @@
 
                 <!-- 中间 -->
                 <slot v-if="$slots.center" name="center"></slot>
-                <view v-else class="hy-navbar__content__center">
-                    <text
-                        class="hy-navbar__content__center--title"
-                        :style="[
-                            {
-                                width: addUnit(titleWidth),
-                                color: titleColor
-                            },
-                            titleStyle
-                        ]"
-                    >
-                        {{ title }}
-                    </text>
-                    <text
-                        class="hy-navbar__content__center--sub"
-                        :style="[
-                            {
-                                width: addUnit(titleWidth),
-                                color: titleColor
-                            },
-                            titleStyle
-                        ]"
-                    >
-                        {{ sub }}
-                    </text>
+                <view v-else class="hy-navbar__content__center" :style="[centerStyle]">
+                    <slot v-if="$slots.title" name="title"></slot>
+                    <template v-else>
+                        <text
+                            v-if="title"
+                            class="hy-navbar__content__center--title"
+                            :style="[
+                                {
+                                    width: addUnit(titleWidth),
+                                    color: titleColor
+                                },
+                                titleStyle
+                            ]"
+                        >
+                            {{ title }}
+                        </text>
+                        <text
+                            v-if="sub"
+                            class="hy-navbar__content__center--sub"
+                            :style="[
+                                {
+                                    width: addUnit(titleWidth),
+                                    color: titleColor
+                                },
+                                titleStyle
+                            ]"
+                        >
+                            {{ sub }}
+                        </text>
+                    </template>
                 </view>
                 <!-- 中间 -->
 
                 <!-- 右边 -->
-                <view class="hy-navbar__content__right" @tap="rightClick">
+                <view class="hy-navbar__content__right" :style="[rightStyle]" @tap="rightClick">
                     <slot v-if="$slots.right" name="right"></slot>
                     <template v-else>
                         <hy-icon v-if="rightIcon" :name="rightIcon" size="20"></hy-icon>

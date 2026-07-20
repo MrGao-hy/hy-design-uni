@@ -77,18 +77,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, getCurrentInstance, type CSSProperties } from 'vue'
+import { ref, watch, onMounted, getCurrentInstance, type CSSProperties } from 'vue'
 import dayjs from 'dayjs'
-import {
-    addUnit,
-    colorGradient,
-    deepClone,
-    getRect,
-    sleep,
-    formatTime,
-    useTranslate
-} from '../../libs'
-import type { DateItem, IMonthProps } from './typing'
+import { addUnit, colorGradient, getRect, sleep, formatTime, useTranslate } from '../../libs'
+import type { DateItem, IMonthProps, IMonthExpose } from './typing'
 
 const props = withDefaults(defineProps<IMonthProps>(), {
     showMark: true,
@@ -262,7 +254,7 @@ const isForbid = (item: DateItem) => {
 }
 
 const getWrapperWidth = async () => {
-    const size: any = await getRect('.hy-calendar--month__wrapper', false, instance?.proxy)
+    const size: any = await getRect('.hy-calendar--month__wrapper', false, instance)
     if (size) wrapperWidth.value = size.width
 }
 
@@ -411,12 +403,19 @@ watch(
 // --- 生命周期 ---
 onMounted(async () => {
     emit('monthSelected', selected.value)
+})
+
+const initLayout = async () => {
     await sleep(50)
     await getWrapperWidth()
     await getMonthRect()
+}
+
+defineExpose<IMonthExpose>({
+    initLayout
 })
 </script>
 
-<style lang="scss" scoped>
-@import './index';
+<style lang="scss">
+@use './index';
 </style>

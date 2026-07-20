@@ -62,7 +62,7 @@ const textareaProps = {
     /** 指定focus时的光标位置 */
     cursor: {
         type: Number,
-        default: ''
+        default: 0
     },
     /** 是否显示键盘上方带有”完成“按钮那一栏 */
     showConfirmBar: {

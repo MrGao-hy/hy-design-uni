@@ -2,8 +2,8 @@
     <view class="hy-check-button">
         <template v-for="(item, i) in columns" :key="i">
             <hy-tag
-                :text="String(item?.[fieldNames.label])"
-                :name="item?.[fieldNames.value]"
+                :label="String(item?.[fieldNames.label])"
+                :value="item?.[fieldNames.value]"
                 :type="type"
                 :size="size"
                 :shape="shape"
@@ -86,10 +86,10 @@ watch(
 /**
  * 点击执行函数
  * */
-const onCheckbox = ({ name }: TagParamsVo) => {
-    if (name === undefined) return
-    changeCheckFn(name)
-    changeRadioFn(name)
+const onCheckbox = ({ value }: TagParamsVo) => {
+    if (value === undefined) return
+    changeCheckFn(value)
+    changeRadioFn(value)
 
     emit('update:modelValue', current.value)
 }
@@ -124,10 +124,10 @@ const changeCheckFn = (check: string | number) => {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../../libs/css/mixin';
+<style lang="scss">
+@use '../../libs/css/mixin';
 
-@include b(check-button) {
+@include mixin.b(check-button) {
     display: grid;
     grid-template-columns: v-bind(col);
     gap: v-bind(gap);

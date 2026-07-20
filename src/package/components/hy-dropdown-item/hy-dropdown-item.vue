@@ -7,17 +7,17 @@
         >
             {{ title }}
         </text>
-        <HyIcon
+        <hy-icon
             :custom-style="{
                 transform: isOpen ? 'rotate(-180deg)' : 'rotate(0deg)'
             }"
             :name="menuIcon"
             :size="menuIconSize"
             :color="currentColor"
-        ></HyIcon>
+        ></hy-icon>
     </view>
     <!-- 下拉弹窗 -->
-    <HyOverlay :show="isOpen" :custom-style="{ top: addUnit(dropPopupTop) }" @click="closePopupFn">
+    <hy-overlay :show="isOpen" :custom-style="{ top: addUnit(dropPopupTop) }" @click="closePopupFn">
         <view
             class="hy-dropdown-item__main"
             :style="{ top: addUnit(dropPopupTop), height: addUnit(dropHeight) }"
@@ -45,16 +45,16 @@
                             {{ item.label }}
                         </view>
                         <!-- 勾选图标 -->
-                        <HyIcon
+                        <hy-icon
                             v-if="currentIndex === index"
                             :color="currentColor"
                             :name="IconConfig.CHECK_MASK"
-                        ></HyIcon>
+                        ></hy-icon>
                     </view>
                 </view>
             </view>
         </view>
-    </HyOverlay>
+    </hy-overlay>
 </template>
 
 <script lang="ts">

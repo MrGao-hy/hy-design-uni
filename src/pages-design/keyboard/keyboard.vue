@@ -293,7 +293,7 @@ useShareButton()
     &-text {
         font-size: 32rpx;
         font-weight: 500;
-        color: #333;
+        color: red;
     }
 }
 </style>

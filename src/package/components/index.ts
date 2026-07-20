@@ -18,9 +18,9 @@ import HyDropdown from './hy-dropdown/hy-dropdown.vue'
 import HyDropdownItem from './hy-dropdown-item/hy-dropdown-item.vue'
 import YkEmpty from './hy-empty/hy-empty.vue'
 import YkFloatButton from './hy-float-button/hy-float-button.vue'
-import HyFoldingPanel from '@/package/components/hy-folding-panel/hy-folding-panel.vue'
-import HyForm from '@/package/components/hy-form-group/hy-form.vue'
-import HyFormSimple from '@/package/components/hy-form/hy-form-simple.vue'
+import HyFoldingPanel from './hy-folding-panel/hy-folding-panel.vue'
+import HyForm from './hy-form/hy-form.vue'
+import HyFormGroup from './hy-form-group/hy-form-group.vue'
 import HyFormItem from './hy-form-item/hy-form-item.vue'
 import HyGrid from './hy-grid/hy-grid.vue'
 import HyIcon from './hy-icon/hy-icon.vue'
@@ -30,7 +30,6 @@ import HyLine from './hy-line/hy-line.vue'
 import HyLineProgress from './hy-line-progress/hy-line-progress.vue'
 import HyList from './hy-list/hy-list.vue'
 import HyLoading from './hy-loading/hy-loading.vue'
-import YkLogin from './hy-login/hy-login.vue'
 import HyModal from './hy-modal/hy-modal.vue'
 import HyNavbar from './hy-navbar/hy-navbar.vue'
 import HyNoticeBar from './hy-notice-bar/hy-notice-bar.vue'
@@ -84,7 +83,7 @@ const install = (Vue: any) => {
     Vue.component('YkFloatButton', YkFloatButton)
     Vue.component('HyFoldingPanel', HyFoldingPanel)
     Vue.component('HyForm', HyForm)
-    Vue.component('HyFormSimple', HyFormSimple)
+    Vue.component('HyFormGroup', HyFormGroup)
     Vue.component('HyFormItem', HyFormItem)
     Vue.component('HyGrid', HyGrid)
     Vue.component('HyIcon', HyIcon)
@@ -94,7 +93,6 @@ const install = (Vue: any) => {
     Vue.component('HyLineProgress', HyLineProgress)
     Vue.component('HyList', HyList)
     Vue.component('HyLoading', HyLoading)
-    // Vue.component("YkLogin", YkLogin);
     Vue.component('HyModal', HyModal)
     Vue.component('HyNavbar', HyNavbar)
     Vue.component('HyNoticeBar', HyNoticeBar)
@@ -147,7 +145,7 @@ export {
     YkFloatButton,
     HyFoldingPanel,
     HyForm,
-    HyFormSimple,
+    HyFormGroup,
     HyFormItem,
     HyGrid,
     HyIcon,

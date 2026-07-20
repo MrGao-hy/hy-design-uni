@@ -40,6 +40,6 @@ const context = {
 provide('hy-checkbox-group', context)
 </script>
 
-<style lang="scss" scoped>
-@import './index';
+<style lang="scss">
+@use './index';
 </style>

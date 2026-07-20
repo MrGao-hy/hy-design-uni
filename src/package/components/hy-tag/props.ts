@@ -3,12 +3,12 @@ import type { HyIconProps } from '../hy-icon/typing'
 
 const tagProps = {
     /** 标签的文字内容 */
-    text: {
+    label: {
         type: String,
         default: ''
     },
     /** 点击需要传得值 */
-    name: {
+    value: {
         type: [String, Number, Boolean],
         default: ''
     },

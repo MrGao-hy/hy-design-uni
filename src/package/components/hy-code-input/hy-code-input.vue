@@ -231,10 +231,10 @@ const inputHandler = (e: InputOnInputEvent) => {
 
 <style lang="scss">
 @use './index.scss';
-@import '../../libs/css/mixin';
-@import '../../libs/css/theme';
-@include b(code-input) {
-    @include m(item) {
+@use '../../libs/css/mixin';
+@use '../../libs/css/theme';
+@include mixin.b(code-input) {
+    @include mixin.m(item) {
         &__box {
             &__active {
                 width: v-bind(boxSize);
@@ -245,7 +245,7 @@ const inputHandler = (e: InputOnInputEvent) => {
         &__line {
             &::after {
                 height: v-bind(lineHeight);
-                background-color: $hy-border-color;
+                background-color: theme.$hy-border-color;
             }
         }
     }

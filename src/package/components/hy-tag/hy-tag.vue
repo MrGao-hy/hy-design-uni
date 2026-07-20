@@ -20,7 +20,7 @@
                 ></hy-icon>
                 <view :class="textClass" :style="textStyle">
                     <slot v-if="$slots.default"></slot>
-                    <template v-else>{{ text }}</template>
+                    <template v-else>{{ label }}</template>
                 </view>
                 <!-- 关闭按钮 -->
                 <view
@@ -68,7 +68,7 @@ const props = defineProps(tagProps)
 const emit = defineEmits<ITagEmits>()
 
 /**
- * @description tag类名
+ * tag类名
  * */
 const tagClass = computed((): string[] => {
     let classes = ['hy-tag', `hy-tag--${props.shape}`, `hy-tag--${props.size}`, props.customClass]
@@ -84,7 +84,7 @@ const tagClass = computed((): string[] => {
     return classes
 })
 /**
- * @description tag样式
+ * tag样式
  * */
 const tagStyle = computed<CSSProperties>(() => {
     const style: CSSProperties = {
@@ -110,7 +110,7 @@ const tagStyle = computed<CSSProperties>(() => {
 })
 
 /**
- * @description 文本样式
+ * 文本样式
  * */
 const textStyle = computed(() => {
     const style: CSSProperties = {}
@@ -118,20 +118,20 @@ const textStyle = computed(() => {
     return style
 })
 /**
- * @description 文本类名
+ * 文本类名
  * */
 const textClass = computed((): string[] => {
     return [`hy-tag__text`, `hy-tag__text--${props.size}`]
 })
 
 /**
- * @description 关闭图标icon大小
+ * 关闭图标icon大小
  */
 const closeSize = computed(() => {
     return props.size === 'large' ? 15 : props.size === 'medium' ? 13 : 11
 })
 /**
- * @description 图标大小
+ * 图标大小
  * */
 const hyIconSize = computed(() => {
     if (props.icon?.size) {
@@ -141,28 +141,28 @@ const hyIconSize = computed(() => {
     }
 })
 /**
- * @description 图标颜色
+ * 图标颜色
  * */
 const hyIconColor = computed(() => {
     return props.icon?.color ? props.icon.color : props.plain ? props.type : '#ffffff'
 })
 
 /**
- * @description 点击关闭按钮
+ * 点击关闭按钮
  * */
 const closeHandler = () => {
     if (!props.disabled) {
-        emit('close', props.text)
+        emit('close', props.value)
     }
 }
 /**
- * @description 点击标签
+ * 点击标签
  * */
 const clickHandler = () => {
     if (!props.disabled) {
         emit('click', {
-            value: props.name,
-            name: props.text
+            label: props.label,
+            value: props.value
         })
     }
 }

@@ -1,5 +1,7 @@
 @use 'sass:meta';
 @use 'sass:string';
+@use 'sass:list';
+@use 'sass:color';
 @use 'config';
 
 $default-theme: #4d80f0 !default; // 正常色
@@ -41,10 +43,13 @@ $default-theme: #4d80f0 !default; // 正常色
  * @params $mix-color 自己设置的混色
  */
 @function themeColor($theme-color, $type: '', $mix-color: '') {
-    @if $type== 'dark' {
-        @return darken($theme-color, 10%);
-    } @else if $type== 'light' {
-        @return lighten($theme-color, 30%);
+    @if $type == 'dark' {
+        // lighten/darken 原理是直接加减亮度，
+        // color.scale($color, $lightness: -10%) 表示亮度减少 10%
+        @return color.scale($theme-color, $lightness: -10%);
+    } @else if $type == 'light' {
+        // lighten($theme-color, 30%) 对应 color.scale($theme-color, $lightness: 30%)
+        @return color.scale($theme-color, $lightness: 30%);
     } @else {
         @return $theme-color;
     }
@@ -60,18 +65,19 @@ $default-theme: #4d80f0 !default; // 正常色
  * @params [Array] $per-list 渐变色比例
  */
 @function resultColor($deg, $theme-color, $set, $color-list, $per-list) {
-    // 开启渐变
-
-    $len: length($color-list);
-    $arg: $deg;
-
-    @for $i from 1 through $len {
-        $arg: $arg +
-            ',' +
-            themeColor($theme-color, nth($set, $i), nth($color-list, $i)) +
-            ' ' +
-            nth($per-list, $i);
+    // 确保长度一致性检查
+    @if list.length($color-list) != list.length($per-list) {
+        @error "颜色列表和百分比列表长度不匹配";
     }
 
-    @return linear-gradient(unquote($arg));
+    $arg: '#{$deg}';
+
+    @for $i from 1 through list.length($color-list) {
+        $c: themeColor($theme-color, list.nth($set, $i), list.nth($color-list, $i));
+        $p: list.nth($per-list, $i);
+
+        $arg: $arg + ', ' + $c + ' ' + $p;
+    }
+
+    @return linear-gradient(string.unquote($arg));
 }

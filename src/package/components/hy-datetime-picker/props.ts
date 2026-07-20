@@ -25,7 +25,7 @@ const datetimePickerProps = {
     },
     /** 绑定值 */
     modelValue: {
-        type: [String, Number, Date],
+        type: [String, Date],
         default: ''
     },
     /** 顶部标题 */

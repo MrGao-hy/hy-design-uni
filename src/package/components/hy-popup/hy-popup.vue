@@ -32,7 +32,7 @@
                 >
                     <hy-icon :name="IconConfig.CLOSE" color="#909399" size="28"></hy-icon>
                 </view>
-                <!--        <hy-safe-bottom v-if="safeAreaInsetBottom"></hy-safe-bottom>-->
+                <hy-safe-bottom v-if="safeAreaInsetBottom"></hy-safe-bottom>
             </view>
         </hy-transition>
     </view>

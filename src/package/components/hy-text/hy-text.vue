@@ -215,9 +215,9 @@ const toLink = () => {
 
 <style lang="scss">
 @use './index.scss';
-@import '../../libs/css/mixin';
+@use '../../libs/css/mixin';
 /*超出出现省略号*/
 .hy-text__value--lines {
-    @include multiEllipsis(v-bind(lines));
+    @include mixin.multiEllipsis(v-bind(lines));
 }
 </style>

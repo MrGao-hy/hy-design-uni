@@ -1,169 +1,174 @@
-@use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin" as *;
+@use '../../libs/css/theme' as *;
+@use '../../libs/css/mixin' as *;
 
 @include b(tabbar) {
-  height: 70px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: relative;
-  @include m(placeholder) {
-    height: 137rpx;
     bottom: 0;
-  }
+    left: 0;
+    right: 0;
+    position: relative;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
 
-  @include m(box) {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15rpx 15rpx 0 0;
-    /* #ifndef APP-PLUS-NVUE */
-    box-sizing: border-box;
-    /* #endif */
-    background-color: $hy-background--container;
-  }
-  @include m(container) {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0 20rpx;
-    &__item {
-      position: relative;
-      width: 60px;
-      height: 100%;
-      z-index: 1;
+    @include m(placeholder) {
+        box-sizing: content-box;
+        padding-bottom: constant(safe-area-inset-bottom);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
 
-      /* #ifndef APP-PLUS-NVUE */
-      &:nth-child(1).is-active ~ .hy-tabbar--indicator {
-        transform: var(--num);
-      }
-
-      &:nth-child(2).is-active ~ .hy-tabbar--indicator {
-        transform: var(--num);
-      }
-
-      &:nth-child(3).is-active ~ .hy-tabbar--indicator {
-        transform: var(--num);
-      }
-
-      &:nth-child(4).is-active ~ .hy-tabbar--indicator {
-        transform: var(--num);
-      }
-
-      &:nth-child(5).is-active ~ .hy-tabbar--indicator {
-        transform: var(--num);
-      }
-      /* #endif */
-
-      @include m(bar) {
-        position: relative;
+    @include m(box) {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: calc(60px + env(safe-area-inset-bottom));
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+        border-radius: 15rpx 15rpx 0 0;
+        /* #ifndef APP-PLUS-NVUE */
+        box-sizing: border-box;
+        /* #endif */
+        background-color: $hy-background--container;
+    }
+    @include m(container) {
         width: 100%;
-        text-align: center;
-        font-weight: 500;
-        .icon {
-          /* #ifndef APP-PLUS-NVUE */
-          transition: 0.5s;
-          /* #endif */
-          position: relative;
-        }
-        .text {
-          position: absolute;
-          font-weight: 400;
-          font-size: 0.75em;
-          /* #ifndef APP-PLUS-NVUE */
-          letter-spacing: 0.05em;
-          transition: 0.5s;
-          /* #endif */
-          transform: translateY(20px) scale(0);
-        }
-        .circle {
-          position: absolute;
-          /* #ifndef APP-PLUS-NVUE */
-          display: block;
-          /* #endif */
-          width: 40px;
-          height: 40px;
-          background: transparent;
-          border-radius: 50%;
-          border: 3rpx solid #fff;
-          transform: translateY(-70rpx) scale(0);
-          z-index: -1;
-        }
-      }
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0 20rpx;
+        &__item {
+            position: relative;
+            width: 60px;
+            height: 100%;
+            z-index: 1;
+            //padding-bottom: constant(safe-area-inset-bottom);
+            padding-bottom: env(safe-area-inset-bottom);
 
-      @include is(active) {
-        @include b(tabbar--container__item--bar) {
-          .icon {
-            transform: translate(0, -36px);
-            :deep(.hy-icon) {
-              color: #FFFFFF;
-            }
-          }
-          .text {
-            opacity: 1;
-            transform: translateY(20rpx);
-          }
-          .circle {
             /* #ifndef APP-PLUS-NVUE */
-            margin: 0 auto;
-            transition: 0.5s;
+            &:nth-child(1).is-active ~ .hy-tabbar--indicator {
+                transform: var(--num);
+            }
+
+            &:nth-child(2).is-active ~ .hy-tabbar--indicator {
+                transform: var(--num);
+            }
+
+            &:nth-child(3).is-active ~ .hy-tabbar--indicator {
+                transform: var(--num);
+            }
+
+            &:nth-child(4).is-active ~ .hy-tabbar--indicator {
+                transform: var(--num);
+            }
+
+            &:nth-child(5).is-active ~ .hy-tabbar--indicator {
+                transform: var(--num);
+            }
             /* #endif */
-            transition-delay: 0.5s;
-            transform: translate(-1px, -36px) scale(1);
-          }
+
+            @include m(bar) {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                font-weight: 500;
+                .icon {
+                    /* #ifndef APP-PLUS-NVUE */
+                    transition: 0.5s;
+                    /* #endif */
+                    position: relative;
+                }
+                .text {
+                    position: absolute;
+                    font-weight: 400;
+                    font-size: 0.75em;
+                    /* #ifndef APP-PLUS-NVUE */
+                    letter-spacing: 0.05em;
+                    transition: 0.5s;
+                    /* #endif */
+                    transform: translateY(20px) scale(0);
+                }
+                .circle {
+                    position: absolute;
+                    /* #ifndef APP-PLUS-NVUE */
+                    display: block;
+                    /* #endif */
+                    width: 40px;
+                    height: 40px;
+                    background: transparent;
+                    border-radius: 50%;
+                    border: 3rpx solid #fff;
+                    transform: translateY(-70rpx) scale(0);
+                    z-index: -1;
+                }
+            }
+
+            @include is(active) {
+                @include b(tabbar--container__item--bar) {
+                    .icon {
+                        transform: translate(0, -36px);
+                        :deep(.hy-icon) {
+                            color: #ffffff;
+                        }
+                    }
+                    .text {
+                        opacity: 1;
+                        transform: translateY(20rpx);
+                    }
+                    .circle {
+                        /* #ifndef APP-PLUS-NVUE */
+                        margin: 0 auto;
+                        transition: 0.5s;
+                        /* #endif */
+                        transition-delay: 0.5s;
+                        transform: translate(-1px, -36px) scale(1);
+                    }
+                }
+            }
         }
-      }
-    }
-  }
-
-  @include m(indicator) {
-    position: absolute;
-    top: -36px;
-    left: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $hy-primary;
-    /* #ifndef APP-PLUS-NVUE */
-    transition: 0.5s;
-    /* #endif */
-
-    @include pseudo(before) {
-      /* #ifndef APP-PLUS-NVUE */
-      content: "";
-      /* #endif */
-      position: absolute;
-      top: 59%;
-      left: -46rpx;
-      width: 50rpx;
-      height: 40rpx;
-      background: transparent;
-      border-top-right-radius: 20px;
     }
 
-    @include pseudo(after) {
-      /* #ifndef APP-PLUS-NVUE */
-      content: "";
-      /* #endif */
-      position: absolute;
-      top: 58%;
-      right: -46rpx;
-      width: 50rpx;
-      height: 40rpx;
-      background: transparent;
-      border-top-left-radius: 40rpx;
+    @include m(indicator) {
+        position: absolute;
+        top: -36px;
+        left: 0;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $hy-primary;
+        /* #ifndef APP-PLUS-NVUE */
+        transition: 0.5s;
+        /* #endif */
+
+        @include pseudo(before) {
+            /* #ifndef APP-PLUS-NVUE */
+            content: '';
+            /* #endif */
+            position: absolute;
+            top: 59%;
+            left: -46rpx;
+            width: 50rpx;
+            height: 40rpx;
+            background: transparent;
+            border-top-right-radius: 20px;
+        }
+
+        @include pseudo(after) {
+            /* #ifndef APP-PLUS-NVUE */
+            content: '';
+            /* #endif */
+            position: absolute;
+            top: 58%;
+            right: -46rpx;
+            width: 50rpx;
+            height: 40rpx;
+            background: transparent;
+            border-top-left-radius: 40rpx;
+        }
     }
-  }
 }

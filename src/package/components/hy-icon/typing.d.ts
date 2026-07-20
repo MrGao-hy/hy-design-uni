@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes } from 'vue'
+import type { ExtractPropTypes } from 'vue'
 import iconProps from '@/package/components/hy-icon/props.ts'
 
 export interface HyIconProps extends ExtractPropTypes<typeof iconProps> {}

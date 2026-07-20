@@ -100,7 +100,7 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref, watch, useSlots } from 'vue'
-import type { KeyboardMode, CarKeyboardLang, Key, IKeyboardEmits } from './typing'
+import type { CarKeyboardLang, Key, IKeyboardEmits } from './typing'
 import type { NumberKeyType } from './key/types'
 import { CAR_KEYBOARD_AREAS, CAR_KEYBOARD_KEYS } from './constants'
 import { keyboardProps } from './props'

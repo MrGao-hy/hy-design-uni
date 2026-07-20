@@ -1,9 +1,10 @@
 <template>
     <view :class="['hy-datetime-picker', customClass]" :style="customStyle">
         <view v-if="hasInput" class="hy-datetime-picker__has-input" @click="onShowByClickInput">
-            <slot name="trigger" :value="inputValue">
+            <slot v-if="$slots.trigger" name="trigger" :value="inputValue"> </slot>
+            <template v-else>
                 <hy-input
-                    v-model="String(inputValue)"
+                    v-model="inputValue"
                     :disabled="input?.disabled"
                     :disabledColor="input?.disabledColor"
                     :shape="input?.shape"
@@ -19,7 +20,7 @@
                     :customStyle="Object.assign({ 'pointer-events': 'none' }, input?.customStyle)"
                 ></hy-input>
                 <view class="input-cover"></view>
-            </slot>
+            </template>
         </view>
         <hy-picker
             :show="show || (hasInput && showByClickInput)"
@@ -85,8 +86,8 @@ const emit = defineEmits<IDatetimePickerEmits>()
 
 const { t } = useTranslate('datetimePicker')
 // 原来的日期选择器不方便，这里增加一个hasInput选项支持类似element的自带输入框的功能。
-const inputValue = ref<string | number>('') // 表单显示值
-const innerValue = ref<string | number>('') // 表单显示值
+const inputValue = ref<string>('') // 表单显示值
+const innerValue = ref<string>('') // 表单显示值
 const showByClickInput = ref<boolean>(false) // 是否在hasInput模式下显示日期选择弹唱
 const columns = ref<any[]>([])
 const innerDefaultIndex = ref<number[]>([])
@@ -112,7 +113,7 @@ const updateColumns = () => {
 /**
  * 更新各列的值，进行补0、格式化等操作
  * */
-const updateColumnValue = (value: string | number) => {
+const updateColumnValue = (value: string) => {
     innerValue.value = value
     updateColumns()
     // 延迟执行,等待u-picker组件列数据更新完后再设置选中值索引
@@ -167,7 +168,7 @@ onMounted(() => {
     init()
 })
 
-const getInputValue = (newValue: string | number) => {
+const getInputValue = (newValue: string) => {
     if (newValue == '' || !newValue) {
         inputValue.value = ''
         return
@@ -235,8 +236,8 @@ const cancel = () => {
 /**
  * 根据索引和列数据获取选中值
  * */
-const getSelectValue = (indexs: number[], values: any[][]): string | number => {
-    let selectValue: string | number = ''
+const getSelectValue = (indexs: number[], values: any[][]): string => {
+    let selectValue: string
     if (validModes.has(props.mode) && props.mode !== DateModeEnum.MONTH_DAY) {
         selectValue = `${intercept(values[0][indexs[0]])}:${intercept(values[1][indexs[1]])}`
     } else if (props.mode === DateModeEnum.MONTH_DAY) {
@@ -255,7 +256,7 @@ const getSelectValue = (indexs: number[], values: any[][]): string | number => {
             minute = parseInt(intercept(values[4][indexs[4]]))
             second = parseInt(intercept(values[5][indexs[5]]))
         }
-        selectValue = Number(new Date(year, month - 1, date, hour, minute, second))
+        selectValue = String(new Date(year, month - 1, date, hour, minute, second))
     }
     return correctValue(selectValue)
 }
@@ -270,8 +271,7 @@ const confirm = () => {
                 ? innerDefaultIndex.value
                 : Array(columns.value.length).fill(0)
         const values = columns.value.map((column: any[]) => column)
-        const selectValue = getSelectValue(indexs, values)
-        innerValue.value = selectValue
+        innerValue.value = getSelectValue(indexs, values)
     }
     getInputValue(innerValue.value)
     emit('update:modelValue', inputValue.value)
@@ -401,7 +401,7 @@ const getOriginColumns = () => {
 /**
  * 得出合法的时间
  * */
-const correctValue = (value: number | string | Date): string | number => {
+const correctValue = (value: string | Date): string => {
     const isDateMode = props.mode !== DateModeEnum.TIME
     // if (isDateMode && !test.date(value)) {
     if (!isDateMode && !value) {
@@ -413,9 +413,9 @@ const correctValue = (value: number | string | Date): string | number => {
         return value as string
     } else {
         // 如果是日期格式，控制在最小日期和最大日期之间
-        value = dayjs(value).isBefore(dayjs(props.minDate)) ? props.minDate : value
-        value = dayjs(value).isAfter(dayjs(props.maxDate)) ? props.maxDate : value
-        return value as string | number
+        value = dayjs(value).isBefore(dayjs(props.minDate)) ? String(props.minDate) : value
+        value = dayjs(value).isAfter(dayjs(props.maxDate)) ? String(props.maxDate) : value
+        return value as string
     }
 }
 /**

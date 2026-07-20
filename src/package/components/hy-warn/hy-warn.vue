@@ -1,5 +1,5 @@
 <template>
-    <HyTransition mode="fade" :show="show">
+    <hy-transition mode="fade" :show="show">
         <view
             :class="['hy-warn', `hy-warn__${type}--${theme}`, customClass]"
             @tap.stop="clickHandler"
@@ -54,7 +54,7 @@
                 <hy-icon :name="IconConfig.CLOSE" :color="iconColor" size="15"></hy-icon>
             </view>
         </view>
-    </HyTransition>
+    </hy-transition>
 </template>
 
 <script lang="ts">

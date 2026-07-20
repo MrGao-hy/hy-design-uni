@@ -6,6 +6,7 @@
         @close="close"
         :round="round"
         :z-index="998"
+        safe-area-inset-bottom
         :closeOnClickOverlay="closeOnClickOverlay"
     >
         <view class="hy-calendar">
@@ -26,6 +27,7 @@
                 :scrollIntoView="scrollIntoView"
             >
                 <hy-mount
+                    ref="monthRef"
                     :color="color"
                     :rowHeight="rowHeight"
                     :showMark="showMark"
@@ -86,7 +88,7 @@ import {
     range,
     useTranslate
 } from '../../libs'
-import type { ICalendarEmits, ICalendarExpose } from './typing'
+import type { ICalendarEmits, ICalendarExpose, IMonthExpose } from './typing'
 import { Calendar } from '../../libs'
 import calendarProps from './props'
 import dayjs from 'dayjs/esm'
@@ -106,6 +108,7 @@ const props = defineProps(calendarProps)
 const emit = defineEmits<ICalendarEmits>()
 
 const { t } = useTranslate('calendar')
+const monthRef = ref<IMonthExpose>()
 // 需要显示的月份的数组
 const months = ref<any[]>([])
 // 在月份滚动区域中，当前视图中月份的index索引
@@ -216,9 +219,11 @@ watch(
 
 watch(
     () => props.show,
-    (newVal: boolean) => {
+    async (newVal: boolean) => {
         if (newVal) {
             setMonth()
+            await nextTick()
+            monthRef.value?.initLayout()
         } else {
             // 关闭时重置scrollIntoView，否则会出现二次打开日历，当前月份数据显示不正确。
             // scrollIntoView需要有一个值变动过程，才会产生作用。

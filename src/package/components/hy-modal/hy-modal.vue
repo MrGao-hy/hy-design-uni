@@ -1,5 +1,5 @@
 <template>
-    <HyPopup
+    <hy-popup
         mode="center"
         :zoom="modalOptions.zoom || zoom"
         :show="showModal"
@@ -89,7 +89,7 @@
                 </view>
             </template>
         </view>
-    </HyPopup>
+    </hy-popup>
 </template>
 
 <script lang="ts">

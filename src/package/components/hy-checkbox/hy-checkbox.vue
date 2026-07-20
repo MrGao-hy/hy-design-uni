@@ -23,7 +23,7 @@
                             :iconSize="addUnit(iconSize)"
                         >
                         </slot>
-                        <HyIcon
+                        <hy-icon
                             v-else
                             class="hy-checkbox--icon-wrap__icon"
                             :name="IconConfig.CHECK_MASK"
