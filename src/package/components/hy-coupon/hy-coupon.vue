@@ -31,7 +31,7 @@
                     </view>
 
                     <hy-tag
-                        :text="typeValue"
+                        :label="typeValue"
                         size="mini"
                         plain
                         shape="circle"
