@@ -1,5 +1,12 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { CheckboxColumnsVo, IFieldNames } from '../../index'
+import {
+    CheckboxColumnsVo,
+    DirectionType,
+    IFieldNames,
+    LeftRightType,
+    ShapeType,
+    SizeType
+} from '../../index'
 
 const radioProps = {
     /** 双向绑定值，数组类型 */
@@ -27,7 +34,7 @@ const radioProps = {
      * @values small,medium,large
      * */
     size: {
-        type: String,
+        type: String as PropType<SizeType>,
         default: 'medium'
     },
     /**
@@ -35,7 +42,7 @@ const radioProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'circle'
     },
     /** 是否禁用 */
@@ -62,7 +69,7 @@ const radioProps = {
      * @values left,right
      * */
     iconPlacement: {
-        type: String,
+        type: String as PropType<LeftRightType>,
         default: 'left'
     },
     /** 竖向配列时，是否显示下划线 */
@@ -84,7 +91,7 @@ const radioProps = {
      * @values row,column
      * */
     placement: {
-        type: String,
+        type: String as PropType<DirectionType>,
         default: 'row'
     },
     /** 定义需要用到的外部样式 */

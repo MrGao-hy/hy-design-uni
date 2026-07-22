@@ -17,7 +17,7 @@
                 size="60rpx"
                 height="70rpx"
                 scroll-direction="alternate"
-                stop-order="left-to-right"
+                stop-order="ltr"
                 color="red"
                 :delay-step="0.1"
             />

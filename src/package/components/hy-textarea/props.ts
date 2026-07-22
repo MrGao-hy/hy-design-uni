@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import { TextareaConfirmType } from '@uni-helper/uni-app-types'
+import type { BorderType } from '../../libs'
 
 const textareaProps = {
     /** 输入框的内容 */
@@ -104,7 +105,7 @@ const textareaProps = {
      * @values surround,none,bottom
      * */
     border: {
-        type: String,
+        type: String as PropType<BorderType>,
         default: 'surround'
     },
     /** 内容式化函数 */

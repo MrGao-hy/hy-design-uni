@@ -1,5 +1,12 @@
 import type { CSSProperties, PropType } from 'vue'
 import { ButtonOpenType } from '@uni-helper/uni-types'
+import type {
+    RowCenterType,
+    TextMode,
+    ThemeType,
+    TextWrapType,
+    TextDecorationType
+} from '../../libs'
 
 const textProps = {
     /** 显示的值 */
@@ -12,7 +19,7 @@ const textProps = {
      * 主题颜色
      * @values primary,success,error,warning,info
      * */
-    type: String,
+    type: String as PropType<ThemeType>,
     /** 是否显示 */
     show: {
         type: Boolean,
@@ -27,7 +34,7 @@ const textProps = {
      * @values test,price,phone,name,date,link
      * */
     mode: {
-        type: String,
+        type: String as PropType<TextMode>,
         default: 'text'
     },
     /** mode=link下，配置的链接 */
@@ -78,7 +85,7 @@ const textProps = {
      * 文字装饰，下划线，中划线等，可选值
      * @values none,underline,line-through
      * */
-    decoration: String,
+    decoration: String as PropType<TextDecorationType>,
     /** 外边距，对象、字符串，数值形式均可 */
     margin: String,
     /** 文本行高 */
@@ -88,7 +95,7 @@ const textProps = {
      * @values left,center,right
      * */
     align: {
-        type: String,
+        type: String as PropType<RowCenterType>,
         default: 'left'
     },
     /**
@@ -96,7 +103,7 @@ const textProps = {
      * @values normal,break-word,anywhere
      * */
     wordWrap: {
-        type: String,
+        type: String as PropType<TextWrapType>,
         default: 'normal'
     },
     /** 是否占满剩余空间 */

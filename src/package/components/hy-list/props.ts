@@ -1,4 +1,5 @@
 import type { PropType } from 'vue'
+import { LoadMoreStatus } from '../../libs'
 
 const listProps = {
     /** 数据列表 */
@@ -56,7 +57,7 @@ const listProps = {
      * @values loadMore,loading,noMore
      * */
     load: {
-        type: String,
+        type: String as PropType<LoadMoreStatus>,
         default: 'loadMore'
     },
     /** 显示底部加载状态 */

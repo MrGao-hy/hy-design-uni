@@ -1,3 +1,4 @@
+import type { RowCenterType } from '../../libs'
 export interface ITableColumn {
     /** 列标题 */
     title: string
@@ -6,7 +7,7 @@ export interface ITableColumn {
     /** 列宽 (数字默认 px) */
     width?: number
     /** 对齐方式 */
-    align?: HyApp.RowCenterType
+    align?: RowCenterType
     /** 是否开启排序 */
     sortable?: boolean
     /** 是否开启文本超长省略 */

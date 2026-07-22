@@ -1,6 +1,13 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { HyIconProps } from '../hy-icon/typing'
 import { ButtonFormType, ButtonLang, ButtonOpenType } from '@uni-helper/uni-types'
+import type {
+    ThemeType,
+    HyIconProps,
+    SizeType,
+    ShapeType,
+    LoadingMode,
+    AlipayAuthScopeType
+} from '../../libs'
 
 const buttonProps = {
     /** 是否显示按钮的细边框 */
@@ -18,7 +25,7 @@ const buttonProps = {
      * @values info,primary,error,warning,success
      * */
     type: {
-        type: String,
+        type: String as PropType<ThemeType>,
         default: 'primary'
     },
     /**
@@ -26,7 +33,7 @@ const buttonProps = {
      * @values large,medium,small,mini
      * */
     size: {
-        type: String,
+        type: String as PropType<SizeType>,
         default: 'medium'
     },
     /**
@@ -34,7 +41,7 @@ const buttonProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'square'
     },
     /** 按钮是否镂空，背景色透明  */
@@ -59,7 +66,7 @@ const buttonProps = {
      * @values spinner,circle,semicircle
      * */
     loadingMode: {
-        type: String,
+        type: String as PropType<LoadingMode>,
         default: 'spinner'
     },
     /** 加载图标大小 */
@@ -136,7 +143,7 @@ const buttonProps = {
      * @values userInfo,phoneNumber
      * */
     scope: {
-        type: String,
+        type: String as PropType<AlipayAuthScopeType>,
         default: ''
     }
 }

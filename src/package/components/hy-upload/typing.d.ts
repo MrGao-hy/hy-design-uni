@@ -41,6 +41,31 @@ export interface FileVo {
     schedule?: number
 }
 
+/**
+ * 接受的文件类型
+ *
+ * @default image
+ *
+ * @values
+ * all-所有文件类型
+ * media-媒体文件（图片和视频）
+ * image-图片文件
+ * file-普通文件
+ * video-视频文件
+ */
+export type FileType = 'image' | 'video' | 'media' | 'file' | 'all'
+
+/**
+ * 摄像头方向类型
+ *
+ * 用于视频拍摄时选择使用的摄像头。
+ *
+ * @values
+ * back-后置摄像头
+ * front-前置摄像头
+ */
+export type CameraType = 'back' | 'front'
+
 export type ReadFunctionVo = (file: FileVo, detail: { name: string; index: number }) => void
 
 export interface UploadFileParams {

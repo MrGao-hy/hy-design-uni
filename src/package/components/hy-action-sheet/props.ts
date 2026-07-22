@@ -1,3 +1,4 @@
+import type { RowCenterType } from '../../libs'
 import type { IActionSheetAction, IActionSheetPanel } from './typing'
 import type { CSSProperties, PropType } from 'vue'
 
@@ -30,7 +31,7 @@ const actionSheetProps = {
      * @values left,center,right
      * */
     titleAlign: {
-        type: String as PropType<CSSProperties['text-align']>,
+        type: String as PropType<RowCenterType>,
         default: 'center'
     },
     /** 取消按钮的提示文字,不为空时显示按钮 */

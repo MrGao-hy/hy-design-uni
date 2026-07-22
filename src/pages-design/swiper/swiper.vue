@@ -58,7 +58,7 @@
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
 import TheRootPage from '@/components/the-root-page.vue'
-import type { SwiperList } from '@/package'
+import type { SwiperList, IndicatorMode } from '@/package'
 
 definePage({
     style: {
@@ -91,7 +91,7 @@ const list_2 = ref<SwiperList[]>([
         title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
     }
 ])
-const mode = ref<HyApp.SwiperIndicatorModeType>('line')
+const mode = ref<IndicatorMode>('line')
 const height = ref<number>(130)
 const duration = ref<number>(300)
 const interval = ref<number>(3000)

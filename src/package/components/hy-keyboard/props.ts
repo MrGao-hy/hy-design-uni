@@ -1,5 +1,5 @@
 import type { PropType, ExtractPropTypes } from 'vue'
-import type { KeyboardMode, CarKeyboardLang } from './typing'
+import type { KeyboardModeType, CarKeyboardLang } from './typing'
 
 export const keyboardProps = {
     /** 是否可见 */
@@ -19,7 +19,7 @@ export const keyboardProps = {
      * @values default,custom,car,idcard
      * */
     mode: {
-        type: String as PropType<KeyboardMode>,
+        type: String as PropType<KeyboardModeType>,
         default: 'default'
     },
     /** 层级 */

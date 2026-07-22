@@ -1,5 +1,6 @@
 import type { PropType } from 'vue'
 import type { FieldRuleMap } from './typing'
+import { LabelPosition, RowCenterType } from '../../libs'
 
 const formProps = {
     /** 表单数据对象 */
@@ -21,7 +22,7 @@ const formProps = {
      * @values left,top
      * */
     labelPosition: {
-        type: String,
+        type: String as PropType<LabelPosition>,
         default: 'left'
     },
     /**
@@ -29,7 +30,7 @@ const formProps = {
      * @values left,center,right
      * */
     labelAlign: {
-        type: String,
+        type: String as PropType<RowCenterType>,
         default: 'left'
     }
 }

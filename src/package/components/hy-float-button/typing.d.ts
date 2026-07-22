@@ -17,7 +17,20 @@ export type IGap = {
     bottom?: number
 }
 
-export type FloatPositionVo =
+/**
+ * 浮动位置类型
+ *
+ * 用于控制浮动元素在容器中的显示位置。
+ * left-top-左上角
+ * left-bottom-左下角
+ * right-top-右上角
+ * right-bottom-右下角
+ * left-center-左侧居中
+ * right-center-右侧居中
+ * top-center-顶部居中
+ * bottom-center-底部居中
+ */
+export type FloatPositionType =
     | 'left-top'
     | 'left-bottom'
     | 'right-top'

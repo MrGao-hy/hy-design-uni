@@ -1,4 +1,4 @@
-import type { IOffset, IPlacementVo } from './typing'
+import type { IOffset, IPlacementVo, PopoverModeType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 
 const popoverProps = {
@@ -16,7 +16,7 @@ const popoverProps = {
      * @values top,top-start,top-end,bottom,bottom-start,bottom-end,left,left-start,left-end,right,right-start,right-end
      * */
     placement: {
-        type: String as unknown as PropType<IPlacementVo>,
+        type: String as PropType<IPlacementVo>,
         default: 'bottom'
     },
     /** 控制 popover 的显示状态 */
@@ -39,7 +39,7 @@ const popoverProps = {
      * @values normal,menu
      * */
     mode: {
-        type: String,
+        type: String as PropType<PopoverModeType>,
         default: 'normal'
     },
     /** 定义需要用到的外部样式 */

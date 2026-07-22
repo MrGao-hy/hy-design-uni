@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import type { ThemeModeType, ThemeType } from '../../libs'
 
 const warnProps = {
     /** 显示的文字 */
@@ -8,7 +9,7 @@ const warnProps = {
      * @values primary,success,warning,error,info
      * */
     type: {
-        type: String,
+        type: String as PropType<ThemeType>,
         default: 'warning'
     },
     /** 辅助性文字，颜色比title浅一点，字号也小一点 */
@@ -23,9 +24,12 @@ const warnProps = {
         type: Boolean,
         default: false
     },
-    /** 显示的暗色或者亮色 */
+    /**
+     * 显示的暗色或者亮色
+     * @values dark,light
+     * */
     theme: {
-        type: String,
+        type: String as PropType<ThemeModeType>,
         default: 'dark'
     },
     /** 文字是否居中 */

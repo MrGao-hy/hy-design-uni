@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import type { TransitionModeType } from '../../libs'
 
 const transitionProps = {
     /** 是否展示组件 */
@@ -6,9 +7,12 @@ const transitionProps = {
         type: Boolean,
         default: false
     },
-    /** 使用的动画模式 */
+    /**
+     * 使用的动画模式
+     * @values fade,fade-zoom,fade-up,fade-down,fade-left,fade-right,slide-up,slide-down,slide-left,slide-right,zoom-in,zoom-out
+     * */
     mode: {
-        type: String,
+        type: String as PropType<TransitionModeType>,
         default: 'fade'
     },
     /** 动画的执行时间，单位ms */

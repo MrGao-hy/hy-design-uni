@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import { BadgeNumberType, BadgeShapeType, ThemeType } from '../../libs'
 
 const badgeProps = {
     /** 是否显示圆点 */
@@ -31,7 +32,7 @@ const badgeProps = {
      * @values error,warning,success,primary,info
      * */
     type: {
-        type: String,
+        type: String as PropType<ThemeType>,
         default: 'error'
     },
     /** 当数值为 0 时，是否展示 Badge */
@@ -48,7 +49,7 @@ const badgeProps = {
      * @values circle,horn
      * */
     shape: {
-        type: String,
+        type: String as PropType<BadgeShapeType>,
         default: 'circle'
     },
     /**
@@ -56,7 +57,7 @@ const badgeProps = {
      * @values overflow,ellipsis,limit
      * */
     numberType: {
-        type: String,
+        type: String as PropType<BadgeNumberType>,
         default: 'overflow'
     },
     /** 设置badge的位置偏移，格式为 \[x, y\]，也即设置的为top和right的值，absolute为true时有效 */

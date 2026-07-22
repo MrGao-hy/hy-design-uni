@@ -30,8 +30,8 @@
 // 指示器为线型的样式
 import { computed, type CSSProperties, toRefs, ref } from 'vue'
 import { addUnit } from '../../libs'
+import type { IndicatorMode } from '../../libs'
 
-export type IndicatorMode = 'line' | 'dot'
 interface IProps {
     length: number
     current: number | string

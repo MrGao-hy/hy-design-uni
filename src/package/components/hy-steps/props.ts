@@ -1,5 +1,6 @@
 import type { StepListVo } from './typing'
 import type { PropType } from 'vue'
+import type { DirectionType } from '../../libs'
 
 const stepsProps = {
     /** 设置当前处于第几步 */
@@ -17,7 +18,7 @@ const stepsProps = {
      * @values row,column
      * */
     direction: {
-        type: String,
+        type: String as PropType<DirectionType>,
         default: 'row'
     },
     /** 激活状态颜色 */

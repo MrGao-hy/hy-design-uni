@@ -161,6 +161,7 @@
 </template>
 
 <script setup lang="ts">
+import type { LoadingMode } from '@/package/libs/typing'
 import { ref } from 'vue'
 import type { HyIconProps } from '@/package/components/hy-icon/typing'
 import { isString, useToast } from '@/package'
@@ -177,7 +178,7 @@ const toast = useToast()
 // 配置项
 const icon = ref(true)
 const loading = ref(false)
-const loadMode = ref<HyApp.LoadingMode>('circle')
+const loadMode = ref<LoadingMode>('circle')
 const position = ref('center')
 const callbackMessage = ref('')
 
@@ -213,7 +214,7 @@ const handleDuration = (duration: number) => {
 }
 
 // 加载提示
-const handleLoading = (message?: string, mode?: HyApp.LoadingMode) => {
+const handleLoading = (message?: string, mode?: LoadingMode) => {
     toast.loading(message || '加载中...', {
         loadMode: mode || loadMode.value,
         position: position.value as any

@@ -53,6 +53,7 @@
 </template>
 
 <script setup lang="ts">
+import type { ThemeModeType } from '@/package'
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
 
@@ -62,7 +63,7 @@ definePage({
     }
 })
 
-const theme = ref<HyApp.ThemeVo>('light')
+const theme = ref<ThemeModeType>('light')
 const closable = ref(false)
 const showIcon = ref(false)
 

@@ -1,6 +1,7 @@
 import { IconConfig } from '../../libs/config'
 import type { CSSProperties, PropType } from 'vue'
 import { useTranslate } from '../../libs'
+import type { RowCenterType } from '../../libs'
 
 const { t } = useTranslate('loadMore')
 
@@ -25,7 +26,7 @@ const dividerProps = {
      * @values left,center,right
      * */
     textPosition: {
-        type: String,
+        type: String as PropType<RowCenterType>,
         default: 'center'
     },
     /** 文本内容，如果为loadMore就是加载前，如果为loading就是加载中，如果为noMore就是没有更多 */

@@ -1,4 +1,4 @@
-import type { SubSectionVo } from './typing'
+import type { SubSectionVo, SubsectionModeType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 
 const subsectionProps = {
@@ -28,7 +28,7 @@ const subsectionProps = {
      * @values button,subsection
      * */
     mode: {
-        type: String,
+        type: String as PropType<SubsectionModeType>,
         default: 'button'
     },
     /** 字体大小，单位px */

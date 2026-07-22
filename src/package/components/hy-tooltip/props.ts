@@ -1,3 +1,4 @@
+import type { UDLRType, TriggerModeType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 
 const tooltipProps = {
@@ -12,11 +13,11 @@ const tooltipProps = {
         default: ''
     },
     /**
-     * 触发模式
+     * 触发模式longpress-长按触发，click-点击触发
      * @values longpress,click
      * */
     triggerMode: {
-        type: String,
+        type: String as PropType<TriggerModeType>,
         default: 'longpress'
     },
     /**
@@ -24,7 +25,7 @@ const tooltipProps = {
      * @values top,bottom,left,right
      * */
     placement: {
-        type: String as unknown as PropType<HyApp.UDLRType>,
+        type: String as PropType<UDLRType>,
         default: 'bottom'
     },
     /** 文本大小 */

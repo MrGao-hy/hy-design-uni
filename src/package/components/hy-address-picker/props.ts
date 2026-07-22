@@ -1,3 +1,4 @@
+import type { TopBottomType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 import type { HyInputProps } from '../hy-input/typing'
 import { useTranslate } from '../../libs'
@@ -15,7 +16,7 @@ const addressPickerProps = {
      * @values top,bottom
      * */
     popupMode: {
-        type: String as PropType<HyApp.TopBottomType>,
+        type: String as PropType<TopBottomType>,
         default: 'bottom'
     },
     /** 是否显示顶部的操作栏 */

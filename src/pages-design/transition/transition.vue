@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import type { TransitionModeType } from '@/package'
 import { computed, type CSSProperties, reactive, ref } from 'vue'
 import { getWindowInfo } from '@/package'
 import { useShareButton } from '@/composables'
@@ -20,7 +21,7 @@ definePage({
 })
 
 const show = ref(false)
-const mode = ref<HyApp.TransitionMode>('fade')
+const mode = ref<TransitionModeType>('fade')
 const style = computed((): CSSProperties => {
     return {
         position: 'fixed',
@@ -47,7 +48,7 @@ const list = reactive([
 ])
 
 const onClick = (temp: CommonType.CellItem) => {
-    mode.value = temp.value as HyApp.TransitionMode
+    mode.value = temp.value as TransitionModeType
     show.value = true
     setTimeout(() => {
         show.value = false

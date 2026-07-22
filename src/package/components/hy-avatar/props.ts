@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { ImageMode } from '@uni-helper/uni-app-types'
+import type { SizeType, ImageMode, ShapeType } from '../../libs'
 
 const avatarProps = {
     /** 头像路径 */
@@ -9,7 +9,7 @@ const avatarProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'circle'
     },
     /**
@@ -17,7 +17,7 @@ const avatarProps = {
      * @values large, medium, small
      * */
     size: {
-        type: [String, Number],
+        type: [String, Number] as PropType<SizeType | number>,
         default: 'medium'
     },
     /**

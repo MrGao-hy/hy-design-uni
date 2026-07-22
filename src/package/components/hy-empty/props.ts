@@ -1,5 +1,5 @@
-import type { CSSProperties, PropType } from 'vue'
-import type { HyButtonProps } from '../hy-button/typing'
+import type { EmptyModeType, HyButtonProps } from '../../libs'
+import { CSSProperties, PropType } from 'vue'
 
 const emptyProps = {
     /** 是否显示空状态 */
@@ -12,7 +12,7 @@ const emptyProps = {
      * @values content,search,address,network,order,coupon,collect,history,message,comment,integral,card,notification,shop,activity,loading
      * */
     mode: {
-        type: String,
+        type: String as PropType<EmptyModeType>,
         default: 'content'
     },
     /** 空状态图片 */

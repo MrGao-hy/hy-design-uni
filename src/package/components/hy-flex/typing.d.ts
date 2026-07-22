@@ -1,7 +1,7 @@
+import type { JustifyContentType } from '../../libs'
 export type FlexAlign = 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline'
 
-export type FlexJustify = HyApp.JustifyContentType
-export type FlexWrap = 'nowrap' | 'wrap' | 'wrap-reverse'
+export type FlexJustify = JustifyContentType
 
 export interface FlexProps {
     /** 主轴方向，等价于 flex-direction */

@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import type { ThemeType } from '../../libs'
 
 const notifyProps = {
     /** 到顶部的距离 */
@@ -11,7 +12,7 @@ const notifyProps = {
      * @values primary,success,warning,error,info
      * */
     type: {
-        type: String,
+        type: String as PropType<ThemeType>,
         default: 'primary'
     },
     /** 字体颜色 */

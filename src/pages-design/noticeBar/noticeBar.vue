@@ -49,8 +49,9 @@
 </template>
 
 <script setup lang="ts">
+import type { DirectionType, JustifyContentType } from '@/package/libs/typing'
 import { reactive, ref } from 'vue'
-import type { NoticeBarModeVo } from '@/package'
+import type { NoticeBarModeType } from '@/package'
 import { useShareButton } from '@/composables'
 import { IconConfig } from '@/package'
 
@@ -60,9 +61,9 @@ definePage({
     }
 })
 
-const direction = ref<HyApp.DirectionType>('column')
-const mode = ref<NoticeBarModeVo>('')
-const justifyContent = ref<HyApp.JustifyContentType>('flex-start')
+const direction = ref<DirectionType>('column')
+const mode = ref<NoticeBarModeType>('')
+const justifyContent = ref<JustifyContentType>('flex-start')
 const step = ref(false)
 const speed = ref(80)
 const list_1 = [

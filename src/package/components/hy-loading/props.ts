@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import type { DirectionType, LoadingMode } from '../../libs'
 
 const loadingProps = {
     /** 是否显示组件 */
@@ -21,7 +22,7 @@ const loadingProps = {
      * @values row,column
      * */
     direction: {
-        type: String,
+        type: String as PropType<DirectionType>,
         default: 'row'
     },
     /**
@@ -29,7 +30,7 @@ const loadingProps = {
      * @values spinner, circle, semicircle
      * */
     mode: {
-        type: String,
+        type: String as PropType<LoadingMode>,
         default: 'spinner'
     },
     /** 加载图标的大小，单位px */

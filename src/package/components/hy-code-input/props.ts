@@ -1,5 +1,5 @@
-import type IProps from './typing'
 import type { CSSProperties, PropType } from 'vue'
+import type { CodeInputModeType } from '../../libs'
 
 const codeInputProps = {
     /** 获取值 */
@@ -32,7 +32,7 @@ const codeInputProps = {
      * @values box,line
      * */
     mode: {
-        type: String,
+        type: String as PropType<CodeInputModeType>,
         default: 'box'
     },
     /** 是否细边框 */

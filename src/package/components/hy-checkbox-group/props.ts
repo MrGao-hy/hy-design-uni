@@ -1,3 +1,4 @@
+import type { DirectionType, LeftRightType, ShapeType, SizeType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 
 const checkboxGroupProps = {
@@ -11,7 +12,7 @@ const checkboxGroupProps = {
      * @values small,medium,large
      * */
     size: {
-        type: String,
+        type: String as PropType<SizeType>,
         default: 'medium'
     },
     /**
@@ -19,7 +20,7 @@ const checkboxGroupProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'square'
     },
     /** 是否禁用 */
@@ -46,7 +47,7 @@ const checkboxGroupProps = {
      * @values left,right
      * */
     iconPlacement: {
-        type: String,
+        type: String as PropType<LeftRightType>,
         default: 'left'
     },
     /** 竖向配列时，是否显示下划线 */
@@ -68,7 +69,7 @@ const checkboxGroupProps = {
      * @values row,column
      * */
     placement: {
-        type: String,
+        type: String as PropType<DirectionType>,
         default: 'row'
     },
     /** 定义需要用到的外部样式 */

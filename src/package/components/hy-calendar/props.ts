@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import { MonthMode, useTranslate } from '../../libs'
+import { MonthModeType, useTranslate } from '../../libs'
 
 const { t } = useTranslate('calendar')
 
@@ -30,7 +30,7 @@ const calendarProps = {
      * @values single,range,multiple
      * */
     mode: {
-        type: String as PropType<MonthMode>,
+        type: String as PropType<MonthModeType>,
         default: 'single'
     },
     /** mode=range时，第一个日期底部的提示文字 */

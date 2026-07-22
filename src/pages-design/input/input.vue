@@ -70,6 +70,7 @@
 </template>
 
 <script setup lang="ts">
+import type { ShapeType, BorderType } from '@/package/libs/typing'
 import { reactive, ref, watch } from 'vue'
 import { IconConfig } from '@/package'
 import type { InputType } from '@uni-helper/uni-types'
@@ -85,9 +86,9 @@ const value = ref('')
 const value3 = ref('')
 const value2 = ref('中国速度，东风快递，使命必达，风雨无阻！！！')
 const disabled = ref(false)
-const shape = ref<HyApp.ShapeType>('square')
+const shape = ref<ShapeType>('square')
 const type = ref<InputType>('text')
-const border = ref<HyApp.BorderType>('surround')
+const border = ref<BorderType>('surround')
 
 const list_1 = reactive([
     { name: '半圆', value: 'circle' },

@@ -3,7 +3,7 @@
         <template v-for="(item, i) in columns" :key="i">
             <hy-tag
                 :label="String(item?.[fieldNames.label])"
-                :value="item?.[fieldNames.value]"
+                :value="item?.[fieldNames.value] as string"
                 :type="type"
                 :size="size"
                 :shape="shape"

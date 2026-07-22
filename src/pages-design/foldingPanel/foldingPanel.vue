@@ -48,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
+import type { SizeType } from '@/package/libs/typing'
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
 
@@ -57,7 +58,7 @@ definePage({
     }
 })
 
-const size = ref<HyApp.SizeType>('medium')
+const size = ref<SizeType>('medium')
 const border = ref(true)
 const disabled = ref(false)
 const accordion = ref(false)

@@ -1,6 +1,6 @@
 {
     "name": "@hy-app/ui",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "📱一个基于vue3+ts构建的uni-app组件库,拥有八十多个精美组件，适配多端，支持自定义主题",
     "main": "./index.ts",
     "private": false,
@@ -13,7 +13,8 @@
         "暗黑模式",
         "国际化",
         "vue3",
-        "uniApp"
+        "uniApp",
+        "ai"
     ],
     "vetur": {
         "tags": "./tags.json",

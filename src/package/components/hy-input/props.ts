@@ -1,6 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { InputConfirmType, InputType } from '@uni-helper/uni-types'
-import type { HyIconProps } from '../hy-icon/typing'
+import type { BorderType, HyIconProps, RowCenterType, ShapeType } from '../../libs'
 
 const inputProps = {
     /** 输入的值 */
@@ -123,7 +123,7 @@ const inputProps = {
      * @values left,center,right
      * */
     inputAlign: {
-        type: String as PropType<CSSProperties['textAlign']>,
+        type: String as PropType<RowCenterType>,
         default: 'left'
     },
     /** 输入框字体的大小 */
@@ -151,7 +151,7 @@ const inputProps = {
      * @values surround,bottom,none
      * */
     border: {
-        type: String,
+        type: String as PropType<BorderType>,
         default: 'surround'
     },
     /** 是否只读，与disabled不同之处在于disabled会置灰组件，而readonly则不会 */
@@ -164,7 +164,7 @@ const inputProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'square'
     },
     /** 是否忽略组件内对文本合成系统事件的处理 */

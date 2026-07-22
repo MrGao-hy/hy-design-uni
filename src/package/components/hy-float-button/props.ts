@@ -1,5 +1,6 @@
 import type { IGap, MenusType } from './typing'
 import { IconConfig } from '../../libs'
+import type { DirectionType, ShapeType, SizeType, FloatPositionType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 
 const floatButtonProps = {
@@ -13,7 +14,7 @@ const floatButtonProps = {
      * @values row,column
      * */
     direction: {
-        type: String,
+        type: String as PropType<DirectionType>,
         default: 'column'
     },
     /** 按钮显示的图标 */
@@ -51,7 +52,7 @@ const floatButtonProps = {
      * @values small,medium,large
      * */
     size: {
-        type: [String, Number],
+        type: [String, Number] as PropType<SizeType | number>,
         default: 'medium'
     },
     /**
@@ -59,7 +60,7 @@ const floatButtonProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'circle'
     },
     /** 按钮的透明度 */
@@ -92,7 +93,7 @@ const floatButtonProps = {
      * @values left-top,left-bottom,right-top,right-bottom,left-center,right-center,top-center,bottom-center
      * */
     position: {
-        type: String,
+        type: String as PropType<FloatPositionType>,
         default: 'right-bottom'
     },
     /** 禁用点击打开菜单栏 */

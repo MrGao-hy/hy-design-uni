@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { HyButtonProps } from '../hy-button/typing'
+import type { HyButtonProps, CouponButtonModeType, CouponType } from '../../libs'
 
 const couponProps = {
     /** 优惠券标题 */
@@ -12,7 +12,7 @@ const couponProps = {
      * @values moneyOff,discount,fixedAmount
      * */
     type: {
-        type: String,
+        type: String as PropType<CouponType>,
         default: ''
     },
     /** 金额底部优惠券类型文字描述 */
@@ -82,10 +82,10 @@ const couponProps = {
     },
     /**
      * 按钮类型
-     * @values test,button,none
+     * @values text,button,none
      * */
     btnMode: {
-        type: String,
+        type: String as PropType<CouponButtonModeType>,
         default: 'button'
     },
     /** 按钮文字 */

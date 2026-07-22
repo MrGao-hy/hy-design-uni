@@ -15,7 +15,17 @@ export interface MonthData {
     date: DateItem[]
 }
 
-export type MonthMode = 'single' | 'multiple' | 'range'
+/**
+ * 月份选择模式类型
+ *
+ * 用于 MonthPicker 组件设置日期选择方式。
+ *
+ * @values
+ * single-单个月份选择
+ * multiple-多个月份选择
+ * range-月份范围选择
+ */
+export type MonthModeType = 'single' | 'multiple' | 'range'
 
 export interface IMonthProps {
     showMark?: boolean

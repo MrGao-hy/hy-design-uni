@@ -1,5 +1,12 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { CheckboxColumnsVo, IFieldNames } from '../hy-check-button/typing'
+import type {
+    LeftRightType,
+    ShapeType,
+    SizeType,
+    DirectionType,
+    CheckboxColumnsVo,
+    IFieldNames
+} from '../../libs'
 
 const checkboxProps = {
     /** 双向绑定值，数组类型 */
@@ -27,7 +34,7 @@ const checkboxProps = {
      * @values small,medium,large
      * */
     size: {
-        type: String,
+        type: String as PropType<SizeType>,
         default: 'medium'
     },
     /**
@@ -35,7 +42,7 @@ const checkboxProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'square'
     },
     /** 是否禁用 */
@@ -62,7 +69,7 @@ const checkboxProps = {
      * @values left,right
      * */
     iconPlacement: {
-        type: String,
+        type: String as PropType<LeftRightType>,
         default: 'left'
     },
     /** 竖向配列时，是否显示下划线 */
@@ -84,7 +91,7 @@ const checkboxProps = {
      * @values row,column
      * */
     placement: {
-        type: String,
+        type: String as PropType<DirectionType>,
         default: 'row'
     },
     /** 定义需要用到的外部样式 */

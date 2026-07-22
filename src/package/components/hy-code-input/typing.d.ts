@@ -1,3 +1,14 @@
+/**
+ * 输入框显示模式类型
+ *
+ * 用于控制输入框的外观样式。
+ *
+ * @values
+ * box-盒子模式，有完整边框样式
+ * line-底部横线模式，仅显示底部边框
+ */
+export type CodeInputModeType = 'box' | 'line'
+
 export interface ICodeInputEmits {
     /** 输入内容发生改变时触发 */
     change: [value: string | number]

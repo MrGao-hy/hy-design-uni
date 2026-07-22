@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import { ArrowDirectionType, RowCenterType, SizeType } from '../../libs'
 
 const cellProps = {
     /** 是否显示cell下边框 */
@@ -21,7 +22,7 @@ const cellProps = {
      * @values large,medium,small
      * */
     size: {
-        type: [String, Number],
+        type: [String, Number] as PropType<SizeType | number>,
         default: 'medium'
     },
     /**
@@ -29,7 +30,7 @@ const cellProps = {
      * @values left,center,right
      * */
     arrange: {
-        type: String,
+        type: String as PropType<RowCenterType>,
         default: 'right'
     },
     /** 是否展示右侧图标 */
@@ -42,7 +43,7 @@ const cellProps = {
      * @values left,up,down
      * */
     arrowDirection: {
-        type: String,
+        type: String as PropType<ArrowDirectionType>,
         default: 'right'
     },
     /** 定义需要用到的外部样式 */

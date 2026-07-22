@@ -113,12 +113,12 @@
                         <template #left>
                             <view class="user-slot">
                                 <hy-avatar
-                                    size="28"
+                                    :size="28"
                                     src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=portrait%20of%20a%20young%20person%20avatar%20style%20clean%20background&image_size=square"
                                 ></hy-avatar>
                                 <text class="user-name">用户名</text>
                                 <hy-icon
-                                    :name="IconConfig.ARROW_RIGHT"
+                                    :name="IconConfig.ARROW_DOUBLE_LEFT"
                                     size="12"
                                     color="#999"
                                 ></hy-icon>

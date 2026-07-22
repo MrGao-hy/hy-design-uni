@@ -1,3 +1,4 @@
+import type { DirectionType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 
 const lineProps = {
@@ -13,7 +14,7 @@ const lineProps = {
      * @values row,column
      * */
     direction: {
-        type: String,
+        type: String as PropType<DirectionType>,
         default: 'row'
     },
     /** 是否显示细线条 */

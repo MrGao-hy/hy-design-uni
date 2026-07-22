@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+import type { LayoutType } from '@/package/libs/typing'
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
 
@@ -21,7 +22,7 @@ definePage({
 })
 
 const show = ref(false)
-const mode = ref<HyApp.LayoutType>('center')
+const mode = ref<LayoutType>('center')
 const list = [
     { title: '底部弹出', value: 'bottom' },
     { title: '顶部弹出', value: 'top' },
@@ -31,7 +32,7 @@ const list = [
 ]
 
 const onClick = (temp: AnyObject) => {
-    mode.value = temp.value as HyApp.LayoutType
+    mode.value = temp.value as LayoutType
     show.value = true
 }
 

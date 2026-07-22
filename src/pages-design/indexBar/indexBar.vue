@@ -34,6 +34,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, nextTick, onMounted } from 'vue'
 import { getRect, sleep } from '@/package'
+import type { LeftRightType } from '@/package'
 import { useShareButton } from '@/composables'
 
 definePage({
@@ -43,7 +44,7 @@ definePage({
 })
 
 // 索引栏位置
-const position = ref<string>('right')
+const position = ref<LeftRightType>('right')
 const sectionRect = ref<UniNamespace.NodeInfo[]>([])
 const scrollTop = ref<number>(0)
 // 是否显示提示

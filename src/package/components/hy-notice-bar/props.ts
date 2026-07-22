@@ -1,7 +1,12 @@
-import type { NoticeBarModeVo } from './typing'
+import type {
+    DirectionType,
+    JustifyContentType,
+    LinkType,
+    HyIconProps,
+    NoticeBarModeType
+} from '../../libs'
 import { IconConfig } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
-import type { HyIconProps } from '../hy-icon/typing'
 
 const noticeBarProps = {
     /** 显示的内容，数组 */
@@ -14,7 +19,7 @@ const noticeBarProps = {
      * @values row,column
      * */
     direction: {
-        type: String,
+        type: String as PropType<DirectionType>,
         default: 'row'
     },
     /** direction = row时，是否使用步进形式滚动  */
@@ -31,7 +36,7 @@ const noticeBarProps = {
      * 通告模式，link-显示右箭头，closable-显示右侧关闭图标
      * @values link,closable
      * */
-    mode: String,
+    mode: String as PropType<NoticeBarModeType>,
     /** 文字颜色，各图标也会使用文字颜色 */
     color: {
         type: String,
@@ -64,7 +69,7 @@ const noticeBarProps = {
      * @values flex-start,flex-start,center
      * */
     justifyContent: {
-        type: String,
+        type: String as PropType<JustifyContentType>,
         default: 'flex-start'
     },
     /**
@@ -72,7 +77,7 @@ const noticeBarProps = {
      * @values navigateTo,redirectTo,switchTab,reLaunch
      * */
     linkType: {
-        type: String,
+        type: String as PropType<LinkType>,
         default: 'navigateTo'
     },
     /** 跳转地址 */

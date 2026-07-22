@@ -1,3 +1,4 @@
+import type { LayoutType, CloseIconPositionType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 
 const popupProps = {
@@ -16,7 +17,7 @@ const popupProps = {
      * @values left,right,top,bottom,center
      * */
     mode: {
-        type: String as unknown as PropType<HyApp.LayoutType>,
+        type: String as PropType<LayoutType>,
         default: 'bottom'
     },
     /** 动画时长，单位ms */
@@ -61,7 +62,7 @@ const popupProps = {
      * @values top-left,top-right
      * */
     closeIconPos: {
-        type: String,
+        type: String as PropType<CloseIconPositionType>,
         default: 'top-right'
     },
     /** 圆角值 */

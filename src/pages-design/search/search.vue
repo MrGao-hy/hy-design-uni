@@ -35,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import type { ShapeType, LeftRightType } from '@/package/libs/typing'
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
 
@@ -47,9 +48,9 @@ definePage({
 const value = ref('测试')
 const label = ref('搜索')
 const disabled = ref(false)
-const shape = ref<HyApp.ShapeType>('circle')
+const shape = ref<ShapeType>('circle')
 const showClose = ref(false)
-const inputAlign = ref<HyApp.LeftRightType>('left')
+const inputAlign = ref<LeftRightType>('left')
 const list = reactive([
     { name: '圆形', value: 'circle' },
     { name: '方形', value: 'square' }

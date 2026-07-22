@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import type { FlexWrap } from './typing'
+import { AlignType, JustifyContentType, FlexWrapType } from '../../libs'
 
 const flexProps = {
     /** flex 主轴的方向是否垂直，使用 flex-direction: column */
@@ -12,7 +12,7 @@ const flexProps = {
      * @values flex-start,flex-end,space-between,space-around,space-evenly,center
      * */
     justify: {
-        type: String,
+        type: String as PropType<JustifyContentType>,
         default: 'flex-start'
     },
     /**
@@ -20,7 +20,7 @@ const flexProps = {
      * @values flex-start,center,flex-end,stretch,baseline
      * */
     align: {
-        type: String,
+        type: String as PropType<AlignType>,
         default: 'flex-start'
     },
     /**
@@ -28,7 +28,7 @@ const flexProps = {
      * @values nowrap,wrap,wrap-reverse
      * */
     wrap: {
-        type: String as PropType<FlexWrap>,
+        type: String as PropType<FlexWrapType>,
         default: 'nowrap'
     },
     /** flex 属性，支持数字或字符串。如 1 或 'none' */

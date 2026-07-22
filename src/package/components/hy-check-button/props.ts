@@ -1,4 +1,11 @@
-import type { CheckboxColumnsVo, IFieldNames } from './typing'
+import type {
+    CheckboxColumnsVo,
+    IFieldNames,
+    SelectType,
+    ShapeType,
+    SizeType,
+    ThemeType
+} from '../../libs'
 import type { PropType } from 'vue'
 
 const checkButtonProps = {
@@ -27,7 +34,7 @@ const checkButtonProps = {
      * @values checkbox, radio
      * */
     selectType: {
-        type: String,
+        type: String as PropType<SelectType>,
         default: 'checkbox'
     },
     /** 禁用 */
@@ -50,7 +57,7 @@ const checkButtonProps = {
      * @values info,primary,success,warning,error
      * */
     type: {
-        type: String,
+        type: String as PropType<ThemeType>,
         default: 'primary'
     },
     /**
@@ -58,7 +65,7 @@ const checkButtonProps = {
      * @values small,medium,large
      * */
     size: {
-        type: String,
+        type: String as PropType<SizeType>,
         default: 'medium'
     },
     /**
@@ -66,7 +73,7 @@ const checkButtonProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'square'
     }
 }

@@ -1,8 +1,6 @@
-import type { SwiperList } from './typing'
 import type { CSSProperties, PropType } from 'vue'
 import { SwiperEasingFunction } from '@uni-helper/uni-types'
-import { ImageMode } from '@uni-helper/uni-app-types'
-import { IndicatorMode } from './hy-swiper-indicator.vue'
+import type { IndicatorMode, SwiperList, ImageMode } from '../../libs'
 
 const swiperProps = {
     /** 轮播图数据 */

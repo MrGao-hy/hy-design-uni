@@ -1,3 +1,4 @@
+import type { ThemeModeType } from '../../libs'
 import { ColorConfig } from '../../libs/config'
 import type { CSSProperties, PropType } from 'vue'
 
@@ -7,7 +8,7 @@ const configProviderProps = {
      * @values dark,light
      * */
     theme: {
-        type: String,
+        type: String as PropType<ThemeModeType>,
         default: ''
     },
     /** 主题色 */

@@ -6,6 +6,18 @@ export type CouponStatus = 'unused' | 'used' | 'expired' | 'redeemed'
  * */
 export type CouponType = 'moneyOff' | 'discount' | 'fixedAmount'
 
+/**
+ * 按钮显示模式类型
+ *
+ * 用于控制组件按钮的显示方式。
+ *
+ * @values
+ * text-文本按钮模式
+ * button-普通按钮模式
+ * none-不显示按钮
+ */
+export type CouponButtonModeType = 'text' | 'button' | 'none'
+
 export interface ICouponEmits {
     /** 点击优惠券 */
     click: []

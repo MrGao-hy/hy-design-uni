@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { HyIconProps } from '../hy-icon/typing'
+import type { ShapeType } from '../../libs'
 
 const backTopProps = {
     /**
@@ -7,7 +8,7 @@ const backTopProps = {
      * @values circle,square
      * */
     mode: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'circle'
     },
     /** 自定义图标属性集合 */

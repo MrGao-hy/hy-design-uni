@@ -1,6 +1,7 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { HyIconProps } from '../hy-icon/typing'
 import type { CustomKeysVo, GridItemVo } from './typing'
+import type { RowCenterType } from '../../libs'
 
 const gridProps = {
     /** 数据列表 */
@@ -41,7 +42,7 @@ const gridProps = {
      * @values left,center,right
      * */
     align: {
-        type: String,
+        type: String as PropType<RowCenterType>,
         default: 'left'
     },
     /** 间隔 */

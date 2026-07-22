@@ -1,3 +1,4 @@
+import type { SizeType } from '../../libs'
 import type { PropType } from 'vue'
 
 const foldingPanelProps = {
@@ -34,7 +35,7 @@ const foldingPanelProps = {
      * @values large, medium, small
      */
     size: {
-        type: String as PropType<HyApp.SizeType>,
+        type: String as PropType<SizeType>,
         default: 'medium'
     }
 }

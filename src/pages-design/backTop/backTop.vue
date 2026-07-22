@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import type { ShapeType } from '@/package/libs/typing'
 import { ref } from 'vue'
 import { onPageScroll } from '@dcloudio/uni-app'
 import { useShareButton } from '@/composables'
@@ -34,7 +35,7 @@ definePage({
     }
 })
 
-const mode = ref<HyApp.ShapeType>('circle')
+const mode = ref<ShapeType>('circle')
 const duration = ref(500)
 const right = ref(20)
 const bottom = ref(100)

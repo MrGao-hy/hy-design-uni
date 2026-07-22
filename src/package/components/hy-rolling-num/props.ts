@@ -1,4 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
+import type { RollingStopOrderType, RollingScrollDirectionType } from '../../libs'
 
 const rollingNumProps = {
     /** 要显示的数字或字符串值 */
@@ -41,7 +42,7 @@ const rollingNumProps = {
      * @values up,down,alternate
      * */
     scrollDirection: {
-        type: String,
+        type: String as PropType<RollingScrollDirectionType>,
         default: 'up'
     },
     /**
@@ -49,7 +50,7 @@ const rollingNumProps = {
      * @values ltr,rtl
      * */
     stopOrder: {
-        type: String,
+        type: String as PropType<RollingStopOrderType>,
         default: 'ltr'
     },
     /** 每个数字滚动的延迟时间间隔（秒） */

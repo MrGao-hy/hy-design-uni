@@ -112,6 +112,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
+import { CouponButtonModeType, CouponType } from '@/package'
 
 definePage({
     style: {
@@ -119,8 +120,22 @@ definePage({
     }
 })
 
+export interface CouponItem {
+    id: string | number
+    name: string
+    type: CouponType
+    status: string
+    description?: string
+    minSpend?: number
+    value?: number
+    validFrom?: string
+    validTo?: string
+    maxDiscount?: number
+    applicableCategories?: string[]
+}
+
 const boxShadow = ref(true)
-const btnMode = ref('button')
+const btnMode = ref<CouponButtonModeType>('button')
 const btnModeOptions = reactive([
     {
         name: '按钮',
@@ -135,7 +150,7 @@ const btnModeOptions = reactive([
         value: 'none'
     }
 ])
-const list = ref([
+const list = ref<CouponItem[]>([
     {
         id: '1',
         name: '新人专享满减券',
@@ -171,7 +186,7 @@ const list = ref([
         validTo: '2023-12-31T23:59:59'
     }
 ])
-const list2 = ref([
+const list2 = ref<CouponItem[]>([
     {
         id: '1',
         name: '新人专享满减券',

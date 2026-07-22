@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import { useShareButton } from '@/composables'
 import { reactive, ref } from 'vue'
+import { EmptyModeType } from '@/package'
 
 definePage({
     style: {
@@ -32,7 +33,7 @@ definePage({
     }
 })
 
-const mode = ref('content')
+const mode = ref<EmptyModeType>('content')
 const list = reactive([
     {
         label: '无内容',

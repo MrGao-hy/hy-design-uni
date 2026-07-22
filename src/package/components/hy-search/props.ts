@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { IconConfig, useTranslate } from '../../libs'
+import { IconConfig, ShapeType, useTranslate } from '../../libs'
 import type { HyIconProps } from '../hy-icon/typing'
 import { InputConfirmType } from '@uni-helper/uni-types'
 
@@ -16,7 +16,7 @@ const searchProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'circle'
     },
     /** 搜索框背景颜色 */

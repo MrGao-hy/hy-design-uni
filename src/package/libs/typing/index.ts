@@ -1,7 +1,8 @@
+﻿export * from './modules/common'
 export * from './modules/form'
 export * from './modules/enum'
 
-// 组件类型
+// 缁勪欢绫诲瀷
 export * from '../../components/hy-action-sheet/typing.d'
 export * from '../../components/hy-address-picker/typing.d'
 export * from '../../components/hy-avatar/typing.d'

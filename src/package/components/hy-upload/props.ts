@@ -1,7 +1,6 @@
-import type { FileVo, ReadFunctionVo } from './typing'
-import { IconConfig } from '../../libs'
+import { CameraType, IconConfig } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
-import { ImageMode } from '@uni-helper/uni-app-types'
+import type { ImageMode, FileType, FileVo, ReadFunctionVo } from '../../libs'
 
 const uploadProps = {
     /**
@@ -9,7 +8,7 @@ const uploadProps = {
      * @values all,media,image,file,video
      * */
     accept: {
-        type: String,
+        type: String as PropType<FileType>,
         default: 'image'
     },
     /** 根据文件拓展名过滤，每一项都不能是空字符串。默认不过滤。 */
@@ -27,9 +26,12 @@ const uploadProps = {
         type: Boolean,
         default: true
     },
-    /** 当accept为video时生效，可选值为back或front */
+    /**
+     * 当accept为video时生效，可选值为back或front
+     * @values back,front
+     * */
     camera: {
-        type: String,
+        type: String as PropType<CameraType>,
         default: 'back'
     },
     /** 当accept为video时生效，拍摄视频最长拍摄时间，单位秒 */

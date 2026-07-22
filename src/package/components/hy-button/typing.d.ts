@@ -3,6 +3,17 @@ import type buttonProps from './props'
 
 export interface HyButtonProps extends ExtractPropTypes<typeof buttonProps> {}
 
+/**
+ * 支付宝授权范围类型
+ *
+ * 用于支付宝小程序 open-type="getAuthorize" 时指定授权信息类型。
+ *
+ * @values
+ * userInfo-用户信息授权
+ * phoneNumber-手机号授权
+ */
+export type AlipayAuthScopeType = 'userInfo' | 'phoneNumber'
+
 export interface IButtonEmits {
     /**
      * 点击按钮事件

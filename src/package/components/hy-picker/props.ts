@@ -1,6 +1,5 @@
-import type { PickerColumnVo } from './typing'
+import type { TopBottomType, HyInputProps, PickerColumnVo } from '../../libs'
 import type { PropType } from 'vue'
-import type { HyInputProps } from '../hy-input/typing'
 import { useTranslate } from '../../libs'
 
 const { t } = useTranslate('picker')
@@ -21,7 +20,7 @@ const pickerProps = {
      * @values bottom, top
      */
     popupMode: {
-        type: String as PropType<HyApp.TopBottomType>,
+        type: String as PropType<TopBottomType>,
         default: 'bottom'
     },
     /** 分割数组条件 */

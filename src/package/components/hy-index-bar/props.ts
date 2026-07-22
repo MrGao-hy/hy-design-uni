@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { IIndexItem } from './typing'
+import type { LeftRightType } from '../../libs'
 
 const indexBarProps = {
     /**
@@ -22,7 +23,7 @@ const indexBarProps = {
      * @values left, right
      */
     position: {
-        type: String,
+        type: String as PropType<LeftRightType>,
         default: 'right'
     },
     /**

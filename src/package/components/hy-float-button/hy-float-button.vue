@@ -64,6 +64,7 @@
 </template>
 
 <script lang="ts">
+import type { LeftRightType, TopBottomType } from '../../libs'
 export default {
     name: 'hy-float-button',
     options: {
@@ -112,8 +113,8 @@ const currentCoordinate = reactive({
 // 按下时坐标相对于元素的偏移量
 const touchOffset = reactive({ x: 0, y: 0 })
 const attractTransition = ref<boolean>(false)
-const fabDirection = ref<HyApp.LeftRightType>('left')
-const fabDirection2 = ref<HyApp.TopBottomType>('top')
+const fabDirection = ref<LeftRightType>('left')
+const fabDirection2 = ref<TopBottomType>('top')
 const bounding = reactive({
     minLeft: 10,
     minTop: 10,

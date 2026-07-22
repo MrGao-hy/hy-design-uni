@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { HyIconProps } from '../hy-icon/typing'
+import type { SizeType, TagShapeType, ThemeType } from '../../libs'
 
 const tagProps = {
     /** 标签的文字内容 */
@@ -9,7 +10,7 @@ const tagProps = {
     },
     /** 点击需要传得值 */
     value: {
-        type: [String, Number, Boolean],
+        type: [String, Number],
         default: ''
     },
     /**
@@ -17,7 +18,7 @@ const tagProps = {
      * @values info,primary,success,error,warning
      * */
     type: {
-        type: String,
+        type: String as PropType<ThemeType>,
         default: 'primary'
     },
     /** 禁用点击标签 */
@@ -30,7 +31,7 @@ const tagProps = {
      * @values large,medium,small,mini
      * */
     size: {
-        type: String,
+        type: String as PropType<SizeType>,
         default: 'medium'
     },
     /**
@@ -38,7 +39,7 @@ const tagProps = {
      * @values circle,square,opposite
      * */
     shape: {
-        type: String,
+        type: String as PropType<TagShapeType>,
         default: 'square'
     },
     /** 背景颜色，默认为空字符串，即不处理 */

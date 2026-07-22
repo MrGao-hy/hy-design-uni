@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
+import { DirectionType, type FloatPositionType, ShapeType, SizeType } from '@/package'
 
 definePage({
     style: {
@@ -52,15 +53,15 @@ definePage({
 })
 
 const menus = ['菜单1', '菜单2', '菜单3']
-const shape = ref('circle')
-const size = ref('medium')
-const direction = ref('column')
+const shape = ref<ShapeType>('circle')
+const size = ref<SizeType>('medium')
+const direction = ref<DirectionType>('column')
 const float = ref(false)
 const shadow = ref(false)
 const draggable = ref(false)
 const expandable = ref(true)
 const opacity = ref(1)
-const position = ref('right-top')
+const position = ref<FloatPositionType>('right-top')
 
 const list_1 = reactive([
     { name: '圆形', value: 'circle' },

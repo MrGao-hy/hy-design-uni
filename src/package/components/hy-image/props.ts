@@ -1,6 +1,6 @@
 import { IconConfig } from '../../libs/config'
 import type { CSSProperties, PropType } from 'vue'
-import { ImageMode } from '@uni-helper/uni-app-types'
+import type { ShapeType, ImageMode } from '../../libs'
 
 const imageProps = {
     /** 图片地址 */
@@ -32,7 +32,7 @@ const imageProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'square'
     },
     /** 圆角值，单位任意，如果为数值，则为px单位 */

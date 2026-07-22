@@ -35,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import type { RowCenterType, SizeType, ArrowDirectionType } from '@/package/libs'
 import { reactive, ref } from 'vue'
 import { IconConfig } from '@/package'
 import { useShareButton } from '@/composables'
@@ -45,9 +46,9 @@ definePage({
     }
 })
 
-const arrange = ref<HyApp.RowCenterType>('right')
-const size = ref<HyApp.SizeType>('medium')
-const arrowDirection = ref<HyApp.RotateType>('right')
+const arrange = ref<RowCenterType>('right')
+const size = ref<SizeType>('medium')
+const arrowDirection = ref<ArrowDirectionType>('right')
 
 const list_1 = reactive([
     { name: '左边', value: 'left' },

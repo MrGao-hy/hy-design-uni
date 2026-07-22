@@ -1,4 +1,4 @@
-import type { SubmitBarIconMenus } from './typing'
+import type { ShapeType, SubmitBarIconMenus } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 
 const submitBarProps = {
@@ -71,7 +71,7 @@ const submitBarProps = {
      * @values circle,square
      * */
     shape: {
-        type: String,
+        type: String as PropType<ShapeType>,
         default: 'circle'
     },
     /** 层级 */

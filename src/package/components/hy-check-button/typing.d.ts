@@ -3,6 +3,17 @@ import type checkButtonProps from './props'
 
 export interface HyCheckButtonProps extends ExtractPropTypes<typeof checkButtonProps> {}
 
+/**
+ * 选择器类型
+ *
+ * 用于区分单选和复选模式。
+ *
+ * @values
+ * checkbox-复选框模式，可选择多个选项
+ * radio-单选框模式，只能选择一个选项
+ */
+export type SelectType = 'checkbox' | 'radio'
+
 export interface CheckboxColumnsVo extends FieldNamesType {
     /**
      * 显示文本内容

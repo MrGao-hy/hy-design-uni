@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { HyBadgeProps } from '../hy-badge/typing'
+import type { TabbarShapeType } from '../../libs'
 
 const tabbarGroupProps = {
     /** 选中项的索引值 */
@@ -24,10 +25,10 @@ const tabbarGroupProps = {
     },
     /**
      * 导航栏的形状
-     * @values square, circle
+     * @values square, circle, round
      * */
     shape: {
-        type: String,
+        type: String as PropType<TabbarShapeType>,
         default: 'square'
     },
     /** 背景颜色 */

@@ -2,7 +2,6 @@ import type {
     InputOnBlurEvent,
     InputOnConfirmEvent,
     InputOnFocusEvent,
-    InputOnKeyboardheightchange,
     InputOnKeyboardheightchangeEvent
 } from '@uni-helper/uni-types'
 import type { ExtractPropTypes } from 'vue'

@@ -10,6 +10,8 @@ export interface SwiperList {
     [key: string]: any
 }
 
+export type IndicatorMode = 'line' | 'dot'
+
 export interface SwiperVo {
     detail: {
         current: number

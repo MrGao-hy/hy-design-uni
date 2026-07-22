@@ -11,6 +11,18 @@ export type IPlacementVo =
     | 'right'
     | 'right-start'
     | 'right-end'
+
+/**
+ * 展示模式类型
+ *
+ * 用于控制组件内容的展现形式。
+ *
+ * @values
+ * normal-普通展示模式
+ * menu-菜单展示模式
+ */
+export type PopoverModeType = 'normal' | 'menu'
+
 export type IOffset = number | number[] | Record<'x' | 'y', number>
 
 export type IPopoverExpose = {

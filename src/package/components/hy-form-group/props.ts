@@ -1,12 +1,14 @@
-import type { FormColumnsType } from '../../libs'
-import type {
+import {
+    FormColumnsType,
+    LabelPosition,
+    RowCenterType,
     HyTextareaProps,
     HyPickerProps,
     HySwitchProps,
     HyRadioProps,
     HyCheckButtonProps,
     HyInputProps
-} from '../../index'
+} from '../../libs'
 import type { PropType } from 'vue'
 
 const formGroupProps = {
@@ -15,7 +17,7 @@ const formGroupProps = {
      * @values left, top
      * */
     labelPosition: {
-        type: String,
+        type: String as PropType<LabelPosition>,
         default: 'left'
     },
     /**
@@ -37,7 +39,7 @@ const formGroupProps = {
      * @values left,center,right
      * */
     labelAlign: {
-        type: String,
+        type: String as PropType<RowCenterType>,
         default: 'left'
     },
     /**

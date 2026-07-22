@@ -60,11 +60,7 @@
                 </hy-form-item>
 
                 <hy-form-item label="爱好（测试）" prop="hobbies">
-                    <hy-check-button
-                        v-model="formData.hobbies"
-                        :columns="hobbyOptions"
-                        select-type="multiple"
-                    />
+                    <hy-check-button v-model="formData.hobbies" :columns="hobbyOptions" />
                 </hy-form-item>
 
                 <hy-form-item label="开关" prop="switch">

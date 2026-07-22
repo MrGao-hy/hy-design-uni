@@ -39,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import type { ThemeType, ShapeType, SizeType } from '@/package/libs/typing'
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
 
@@ -50,9 +51,9 @@ definePage({
 
 const value_1 = ref('')
 const value_2 = ref('')
-const type = ref<HyApp.ThemeType>('primary')
-const shape = ref<HyApp.ShapeType>('square')
-const size = ref<HyApp.SizeType>('medium')
+const type = ref<ThemeType>('primary')
+const shape = ref<ShapeType>('square')
+const size = ref<SizeType>('medium')
 
 const columns = reactive([
     { label: '老师', value: 0 },

@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { ImageMode } from '@uni-helper/uni-app-types'
+import type { IconLabelPosition, ImageMode } from '../../libs'
 
 const iconProps = {
     /** 图标名称 */
@@ -33,7 +33,7 @@ const iconProps = {
      * @values right,bottom
      * */
     labelPos: {
-        type: String,
+        type: String as PropType<IconLabelPosition>,
         default: 'right'
     },
     /** label字体大小，单位px */

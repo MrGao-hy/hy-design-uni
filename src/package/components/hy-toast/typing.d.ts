@@ -1,3 +1,4 @@
+import type { ThemeType, ColumnCenterType, LoadingMode } from '../../libs'
 import type { HyIconProps } from '../hy-icon/typing'
 
 export interface ToastOptions {
@@ -8,11 +9,11 @@ export interface ToastOptions {
     /**
      * 主题类型，primary，success，error，warning，info
      * */
-    type?: HyApp.ThemeType | ''
+    type?: ThemeType | ''
     /**
      * toast出现的位置
      * */
-    position?: HyApp.ColumnCenterType
+    position?: ColumnCenterType
     /**
      * 显示的图标
      * */
@@ -32,7 +33,7 @@ export interface ToastOptions {
     /**
      * 加载状态
      * */
-    loadMode?: HyApp.LoadingMode
+    loadMode?: LoadingMode
     /**
      * 显示的时间，毫秒
      * */
