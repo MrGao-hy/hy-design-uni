@@ -87,7 +87,7 @@ const getProgressWidth = (): Promise<HyUtils.RectResultType<false>> => {
 }
 
 /**
- * @description 计算轨道长度
+ * 计算轨道长度
  * */
 const resizeProgressWidth = async () => {
     const { width } = await getProgressWidth()

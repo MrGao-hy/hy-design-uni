@@ -5,17 +5,15 @@
 @include b(loading-icon) {
   align-items: center;
   justify-content: center;
-  color: #c8c9cc;
+  color: $hy-primary;
 
   @include e(text) {
-    color: $hy-text-color--grey;
+    color: $hy-primary;
     font-size: 14px;
     line-height: 20px;
   }
 
   @include e(spinner) {
-    width: 30px;
-    height: 30px;
     position: relative;
     /* #ifndef APP-NVUE */
     box-sizing: border-box;
@@ -25,13 +23,39 @@
     /* #endif */
 
     @include m(semicircle) {
-      border: 2px solid transparent;
+      border: 3px solid transparent;
+      border-top-color: currentColor;
       border-radius: 50%;
     }
 
     @include m(circle) {
       border-radius: 50%;
-      border: 2px solid #e5e5e5;
+      border: 3px solid #e5e5e5;
+      border-top-color: currentColor;
+    }
+
+    /* ---- dots: 跳动圆点 ---- */
+    @include m(dots) {
+      /* #ifndef APP-NVUE */
+      animation: none;
+      border: none;
+      @include flex(row);
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      /* #endif */
+    }
+
+    /* ---- bars: 音波柱 ---- */
+    @include m(bars) {
+      /* #ifndef APP-NVUE */
+      animation: none;
+      border: none;
+      @include flex(row);
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      /* #endif */
     }
   }
 
@@ -92,6 +116,33 @@
       content: " ";
     }
   }
+
+  /* ---- dots 模式元素 ---- */
+  @include e(dot-item) {
+    width: 20%;
+    height: 20%;
+    border-radius: 50%;
+    background-color: currentColor;
+    animation: hy-dot-bounce 1.4s ease-in-out infinite both;
+
+    &:nth-child(1) { animation-delay: -0.32s; }
+    &:nth-child(2) { animation-delay: -0.16s; }
+    &:nth-child(3) { animation-delay: 0s; }
+  }
+
+  /* ---- bars 模式元素 ---- */
+  @include e(bar-item) {
+    width: 18%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: currentColor;
+    animation: hy-bar-stretch 1.2s ease-in-out infinite;
+
+    &:nth-child(1) { animation-delay: -1s; }
+    &:nth-child(2) { animation-delay: -0.8s; }
+    &:nth-child(3) { animation-delay: -0.6s; }
+    &:nth-child(4) { animation-delay: -0.4s; }
+  }
 }
 
 @for $i from 1 through 12 {
@@ -101,13 +152,34 @@
   }
 }
 
+/* ---- 关键帧 ---- */
 @keyframes hy-rotate {
-  0% {
-    transform: rotate(0deg);
-  }
+  0% { transform: rotate(0deg); }
+  to { transform: rotate(1turn); }
+}
 
-  to {
-    transform: rotate(1turn);
+@keyframes hy-dot-bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0.4);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes hy-bar-stretch {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
   }
 }
 

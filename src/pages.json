@@ -907,6 +907,7 @@
                         }
                     }
                 },
+                // #ifdef APP || MP-ALIPAY || MP-WEIXIN
                 {
                     "path": "signature/signature",
                     "type": "page",
@@ -923,6 +924,24 @@
                         }
                     }
                 },
+                // #endif
+                // #ifdef H5
+                {
+                    "path": "signature/signature",
+                    "type": "page",
+                    "style": {
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                // #endif
                 {
                     "path": "skeleton/skeleton",
                     "type": "page",
@@ -1313,6 +1332,25 @@
                     "type": "page",
                     "style": {
                         "navigationBarTitleText": "贝塞尔飞入动画",
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                // #endif
+                // #ifdef MP-WEIXIN
+                {
+                    "path": "signature/Landscape",
+                    "type": "page",
+                    "style": {
+                        "navigationBarTitleText": "横向签名",
+                        "pageOrientation": "landscape",
                         "h5": {
                             "titleNView": {
                                 "buttons": [

@@ -12,8 +12,8 @@
                         v-else
                         :name="tmpConfig?.icon || icon"
                         :color="tmpConfig?.color"
-                        :size="tmpConfig.fontSize"
-                        :customStyle="{ marginRight: '4px' }"
+                        :size="getPx(tmpConfig?.fontSize|| 15) * 1.4"
+                        :customStyle="{ marginRight: '8px' }"
                     ></hy-icon>
                 </template>
                 <text
@@ -45,7 +45,7 @@ export default {
 import type { NotifyOptions, INotifyExpose } from './typing'
 import { computed, ref } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, IconConfig } from '../../libs'
+import { addUnit, IconConfig, getPx } from '../../libs'
 import notifyProps from './props'
 // 组件
 import HyTransition from '../hy-transition/hy-transition.vue'

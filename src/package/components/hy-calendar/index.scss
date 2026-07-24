@@ -95,66 +95,72 @@
         /* #endif */
 
         @include e(select) {
-          flex: 1;
-          @include flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          @include m(selected) {
-            background-color: $hy-primary;
-            @include flex;
-            justify-content: center;
-            align-items: center;
             flex: 1;
-            border-radius: 3px;
-            @include m(center) {
-              border-radius: 0;
-              background-color: $hy-primary-light;
-              color: $hy-primary;
-            }
-          }
-
-          @include e(dot) {
-            width: 7px;
-            height: 7px;
-            border-radius: 100px;
-            background-color: $hy-error;
-            position: absolute;
-            top: 12px;
-            right: 7px;
-          }
-
-          @include e(button-info) {
-            color: $hy-text-color--2;
-            text-align: center;
-            position: absolute;
-            bottom: 5px;
-            font-size: 10px;
-            left: 0;
-            right: 0;
-
+            @include flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
             @include m(selected) {
-              color: #ffffff;
-            }
-
-            @include m(disabled) {
-              color: $hy-text-color--disabled;
-            }
-          }
-
-          @include e(info) {
-            text-align: center;
-            font-size: 16px;
-
-            @include m(selected) {
-              color: #ffffff;
               background-color: $hy-primary;
+              @include flex;
+              justify-content: center;
+              align-items: center;
+              flex: 1;
+              border-radius: 3px;
+              @include m(center) {
+                border-radius: 0;
+                background-color: $hy-primary-light;
+                color: $hy-primary;
+              }
             }
 
-            @include m(disabled) {
-              color: $hy-text-color--disabled;
+            @include e(dot) {
+              width: 7px;
+              height: 7px;
+              border-radius: 100px;
+              background-color: $hy-error;
+              position: absolute;
+              top: 6px;
+              right: 6px;
             }
-          }
+
+            @include e(content) {
+              @include flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+            }
+
+            @include e(button-info) {
+              color: $hy-text-color--2;
+              text-align: center;
+              font-size: 10px;
+              line-height: 12px;
+              margin-top: 2px;
+
+              @include m(selected) {
+                color: #ffffff;
+              }
+
+              @include m(disabled) {
+                color: $hy-text-color--disabled;
+              }
+            }
+
+            @include e(info) {
+              text-align: center;
+              font-size: 16px;
+              line-height: 18px;
+
+              @include m(selected) {
+                color: #ffffff;
+                background-color: $hy-primary;
+              }
+
+              @include m(disabled) {
+                color: $hy-text-color--disabled;
+              }
+            }
 
           @include m(range-selected) {
             opacity: 0.3;

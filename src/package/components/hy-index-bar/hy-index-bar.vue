@@ -16,11 +16,11 @@
             </view>
 
             <!-- 索引字母提示 -->
-            <hy-transition :show="showToast && isTouching" :customStyle="toastStyle">
+            <view v-if="showToast && isTouching" :style="toastStyle">
                 <view class="hy-index-bar__toast">
                     <text class="hy-index-bar__toast--text">{{ modelValue }}</text>
                 </view>
-            </hy-transition>
+            </view>
         </view>
     </view>
 </template>
@@ -37,13 +37,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, getCurrentInstance, nextTick } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, getCurrentInstance, nextTick } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { IIndexBarEmits, IIndexItem } from './typing'
-import { addUnit, getRect, isObject, sleep } from '../../libs'
+import { addUnit, getRect, isObject } from '../../libs'
 import indexBarProps from './props'
-// 组件
-import HyTransition from '../hy-transition/hy-transition.vue'
 
 /**
  * 索引栏组件,用于快速定位列表内容的索引栏组件，支持点击和滑动两种交互方式
@@ -113,12 +111,35 @@ const getIndexItemStyle = (index: string | number) => {
     return indexItemStyles.value[index] || {}
 }
 
+// toast 隐藏定时器
+let toastTimer: ReturnType<typeof setTimeout> | null = null
+
+const resetToastTimer = () => {
+    if (toastTimer) {
+        clearTimeout(toastTimer)
+        toastTimer = null
+    }
+}
+
+const startToastTimer = () => {
+    resetToastTimer()
+    toastTimer = setTimeout(() => {
+        isTouching.value = false
+        toastTimer = null
+    }, 1000)
+}
+
 const handleIndexClick = (index: string | number, event: any) => {
+    // H5 鼠标点击不会触发 touchstart，需要在这里管理 toast 显隐
+    resetToastTimer()
+    isTouching.value = true
     emit('update:modelValue', index)
     emit('click', index, event)
+    startToastTimer()
 }
 
 const handleTouchStart = (event: any) => {
+    resetToastTimer()
     isTouching.value = true
     handleTouchMove(event)
 }
@@ -160,9 +181,8 @@ const handleTouchMove = (event: any) => {
     }
 }
 
-const handleTouchEnd = async () => {
-    await sleep(1000)
-    isTouching.value = false
+const handleTouchEnd = () => {
+    startToastTimer()
 }
 
 /**
@@ -179,6 +199,10 @@ const init = () => {
 
 onMounted(() => {
     init()
+})
+
+onBeforeUnmount(() => {
+    resetToastTimer()
 })
 </script>
 

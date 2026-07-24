@@ -28,32 +28,34 @@
                     @tap="clickHandler(item1)"
                 >
                     <view :class="getDaySelectClass(item1)" :style="getDaySelectStyle(item1)">
-                        <!-- 日期文字 -->
-                        <text
-                            class="hy-calendar--month__days__day__select__info"
-                            :class="[
-                                item1.disabled || isForbid(item1)
-                                    ? 'hy-calendar--month__days__day__select__info--disabled'
-                                    : ''
-                            ]"
-                            :style="getTextStyle(item1)"
-                        >
-                            {{ item1.day }}
-                        </text>
+                        <view class="hy-calendar--month__days__day__select__content">
+                            <!-- 日期文字 -->
+                            <text
+                                class="hy-calendar--month__days__day__select__info"
+                                :class="[
+                                    item1.disabled || isForbid(item1)
+                                        ? 'hy-calendar--month__days__day__select__info--disabled'
+                                        : ''
+                                ]"
+                                :style="getTextStyle(item1)"
+                            >
+                                {{ item1.day }}
+                            </text>
 
-                        <!-- 底部提示文字 (开始/结束) -->
-                        <text
-                            v-if="getBottomInfoText(item1)"
-                            class="hy-calendar--month__days__day__select__button-info"
-                            :class="[
-                                item1.disabled || isForbid(item1)
-                                    ? 'hy-calendar--month__days__day__select__button-info--disabled'
-                                    : ''
-                            ]"
-                            :style="getTextStyle(item1)"
-                        >
-                            {{ getBottomInfoText(item1) }}
-                        </text>
+                            <!-- 底部提示文字 (开始/结束) -->
+                            <text
+                                v-if="getBottomInfoText(item1)"
+                                class="hy-calendar--month__days__day__select__button-info"
+                                :class="[
+                                    item1.disabled || isForbid(item1)
+                                        ? 'hy-calendar--month__days__day__select__button-info--disabled'
+                                        : ''
+                                ]"
+                                :style="getTextStyle(item1)"
+                            >
+                                {{ getBottomInfoText(item1) }}
+                            </text>
+                        </view>
 
                         <!-- 打点标记 -->
                         <text

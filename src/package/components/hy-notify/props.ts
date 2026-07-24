@@ -31,7 +31,7 @@ const notifyProps = {
         type: Number,
         default: 3000
     },
-    /** 字体大小 */
+    /** 字体大小，单位px */
     fontSize: {
         type: [Number, String],
         default: 15

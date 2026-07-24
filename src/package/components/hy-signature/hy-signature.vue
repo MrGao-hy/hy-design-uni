@@ -145,15 +145,10 @@ watch(
 
 const canvasStyle = computed(() => {
     const style: CSSProperties = {}
-    if (props.width) {
-        style.width = addUnit(props.width)
-    }
+    if (props.width) style.width = addUnit(props.width)
+    if (props.height) style.height = addUnit(props.height)
 
-    if (props.height) {
-        style.height = addUnit(props.height)
-    }
-
-    return `${style}`
+    return style
 })
 
 const disableScroll = computed(() => props.disableScroll)

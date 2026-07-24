@@ -1,0 +1,115 @@
+@use '../../libs/css/mixin' as *;
+@use '../../libs/css/theme' as *;
+
+@include b(check-button) {
+    display: grid;
+
+    @include e(item) {
+        border-style: solid;
+        border-width: 2rpx;
+        @include flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        transition: all 0.2s $hy-transition-ease;
+        cursor: pointer;
+
+        &:active {
+            opacity: 0.8;
+        }
+
+        @include m(small) {
+            padding: 10rpx 16rpx;
+            font-size: $hy-font-size-sm;
+            line-height: $hy-font-size-sm;
+        }
+
+        @include m(medium) {
+            padding: 16rpx 20rpx;
+            font-size: $hy-font-size-base;
+            line-height: $hy-font-size-base;
+        }
+
+        @include m(large) {
+            padding: 20rpx 24rpx;
+            font-size: $hy-font-size-md;
+            line-height: $hy-font-size-md;
+        }
+
+        @include m(circle) {
+            border-radius: $hy-radius-semicircle;
+        }
+
+        @include m(square) {
+            border-radius: $hy-radius-sm;
+        }
+
+        @include m(disabled) {
+            background-color: $hy-background--disabled;
+            border-color: $hy-background--disabled;
+            color: $hy-text-color--disabled;
+            cursor: not-allowed;
+            opacity: $hy-opacity-disabled;
+        }
+
+        @include m(primary) {
+            background-color: $hy-primary;
+            border-color: $hy-primary;
+            color: #ffffff;
+        }
+
+        @include m(primary--plain) {
+            background-color: transparent;
+            border-color: $hy-primary;
+            color: $hy-primary;
+        }
+
+        @include m(error) {
+            background-color: $hy-error;
+            border-color: $hy-error;
+            color: #ffffff;
+        }
+
+        @include m(error--plain) {
+            background-color: transparent;
+            border-color: $hy-error;
+            color: $hy-error;
+        }
+
+        @include m(warning) {
+            background-color: $hy-warning;
+            border-color: $hy-warning;
+            color: #ffffff;
+        }
+
+        @include m(warning--plain) {
+            background-color: transparent;
+            border-color: $hy-warning;
+            color: $hy-warning;
+        }
+
+        @include m(success) {
+            background-color: $hy-success;
+            border-color: $hy-success;
+            color: #ffffff;
+        }
+
+        @include m(success--plain) {
+            background-color: transparent;
+            border-color: $hy-success;
+            color: $hy-success;
+        }
+
+        @include m(info) {
+            background-color: $hy-info;
+            border-color: $hy-info;
+            color: #ffffff;
+        }
+
+        @include m(info--plain) {
+            background-color: transparent;
+            border-color: $hy-info;
+            color: $hy-info;
+        }
+    }
+}

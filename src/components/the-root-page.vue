@@ -25,3 +25,9 @@ const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)
 const props = withDefaults(defineProps<IProps>(), {})
 </script>
+
+<style lang="scss" scoped>
+.custom-class {
+    padding-bottom: 40px;
+}
+</style>

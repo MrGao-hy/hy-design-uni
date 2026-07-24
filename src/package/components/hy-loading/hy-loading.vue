@@ -21,22 +21,36 @@
                     mode === 'semicircle' || mode === 'circle' ? timingFunction : ''
             }"
         >
+            <!-- #ifndef APP-NVUE -->
             <block v-if="mode === 'spinner'">
-                <!-- #ifndef APP-NVUE -->
                 <view
                     v-for="(item, index) in array12"
                     :key="index"
                     class="hy-loading-icon__dot"
                 ></view>
-                <!-- #endif -->
             </block>
+            <block v-else-if="mode === 'dots'">
+                <view
+                    v-for="(item, index) in array3"
+                    :key="index"
+                    class="hy-loading-icon__dot-item"
+                ></view>
+            </block>
+            <block v-else-if="mode === 'bars'">
+                <view
+                    v-for="(item, index) in array4"
+                    :key="index"
+                    class="hy-loading-icon__bar-item"
+                ></view>
+            </block>
+            <!-- #endif -->
         </view>
         <text
             v-if="text"
             :class="['hy-loading-icon__text', `hy-loading-icon__${direction}--text`]"
             :style="{
                 fontSize: addUnit(textSize),
-                color: textColor
+                ...(textColor ? { color: textColor } : {})
             }"
         >
             {{ text }}
@@ -73,15 +87,20 @@ const aniAngel = ref(360)
 const array12 = Array.from({
     length: 12
 })
+const array3 = Array.from({
+    length: 3
+})
+const array4 = Array.from({
+    length: 4
+})
 const webviewHide = ref(false)
 
 const otherBorderColor = computed(() => {
     const lightColor = colorGradient(props.color, '#ffffff', 100)[80]
     if (props.mode === 'circle') {
         return props.inactiveColor ? props.inactiveColor : lightColor
-    } else {
-        return 'transparent'
     }
+    return 'transparent'
 })
 
 // 监听webview的显示与隐藏

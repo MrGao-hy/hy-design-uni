@@ -136,7 +136,7 @@ defineOptions({})
 const props = defineProps(actionSheetProps)
 const emit = defineEmits<IActionSheetEmits>()
 
-const formatPanels = ref<Array<IActionSheetPanel> | Array<IActionSheetPanel[]>>([])
+const formatPanels = ref<Array<IActionSheetPanel[]>>([])
 const showPopup = ref<boolean>(false)
 
 watch(() => props.panels, computedValue, { deep: true, immediate: true })

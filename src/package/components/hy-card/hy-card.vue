@@ -126,9 +126,9 @@ const cardStyle = computed(() => {
             margin: props.margin,
             boxShadow: props.boxShadow
                 ? typeof props.boxShadow === 'boolean'
-                    ? '0 0 10rpx 4rpx rgba(0, 0, 0, 0.16)'
+                    ? '0 4rpx 16rpx rgba(0, 0, 0, 0.08)'
                     : props.boxShadow
-                : ''
+                : undefined
         },
         props.customStyle
     )

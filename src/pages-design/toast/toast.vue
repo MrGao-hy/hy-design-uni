@@ -97,9 +97,14 @@
                     @click="handleLoading('加载中', 'spinner')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="半圆形"
+                    title="跳动圆点"
                     name="loading-semicircle"
-                    @click="handleLoading('加载中', 'semicircle')"
+                    @click="handleLoading('加载中', 'dots')"
+                ></hy-cell-item>
+                <hy-cell-item
+                    title="音波柱加载"
+                    name="loading-semicircle"
+                    @click="handleLoading('加载中', 'bars')"
                 ></hy-cell-item>
             </hy-cell>
             <view class="hy-button-group">

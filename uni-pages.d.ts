@@ -63,6 +63,7 @@ type _LocationUrl =
   "/pages-design/rollingNum/rollingNum" |
   "/pages-design/scrollList/scrollList" |
   "/pages-design/search/search" |
+  "/pages-design/signature/Landscape" |
   "/pages-design/signature/signature" |
   "/pages-design/skeleton/skeleton" |
   "/pages-design/slider/slider" |

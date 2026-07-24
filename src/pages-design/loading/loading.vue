@@ -15,6 +15,12 @@
             <hy-loading mode="semicircle"></hy-loading>
         </view>
 
+        <view class="hy-title">更多状态</view>
+        <view class="hy-flex hy-container">
+            <hy-loading mode="dots"></hy-loading>
+            <hy-loading mode="bars"></hy-loading>
+        </view>
+
         <view class="hy-title">自定义颜色</view>
         <view class="hy-flex hy-container">
             <hy-loading mode="circle" color="#19be6b"></hy-loading>

@@ -7,15 +7,15 @@ const loadingProps = {
         type: Boolean,
         default: true
     },
-    /** 动画活动区域的颜色，只对 mode = flower 模式有效 */
+    /** 动画活动区域的颜色 */
     color: {
         type: String,
-        default: '#909399'
+        default: ''
     },
     /** 提示文本的颜色 */
     textColor: {
         type: String,
-        default: '#909399'
+        default: ''
     },
     /**
      * 文字和图标是否垂直排列
@@ -27,7 +27,7 @@ const loadingProps = {
     },
     /**
      * 加载样式选择
-     * @values spinner, circle, semicircle
+     * @values spinner, circle, semicircle, dots, bars
      * */
     mode: {
         type: String as PropType<LoadingMode>,

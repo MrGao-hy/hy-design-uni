@@ -17,14 +17,12 @@
                         :custom-style="{ overflow: 'hidden' }"
                     >
                         <hy-image
-                            slot="cover"
                             width="100%"
                             height="187px"
                             :src="record.image"
-                            mode="aspectFit"
                         ></hy-image>
                         <template #footer>
-                            <view slot="content">
+                            <view>
                                 <text class="course-title">{{ record.title }}</text>
                                 <view class="course-info">
                                     <hy-button

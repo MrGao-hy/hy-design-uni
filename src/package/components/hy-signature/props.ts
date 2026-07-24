@@ -56,13 +56,13 @@ const signatureProps = {
     },
     /** 画布的高度 */
     height: {
-        type: Number,
-        default: 1
+        type: [String, Number],
+        default: ''
     },
     /** 画布的宽度 */
     width: {
-        type: Number,
-        default: 1
+        type: [String, Number],
+        default: ''
     },
     /** 边框圆角 */
     round: {

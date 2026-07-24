@@ -1,6 +1,5 @@
-@use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin" as *;
-
+@use '../../libs/css/theme' as *;
+@use '../../libs/css/mixin' as *;
 
 @include b(notify) {
   padding: $hy-border-margin-padding-base;
@@ -8,11 +7,11 @@
   @include e(wrapper) {
     @include flex;
     align-items: center;
-    text-align: center;
     justify-content: center;
 
     @include m(text) {
       font-size: $hy-font-size-base;
+      line-height: 1;
       text-align: center;
     }
   }

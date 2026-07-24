@@ -16,7 +16,7 @@
     justify-content: center;
     position: relative;
     flex-direction: column;
-    overflow: hidden;
+    // overflow: hidden;
     /* #ifndef APP-NVUE */
     box-sizing: border-box;
     display: flex;
@@ -25,7 +25,6 @@
     /* #ifdef MP */
     float: left;
     /* #endif */
-    padding: $hy-border-margin-padding-base 0;
 
     // 只有当有 border 类时才显示边框
     @include m(border) {

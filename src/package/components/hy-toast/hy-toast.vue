@@ -10,9 +10,9 @@
                 v-if="tmpConfig.loading"
                 :mode="tmpConfig.loadMode || 'circle'"
                 :color="loadingIconColor"
-                inactiveColor="#F0E6EF"
+                inactiveColor="rgba(255, 255, 255, 0.3)"
                 size="25"
-                :customStyle="{ marginBottom: '20px' }"
+                :customStyle="{ marginBottom: '20rpx' }"
             ></hy-loading>
             <view
                 v-else-if="iconNameCom"
@@ -28,7 +28,7 @@
             </view>
             <text
                 :class="[
-                    'hy-toast__content--test',
+                    'hy-toast__content--text',
                     !tmpConfig.icon && !tmpConfig.loading
                         ? `hy-toast__content--text__${tmpConfig.type}`
                         : ''

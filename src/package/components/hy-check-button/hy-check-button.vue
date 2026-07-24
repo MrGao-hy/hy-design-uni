@@ -1,21 +1,13 @@
 <template>
     <view class="hy-check-button">
         <template v-for="(item, i) in columns" :key="i">
-            <hy-tag
-                :label="String(item?.[fieldNames.label])"
-                :value="item?.[fieldNames.value] as string"
-                :type="type"
-                :size="size"
-                :shape="shape"
-                :disabled="isDisabled(item.disabled)"
-                :plain="!isSelect(item?.[fieldNames.value])"
-                @click="onCheckbox"
+            <view
+                :class="getItemClass(item)"
+                @click="onCheckbox(item?.[fieldNames.value] as string | number | undefined)"
             >
-                <template #default>
-                    <slot v-if="$slots.default" :record="item"></slot>
-                    <text v-else>{{ item?.[fieldNames.label] }}</text>
-                </template>
-            </hy-tag>
+                <slot v-if="$slots.default" :record="item"></slot>
+                <text v-else>{{ item?.[fieldNames.label] }}</text>
+            </view>
         </template>
     </view>
 </template>
@@ -34,13 +26,11 @@ export default {
 <script setup lang="ts">
 import { watch, ref, computed } from 'vue'
 import type { ICheckButtonEmits } from './typing'
-import HyTag from '../hy-tag/hy-tag.vue'
 import { isArray, isBoolean } from '../../libs'
-import type { TagParamsVo } from '../hy-tag/typing'
 import checkButtonProps from './props'
 
 /**
- * 该组件内部实现以tag二次封装按钮复选框和单选框
+ * 该组件实现按钮复选框和单选框
  * @displayName hy-check-button
  */
 defineOptions({})
@@ -54,9 +44,6 @@ type CurrentValue = string | number | (string | number)[]
 
 const current = ref<CurrentValue>([])
 
-/**
- * 判断是否有选中值，true选中、false未选中
- * */
 const isSelect = computed(() => {
     return (check?: string | number | boolean) => {
         if (check && !isBoolean(check) && isArray(current.value)) {
@@ -66,14 +53,34 @@ const isSelect = computed(() => {
         }
     }
 })
-/**
- * 获取当前索引
- * */
+
 const index = computed(() => {
     return (check: string | number) => {
         return props.columns?.findIndex((item: any) => item[props.fieldNames?.value] === check)
     }
 })
+
+const getItemClass = (item: any) => {
+    const classes = [
+        'hy-check-button__item',
+        `hy-check-button__item--${props.shape}`,
+        `hy-check-button__item--${props.size}`
+    ]
+    const selected = isSelect.value(item?.[props.fieldNames?.value])
+    const disabled = isDisabled(item.disabled)
+
+    if (disabled) {
+        classes.push('hy-check-button__item--disabled')
+    } else {
+        if (selected) {
+            classes.push(`hy-check-button__item--${props.type}`)
+        } else {
+            classes.push(`hy-check-button__item--${props.type}--plain`)
+        }
+    }
+
+    return classes
+}
 
 watch(
     () => props.modelValue,
@@ -83,21 +90,13 @@ watch(
     { immediate: true }
 )
 
-/**
- * 点击执行函数
- * */
-const onCheckbox = ({ value }: TagParamsVo) => {
+const onCheckbox = (value: string | number | undefined) => {
     if (value === undefined) return
     changeCheckFn(value)
     changeRadioFn(value)
-
     emit('update:modelValue', current.value)
 }
 
-/**
- * 单选框执行函数
- * @param check 选择的值
- * */
 const changeRadioFn = (check: string | number) => {
     if (props.selectType === 'radio') {
         if (check !== current.value) {
@@ -107,10 +106,6 @@ const changeRadioFn = (check: string | number) => {
     }
 }
 
-/**
- * 多选框执行函数
- * @param check 选择的值
- * */
 const changeCheckFn = (check: string | number) => {
     if (props.selectType === 'checkbox') {
         if (!isArray(current.value)) current.value = []
@@ -125,10 +120,9 @@ const changeCheckFn = (check: string | number) => {
 </script>
 
 <style lang="scss">
-@use '../../libs/css/mixin';
+@use './index.scss';
 
-@include mixin.b(check-button) {
-    display: grid;
+.hy-check-button {
     grid-template-columns: v-bind(col);
     gap: v-bind(gap);
 }

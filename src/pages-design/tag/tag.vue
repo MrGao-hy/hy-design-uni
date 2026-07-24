@@ -41,10 +41,10 @@
 
         <view class="hy-title">尺寸</view>
         <view class="hy-flex hy-container">
-            <hy-tag label="标签" size="large"></hy-tag>
-            <hy-tag label="标签" size="medium"></hy-tag>
-            <hy-tag label="标签" size="small"></hy-tag>
-            <hy-tag label="标签" size="mini"></hy-tag>
+            <hy-tag :icon="{ name: IconConfig.MAP }" label="标签" size="large"></hy-tag>
+            <hy-tag :icon="{ name: IconConfig.MAP }" label="标签" size="medium"></hy-tag>
+            <hy-tag :icon="{ name: IconConfig.MAP }" label="标签" size="small"></hy-tag>
+            <hy-tag :icon="{ name: IconConfig.MAP }" label="标签" size="mini"></hy-tag>
         </view>
 
         <view class="hy-title">形状</view>

@@ -1,11 +1,11 @@
-@use "../../libs/css/mixin" as *;
-@use "../../libs/css/theme" as *;
+@use '../../libs/css/mixin' as *;
+@use '../../libs/css/theme' as *;
 
-@include b(toast){
+@include b(toast) {
   @include e(content) {
     @include flex;
-    padding: 12px 20px;
-    border-radius: 4px;
+    padding: 20rpx 32rpx;
+    border-radius: 16rpx;
     background-color: #585858;
     color: #ffffff;
     align-items: center;
@@ -14,21 +14,25 @@
     /* #endif */
     position: relative;
     z-index: 11000;
+    /* #ifndef APP-NVUE */
+    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+    /* #endif */
 
     @include m(loading) {
       flex-direction: column;
-      padding: 20px;
+      padding: 40rpx;
     }
 
     @include m(icon) {
-      width: 60rpx;
-      height: 60rpx;
+      width: 40rpx;
+      height: 40rpx;
       border-radius: $hy-radius-semicircle;
       box-sizing: border-box;
-      margin-right: $hy-border-margin-padding-base;
+      margin-right: 16rpx;
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-shrink: 0;
 
       @include e(info) {
         background: $hy-info;
@@ -53,9 +57,10 @@
 
     @include m(text) {
       color: #ffffff;
-      font-size: 15px;
-      line-height: 15px;
-      max-width: 400rpx;
+      font-size: $hy-font-size-base;
+      line-height: 1.5;
+      max-width: 480rpx;
+      word-break: break-all;
 
       @include e(info) {
         color: $hy-info;
@@ -79,9 +84,8 @@
     }
   }
 
-
-  @include m(default)  {
+  @include m(default) {
     color: #ffffff;
-    background-color: #585858;
+    background-color: rgba(0, 0, 0, 0.75);
   }
 }

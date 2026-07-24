@@ -1,22 +1,31 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* tag 各尺寸设计参数
+   mini:   20rpx 字号, 4rpx/12rpx padding, 6rpx 圆角
+   small:  24rpx 字号, 6rpx/16rpx padding, 8rpx 圆角
+   medium: 28rpx 字号, 8rpx/20rpx padding, 8rpx 圆角
+   large:  32rpx 字号, 10rpx/24rpx padding, 10rpx 圆角
+*/
 
-@include b(tag){
+@include b(tag) {
   border-style: solid;
+  border-width: 2rpx;
   @include flex;
   align-items: center;
+  box-sizing: border-box;
+  transition: opacity $hy-transition-ease 0.2s;
+
   @include e(wrapper) {
     @include flex;
     position: relative;
     box-sizing: border-box;
   }
 
-  /*禁用*/
-  @include themeColor(disabled, $hy-background--disabled, $hy-text-color--disabled,
-$hy-background--disabled);
+  /* 禁用 */
+  @include themeColor(disabled, $hy-background--disabled, $hy-background--disabled);
 
-  /*圆角*/
+  /* 圆角形状 */
   @include borderRadio(circle);
   @include borderRadio(square);
   @include borderRadio(opposite);
@@ -25,12 +34,14 @@ $hy-background--disabled);
     margin-right: $hy-border-margin-padding-sm;
   }
 
+  /* ---- 文本 ---- */
   @include e(text) {
     white-space: nowrap;
+    font-weight: $hy-font-weight-medium;
 
     @include m(mini) {
-      font-size: 20rpx;
-      line-height: 20rpx;
+      font-size: $hy-font-size-xs;
+      line-height: $hy-font-size-xs;
     }
 
     @include m(small) {
@@ -44,26 +55,27 @@ $hy-background--disabled);
     }
 
     @include m(large) {
-      font-size: $hy-font-size-lg;
+      font-size: $hy-font-size-md;
+      line-height: $hy-font-size-md;
     }
   }
 
+  /* ---- 尺寸 padding ---- */
   @include m(mini) {
-    padding: 4rpx 10rpx;
+    padding: 4rpx 12rpx;
   }
 
   @include m(small) {
-    padding: 6rpx $hy-border-margin-padding-sm;
+    padding: 6rpx 16rpx;
   }
 
   @include m(medium) {
-    padding: 8rpx $hy-border-margin-padding-base;
+    padding: 8rpx 20rpx;
   }
 
   @include m(large) {
-    padding: 10rpx $hy-border-margin-padding-lg;
+    padding: 10rpx 24rpx;
   }
-
 
   /* 主题色 */
   @include themeColor(primary, $hy-primary, $hy-primary, #FFFFFF);
@@ -86,34 +98,39 @@ $hy-background--disabled);
   @include themeColor(success--plain__fill, $hy-success-light, $hy-success, $hy-success);
   @include themeColor(info--plain__fill, $hy-info-light, $hy-info, $hy-info);
 
-  /* 关闭按钮 */
+  /* ---- 关闭按钮 ---- */
   @include e(close) {
     border-radius: $hy-radius-semicircle;
-    background-color: #C6C7CB;
+    background-color: $hy-background--line;
     margin-left: $hy-border-margin-padding-sm;
     @include flex(row);
     align-items: center;
     justify-content: center;
     /* #ifndef APP-NVUE */
-    transform: scale(0.8) translate(40%, 0%);
+    transform: scale(0.7);
     /* #endif */
     /* #ifdef APP-NVUE */
     transform: scale(0.6) translate(50%, -50%);
     /* #endif */
 
+    @include m(mini) {
+      width: 14px;
+      height: 14px;
+    }
+
     @include m(small) {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
     }
 
     @include m(medium) {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
     }
 
     @include m(large) {
-      width: 25px;
-      height: 25px;
+      width: 22px;
+      height: 22px;
     }
   }
 }

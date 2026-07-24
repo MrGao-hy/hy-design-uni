@@ -128,7 +128,8 @@ const textClass = computed((): string[] => {
  * 关闭图标icon大小
  */
 const closeSize = computed(() => {
-    return props.size === 'large' ? 15 : props.size === 'medium' ? 13 : 11
+    const sizeMap: Record<string, number> = { large: 14, medium: 12, small: 10, mini: 8 }
+    return sizeMap[props.size] || 12
 })
 /**
  * 图标大小
@@ -136,9 +137,9 @@ const closeSize = computed(() => {
 const hyIconSize = computed(() => {
     if (props.icon?.size) {
         return props.icon.size
-    } else {
-        return props.size === 'large' ? 18 : props.size === 'medium' ? 14 : 10
     }
+    const sizeMap: Record<string, number> = { large: 18, medium: 14, small: 12, mini: 10 }
+    return sizeMap[props.size] || 14
 })
 /**
  * 图标颜色

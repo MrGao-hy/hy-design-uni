@@ -60,8 +60,7 @@ const columns = reactive([
     { label: '护士', value: 1 },
     { label: '空姐', value: 2 },
     { label: '作家', value: 3 },
-    { label: '网红', value: 4 },
-    { label: '科学家', value: 5 }
+    { label: '网红', value: 4 }
 ])
 
 const list_1 = reactive([
