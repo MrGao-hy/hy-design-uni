@@ -26,7 +26,7 @@ const floatButtonProps = {
     iconSize: String,
     /** 按钮图标颜色 */
     iconColor: String,
-    /** 到边框最小距离 */
+    /** 到边框最小距离，单位px */
     gap: {
         type: Object as PropType<IGap>,
         default: { left: 16, right: 16, top: 16, bottom: 40 }
@@ -40,7 +40,7 @@ const floatButtonProps = {
     bgColor: String,
     /** 按钮文字 */
     text: String,
-    /** 按钮文字大小 */
+    /** 按钮文字大小，单位px */
     fontSize: {
         type: [Number, String],
         default: 12

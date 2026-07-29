@@ -83,9 +83,7 @@ const cardProps = {
         default: false
     },
     /** 给head，body，foot的内边距 */
-    padding: {
-        type: [String, Number]
-    },
+    padding: [String, Number],
     /** 头部内边距 */
     paddingHead: [String, Number],
     /** 中部内边距 */
@@ -95,7 +93,7 @@ const cardProps = {
     /** 是否显示头部 */
     showHead: {
         type: Boolean,
-        default: true
+        default: false
     },
     /** 是否显示尾部 */
     showFoot: {

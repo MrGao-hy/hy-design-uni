@@ -22,19 +22,19 @@ const emptyProps = {
         type: Number,
         default: 889
     },
-    /** 组件层级 */
+    /** 图片组件宽度，单位px */
     width: {
         type: [String, Number],
         default: '240px'
     },
-    /** icon高度 */
+    /** 图片组件高度，单位px */
     height: {
         type: [String, Number],
         default: '240px'
     },
     /** 提示信息 */
     description: String,
-    /** 提示信息大小 */
+    /** 提示信息大小，单位px */
     desSize: {
         type: Number,
         default: 15

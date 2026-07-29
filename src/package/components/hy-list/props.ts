@@ -12,17 +12,17 @@ const listProps = {
         type: String,
         default: '100%'
     },
-    /** 子容器的高度，必须和内容一致，否则计算有问题 */
+    /** 子容器的高度，必须和内容一致，否则计算有问题，单位px */
     itemHeight: {
         type: [String, Number],
         default: '40px'
     },
-    /** 子容器的底部，会计算到容器内 */
+    /** 子容器的底部外边距，会计算到容器内，单位px */
     marginBottom: {
         type: [String, Number],
         default: 0
     },
-    /** 子容器的内边距 */
+    /** 子容器的内边距，单位px */
     padding: {
         type: [String, Number],
         default: 10
@@ -60,7 +60,7 @@ const listProps = {
         type: String as PropType<LoadMoreStatus>,
         default: 'loadMore'
     },
-    /** 显示底部加载状态 */
+    /** 是否显示底部分割线（加载状态时展示） */
     showDivider: {
         type: Boolean,
         default: true

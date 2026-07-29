@@ -36,7 +36,7 @@ const flexProps = {
         type: [String, Number],
         default: 'initial'
     },
-    /** 设置网格之间的间隙 */
+    /** 设置网格之间的间隙，单位px */
     gap: {
         type: [String, Number, Array] as PropType<string | number | (string | number)[]>,
         default: 0

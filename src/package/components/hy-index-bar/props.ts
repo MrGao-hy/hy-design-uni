@@ -62,21 +62,21 @@ const indexBarProps = {
         default: ''
     },
     /**
-     * 索引项大小
+     * 索引项大小，单位px
      */
     indexSize: {
         type: [Number, String],
         default: 12
     },
     /**
-     * 索引栏高度
+     * 索引栏高度，单位px
      */
     height: {
         type: [Number, String],
         default: '100%'
     },
     /**
-     * 索引栏宽度
+     * 索引栏宽度，单位px
      */
     width: {
         type: [Number, String],

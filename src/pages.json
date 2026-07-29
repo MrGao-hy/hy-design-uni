@@ -907,7 +907,6 @@
                         }
                     }
                 },
-                // #ifdef APP || MP-ALIPAY || MP-WEIXIN
                 {
                     "path": "signature/signature",
                     "type": "page",
@@ -924,24 +923,6 @@
                         }
                     }
                 },
-                // #endif
-                // #ifdef H5
-                {
-                    "path": "signature/signature",
-                    "type": "page",
-                    "style": {
-                        "h5": {
-                            "titleNView": {
-                                "buttons": [
-                                    {
-                                        "type": "share"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                // #endif
                 {
                     "path": "skeleton/skeleton",
                     "type": "page",
@@ -1344,7 +1325,7 @@
                     }
                 },
                 // #endif
-                // #ifdef MP-WEIXIN
+                // #ifdef H5 || MP-WEIXIN
                 {
                     "path": "signature/Landscape",
                     "type": "page",

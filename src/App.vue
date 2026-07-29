@@ -25,11 +25,13 @@ onUnload(() => {
 })
 
 onThemeChange((option) => {
+    console.log(option)
     darkMode.value = option.theme
 })
 
 onLaunch(() => {
     uni.onThemeChange(function (res) {
+        console.log(res, 'res')
         darkMode.value = res.theme
     })
 })

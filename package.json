@@ -1,6 +1,6 @@
 {
-    "name": "hy-app",
-    "version": "0.7.4",
+    "name": "@hy-app/ui",
+    "version": "1.0.4",
     "type": "module",
     "engines": {
         "node": "20.x"

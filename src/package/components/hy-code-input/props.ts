@@ -40,7 +40,7 @@ const codeInputProps = {
         type: Boolean,
         default: false
     },
-    /** 字符间的距离 */
+    /** 字符间的距离，单位px */
     space: {
         type: Number,
         default: 10
@@ -62,7 +62,7 @@ const codeInputProps = {
         type: [String, Number],
         default: 18
     },
-    /** 输入框的大小，宽等于高 */
+    /** 输入框的大小，宽等于高，单位px */
     size: {
         type: [String, Number],
         default: 35

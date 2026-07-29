@@ -12,12 +12,12 @@ const tableProps = {
         type: Array as PropType<ITableColumn[]>,
         default: () => []
     },
-    /** 表格高度，如 '500rpx' */
+    /** 表格高度，如 '500rpx'，单位px */
     height: {
         type: [String, Number],
         default: 400
     },
-    /** 行高，如 '50' */
+    /** 行高，如 '50'，单位px */
     rowHeight: {
         type: [String, Number],
         default: 50

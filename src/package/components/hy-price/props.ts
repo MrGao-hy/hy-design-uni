@@ -27,7 +27,7 @@ const priceProps = {
         type: String,
         default: '#FE3232'
     },
-    /** 字体大小 */
+    /** 字体大小，单位px */
     size: {
         type: [Number, String],
         default: 12

@@ -71,10 +71,10 @@ const textProps = {
     },
     /** 文本颜色 */
     color: String,
-    /** 字体大小 */
+    /** 字体大小，单位默认px */
     size: {
         type: [String, Number],
-        default: 15
+        default: 12
     },
     /** 图标的样式 */
     iconStyle: {

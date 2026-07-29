@@ -1,5 +1,5 @@
 <template>
-    <view :style="safeBottomStyle" :class="['hy-safe-bottom', isH5 && 'hy-safe-area-inset-bottom']">
+    <view :style="safeBottomStyle" :class="['hy-safe-bottom', isH5 && 'hy-safe-area-inset-bottom', customClass]">
     </view>
 </template>
 
@@ -16,9 +16,14 @@ export default {
 <script setup lang="ts">
 import { computed, ref, type CSSProperties } from 'vue'
 import { addUnit, getWindowInfo, isH5 } from '../../libs'
+import safeBottomProps from './props';
+
+const props = defineProps(safeBottomProps);
 
 const safeBottomStyle = computed(() => {
-    const style: CSSProperties = {}
+    const style: CSSProperties = {
+        background: props.bgColor
+    }
     // 某些平台无法识别css的底部安全区变量，所以使用js获取的方式
     const { safeAreaInsets } = getWindowInfo() as any
     const bottom = safeAreaInsets?.bottom || 0
@@ -26,6 +31,6 @@ const safeBottomStyle = computed(() => {
         style.height = addUnit(bottom)
     }
 
-    return style
+    return Object.assign(style, props.customStyle)
 })
 </script>

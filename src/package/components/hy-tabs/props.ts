@@ -35,12 +35,12 @@ const tabsProps = {
         type: Object as PropType<CSSProperties>,
         default: {}
     },
-    /** 滑块长度 */
+    /** 滑块长度，单位px */
     lineWidth: {
         type: [String, Number],
         default: 20
     },
-    /** 滑块高度 */
+    /** 滑块高度，单位px */
     lineHeight: {
         type: [String, Number],
         default: 3

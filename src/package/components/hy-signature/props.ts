@@ -9,7 +9,7 @@ const signatureProps = {
         type: String,
         default: '#000'
     },
-    /** 签名笔宽度 */
+    /** 签名笔宽度，单位px */
     lineWidth: {
         type: Number,
         default: 3
@@ -54,12 +54,12 @@ const signatureProps = {
         type: Boolean,
         default: false
     },
-    /** 画布的高度 */
+    /** 画布的高度，单位px */
     height: {
         type: [String, Number],
         default: ''
     },
-    /** 画布的宽度 */
+    /** 画布的宽度，单位px */
     width: {
         type: [String, Number],
         default: ''

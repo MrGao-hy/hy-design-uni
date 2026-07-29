@@ -21,7 +21,7 @@ const dropdownProps = {
     activeColor: String,
     /** 标题和选项卡未选中的颜色 */
     inactiveColor: String,
-    /** 标题和选项卡选中的字体大小 */
+    /** 标题和选项卡选中的字体大小，单位px */
     titleSize: [String, Number],
     /** 点击遮罩层关闭弹窗 */
     closeOnClickMask: {
@@ -33,7 +33,7 @@ const dropdownProps = {
         type: String,
         default: IconConfig.ARROW_DOWN_FILL
     },
-    /** 图标大小 */
+    /** 图标大小，单位px */
     menuIconSize: {
         type: [String, Number],
         default: 14

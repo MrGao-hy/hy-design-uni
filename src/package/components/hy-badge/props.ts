@@ -60,7 +60,7 @@ const badgeProps = {
         type: String as PropType<BadgeNumberType>,
         default: 'overflow'
     },
-    /** 设置badge的位置偏移，格式为 \[x, y\]，也即设置的为top和right的值，absolute为true时有效 */
+    /** 设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，单位px，absolute为true时有效 */
     offset: Array,
     /** 是否反转背景和字体颜色 */
     inverted: {

@@ -19,7 +19,7 @@ const popoverProps = {
         type: String as PropType<IPlacementVo>,
         default: 'bottom'
     },
-    /** 控制 popover 的显示状态 */
+    /** popover 的偏移量，支持数字、数组 [x, y] 或对象 { x, y }，单位px */
     offset: {
         type: [Number, Array, Object] as PropType<IOffset>,
         default: 0

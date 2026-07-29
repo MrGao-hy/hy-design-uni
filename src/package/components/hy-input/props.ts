@@ -172,7 +172,7 @@ const inputProps = {
         type: Boolean,
         default: false
     },
-    /** 内容式化函数 */
+    /** 内容格式化函数 */
     formatter: Function,
     /** 定义需要用到的外部样式 */
     customStyle: {

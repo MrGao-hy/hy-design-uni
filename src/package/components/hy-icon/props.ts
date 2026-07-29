@@ -47,9 +47,9 @@ const iconProps = {
     },
     /** 图片的mode */
     imgMode: String as PropType<ImageMode>,
-    /** 显示图片小图标时的宽度 */
+    /** 显示图片小图标时的宽度，单位px */
     width: [String, Number],
-    /** 显示图片小图标时的高度 */
+    /** 显示图片小图标时的高度，单位px */
     height: [String, Number],
     /** 图标在垂直方向上的定位 用于解决某些情况下，让图标垂直居中的用途 */
     top: {

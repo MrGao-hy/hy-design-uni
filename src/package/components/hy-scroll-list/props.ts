@@ -1,10 +1,10 @@
 const scrollListProps = {
-    /** 指示器的整体宽度 */
+    /** 指示器的整体宽度，单位px */
     indicatorWidth: {
         type: Number,
         default: 50
     },
-    /** 滑块的宽度 */
+    /** 滑块的宽度，单位px */
     indicatorBarWidth: {
         type: Number,
         default: 20

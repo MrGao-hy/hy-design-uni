@@ -18,6 +18,8 @@ dist
 
 # Editor directories and files
 .idea
+.trae
+.hbuilderx
 *.suo
 *.ntvs*
 *.njsproj

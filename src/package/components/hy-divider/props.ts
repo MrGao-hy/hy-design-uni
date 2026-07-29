@@ -34,7 +34,7 @@ const dividerProps = {
         type: String,
         default: ''
     },
-    /** 文本大小 */
+    /** 文本大小，单位px */
     textSize: {
         type: [String, Number],
         default: 14

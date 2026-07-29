@@ -51,7 +51,7 @@ const navbarProps = {
         type: [String, Number],
         default: '44px'
     },
-    /** 左侧返回图标的大小 */
+    /** 左侧返回图标的大小，单位px */
     leftIconSize: {
         type: [String, Number],
         default: 20

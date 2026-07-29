@@ -48,7 +48,7 @@ const switchProps = {
         type: Boolean,
         default: false
     },
-    /** 圆点与外边框的距离 */
+    /** 圆点与外边框的距离，单位px */
     space: {
         type: Number,
         default: 0

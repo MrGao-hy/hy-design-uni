@@ -22,7 +22,7 @@ const gridProps = {
         type: Number,
         default: 5
     },
-    /** 图标大小 */
+    /** 图标大小，单位px */
     size: {
         type: [Number, String],
         default: 44
@@ -32,7 +32,7 @@ const gridProps = {
         type: Boolean,
         default: false
     },
-    /** 单个宫格高度 */
+    /** 单个宫格高度，单位px */
     itemHeight: {
         type: [Number, String],
         default: 'auto'
@@ -45,7 +45,7 @@ const gridProps = {
         type: String as PropType<RowCenterType>,
         default: 'left'
     },
-    /** 间隔 */
+    /** 间隔，单位px */
     gap: {
         type: [Number, String],
         default: 0
