@@ -18,11 +18,12 @@
             <hy-price text="10.22" :size="20"></hy-price>
         </view>
 
-        <view class="hy-title">保留6位小数</view>
+        <view class="hy-title">保留不同小数</view>
         <view class="hy-container hy-flex">
-            <hy-price text="10.22234563" :num="6"></hy-price>
-            <hy-price :text="10.22234563" :num="6"></hy-price>
-            <hy-price :text="10.23" :num="6"></hy-price>
+            <hy-price text="10.22234563" :num="0"></hy-price>
+            <hy-price text="10" :num="0"></hy-price>
+            <hy-price :text="10.22234563" :num="3"></hy-price>
+            <hy-price :text="10.23" :num="5"></hy-price>
             <hy-price text="10" :num="6"></hy-price>
         </view>
 

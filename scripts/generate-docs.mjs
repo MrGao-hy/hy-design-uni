@@ -421,61 +421,37 @@ function extractAllPropsFromPropsFile(propsFilePath, componentName, specialConfi
             processProp(prop.name, prop.jsdoc, props, prop.value);
         });
         
-        // 辅助函数：从字符串中提取 PropType<...> 内的类型（支持嵌套泛型）
-        function extractPropTypeParams(typeStr) {
-            const patterns = [
-                /as\s+unknown\s+as\s+PropType</,
-                /as\s+PropType</,
-                /PropType</
-            ]
-            for (const pattern of patterns) {
-                const match = pattern.exec(typeStr)
-                if (match) {
-                    const start = match.index + match[0].length
-                    let depth = 1
-                    for (let i = start; i < typeStr.length; i++) {
-                        // 跳过 => 中的 >（箭头函数类型）
-                        if (typeStr[i] === '>' && i > 0 && typeStr[i - 1] === '=') {
-                            continue
-                        }
-                        if (typeStr[i] === '<') depth++
-                        if (typeStr[i] === '>') {
-                            depth--
-                            if (depth === 0) {
-                                return typeStr.substring(start, i).trim()
-                            }
-                        }
-                    }
-                }
-            }
-            return null
-        }
-
         // 辅助函数：处理类型字符串
         function processType(typeString) {
             let processedType = typeString.trim()
             
-            // 优先处理 PropType（支持嵌套泛型如 PropType<(date: Date) => string>）
-            const propTypeParams = extractPropTypeParams(processedType)
-            if (propTypeParams !== null) {
-                processedType = propTypeParams
-            } else {
-                // 处理 as 类型断言（无 PropType 的情况）
-                const asMatch = processedType.match(/as\s+(.+)$/)
-                if (asMatch) {
-                    processedType = asMatch[1].trim()
-                }
+            // 处理 PropType
+            const propTypeMatch = 
+                processedType.match(/PropType<([^>]+)>/) || 
+                processedType.match(/as\s+unknown\s+as\s+PropType<([^>]+)>/) || 
+                processedType.match(/as\s+PropType<([^>]+)>/) || 
+                processedType.match(/as\s+([^>]+)\s*$/) || 
+                processedType.match(/String\s+as\s+.*?([^\s>]+)/)
+            if (propTypeMatch) {
+                processedType = propTypeMatch[1]
             }
             
             // 处理类型数组（如 [Number, String]）
             if (processedType.startsWith('[') && processedType.endsWith(']')) {
+                // 提取数组内容
                 const arrayContent = processedType.slice(1, -1)
+                // 分割类型并转换为小写
                 const types = arrayContent.split(',').map((t) => {
                     const cleanedType = t.trim()
+                    // 使用配置的类型映射
                     return CONFIG.TYPE_MAPPING[cleanedType] || cleanedType
                 })
+                // 合并为类型，使用英文逗号作为分隔符
                 return types.join(', ')
             } else {
+                // 处理 as 类型断言
+                processedType = processedType.replace(/\s+as\s+.*$/g, '')
+                
                 // 使用配置的类型映射转换基本类型
                 Object.keys(CONFIG.TYPE_MAPPING).forEach((originalType) => {
                     if (processedType.includes(originalType)) {
@@ -525,7 +501,7 @@ function extractAllPropsFromPropsFile(propsFilePath, componentName, specialConfi
             
             // 对默认值进行转义，确保特殊字符不会破坏Markdown表格格式
             // 特别是对竖线字符(|)进行转义，它是Markdown表格的分隔符
-            return formattedDefaultValue;
+            return formattedDefaultValue.replace(/\|/g, '\\|');
         }
         
         // 使用括号匹配算法查找值的结束位置
@@ -768,29 +744,15 @@ function extractEmitsFromVueFile(vueFilePath, componentName, customEmitsInterfac
                         interfaceEnd
                     )
 
-                    // ========== 使用括号匹配提取 tuple 格式事件 ==========
-                    // 先用正则找到事件名和 [ 位置，再用括号匹配提取参数
-                    const eventTupleRegex = /\/\*\*[\s\S]*?\*\/\s*['"]?([^\s'"]+)['"]?\s*:\s*\[/g
-                    let tupleMatch
-                    while ((tupleMatch = eventTupleRegex.exec(fullInterfaceContent)) !== null) {
-                        const eventName = tupleMatch[1]
-                        const matchEndPos = tupleMatch.index + tupleMatch[0].length
-                        // 用括号匹配找到正确的 ] 结束位置
-                        let depth = 1
-                        let endPos = matchEndPos
-                        for (let i = matchEndPos; i < fullInterfaceContent.length; i++) {
-                            if (fullInterfaceContent[i] === '[') depth++
-                            if (fullInterfaceContent[i] === ']') {
-                                depth--
-                                if (depth === 0) {
-                                    endPos = i
-                                    break
-                                }
-                            }
-                        }
-                        const rawParams = fullInterfaceContent.substring(matchEndPos, endPos)
+                    // ========== 优先匹配 tuple 格式（带 JSDoc 注释） ==========
+                    let eventMatch
 
-                        const descriptionMatch = tupleMatch[0].match(/\/\*\*\s*([\s\S]*?)\s*\*\//)
+                    while ((eventMatch = REGEX.EVENT_TUPLE.exec(fullInterfaceContent)) !== null) {
+                        const fullMatch = eventMatch[0]
+                        const eventName = eventMatch[1]
+                        const rawParams = eventMatch[2]
+
+                        const descriptionMatch = fullMatch.match(/\/\*\*\s*([\s\S]*?)\s*\*\//)
                         const description = descriptionMatch
                             ? descriptionMatch[1].replace(/\*\s?/g, '').trim()
                             : ''
@@ -803,26 +765,11 @@ function extractEmitsFromVueFile(vueFilePath, componentName, customEmitsInterfac
                         }
                     }
 
-                    // ========== 匹配无注释 tuple 格式（补充遗漏事件） ==========
-                    const eventTupleNoCommentRegex = /['"]?([^\s'"]+)['"]?\s*:\s*\[/g
-                    let ncMatch
-                    while ((ncMatch = eventTupleNoCommentRegex.exec(fullInterfaceContent)) !== null) {
-                        const eventName = ncMatch[1]
+                    // ========== 匹配 tuple 格式（无注释，补充遗漏事件） ==========
+                    while ((eventMatch = REGEX.EVENT_TUPLE_NO_COMMENT.exec(fullInterfaceContent)) !== null) {
+                        const eventName = eventMatch[1]
+                        const rawParams = eventMatch[2]
                         if (!eventInfoMap[eventName]) {
-                            const matchEndPos = ncMatch.index + ncMatch[0].length
-                            let depth = 1
-                            let endPos = matchEndPos
-                            for (let i = matchEndPos; i < fullInterfaceContent.length; i++) {
-                                if (fullInterfaceContent[i] === '[') depth++
-                                if (fullInterfaceContent[i] === ']') {
-                                    depth--
-                                    if (depth === 0) {
-                                        endPos = i
-                                        break
-                                    }
-                                }
-                            }
-                            const rawParams = fullInterfaceContent.substring(matchEndPos, endPos)
                             eventInfoMap[eventName] = {
                                 description: '',
                                 parameters: rawParams.trim() || '-'
@@ -834,7 +781,6 @@ function extractEmitsFromVueFile(vueFilePath, componentName, customEmitsInterfac
                     }
 
                     // ========== 兼容旧函数格式（带注释） ==========
-                    let eventMatch
                     while ((eventMatch = REGEX.EVENT_WITH_COMMENT.exec(fullInterfaceContent)) !== null) {
                         const eventName = eventMatch[1]
                         if (!eventInfoMap[eventName]) {
@@ -1141,16 +1087,6 @@ function extractComponentInfoFromVueFile(vueFilePath) {
     }
 }
 
-// 转义 Markdown 表格单元格中的特殊字符
-function escapeMarkdownTableCell(str) {
-    if (!str) return ''
-    return String(str)
-        .replace(/\\/g, '\\\\')
-        .replace(/\|/g, '\\|')
-        .replace(/\n/g, ' ')
-        .replace(/\r/g, ' ')
-}
-
 // 生成 Markdown 文档的函数
 function generateMarkdown(componentConfig) {
     const { vuePath, name: componentName, propsPath, ...specialConfig } = componentConfig
@@ -1187,15 +1123,18 @@ function generateMarkdown(componentConfig) {
 
         props.forEach((prop) => {
             const values = prop.values.length > 0 ? prop.values.join(', ') : '-'
-            const escapedType = escapeMarkdownTableCell(prop.type)
-            const escapedName = escapeMarkdownTableCell(prop.name)
-            const escapedDesc = escapeMarkdownTableCell(prop.description)
+            // 对类型字符串中的特殊字符进行转义
+            const escapedType = prop.type.replace(/[\(\)\[\]\{\}]/g, '\\$&')
+            // 确保默认值存在，如果不存在或为 undefined 则设置为单引号空字符串
             let defaultValue = prop.default
             if (defaultValue === undefined || defaultValue === 'undefined') {
                 defaultValue = "''"
+            } else {
+                // 对默认值进行转义，确保特殊字符不会破坏Markdown表格格式
+                // 特别是对竖线字符(|)进行转义，它是Markdown表格的分隔符
+                defaultValue = defaultValue.replace(/\|/g, '\\|')
             }
-            defaultValue = escapeMarkdownTableCell(defaultValue)
-            markdown += `| ${escapedName} | ${escapedDesc} | ${escapedType} | ${values} | ${defaultValue} |\n`
+            markdown += `| ${prop.name} | ${prop.description} | ${escapedType} | ${values} | ${defaultValue} |\n`
         })
 
         markdown += '\n'
@@ -1209,9 +1148,7 @@ function generateMarkdown(componentConfig) {
         markdown += '| ---------- | ---------- | ----------- |\n'
 
         emits.forEach((event) => {
-            const escapedParams = escapeMarkdownTableCell(event.parameters)
-            const escapedDesc = escapeMarkdownTableCell(event.description)
-            markdown += `| ${event.name} | ${escapedParams} | ${escapedDesc} |\n`
+            markdown += `| ${event.name} | ${event.parameters} | ${event.description} |\n`
         })
 
         markdown += '\n'
