@@ -39,4 +39,8 @@ onLaunch(() => {
 <style lang="scss">
 @use '@/style/common.scss';
 @use '@/static/icon/font_1/iconfont.css';
+
+page {
+    padding: var(--)
+}
 </style>

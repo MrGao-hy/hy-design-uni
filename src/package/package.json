@@ -1,7 +1,7 @@
 {
     "name": "@hy-app/ui",
     "version": "1.0.3",
-    "description": "📱一个基于vue3+ts构建的uni-app组件库,拥有八十多个精美组件，适配多端，支持自定义主题",
+    "description": "📱一款使用 Vue3 + Ts 构建、面向 uni‑app 的跨端组件库。现已封装八十余款高质量业务组件，完整兼容小程序、H5、App‑plus 等多端环境；支持灵活的主题定制、样式变量覆盖，内置完善的国际化方案",
     "main": "./index.ts",
     "private": false,
     "scripts": {},

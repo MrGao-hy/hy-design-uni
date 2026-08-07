@@ -1,5 +1,5 @@
 <template>
-    <view :class="themeClass" :style="[themeStyle, { height: height ? addUnit(height) : '' }]">
+    <view :class="themeClass" :style="[{ height: height ? addUnit(height) : '' }, themeStyle]">
         <!-- @slot 默认插槽 -->
         <slot />
     </view>
