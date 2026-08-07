@@ -3,7 +3,7 @@
     "version": "1.0.4",
     "type": "module",
     "engines": {
-        "node": "20.x"
+        "node": "22.x"
     },
     "scripts": {
         "changelog": "npx tsx scripts/generate-changelog.ts",
@@ -58,7 +58,7 @@
         "@dcloudio/uni-mp-weixin": "3.0.0-4030620241128001",
         "@dcloudio/uni-mp-xhs": "3.0.0-4030620241128001",
         "@dcloudio/uni-quickapp-webview": "3.0.0-4030620241128001",
-        "@hy-app/ui": "^1.0.1",
+        "@hy-app/ui": "^1.0.3",
         "dayjs": "^1.11.13",
         "pinia": "^2.3.1",
         "pinia-plugin-unistorage": "^0.1.2",
