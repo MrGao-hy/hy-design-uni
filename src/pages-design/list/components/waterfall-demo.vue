@@ -189,7 +189,7 @@ const generateItem = (index: number): AnyObject => {
         description: desc,
         price,
         sold: sold > 9999 ? `${(sold / 10000).toFixed(1)}万` : String(sold),
-        image: `https://picsum.photos/seed/${seed}/400/400`
+        image: `44/${seed}/400/400`
     }
 }
 

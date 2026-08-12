@@ -37,7 +37,7 @@
             </hy-card>
 
             <!-- 我的服务 -->
-            <hy-card>
+            <!-- <hy-card>
                 <view
                     v-for="item in serviceFeatures"
                     :key="item.key"
@@ -59,10 +59,10 @@
                         <hy-icon v-else name="right" size="20" color="#c0c4cc" />
                     </view>
                 </view>
-            </hy-card>
+            </hy-card> -->
 
             <!-- 设置与帮助 -->
-            <hy-card>
+            <!-- <hy-card>
                 <view
                     v-for="item in settingFeatures"
                     :key="item.key"
@@ -84,7 +84,7 @@
                         <hy-icon v-else name="right" size="20" color="#c0c4cc" />
                     </view>
                 </view>
-            </hy-card>
+            </hy-card> -->
 
             <!-- 语言切换 -->
             <hy-card>
@@ -104,7 +104,7 @@
             </hy-card>
 
             <!-- 退出登录 -->
-            <hy-button
+            <!-- <hy-button
                 type="error"
                 plain
                 :loading="isLoggingOut"
@@ -113,7 +113,7 @@
                 @click="handleLogout"
             >
                 {{ t('logout') }}
-            </hy-button>
+            </hy-button> -->
         </scroll-view>
     </the-root-page>
 </template>

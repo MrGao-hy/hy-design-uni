@@ -110,5 +110,28 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "3"
+    "vueVersion" : "3",
+    "app-harmony" : {
+        "distribute" : {
+            "bundleName" : "com.hy.ui",
+            "signingConfigs" : {
+                "release" : {
+                    "certpath" : "D:\\important\\harmony\\zs\\hy-app证书.cer",
+                    "keyAlias" : "releaseKey",
+                    "keyPassword" : "0000001CC89B10D89EBCB64F844E335506FB8A573932E7C0D0D73C316C991BF522DB9DB7B4C034C1447CABB7",
+                    "profile" : "D:\\important\\harmony\\zs\\hy-appRelease.p7b",
+                    "signAlg" : "SHA256withECDSA",
+                    "storeFile" : "D:\\important\\harmony\\zs\\hy-app.p12",
+                    "storePassword" : "0000001C3A409957B61925866AA94DBC81645A112A155FDD058493BE1DE253527B0529C3634F7B37BAEFA128"
+                }
+            },
+            "splashScreens" : {
+                "startWindowIcon" : "unpackage/res/icons/192x192.png"
+            },
+            "icons" : {
+                "foreground" : "unpackage/res/icons/1024x1024.png",
+                "background" : "unpackage/res/icons/background.png"
+            }
+        }
+    }
 }

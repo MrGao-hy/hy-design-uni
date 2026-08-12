@@ -72,6 +72,7 @@
         "@dcloudio/uni-automator": "3.0.0-4030620241128001",
         "@dcloudio/uni-cli-shared": "3.0.0-4030620241128001",
         "@dcloudio/uni-stacktracey": "3.0.0-4030620241128001",
+        "@dcloudio/uni-uts-v1": "3.0.0-4030620241128001",
         "@dcloudio/vite-plugin-uni": "3.0.0-4030620241128001",
         "@types/node": "^24.2.1",
         "@types/wechat-miniprogram": "^3.4.8",

@@ -90,6 +90,9 @@ importers:
       '@dcloudio/uni-stacktracey':
         specifier: 3.0.0-4030620241128001
         version: 3.0.0-4030620241128001
+      '@dcloudio/uni-uts-v1':
+        specifier: 3.0.0-4030620241128001
+        version: 3.0.0-4030620241128001(rollup@4.62.4)
       '@dcloudio/vite-plugin-uni':
         specifier: 3.0.0-4030620241128001
         version: 3.0.0-4030620241128001(postcss@8.5.26)(rollup@4.62.4)(vite@5.4.21(@types/node@24.13.3)(sass@1.102.0)(terser@5.49.2))(vue@3.5.41(typescript@5.9.3))
@@ -867,6 +870,9 @@ packages:
   '@dcloudio/uni-app-vue@3.0.0-4030620241128001':
     resolution: {integrity: sha512-BxblHfDWWmDW2+9M8TJwKNKCbvlmH0VGJvRYudF46vl7+6sRml/06YBy9KjhTRIY4WetN7IVYuSuA0PbH2HG+w==}
 
+  '@dcloudio/uni-app-x@0.7.133':
+    resolution: {integrity: sha512-9A0XfIASuUN+AHycyvwQCGK9Ib12QjiMShQjIKtKPhOkXbU1LytnLIm58s6CsMx8f8yr1kfXCqo5omYuHXXcCA==}
+
   '@dcloudio/uni-app@3.0.0-4030620241128001':
     resolution: {integrity: sha512-J+hIUT+d2RIIKygO+2tOgHPgWjFtnpTTLLBYd2QsXtxWGDqV2CRvf2FG4KzNf82P46OjUh54O+EJwvAcMFItCg==}
     peerDependencies:
@@ -953,6 +959,50 @@ packages:
 
   '@dcloudio/uni-stat@3.0.0-4030620241128001':
     resolution: {integrity: sha512-0WCvT+FIKxy1MNryK5nhKH1sBZchu5KTWv/nVZo+NmTwsvcdUf4rWei3DYq6Qo0ehBasVeW8nIIYoAwB7pDQsw==}
+
+  '@dcloudio/uni-uts-v1@3.0.0-4030620241128001':
+    resolution: {integrity: sha512-AHps+kINnbRqcZdaepyezO0DP1qIGkTPorjT+aM4cQoka2cVLiNbAuSGIyvP9MGcEUmEqtI/SYMdhOWbWKWuzQ==}
+
+  '@dcloudio/uts-darwin-arm64@3.0.0-4030620241128001':
+    resolution: {integrity: sha512-lNRKWqLFSoVQc6dbA7og2OisO4wQO3eIBU9VTStuYA9MJYK6DbT5VW/InlPnTeRFq4w/9gbqRbqQ2h+QfkfNcQ==}
+    engines: {node: '>=10'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@dcloudio/uts-darwin-x64@3.0.0-4030620241128001':
+    resolution: {integrity: sha512-wv+qoUAUOfzksus68J4QYMoLJ7wtG/TeQ3n6VXY0YXUnMEo4jplVq/hakknKoJtk2/R37XkT9UiJbZzOTGCEOg==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@dcloudio/uts-linux-x64-gnu@3.0.0-4030620241128001':
+    resolution: {integrity: sha512-2lRiAUoffSeLkZ2v83IXlYP5+CNsB/f2vijYhRsAoCJ/yDizipKc5mTeSv08pIWK6BId2ZHdYATfDUAAetrLAg==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+    libc: [gnu]
+
+  '@dcloudio/uts-linux-x64-musl@3.0.0-4030620241128001':
+    resolution: {integrity: sha512-HbuOIYCe0KTzW42oqACQDmSuLWmiEG9zUE3rGpp5QP3MKpcB4wJ5BAOusCt3V02akyVv4/IGToktN8dc9N7+Eg==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
+  '@dcloudio/uts-win32-ia32-msvc@3.0.0-4030620241128001':
+    resolution: {integrity: sha512-pgITm85ya64iJ19mixTUOiYVAyCJQ+V66L5Ue/cmME6CA2dU9DjTtPEP6DdSnoyq9JWcdbQLyVEQkxxtBSOyGA==}
+    engines: {node: '>=10'}
+    cpu: [ia32]
+    os: [win32]
+
+  '@dcloudio/uts-win32-x64-msvc@3.0.0-4030620241128001':
+    resolution: {integrity: sha512-Fqj8WboYMePB5rggEY4i23uRGmf03yduZ5T5RE/r2ARAnWTgmvhLgZBamqi2cdODCgQUKobQk+yITCsmkCSh+g==}
+    engines: {node: '>=10'}
+    cpu: [x64]
+    os: [win32]
+
+  '@dcloudio/uts@3.0.0-4030620241128001':
+    resolution: {integrity: sha512-YkIhUyoWHKZ2P7MDlwR3TmQNBZTh7qUNjEYfqhYV/C8sP54LmqqoA2bD8G1IDtpP5yEgxPwMOtRTY2UFWyOGSg==}
 
   '@dcloudio/vite-plugin-uni@3.0.0-4030620241128001':
     resolution: {integrity: sha512-sXIuBQz/j/aUDc+uSJuTozUj8W6Wy6dtC1S7oS95yLqacNOrzAhITfNWpmY51Zff7NXIt4bp+V++awDo0wnLsg==}
@@ -2439,6 +2489,9 @@ packages:
   alien-signals@3.2.1:
     resolution: {integrity: sha512-I8FjmltrfnDFoZedi5CG8DghVYNhzb/Ijluz7tCSJH0xpd0484Kowhbb1XDYOxfJpU1p5wnM2X54dA+IfGyD1g==}
 
+  android-versions@1.9.0:
+    resolution: {integrity: sha512-13O2B6PQMEM4ej9n13ePRQeckrCoKbZrvuzlLvK+9s2QmncpHDbYzZxhgapN32sJNoifN6VAHexLnd/6CYrs7Q==}
+
   ansi-escapes@4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}
     engines: {node: '>=8'}
@@ -2771,6 +2824,10 @@ packages:
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
 
+  colors@1.4.0:
+    resolution: {integrity: sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==}
+    engines: {node: '>=0.1.90'}
+
   combined-stream@1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
     engines: {node: '>= 0.8'}
@@ -2789,6 +2846,9 @@ packages:
   comment-parser@1.4.7:
     resolution: {integrity: sha512-0h+uSNtQGW3D98eQt3jJ8L06Fves8hncB4V/PKdw/Qb8Hnk19VaKuTr55UNRYiSoVa7WwrFls+rh3ux9agmkeQ==}
     engines: {node: '>= 12.0.0'}
+
+  commondir@1.0.1:
+    resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
 
   compare-func@2.0.0:
     resolution: {integrity: sha512-zHig5N+tPWARooBnb0Zx1MFcdfpyJrfTJ3Y5L+IFvUm8rM74hHz66z0gw0x4tijh5CorKkKUCnW82R2vmpeCRA==}
@@ -3495,6 +3555,10 @@ packages:
     resolution: {integrity: sha512-aA4RyPcd3badbdABGDuTXCMTtOneUCAYH/gxoYRTZlIJdF0YPWuGqiAsIrhNnnqdXGswYk6dGujem4w80UJFhg==}
     engines: {node: '>= 0.8'}
 
+  find-cache-dir@3.3.2:
+    resolution: {integrity: sha512-wXZV5emFEjrridIgED11OoUKLxiYjAcqot/NJdAkOhlJ+vGzwhOAfcG5OX1jP+S0PcjEn8bdMJv+g2jwQ3Onig==}
+    engines: {node: '>=8'}
+
   find-up-simple@1.0.1:
     resolution: {integrity: sha512-afd4O7zpqHeRyg4PfDQsXmlDe2PfdHtJt6Akt8jOWaApLOZk5JXs6VMR29lz03pRe9mpykrRCYIYxaJYcfpncQ==}
     engines: {node: '>=18'}
@@ -3665,6 +3729,9 @@ packages:
 
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
+
+  graphlib@2.1.8:
+    resolution: {integrity: sha512-jcLLfkpoVGmH7/InMC/1hIvOPSUh38oJtGhvrOFGzioE1DZ+0YW16RgmOJhHiuWTvGiJQ9Z1Ik43JvkRPRvE+A==}
 
   handlebars@4.7.9:
     resolution: {integrity: sha512-4E71E0rpOaQuJR2A3xDZ+GM1HyWYv1clR58tC8emQNeQe3RH7MAzSbat+V0wG78LQBo6m6bzSG/L4pBuCsgnUQ==}
@@ -4271,6 +4338,10 @@ packages:
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
+  make-dir@3.1.0:
+    resolution: {integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw==}
+    engines: {node: '>=8'}
+
   make-dir@4.0.0:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
@@ -4292,6 +4363,11 @@ packages:
   math-intrinsics@1.1.0:
     resolution: {integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==}
     engines: {node: '>= 0.4'}
+
+  md5-file@5.0.0:
+    resolution: {integrity: sha512-xbEFXCYVWrSx/gEKS1VPlg84h/4L20znVIulKw6kMfmBUAZNAnF00eczz9ICMl+/hjQGo5KSXRxbL/47X3rmMw==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
 
   mdast-util-find-and-replace@3.0.2:
     resolution: {integrity: sha512-Tmd1Vg/m3Xz43afeNxDIhWRtFZgM2VLyaf4vSTYwudTyeuTneoL3qtWMA5jeLyz/O1vDJmmV4QuScFCA2tBPwg==}
@@ -4578,6 +4654,10 @@ packages:
 
   object-deep-merge@1.0.5:
     resolution: {integrity: sha512-3DioFgOzetbxbeUq8pB2NunXo8V0n4EvqsWM/cJoI6IA9zghd7cl/2pBOuWRf4dlvA+fcg5ugFMZaN2/RuoaGg==}
+
+  object-hash@3.0.0:
+    resolution: {integrity: sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw==}
+    engines: {node: '>= 6'}
 
   object-inspect@1.13.4:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
@@ -6917,6 +6997,8 @@ snapshots:
 
   '@dcloudio/uni-app-vue@3.0.0-4030620241128001': {}
 
+  '@dcloudio/uni-app-x@0.7.133': {}
+
   '@dcloudio/uni-app@3.0.0-4030620241128001(@dcloudio/types@3.4.32)(postcss@8.5.26)(rollup@4.62.4)(vue@3.5.41(typescript@5.9.3))':
     dependencies:
       '@dcloudio/types': 3.4.32
@@ -7380,6 +7462,59 @@ snapshots:
       - supports-color
       - ts-node
       - vue
+
+  '@dcloudio/uni-uts-v1@3.0.0-4030620241128001(rollup@4.62.4)':
+    dependencies:
+      '@babel/code-frame': 7.29.7
+      '@dcloudio/uni-app-x': 0.7.133
+      '@dcloudio/uts': 3.0.0-4030620241128001
+      '@rollup/pluginutils': 5.4.0(rollup@4.62.4)
+      '@vue/shared': 3.4.21
+      adm-zip: 0.5.18
+      android-versions: 1.9.0
+      colors: 1.4.0
+      debug: 4.4.3
+      fast-glob: 3.3.3
+      find-cache-dir: 3.3.2
+      fs-extra: 10.1.0
+      graphlib: 2.1.8
+      jsonc-parser: 3.3.1
+      lodash: 4.18.1
+      md5-file: 5.0.0
+      object-hash: 3.0.0
+      semver: 7.8.5
+      source-map: 0.7.6
+      source-map-js: 1.2.1
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
+
+  '@dcloudio/uts-darwin-arm64@3.0.0-4030620241128001':
+    optional: true
+
+  '@dcloudio/uts-darwin-x64@3.0.0-4030620241128001':
+    optional: true
+
+  '@dcloudio/uts-linux-x64-gnu@3.0.0-4030620241128001':
+    optional: true
+
+  '@dcloudio/uts-linux-x64-musl@3.0.0-4030620241128001':
+    optional: true
+
+  '@dcloudio/uts-win32-ia32-msvc@3.0.0-4030620241128001':
+    optional: true
+
+  '@dcloudio/uts-win32-x64-msvc@3.0.0-4030620241128001':
+    optional: true
+
+  '@dcloudio/uts@3.0.0-4030620241128001':
+    optionalDependencies:
+      '@dcloudio/uts-darwin-arm64': 3.0.0-4030620241128001
+      '@dcloudio/uts-darwin-x64': 3.0.0-4030620241128001
+      '@dcloudio/uts-linux-x64-gnu': 3.0.0-4030620241128001
+      '@dcloudio/uts-linux-x64-musl': 3.0.0-4030620241128001
+      '@dcloudio/uts-win32-ia32-msvc': 3.0.0-4030620241128001
+      '@dcloudio/uts-win32-x64-msvc': 3.0.0-4030620241128001
 
   '@dcloudio/vite-plugin-uni@3.0.0-4030620241128001(postcss@8.5.26)(rollup@4.62.4)(vite@5.4.21(@types/node@24.13.3)(sass@1.102.0)(terser@5.49.2))(vue@3.5.41(typescript@5.9.3))':
     dependencies:
@@ -8939,6 +9074,10 @@ snapshots:
 
   alien-signals@3.2.1: {}
 
+  android-versions@1.9.0:
+    dependencies:
+      semver: 7.8.5
+
   ansi-escapes@4.3.2:
     dependencies:
       type-fest: 0.21.3
@@ -9296,6 +9435,8 @@ snapshots:
 
   color-name@1.1.4: {}
 
+  colors@1.4.0: {}
+
   combined-stream@1.0.8:
     dependencies:
       delayed-stream: 1.0.0
@@ -9310,6 +9451,8 @@ snapshots:
   comment-parser@1.4.1: {}
 
   comment-parser@1.4.7: {}
+
+  commondir@1.0.1: {}
 
   compare-func@2.0.0:
     dependencies:
@@ -10167,6 +10310,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  find-cache-dir@3.3.2:
+    dependencies:
+      commondir: 1.0.1
+      make-dir: 3.1.0
+      pkg-dir: 4.2.0
+
   find-up-simple@1.0.1: {}
 
   find-up@2.1.0:
@@ -10334,6 +10483,10 @@ snapshots:
   graceful-fs@4.2.11: {}
 
   graphemer@1.4.0: {}
+
+  graphlib@2.1.8:
+    dependencies:
+      lodash: 4.18.1
 
   handlebars@4.7.9:
     dependencies:
@@ -11138,6 +11291,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  make-dir@3.1.0:
+    dependencies:
+      semver: 6.3.1
+
   make-dir@4.0.0:
     dependencies:
       semver: 7.8.5
@@ -11153,6 +11310,8 @@ snapshots:
   markdown-table@3.0.4: {}
 
   math-intrinsics@1.1.0: {}
+
+  md5-file@5.0.0: {}
 
   mdast-util-find-and-replace@3.0.2:
     dependencies:
@@ -11607,6 +11766,8 @@ snapshots:
   object-deep-merge@1.0.5:
     dependencies:
       type-fest: 4.2.0
+
+  object-hash@3.0.0: {}
 
   object-inspect@1.13.4: {}
 
