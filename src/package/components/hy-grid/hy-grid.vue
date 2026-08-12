@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-grid" ref="hy-grid" :style="gridStyle">
+    <view :class="['hy-grid', customClass]" ref="hy-grid" :style="gridStyle">
         <template v-for="(item, i) in list" :key="i">
             <view
                 :class="getItemClass(i)"
