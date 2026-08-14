@@ -12,6 +12,7 @@ tags.json
 web-types.json
 attributes.json
 node_modules
+unpackage
 .DS_Store
 dist
 *.local
