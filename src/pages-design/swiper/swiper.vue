@@ -8,22 +8,22 @@
                 :height="height"
                 :duration="duration"
                 :interval="interval"
+                circular
             ></hy-swiper>
         </view>
 
         <view class="hy-margin">
             <hy-swiper
                 :list="list_2"
+                :autoplay="false"
                 indicator
                 :indicatorMode="mode"
                 previousMargin="30"
                 nextMargin="30"
-                circular
                 radius="5"
                 bgColor="#ffffff"
-                :duration="duration"
-                :interval="interval"
                 showTitle
+                circular
             ></hy-swiper>
         </view>
 
@@ -59,6 +59,7 @@ import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
 import TheRootPage from '@/components/the-root-page.vue'
 import type { SwiperList, IndicatorMode } from '@/package'
+import { config } from '@/config/config.ts'
 
 definePage({
     style: {
@@ -66,16 +67,7 @@ definePage({
     }
 })
 
-const list = ref([
-    'https://img0.baidu.com/it/u=1913990970,584854398&fm=253&id=1',
-    'http://mms2.baidu.com/it/u=204741874,3444396868&fm=253&id=2',
-    'https://img2.baidu.com/it/u=3042825715,659259329&fm=253&id=3',
-    'https://img2.baidu.com/it/u=109690972,2214958998&fm=253&id=4',
-    'http://mms0.baidu.com/it/u=2161107790,808970254&fm=253&id=5',
-    'https://img2.baidu.com/it/u=4211554685,400408647&fm=253&id=6',
-    'https://img2.baidu.com/it/u=2237681987,1998118702&fm=253&id=7',
-    'https://img1.baidu.com/it/u=2494879897,1602792615&fm=253&id=8'
-])
+const list = ref([config.swiper1, config.swiper2, config.swiper3])
 const list_2 = ref<SwiperList[]>([
     {
         url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
@@ -83,16 +75,16 @@ const list_2 = ref<SwiperList[]>([
         type: 'video'
     },
     {
-        url: 'http://mms2.baidu.com/it/u=204741874,3444396868&fm=253&id=2',
+        url: config.swiper1,
         title: '身无彩凤双飞翼，心有灵犀一点通'
     },
     {
-        url: 'https://img2.baidu.com/it/u=3042825715,659259329&fm=253&id=3',
+        url: config.swiper2,
         title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
     }
 ])
 const mode = ref<IndicatorMode>('line')
-const height = ref<number>(130)
+const height = ref<number>(200)
 const duration = ref<number>(300)
 const interval = ref<number>(3000)
 const list_1 = reactive([

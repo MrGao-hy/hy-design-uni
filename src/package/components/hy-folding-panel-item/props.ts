@@ -66,11 +66,14 @@ const foldingPanelItemProps = {
         default: false
     },
     /**
-     * 内容区域最大高度
+     * 内容区域最大高度上限
+     * - 不传或传 'auto' 时按内容真实高度自适应
+     * - 传入具体数值（如 200）或带单位字符串（如 '200px'）时，
+     *   当内容真实高度超过该上限，则在内部出现滚动条
      */
     contentHeight: {
         type: [Number, String],
-        default: 150
+        default: 'auto'
     },
     /**
      * 自定义样式

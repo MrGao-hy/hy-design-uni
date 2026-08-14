@@ -30,7 +30,7 @@
         </view>
 
         <view class="hy-title">超链接</view>
-        <hy-text mode="link" text="摸鱼日记" href="https://gxh151.top/h5"></hy-text>
+        <hy-text mode="link" text="我的博客" href="https://blogs.hy-design-uni.top/"></hy-text>
 
         <view class="hy-title">显示金额</view>
         <hy-text mode="price" text="728732.32"></hy-text>

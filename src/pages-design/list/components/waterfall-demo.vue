@@ -40,6 +40,11 @@
                 <view class="product-card__info">
                     <text class="product-card__name">{{ record.name }}</text>
                     <text class="product-card__desc">{{ record.description }}</text>
+                    <hy-flex gap="10">
+                        <hy-tag label="国产" plain size="mini"></hy-tag>
+                        <hy-tag label="物美价廉" plain size="mini"></hy-tag>
+                        <hy-tag label="跑车" plain size="mini"></hy-tag>
+                    </hy-flex>
                     <view class="product-card__bottom">
                         <text class="product-card__price">
                             <text class="product-card__symbol">¥</text>{{ record.price }}
@@ -60,6 +65,11 @@
                 <view class="product-card__info">
                     <text class="product-card__name">{{ record.name }}</text>
                     <text class="product-card__desc">{{ record.description }}</text>
+                    <hy-flex gap="10">
+                        <hy-tag label="国产" plain size="mini"></hy-tag>
+                        <hy-tag label="物美价廉" plain size="mini"></hy-tag>
+                        <hy-tag label="跑车" plain size="mini"></hy-tag>
+                    </hy-flex>
                     <view class="product-card__bottom">
                         <text class="product-card__price">
                             <text class="product-card__symbol">¥</text>{{ record.price }}
@@ -88,6 +98,11 @@
                 <view class="product-card__info">
                     <text class="product-card__name">{{ item.name }}</text>
                     <text class="product-card__desc">{{ item.description }}</text>
+                    <hy-flex gap="10">
+                        <hy-tag label="国产" plain size="mini"></hy-tag>
+                        <hy-tag label="物美价廉" plain size="mini"></hy-tag>
+                        <hy-tag label="跑车" plain size="mini"></hy-tag>
+                    </hy-flex>
                     <view class="product-card__bottom">
                         <text class="product-card__price">
                             <text class="product-card__symbol">¥</text>{{ item.price }}
@@ -113,6 +128,11 @@
                 <view class="product-card__info">
                     <text class="product-card__name">{{ item.name }}</text>
                     <text class="product-card__desc">{{ item.description }}</text>
+                    <hy-flex gap="10">
+                        <hy-tag label="国产" plain size="mini"></hy-tag>
+                        <hy-tag label="物美价廉" plain size="mini"></hy-tag>
+                        <hy-tag label="跑车" plain size="mini"></hy-tag>
+                    </hy-flex>
                     <view class="product-card__bottom">
                         <text class="product-card__price">
                             <text class="product-card__symbol">¥</text>{{ item.price }}
@@ -128,6 +148,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
+import { config } from '@/config/config.ts'
 
 // ====== 列表数据 ======
 const list = ref<AnyObject[]>([])
@@ -171,7 +192,7 @@ const descriptions = [
 ]
 
 const fakeRequest = <T = any,>(data: T, delay?: number): Promise<T> => {
-    const ms = delay ?? 800 + Math.random() * 400
+    const ms = delay || 800 + Math.random() * 400
     return new Promise((resolve) => {
         setTimeout(() => resolve(data), ms)
     })
@@ -182,14 +203,15 @@ const generateItem = (index: number): AnyObject => {
     const desc = descriptions[index % descriptions.length]
     const price = (Math.random() * 200 + 5).toFixed(2)
     const sold = Math.floor(Math.random() * 10000)
-    const seed = `waterfall-${index}-${Date.now()}`
+    const img = Math.floor(Math.random() * 11) + 1
+    const imgName = `good_${img}.jpg`
     return {
         id: index,
         name: category,
         description: desc,
         price,
         sold: sold > 9999 ? `${(sold / 10000).toFixed(1)}万` : String(sold),
-        image: `44/${seed}/400/400`
+        image: config.good(imgName)
     }
 }
 
@@ -377,7 +399,7 @@ onMounted(() => {
     &__desc {
         font-size: $hy-font-size-xs;
         color: $hy-text-color--3;
-        margin-top: 6rpx;
+        margin: $hy-border-margin-padding-sm 0;
     }
 
     &__bottom {

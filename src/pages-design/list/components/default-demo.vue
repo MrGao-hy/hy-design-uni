@@ -51,6 +51,7 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
+import { config } from '@/config/config.ts'
 
 // ====== 列表数据 ======
 const list = ref<AnyObject[]>([])
@@ -85,7 +86,7 @@ const categories = [
 ]
 
 const fakeRequest = <T = any,>(data: T, delay?: number): Promise<T> => {
-    const ms = delay ?? 800 + Math.random() * 400
+    const ms = delay || 800 + Math.random() * 400
     return new Promise((resolve) => {
         setTimeout(() => resolve(data), ms)
     })
@@ -95,13 +96,14 @@ const generateItem = (index: number): AnyObject => {
     const category = categories[index % categories.length]
     const price = (Math.random() * 200 + 5).toFixed(2)
     const sold = Math.floor(Math.random() * 10000)
-    const seed = `default-${index}-${Date.now()}`
+    const img = Math.floor(Math.random() * 11) + 1
+    const imgName = `good_${img}.jpg`
     return {
         id: index,
         name: category,
         price,
         sold: sold > 9999 ? `${(sold / 10000).toFixed(1)}万` : String(sold),
-        image: `https://picsum.photos/seed/${seed}/400/400`
+        image: config.good(imgName)
     }
 }
 

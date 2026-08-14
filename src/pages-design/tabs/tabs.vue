@@ -18,6 +18,7 @@ import { useShareButton } from '@/composables'
 import type { OrderItem } from '@/pages-design/tabs/components/types'
 import TheRootPage from '@/components/the-root-page.vue'
 import type { TabsItemVo } from '@/package'
+import { config } from '@/config/config.ts'
 
 definePage({
     style: {
@@ -65,7 +66,7 @@ function generateOrders(): OrderItem[][] {
                 product: {
                     skuId,
                     name: `智能商品_${skuId}`,
-                    img: `https://img.yzcdn.cn/vant/cat.jpeg`, // 公网图
+                    img: config.image, // 公网图
                     price: (Math.random() * 100 + 10).toFixed(2),
                     qty: Math.floor(Math.random() * 3) + 1
                 }

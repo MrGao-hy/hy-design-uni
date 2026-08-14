@@ -100,9 +100,9 @@
                             <text
                                 :class="[
                                     'status-tag',
-                                    index < currentStep ? 'status-done' : '',
-                                    index === currentStep ? 'status-active' : '',
-                                    index > currentStep ? 'status-pending' : ''
+                                    index < currentStep ? 'static-done' : '',
+                                    index === currentStep ? 'static-active' : '',
+                                    index > currentStep ? 'static-pending' : ''
                                 ]"
                             >
                                 {{

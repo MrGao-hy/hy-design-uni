@@ -13,7 +13,8 @@
                     <hy-flex vertical :flex="1" justify="center" gap="4rpx">
                         <hy-flex align="center" justify="space-between">
                             <hy-text :text="userInfo.nickname" size="18rpx" :bold="true" />
-                            <hy-tag :text="t('vip')" type="primary" plain size="mini" />
+                            &ensp;
+                            <hy-tag :label="t('vip')" type="primary" plain size="mini" />
                         </hy-flex>
                         <hy-text :text="'ID: ' + userInfo.userId" size="12rpx" color="#999" />
                         <hy-text :text="t('bio')" size="12rpx" color="#666" />
@@ -103,6 +104,20 @@
                 </view>
             </hy-card>
 
+            <!-- 鸿蒙审核测试小工具 -->
+            <hy-card>
+                <view class="cell-row cell-border" @click="handleNavigate('/pages/tools/Index')">
+                    <view class="cell-icon" style="background-color: #9f7aea">
+                        <hy-icon :name="IconConfig.SETTING" size="20" color="#fff" />
+                    </view>
+                    <hy-text :text="t('harmonyTools')" size="28rpx" :flex="true" />
+                    <view class="cell-right">
+                        <hy-tag v-if="toolBadge" :label="toolBadge" type="error" size="mini" />
+                        <hy-icon name="right" size="20" color="#c0c4cc" />
+                    </view>
+                </view>
+            </hy-card>
+
             <!-- 退出登录 -->
             <!-- <hy-button
                 type="error"
@@ -121,6 +136,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { IconConfig, Locale, useCurrentLang, useToast } from '@/package'
+import { config } from '@/config/config'
 import enUS from '@/package/libs/locale/lang/en-US'
 
 // 国际化文案
@@ -147,7 +163,8 @@ const i18nMessages: Record<string, Record<string, string>> = {
         logoutFail: '退出失败，请重试',
         pageNotExist: '页面不存在',
         langSwitch: '已切换为中文',
-        langSwitchEn: 'Switched to English'
+        langSwitchEn: 'Switched to English',
+        harmonyTools: '鸿蒙审核工具'
     },
     'en-US': {
         vip: 'VIP',
@@ -171,7 +188,8 @@ const i18nMessages: Record<string, Record<string, string>> = {
         logoutFail: 'Logout failed, please retry',
         pageNotExist: 'Page not found',
         langSwitch: 'Switched to Chinese',
-        langSwitchEn: 'Switched to English'
+        langSwitchEn: 'Switched to English',
+        harmonyTools: 'HarmonyOS Tools'
     }
 }
 
@@ -191,11 +209,19 @@ const t = (key: string): string => {
 const toast = useToast()
 const isLoggingOut = ref(false)
 
+// 工具页未读问题数（鸿蒙审核未通过项），存在本地，用于在入口徽标提示
+const toolBadge = ref<string>(
+    (() => {
+        const cnt = uni.getStorageSync('harmony_tools_issues')
+        return typeof cnt === 'number' && cnt > 0 ? String(cnt) : ''
+    })()
+)
+
 // 用户信息
 const userInfo = ref({
     nickname: '华玥10086',
     userId: '10086',
-    avatar: 'https://q1.qlogo.cn/g?b=qq&nk=123456789&s=100',
+    avatar: config.avatar,
     bio: '这个人很懒，什么都没有留下',
     isVip: true
 })
@@ -256,16 +282,16 @@ const handleEditProfile = () => {}
 
 // 处理统计项点击
 const handleStatClick = (key: string) => {
-    const routeMap: Record<string, string> = {
-        components: '/pages/favorites/index',
-        following: '/pages/following/index',
-        followers: '/pages/followers/index',
-        likes: '/pages/likes/index'
-    }
-    const route = routeMap[key]
-    if (route) {
-        uni.navigateTo({ url: route, fail: () => toast.info(t('pageNotExist')) })
-    }
+    // const routeMap: Record<string, string> = {
+    //     components: '/pages/favorites/index',
+    //     following: '/pages/following/index',
+    //     followers: '/pages/followers/index',
+    //     likes: '/pages/likes/index'
+    // }
+    // const route = routeMap[key]
+    // if (route) {
+    //     uni.navigateTo({ url: route, fail: () => toast.info(t('pageNotExist')) })
+    // }
 }
 
 // 处理导航
@@ -273,12 +299,18 @@ const handleNavigate = (route?: string) => {
     if (!route) return
     uni.navigateTo({
         url: route,
-        fail: () => toast.info(t('pageNotExist'))
+        fail: () => toast.info(t('pageNotExist')),
+        success: () => {
+            // 进入工具页后清除徽标
+            if (route === '/pages/tools/Index') {
+                toolBadge.value = ''
+            }
+        }
     })
 }
 
 // 处理语言切换
-const handleLangChange = (val: boolean) => {
+const handleLangChange = (val: boolean | string | number) => {
     if (val) {
         Locale.use('en-US', enUS)
     } else {

@@ -28,7 +28,7 @@
         <view class="hy-container">
             <hy-qrcode
                 cid="qrcode_5"
-                text="https://uview-plus.jiangruyi.com/uview-plus/common/logo.png"
+                text="华玥组件库，中国13亿人都在用的组件库"
                 background="red"
                 foreground="green"
                 pdGround="blue"

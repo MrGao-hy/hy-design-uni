@@ -56,7 +56,7 @@ const orderStatusColor = {
 } as Record<string, string>
 
 const statusTextColor = computed(() => {
-    return orderStatusColor[props.order.order.status] ?? '#909399'
+    return orderStatusColor[props.order.order.status] || '#909399'
 })
 </script>
 

@@ -26,8 +26,8 @@
         <view class="hy-container">
             <hy-rate
                 v-model="value"
-                activeIcon="https://pic1.imgdb.cn/item/67d6820788c538a9b5bf333a.png"
-                inactiveIcon="https://pic1.imgdb.cn/item/67d6820788c538a9b5bf333b.png"
+                activeIcon="/src/pages-design/z_static/images/activeIcon.jpg"
+                inactiveIcon="/src/pages-design/z_static/images/inactiveIcon.jpg"
             ></hy-rate>
         </view>
 

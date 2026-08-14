@@ -7,7 +7,7 @@
                 thumbCircle
                 sub-title="釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放"
                 right-text="2020-05-15"
-                thumb="https://img0.baidu.com/it/u=3124282249,3904399666&fm=253"
+                :thumb="config.avatar"
                 thumb-width="40"
                 full
                 :showHead="showHead"
@@ -23,19 +23,13 @@
                             <view class="u-body-item-title u-line-2"
                                 >瓶身描绘的牡丹一如你初妆，冉冉檀香透过窗心事我了然，宣纸上走笔至此搁一半</view
                             >
-                            <image
-                                src="https://img11.360buyimg.com/n7/jfs/t1/94448/29/2734/524808/5dd4cc16E990dfb6b/59c256f85a8c3757.jpg"
-                                mode="aspectFill"
-                            ></image>
+                            <hy-image :src="config.swiper1" width="100%" :radius="10"></hy-image>
                         </view>
                         <view class="u-body-item u-flex u-row-between u-p-b-0">
                             <view class="u-body-item-title u-line-2"
                                 >釉色渲染仕女图韵味被私藏，而你嫣然的一笑如含苞待放</view
                             >
-                            <image
-                                src="https://img12.360buyimg.com/n7/jfs/t1/102191/19/9072/330688/5e0af7cfE17698872/c91c00d713bf729a.jpg"
-                                mode="aspectFill"
-                            ></image>
+                            <hy-image :src="config.swiper2" width="100%" :radius="10"></hy-image>
                         </view>
                     </view>
                 </template>
@@ -67,6 +61,7 @@
 import { IconConfig } from '@/package'
 import { reactive, ref } from 'vue'
 import { useShareButton } from '@/composables'
+import { config } from '@/config/config.ts'
 
 definePage({
     style: {

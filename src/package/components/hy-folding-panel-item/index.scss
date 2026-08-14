@@ -71,9 +71,46 @@
     }
   }
 
+  @include e(content-wrapper) {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    transition:
+    height 0.3s ease,
+    max-height 0.3s ease,
+    opacity 0.25s ease;
+    opacity: 0;
+
+    // 展开时渐显
+    &.is-expanded {
+      opacity: 1;
+    }
+
+    // 限高且动画结束后：内部可滚动
+    &.is-limited-scroll {
+      overflow: auto;
+    }
+
+    // 脱屏测量模式：脱离正常流、隐藏不可见、完整撑开内容，确保 getRect 测到真实高度
+    &.is-measuring {
+      position: absolute;
+      left: -99999rpx;
+      top: 0;
+      width: 100%;
+      height: auto;
+      max-height: none;
+      overflow: visible;
+      visibility: hidden;
+      opacity: 0;
+      z-index: -1;
+      pointer-events: none;
+      transition: none;
+    }
+  }
+
   @include e(content) {
     background-color: transparent;
-    transition: height 0.3s ease;
     box-sizing: border-box;
   }
 }

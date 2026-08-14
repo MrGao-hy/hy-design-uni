@@ -1,7 +1,7 @@
 <template>
     <view
         :style="statusBarStyle"
-        :class="['hy-status-bar', isH5 && 'hy-safe-area-inset-top', customClass]"
+        :class="['hy-static-bar', isH5 && 'hy-safe-area-inset-top', customClass]"
     >
         <slot />
     </view>

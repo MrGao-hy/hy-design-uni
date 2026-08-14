@@ -55,4 +55,10 @@ export interface IFoldingPanelItemExpose {
      * @returns 当前展开状态
      */
     getExpanded: () => boolean
+    /**
+     * 重新测量内容高度
+     * 当插槽内容动态变化（如异步加载、加载更多）导致高度改变时调用
+     * @returns Promise，测量并应用高度后 resolve
+     */
+    resize: () => Promise<void>
 }

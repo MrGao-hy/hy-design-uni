@@ -112,6 +112,7 @@ import { ref } from 'vue'
 import { bytesToSize, isArray } from '@/package'
 import { useShareButton } from '@/composables'
 import type { FileVo, UploadFileParams } from '@/package'
+import { config } from '@/config/config.ts'
 
 definePage({
     style: {
@@ -124,7 +125,7 @@ const list = ref<FileVo[]>([
     {
         status: 'success',
         message: '上传成功',
-        url: 'https://img0.baidu.com/it/u=3196617431,1263013381&fm=253'
+        url: config.avatar
     }
 ])
 const list_1 = ref<FileVo[]>([])
@@ -136,14 +137,14 @@ const list_6 = ref<FileVo[]>([
     {
         status: 'success',
         message: '已上传',
-        url: 'https://img0.baidu.com/it/u=3196617431,1263013381&fm=253'
+        url: config.avatar
     }
 ])
 const list_7 = ref<FileVo[]>([
     {
         status: 'success',
         message: '上传成功',
-        url: 'https://img0.baidu.com/it/u=3196617431,1263013381&fm=253'
+        url: config.avatar
     }
 ])
 const list_8 = ref<FileVo[]>([])

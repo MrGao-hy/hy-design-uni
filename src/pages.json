@@ -35,6 +35,10 @@
         {
             "path": "pages/test/Index",
             "type": "page"
+        },
+        {
+            "path": "pages/tools/Index",
+            "type": "page"
         }
     ],
     "subPackages": [
@@ -1307,25 +1311,6 @@
                         }
                     }
                 },
-                // #ifdef MP-ALIPAY
-                {
-                    "path": "bezierFly/bezierFly",
-                    "type": "page",
-                    "style": {
-                        "navigationBarTitleText": "贝塞尔飞入动画",
-                        "h5": {
-                            "titleNView": {
-                                "buttons": [
-                                    {
-                                        "type": "share"
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                // #endif
-                // #ifdef APP || APP-HARMONY || H5 || MP-WEIXIN
                 {
                     "path": "signature/Landscape",
                     "type": "page",
@@ -1343,7 +1328,6 @@
                         }
                     }
                 }
-                // #endif
             ]
         }
     ],

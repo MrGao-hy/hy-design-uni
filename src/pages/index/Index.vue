@@ -1,12 +1,12 @@
 <template>
     <the-root-page>
-        <the-cell title="基础组件" :list="list_1"></the-cell>
-        <the-cell title="表单组件" :list="list_2"></the-cell>
-        <the-cell title="布局组件" :list="list_3"></the-cell>
-        <the-cell title="反馈组件" :list="list_4"></the-cell>
-        <the-cell title="导航组件" :list="list_5"></the-cell>
-        <the-cell title="其他组件" :list="list_6"></the-cell>
-        <the-cell title="业务组件" :list="list_7"></the-cell>
+        <the-cell title="基础组件" :list="list_1" :showRate="true"></the-cell>
+        <the-cell title="表单组件" :list="list_2" :showRate="true"></the-cell>
+        <the-cell title="布局组件" :list="list_3" :showRate="true"></the-cell>
+        <the-cell title="反馈组件" :list="list_4" :showRate="true"></the-cell>
+        <the-cell title="导航组件" :list="list_5" :showRate="true"></the-cell>
+        <the-cell title="其他组件" :list="list_6" :showRate="true"></the-cell>
+        <the-cell title="业务组件" :list="list_7" :showRate="true"></the-cell>
 
         <hy-modal v-model="showHint" title="摇一摇更换主题色"></hy-modal>
     </the-root-page>

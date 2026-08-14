@@ -15,6 +15,9 @@ export default defineConfig({
             gzipSize: true // 同时显示 gzip 体积
         })
     ],
+    server: {
+        port: 8070
+    },
     resolve: {
         alias: {
             '@': resolve(__dirname, 'src')

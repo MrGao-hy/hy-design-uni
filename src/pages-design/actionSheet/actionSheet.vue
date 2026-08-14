@@ -3,76 +3,32 @@
         <!-- 基础功能 -->
         <view class="hy-title">基础功能</view>
         <hy-cell>
-            <hy-cell-item
-                title="基础使用"
-                clickable
-                @click="showBasic = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                title="带标题"
-                clickable
-                @click="showTitle = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                title="带取消按钮"
-                clickable
-                @click="showCancel = true"
-            ></hy-cell-item>
+            <hy-cell-item title="基础使用" clickable @click="showBasic = true"></hy-cell-item>
+            <hy-cell-item title="带标题" clickable @click="showTitle = true"></hy-cell-item>
+            <hy-cell-item title="带取消按钮" clickable @click="showCancel = true"></hy-cell-item>
         </hy-cell>
 
         <!-- 选项状态 -->
         <view class="hy-title">选项状态</view>
         <hy-cell>
-            <hy-cell-item
-                title="禁用状态"
-                clickable
-                @click="showDisabled = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                title="加载状态"
-                clickable
-                @click="showLoading = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                title="自定义颜色"
-                clickable
-                @click="showColor = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                title="描述信息"
-                clickable
-                @click="showSub = true"
-            ></hy-cell-item>
+            <hy-cell-item title="禁用状态" clickable @click="showDisabled = true"></hy-cell-item>
+            <hy-cell-item title="加载状态" clickable @click="showLoading = true"></hy-cell-item>
+            <hy-cell-item title="自定义颜色" clickable @click="showColor = true"></hy-cell-item>
+            <hy-cell-item title="描述信息" clickable @click="showSub = true"></hy-cell-item>
         </hy-cell>
 
         <!-- 自定义面板 -->
         <view class="hy-title">自定义面板</view>
         <hy-cell>
-            <hy-cell-item
-                title="单行面板"
-                clickable
-                @click="showPanelSingle = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                title="多行面板"
-                clickable
-                @click="showPanelMulti = true"
-            ></hy-cell-item>
+            <hy-cell-item title="单行面板" clickable @click="showPanelSingle = true"></hy-cell-item>
+            <hy-cell-item title="多行面板" clickable @click="showPanelMulti = true"></hy-cell-item>
         </hy-cell>
 
         <!-- 高级用法 -->
         <view class="hy-title">高级用法</view>
         <hy-cell>
-            <hy-cell-item
-                title="点击不关闭"
-                clickable
-                @click="showNoClose = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                title="自定义内容插槽"
-                clickable
-                @click="showSlot = true"
-            ></hy-cell-item>
+            <hy-cell-item title="点击不关闭" clickable @click="showNoClose = true"></hy-cell-item>
+            <hy-cell-item title="自定义内容插槽" clickable @click="showSlot = true"></hy-cell-item>
         </hy-cell>
 
         <!-- ========== 基础功能 ========== -->
@@ -164,11 +120,7 @@
         <hy-action-sheet v-model="showSlot" title="自定义内容">
             <view class="custom-content">
                 <text class="custom-text">这里是自定义内容区域</text>
-                <hy-button
-                    text="确认关闭"
-                    type="primary"
-                    @click="showSlot = false"
-                ></hy-button>
+                <hy-button text="确认关闭" type="primary" @click="showSlot = false"></hy-button>
             </view>
         </hy-action-sheet>
     </the-root-page>
@@ -178,6 +130,7 @@
 import { ref } from 'vue'
 import type { IActionSheetAction } from '@/package/components/hy-action-sheet/typing'
 import { useShareButton } from '@/composables'
+import { config } from '@/config/config.ts'
 
 definePage({
     style: {
@@ -236,19 +189,19 @@ const actionsSub = ref<IActionSheetAction[]>([
 // ========== 单行面板 ==========
 const panelsSingle = ref([
     {
-        iconUrl: 'https://img12.360buyimg.com/imagetools/jfs/t1/122016/33/6657/1362/5f0692a1E8708d245/e47299e5945a6956.png',
+        iconUrl: config.wx,
         name: '微信'
     },
     {
-        iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/111572/11/11734/1245/5f0692a1E39d13d21/b35dfe9243bd6c2a.png',
+        iconUrl: config.wb,
         name: '微博'
     },
     {
-        iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/132639/25/4003/945/5f069336E18778248/fa181913030bed8a.png',
+        iconUrl: config.qq,
         name: 'QQ'
     },
     {
-        iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/134807/4/3950/1256/5f069336E76949e27/d20641da8e699f07.png',
+        iconUrl: config.sc,
         name: '收藏'
     }
 ])
@@ -257,33 +210,33 @@ const panelsSingle = ref([
 const panelsMulti = ref([
     [
         {
-            iconUrl: 'https://img12.360buyimg.com/imagetools/jfs/t1/122016/33/6657/1362/5f0692a1E8708d245/e47299e5945a6956.png',
+            iconUrl: config.wx,
             name: '微信'
         },
         {
-            iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/111572/11/11734/1245/5f0692a1E39d13d21/b35dfe9243bd6c2a.png',
+            iconUrl: config.wb,
             name: '微博'
         },
         {
-            iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/132639/25/4003/945/5f069336E18778248/fa181913030bed8a.png',
+            iconUrl: config.qq,
             name: 'QQ'
         },
         {
-            iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/134807/4/3950/1256/5f069336E76949e27/d20641da8e699f07.png',
+            iconUrl: config.sc,
             name: '收藏'
         }
     ],
     [
         {
-            iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/132639/25/4003/945/5f069336E18778248/fa181913030bed8a.png',
+            iconUrl: config.qq,
             name: 'QQ好友'
         },
         {
-            iconUrl: 'https://img12.360buyimg.com/imagetools/jfs/t1/122016/33/6657/1362/5f0692a1E8708d245/e47299e5945a6956.png',
+            iconUrl: config.wx,
             name: '微信好友'
         },
         {
-            iconUrl: 'https://img14.360buyimg.com/imagetools/jfs/t1/111572/11/11734/1245/5f0692a1E39d13d21/b35dfe9243bd6c2a.png',
+            iconUrl: config.wb,
             name: '朋友圈'
         }
     ]

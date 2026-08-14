@@ -112,10 +112,7 @@
                     <hy-navbar :fixed="false" :safeAreaInsetTop="false">
                         <template #left>
                             <view class="user-slot">
-                                <hy-avatar
-                                    :size="28"
-                                    src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=portrait%20of%20a%20young%20person%20avatar%20style%20clean%20background&image_size=square"
-                                ></hy-avatar>
+                                <hy-avatar :size="28" :src="config.avatar"></hy-avatar>
                                 <text class="user-name">用户名</text>
                                 <hy-icon
                                     :name="IconConfig.ARROW_DOUBLE_LEFT"
@@ -170,7 +167,6 @@
                         :fixed="false"
                         :safeAreaInsetTop="false"
                         :left-style="{ paddingLeft: '10px' }"
-                        :right-style="{ paddingRight: '10px' }"
                         autoBack
                         shadow
                     >
@@ -181,7 +177,7 @@
                         </template>
                         <template #right>
                             <view class="styled-right">
-                                <hy-tag type="primary" size="mini">发布</hy-tag>
+                                <hy-button type="primary" plain :border="false">发布</hy-button>
                             </view>
                         </template>
                     </hy-navbar>
@@ -195,6 +191,7 @@
 <script setup lang="ts">
 import { IconConfig } from '@/package'
 import { useShareButton } from '@/composables'
+import { config } from '@/config/config.ts'
 
 definePage({
     style: {

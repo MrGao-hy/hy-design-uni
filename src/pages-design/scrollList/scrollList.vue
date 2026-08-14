@@ -25,6 +25,7 @@
 
 <script setup lang="ts">
 import { useShareButton } from '@/composables'
+import { config } from '@/config/config.ts'
 
 definePage({
     style: {
@@ -35,43 +36,35 @@ definePage({
 const goodsArr = [
     {
         price: '230.5',
-        thumbnail:
-            'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png'
+        thumbnail: config.image
     },
     {
         price: '74.1',
-        thumbnail:
-            'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png'
+        thumbnail: config.image
     },
     {
         price: '8457',
-        thumbnail:
-            'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png'
+        thumbnail: config.image
     },
     {
         price: '1442',
-        thumbnail:
-            'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png'
+        thumbnail: config.image
     },
     {
         price: '541',
-        thumbnail:
-            'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png'
+        thumbnail: config.image
     },
     {
         price: '234',
-        thumbnail:
-            'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png'
+        thumbnail: config.image
     },
     {
         price: '562',
-        thumbnail:
-            'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png'
+        thumbnail: config.image
     },
     {
         price: '251.5',
-        thumbnail:
-            'https://img11.360buyimg.com/n1/s450x450_jfs/t1/281169/10/14028/31748/67ecf51dF384c5bd6/1ec0c214ea7a914e.png'
+        thumbnail: config.image
     }
 ]
 

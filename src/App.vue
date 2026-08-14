@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { onLaunch, onThemeChange, onUnload } from '@dcloudio/uni-app'
+import { onThemeChange, onUnload } from '@dcloudio/uni-app'
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { enableTouchSimulation } from '@/utils'
+import type { ThemeModeType } from '@/package'
 
 const themeStore = useThemeStore()
 const { darkMode } = storeToRefs(themeStore)
@@ -24,23 +25,19 @@ onUnload(() => {
     // #endif
 })
 
+uni.getSystemInfo({
+    success(res) {
+        // theme: dark / light
+        if (res.theme) darkMode.value = res.theme as ThemeModeType
+    }
+})
+
 onThemeChange((option) => {
     console.log(option)
     darkMode.value = option.theme
-})
-
-onLaunch(() => {
-    uni.onThemeChange(function (res) {
-        console.log(res, 'res')
-        darkMode.value = res.theme
-    })
 })
 </script>
 <style lang="scss">
 @use '@/style/common.scss';
 @use '@/static/icon/font_1/iconfont.css';
-
-page {
-    padding: var(--)
-}
 </style>
