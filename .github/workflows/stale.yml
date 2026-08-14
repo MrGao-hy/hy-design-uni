@@ -1,0 +1,297 @@
+name: 闲置Issue自动管理
+
+on:
+  schedule:
+    # 每天凌晨 1 点执行
+    - cron: "0 1 * * *"
+
+  # 允许在 GitHub Actions 页面手动执行
+  workflow_dispatch:
+
+jobs:
+  # ============================================================
+  # 第一步：检查 Issue 是否有作者 / 管理员的评论
+  # ============================================================
+  check-issue-eligibility:
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+      contents: read
+
+    steps:
+      - name: 检查 Issue 评论资格
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            // 用于标记“允许进入自动关闭流程”的标签
+            const eligibleLabel = '可自动关闭';
+
+            // 获取仓库 Issue
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner,
+                repo,
+                state: 'open',
+                per_page: 100
+              }
+            );
+
+            console.log(`共发现 ${issues.length} 个 Open Issue`);
+
+            // 确保标签存在
+            try {
+              await github.rest.issues.getLabel({
+                owner,
+                repo,
+                name: eligibleLabel
+              });
+
+              console.log(`标签「${eligibleLabel}」已存在`);
+            } catch (error) {
+              if (error.status === 404) {
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name: eligibleLabel,
+                  color: '0E8A16',
+                  description: 'Issue 已有作者或仓库维护者回复，可以进入自动关闭流程'
+                });
+
+                console.log(`已创建标签「${eligibleLabel}」`);
+              } else {
+                throw error;
+              }
+            }
+
+            // 获取仓库权限信息
+            const collaborators = await github.paginate(
+              github.rest.repos.listCollaborators,
+              {
+                owner,
+                repo,
+                affiliation: 'all',
+                per_page: 100
+              }
+            );
+
+            // 管理员 / 维护者账号
+            const maintainers = new Set(
+              collaborators
+                .filter(user => {
+                  const permission = user.permissions?.permission;
+
+                  return [
+                    'admin',
+                    'maintain',
+                    'write'
+                  ].includes(permission);
+                })
+                .map(user => user.login.toLowerCase())
+            );
+
+            console.log(
+              `发现 ${maintainers.size} 个管理员/维护者账号`
+            );
+
+            // 遍历所有 Open Issue
+            for (const issue of issues) {
+
+              // pull request 也会出现在 issues API 中
+              // 排除 PR
+              if (issue.pull_request) {
+                continue;
+              }
+
+              const issueNumber = issue.number;
+
+              const issueAuthor =
+                issue.user?.login?.toLowerCase();
+
+              if (!issueAuthor) {
+                continue;
+              }
+
+              console.log(
+                `\n检查 Issue #${issueNumber}，作者：${issueAuthor}`
+              );
+
+              // 如果已经有资格标签，不需要重复检查
+              const hasEligibleLabel =
+                issue.labels?.some(label => {
+                  const name =
+                    typeof label === 'string'
+                      ? label
+                      : label.name;
+
+                  return name === eligibleLabel;
+                });
+
+              if (hasEligibleLabel) {
+                console.log(
+                  `Issue #${issueNumber} 已经具有「${eligibleLabel}」`
+                );
+                continue;
+              }
+
+              // 获取所有评论
+              const comments = await github.paginate(
+                github.rest.issues.listComments,
+                {
+                  owner,
+                  repo,
+                  issue_number: issueNumber,
+                  per_page: 100
+                }
+              );
+
+              console.log(
+                `Issue #${issueNumber} 共 ${comments.length} 条评论`
+              );
+
+              // 判断是否存在作者评论
+              const authorComment = comments.find(comment => {
+                const commenter =
+                  comment.user?.login?.toLowerCase();
+
+                return commenter === issueAuthor;
+              });
+
+              // 判断是否存在管理员/维护者评论
+              const maintainerComment = comments.find(comment => {
+                const commenter =
+                  comment.user?.login?.toLowerCase();
+
+                return commenter &&
+                  maintainers.has(commenter);
+              });
+
+              // 作者或者管理员任意一个评论即可
+              if (authorComment || maintainerComment) {
+
+                console.log(
+                  `✅ Issue #${issueNumber} 满足自动关闭条件`
+                );
+
+                if (authorComment) {
+                  console.log(
+                    `   原因：Issue 作者 ${issueAuthor} 发表过评论`
+                  );
+                }
+
+                if (maintainerComment) {
+                  console.log(
+                    `   原因：管理员/维护者发表过评论`
+                  );
+                }
+
+                // 添加资格标签
+                await github.rest.issues.addLabels({
+                  owner,
+                  repo,
+                  issue_number: issueNumber,
+                  labels: [eligibleLabel]
+                });
+
+                console.log(
+                  `已给 Issue #${issueNumber} 添加「${eligibleLabel}」`
+                );
+
+              } else {
+
+                console.log(
+                  `❌ Issue #${issueNumber} 没有作者或管理员评论`
+                );
+
+                console.log(
+                  `   不进入自动关闭流程`
+                );
+              }
+            }
+
+  # ============================================================
+  # 第二步：处理已经满足条件的 Issue
+  # ============================================================
+  stale:
+    needs: check-issue-eligibility
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: 自动管理闲置 Issue
+        uses: actions/stale@v11
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # ==================================================
+          # 只处理具有「可自动关闭」标签的 Issue
+          # ==================================================
+          only-issue-labels: "可自动关闭"
+
+          # ==================================================
+          # Issue 7 天没有活动
+          # → 标记「待关闭」
+          # ==================================================
+          days-before-issue-stale: 7
+
+          # ==================================================
+          # 标记「待关闭」后
+          # 再 7 天没有活动
+          # → 自动关闭
+          # ==================================================
+          days-before-issue-close: 7
+
+          # ==================================================
+          # 待关闭标签
+          # ==================================================
+          stale-issue-label: "待关闭"
+
+          # ==================================================
+          # 标记待关闭时的提示
+          # ==================================================
+          stale-issue-message: |
+            问题已给出解决方案。
+
+            如果问题仍未解决，请直接回复此 Issue。
+            如果 7 天内没有新的反馈，该 Issue 将自动关闭。
+
+          # ==================================================
+          # 自动关闭时的提示
+          # ==================================================
+          close-issue-message: |
+            连续 7 天没有后续反馈，默认问题已解决，
+            该 Issue 已自动关闭。
+
+            后续如果再次遇到 Bug 或有新的需求，
+            欢迎重新提交 Issue。
+
+          # ==================================================
+          # Issue 有新活动时移除「待关闭」
+          # ==================================================
+          remove-stale-when-updated: true
+
+          # ==================================================
+          # PR 不参与任何自动处理
+          # ==================================================
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
+
+          # ==================================================
+          # 已经分配给人员的 Issue 不处理
+          # ==================================================
+          exempt-all-issue-assignees: true
+
+          # ==================================================
+          # 自动关闭原因
+          # ==================================================
+          close-issue-reason: completed
