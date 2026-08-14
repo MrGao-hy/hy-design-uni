@@ -1,10 +1,14 @@
+const designImages = import.meta.glob('/src/pages-design/static/images/*', {
+    eager: true,
+    import: 'default'
+}) as Record<string, string>
 export const designImage = (path: string) => {
-    // #ifndef H5 | APP-PLUS
+    // #ifndef H5 || APP-PLUS
     return `/pages-design/static/images/${path}`
     // #endif
 
-    // #ifdef H5 | APP-PLUS
-    return `/src/pages-design/static/images/${path}`
+    // #ifdef H5 || APP-PLUS
+    return designImages[`/src/pages-design/static/images/${path}`]
     // #endif
 }
 
