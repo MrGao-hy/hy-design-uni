@@ -6,11 +6,11 @@
         <view class="hy-title">主题色</view>
         <view class="hy-flex">
             <hy-text text="主色" type="primary"></hy-text>
-            <hy-text text="错误" type="error"></hy-text>
+            <hy-text text="错误" type="error" size="12"></hy-text>
             <hy-text text="成功" type="success"></hy-text>
             <hy-text text="警告" type="warning"></hy-text>
             <hy-text text="信息" type="info"></hy-text>
-            <hy-text text="颜色" size="30rpx" color="#892FE8"></hy-text>
+            <hy-text text="颜色" size="24rpx" color="#892FE8"></hy-text>
         </view>
 
         <view class="hy-title">手机号</view>
