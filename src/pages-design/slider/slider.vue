@@ -18,6 +18,10 @@
         <view class="hy-title">区间选择</view>
         <hy-slider isRange showValue v-model:rangeValue="value_2"></hy-slider>
 
+        <view class="hy-title">弹窗内使用</view>
+        <hy-button text="打开弹窗调节" type="primary" @click="showPopup = true"></hy-button>
+        <view class="popup-tip">当前值：{{ popupValue }}</view>
+
         <view class="hy-title">自定义滑块</view>
         <hy-slider v-model="value">
             <template #default>
@@ -61,12 +65,29 @@
                 </view>
             </template>
         </hy-slider>
+
+        <!-- 弹窗内滑块演示 -->
+        <hy-popup
+            v-model:show="showPopup"
+            :round="24"
+            closeable
+            close-on-click-overlay
+            @click="showPopup = false"
+        >
+            <view class="popup-content">
+                <view class="popup-content__title">音量调节</view>
+                <hy-slider :custom-style="{width: '100%'}" v-model:rangeValue="popupValue" isRange showValue :min="0" :max="100"></hy-slider>
+                <view class="popup-content__value">{{ popupValue }}</view>
+            </view>
+        </hy-popup>
     </the-root-page>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useShareButton } from '@/composables'
+import HyButton from '@/package/components/hy-button/hy-button.vue'
+import HyPopup from '@/package/components/hy-popup/hy-popup.vue'
 
 definePage({
     style: {
@@ -77,8 +98,38 @@ definePage({
 const value = ref(20)
 const value_3 = ref(0)
 const value_2 = ref([20, 80])
+// 弹窗显示状态
+const showPopup = ref(false)
+// 弹窗内的滑块值
+const popupValue = ref([20, 80])
 
 useShareButton()
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.popup-tip {
+    margin-top: $hy-border-margin-padding-sm;
+    font-size: $hy-font-size-sm;
+    color: $hy-text-color--3;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $hy-border-margin-padding-lg;
+    padding: $hy-border-margin-padding-lg $hy-border-margin-padding-xl;
+
+    &__title {
+        font-size: $hy-font-size-lg;
+        font-weight: $hy-font-weight-bold;
+        color: $hy-text-color;
+    }
+
+    &__value {
+        font-size: $hy-font-size-xl;
+        font-weight: $hy-font-weight-bold;
+        color: $hy-primary;
+    }
+}
+</style>

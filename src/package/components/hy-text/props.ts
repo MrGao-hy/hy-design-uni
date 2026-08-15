@@ -73,8 +73,7 @@ const textProps = {
     color: String,
     /** 字体大小，单位默认px */
     size: {
-        type: [String, Number],
-        default: 12
+        type: [String, Number]
     },
     /** 图标的样式 */
     iconStyle: {

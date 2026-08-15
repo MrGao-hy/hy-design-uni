@@ -43,8 +43,8 @@
                     :style="[
                         barStyle0,
                         {
-                            height: addUnit(height),
-                            marginTop: '-' + addUnit(height),
+                            height: addUnit(getPx(height) + 2),
+                            marginTop: '-' + addUnit(getPx(height) + 1),
                             backgroundColor: inactiveColor
                         }
                     ]"
@@ -160,7 +160,7 @@ import type { SliderOnChangingEvent } from '@uni-helper/uni-types'
 import sliderProps from './props'
 
 /**
- * 一般用于表单中，手动选择一个区间范围的场景。
+ * 滑动选择器，一般用于表单中，手动选择一个区间范围的场景。
  * @displayName hy-slider
  */
 defineOptions({})
