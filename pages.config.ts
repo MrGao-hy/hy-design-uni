@@ -27,6 +27,12 @@ export default defineUniPages({
                 selectedIconPath: './static/tabbar/homeHL.png'
             },
             {
+                pagePath: 'pages/docs/Index',
+                text: '文档',
+                iconPath: './static/tabbar/example.png',
+                selectedIconPath: './static/tabbar/exampleHL.png'
+            },
+            {
                 pagePath: 'pages/mine/Index',
                 text: '我的',
                 iconPath: './static/tabbar/personal.png',

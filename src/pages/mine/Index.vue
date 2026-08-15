@@ -104,20 +104,6 @@
                 </view>
             </hy-card>
 
-            <!-- 鸿蒙审核测试小工具 -->
-            <hy-card>
-                <view class="cell-row cell-border" @click="handleNavigate('/pages/tools/Index')">
-                    <view class="cell-icon" style="background-color: #9f7aea">
-                        <hy-icon :name="IconConfig.SETTING" size="20" color="#fff" />
-                    </view>
-                    <hy-text :text="t('harmonyTools')" size="28rpx" :flex="true" />
-                    <view class="cell-right">
-                        <hy-tag v-if="toolBadge" :label="toolBadge" type="error" size="mini" />
-                        <hy-icon name="right" size="20" color="#c0c4cc" />
-                    </view>
-                </view>
-            </hy-card>
-
             <!-- 退出登录 -->
             <!-- <hy-button
                 type="error"
@@ -135,79 +121,17 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { IconConfig, Locale, useCurrentLang, useToast } from '@/package'
+import { IconConfig, Locale, useCurrentLang, useToast, useTranslate } from '@/package'
 import { config } from '@/config/config'
-import enUS from '@/package/libs/locale/lang/en-US'
 
-// 国际化文案
-const i18nMessages: Record<string, Record<string, string>> = {
-    'zh-CN': {
-        vip: 'VIP',
-        bio: '这个人很懒，什么都没有留下',
-        components: '组件',
-        following: '关注',
-        followers: '粉丝',
-        likes: '获赞',
-        orders: '我的订单',
-        address: '收货地址',
-        messages: '我的消息',
-        favorites: '我的收藏',
-        settings: '设置',
-        help: '帮助与反馈',
-        about: '关于我们',
-        language: '语言切换',
-        logout: '退出登录',
-        logoutConfirm: '确定要退出登录吗？',
-        logoutTitle: '确认退出',
-        logoutSuccess: '退出成功',
-        logoutFail: '退出失败，请重试',
-        pageNotExist: '页面不存在',
-        langSwitch: '已切换为中文',
-        langSwitchEn: 'Switched to English',
-        harmonyTools: '鸿蒙审核工具'
-    },
-    'en-US': {
-        vip: 'VIP',
-        bio: 'This person is lazy and left nothing.',
-        components: 'Components',
-        following: 'Following',
-        followers: 'Followers',
-        likes: 'Likes',
-        orders: 'My Orders',
-        address: 'Address',
-        messages: 'Messages',
-        favorites: 'Favorites',
-        settings: 'Settings',
-        help: 'Help & Feedback',
-        about: 'About Us',
-        language: 'Language',
-        logout: 'Log Out',
-        logoutConfirm: 'Are you sure you want to log out?',
-        logoutTitle: 'Confirm Logout',
-        logoutSuccess: 'Logged out',
-        logoutFail: 'Logout failed, please retry',
-        pageNotExist: 'Page not found',
-        langSwitch: 'Switched to Chinese',
-        langSwitchEn: 'Switched to English',
-        harmonyTools: 'HarmonyOS Tools'
-    }
-}
-
-// 注册页面级国际化文案到 Locale
-Locale.add(i18nMessages)
+const { t } = useTranslate('mine')
 
 // 当前语言
 const currentLang = useCurrentLang()
+
 const isEn = ref(currentLang.value === 'en-US')
 
-// 翻译函数
-const t = (key: string): string => {
-    const msgs = Locale.messages()
-    return msgs?.[key] || key
-}
-
 const toast = useToast()
-const isLoggingOut = ref(false)
 
 // 工具页未读问题数（鸿蒙审核未通过项），存在本地，用于在入口徽标提示
 const toolBadge = ref<string>(
@@ -302,7 +226,7 @@ const handleNavigate = (route?: string) => {
         fail: () => toast.info(t('pageNotExist')),
         success: () => {
             // 进入工具页后清除徽标
-            if (route === '/pages/tools/Index') {
+            if (route === '/pages/docs/Index') {
                 toolBadge.value = ''
             }
         }
@@ -312,35 +236,11 @@ const handleNavigate = (route?: string) => {
 // 处理语言切换
 const handleLangChange = (val: boolean | string | number) => {
     if (val) {
-        Locale.use('en-US', enUS)
+        Locale.use('en-US')
     } else {
         Locale.use('zh-CN')
     }
     toast.success(val ? t('langSwitchEn') : t('langSwitch'))
-}
-
-// 处理退出登录
-const handleLogout = async () => {
-    const [, res] = await uni.showModal({
-        title: t('logoutTitle'),
-        content: t('logoutConfirm'),
-        showCancel: true
-    })
-    if (!res.confirm) return
-
-    isLoggingOut.value = true
-    try {
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        uni.removeStorageSync('userInfo')
-        uni.removeStorageSync('token')
-        toast.success(t('logoutSuccess'))
-        setTimeout(() => {
-            uni.reLaunch({ url: '/pages/login/index' })
-        }, 1500)
-    } catch {
-        toast.error(t('logoutFail'))
-        isLoggingOut.value = false
-    }
 }
 </script>
 
