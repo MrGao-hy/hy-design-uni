@@ -142,6 +142,14 @@ const contentStyle = computed(() => {
                 style.borderTopLeftRadius = value
                 style.borderTopRightRadius = value
                 break
+            case 'left':
+                style.borderTopRightRadius = value
+                style.borderBottomRightRadius = value
+                break
+            case 'right':
+                style.borderTopLeftRadius = value
+                style.borderBottomLeftRadius = value
+                break
             case 'center':
                 style.borderRadius = value
                 break
