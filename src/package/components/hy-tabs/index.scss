@@ -57,14 +57,18 @@
       }
 
       @include e(line) {
-        height: 3px;
-        background: $hy-primary;
         width: 30px;
         position: absolute;
-        bottom: 2px;
-        border-radius: $hy-radius-semicircle;
+        bottom: -7px;
         transition-property: transform;
         transition-duration: 300ms;
+
+        @include is(line) {
+          height: 3px;
+          bottom: 2px;
+          background: $hy-primary;
+          border-radius: $hy-radius-semicircle;
+        }
       }
     }
   }

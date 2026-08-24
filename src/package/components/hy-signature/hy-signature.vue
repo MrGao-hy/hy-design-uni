@@ -98,7 +98,7 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, onBeforeMount, onMounted, reactive, ref, watch } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, getRect, guid } from '../../libs'
+import { addUnit, getRect, guid, getWindowInfo } from '../../libs'
 import type { ISignatureExpose, SignatureResult, Point, Line, ISignatureEmits } from './typing'
 // #ifdef MP-WEIXIN
 import { canvas2dAdapter } from './canvasHelper'
@@ -503,7 +503,7 @@ onMounted(() => {
 
 onBeforeMount(() => {
     // #ifdef MP
-    pixelRatio.value = uni.getSystemInfoSync().pixelRatio
+    pixelRatio.value = getWindowInfo().pixelRatio
     // #endif
 })
 

@@ -1,82 +1,82 @@
-@use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin" as *;
-
+@use '../../libs/css/theme' as *;
+@use '../../libs/css/mixin' as *;
 
 @include b(slider) {
-  position: relative;
-  @include flex;
-  align-items: center;
-
-  @include e(native) {
-    flex: 1;
-  }
-
-  @include e(inner) {
-    flex: 1;
-    @include flex(column);
     position: relative;
-    border-radius: $hy-radius-semicircle;
-    padding: $hy-border-margin-padding-base $hy-border-margin-padding-lg;
-    justify-content: center;
-  }
+    @include flex;
+    align-items: center;
 
-  @include e(show-value) {
-    margin: $hy-border-margin-padding-base $hy-border-margin-padding-lg $hy-border-margin-padding-base 0;
-  }
-
-  @include e(show-range-value) {
-    padding-top: 2px;
-    font-size: 12px;
-    line-height: 12px;
-    position: absolute;
-    bottom: 0;
-  }
-
-  @include e(base) {
-    background-color: $hy-background--empty;
-    border-radius: $hy-radius-semicircle;
-  }
-
-  /* #ifndef APP-NVUE */
-  &-inner:before {
-    position: absolute;
-    right: 0;
-    left: 0;
-    content: "";
-    top: -8px;
-    bottom: -8px;
-    z-index: -1;
-  }
-  /* #endif */
-
-  @include e(gap) {
-    position: relative;
-    border-radius: $hy-radius-semicircle;
-    transition: width 0.2s;
-    background-color: $hy-primary;
-    &-0 {
-      background-color: $hy-background--empty;
+    @include e(native) {
+        flex: 1;
     }
-  }
 
-  @include e(button) {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    background-color: $hy-background--3;
-    transform: scale(0.9);
-    /* #ifdef H5 */
-    cursor: pointer;
+    @include e(inner) {
+        flex: 1;
+        @include flex(column);
+        position: relative;
+        border-radius: $hy-radius-semicircle;
+        padding: $hy-border-margin-padding-base $hy-border-margin-padding-lg;
+        justify-content: center;
+    }
+
+    @include e(show-value) {
+        margin: $hy-border-margin-padding-base $hy-border-margin-padding-lg
+            $hy-border-margin-padding-base 0;
+    }
+
+    @include e(show-range-value) {
+        padding-top: 2px;
+        font-size: 12px;
+        line-height: 12px;
+        position: absolute;
+        bottom: 0;
+    }
+
+    @include e(base) {
+        background-color: $hy-background--empty;
+        border-radius: $hy-radius-semicircle;
+    }
+
+    /* #ifndef APP-NVUE */
+    &-inner::before {
+        position: absolute;
+        right: 0;
+        left: 0;
+        content: '';
+        top: -8px;
+        bottom: -8px;
+        z-index: -1;
+    }
     /* #endif */
 
-    @include m(wrap) {
-      position: absolute;
-      // transform: translate3d(50%, -50%, 0);
+    @include e(gap) {
+        position: relative;
+        border-radius: $hy-radius-semicircle;
+        transition: width 0.2s;
+        background-color: $hy-primary;
+        &-0 {
+            background-color: $hy-background--empty;
+        }
     }
-  }
 
-  @include e(disabled) {
-    opacity: 0.5;
-  }
+    @include e(button) {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        background-color: $hy-background--3;
+        transform: scale(0.9);
+        /* #ifdef H5 */
+        cursor: pointer;
+        /* #endif */
+
+        @include m(wrap) {
+            position: absolute;
+            // transform: translate3d(50%, -50%, 0);
+        }
+    }
+
+    @include e(disabled) {
+        opacity: 0.5;
+    }
 }

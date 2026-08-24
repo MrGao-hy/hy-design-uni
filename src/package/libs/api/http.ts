@@ -119,4 +119,37 @@ export class Http {
             ...options
         })
     }
+
+    /**
+     * put请求
+     * @param url 请求地址
+     * @param params 请求JSON参数
+     * @param options 请求配置
+     */
+    put<T = any>(url: string, params?: any, options?: HyHttps.HttpRequestConfig): Promise<T> {
+        return this.request({
+            url: url,
+            method: 'PUT',
+            data: params,
+            ...options
+        })
+    }
+
+
+    /**
+     * delete请求
+     * @param url 请求地址
+     * @param params URL查询参数
+     * @param options 请求配置
+     */
+    delete<T = any>(url: string, params?: any, options?: HyHttps.HttpRequestConfig): Promise<T> {
+        if (params) {
+            url += '?' + objectToUrlParams(params)
+        }
+        return this.request({
+            url: url,
+            method: 'DELETE',
+            ...options
+        })
+    }
 }

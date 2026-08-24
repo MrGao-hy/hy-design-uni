@@ -89,7 +89,7 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, onMounted, ref, useSlots, watch } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, getPx, getRect, IListExpose, IListSlots } from '../../libs'
+import { addUnit, getPx, getRect, getWindowInfo, IListExpose, IListSlots } from '../../libs'
 import type { IListEmits } from './typing'
 import listProps from './props'
 import HyDivider from '../hy-divider/hy-divider.vue'
@@ -154,7 +154,7 @@ const visibleStartRow = computed(() => {
 
 const visibleEndRow = computed(() => {
     if (props.list.length === 0) return 0
-    const effectiveViewHeight = viewHeight.value || uni.getSystemInfoSync().windowHeight
+    const effectiveViewHeight = viewHeight.value || getWindowInfo().windowHeight
     const targetHeight = realScrollTop.value + effectiveViewHeight + 200
     let cum = cumulativeToRow(visibleStartRow.value)
     for (let r = visibleStartRow.value; r < rowCount.value; r++) {
@@ -227,7 +227,7 @@ const tryEmit = () => {
 
 const onScroll = (e: any) => {
     realScrollTop.value = e.detail.scrollTop || 0
-    const effViewH = viewHeight.value || uni.getSystemInfoSync().windowHeight
+    const effViewH = viewHeight.value || getWindowInfo().windowHeight
     const distToBottom = totalHeight.value - realScrollTop.value - effViewH
     if (distToBottom <= lowerThreshold) {
         tryEmit()
@@ -288,7 +288,7 @@ onMounted(() => {
             }
             await new Promise((r) => setTimeout(r, 100))
         }
-        viewHeight.value = uni.getSystemInfoSync().windowHeight
+        viewHeight.value = getWindowInfo().windowHeight
     }
     measureHeight()
 })

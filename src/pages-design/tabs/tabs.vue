@@ -1,6 +1,13 @@
 <template>
     <the-root-page>
-        <hy-tabs :list="list">
+        <hy-tabs :list="list" is-swiper>
+            <template #line> 
+                <image
+                    src="/static/logo.png"
+                    mode="scaleToFill"
+                    style="width: 20px; height: 15px;"
+                /> 
+            </template>
             <template #default="{ record, index }">
                 <scroll-view class="scroll-view" scroll-y>
                     <the-order-dom v-for="(item, i) in orderList[index]" :key="i" :order="item">

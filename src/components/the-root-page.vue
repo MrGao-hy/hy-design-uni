@@ -28,6 +28,6 @@ const props = withDefaults(defineProps<IProps>(), {})
 
 <style lang="scss" scoped>
 .custom-class {
-    padding-bottom: 40px;
+    //padding-bottom: 40px;
 }
 </style>

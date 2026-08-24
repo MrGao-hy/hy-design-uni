@@ -5,10 +5,6 @@
                 ref="hy-slider__inner"
                 class="hy-slider__inner"
                 @tap="onClick"
-                @onTouchStart="onTouchStart2($event, 1)"
-                @touchmove="onTouchMove2($event, 1)"
-                @touchend="onTouchEnd2($event, 1)"
-                @touchcancel="onTouchEnd2($event, 1)"
                 :class="[disabled ? 'hy-slider__disabled' : '']"
                 :style="{
                     height:
@@ -152,9 +148,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
+import { computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, error, getRect, getPx } from '../../libs'
+import { addUnit, error, getRect, getPx, sleep } from '../../libs'
 import type { ISliderEmits } from './typing'
 import type { SliderOnChangingEvent } from '@uni-helper/uni-types'
 import sliderProps from './props'
@@ -210,18 +206,29 @@ watch(
     { deep: true }
 )
 
+/**
+ * 获取滑块条的实际尺寸
+ * 弹窗、折叠面板等延迟渲染场景下，元素可能尚未就绪，需在拿到有效宽度后返回
+ */
+const getSliderRect = async (): Promise<void> => {
+    // #ifndef APP-NVUE
+    const rect = (await getRect('.hy-slider__base', false, instance)) as UniNamespace.NodeInfo
+
+    if (rect && rect.width) {
+        sliderRect.value = rect
+    }
+    // #endif
+}
+
 onMounted(async () => {
     // 获取滑块条的尺寸信息
     if (!props.useNative) {
         // #ifndef APP-NVUE
-        sliderRect.value = (await getRect(
-            '.hy-slider__base',
-            false,
-            instance
-        )) as UniNamespace.NodeInfo
-        // console.log('sliderRect', sliderRect.value)
-        if (sliderRect.value.width == 0) {
-            error('如在弹窗等元素中使用，请使用v-if来显示滑块，否则无法计算长度。')
+        await nextTick()
+        await getSliderRect()
+
+        if (!sliderRect.value.width) {
+            error('在小程序里，如在弹窗等隐藏元素中使用，请使用v-if来显示滑块，否则无法计算长度。')
         }
         init()
         // #endif
@@ -255,8 +262,26 @@ const changeHandler = (e: SliderOnChangingEvent) => {
     emit('change', value)
 }
 
-const onTouchStart = (e: TouchEvent, index = 1) => {
+/**
+ * 获取触摸点的横向坐标，兼容各端事件对象差异
+ * @param e 触摸事件对象
+ * @param index 触摸点索引，默认为第一个触摸点
+ */
+const getTouchX = (e: any, index = 0): number => {
+    return e.touches?.[index]?.clientX || e.changedTouches?.[index]?.clientX || 0
+}
+
+const onTouchStart = async (e: any, index = 1) => {
     if (props.disabled) return
+    // 弹窗等场景下，每次触摸前重新测量，确保 left/width 为布局完成后的最新值
+    // 避免弹窗动画（缩放/平移）期间测量到错误的位置，导致点击/拖动值跳变
+    const rect = (await getRect('.hy-slider__base', false, instance)) as UniNamespace.NodeInfo
+    if (rect?.width) {
+        sliderRect.value = rect
+    }
+    if (!sliderRect.value.width) return
+    // 尺寸就绪后，同步一次滑块展示位置
+    init()
     startX.value = 0
     // 触摸点集
     let touches = e.touches[0]
@@ -272,14 +297,7 @@ const onTouchStart = (e: TouchEvent, index = 1) => {
     // 标示当前的状态为开始触摸滑动
     status.value = 'start'
 
-    let clientX = 0
-    // #ifndef APP-NVUE
-    clientX = touches.clientX
-    // #endif
-    // #ifdef APP-NVUE
-    clientX = touches.screenX
-    // #endif
-    distanceX.value = clientX - sliderRect.value.left!
+    distanceX.value = getTouchX(e) - sliderRect.value.left!
     // 获得移动距离对整个滑块的值，此为带有多位小数的值，不能用此更新视图
     // 否则造成通信阻塞，需要每改变一个step值时修改一次视图
     newValue.value =
@@ -289,22 +307,12 @@ const onTouchStart = (e: TouchEvent, index = 1) => {
     let $crtFmtValue = updateValue(newValue.value, true, index)
     emit('changing', $crtFmtValue)
 }
-const onTouchMove = (e: TouchEvent, index = 1) => {
+const onTouchMove = (e: any, index = 1) => {
     if (props.disabled) return
     // 连续触摸的过程会一直触发本方法，但只有手指触发且移动了才被认为是拖动了，才发出事件
     // 触摸后第一次移动已经将status设置为moving状态，故触摸第二次移动不会触发本事件
     if (status.value == 'start') emit('start')
-    let touches = e.touches[0]
-    // console.log('touchs', touches)
-    // 滑块的左边不一定跟屏幕左边接壤，所以需要减去最外层父元素的左边值
-    let clientX = 0
-    // #ifndef APP-NVUE
-    clientX = touches.clientX
-    // #endif
-    // #ifdef APP-NVUE
-    clientX = touches.screenX
-    // #endif
-    distanceX.value = clientX - sliderRect.value.left!
+    distanceX.value = getTouchX(e) - sliderRect.value.left!
     // 获得移动距离对整个滑块的值，此为带有多位小数的值，不能用此更新视图
     // 否则造成通信阻塞，需要每改变一个step值时修改一次视图
     newValue.value =
@@ -314,7 +322,7 @@ const onTouchMove = (e: TouchEvent, index = 1) => {
     let $crtFmtValue = updateValue(newValue.value, true, index)
     emit('changing', $crtFmtValue)
 }
-const onTouchEnd = (e: TouchEvent, index = 1) => {
+const onTouchEnd = (e: any, index = 1) => {
     if (props.disabled) return
     if (status.value === 'moving') {
         let $crtFmtValue = updateValue(newValue.value, false, index)
@@ -322,26 +330,18 @@ const onTouchEnd = (e: TouchEvent, index = 1) => {
     }
     status.value = 'end'
 }
-const onTouchStart2 = (e: TouchEvent, index = 1) => {
-    if (!props.isRange) {
-        // this.onChangeStart(event, index);
-    }
-}
-const onTouchMove2 = (e: TouchEvent, index = 1) => {
-    if (!props.isRange) {
-        // this.onTouchMove(event, index);
-    }
-}
-const onTouchEnd2 = (e: TouchEvent, index = 1) => {
-    if (!props.isRange) {
-        // this.onTouchEnd(event, index);
-    }
-}
-const onClick = (e: any) => {
+const onClick = async (e: any) => {
     if (props.disabled) return
     // 直接点击滑块的情况，计算方式与onTouchMove方法相同
     // #ifndef APP-NVUE
 
+    // 弹窗等场景下，点击时重新测量，确保使用布局完成后的最新位置，避免值跳变为0
+    const rect = (await getRect('.hy-slider__base', false, instance)) as UniNamespace.NodeInfo
+    if (rect?.width) {
+        sliderRect.value = rect
+    }
+    // 弹窗等场景下尺寸尚未就绪时不处理点击，避免除零
+    if (!sliderRect.value.width) return
     let x
     // #ifdef MP-ALIPAY
     x = e.detail.clientX

@@ -80,7 +80,7 @@ import { computed, getCurrentInstance, onMounted, ref, reactive, watch } from 'v
 import type { CSSProperties } from 'vue'
 import type { IFloatButtonEmits } from './typing'
 import type { MenusType } from './typing'
-import { addUnit, debounce, getPx, getRect, guid, isH5, throttle } from '../../libs'
+import { addUnit, getPx, getRect, getWindowInfo, guid, isH5 } from '../../libs'
 import floatButtonProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -309,7 +309,7 @@ const handleMenuItemClick = (temp: MenusType, index: number) => {
 
 const getBounding = () => {
     return new Promise((resolve) => {
-        const sysInfo = uni.getSystemInfoSync()
+        const sysInfo = getWindowInfo()
 
         const { top = 16, left = 16, right = 16, bottom = 16 } = props.gap
         screen.width = sysInfo.windowWidth

@@ -88,6 +88,7 @@ const { windowWidth } = uni.getWindowInfo()
 const { system } = uni.getDeviceInfo()
 // #endif
 // #ifndef APP || H5 || MP-WEIXIN
+// 其他小程序基础库暂不支持 getWindowInfo/getDeviceInfo，继续使用 getSystemInfoSync 保证兼容
 const { windowWidth, system } = uni.getSystemInfoSync()
 // #endif
 const blankChar = makeMap(' ,\r,\n,\t,\f')

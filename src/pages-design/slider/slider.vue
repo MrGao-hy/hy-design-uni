@@ -9,8 +9,12 @@
         <view class="hy-title">自定义颜色</view>
         <hy-slider v-model="value" active-color="red" block-color="red"></hy-slider>
 
-        <view class="hy-title">自定义大小</view>
-        <hy-slider v-model="value" :blockSize="30" height="8"></hy-slider>
+        <view class="hy-title">自定义宽度</view>
+        <view style="width: 500rpx">
+            <hy-slider v-model="value" :blockSize="30" height="8"></hy-slider>
+
+            <hy-slider isRange showValue v-model:rangeValue="value_2"></hy-slider>
+        </view>
 
         <view class="hy-title">小数点</view>
         <hy-slider v-model="value_3" :min="0" :max="1" :step="0.1" show-value></hy-slider>
@@ -69,15 +73,32 @@
         <!-- 弹窗内滑块演示 -->
         <hy-popup
             v-model:show="showPopup"
-            :round="24"
-            closeable
+            mode="right"
+            safe-area-inset-top
             close-on-click-overlay
+            :custom-style="{
+                width: '80vw'
+            }"
+            :round="20"
             @click="showPopup = false"
         >
             <view class="popup-content">
-                <view class="popup-content__title">音量调节</view>
-                <hy-slider :custom-style="{width: '100%'}" v-model:rangeValue="popupValue" isRange showValue :min="0" :max="100"></hy-slider>
-                <view class="popup-content__value">{{ popupValue }}</view>
+                <hy-slider
+                    v-if="showPopup"
+                    is-range
+                    v-model:range-value="value_2"
+                    :min="10"
+                    :max="100"
+                    :step="2"
+                    :block-size="20"
+                    active-color="#1A1A1A"
+                    inactive-color="#E6E6E6"
+                    block-color="#1A1A1A"
+                    show-value
+                    custom-class="price-slider"
+                />
+
+                <hy-slider v-model="value" v-if="showPopup" custom-class="price-slider"></hy-slider>
             </view>
         </hy-popup>
     </the-root-page>
@@ -130,6 +151,10 @@ useShareButton()
         font-size: $hy-font-size-xl;
         font-weight: $hy-font-weight-bold;
         color: $hy-primary;
+    }
+
+    :deep(.price-slider) {
+        width: 100%;
     }
 }
 </style>

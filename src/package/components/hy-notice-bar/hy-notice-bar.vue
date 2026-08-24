@@ -54,7 +54,8 @@
                 ></hy-icon>
                 <hy-icon
                     v-if="mode === 'closable'"
-                    @click.stop="close"
+                    @click="close"
+                    stop
                     :name="IconConfig.CLOSE"
                     :size="16"
                     :color="color"
@@ -98,24 +99,25 @@ const props = defineProps(noticeBarProps)
 const emit = defineEmits<INoticeBarEmits>()
 
 /**
- * @description 通告内容变化
+ * 通告内容变化
  * */
 const noticeChange = (index: number) => {
     currentIndex.value = index
 }
 
 /**
- * @description 点击通告栏
+ * 点击通告栏
  * */
 const clickHandler = () => {
     emit('click', currentIndex.value)
+
     if (props.url && props.linkType && props.mode === 'link') {
         ;(uni as any)[props.linkType]({ url: props.url })
     }
 }
 
 /**
- * @description 点击关闭按钮
+ * 点击关闭按钮
  * */
 const close = () => {
     show.value = false

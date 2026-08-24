@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-tabs">
+    <view :class="['hy-tabs', customClass]" :style="customStyle">
         <view class="hy-tabs__wrapper">
             <slot name="left" />
             <view class="hy-tabs__wrapper--scroll-view__wrapper">
@@ -84,19 +84,23 @@
                         </view>
                         <!-- #ifndef APP-NVUE -->
                         <view
-                            class="hy-tabs__wrapper--nav__line"
+                            :class="['hy-tabs__wrapper--nav__line', !$slots.line && 'is-line']"
                             ref="hy-tabs__wrapper--nav__line"
                             :style="[
                                 {
                                     width: addUnit(lineWidth),
                                     transform: `translate(${lineOffsetLeft}px)`,
                                     transitionDuration: `${firstTime ? 0 : duration}ms`,
-                                    height: addUnit(lineHeight),
-                                    background: lineColor,
-                                    backgroundSize: lineBgSize
+                                    // 使用自定义插槽时不再渲染默认背景，避免与插槽内容叠加
+                                    ...($slots.line
+                                        ? {}
+                                        : { background: lineColor, backgroundSize: lineBgSize, height: addUnit(lineHeight), })
                                 }
                             ]"
-                        ></view>
+                        >
+                            <!-- 自定义滑块内容插槽（如图片），仅在非 nvue 端生效 -->
+                            <slot name="line" :offset="lineOffsetLeft" />
+                        </view>
                         <!-- #endif -->
                     </view>
                 </scroll-view>
@@ -108,7 +112,7 @@
     <!-- 内容轮播图	-->
     <slot v-if="$slots.main" name="main"></slot>
     <swiper
-        v-else-if="isSwiper || list.length"
+        v-else-if="isSwiper && list.length"
         :current="innerCurrent"
         @animationfinish="animationFinish"
         :style="{ height: swiperHeight }"
@@ -134,7 +138,7 @@ export default {
 import { computed, ref, watch, nextTick, onMounted, getCurrentInstance } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { ITabsEmits, ITabsExpose, TabsItemVo } from './typing'
-import { addUnit, getPx, getRect, sleep } from '../../libs'
+import { addUnit, getPx, getRect, getWindowInfo, sleep } from '../../libs'
 import tabsProps from './props'
 // 组件
 import HyBadge from '../hy-badge/hy-badge.vue'
@@ -247,7 +251,7 @@ const setScrollLeft = () => {
         return total + curr.rect.width
     }, 0)
     // 此处为屏幕宽度
-    const windowWidth = uni.getWindowInfo().windowWidth
+    const windowWidth = getWindowInfo().windowWidth
     // 将活动的tabs-item移动到屏幕正中间，实际上是对scroll-view的移动
     let scrollLeft_1 =
         offsetLeft -

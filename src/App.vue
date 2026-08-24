@@ -25,12 +25,19 @@ onUnload(() => {
     // #endif
 })
 
+// #ifdef APP || H5 || MP-WEIXIN
+// 微信小程序、App、H5 使用新版 getAppBaseInfo，避免 getSystemInfo 被废弃的警告
+const { theme } = uni.getAppBaseInfo()
+if (theme) darkMode.value = theme as ThemeModeType
+// #endif
+// #ifndef APP || H5 || MP-WEIXIN
+// 其他小程序基础库暂不支持 getAppBaseInfo，继续使用 getSystemInfo 获取主题（dark / light）
 uni.getSystemInfo({
     success(res) {
-        // theme: dark / light
         if (res.theme) darkMode.value = res.theme as ThemeModeType
     }
 })
+// #endif
 
 onThemeChange((option) => {
     console.log(option)

@@ -27,9 +27,9 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch, nextTick, onUnmounted } from 'vue'
+import { computed, onMounted, ref, nextTick, onUnmounted } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, guid } from '../../libs'
+import { addUnit, guid, getWindowInfo } from '../../libs'
 import watermarkProps from './props'
 
 /**
@@ -54,7 +54,7 @@ initCanvasOffScreen = false
 initCanvasOffScreen = uni.canIUse('createOffscreenCanvas') && Boolean(uni.createOffscreenCanvas)
 // #endif
 const canvasOffScreenable = ref<boolean>(initCanvasOffScreen)
-const pixelRatio = ref<number>(uni.getSystemInfoSync().pixelRatio)
+const pixelRatio = ref<number>(getWindowInfo().pixelRatio)
 const canvasHeight = ref<number>((props.height + props.gutterY) * pixelRatio.value)
 const canvasWidth = ref<number>((props.width + props.gutterX) * pixelRatio.value)
 const showCanvas = ref<boolean>(true)

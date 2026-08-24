@@ -1,51 +1,51 @@
-@use "theme" as *;
+@use 'theme' as *;
 .hy-border__bottom {
-  border-bottom: $hy-border-line;
+    border-bottom: $hy-border-line;
 }
 
 .hy-border {
-  border: $hy-border-line;
+    border: $hy-border-line;
 }
 
 .hy-border__top {
-  border-top: $hy-border-line;
+    border-top: $hy-border-line;
 }
 
 .hy-page {
-  padding: $hy-border-margin-padding-base;
-  box-sizing: border-box;
-  width: 100%;
-  /* #ifdef H5 */
-  height: calc(100vh - 44px);
-  /* #endif */
-  /* #ifndef H5 */
-  height: 100vh;
-  /* #endif */
-  overflow: auto;
+    padding: $hy-border-margin-padding-base;
+    box-sizing: border-box;
+    width: 100%;
+    /* #ifdef H5 */
+    height: calc(100vh - 44px);
+    /* #endif */
+    /* #ifndef H5 */
+    height: 100vh;
+    /* #endif */
+    overflow: auto;
 }
 
 .hy-title {
-  padding: $hy-border-margin-padding-base;
-  color: $hy-text-color;
-  position: relative;
+    padding: $hy-border-margin-padding-base;
+    color: $hy-text-color;
+    position: relative;
 
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 18px;
-    background: $hy-primary;
-    border-radius: $hy-radius-semicircle;
-  }
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 18px;
+        background: $hy-primary;
+        border-radius: $hy-radius-semicircle;
+    }
 }
 
 /* 解决滚动时候出现滚动条 */
-::-webkit-scrollbar{
-  width: 0;
-  height: 0;
-  color: transparent;
-  display:none;
-}
+//::-webkit-scrollbar{
+//  width: 0;
+//  height: 0;
+//  color: transparent;
+//  display:none;
+//}

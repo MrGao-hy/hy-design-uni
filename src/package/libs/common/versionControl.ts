@@ -80,7 +80,14 @@ export const appInit = {
                             onConfirm()
                         }
 
-                        const platform = uni.getSystemInfoSync().platform
+                        // 微信小程序、App、H5 使用新版 getDeviceInfo，其他小程序回退 getSystemInfoSync 保证兼容
+                        let platform = ''
+                        // #ifdef APP || H5 || MP-WEIXIN
+                        platform = uni.getDeviceInfo().platform
+                        // #endif
+                        // #ifndef APP || H5 || MP-WEIXIN
+                        platform = uni.getSystemInfoSync().platform
+                        // #endif
 
                         // iOS
                         if (platform === 'ios') {

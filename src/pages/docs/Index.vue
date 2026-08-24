@@ -179,7 +179,7 @@ const DOC_URL = 'https://www.hy-design-uni.top/'
 const heroTags = ['开箱即用', '类型安全', '高度可定制']
 
 // 升级提醒文案
-const noticeText = '2026-07-13 hy-app 已停止迭代更新，请下载迁移全新版本 @hy-app/ui'
+const noticeText = '2026-07-13 hy-app 依赖包 已停止迭代更新，请下载迁移全新版本 @hy-app/ui'
 
 // 锚点导航配置
 interface INavItem {
@@ -363,7 +363,7 @@ definePage({
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: $hy-border-margin-padding-xl $hy-border-margin-padding-base
+    padding: calc(var(--status-bar-height) + 25rpx) $hy-border-margin-padding-base
         $hy-border-margin-padding-xl;
     background: linear-gradient(160deg, $hy-primary 0%, $hy-primary-dark 100%);
     border-radius: 0 0 $hy-radius-lg $hy-radius-lg;
@@ -658,7 +658,7 @@ definePage({
     &__url {
         font-size: $hy-font-size-sm;
         color: rgba(255, 255, 255, 0.85);
-        word-break: break-all;
+        user-select: text;
     }
 
     &__arrow {

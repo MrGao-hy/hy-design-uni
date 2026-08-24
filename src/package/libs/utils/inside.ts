@@ -101,15 +101,17 @@ export function guid(len: number = 32, firstU: boolean = true, radix: number | n
 }
 
 /**
- * 获取设备信息
+ * 获取窗口信息
+ * 微信小程序、App、H5 使用新版 uni.getWindowInfo()，避免 getSystemInfoSync 被废弃的警告
+ * 其他小程序基础库暂不支持 getWindowInfo，继续使用 uni.getSystemInfoSync() 保证兼容
  * */
 export const getWindowInfo = ():
     UniNamespace.GetWindowInfoResult | UniNamespace.GetSystemInfoResult => {
     let ret: UniNamespace.GetWindowInfoResult | UniNamespace.GetSystemInfoResult
-    // #ifdef APP || H5
+    // #ifdef APP || H5 || MP-WEIXIN
     ret = uni.getWindowInfo()
     // #endif
-    // #ifndef APP || H5
+    // #ifndef APP || H5 || MP-WEIXIN
     ret = uni.getSystemInfoSync()
     // #endif
     return ret
