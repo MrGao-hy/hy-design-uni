@@ -39,13 +39,16 @@
 
 <script setup lang="ts">
 import { type Ref, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '吸顶'
     }
 })
+
+const { t } = useTranslate('sticky')
+usePageTitle('sticky')
 
 // 用于控制样式变化（比如吸顶后加阴影）
 const isTabFixed = ref(false)
@@ -68,7 +71,7 @@ offsetTop2 = ref(88)
 // 监听吸顶状态改变
 const onStickyChange = (isFixed: boolean) => {
     isTabFixed.value = isFixed
-    uni.showToast({ title: `⚡️ 捕获埋点事件:${isFixed}`, icon: 'none' })
+    uni.showToast({ title: t('capture', isFixed), icon: 'none' })
 }
 
 useShareButton()

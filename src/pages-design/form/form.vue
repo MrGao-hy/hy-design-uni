@@ -1,76 +1,80 @@
 <template>
     <the-root-page :custom-style="{ padding: '10px' }">
         <view class="demo-header">
-            <text class="demo-title">表单组件示例</text>
+            <text class="demo-title">{{ t('demoTitle') }}</text>
         </view>
 
         <view class="demo-content">
             <hy-form ref="formRef" :model="formData" :rules="rules" label-position="top">
-                <hy-form-item label="用户名（测试）" prop="username" required>
+                <hy-form-item :label="t('labelUsername')" prop="username" required>
                     <hy-input
                         v-model="formData.username"
-                        placeholder="请输入用户名"
+                        :placeholder="t('phUsername')"
                         border="bottom"
                     />
                 </hy-form-item>
 
-                <hy-form-item label="手机号（测试）" prop="phone" required>
+                <hy-form-item :label="t('labelPhone')" prop="phone" required>
                     <hy-input
                         v-model="formData.phone"
                         type="number"
-                        placeholder="请输入手机号"
+                        :placeholder="t('phPhone')"
                         :maxlength="11"
                         border="bottom"
                     />
                 </hy-form-item>
 
-                <hy-form-item label="邮箱（测试）" prop="email">
-                    <hy-input v-model="formData.email" placeholder="请输入邮箱" border="bottom" />
+                <hy-form-item :label="t('labelEmail')" prop="email">
+                    <hy-input
+                        v-model="formData.email"
+                        :placeholder="t('phEmail')"
+                        border="bottom"
+                    />
                 </hy-form-item>
 
-                <hy-form-item label="密码（测试）" prop="password" required>
+                <hy-form-item :label="t('labelPassword')" prop="password" required>
                     <hy-input
                         v-model="formData.password"
                         type="safe-password"
-                        placeholder="请输入密码"
+                        :placeholder="t('phPassword')"
                         border="bottom"
                     />
                 </hy-form-item>
 
-                <hy-form-item label="确认密码（测试）" prop="confirmPassword" required>
+                <hy-form-item :label="t('labelConfirmPassword')" prop="confirmPassword" required>
                     <hy-input
                         v-model="formData.confirmPassword"
                         type="safe-password"
-                        placeholder="请再次输入密码"
+                        :placeholder="t('phConfirmPassword')"
                         border="bottom"
                     />
                 </hy-form-item>
 
-                <hy-form-item label="年龄（测试）" prop="age">
+                <hy-form-item :label="t('labelAge')" prop="age">
                     <hy-input
                         v-model="formData.age"
                         type="number"
-                        placeholder="请输入年龄"
+                        :placeholder="t('phAge')"
                         border="bottom"
                     />
                 </hy-form-item>
 
-                <hy-form-item label="性别（测试）" prop="gender">
+                <hy-form-item :label="t('labelGender')" prop="gender">
                     <hy-radio v-model="formData.gender" :columns="genderOptions" />
                 </hy-form-item>
 
-                <hy-form-item label="爱好（测试）" prop="hobbies">
+                <hy-form-item :label="t('labelHobbies')" prop="hobbies">
                     <hy-check-button v-model="formData.hobbies" :columns="hobbyOptions" />
                 </hy-form-item>
 
-                <hy-form-item label="开关" prop="switch">
+                <hy-form-item :label="t('labelSwitch')" prop="switch">
                     <hy-switch v-model="formData.switch" />
                 </hy-form-item>
 
-                <hy-form-item label="备注" prop="remark">
+                <hy-form-item :label="t('labelRemark')" prop="remark">
                     <hy-textarea
                         v-model="formData.remark"
-                        placeholder="请输入备注信息"
+                        :placeholder="t('phRemark')"
                         :height="80"
                     />
                 </hy-form-item>
@@ -78,22 +82,22 @@
         </view>
 
         <view class="demo-actions">
-            <hy-button type="primary" @click="handleSubmit">提交表单</hy-button>
-            <hy-button type="info" plain @click="handleReset">重置表单</hy-button>
-            <hy-button type="error" @click="handleValidate">验证表单</hy-button>
+            <hy-button type="primary" @click="handleSubmit">{{ t('submitBtn') }}</hy-button>
+            <hy-button type="info" plain @click="handleReset">{{ t('resetBtn') }}</hy-button>
+            <hy-button type="error" @click="handleValidate">{{ t('validateBtn') }}</hy-button>
         </view>
 
         <view class="demo-result">
-            <text class="result-title">表单数据：</text>
+            <text class="result-title">{{ t('resultTitle') }}</text>
             <text class="result-content">{{ JSON.stringify(formData, null, 2) }}</text>
         </view>
     </the-root-page>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 import type { FieldRuleMap } from '@/package/components/hy-form/typing'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { useToast } from '@/package'
 
 definePage({
@@ -101,6 +105,9 @@ definePage({
         navigationBarTitleText: '表单'
     }
 })
+
+const { t } = useTranslate('form')
+usePageTitle('form')
 
 const toast = useToast()
 // 表单数据
@@ -117,57 +124,57 @@ const formData = reactive({
     remark: ''
 })
 
-// 表单验证规则
-const rules: FieldRuleMap = {
+// 表单验证规则（computed 包裹，切换语言后 message 同步更新）
+const rules = computed<FieldRuleMap>(() => ({
     username: [
-        { required: true, message: '请输入用户名' },
+        { required: true, message: t('usernameRequired') },
         {
             min: 2,
             max: 4,
-            message: '用户名长度在 2 到 4 个字符',
+            message: t('usernameLength'),
             trigger: ['change']
         }
     ],
     phone: [
-        { required: true, message: '请输入手机号' },
+        { required: true, message: t('phoneRequired') },
         {
             type: 'phone',
-            message: '请输入正确的手机号',
+            message: t('phoneInvalid'),
             trigger: ['change', 'blur']
         }
     ],
-    email: [{ type: 'email', message: '请输入正确的邮箱格式', trigger: ['change'] }],
+    email: [{ type: 'email', message: t('emailInvalid'), trigger: ['change'] }],
     password: [
-        { required: true, message: '请输入密码' },
-        { min: 6, message: '密码长度不能少于 6 个字符', trigger: ['change'] }
+        { required: true, message: t('passwordRequired') },
+        { min: 6, message: t('passwordMin'), trigger: ['change'] }
     ],
     confirmPassword: [
-        { required: true, message: '请确认密码' },
+        { required: true, message: t('confirmPasswordRequired') },
         {
             validator: (value: string) => {
                 if (value !== formData.password) {
-                    return '两次输入的密码不一致'
+                    return t('passwordMismatch')
                 }
                 return true
             },
             trigger: ['change']
         }
     ],
-    gender: { required: true, message: '请输入用户名' }
-}
+    gender: { required: true, message: t('genderRequired') }
+}))
 
 // 选项数据
-const genderOptions = [
-    { label: '男', value: 'male' },
-    { label: '女', value: 'female' }
-]
+const genderOptions = computed(() => [
+    { label: t('genderMale'), value: 'male' },
+    { label: t('genderFemale'), value: 'female' }
+])
 
-const hobbyOptions = [
-    { label: '阅读', value: 'reading' },
-    { label: '音乐', value: 'music' },
-    { label: '运动', value: 'sports' },
-    { label: '旅行', value: 'travel' }
-]
+const hobbyOptions = computed(() => [
+    { label: t('hobbyReading'), value: 'reading' },
+    { label: t('hobbyMusic'), value: 'music' },
+    { label: t('hobbySports'), value: 'sports' },
+    { label: t('hobbyTravel'), value: 'travel' }
+])
 
 // 表单引用
 const formRef = ref()
@@ -177,7 +184,7 @@ const handleSubmit = async (data: any) => {
     const isSuccess = await formRef.value?.submit()
     if (isSuccess) {
         await uni.showToast({
-            title: '提交成功',
+            title: t('submitSuccess'),
             icon: 'success'
         })
     }
@@ -187,16 +194,16 @@ const handleSubmit = async (data: any) => {
 const handleValidate = async () => {
     try {
         await formRef.value?.validate()
-        toast.success('表单校验成功')
+        toast.success(t('validateSuccess'))
     } catch (err) {
-        toast.error('表单校验失败')
+        toast.error(t('validateFail'))
     }
 }
 
 // 重置表单
 const handleReset = () => {
     formRef.value?.resetFields()
-    toast.show('重置成功')
+    toast.show(t('resetSuccess'))
 }
 
 useShareButton()

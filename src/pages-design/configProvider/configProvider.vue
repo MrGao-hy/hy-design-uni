@@ -1,11 +1,11 @@
 <template>
     <the-root-page>
-        <view class="hy-title">设置暗色</view>
+        <view class="hy-title">{{ t('darkSection') }}</view>
         <view class="hy-container">
             <hy-switch v-model="darkMode" activeValue="dark" inactiveValue="light"></hy-switch>
         </view>
 
-        <view class="hy-title">主题色</view>
+        <view class="hy-title">{{ t('themeSection') }}</view>
         <view class="hy-container">
             <hy-check-button
                 :columns="columns"
@@ -18,10 +18,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { computed } from 'vue'
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -29,28 +29,55 @@ definePage({
     }
 })
 
+const { t } = useTranslate('configProvider')
+usePageTitle('configProvider')
+
 const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)
-const columns = reactive([
-    { label: '红色', value: '#E83A30' },
-    { label: '紫红色', value: '#E72F8C' },
-    { label: '紫色', value: '#892FE8' },
-    { label: '蓝紫色', value: '#5F4FD9' },
-    { label: '海蓝色', value: '#3646FF' },
-    { label: '蓝色', value: '#3D7EFF' },
-    { label: '靛蓝色', value: '#31C9E8' },
-    { label: '青色', value: '#2DE88D' },
-    { label: '绿色', value: '#31E749' },
-    { label: '黄绿色', value: '#A4E82F' },
-    { label: '酸橙色', value: '#D5EB00' },
-    { label: '黄色', value: '#FFF420' },
-    { label: '橘黄色', value: '#FFCA28' },
-    { label: '橙色', value: '#FFA726' },
-    { label: '橘红色', value: '#FF7043' },
-    { label: '棕色', value: '#914F2C' },
-    { label: '玄灰色', value: '#78909C' },
-    { label: '灰色', value: '#AAAAAA' }
-])
+// 颜色列表：value 为色值，key 与 locale configProvider.colors.* 对应
+const colorKeys = [
+    'red',
+    'magenta',
+    'purple',
+    'bluePurple',
+    'oceanBlue',
+    'blue',
+    'indigo',
+    'cyan',
+    'green',
+    'yellowGreen',
+    'lime',
+    'yellow',
+    'orangeYellow',
+    'orange',
+    'orangeRed',
+    'brown',
+    'darkGray',
+    'gray'
+]
+const colorValues = [
+    '#E83A30',
+    '#E72F8C',
+    '#892FE8',
+    '#5F4FD9',
+    '#3646FF',
+    '#3D7EFF',
+    '#31C9E8',
+    '#2DE88D',
+    '#31E749',
+    '#A4E82F',
+    '#D5EB00',
+    '#FFF420',
+    '#FFCA28',
+    '#FFA726',
+    '#FF7043',
+    '#914F2C',
+    '#78909C',
+    '#AAAAAA'
+]
+const columns = computed(() =>
+    colorKeys.map((key, i) => ({ label: t(`colors.${key}`), value: colorValues[i] }))
+)
 
 const changeFn = (temp: AnyObject) => (color.value = temp.value)
 

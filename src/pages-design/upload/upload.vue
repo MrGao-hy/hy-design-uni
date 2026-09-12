@@ -1,7 +1,7 @@
 <template>
     <the-root-page>
         <!-- 基础使用 -->
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-upload
                 :fileList="list"
@@ -13,7 +13,7 @@
         </view>
 
         <!-- 限制图片上传大小 -->
-        <view class="hy-title">限制图片上传大小</view>
+        <view class="hy-title">{{ t('limitSize') }}</view>
         <view class="hy-container">
             <hy-upload
                 :fileList="list_2"
@@ -24,85 +24,85 @@
         </view>
 
         <!-- 多张图片上传 -->
-        <view class="hy-title">多张图片上传</view>
+        <view class="hy-title">{{ t('multipleUpload') }}</view>
         <view class="hy-container">
             <hy-upload
                 :fileList="list_1"
                 @afterRead="afterRead_1"
                 multiple
-                upload-text="上传图片"
+                :upload-text="t('uploadImage')"
             ></hy-upload>
         </view>
 
         <!-- 限制只上传视频 -->
-        <view class="hy-title">限制只上传视频</view>
+        <view class="hy-title">{{ t('onlyVideo') }}</view>
         <view class="hy-container">
             <hy-upload
                 :fileList="list_3"
                 @afterRead="afterRead_3"
-                upload-text="上传视频"
+                :upload-text="t('uploadVideo')"
                 accept="video"
             ></hy-upload>
         </view>
 
         <!-- 自定义上传按钮 -->
-        <view class="hy-title">自定义上传按钮</view>
+        <view class="hy-title">{{ t('customUploadBtn') }}</view>
         <view class="hy-container">
             <hy-upload :fileList="list_4" @afterRead="afterRead_4">
                 <view class="custom-upload-btn">
                     <hy-icon name="plus" color="#999" size="32"></hy-icon>
-                    <text class="custom-upload-text">点击上传</text>
+                    <text class="custom-upload-text">{{ t('clickUpload') }}</text>
                 </view>
             </hy-upload>
         </view>
 
         <!-- 自定义触发区域 -->
-        <view class="hy-title">自定义触发区域</view>
+        <view class="hy-title">{{ t('customTrigger') }}</view>
         <view class="hy-container">
             <hy-upload :fileList="list_5" @afterRead="afterRead_5">
                 <template #trigger>
                     <view class="custom-trigger">
                         <hy-icon name="upload" color="#2979ff" size="48"></hy-icon>
-                        <text class="custom-trigger-text">拖拽或点击上传</text>
+                        <text class="custom-trigger-text">{{ t('dragOrClick') }}</text>
                     </view>
                 </template>
             </hy-upload>
         </view>
 
         <!-- 禁用状态 -->
-        <view class="hy-title">禁用状态</view>
+        <view class="hy-title">{{ t('disabledState') }}</view>
         <view class="hy-container">
             <hy-upload :fileList="list_6" disabled>
                 <view class="disabled-btn">
                     <hy-icon name="lock" color="#ccc" size="24"></hy-icon>
-                    <text class="disabled-text">上传已禁用</text>
+                    <text class="disabled-text">{{ t('uploadDisabled') }}</text>
                 </view>
             </hy-upload>
         </view>
 
         <!-- 不显示删除按钮 -->
-        <view class="hy-title">不显示删除按钮</view>
+        <view class="hy-title">{{ t('hideDelete') }}</view>
         <view class="hy-container">
             <hy-upload :fileList="list_7" :deletable="false" @afterRead="afterRead_7"> </hy-upload>
         </view>
 
         <!-- 自定义尺寸 -->
-        <view class="hy-title">自定义尺寸</view>
+        <view class="hy-title">{{ t('customSize') }}</view>
         <view class="hy-container">
             <hy-upload
                 :fileList="list_8"
                 :width="120"
                 :height="120"
-                upload-text="大尺寸"
+                :upload-text="t('largeSize')"
                 @afterRead="afterRead_8"
             ></hy-upload>
         </view>
 
         <!-- 上传失败状态 -->
-        <view class="hy-title">上传失败状态</view>
+        <view class="hy-title">{{ t('failedState') }}</view>
         <view class="hy-container">
             <hy-upload :fileList="list_9"></hy-upload>
-            <view class="tip-text">点击重新上传</view>
+            <view class="tip-text">{{ t('reupload') }}</view>
         </view>
     </the-root-page>
 </template>
@@ -110,7 +110,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { bytesToSize, isArray } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import type { FileVo, UploadFileParams } from '@/package'
 import { config } from '@/config/config.ts'
 
@@ -120,11 +120,14 @@ definePage({
     }
 })
 
+const { t } = useTranslate('upload')
+usePageTitle('upload')
+
 const maxSize = ref(500000)
 const list = ref<FileVo[]>([
     {
         status: 'success',
-        message: '上传成功',
+        message: t('uploadSuccess'),
         url: config.avatar
     }
 ])
@@ -136,14 +139,14 @@ const list_5 = ref<FileVo[]>([])
 const list_6 = ref<FileVo[]>([
     {
         status: 'success',
-        message: '已上传',
+        message: t('uploaded'),
         url: config.avatar
     }
 ])
 const list_7 = ref<FileVo[]>([
     {
         status: 'success',
-        message: '上传成功',
+        message: t('uploadSuccess'),
         url: config.avatar
     }
 ])
@@ -151,7 +154,7 @@ const list_8 = ref<FileVo[]>([])
 const list_9 = ref<FileVo[]>([
     {
         status: 'failed',
-        message: '上传失败',
+        message: t('uploadFailed'),
         url: ''
     }
 ])
@@ -161,7 +164,7 @@ const afterRead = (event: any) => {
     let a = 0
     list.value.push({
         status: 'loading',
-        message: '上传中',
+        message: t('uploading'),
         url: lists[0].url,
         schedule: a
     })
@@ -174,7 +177,7 @@ const afterRead = (event: any) => {
         list.value = [
             {
                 status: 'success',
-                message: '上传成功',
+                message: t('uploadSuccess'),
                 url: lists[0].url,
                 schedule: a
             }
@@ -189,7 +192,7 @@ const afterRead_1 = async (event: UploadFileParams) => {
             let a = 0
             list_1.value.push({
                 status: 'loading',
-                message: '上传中',
+                message: t('uploading'),
                 url: item.url,
                 schedule: a
             })
@@ -202,7 +205,7 @@ const afterRead_1 = async (event: UploadFileParams) => {
                 clearInterval(timer)
                 list_1.value[index] = {
                     status: 'success',
-                    message: '上传成功',
+                    message: t('uploadSuccess'),
                     url: item.url,
                     schedule: a
                 }
@@ -216,7 +219,7 @@ const afterRead_2 = (params: UploadFileParams) => {
     let a = 0
     list_2.value.push({
         status: 'loading',
-        message: '上传中',
+        message: t('uploading'),
         url: lists.url,
         schedule: a
     })
@@ -229,7 +232,7 @@ const afterRead_2 = (params: UploadFileParams) => {
         list_2.value = [
             {
                 status: 'success',
-                message: '上传成功',
+                message: t('uploadSuccess'),
                 url: lists.url,
                 schedule: a
             }
@@ -242,7 +245,7 @@ const afterRead_3 = (params: UploadFileParams) => {
     let a = 0
     list_3.value.push({
         status: 'loading',
-        message: '上传中',
+        message: t('uploading'),
         url: lists.url,
         schedule: a
     })
@@ -255,7 +258,7 @@ const afterRead_3 = (params: UploadFileParams) => {
         list_3.value = [
             {
                 status: 'success',
-                message: '上传成功',
+                message: t('uploadSuccess'),
                 url: lists.url,
                 schedule: a
             }
@@ -268,7 +271,7 @@ const afterRead_4 = (params: UploadFileParams) => {
     let a = 0
     list_4.value.push({
         status: 'loading',
-        message: '上传中',
+        message: t('uploading'),
         url: lists.url,
         schedule: a
     })
@@ -280,7 +283,7 @@ const afterRead_4 = (params: UploadFileParams) => {
         clearInterval(timer)
         list_4.value[0] = {
             status: 'success',
-            message: '上传成功',
+            message: t('uploadSuccess'),
             url: lists.url,
             schedule: a
         }
@@ -292,7 +295,7 @@ const afterRead_5 = (params: UploadFileParams) => {
     let a = 0
     list_5.value.push({
         status: 'loading',
-        message: '上传中',
+        message: t('uploading'),
         url: lists.url,
         schedule: a
     })
@@ -304,7 +307,7 @@ const afterRead_5 = (params: UploadFileParams) => {
         clearInterval(timer)
         list_5.value[0] = {
             status: 'success',
-            message: '上传成功',
+            message: t('uploadSuccess'),
             url: lists.url,
             schedule: a
         }
@@ -316,7 +319,7 @@ const afterRead_7 = (params: UploadFileParams) => {
     let a = 0
     list_7.value.push({
         status: 'loading',
-        message: '上传中',
+        message: t('uploading'),
         url: lists.url,
         schedule: a
     })
@@ -328,7 +331,7 @@ const afterRead_7 = (params: UploadFileParams) => {
         clearInterval(timer)
         list_7.value[list_7.value.length - 1] = {
             status: 'success',
-            message: '上传成功',
+            message: t('uploadSuccess'),
             url: lists.url,
             schedule: a
         }
@@ -340,7 +343,7 @@ const afterRead_8 = (params: UploadFileParams) => {
     let a = 0
     list_8.value.push({
         status: 'loading',
-        message: '上传中',
+        message: t('uploading'),
         url: lists.url,
         schedule: a
     })
@@ -352,7 +355,7 @@ const afterRead_8 = (params: UploadFileParams) => {
         clearInterval(timer)
         list_8.value[0] = {
             status: 'success',
-            message: '上传成功',
+            message: t('uploadSuccess'),
             url: lists.url,
             schedule: a
         }
@@ -361,7 +364,7 @@ const afterRead_8 = (params: UploadFileParams) => {
 
 const oversizeFn = () => {
     uni.showToast({
-        title: `图片超出${bytesToSize(maxSize.value)}限制大小`,
+        title: t('oversize', bytesToSize(maxSize.value)),
         icon: 'none'
     })
 }

@@ -1,25 +1,29 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-line-progress :percentage="value"></hy-line-progress>
         </view>
 
-        <view class="hy-title">自定义高度</view>
+        <view class="hy-title">{{ t('customHeight') }}</view>
         <view class="hy-container">
             <hy-line-progress :percentage="value" height="20"></hy-line-progress>
         </view>
 
-        <view class="hy-title">自定义颜色</view>
+        <view class="hy-title">{{ t('customColor') }}</view>
         <view class="hy-container">
             <hy-line-progress :percentage="value" activeColor="red"></hy-line-progress>
         </view>
 
-        <view class="hy-title">手动控制</view>
+        <view class="hy-title">{{ t('manualControl') }}</view>
         <view class="hy-container">
             <hy-flex justify="space-around">
-                <hy-button type="error" text="减少" @click="computedWidth('minus')"></hy-button>
-                <hy-button text="增加" @click="computedWidth('plus')"></hy-button>
+                <hy-button
+                    type="error"
+                    :text="t('minus')"
+                    @click="computedWidth('minus')"
+                ></hy-button>
+                <hy-button :text="t('plus')" @click="computedWidth('plus')"></hy-button>
             </hy-flex>
         </view>
     </the-root-page>
@@ -28,13 +32,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { range } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '线形进度条'
     }
 })
+
+const { t } = useTranslate('lineProgress')
+usePageTitle('lineProgress')
 
 const value = ref(20)
 

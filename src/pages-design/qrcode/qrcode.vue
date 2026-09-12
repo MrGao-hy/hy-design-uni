@@ -39,13 +39,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '二维码'
     }
 })
+
+const { t } = useTranslate('qrcode')
+usePageTitle('qrcode')
 
 const showCode = ref(false)
 const textContent = ref('')

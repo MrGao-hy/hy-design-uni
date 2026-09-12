@@ -1,6 +1,6 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-input
                 v-model="value"
@@ -9,11 +9,11 @@
                 :type="type"
                 clearable
                 :disabled="disabled"
-                placeholder="输入值"
+                :placeholder="t('phValue')"
             ></hy-input>
         </view>
 
-        <view class="hy-title">限制输入金额格式</view>
+        <view class="hy-title">{{ t('amountFormatSection') }}</view>
         <view class="hy-container">
             <hy-input
                 v-model="value3"
@@ -24,12 +24,12 @@
             ></hy-input>
         </view>
 
-        <view class="hy-title">清空按钮</view>
+        <view class="hy-title">{{ t('clearableSection') }}</view>
         <view class="hy-container">
-            <hy-input v-model="value2" clearable focus placeholder="输入值"></hy-input>
+            <hy-input v-model="value2" clearable focus :placeholder="t('phValue')"></hy-input>
         </view>
 
-        <view class="hy-title">icon</view>
+        <view class="hy-title">{{ t('iconSection') }}</view>
         <view class="hy-container">
             <hy-input
                 v-model="value"
@@ -44,26 +44,26 @@
             ></hy-input>
         </view>
 
-        <view class="hy-title">自定义icon</view>
+        <view class="hy-title">{{ t('customIconSection') }}</view>
         <view class="hy-container">
             <hy-input v-model="value" clearable :disabled="disabled">
                 <template #suffix>
-                    <hy-button text="发送验证码"></hy-button>
+                    <hy-button :text="t('sendCode')"></hy-button>
                 </template>
             </hy-input>
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">禁用</view>
+            <view class="hy-title">{{ t('disabledSection') }}</view>
             <hy-switch v-model="disabled"></hy-switch>
 
-            <view class="hy-title">输入框形状</view>
+            <view class="hy-title">{{ t('shapeSection') }}</view>
             <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">输入框类型</view>
+            <view class="hy-title">{{ t('typeSection') }}</view>
             <hy-subsection :list="list_2" v-model="type"></hy-subsection>
 
-            <view class="hy-title">边框</view>
+            <view class="hy-title">{{ t('borderSection') }}</view>
             <hy-subsection :list="list_3" v-model="border"></hy-subsection>
         </view>
     </the-root-page>
@@ -71,10 +71,10 @@
 
 <script setup lang="ts">
 import type { ShapeType, BorderType } from '@/package/libs/typing'
-import { reactive, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { IconConfig } from '@/package'
 import type { InputType } from '@uni-helper/uni-types'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -82,31 +82,34 @@ definePage({
     }
 })
 
+const { t } = useTranslate('input')
+usePageTitle('input')
+
 const value = ref('')
 const value3 = ref('')
-const value2 = ref('中国速度，东风快递，使命必达，风雨无阻！！！')
+const value2 = ref(t('defaultValue'))
 const disabled = ref(false)
 const shape = ref<ShapeType>('square')
 const type = ref<InputType>('text')
 const border = ref<BorderType>('surround')
 
-const list_1 = reactive([
-    { name: '半圆', value: 'circle' },
-    { name: '方形', value: 'square' }
+const list_1 = computed(() => [
+    { name: t('shapeCircle'), value: 'circle' },
+    { name: t('shapeSquare'), value: 'square' }
 ])
 
-const list_2 = reactive([
-    { name: '文本', value: 'text' },
-    { name: '数字', value: 'number' },
-    { name: '身份证id', value: 'idcard' },
-    { name: '小数点', value: 'digit' },
-    { name: '密码', value: 'password' }
+const list_2 = computed(() => [
+    { name: t('typeText'), value: 'text' },
+    { name: t('typeNumber'), value: 'number' },
+    { name: t('typeIdcard'), value: 'idcard' },
+    { name: t('typeDigit'), value: 'digit' },
+    { name: t('typePassword'), value: 'password' }
 ])
 
-const list_3 = reactive([
-    { name: '四周边框', value: 'surround' },
-    { name: '底部边框', value: 'bottom' },
-    { name: '无边框', value: 'none' }
+const list_3 = computed(() => [
+    { name: t('borderSurround'), value: 'surround' },
+    { name: t('borderBottom'), value: 'bottom' },
+    { name: t('borderNone'), value: 'none' }
 ])
 
 // 实时过滤

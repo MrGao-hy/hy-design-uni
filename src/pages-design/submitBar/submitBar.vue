@@ -5,7 +5,7 @@
             :left-loading="true"
             @menu-click="clickMenuFn"
         ></hy-submit-bar>
-        <view class="hy-title">显示一个按钮</view>
+        <view class="hy-title">{{ t('oneButton') }}</view>
         <hy-submit-bar
             :menus="menus"
             :fixed="false"
@@ -17,10 +17,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { computed } from 'vue'
 import { IconConfig } from '@/package'
 import type { SubmitBarIconMenus } from '@/package/components/hy-submit-bar/typing'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -28,18 +28,22 @@ definePage({
     }
 })
 
-const menus = reactive([
-    { icon: IconConfig.HOME, text: '首页' },
-    { icon: IconConfig.CUSTOMER_SERVICE, text: '客服' },
+const { t } = useTranslate('submitBar')
+usePageTitle('submitBar')
+
+// 图标菜单文案（computed 包裹以响应语言切换）
+const menus = computed(() => [
+    { icon: IconConfig.HOME, text: t('home') },
+    { icon: IconConfig.CUSTOMER_SERVICE, text: t('service') },
     {
         icon: IconConfig.SHOPPING_CART,
-        text: '购物车',
+        text: t('cart'),
         badge: { value: 10 }
     }
 ])
 
 const clickMenuFn = (temp: SubmitBarIconMenus, i: number) => {
-    uni.showToast({ title: `点击第${i}个` })
+    uni.showToast({ title: t('clicked', i) })
 }
 
 useShareButton()

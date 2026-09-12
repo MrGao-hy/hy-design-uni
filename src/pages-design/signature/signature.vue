@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import type { ISignatureExpose, SignatureResult } from '@/package'
 
 definePage({
@@ -49,6 +49,9 @@ definePage({
         navigationBarTitleText: '签名'
     }
 })
+
+const { t } = useTranslate('signature')
+usePageTitle('signature')
 
 const signatureRef = ref<ISignatureExpose>()
 const showImage = ref(false)

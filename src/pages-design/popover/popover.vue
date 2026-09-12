@@ -88,13 +88,16 @@ import { ref, reactive } from 'vue'
 import { useQueue, IconConfig, type PopoverItemParamsVo } from '@/package'
 // 组件
 import HyButton from '../../package/components/hy-button/hy-button.vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '气泡'
     }
 })
+
+const { t } = useTranslate('popover')
+usePageTitle('popover')
 
 const { closeOutside } = useQueue()
 const content = ref('华玥组件库，我为自己代言，华玥组件库是一款集合了所以需求的现代化的组件库')
@@ -122,7 +125,7 @@ const show = ref(false)
 setTimeout(() => (count.value = 10), 2000)
 
 const onMenu = ({ index, item }: PopoverItemParamsVo) => {
-    uni.showToast({ title: `点击了第${index}个`, icon: 'none' })
+    uni.showToast({ title: t('clicked', index), icon: 'none' })
 }
 
 useShareButton()

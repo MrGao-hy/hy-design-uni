@@ -15,13 +15,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '遮罩层'
     }
 })
+
+const { t } = useTranslate('overlay')
+usePageTitle('overlay')
 
 const show = ref(false)
 const opacity = ref(0.5)

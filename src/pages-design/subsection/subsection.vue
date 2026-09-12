@@ -1,37 +1,37 @@
 <template>
     <the-root-page>
         <!-- 基础使用 - 字符串数组 -->
-        <view class="hy-title">基础使用（字符串数组）</view>
+        <view class="hy-title">{{ t('basicString') }}</view>
         <view class="hy-container">
             <hy-subsection :list="stringList" v-model="stringValue"></hy-subsection>
         </view>
 
         <!-- 基础使用 - 对象数组 -->
-        <view class="hy-title">基础使用（对象数组）</view>
+        <view class="hy-title">{{ t('basicObject') }}</view>
         <view class="hy-container">
             <hy-subsection :list="objectList" v-model="objectValue"></hy-subsection>
         </view>
 
         <!-- 基础使用 - 数字数组 -->
-        <view class="hy-title">基础使用（数字数组）</view>
+        <view class="hy-title">{{ t('basicNumber') }}</view>
         <view class="hy-container">
             <hy-subsection :list="numberList" v-model="numberValue"></hy-subsection>
         </view>
 
         <!-- 默认选中项 -->
-        <view class="hy-title">默认选中项（current=1）</view>
+        <view class="hy-title">{{ t('defaultCurrent') }}</view>
         <view class="hy-container">
             <hy-subsection :list="stringList" v-model="defaultValue" :current="1"></hy-subsection>
         </view>
 
         <!-- 按钮模式 -->
-        <view class="hy-title">按钮模式</view>
+        <view class="hy-title">{{ t('buttonMode') }}</view>
         <view class="hy-container">
             <hy-subsection :list="stringList" v-model="buttonValue" mode="button"></hy-subsection>
         </view>
 
         <!-- 分段器模式 -->
-        <view class="hy-title">分段器模式</view>
+        <view class="hy-title">{{ t('subsectionMode') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="stringList"
@@ -41,7 +41,7 @@
         </view>
 
         <!-- 自定义激活和未激活颜色 -->
-        <view class="hy-title">自定义激活和未激活颜色</view>
+        <view class="hy-title">{{ t('customColor') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="stringList"
@@ -53,7 +53,7 @@
         </view>
 
         <!-- 自定义背景颜色（按钮模式） -->
-        <view class="hy-title">自定义背景颜色（按钮模式）</view>
+        <view class="hy-title">{{ t('customBgColor') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="stringList"
@@ -64,7 +64,7 @@
         </view>
 
         <!-- 自定义字体大小 -->
-        <view class="hy-title">自定义字体大小</view>
+        <view class="hy-title">{{ t('customFontSize') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="stringList"
@@ -75,7 +75,7 @@
         </view>
 
         <!-- 激活字体不加粗 -->
-        <view class="hy-title">激活字体不加粗</view>
+        <view class="hy-title">{{ t('noBold') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="stringList"
@@ -86,7 +86,7 @@
         </view>
 
         <!-- 自定义键名 -->
-        <view class="hy-title">自定义键名（title/id）</view>
+        <view class="hy-title">{{ t('customKeyNames') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="customKeyList"
@@ -97,7 +97,7 @@
         </view>
 
         <!-- 事件监听 -->
-        <view class="hy-title">事件监听</view>
+        <view class="hy-title">{{ t('eventListen') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="stringList"
@@ -105,13 +105,13 @@
                 @change="handleChange"
             ></hy-subsection>
             <view class="info-box">
-                <text>当前选中值：{{ eventValue }}</text>
-                <text>当前选中索引：{{ currentIndex }}</text>
+                <text>{{ t('currentValue') }}{{ eventValue }}</text>
+                <text>{{ t('currentIndex') }}{{ currentIndex }}</text>
             </view>
         </view>
 
         <!-- 配合内容切换 -->
-        <view class="hy-title">配合内容切换</view>
+        <view class="hy-title">{{ t('contentSwitch') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="statusList"
@@ -120,26 +120,26 @@
             ></hy-subsection>
             <view class="content-box">
                 <view v-if="statusValue === 'all'" class="content-item">
-                    <view class="content-title">全部订单</view>
-                    <view class="content-desc">显示所有订单信息</view>
+                    <view class="content-title">{{ t('all') }}</view>
+                    <view class="content-desc">{{ t('allOrdersDesc') }}</view>
                 </view>
                 <view v-else-if="statusValue === 'pending'" class="content-item">
-                    <view class="content-title">待付款</view>
-                    <view class="content-desc">您有 3 笔订单待支付</view>
+                    <view class="content-title">{{ t('pendingPayment') }}</view>
+                    <view class="content-desc">{{ t('pendingDesc') }}</view>
                 </view>
                 <view v-else-if="statusValue === 'shipped'" class="content-item">
-                    <view class="content-title">待收货</view>
-                    <view class="content-desc">您的快递正在运输中</view>
+                    <view class="content-title">{{ t('toReceive') }}</view>
+                    <view class="content-desc">{{ t('receiveDesc') }}</view>
                 </view>
                 <view v-else class="content-item">
-                    <view class="content-title">已完成</view>
-                    <view class="content-desc">所有订单已确认收货</view>
+                    <view class="content-title">{{ t('completed') }}</view>
+                    <view class="content-desc">{{ t('completedDesc') }}</view>
                 </view>
             </view>
         </view>
 
         <!-- 配合 Tab 切换 -->
-        <view class="hy-title">配合列表筛选</view>
+        <view class="hy-title">{{ t('listFilter') }}</view>
         <view class="hy-container">
             <hy-subsection
                 :list="filterList"
@@ -147,7 +147,7 @@
                 mode="subsection"
             ></hy-subsection>
             <view class="filter-result">
-                <text>当前筛选：{{ filterText }}</text>
+                <text>{{ t('currentFilter') }}{{ filterText }}</text>
             </view>
         </view>
     </the-root-page>
@@ -155,7 +155,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -163,16 +163,19 @@ definePage({
     }
 })
 
-// 字符串数组
-const stringList = ['未付款', '待评价', '已付款']
-const stringValue = ref('未付款')
+const { t } = useTranslate('subsection')
+usePageTitle('subsection')
+
+// 字符串数组（computed 包裹以响应语言切换）
+const stringList = computed(() => [t('unpaid'), t('toReview'), t('paid')])
+const stringValue = ref(stringList.value[0])
 
 // 对象数组
-const objectList = [
-    { name: '全部', value: 'all' },
-    { name: '未核销', value: 'unused' },
-    { name: '已核销', value: 'used' }
-]
+const objectList = computed(() => [
+    { name: t('all'), value: 'all' },
+    { name: t('unverified'), value: 'unused' },
+    { name: t('verified'), value: 'used' }
+])
 const objectValue = ref('all')
 
 // 数字数组
@@ -180,39 +183,39 @@ const numberList = [0, 1, 2]
 const numberValue = ref(0)
 
 // 默认选中项
-const defaultValue = ref('待评价')
+const defaultValue = ref(stringList.value[1])
 
 // 按钮模式
-const buttonValue = ref('未付款')
+const buttonValue = ref(stringList.value[0])
 
 // 分段器模式
-const subsectionValue = ref('未付款')
+const subsectionValue = ref(stringList.value[0])
 
 // 激活颜色
-const activeColorValue = ref('未付款')
+const activeColorValue = ref(stringList.value[0])
 
 // 颜色组合
-const colorValue = ref('未付款')
+const colorValue = ref(stringList.value[0])
 
 // 背景颜色
-const bgColorValue = ref('未付款')
+const bgColorValue = ref(stringList.value[0])
 
 // 字体大小
-const fontSizeValue = ref('未付款')
+const fontSizeValue = ref(stringList.value[0])
 
 // 字体加粗
-const boldValue = ref('未付款')
+const boldValue = ref(stringList.value[0])
 
 // 自定义键名
-const customKeyList = [
-    { title: '全部', id: 1 },
-    { title: '待付款', id: 2 },
-    { title: '已完成', id: 3 }
-]
+const customKeyList = computed(() => [
+    { title: t('all'), id: 1 },
+    { title: t('pendingPayment'), id: 2 },
+    { title: t('completed'), id: 3 }
+])
 const customKeyValue = ref(1)
 
 // 事件监听
-const eventValue = ref('未付款')
+const eventValue = ref(stringList.value[0])
 const currentIndex = ref(0)
 
 const handleChange = (index: number) => {
@@ -220,25 +223,25 @@ const handleChange = (index: number) => {
 }
 
 // 内容切换
-const statusList = [
-    { name: '全部', value: 'all' },
-    { name: '待付款', value: 'pending' },
-    { name: '待收货', value: 'shipped' },
-    { name: '已完成', value: 'completed' }
-]
+const statusList = computed(() => [
+    { name: t('all'), value: 'all' },
+    { name: t('pendingPayment'), value: 'pending' },
+    { name: t('toReceive'), value: 'shipped' },
+    { name: t('completed'), value: 'completed' }
+])
 const statusValue = ref('all')
 
 // 列表筛选
-const filterList = [
-    { name: '综合', value: 'default' },
-    { name: '销量', value: 'sales' },
-    { name: '价格', value: 'price' },
-    { name: '新品', value: 'new' }
-]
+const filterList = computed(() => [
+    { name: t('comprehensive'), value: 'default' },
+    { name: t('sales'), value: 'sales' },
+    { name: t('price'), value: 'price' },
+    { name: t('newest'), value: 'new' }
+])
 const filterValue = ref('default')
 
 const filterText = computed(() => {
-    const item = filterList.find((i) => i.value === filterValue.value)
+    const item = filterList.value.find((i) => i.value === filterValue.value)
     return item ? item.name : ''
 })
 

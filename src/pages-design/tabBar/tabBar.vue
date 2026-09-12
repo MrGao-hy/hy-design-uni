@@ -1,38 +1,38 @@
 <template>
     <the-root-page>
-        <view class="hy-title"> 基础使用</view>
+        <view class="hy-title"> {{ t('basicUsage') }}</view>
         <hy-tabbar-group v-model="current" @change="onChange">
-            <hy-tabbar-item title="首页" icon="home"></hy-tabbar-item>
-            <hy-tabbar-item title="分类" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item title="我的" icon="mine"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
         </hy-tabbar-group>
 
-        <view class="hy-title"> 徽标提示 </view>
+        <view class="hy-title"> {{ t('badge') }} </view>
         <hy-tabbar-group
             :custom-style="{ marginBottom: '20px' }"
             :badgeProps="{ isDot: true }"
             v-model="current"
             @change="onChange"
         >
-            <hy-tabbar-item title="首页" icon="home"></hy-tabbar-item>
-            <hy-tabbar-item title="分类" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item title="我的" icon="mine" :value="1"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('mine')" icon="mine" :value="1"></hy-tabbar-item>
         </hy-tabbar-group>
 
         <hy-tabbar-group v-model="current" @change="onChange">
-            <hy-tabbar-item title="首页" icon="home" :value="10"></hy-tabbar-item>
-            <hy-tabbar-item title="分类" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item title="我的" icon="mine"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('home')" icon="home" :value="10"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
         </hy-tabbar-group>
 
-        <view class="hy-title"> 圆角导航栏 </view>
+        <view class="hy-title"> {{ t('circleBar') }} </view>
         <hy-tabbar-group v-model="current" @change="onChange" shape="circle">
-            <hy-tabbar-item title="首页" icon="home"></hy-tabbar-item>
-            <hy-tabbar-item title="分类" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item title="我的" icon="mine"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
         </hy-tabbar-group>
 
-        <view class="hy-title"> 自定义颜色 </view>
+        <view class="hy-title"> {{ t('customColor') }} </view>
         <hy-tabbar-group
             v-model="current"
             @change="onChange"
@@ -40,20 +40,20 @@
             inactiveColor="green"
             bgColor="yellow"
         >
-            <hy-tabbar-item title="首页" icon="home"></hy-tabbar-item>
-            <hy-tabbar-item title="分类" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item title="我的" icon="mine"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
         </hy-tabbar-group>
 
-        <view class="hy-title"> 自定义图标 </view>
+        <view class="hy-title"> {{ t('customIcon') }} </view>
         <hy-tabbar-group v-model="current" @change="onChange">
-            <hy-tabbar-item title="首页" icon="home">
+            <hy-tabbar-item :title="t('home')" icon="home">
                 <template #icon>
                     <hy-image :src="config.avatar" width="30" height="30"></hy-image>
                 </template>
             </hy-tabbar-item>
-            <hy-tabbar-item title="分类" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item title="我的" icon="mine"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
         </hy-tabbar-group>
 
         <!-- 底部固定的tabbar测试 -->
@@ -62,10 +62,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { IconConfig } from '@/package'
 import { config } from '@/config/config'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -73,17 +73,21 @@ definePage({
     }
 })
 
+const { t } = useTranslate('tabBar')
+usePageTitle('tabBar')
+
 const current = ref(0)
 const fixedCurrent = ref(0)
-const list = [
-    { name: '首页', icon: IconConfig.HOME },
-    { name: '分类', icon: IconConfig.HOME },
-    { name: '购物车', icon: IconConfig.HOME, badge: 10 },
-    { name: '我的', icon: IconConfig.HOME }
-]
+// 底部固定 tabbar 数据（computed 包裹以响应语言切换）
+const list = computed(() => [
+    { name: t('home'), icon: IconConfig.HOME },
+    { name: t('category'), icon: IconConfig.HOME },
+    { name: t('cart'), icon: IconConfig.HOME, badge: 10 },
+    { name: t('mine'), icon: IconConfig.HOME }
+])
 
 const onChange = ({ value }: { value: number | string }) => {
-    uni.showToast({ title: `切换第${value}个`, icon: 'none' })
+    uni.showToast({ title: t('switched', value), icon: 'none' })
 }
 
 useShareButton()

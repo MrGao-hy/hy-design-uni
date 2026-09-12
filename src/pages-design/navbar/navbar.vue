@@ -190,14 +190,17 @@
 
 <script setup lang="ts">
 import { IconConfig } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { config } from '@/config/config.ts'
 
 definePage({
     style: {
-        navigationBarTitleText: '自定义导航栏'
+        navigationStyle: 'custom'
     }
 })
+
+const { t } = useTranslate('navbar')
+usePageTitle('navbar')
 
 useShareButton()
 </script>

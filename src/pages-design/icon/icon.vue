@@ -1,39 +1,39 @@
 <template>
     <the-root-page>
-        <view class="hy-title">图标图片(带圆角)</view>
+        <view class="hy-title">{{ t('iconImageRounded') }}</view>
         <view class="hy-flex">
             <hy-icon :name="config.avatar" size="80" round="5px" />
         </view>
 
-        <view class="hy-title">图标文字位置</view>
+        <view class="hy-title">{{ t('labelPositionSection') }}</view>
         <view class="hy-flex">
-            <hy-icon :name="IconConfig.LOCK" label="横向" label-pos="right" />
-            <hy-icon :name="IconConfig.LOCK" label="纵向" label-pos="bottom" />
+            <hy-icon :name="IconConfig.LOCK" :label="t('labelHorizontal')" label-pos="right" />
+            <hy-icon :name="IconConfig.LOCK" :label="t('labelVertical')" label-pos="bottom" />
         </view>
 
-        <view class="hy-title">图标旋转</view>
+        <view class="hy-title">{{ t('rotateSection') }}</view>
         <view class="hy-flex">
             <hy-icon :name="IconConfig.LOCK" is-rotate />
         </view>
 
-        <view class="hy-title">图标大小</view>
+        <view class="hy-title">{{ t('sizeSection') }}</view>
         <view class="hy-flex">
             <hy-icon :name="IconConfig.LOCK" size="12px" />
             <hy-icon :name="IconConfig.LOCK" size="30" />
         </view>
 
-        <view class="hy-title">图标颜色</view>
+        <view class="hy-title">{{ t('colorSection') }}</view>
         <view class="hy-flex">
             <hy-icon :name="IconConfig.LOCK" color="red" />
             <hy-icon :name="IconConfig.LOCK" color="#FFD04B" />
         </view>
 
-        <view class="hy-title">自定义图标</view>
+        <view class="hy-title">{{ t('customIconSection') }}</view>
         <view class="hy-flex">
             <hy-icon name="renzheng" customPrefix="icon" />
         </view>
 
-        <view class="hy-title">图标集</view>
+        <view class="hy-title">{{ t('iconSetSection') }}</view>
         <view class="hy-container">
             <hy-grid :list="icons" size="30" border itemHeight="100" :col="4"></hy-grid>
         </view>
@@ -41,10 +41,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { computed } from 'vue'
 import { IconConfig } from '@/package'
 import { config } from '@/config/config'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -52,391 +52,394 @@ definePage({
     }
 })
 
-// 图标集合
-const icons = reactive([
+const { t } = useTranslate('icon')
+usePageTitle('icon')
+
+// 图标集合（computed 包裹，响应语言切换）
+const icons = computed(() => [
     {
         icon: 'loading',
-        label: '加载动画',
+        label: t('iconLoading'),
         name: 'LOADING'
     },
     {
         icon: 'close',
-        label: '关闭',
+        label: t('iconClose'),
         name: 'CLOSE'
     },
     {
         icon: 'collect',
-        label: '空星',
+        label: t('iconStar'),
         name: 'STAR'
     },
     {
         icon: 'collect-fill',
-        label: '实星',
+        label: t('iconStarFill'),
         name: 'STAR_FILL'
     },
     {
         icon: 'smile',
-        label: '微笑',
+        label: t('iconSmile'),
         name: 'SMILE'
     },
     {
         icon: 'smile-fill',
-        label: '微笑-实心',
+        label: t('iconSmileFill'),
         name: 'SMILE_FILL'
     },
     {
         icon: 'cry-fill',
-        label: '难过-实心',
+        label: t('iconCryFill'),
         name: 'CRY_FILL'
     },
     {
         icon: 'check-mask',
-        label: '打勾，勾选',
+        label: t('iconCheckMask'),
         name: 'CHECK_MASK'
     },
     {
         icon: 'edit',
-        label: '编辑',
+        label: t('iconEdit'),
         name: 'EDIT'
     },
     {
         icon: 'shop',
-        label: '商城',
+        label: t('iconShop'),
         name: 'SHOP'
     },
     {
         icon: 'lock-fill',
-        label: '实心锁',
+        label: t('iconLockFill'),
         name: 'LOCK_FILL'
     },
     {
         icon: 'lock-open-fill',
-        label: '打开实心锁',
+        label: t('iconLockOpenFill'),
         name: 'LOCK_OPEN_FILL'
     },
     {
         icon: 'lock',
-        label: '空心锁',
+        label: t('iconLock'),
         name: 'LOCK'
     },
     {
         icon: 'map',
-        label: '地点',
+        label: t('iconMap'),
         name: 'MAP'
     },
     {
         icon: 'map-fill',
-        label: '地点-实心',
+        label: t('iconMapFill'),
         name: 'MAP_FILL'
     },
     {
         icon: 'shopping-cart',
-        label: '购物车',
+        label: t('iconShoppingCart'),
         name: 'SHOPPING_CART'
     },
     {
         icon: 'shopping-cart-fill',
-        label: '购物车-实心',
+        label: t('iconShoppingCartFill'),
         name: 'SHOPPING_CART_FILL'
     },
     {
         icon: 'shopping-cart-add',
-        label: '添加购物车',
+        label: t('iconShoppingCartAdd'),
         name: 'SHOPPING_CART_ADD'
     },
     {
         icon: 'shopping-bag',
-        label: '购物袋',
+        label: t('iconShoppingBag'),
         name: 'SHOPPING_BAG'
     },
     {
         icon: 'refresh',
-        label: '刷新',
+        label: t('iconRefresh'),
         name: 'REFRESH'
     },
     {
         icon: 'task',
-        label: '任务',
+        label: t('iconTask'),
         name: 'TASK'
     },
     {
         icon: 'tag',
-        label: '标签',
+        label: t('iconTag'),
         name: 'TAG'
     },
     {
         icon: 'left',
-        label: '左',
+        label: t('iconLeft'),
         name: 'LEFT'
     },
     {
         icon: 'right',
-        label: '右',
+        label: t('iconRight'),
         name: 'RIGHT'
     },
     {
         icon: 'up',
-        label: '上',
+        label: t('iconUp'),
         name: 'UP'
     },
     {
         icon: 'down',
-        label: '下',
+        label: t('iconDown'),
         name: 'DOWN'
     },
     {
         icon: 'arrow-up-fill',
-        label: '向上-实心',
+        label: t('iconArrowUpFill'),
         name: 'ARROW_UP_FILL'
     },
     {
         icon: 'arrow-down-fill',
-        label: '向下-实心',
+        label: t('iconArrowDownFill'),
         name: 'ARROW_DOWN_FILL'
     },
     {
         icon: 'arrow-left-fill',
-        label: '向左-实心',
+        label: t('iconArrowLeftFill'),
         name: 'ARROW_LEFT_FILL'
     },
     {
         icon: 'arrow-right-fill',
-        label: '向右-实心',
+        label: t('iconArrowRightFill'),
         name: 'ARROW_RIGHT_FILL'
     },
     {
         icon: 'arrow-double-left',
-        label: '向左双箭头',
+        label: t('iconArrowDoubleLeft'),
         name: 'ARROW_DOUBLE_LEFT'
     },
     {
         icon: 'arrow-double-right',
-        label: '向右双箭头',
+        label: t('iconArrowDoubleRight'),
         name: 'ARROW_DOUBLE_RIGHT'
     },
     {
         icon: 'arrow-leftward',
-        label: '箭头向左',
+        label: t('iconArrowLeftward'),
         name: 'ARROW_LEFTWARD'
     },
     {
         icon: 'arrow-rightward',
-        label: '箭头向右',
+        label: t('iconArrowRightward'),
         name: 'ARROW_RIGHTWARD'
     },
     {
         icon: 'arrow-upward',
-        label: '箭头向上',
+        label: t('iconArrowUpward'),
         name: 'ARROW_UPWARD'
     },
     {
         icon: 'arrow-downward',
-        label: '箭头向下',
+        label: t('iconArrowDownward'),
         name: 'ARROW_DOWNWARD'
     },
     {
         icon: 'history',
-        label: '历史',
+        label: t('iconHistory'),
         name: 'HISTORY'
     },
     {
         icon: 'time',
-        label: '时间',
+        label: t('iconTime'),
         name: 'TIME'
     },
     {
         icon: 'network',
-        label: '网络',
+        label: t('iconNetwork'),
         name: 'NETWORK'
     },
     {
         icon: 'list-dot',
-        label: '列表',
+        label: t('iconList'),
         name: 'LIST_DOT'
     },
     {
         icon: 'menu',
-        label: '菜单',
+        label: t('iconMenu'),
         name: 'MENU'
     },
     {
         icon: 'search',
-        label: '搜索',
+        label: t('iconSearch'),
         name: 'SEARCH'
     },
     {
         icon: 'plus',
-        label: '加',
+        label: t('iconPlus'),
         name: 'PLUS'
     },
     {
         icon: 'minus',
-        label: '减',
+        label: t('iconMinus'),
         name: 'MINUS'
     },
     {
         icon: 'remind',
-        label: '提醒',
+        label: t('iconRemind'),
         name: 'REMIND'
     },
     {
         icon: 'remind-fill',
-        label: '提醒-实体',
+        label: t('iconRemindFill'),
         name: 'REMIND_FILL'
     },
     {
         icon: 'warning',
-        label: '警告',
+        label: t('iconWarning'),
         name: 'WARNING'
     },
     {
         icon: 'warning-fill',
-        label: '警告-实心',
+        label: t('iconWarningFill'),
         name: 'WARNING_FILL'
     },
     {
         icon: 'delete',
-        label: '删除',
+        label: t('iconDelete'),
         name: 'DELETE'
     },
     {
         icon: 'delete-fill',
-        label: '删除-实心',
+        label: t('iconDeleteFill'),
         name: 'DELETE_FILL'
     },
     {
         icon: 'screen',
-        label: '筛选',
+        label: t('iconScreen'),
         name: 'SCREEN'
     },
     {
         icon: 'class',
-        label: '分类',
+        label: t('iconClass'),
         name: 'CLASS'
     },
     {
         icon: 'class-fill',
-        label: '应用',
+        label: t('iconClassFill'),
         name: 'CLASS_FILL'
     },
     {
         icon: 'home',
-        label: '首页',
+        label: t('iconHome'),
         name: 'HOME'
     },
     {
         icon: 'home-fill',
-        label: '首页-实心',
+        label: t('iconHomeFill'),
         name: 'HOME_FILL'
     },
     {
         icon: 'mine',
-        label: '我的',
+        label: t('iconMine'),
         name: 'MINE'
     },
     {
         icon: 'mine-fill',
-        label: '我的-实心',
+        label: t('iconMineFill'),
         name: 'MINE_FILL'
     },
     {
         icon: 'setting',
-        label: '设置',
+        label: t('iconSetting'),
         name: 'SETTING'
     },
     {
         icon: 'setting-fill',
-        label: '设置-实体',
+        label: t('iconSettingFill'),
         name: 'SETTING_FILL'
     },
     {
         icon: 'close-circle',
-        label: '关闭圆圈',
+        label: t('iconCloseCircle'),
         name: 'CLOSE_CIRCLE'
     },
     {
         icon: 'close-circle-fill',
-        label: '关闭圆圈-实心',
+        label: t('iconCloseCircleFill'),
         name: 'CLOSE_CIRCLE_FILL'
     },
     {
         icon: 'notice',
-        label: '注意',
+        label: t('iconNotice'),
         name: 'NOTICE'
     },
     {
         icon: 'notice-circle',
-        label: '注意-圆形',
+        label: t('iconNoticeCircle'),
         name: 'NOTICE_CIRCLE'
     },
     {
         icon: 'notice-fill',
-        label: '注意-实心',
+        label: t('iconNoticeFill'),
         name: 'NOTICE_FILL'
     },
     {
         icon: 'success',
-        label: '成功',
+        label: t('iconSuccess'),
         name: 'SUCCESS'
     },
     {
         icon: 'success-fill',
-        label: '成功-实心',
+        label: t('iconSuccessFill'),
         name: 'SUCCESS_FILL'
     },
     {
         icon: 'query',
-        label: '问号',
+        label: t('iconQuery'),
         name: 'QUERY'
     },
     {
         icon: 'help-circle',
-        label: '帮助',
+        label: t('iconHelp'),
         name: 'HELP'
     },
     {
         icon: 'help-fill',
-        label: '帮助-实心',
+        label: t('iconHelpFill'),
         name: 'HELP_FILL'
     },
     {
         icon: 'upload',
-        label: '上传',
+        label: t('iconUpload'),
         name: 'UPLOAD'
     },
     {
         icon: 'switch',
-        label: '转换',
+        label: t('iconSwitch'),
         name: 'SWITCH'
     },
     {
         icon: 'download',
-        label: '下载',
+        label: t('iconDownload'),
         name: 'DOWNLOAD'
     },
     {
         icon: 'security',
-        label: '保护',
+        label: t('iconSecurity'),
         name: 'SECURITY'
     },
     {
         icon: 'scan',
-        label: '扫码',
+        label: t('iconScan'),
         name: 'SCAN'
     },
     {
         icon: 'save',
-        label: '保存',
+        label: t('iconSave'),
         name: 'SAVE'
     },
     {
         icon: 'picture',
-        label: '图片',
+        label: t('iconPicture'),
         name: 'PHOTO'
     },
     {
         icon: 'picture-fill',
-        label: '图片-实体',
+        label: t('iconPictureFill'),
         name: 'PHOTO_FILL'
     },
     {
@@ -446,12 +449,12 @@ const icons = reactive([
     },
     {
         icon: 'navigation',
-        label: '导航',
+        label: t('iconNavigation'),
         name: 'NAVIGATION'
     },
     {
         icon: 'print',
-        label: '打印',
+        label: t('iconPrint'),
         name: 'PRINT'
     },
     {
@@ -461,132 +464,132 @@ const icons = reactive([
     },
     {
         icon: 'link',
-        label: '链接',
+        label: t('iconLink'),
         name: 'LINK'
     },
     {
         icon: 'export',
-        label: '导出',
+        label: t('iconExport'),
         name: 'EXPORT'
     },
     {
         icon: 'ellipsis',
-        label: '省略号',
+        label: t('iconEllipsis'),
         name: 'ELLIPSIS'
     },
     {
         icon: 'customer-service',
-        label: '客服',
+        label: t('iconCustomerService'),
         name: 'CUSTOMER_SERVICE'
     },
     {
         icon: 'comment',
-        label: '信息',
+        label: t('iconComment'),
         name: 'COMMENT'
     },
     {
         icon: 'message',
-        label: '消息',
+        label: t('iconMessage'),
         name: 'MESSAGE'
     },
     {
         icon: 'message-fill',
-        label: '消息-实心',
+        label: t('iconMessageFill'),
         name: 'MESSAGE_FILL'
     },
     {
         icon: 'systemprompt_fill',
-        label: '通知-实心',
+        label: t('iconNotificationFill'),
         name: 'NOTIFICATION_FILL'
     },
     {
         icon: 'attachment',
-        label: '附件',
+        label: t('iconAttachment'),
         name: 'ATTACHMENT'
     },
     {
         icon: 'camera',
-        label: '相机',
+        label: t('iconCamera'),
         name: 'CAMERA'
     },
     {
         icon: 'eye',
-        label: '眼睛',
+        label: t('iconEye'),
         name: 'EYE'
     },
     {
         icon: 'eye-close',
-        label: '眼睛-关闭',
+        label: t('iconEyeClose'),
         name: 'EYE_CLOSE'
     },
     {
         icon: 'hide',
-        label: '隐藏',
+        label: t('iconHide'),
         name: 'HIDE'
     },
     {
         icon: 'calendar',
-        label: '日历',
+        label: t('iconCalendar'),
         name: 'CALENDAR'
     },
     {
         icon: 'copy',
-        label: '复制',
+        label: t('iconCopy'),
         name: 'COPY'
     },
     {
         icon: 'order',
-        label: '订单',
+        label: t('iconOrder'),
         name: 'ORDER'
     },
     {
         icon: 'share',
-        label: '分享',
+        label: t('iconShare'),
         name: 'SHARE'
     },
     {
         icon: 'share-fill',
-        label: '分享-实心',
+        label: t('iconShareFill'),
         name: 'SHARE_FILL'
     },
     {
         icon: 'send',
-        label: '发送',
+        label: t('iconSend'),
         name: 'SEND'
     },
     {
         icon: 'telephone-out',
-        label: '打出电话',
+        label: t('iconTelephoneOut'),
         name: 'TELEPHONE_OUT'
     },
     {
         icon: 'telephone',
-        label: '电话',
+        label: t('iconTelephone'),
         name: 'TELEPHONE'
     },
     {
         icon: 'telephone-fill',
-        label: '电话-实心',
+        label: t('iconTelephoneFill'),
         name: 'TELEPHONE_FILL'
     },
     {
         icon: 'mic',
-        label: '话筒',
+        label: t('iconMic'),
         name: 'MIC'
     },
     {
         icon: 'pie-chart',
-        label: '数据占比',
+        label: t('iconPieChart'),
         name: 'PIE_CHART'
     },
     {
         icon: 'bar-chart',
-        label: '数据视图',
+        label: t('iconBarChart'),
         name: 'BAR_CHART'
     },
     {
         icon: 'clear',
-        label: '清除',
+        label: t('iconClear'),
         name: 'CLEAR'
     }
 ])

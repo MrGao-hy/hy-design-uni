@@ -1,12 +1,12 @@
 <template>
     <the-root-page>
         <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">省略号</view>
+            <view class="hy-title">{{ t('ellipsis') }}</view>
             <hy-table height="300" :data="tableData" :columns="columns"></hy-table>
         </view>
 
         <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">插槽</view>
+            <view class="hy-title">{{ t('slot') }}</view>
             <hy-table :data="tableData" :columns="columns2" stripe :row-height="80">
                 <!-- 自定义操作列 -->
                 <template #default="{ row, col, index }">
@@ -18,11 +18,11 @@
                 <!-- 自定义操作列 -->
                 <template #right="{ row, col, index }">
                     <hy-flex v-if="col.key === 'action'" gap="2">
-                        <hy-button text="编辑" size="mini" plain :border="false"></hy-button>
+                        <hy-button :text="t('edit')" size="mini" plain :border="false"></hy-button>
                         <hy-button
                             type="error"
                             size="mini"
-                            text="删除"
+                            :text="t('delete')"
                             plain
                             :border="false"
                         ></hy-button>
@@ -33,14 +33,14 @@
         </view>
 
         <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">空状态</view>
+            <view class="hy-title">{{ t('emptyState') }}</view>
             <hy-table :data="[]" :columns="columns"></hy-table>
         </view>
     </the-root-page>
 </template>
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { useShareButton } from '@/composables'
+import { computed } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { ITableColumn } from '@/package'
 
 definePage({
@@ -49,198 +49,203 @@ definePage({
     }
 })
 
-const columns: ITableColumn[] = reactive([
+const { t } = useTranslate('table')
+usePageTitle('table')
+
+// 列定义（computed 包裹以响应语言切换）
+const columns = computed((): ITableColumn[] => [
     { title: 'ID', key: 'id', width: 40, fixed: 'left', align: 'center' },
-    { title: '姓名', key: 'name', width: 80, fixed: 'left' },
-    { title: '性别', key: 'sex', width: 80 },
-    { title: '年龄', key: 'age', width: 80, sortable: true },
-    { title: '邮箱', key: 'email', width: 200, ellipsis: true },
-    { title: '地址', key: 'address', width: 200, ellipsis: true },
-    { title: '电话', key: 'phone', width: 150, ellipsis: true },
-    { title: '公司', key: 'company', width: 150, ellipsis: true },
-    { title: '职位', key: 'position', width: 150, ellipsis: true }
+    { title: t('colName'), key: 'name', width: 80, fixed: 'left' },
+    { title: t('colSex'), key: 'sex', width: 80 },
+    { title: t('colAge'), key: 'age', width: 80, sortable: true },
+    { title: t('colEmail'), key: 'email', width: 200, ellipsis: true },
+    { title: t('colAddress'), key: 'address', width: 200, ellipsis: true },
+    { title: t('colPhone'), key: 'phone', width: 150, ellipsis: true },
+    { title: t('colCompany'), key: 'company', width: 150, ellipsis: true },
+    { title: t('colPosition'), key: 'position', width: 150, ellipsis: true }
 ])
-const columns2: ITableColumn[] = reactive([
+const columns2 = computed((): ITableColumn[] => [
     { title: 'ID', key: 'id', width: 40, fixed: 'left', align: 'center' },
-    { title: '姓名', key: 'name', width: 80, fixed: 'left' },
-    { title: '头像', key: 'avatar', width: 80 },
-    { title: '性别', key: 'sex', width: 80 },
-    { title: '年龄', key: 'age', width: 80, sortable: true },
-    { title: '邮箱', key: 'email', width: 200, ellipsis: true },
-    { title: '地址', key: 'address', width: 200, ellipsis: true },
-    { title: '电话', key: 'phone', width: 150, ellipsis: true },
-    { title: '公司', key: 'company', width: 150, ellipsis: true },
-    { title: '职位', key: 'position', width: 150, ellipsis: true },
-    { title: '操作', key: 'action', width: 100, fixed: 'right' }
+    { title: t('colName'), key: 'name', width: 80, fixed: 'left' },
+    { title: t('colAvatar'), key: 'avatar', width: 80 },
+    { title: t('colSex'), key: 'sex', width: 80 },
+    { title: t('colAge'), key: 'age', width: 80, sortable: true },
+    { title: t('colEmail'), key: 'email', width: 200, ellipsis: true },
+    { title: t('colAddress'), key: 'address', width: 200, ellipsis: true },
+    { title: t('colPhone'), key: 'phone', width: 150, ellipsis: true },
+    { title: t('colCompany'), key: 'company', width: 150, ellipsis: true },
+    { title: t('colPosition'), key: 'position', width: 150, ellipsis: true },
+    { title: t('colAction'), key: 'action', width: 100, fixed: 'right' }
 ])
-const tableData = reactive([
+// 演示数据（computed 包裹以响应语言切换）
+const tableData = computed(() => [
     {
         id: 1,
-        name: '张三',
+        name: t('zhangSan'),
         age: 12,
-        sex: '男',
-        address: '安徽省合肥市肥西县',
+        sex: t('male'),
+        address: t('addrFeixi'),
         status: 1,
         email: 'zhangsan@example.com',
         phone: '13800138001',
-        company: '科技有限公司',
-        position: '前端开发'
+        company: t('companyTech'),
+        position: t('positionFrontend')
     },
     {
         id: 2,
-        name: '李四',
+        name: t('liSi'),
         age: 18,
-        sex: '男',
-        address: '安徽省合肥市肥西县',
+        sex: t('male'),
+        address: t('addrFeixi'),
         status: 1,
         email: 'lisi@example.com',
         phone: '13800138002',
-        company: '互联网公司',
-        position: '后端开发'
+        company: t('companyInternet'),
+        position: t('positionBackend')
     },
     {
         id: 3,
-        name: '王二',
+        name: t('wangEr'),
         age: 28,
-        sex: '男',
-        address: '安徽省合肥市肥西县',
+        sex: t('male'),
+        address: t('addrFeixi'),
         status: 1,
         email: 'wangwu@example.com',
         phone: '13800138003',
-        company: '金融科技',
-        position: '产品经理'
+        company: t('companyFintech'),
+        position: t('positionProduct')
     },
     {
         id: 4,
-        name: '麻子',
+        name: t('maZi'),
         age: 17,
-        sex: '男',
-        address: '内蒙古自治区呼伦贝尔市莫力达瓦达幹尔自治旗',
+        sex: t('male'),
+        address: t('addrHulunbeier'),
         status: 0,
         email: 'mazi@example.com',
         phone: '13800138004',
-        company: '电子商务',
-        position: '设计师'
+        company: t('companyEcommerce'),
+        position: t('positionDesigner')
     },
     {
         id: 5,
-        name: '丧彪',
+        name: t('sangBiao'),
         age: 80,
-        sex: '男',
-        address: '地府',
+        sex: t('male'),
+        address: t('addrDifu'),
         status: 0,
         email: 'sangbiao@example.com',
         phone: '13800138005',
-        company: '冥界科技',
+        company: t('companyUnderworld'),
         position: 'CEO'
     },
     {
         id: 6,
-        name: '奥德彪',
+        name: t('aoDeBiao'),
         age: 23,
-        sex: '男',
-        address: '非洲',
+        sex: t('male'),
+        address: t('addrAfrica'),
         status: 0,
         email: 'aodebiao@example.com',
         phone: '13800138006',
-        company: '国际贸易',
-        position: '销售经理'
+        company: t('companyTrade'),
+        position: t('positionSales')
     },
     {
         id: 7,
-        name: '宙斯',
+        name: t('zeus'),
         age: 33,
-        sex: '男',
-        address: '宇宙太阳系',
+        sex: t('male'),
+        address: t('addrUniverse'),
         status: 0,
         email: 'zeus@example.com',
         phone: '13800138007',
-        company: '奥林匹斯集团',
-        position: '众神之王'
+        company: t('companyOlympus'),
+        position: t('positionKingOfGods')
     },
     {
         id: 8,
-        name: '张三',
+        name: t('zhangSan'),
         age: 12,
-        sex: '男',
-        address: '安徽省合肥市肥西县',
+        sex: t('male'),
+        address: t('addrFeixi'),
         status: 1,
         email: 'zhangsan@example.com',
         phone: '13800138001',
-        company: '科技有限公司',
-        position: '前端开发'
+        company: t('companyTech'),
+        position: t('positionFrontend')
     },
     {
         id: 9,
-        name: '李四',
+        name: t('liSi'),
         age: 18,
-        sex: '男',
-        address: '安徽省合肥市肥西县',
+        sex: t('male'),
+        address: t('addrFeixi'),
         status: 1,
         email: 'lisi@example.com',
         phone: '13800138002',
-        company: '互联网公司',
-        position: '后端开发'
+        company: t('companyInternet'),
+        position: t('positionBackend')
     },
     {
         id: 10,
-        name: '王二',
+        name: t('wangEr'),
         age: 28,
-        sex: '男',
-        address: '安徽省合肥市肥西县',
+        sex: t('male'),
+        address: t('addrFeixi'),
         status: 1,
         email: 'wangwu@example.com',
         phone: '13800138003',
-        company: '金融科技',
-        position: '产品经理'
+        company: t('companyFintech'),
+        position: t('positionProduct')
     },
     {
         id: 11,
-        name: '麻子',
+        name: t('maZi'),
         age: 17,
-        sex: '男',
-        address: '内蒙古自治区呼伦贝尔市莫力达瓦达幹尔自治旗',
+        sex: t('male'),
+        address: t('addrHulunbeier'),
         status: 0,
         email: 'mazi@example.com',
         phone: '13800138004',
-        company: '电子商务',
-        position: '设计师'
+        company: t('companyEcommerce'),
+        position: t('positionDesigner')
     },
     {
         id: 12,
-        name: '丧彪',
+        name: t('sangBiao'),
         age: 80,
-        sex: '男',
-        address: '地府',
+        sex: t('male'),
+        address: t('addrDifu'),
         status: 0,
         email: 'sangbiao@example.com',
         phone: '13800138005',
-        company: '冥界科技',
+        company: t('companyUnderworld'),
         position: 'CEO'
     },
     {
         id: 13,
-        name: '奥德彪',
+        name: t('aoDeBiao'),
         age: 23,
-        sex: '男',
-        address: '非洲',
+        sex: t('male'),
+        address: t('addrAfrica'),
         status: 0,
         email: 'aodebiao@example.com',
         phone: '13800138006',
-        company: '国际贸易',
-        position: '销售经理'
+        company: t('companyTrade'),
+        position: t('positionSales')
     },
     {
         id: 14,
-        name: '宙斯',
+        name: t('zeus'),
         age: 33,
-        sex: '男',
-        address: '宇宙太阳系',
+        sex: t('male'),
+        address: t('addrUniverse'),
         status: 0,
         email: 'zeus@example.com',
         phone: '13800138007',
-        company: '奥林匹斯集团',
-        position: '众神之王'
+        company: t('companyOlympus'),
+        position: t('positionKingOfGods')
     }
 ])
 

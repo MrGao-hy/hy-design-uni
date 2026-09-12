@@ -64,13 +64,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '翻滚数字'
     }
 })
+
+const { t } = useTranslate('rollingNum')
+usePageTitle('rollingNum')
 
 const val1 = ref<string | number>('000000')
 const val2 = ref<string | number>('000000')

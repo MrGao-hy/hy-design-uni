@@ -10,15 +10,18 @@
 
 <script setup lang="ts">
 import type { TransitionModeType } from '@/package'
-import { computed, type CSSProperties, reactive, ref } from 'vue'
+import { computed, type CSSProperties, ref } from 'vue'
 import { getWindowInfo } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '动画'
     }
 })
+
+const { t } = useTranslate('transition')
+usePageTitle('transition')
 
 const show = ref(false)
 const mode = ref<TransitionModeType>('fade')
@@ -33,18 +36,19 @@ const style = computed((): CSSProperties => {
     }
 })
 
-const list = reactive([
-    { title: '淡入', value: 'fade' },
-    { title: '上滑淡入', value: 'fade-up' },
-    { title: '下滑淡入', value: 'fade-down' },
-    { title: '左滑淡入', value: 'fade-left' },
-    { title: '右滑淡入', value: 'fade-right' },
-    { title: '上滑进入', value: 'slide-up' },
-    { title: '下滑进入', value: 'slide-down' },
-    { title: '左滑进入', value: 'slide-left' },
-    { title: '右滑进入', value: 'slide-right' },
-    { title: '缩放进入', value: 'zoom-in' },
-    { title: '缩放退出', value: 'zoom-out' }
+// 动画模式列表（computed 包裹以响应语言切换）
+const list = computed(() => [
+    { title: t('fade'), value: 'fade' },
+    { title: t('fadeUp'), value: 'fade-up' },
+    { title: t('fadeDown'), value: 'fade-down' },
+    { title: t('fadeLeft'), value: 'fade-left' },
+    { title: t('fadeRight'), value: 'fade-right' },
+    { title: t('slideUp'), value: 'slide-up' },
+    { title: t('slideDown'), value: 'slide-down' },
+    { title: t('slideLeft'), value: 'slide-left' },
+    { title: t('slideRight'), value: 'slide-right' },
+    { title: t('zoomIn'), value: 'zoom-in' },
+    { title: t('zoomOut'), value: 'zoom-out' }
 ])
 
 const onClick = (temp: CommonType.CellItem) => {

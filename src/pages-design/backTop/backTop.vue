@@ -8,16 +8,16 @@
             :bottom="bottom"
         ></hy-back-top>
         <view class="hy-setting__box">
-            <view class="hy-title">指示点</view>
+            <view class="hy-title">{{ t('indicator') }}</view>
             <hy-subsection :list="list_1" v-model="mode"></hy-subsection>
 
-            <view class="hy-title">回去时长</view>
+            <view class="hy-title">{{ t('duration') }}</view>
             <hy-slider v-model="duration" :min="100" :max="4000" show-value></hy-slider>
 
-            <view class="hy-title">距离右边距离</view>
+            <view class="hy-title">{{ t('rightDistance') }}</view>
             <hy-slider v-model="right" :max="100" show-value></hy-slider>
 
-            <view class="hy-title">距离底部距离</view>
+            <view class="hy-title">{{ t('bottomDistance') }}</view>
             <hy-slider v-model="bottom" :max="500" show-value></hy-slider>
         </view>
     </the-root-page>
@@ -25,15 +25,18 @@
 
 <script setup lang="ts">
 import type { ShapeType } from '@/package/libs/typing'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { onPageScroll } from '@dcloudio/uni-app'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '返回顶部'
     }
 })
+
+const { t } = useTranslate('backTop')
+usePageTitle('backTop')
 
 const mode = ref<ShapeType>('circle')
 const duration = ref(500)
@@ -45,10 +48,10 @@ onPageScroll((e) => {
     scrollTop.value = e.scrollTop
 })
 
-const list_1 = [
-    { name: '圆形', value: 'circle' },
-    { name: '方形', value: 'square' }
-]
+const list_1 = computed(() => [
+    { name: t('shapeCircle'), value: 'circle' },
+    { name: t('shapeSquare'), value: 'square' }
+])
 
 useShareButton()
 </script>

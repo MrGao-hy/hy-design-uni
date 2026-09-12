@@ -3,36 +3,36 @@
         <hy-toast></hy-toast>
 
         <!-- 基础类型 -->
-        <view class="hy-title">基础类型</view>
+        <view class="hy-title">{{ t('basicTypes') }}</view>
         <view class="hy-container">
             <hy-cell>
                 <hy-cell-item
-                    title="默认提示"
+                    :title="t('defaultTipCell')"
                     name="show"
                     @click="handleToast('show')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="信息提示"
+                    :title="t('infoTip')"
                     name="info"
                     @click="handleToast('info')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="成功提示"
+                    :title="t('successTip')"
                     name="success"
                     @click="handleToast('success')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="错误提示"
+                    :title="t('errorTip')"
                     name="error"
                     @click="handleToast('error')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="警告提示"
+                    :title="t('warningTip')"
                     name="warning"
                     @click="handleToast('warning')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="主题提示"
+                    :title="t('primaryTip')"
                     name="primary"
                     @click="handleToast('primary')"
                 ></hy-cell-item>
@@ -40,17 +40,21 @@
         </view>
 
         <!-- 显示位置 -->
-        <view class="hy-title">显示位置</view>
+        <view class="hy-title">{{ t('position') }}</view>
         <view class="hy-container">
             <hy-cell>
-                <hy-cell-item title="顶部" name="top" @click="handlePosition('top')"></hy-cell-item>
                 <hy-cell-item
-                    title="居中"
+                    :title="t('top')"
+                    name="top"
+                    @click="handlePosition('top')"
+                ></hy-cell-item>
+                <hy-cell-item
+                    :title="t('center')"
                     name="center"
                     @click="handlePosition('center')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="底部"
+                    :title="t('bottom')"
                     name="bottom"
                     @click="handlePosition('bottom')"
                 ></hy-cell-item>
@@ -58,14 +62,26 @@
         </view>
 
         <!-- 显示时长 -->
-        <view class="hy-title">显示时长</view>
+        <view class="hy-title">{{ t('duration') }}</view>
         <view class="hy-container">
             <hy-cell>
-                <hy-cell-item title="1秒" name="1000" @click="handleDuration(1000)"></hy-cell-item>
-                <hy-cell-item title="3秒" name="3000" @click="handleDuration(3000)"></hy-cell-item>
-                <hy-cell-item title="5秒" name="5000" @click="handleDuration(5000)"></hy-cell-item>
                 <hy-cell-item
-                    title="不自动关闭"
+                    :title="t('oneSecond')"
+                    name="1000"
+                    @click="handleDuration(1000)"
+                ></hy-cell-item>
+                <hy-cell-item
+                    :title="t('threeSeconds')"
+                    name="3000"
+                    @click="handleDuration(3000)"
+                ></hy-cell-item>
+                <hy-cell-item
+                    :title="t('fiveSeconds')"
+                    name="5000"
+                    @click="handleDuration(5000)"
+                ></hy-cell-item>
+                <hy-cell-item
+                    :title="t('noAutoClose')"
                     name="-1"
                     @click="handleDuration(-1)"
                 ></hy-cell-item>
@@ -73,64 +89,71 @@
         </view>
 
         <!-- 加载提示 -->
-        <view class="hy-title">加载提示</view>
+        <view class="hy-title">{{ t('loadingToast') }}</view>
         <view class="hy-container">
             <hy-cell>
                 <hy-cell-item
-                    title="默认加载"
+                    :title="t('defaultLoading')"
                     name="loading"
                     @click="handleLoading()"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="自定义文字"
+                    :title="t('customText')"
                     name="loading-text"
-                    @click="handleLoading('正在加载...')"
+                    @click="handleLoading(t('loadingNow'))"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="圆形加载"
+                    :title="t('circleLoading')"
                     name="loading-circle"
-                    @click="handleLoading('加载中', 'circle')"
+                    @click="handleLoading(t('loadingText'), 'circle')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="经典花"
+                    :title="t('spinnerLoading')"
                     name="loading-spinner"
-                    @click="handleLoading('加载中', 'spinner')"
+                    @click="handleLoading(t('loadingText'), 'spinner')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="跳动圆点"
+                    :title="t('dotsLoading')"
                     name="loading-semicircle"
-                    @click="handleLoading('加载中', 'dots')"
+                    @click="handleLoading(t('loadingText'), 'dots')"
                 ></hy-cell-item>
                 <hy-cell-item
-                    title="音波柱加载"
+                    :title="t('barsLoading')"
                     name="loading-semicircle"
-                    @click="handleLoading('加载中', 'bars')"
+                    @click="handleLoading(t('loadingText'), 'bars')"
                 ></hy-cell-item>
             </hy-cell>
             <view class="hy-button-group">
-                <hy-button text="关闭加载提示" size="small" @click="toast.close()"></hy-button>
+                <hy-button
+                    :text="t('closeLoading')"
+                    size="small"
+                    @click="toast.close()"
+                ></hy-button>
             </view>
         </view>
 
         <!-- 自定义图标 -->
-        <view class="hy-title">自定义图标</view>
+        <view class="hy-title">{{ t('customIcon') }}</view>
         <view class="hy-container">
             <hy-cell>
                 <hy-cell-item
-                    title="图标自定义大小和颜色"
+                    :title="t('iconCustomSize')"
                     @click="handleCustomIcon({ name: 'time', size: '24', color: '#2979ff' })"
                 ></hy-cell-item>
-                <hy-cell-item title="地址图标" @click="handleCustomIcon('map')"></hy-cell-item>
-                <hy-cell-item title="笑脸图标" @click="handleCustomIcon('smile')"></hy-cell-item>
+                <hy-cell-item :title="t('mapIcon')" @click="handleCustomIcon('map')"></hy-cell-item>
+                <hy-cell-item
+                    :title="t('smileIcon')"
+                    @click="handleCustomIcon('smile')"
+                ></hy-cell-item>
             </hy-cell>
         </view>
 
         <!-- 回调函数 -->
-        <view class="hy-title">回调函数</view>
+        <view class="hy-title">{{ t('callback') }}</view>
         <view class="hy-container">
             <hy-cell>
                 <hy-cell-item
-                    title="关闭后回调"
+                    :title="t('closeCallback')"
                     name="callback"
                     @click="handleCallback()"
                 ></hy-cell-item>
@@ -141,22 +164,32 @@
         </view>
 
         <!-- 触摸穿透 -->
-        <view class="hy-title">触摸穿透</view>
+        <view class="hy-title">{{ t('touchThrough') }}</view>
         <view class="hy-container">
             <hy-cell>
-                <hy-cell-item title="允许穿透" @click="handleOverlay(true)"></hy-cell-item>
-                <hy-cell-item title="禁止穿透" @click="handleOverlay(false)"></hy-cell-item>
-                <hy-cell-item title="显示遮罩层" @click="handleCover(true)"></hy-cell-item>
+                <hy-cell-item
+                    :title="t('allowThrough')"
+                    @click="handleOverlay(true)"
+                ></hy-cell-item>
+                <hy-cell-item
+                    :title="t('forbidThrough')"
+                    @click="handleOverlay(false)"
+                ></hy-cell-item>
+                <hy-cell-item :title="t('showCover')" @click="handleCover(true)"></hy-cell-item>
             </hy-cell>
         </view>
 
         <!-- 综合示例 -->
-        <view class="hy-title">综合示例</view>
+        <view class="hy-title">{{ t('comprehensive') }}</view>
         <view class="hy-container">
             <hy-cell>
-                <hy-cell-item title="模拟登录" name="login" @click="handleLogin()"></hy-cell-item>
                 <hy-cell-item
-                    title="模拟网络请求"
+                    :title="t('mockLogin')"
+                    name="login"
+                    @click="handleLogin()"
+                ></hy-cell-item>
+                <hy-cell-item
+                    :title="t('mockRequest')"
                     name="request"
                     @click="handleRequest()"
                 ></hy-cell-item>
@@ -167,16 +200,19 @@
 
 <script setup lang="ts">
 import type { LoadingMode } from '@/package/libs/typing'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { HyIconProps } from '@/package/components/hy-icon/typing'
 import { isString, useToast } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '消息提示'
     }
 })
+
+const { t } = useTranslate('toast')
+usePageTitle('toast')
 
 const toast = useToast()
 
@@ -187,11 +223,12 @@ const loadMode = ref<LoadingMode>('circle')
 const position = ref('center')
 const callbackMessage = ref('')
 
-const positionList = [
-    { name: '上面', value: 'top' },
-    { name: '中间', value: 'center' },
-    { name: '下面', value: 'bottom' }
-]
+// 位置演示数据（computed 包裹以响应语言切换）
+const positionList = computed(() => [
+    { name: t('posTop'), value: 'top' },
+    { name: t('posCenter'), value: 'center' },
+    { name: t('posBottom'), value: 'bottom' }
+])
 
 // 基础类型提示
 const handleToast = (type: string) => {
@@ -199,19 +236,26 @@ const handleToast = (type: string) => {
         icon: type !== 'show' ? icon.value : '',
         position: position.value as any
     }
-    ;(toast as any)[type]?.(`${type === 'show' ? '默认' : type}提示信息`, options)
+    ;(toast as any)[type]?.(t('defaultTip', type), options)
 }
 
 // 显示位置
 const handlePosition = (pos: string) => {
-    toast.success(`显示在${pos === 'top' ? '顶部' : pos === 'center' ? '居中' : '底部'}`, {
-        position: pos as any
-    })
+    toast.success(
+        pos === 'top'
+            ? t('positionTop')
+            : pos === 'center'
+              ? t('positionCenter')
+              : t('positionBottom'),
+        {
+            position: pos as any
+        }
+    )
 }
 
 // 显示时长
 const handleDuration = (duration: number) => {
-    const text = duration === -1 ? '需手动关闭' : `${duration / 1000}秒后关闭`
+    const text = duration === -1 ? t('manualClose') : t('autoClose', duration / 1000)
     toast.info(text, {
         duration,
         position: position.value as any
@@ -220,7 +264,7 @@ const handleDuration = (duration: number) => {
 
 // 加载提示
 const handleLoading = (message?: string, mode?: LoadingMode) => {
-    toast.loading(message || '加载中...', {
+    toast.loading(message || t('loadingDefault'), {
         loadMode: mode || loadMode.value,
         position: position.value as any
     })
@@ -235,7 +279,7 @@ const handleLoading = (message?: string, mode?: LoadingMode) => {
 
 // 自定义图标
 const handleCustomIcon = (icon: string | Partial<HyIconProps>) => {
-    toast.info('自定义图标', {
+    toast.info(t('customIconTip'), {
         icon: isString(icon) ? icon : icon.name,
         position: position.value as any
     })
@@ -244,10 +288,10 @@ const handleCustomIcon = (icon: string | Partial<HyIconProps>) => {
 // 回调函数
 const handleCallback = () => {
     callbackMessage.value = ''
-    toast.success('操作成功', {
+    toast.success(t('operateSuccess'), {
         position: position.value as any,
         complete: () => {
-            callbackMessage.value = 'Toast 已关闭，回调函数执行成功！'
+            callbackMessage.value = t('callbackDone')
             setTimeout(() => {
                 callbackMessage.value = ''
             }, 3000)
@@ -257,7 +301,7 @@ const handleCallback = () => {
 
 // 触摸穿透
 const handleOverlay = (overlay: boolean) => {
-    toast.info(overlay ? '禁止触摸穿透' : '允许触摸穿透', {
+    toast.info(overlay ? t('forbidTouchThrough') : t('allowTouchThrough'), {
         overlay,
         position: position.value as any
     })
@@ -265,7 +309,7 @@ const handleOverlay = (overlay: boolean) => {
 
 // 触摸穿透
 const handleCover = (cover: boolean) => {
-    toast.show(cover ? '显示遮罩层' : '不显示遮罩层', {
+    toast.show(cover ? t('showCover') : t('hideCover'), {
         cover,
         position: position.value as any
     })
@@ -273,21 +317,21 @@ const handleCover = (cover: boolean) => {
 
 // 模拟登录
 const handleLogin = () => {
-    toast.loading('登录中...', { position: position.value as any })
+    toast.loading(t('logging'), { position: position.value as any })
 
     setTimeout(() => {
         toast.close()
-        toast.success('登录成功', { position: position.value as any })
+        toast.success(t('loginSuccess'), { position: position.value as any })
     }, 2000)
 }
 
 // 模拟网络请求
 const handleRequest = () => {
-    toast.loading('请求数据中...', { position: position.value as any })
+    toast.loading(t('requesting'), { position: position.value as any })
 
     setTimeout(() => {
         toast.close()
-        toast.success('数据加载完成', { position: position.value as any })
+        toast.success(t('dataLoaded'), { position: position.value as any })
     }, 3000)
 }
 

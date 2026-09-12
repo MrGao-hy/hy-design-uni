@@ -21,5 +21,4 @@ export function setupLocale() {
     Locale.add(messages)
 }
 
-
 export { Locale }

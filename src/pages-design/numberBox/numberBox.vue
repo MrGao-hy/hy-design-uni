@@ -56,13 +56,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { IconConfig } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '步进器'
     }
 })
+
+const { t } = useTranslate('numberBox')
+usePageTitle('numberBox')
 
 const value = ref(10)
 const value2 = ref(0)

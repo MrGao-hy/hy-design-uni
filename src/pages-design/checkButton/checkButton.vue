@@ -1,6 +1,6 @@
 <template>
     <the-root-page>
-        <view class="hy-title">复选按钮</view>
+        <view class="hy-title">{{ t('checkboxBtn') }}</view>
         <view class="hy-container">
             <hy-check-button
                 v-model="value_1"
@@ -13,7 +13,7 @@
             </hy-check-button>
         </view>
 
-        <view class="hy-title">单选按钮</view>
+        <view class="hy-title">{{ t('radioBtn') }}</view>
         <view class="hy-container">
             <hy-check-button
                 v-model="value_2"
@@ -26,13 +26,13 @@
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">形状</view>
+            <view class="hy-title">{{ t('shapeSection') }}</view>
             <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">主题色</view>
+            <view class="hy-title">{{ t('themeSection') }}</view>
             <hy-subsection :list="list_2" v-model="type"></hy-subsection>
 
-            <view class="hy-title">大小</view>
+            <view class="hy-title">{{ t('sizeSection') }}</view>
             <hy-subsection :list="list_3" v-model="size"></hy-subsection>
         </view>
     </the-root-page>
@@ -40,8 +40,8 @@
 
 <script setup lang="ts">
 import type { ThemeType, ShapeType, SizeType } from '@/package/libs/typing'
-import { reactive, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { computed, ref } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -49,37 +49,40 @@ definePage({
     }
 })
 
+const { t } = useTranslate('checkButton')
+usePageTitle('checkButton')
+
 const value_1 = ref('')
 const value_2 = ref('')
 const type = ref<ThemeType>('primary')
 const shape = ref<ShapeType>('square')
 const size = ref<SizeType>('medium')
 
-const columns = reactive([
-    { label: '老师', value: 0 },
-    { label: '护士', value: 1 },
-    { label: '空姐', value: 2 },
-    { label: '作家', value: 3 },
-    { label: '网红', value: 4 }
+const columns = computed(() => [
+    { label: t('jobs.teacher'), value: 0 },
+    { label: t('jobs.nurse'), value: 1 },
+    { label: t('jobs.stewardess'), value: 2 },
+    { label: t('jobs.writer'), value: 3 },
+    { label: t('jobs.influencer'), value: 4 }
 ])
 
-const list_1 = reactive([
-    { name: '半圆', value: 'circle' },
-    { name: '方形', value: 'square' }
+const list_1 = computed(() => [
+    { name: t('shapeHalfCircle'), value: 'circle' },
+    { name: t('shapeSquare'), value: 'square' }
 ])
 
-const list_2 = reactive([
-    { name: '主要', value: 'primary' },
-    { name: '信息', value: 'success' },
-    { name: '危险', value: 'error' },
-    { name: '提示', value: 'warning' },
-    { name: '默认', value: 'info' }
+const list_2 = computed(() => [
+    { name: t('themePrimary'), value: 'primary' },
+    { name: t('themeSuccess'), value: 'success' },
+    { name: t('themeError'), value: 'error' },
+    { name: t('themeWarning'), value: 'warning' },
+    { name: t('themeInfo'), value: 'info' }
 ])
 
-const list_3 = reactive([
-    { name: '小', value: 'small' },
-    { name: '中', value: 'medium' },
-    { name: '大', value: 'large' }
+const list_3 = computed(() => [
+    { name: t('sizeSmall'), value: 'small' },
+    { name: t('sizeMedium'), value: 'medium' },
+    { name: t('sizeLarge'), value: 'large' }
 ])
 
 useShareButton()

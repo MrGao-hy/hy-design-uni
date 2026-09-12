@@ -13,13 +13,16 @@
 <script setup lang="ts">
 import type { LayoutType } from '@/package/libs/typing'
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '弹出层'
     }
 })
+
+const { t } = useTranslate('popup')
+usePageTitle('popup')
 
 const show = ref(false)
 const mode = ref<LayoutType>('center')

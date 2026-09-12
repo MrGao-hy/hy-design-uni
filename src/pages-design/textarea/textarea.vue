@@ -1,44 +1,52 @@
 <template>
     <the-root-page>
         <!-- 基础使用 -->
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
-            <hy-textarea v-model="basicValue" placeholder="请输入内容"></hy-textarea>
+            <hy-textarea v-model="basicValue" :placeholder="t('inputPlaceholder')"></hy-textarea>
         </view>
 
         <!-- 边框类型 -->
-        <view class="hy-title">边框类型</view>
+        <view class="hy-title">{{ t('borderType') }}</view>
         <view class="hy-container">
             <hy-textarea
                 v-model="surroundValue"
                 border="surround"
-                placeholder="四周边框（默认）"
+                :placeholder="t('borderSurround')"
             ></hy-textarea>
         </view>
         <view class="hy-container">
-            <hy-textarea v-model="bottomValue" border="bottom" placeholder="底部边框"></hy-textarea>
+            <hy-textarea
+                v-model="bottomValue"
+                border="bottom"
+                :placeholder="t('borderBottom')"
+            ></hy-textarea>
         </view>
         <view class="hy-container">
-            <hy-textarea v-model="noneValue" border="none" placeholder="无边框"></hy-textarea>
+            <hy-textarea
+                v-model="noneValue"
+                border="none"
+                :placeholder="t('borderNone')"
+            ></hy-textarea>
         </view>
 
         <!-- 字数统计 -->
-        <view class="hy-title">字数统计</view>
+        <view class="hy-title">{{ t('count') }}</view>
         <view class="hy-container">
             <hy-textarea
                 v-model="countValue"
-                placeholder="请输入内容，会显示字数统计"
+                :placeholder="t('countPlaceholder')"
                 :maxlength="200"
                 count
             ></hy-textarea>
         </view>
 
         <!-- 自动增高 -->
-        <view class="hy-title">自动增高</view>
+        <view class="hy-title">{{ t('autoHeight') }}</view>
         <view class="hy-container">
             <hy-textarea
                 v-model="autoHeightValue"
-                placeholder="输入内容会自动增高高度"
+                :placeholder="t('autoHeightPlaceholder')"
                 :maxlength="500"
                 autoHeight
                 count
@@ -46,61 +54,65 @@
         </view>
 
         <!-- 禁用状态 -->
-        <view class="hy-title">禁用状态</view>
+        <view class="hy-title">{{ t('disabledState') }}</view>
         <view class="hy-container">
-            <hy-textarea v-model="disabledValue" disabled placeholder="禁用状态"></hy-textarea>
+            <hy-textarea
+                v-model="disabledValue"
+                disabled
+                :placeholder="t('disabledState')"
+            ></hy-textarea>
         </view>
 
         <!-- 自动聚焦 -->
-        <view class="hy-title">自动聚焦</view>
+        <view class="hy-title">{{ t('autoFocus') }}</view>
         <view class="hy-container">
             <hy-textarea
                 v-model="focusValue"
                 :focus="isFocus"
-                placeholder="点击按钮会获取焦点"
+                :placeholder="t('focusPlaceholder')"
                 @focus="onFocus"
                 @blur="onBlur"
             ></hy-textarea>
         </view>
         <view class="hy-container">
-            <hy-button text="点击获取焦点" size="small" @click="handleFocus"></hy-button>
+            <hy-button :text="t('focusBtn')" size="small" @click="handleFocus"></hy-button>
         </view>
 
         <!-- 自定义高度 -->
-        <view class="hy-title">自定义高度</view>
+        <view class="hy-title">{{ t('customHeight') }}</view>
         <view class="hy-container">
             <hy-textarea
                 v-model="customHeightValue"
-                placeholder="固定高度120px"
+                :placeholder="t('fixedHeightPlaceholder')"
                 :height="120"
                 count
             ></hy-textarea>
         </view>
 
         <!-- 格式化处理 - 数字 -->
-        <view class="hy-title">格式化处理 - 只能输入数字</view>
+        <view class="hy-title">{{ t('formatNumber') }}</view>
         <view class="hy-container">
             <hy-textarea
                 v-model="numberValue"
                 :formatter="formatterNumber"
-                placeholder="只能输入数字"
+                :placeholder="t('onlyNumber')"
                 count
             ></hy-textarea>
         </view>
 
         <!-- 格式化处理 - 字母 -->
-        <view class="hy-title">格式化处理 - 只能输入字母</view>
+        <view class="hy-title">{{ t('formatLetter') }}</view>
         <view class="hy-container">
             <hy-textarea
                 v-model="letterValue"
                 :formatter="formatterLetter"
-                placeholder="只能输入英文字母"
+                :placeholder="t('onlyLetter')"
                 count
             ></hy-textarea>
         </view>
 
         <!-- 聊天输入框场景 -->
-        <view class="hy-title">聊天输入框场景</view>
+        <view class="hy-title">{{ t('chatScene') }}</view>
         <view class="hy-container chat-container">
             <view class="chat-messages">
                 <view
@@ -120,26 +132,28 @@
                     autoHeight
                     :maxlength="500"
                     confirmType="send"
-                    placeholder="输入消息..."
+                    :placeholder="t('inputMessage')"
                     @confirm="sendMessage"
                 ></hy-textarea>
                 <view class="chat-send">
                     <text class="chat-count">{{ chatInput.length }}/500</text>
-                    <hy-button type="primary" size="small" @click="sendMessage">发送</hy-button>
+                    <hy-button type="primary" size="small" @click="sendMessage">{{
+                        t('send')
+                    }}</hy-button>
                 </view>
             </view>
         </view>
 
         <!-- 配合表单使用 -->
-        <view class="hy-title">配合表单使用</view>
+        <view class="hy-title">{{ t('withForm') }}</view>
         <view class="hy-container">
             <hy-cell>
-                <hy-cell-item title="备注" name="remark" :border="false">
+                <hy-cell-item :title="t('remark')" name="remark" :border="false">
                     <template #value>
                         <hy-textarea
                             v-model="formData.remark"
                             border="none"
-                            placeholder="请输入备注信息"
+                            :placeholder="t('remarkPlaceholder')"
                             :maxlength="200"
                             count
                         ></hy-textarea>
@@ -149,11 +163,11 @@
         </view>
 
         <!-- 事件监听 -->
-        <view class="hy-title">事件监听</view>
+        <view class="hy-title">{{ t('eventListen') }}</view>
         <view class="hy-container">
             <hy-textarea
                 v-model="eventValue"
-                placeholder="输入内容查看事件触发"
+                :placeholder="t('eventPlaceholder')"
                 count
                 @focus="handleFocusEvent"
                 @blur="handleBlurEvent"
@@ -162,7 +176,7 @@
             ></hy-textarea>
         </view>
         <view class="hy-container event-log">
-            <view class="event-title">事件日志：</view>
+            <view class="event-title">{{ t('eventLog') }}</view>
             <view v-for="(log, index) in eventLogs" :key="index" class="event-item">
                 {{ log }}
             </view>
@@ -171,14 +185,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { ref, computed } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '文本域'
     }
 })
+
+const { t } = useTranslate('textarea')
+usePageTitle('textarea')
 
 // 基础使用
 const basicValue = ref('')
@@ -195,7 +212,7 @@ const countValue = ref('')
 const autoHeightValue = ref('')
 
 // 禁用状态
-const disabledValue = ref('这是禁用的文本域')
+const disabledValue = ref(t('disabledText'))
 // 自动聚焦
 const focusValue = ref('')
 const isFocus = ref(false)
@@ -230,17 +247,19 @@ const formatterLetter = (val: string) => {
     return val.replace(/[^a-zA-Z]/g, '')
 }
 
-// 聊天输入框场景
-const chatInput = ref('')
-const chatMessages = ref<Array<{ text: string; isMine: boolean }>>([
-    { text: '你好，有什么可以帮助你的吗？', isMine: false },
-    { text: '我想咨询一下组件的使用方法', isMine: true },
-    { text: '当然可以，请问你具体想了解哪个组件？', isMine: false }
+// 聊天输入框场景：初始消息 computed 响应语言切换，用户发送的消息存于 ref
+const initialMessages = computed(() => [
+    { text: t('chatHello'), isMine: false },
+    { text: t('chatAsk'), isMine: true },
+    { text: t('chatAnswer'), isMine: false }
 ])
+const sentMessages = ref<Array<{ text: string; isMine: boolean }>>([])
+const chatMessages = computed(() => [...initialMessages.value, ...sentMessages.value])
+const chatInput = ref('')
 
 const sendMessage = () => {
     if (!chatInput.value.trim()) return
-    chatMessages.value.push({
+    sentMessages.value.push({
         text: chatInput.value,
         isMine: true
     })
@@ -257,23 +276,25 @@ const eventValue = ref('')
 const eventLogs = ref<string[]>([])
 
 const handleFocusEvent = () => {
-    eventLogs.value.unshift(`[${new Date().toLocaleTimeString()}] 获取焦点`)
+    eventLogs.value.unshift(`[${new Date().toLocaleTimeString()}] ${t('logFocus')}`)
     if (eventLogs.value.length > 5) eventLogs.value.pop()
 }
 
 const handleBlurEvent = () => {
-    eventLogs.value.unshift(`[${new Date().toLocaleTimeString()}] 失去焦点`)
+    eventLogs.value.unshift(`[${new Date().toLocaleTimeString()}] ${t('logBlur')}`)
     if (eventLogs.value.length > 5) eventLogs.value.pop()
 }
 
 const handleChangeEvent = (value: string) => {
-    eventLogs.value.unshift(`[${new Date().toLocaleTimeString()}] 内容变化: ${value.slice(-10)}`)
+    eventLogs.value.unshift(
+        `[${new Date().toLocaleTimeString()}] ${t('logChange', value.slice(-10))}`
+    )
     if (eventLogs.value.length > 5) eventLogs.value.pop()
 }
 
 const handleLineChange = (e: any) => {
     eventLogs.value.unshift(
-        `[${new Date().toLocaleTimeString()}] 行数变化: ${e.detail.lineCount} 行`
+        `[${new Date().toLocaleTimeString()}] ${t('logLine', e.detail.lineCount)}`
     )
     if (eventLogs.value.length > 5) eventLogs.value.pop()
 }

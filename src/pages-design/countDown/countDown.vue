@@ -1,16 +1,19 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-count-down :time="30 * 60 * 60 * 1000"></hy-count-down>
         </view>
 
-        <view class="hy-title">自定义格式</view>
+        <view class="hy-title">{{ t('customFormat') }}</view>
         <view class="hy-container">
-            <hy-count-down :time="30 * 60 * 60 * 1000" format="DD天HH时mm分ss秒"></hy-count-down>
+            <hy-count-down
+                :time="30 * 60 * 60 * 1000"
+                :format="t('formatWithUnits')"
+            ></hy-count-down>
         </view>
 
-        <view class="hy-title">毫秒级渲染</view>
+        <view class="hy-title">{{ t('millisecondRender') }}</view>
         <view class="hy-container">
             <hy-count-down
                 :time="30 * 60 * 60 * 1000"
@@ -20,7 +23,7 @@
             />
         </view>
 
-        <view class="hy-title">自定义样式</view>
+        <view class="hy-title">{{ t('customStyle') }}</view>
         <view class="hy-container">
             <hy-count-down :time="30 * 60 * 60 * 1000" autoStart>
                 <template #default="{ record: timeData }">
@@ -43,7 +46,7 @@
             </hy-count-down>
         </view>
 
-        <view class="hy-title">手动控制</view>
+        <view class="hy-title">{{ t('manualControl') }}</view>
         <view class="hy-container">
             <hy-count-down
                 ref="countDownRef"
@@ -53,9 +56,9 @@
                 millisecond
             ></hy-count-down>
             <view class="hy-flex">
-                <hy-button text="重置" type="info" @click="reset"></hy-button>
-                <hy-button text="开始" type="success" @click="start"></hy-button>
-                <hy-button text="暂停" type="error" @click="pause"></hy-button>
+                <hy-button :text="t('reset')" type="info" @click="reset"></hy-button>
+                <hy-button :text="t('start')" type="success" @click="start"></hy-button>
+                <hy-button :text="t('pause')" type="error" @click="pause"></hy-button>
             </view>
         </view>
     </the-root-page>
@@ -64,13 +67,16 @@
 <script setup lang="ts">
 import HyCountDown from '@/package/components/hy-count-down/hy-count-down.vue'
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '倒计时'
     }
 })
+
+const { t } = useTranslate('countDown')
+usePageTitle('countDown')
 
 const countDownRef = ref<InstanceType<typeof HyCountDown>>()
 

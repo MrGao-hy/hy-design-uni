@@ -15,19 +15,21 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { provide, toRefs } from 'vue'
+import { provide, toRefs, reactive } from 'vue'
 import cellProps from './props'
 import type { ICellEmits } from './typing'
 
 const props = defineProps(cellProps)
 const emit = defineEmits<ICellEmits>()
 
-provide('hy-cell', {
+const cellCtx = {
     ...toRefs(props),
     onClick: (name: string | number) => {
         emit('click', name)
     }
-})
+}
+
+provide('hy-cell', cellCtx)
 </script>
 
 <style lang="scss" scoped></style>

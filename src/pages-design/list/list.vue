@@ -2,7 +2,7 @@
     <the-root-page>
         <!-- 顶部搜索栏 -->
         <view class="page-header">
-            <hy-search placeholder="搜索商品"></hy-search>
+            <hy-search :placeholder="t('searchPlaceholder')"></hy-search>
             <hy-tabs v-model:current="current" :list="tabs"></hy-tabs>
         </view>
 
@@ -15,19 +15,19 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import DefaultDemo from './components/default-demo.vue'
 import WaterfallDemo from './components/waterfall-demo.vue'
 
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 useShareButton()
 
 const current = ref(0)
-// ====== 筛选标签 ======
-const tabs = reactive([
-    { name: '横向', value: 0 },
-    { name: '纵向', value: 1 }
+// ====== 筛选标签（响应语言切换） ======
+const tabs = computed(() => [
+    { name: t('tabHorizontal'), value: 0 },
+    { name: t('tabVertical'), value: 1 }
 ])
 
 // ====== 列表数据 ======
@@ -40,6 +40,9 @@ definePage({
         enablePullDownRefresh: false
     }
 })
+
+const { t } = useTranslate('list')
+usePageTitle('list')
 </script>
 
 <style scoped lang="scss">

@@ -1,11 +1,11 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-grid :list="list" :col="col" :gap="gap" :border="border" @click="onClick"></hy-grid>
         </view>
 
-        <view class="hy-title">嵌套卡片组件</view>
+        <view class="hy-title">{{ t('nestedCard') }}</view>
         <view class="hy-container">
             <hy-grid :list="courseList" :col="2" :gap="10" item-height="100%">
                 <template #default="{ record }">
@@ -16,11 +16,7 @@
                         :show-head="false"
                         :custom-style="{ overflow: 'hidden' }"
                     >
-                        <hy-image
-                            width="100%"
-                            height="187px"
-                            :src="record.image"
-                        ></hy-image>
+                        <hy-image width="100%" height="187px" :src="record.image"></hy-image>
                         <template #footer>
                             <view>
                                 <text class="course-title">{{ record.title }}</text>
@@ -28,9 +24,11 @@
                                     <hy-button
                                         type="primary"
                                         size="small"
-                                        text="点击观看"
+                                        :text="t('watchNow')"
                                     ></hy-button>
-                                    <text class="course-count">{{ record.count }}人看过</text>
+                                    <text class="course-count">{{
+                                        t('viewers', record.count)
+                                    }}</text>
                                 </view>
                             </view>
                         </template>
@@ -40,22 +38,22 @@
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">自定义列数</view>
+            <view class="hy-title">{{ t('colSection') }}</view>
             <hy-subsection :list="list_1" v-model="col"></hy-subsection>
 
-            <view class="hy-title">显示边框</view>
+            <view class="hy-title">{{ t('borderSection') }}</view>
             <hy-switch :list="list_1" v-model="border"></hy-switch>
 
-            <view class="hy-title">边距</view>
+            <view class="hy-title">{{ t('padding') }}</view>
             <hy-slider v-model="gap" :min="0" :max="20" />
         </view>
     </the-root-page>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { config } from '@/config/config'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { useToast } from '@/package'
 
 definePage({
@@ -63,6 +61,9 @@ definePage({
         navigationBarTitleText: '宫格布局'
     }
 })
+
+const { t } = useTranslate('grid')
+usePageTitle('grid')
 
 type Menus = {
     icon: string
@@ -76,14 +77,13 @@ type CustomMenus = {
 }
 
 const toast = useToast()
-const list: Menus[] = reactive([])
-
-for (let i = 0; i < 12; i++) {
-    list.push({
+// 菜单数据（响应语言切换）
+const list = computed<Menus[]>(() =>
+    Array.from({ length: 12 }, (_, i) => ({
         icon: config.image,
-        name: '菜单' + i
-    })
-}
+        name: t('menu', i)
+    }))
+)
 
 type Course = {
     image: string
@@ -91,25 +91,25 @@ type Course = {
     count: string
 }
 
-const courseList: Course[] = reactive([
+const courseList = computed<Course[]>(() => [
     {
         image: config.image,
-        title: 'AI前沿探索分析',
+        title: t('course1'),
         count: '20.1w'
     },
     {
         image: config.image,
-        title: 'AI应用实战指南',
+        title: t('course2'),
         count: '8.8w'
     },
     {
         image: config.image,
-        title: '机器学习入门',
+        title: t('course3'),
         count: '19.2w'
     },
     {
         image: config.image,
-        title: '深度学习进阶',
+        title: t('course4'),
         count: '14.5w'
     }
 ])
@@ -120,7 +120,7 @@ const border = ref(false)
 const list_1 = [2, 3, 4, 5]
 
 const onClick = (e: any) => {
-    toast.show(`点击${e.name}`)
+    toast.show(t('clicked', e.name))
 }
 
 useShareButton()

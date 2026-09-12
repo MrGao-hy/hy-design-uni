@@ -1,90 +1,100 @@
 <template>
     <the-root-page>
         <!-- 基础示例 -->
-        <view class="hy-title">基础示例</view>
+        <view class="hy-title">{{ t('basicDemo') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom :beforeClose="beforeClose">
                 <view class="cell">
-                    <view class="cell-title">我是标题</view>
-                    <view class="cell-value">我是内容</view>
+                    <view class="cell-title">{{ t('cellTitle') }}</view>
+                    <view class="cell-value">{{ t('cellValue') }}</view>
                 </view>
             </hy-swipe-action>
         </view>
 
         <!-- 右侧操作按钮 -->
-        <view class="hy-title">右侧操作按钮</view>
+        <view class="hy-title">{{ t('rightButtons') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom :options="rightOptions">
                 <view class="cell">
-                    <view class="cell-title">向左滑动</view>
-                    <view class="cell-value">显示收藏和删除按钮</view>
+                    <view class="cell-title">{{ t('swipeLeft') }}</view>
+                    <view class="cell-value">{{ t('swipeLeftDesc') }}</view>
                 </view>
             </hy-swipe-action>
         </view>
 
         <!-- 左侧操作按钮 -->
-        <view class="hy-title">左侧操作按钮</view>
+        <view class="hy-title">{{ t('leftButtons') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom>
                 <view class="cell">
-                    <view class="cell-title">向右滑动</view>
-                    <view class="cell-value">显示标记和删除按钮</view>
+                    <view class="cell-title">{{ t('swipeRight') }}</view>
+                    <view class="cell-value">{{ t('swipeRightDesc') }}</view>
                 </view>
                 <template #left>
                     <view class="action">
-                        <view class="action-btn" style="background-color: #3c9cff"> 标记 </view>
-                        <view class="action-btn" style="background-color: #f56c6c"> 删除 </view>
+                        <view class="action-btn" style="background-color: #3c9cff">
+                            {{ t('mark') }}
+                        </view>
+                        <view class="action-btn" style="background-color: #f56c6c">
+                            {{ t('delete') }}
+                        </view>
                     </view>
                 </template>
             </hy-swipe-action>
         </view>
 
         <!-- 双侧操作按钮 -->
-        <view class="hy-title">双侧操作按钮</view>
+        <view class="hy-title">{{ t('bothButtons') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom>
                 <view class="cell">
-                    <view class="cell-title">双向滑动</view>
-                    <view class="cell-value">左右滑动均可显示操作按钮</view>
+                    <view class="cell-title">{{ t('swipeBoth') }}</view>
+                    <view class="cell-value">{{ t('swipeBothDesc') }}</view>
                 </view>
                 <template #left>
                     <view class="action">
-                        <view class="action-btn" style="background-color: #3c9cff">收藏</view>
+                        <view class="action-btn" style="background-color: #3c9cff">
+                            {{ t('favorite') }}
+                        </view>
                     </view>
                 </template>
                 <template #right>
                     <view class="action">
-                        <view class="action-btn" style="background-color: #19be6b">编辑</view>
-                        <view class="action-btn" style="background-color: #f56c6c">删除</view>
+                        <view class="action-btn" style="background-color: #19be6b">
+                            {{ t('edit') }}
+                        </view>
+                        <view class="action-btn" style="background-color: #f56c6c">
+                            {{ t('delete') }}
+                        </view>
                     </view>
                 </template>
             </hy-swipe-action>
         </view>
 
         <!-- 禁用滑动 -->
-        <view class="hy-title">禁用滑动</view>
+        <view class="hy-title">{{ t('disabledSwipe') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom :disabled="true">
                 <view class="cell">
-                    <view class="cell-title">禁用状态</view>
-                    <view class="cell-value">此单元格无法滑动</view>
+                    <view class="cell-title">{{ t('disabledState') }}</view>
+                    <view class="cell-value">{{ t('disabledDesc') }}</view>
                 </view>
             </hy-swipe-action>
         </view>
 
         <!-- 自定义动画时间 -->
-        <view class="hy-title">自定义动画时间</view>
+        <view class="hy-title">{{ t('customDuration') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom :duration="500" :options="rightOptions">
                 <view class="cell">
-                    <view class="cell-title">慢速动画</view>
-                    <view class="cell-value">动画过渡时间为 500ms</view>
+                    <view class="cell-title">{{ t('slowAnimation') }}</view>
+                    <view class="cell-value">{{ t('slowAnimDesc') }}</view>
                 </view>
             </hy-swipe-action>
         </view>
 
         <!-- 监听点击事件 -->
-        <view class="hy-title">监听点击事件</view>
+        <view class="hy-title">{{ t('listenClick') }}</view>
         <view class="hy-container">
             <hy-swipe-action
                 borderBottom
@@ -93,29 +103,37 @@
                 @clickAction="handleAction"
             >
                 <view class="cell">
-                    <view class="cell-title">点击事件</view>
-                    <view class="cell-value">点击内容或按钮触发事件</view>
+                    <view class="cell-title">{{ t('clickEvent') }}</view>
+                    <view class="cell-value">{{ t('clickEventDesc') }}</view>
                 </view>
             </hy-swipe-action>
         </view>
 
         <!-- 程序控制开关 -->
-        <view class="hy-title">程序控制开关</view>
+        <view class="hy-title">{{ t('programControl') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom v-model="controlStatus" :options="rightOptions">
                 <view class="cell">
-                    <view class="cell-title">程序控制</view>
-                    <view class="cell-value">通过按钮控制开关</view>
+                    <view class="cell-title">{{ t('controlByCode') }}</view>
+                    <view class="cell-value">{{ t('controlDesc') }}</view>
                 </view>
             </hy-swipe-action>
             <view class="controls">
-                <hy-button text="打开" size="small" @click="controlStatus = 'right'"></hy-button>
-                <hy-button text="关闭" size="small" @click="controlStatus = 'close'"></hy-button>
+                <hy-button
+                    :text="t('open')"
+                    size="small"
+                    @click="controlStatus = 'right'"
+                ></hy-button>
+                <hy-button
+                    :text="t('close')"
+                    size="small"
+                    @click="controlStatus = 'close'"
+                ></hy-button>
             </view>
         </view>
 
         <!-- 列表场景 -->
-        <view class="hy-title">列表场景</view>
+        <view class="hy-title">{{ t('listScene') }}</view>
         <view class="hy-container list-container">
             <hy-swipe-action
                 v-for="(item, index) in list"
@@ -125,14 +143,14 @@
                 @clickAction="handleDelete(index)"
             >
                 <view class="cell">
-                    <view class="cell-title">{{ item.title }}</view>
-                    <view class="cell-value">{{ item.desc }}</view>
+                    <view class="cell-title">{{ t('listItem', item) }}</view>
+                    <view class="cell-value">{{ t('listItemDesc', item) }}</view>
                 </view>
             </hy-swipe-action>
         </view>
 
         <!-- 复杂内容 -->
-        <view class="hy-title">复杂内容</view>
+        <view class="hy-title">{{ t('complexContent') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom :options="complexOptions">
                 <view class="cell complex-cell">
@@ -149,12 +167,12 @@
         </view>
 
         <!-- 多种操作 -->
-        <view class="hy-title">多种操作</view>
+        <view class="hy-title">{{ t('multiAction') }}</view>
         <view class="hy-container">
             <hy-swipe-action borderBottom :options="multiOptions" @clickAction="handleMultiAction">
                 <view class="cell">
-                    <view class="cell-title">多种操作</view>
-                    <view class="cell-value">支持收藏、编辑、删除等多种操作</view>
+                    <view class="cell-title">{{ t('multiAction') }}</view>
+                    <view class="cell-value">{{ t('multiActionDesc') }}</view>
                 </view>
             </hy-swipe-action>
         </view>
@@ -162,8 +180,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { ref, computed } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { SwipeActionStatus } from '@/package'
 
 definePage({
@@ -172,96 +190,97 @@ definePage({
     }
 })
 
+const { t } = useTranslate('swipeAction')
+usePageTitle('swipeAction')
+
 const show = ref(false)
 const controlStatus = ref<SwipeActionStatus>('close')
 
-// 右侧操作按钮
-const rightOptions = [
+// 右侧操作按钮（computed 包裹以响应语言切换）
+const rightOptions = computed(() => [
     {
-        text: '收藏',
+        text: t('favorite'),
         style: {
             backgroundColor: '#3c9cff'
         }
     },
     {
-        text: '删除',
+        text: t('delete'),
         style: {
             backgroundColor: '#f56c6c'
         }
     }
-]
+])
 
 // 删除选项
-const deleteOptions = [
+const deleteOptions = computed(() => [
     {
-        text: '删除',
+        text: t('delete'),
         style: {
             backgroundColor: '#f56c6c'
         }
     }
-]
+])
 
 // 复杂操作选项
-const complexOptions = [
+const complexOptions = computed(() => [
     {
-        text: '置顶',
+        text: t('pin'),
         style: {
             backgroundColor: '#ff9900'
         }
     },
     {
-        text: '删除',
+        text: t('delete'),
         style: {
             backgroundColor: '#f56c6c'
         }
     }
-]
+])
 
-// 多种操作选项
-const multiOptions = [
+// 多种操作选项（key 为稳定标识，供点击回调匹配）
+const multiOptions = computed(() => [
     {
-        text: '收藏',
+        key: 'favorite',
+        text: t('favorite'),
         style: {
             backgroundColor: '#3c9cff'
         }
     },
     {
-        text: '编辑',
+        key: 'edit',
+        text: t('edit'),
         style: {
             backgroundColor: '#19be6b'
         }
     },
     {
-        text: '删除',
+        key: 'delete',
+        text: t('delete'),
         style: {
             backgroundColor: '#f56c6c'
         }
     }
-]
-
-// 列表数据
-const list = ref([
-    { title: '列表项 1', desc: '这是第一条数据' },
-    { title: '列表项 2', desc: '这是第二条数据' },
-    { title: '列表项 3', desc: '这是第三条数据' },
-    { title: '列表项 4', desc: '这是第四条数据' }
 ])
 
+// 列表数据（存储序号，文案通过 t 函数生成）
+const list = ref([1, 2, 3, 4])
+
 // 复杂内容数据
-const item = {
-    name: '张三',
-    message: '这是一条消息内容',
+const item = computed(() => ({
+    name: t('zhangSan'),
+    message: t('messageContent'),
     time: '10:30'
-}
+}))
 
 const beforeClose = () => {
-    uni.showToast({ title: '关闭', icon: 'none' })
+    uni.showToast({ title: t('close'), icon: 'none' })
 }
 
 const handleClick = (value: string) => {
     console.log('点击位置:', value)
     uni.showToast({
-        title: `点击了: ${value}`,
+        title: t('clicked', value),
         icon: 'none'
     })
 }
@@ -269,20 +288,20 @@ const handleClick = (value: string) => {
 const handleAction = (item: any, index: number) => {
     console.log('操作按钮:', item, index)
     uni.showToast({
-        title: `点击了: ${item.text}`,
+        title: t('clickedAction', item.text),
         icon: 'none'
     })
 }
 
 const handleDelete = (index: number) => {
     uni.showModal({
-        title: '提示',
-        content: '确定删除此条数据吗？',
+        title: t('deleteTitle'),
+        content: t('deleteContent'),
         success: (res) => {
             if (res.confirm) {
                 list.value.splice(index, 1)
                 uni.showToast({
-                    title: '删除成功',
+                    title: t('deleteSuccess'),
                     icon: 'success'
                 })
             }
@@ -291,13 +310,14 @@ const handleDelete = (index: number) => {
 }
 
 const handleMultiAction = (item: any) => {
+    // 按稳定 key 匹配反馈文案，避免翻译后映射失效
     const actions: Record<string, string> = {
-        收藏: '已收藏',
-        编辑: '进入编辑',
-        删除: '已删除'
+        favorite: t('faved'),
+        edit: t('enterEdit'),
+        delete: t('deleted')
     }
     uni.showToast({
-        title: actions[item.text] || item.text,
+        title: actions[item.key] || item.text,
         icon: 'none'
     })
 }

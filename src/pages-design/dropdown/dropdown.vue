@@ -2,19 +2,19 @@
     <the-root-page>
         <hy-dropdown>
             <hy-dropdown-item
-                title="全部"
+                :title="t('all')"
                 :menus="options1"
                 v-model="value1"
                 @change="handleChange"
             ></hy-dropdown-item>
             <hy-dropdown-item
-                title="国漫"
+                :title="t('chineseAnimation')"
                 :menus="options_2"
                 v-model="value_2"
                 @change="handleChange"
             ></hy-dropdown-item>
             <hy-dropdown-item
-                title="国家"
+                :title="t('country')"
                 :menus="options_3"
                 v-model="value_3"
                 @change="handleChange"
@@ -24,8 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { computed, ref } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -33,60 +33,63 @@ definePage({
     }
 })
 
+const { t } = useTranslate('dropdown')
+usePageTitle('dropdown')
+
 const value1 = ref()
 const value_2 = ref()
 const value_3 = ref()
-const options1 = ref([
+const options1 = computed(() => [
     {
-        label: '全部商品',
+        label: t('allGoods'),
         value: 1
     },
     {
-        label: '折扣商品',
+        label: t('discountGoods'),
         value: 2
     },
     {
-        label: '团购商品',
+        label: t('groupGoods'),
         value: 3
     }
 ])
-const options_2 = ref([
+const options_2 = computed(() => [
     {
-        label: '西行记',
+        label: t('journeyWest'),
         value: 1
     },
     {
-        label: '斗破苍穹',
+        label: t('battleThrough'),
         value: 2
     },
     {
-        label: '吞噬星空',
+        label: t('swallowedStar'),
         value: 3
     },
     {
-        label: '斗罗大陆',
+        label: t('soulLand'),
         value: 4
     },
     {
-        label: '偷心九月天',
+        label: t('heartStealer'),
         value: 5
     }
 ])
-const options_3 = ref([
+const options_3 = computed(() => [
     {
-        label: '中国',
+        label: t('china'),
         value: 1
     },
     {
-        label: '日本',
+        label: t('japan'),
         value: 2
     },
     {
-        label: '韩国',
+        label: t('korea'),
         value: 3
     },
     {
-        label: '美国',
+        label: t('usa'),
         value: 4
     }
 ])

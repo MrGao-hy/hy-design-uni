@@ -34,13 +34,16 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
 import { FormColumnsType, FormTypeEnum } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '模态框'
     }
 })
+
+const { t } = useTranslate('modal')
+usePageTitle('modal')
 
 const show = ref(false)
 const formRef = ref()
@@ -58,7 +61,7 @@ const formColumns: FormColumnsType[] = reactive([
         type: FormTypeEnum.TEXT,
         rules: {
             required: true,
-            message: '没有填内容',
+            message: t('requiredField'),
             trigger: ['blur']
         }
     }

@@ -45,13 +45,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '评分'
     }
 })
+
+const { t } = useTranslate('rate')
+usePageTitle('rate')
 
 const value = ref(3)
 

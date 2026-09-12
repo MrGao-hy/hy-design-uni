@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { config } from '@/config/config.ts'
 
 definePage({
@@ -32,6 +32,9 @@ definePage({
         navigationBarTitleText: '横向滚动列表'
     }
 })
+
+const { t } = useTranslate('scrollList')
+usePageTitle('scrollList')
 
 const goodsArr = [
     {
@@ -69,7 +72,7 @@ const goodsArr = [
 ]
 
 const showMore = () => {
-    uni.showToast({ title: '查看更多' })
+    uni.showToast({ title: t('viewMore') })
 }
 
 useShareButton()

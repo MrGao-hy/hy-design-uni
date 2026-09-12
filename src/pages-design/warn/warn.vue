@@ -1,37 +1,37 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container hy-gap">
             <hy-warn
-                title="唧唧复唧唧"
+                :title="t('poem1')"
                 type="primary"
                 :theme="theme"
                 :showIcon="showIcon"
                 :closable="closable"
             ></hy-warn>
             <hy-warn
-                title="木兰当户织"
+                :title="t('poem2')"
                 type="success"
                 :theme="theme"
                 :showIcon="showIcon"
                 :closable="closable"
             ></hy-warn>
             <hy-warn
-                title="不闻机杼声"
+                :title="t('poem3')"
                 type="info"
                 :theme="theme"
                 :showIcon="showIcon"
                 :closable="closable"
             ></hy-warn>
             <hy-warn
-                title="唯闻女叹息"
+                :title="t('poem4')"
                 type="warning"
                 :theme="theme"
                 :showIcon="showIcon"
                 :closable="closable"
             ></hy-warn>
             <hy-warn
-                title="问女何所思"
+                :title="t('poem5')"
                 type="error"
                 :theme="theme"
                 :showIcon="showIcon"
@@ -40,13 +40,13 @@
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">深色浅色</view>
+            <view class="hy-title">{{ t('darkLight') }}</view>
             <hy-subsection :list="list_1" v-model="theme"></hy-subsection>
 
-            <view class="hy-title">显示关闭按钮</view>
+            <view class="hy-title">{{ t('showCloseBtn') }}</view>
             <hy-switch v-model="closable"></hy-switch>
 
-            <view class="hy-title">显示图标</view>
+            <view class="hy-title">{{ t('showIcon') }}</view>
             <hy-switch v-model="showIcon"></hy-switch>
         </view>
     </the-root-page>
@@ -54,8 +54,8 @@
 
 <script setup lang="ts">
 import type { ThemeModeType } from '@/package'
-import { reactive, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { computed, ref } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -63,13 +63,17 @@ definePage({
     }
 })
 
+const { t } = useTranslate('warn')
+usePageTitle('warn')
+
 const theme = ref<ThemeModeType>('light')
 const closable = ref(false)
 const showIcon = ref(false)
 
-const list_1 = reactive([
-    { name: '浅色', value: 'light' },
-    { name: '深色', value: 'dark' }
+// 主题切换选项（computed 包裹以响应语言切换）
+const list_1 = computed(() => [
+    { name: t('light'), value: 'light' },
+    { name: t('dark'), value: 'dark' }
 ])
 
 useShareButton()

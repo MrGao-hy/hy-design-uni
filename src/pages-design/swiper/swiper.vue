@@ -28,20 +28,20 @@
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">指示点</view>
+            <view class="hy-title">{{ t('indicator') }}</view>
             <hy-subsection :list="list_1" v-model="mode"></hy-subsection>
 
-            <view class="hy-title">轮播图高度</view>
+            <view class="hy-title">{{ t('height') }}</view>
             <hy-slider v-model="height" :max="500"></hy-slider>
 
-            <view class="hy-title">轮播图切换时间</view>
+            <view class="hy-title">{{ t('duration') }}</view>
             <hy-slider v-model="duration" :min="100" :max="1000"></hy-slider>
 
-            <view class="hy-title">轮播图自动切换间隔</view>
+            <view class="hy-title">{{ t('interval') }}</view>
             <hy-slider v-model="interval" :min="1000" :max="5000"></hy-slider>
         </view>
 
-        <view class="hy-title">自定义指示器</view>
+        <view class="hy-title">{{ t('customIndicator') }}</view>
         <hy-swiper :list="list" :autoplay="false" height="300">
             <template #indicator="{ current, length }">
                 <view class="indicator">
@@ -55,8 +55,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { computed, ref } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import TheRootPage from '@/components/the-root-page.vue'
 import type { SwiperList, IndicatorMode } from '@/package'
 import { config } from '@/config/config.ts'
@@ -67,29 +67,33 @@ definePage({
     }
 })
 
+const { t } = useTranslate('swiper')
+usePageTitle('swiper')
+
 const list = ref([config.swiper1, config.swiper2, config.swiper3])
-const list_2 = ref<SwiperList[]>([
+// 标题文案（computed 包裹以响应语言切换）
+const list_2 = computed<SwiperList[]>(() => [
     {
         url: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-        title: '昨夜星辰昨夜风，画楼西畔桂堂东',
+        title: t('poem1'),
         type: 'video'
     },
     {
         url: config.swiper1,
-        title: '身无彩凤双飞翼，心有灵犀一点通'
+        title: t('poem2')
     },
     {
         url: config.swiper2,
-        title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
+        title: t('poem3')
     }
 ])
 const mode = ref<IndicatorMode>('line')
 const height = ref<number>(200)
 const duration = ref<number>(300)
 const interval = ref<number>(3000)
-const list_1 = reactive([
-    { name: '线', value: 'line' },
-    { name: '点', value: 'dot' }
+const list_1 = computed(() => [
+    { name: t('line'), value: 'line' },
+    { name: t('dot'), value: 'dot' }
 ])
 
 useShareButton()

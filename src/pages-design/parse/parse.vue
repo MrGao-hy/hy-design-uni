@@ -13,13 +13,16 @@
 </template>
 
 <script setup lang="ts">
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '富文本'
     }
 })
+
+const { t } = useTranslate('parse')
+usePageTitle('parse')
 
 const tagStyle = {
     table: 'box-sizing: border-box; border-top: 1px solid #dfe2e5; border-left: 1px solid #dfe2e5;',

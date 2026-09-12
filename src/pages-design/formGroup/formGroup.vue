@@ -14,13 +14,13 @@
         </view>
 
         <view class="demo-actions">
-            <hy-button type="primary" @click="handleSubmit">提交表单</hy-button>
-            <hy-button type="info" plain @click="handleReset">重置表单</hy-button>
-            <hy-button type="error" @click="handleValidate">验证表单</hy-button>
+            <hy-button type="primary" @click="handleSubmit">{{ t('submitBtn') }}</hy-button>
+            <hy-button type="info" plain @click="handleReset">{{ t('resetBtn') }}</hy-button>
+            <hy-button type="error" @click="handleValidate">{{ t('validateBtn') }}</hy-button>
         </view>
 
         <view class="demo-result">
-            <text class="result-title">表单数据：</text>
+            <text class="result-title">{{ t('resultTitle') }}</text>
             <text class="result-content">{{ JSON.stringify(formData, null, 2) }}</text>
         </view>
     </the-root-page>
@@ -30,14 +30,17 @@
 import { FormTypeEnum, IFormExpose, useToast } from '@/package'
 import type { FormColumnsType } from '@/package'
 import HyFormGroup from '@/package/components/hy-form-group/hy-form-group.vue'
-import { reactive, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { reactive, ref, computed } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '表单组'
     }
 })
+
+const { t } = useTranslate('formGroup')
+usePageTitle('formGroup')
 
 const toast = useToast()
 const formData: AnyObject = reactive({
@@ -46,7 +49,7 @@ const formData: AnyObject = reactive({
     phone: '',
     interest: '',
     password: '',
-    custom: '自定义值',
+    custom: t('customValue'),
     isShow: true,
     sex: '1',
     time: '',
@@ -57,38 +60,39 @@ const formData: AnyObject = reactive({
 })
 const formGroupRef = ref<InstanceType<typeof HyFormGroup> | IFormExpose | null>(null)
 
-const columns: FormColumnsType[] = reactive([
+// 列配置（computed 包裹，切换语言后 label 与校验 message 同步更新）
+const columns = computed<FormColumnsType[]>(() => [
     {
         field: 'name',
-        label: '名字（测试）',
+        label: t('labelName'),
         type: FormTypeEnum.TEXT,
         rules: {
             required: true,
-            message: '没有填内容',
+            message: t('requiredField'),
             trigger: ['blur']
         }
     },
     {
         field: 'sex',
-        label: '性别（测试）',
+        label: t('labelSex'),
         type: FormTypeEnum.RADIO,
         actions: [
-            { label: '女', value: '0' },
-            { label: '男', value: '1' }
+            { label: t('female'), value: '0' },
+            { label: t('male'), value: '1' }
         ],
         rules: {
             required: true,
-            message: '没有填内容'
+            message: t('requiredField')
         }
     },
     {
         field: 'phone',
-        label: '手机号（测试）',
+        label: t('labelPhone'),
         type: FormTypeEnum.TEXT,
         rules: [
             {
                 required: true,
-                message: '请输入您的手机号',
+                message: t('phoneRequired'),
                 trigger: ['blur', 'change']
             },
             {
@@ -99,7 +103,7 @@ const columns: FormColumnsType[] = reactive([
     },
     {
         field: 'password',
-        label: '密码（测试）',
+        label: t('labelPassword'),
         type: FormTypeEnum.PASSWORD,
         rules: {
             type: 'password',
@@ -108,66 +112,66 @@ const columns: FormColumnsType[] = reactive([
     },
     {
         field: 'isShow',
-        label: '是否禁用',
+        label: t('labelIsShow'),
         type: FormTypeEnum.SWITCH
     },
     {
         field: 'time',
-        label: '日期',
+        label: t('labelTime'),
         type: FormTypeEnum.DATE,
         border: 'bottom',
         rules: {
             required: true,
-            message: '请输入您的日期',
+            message: t('timeRequired'),
             trigger: ['blur', 'change']
         }
     },
     {
         field: 'address',
-        label: '地址（测试）',
+        label: t('labelAddress'),
         type: FormTypeEnum.ADDRESS,
         rules: {
             required: true,
-            message: '请输入您的地址',
+            message: t('addressRequired'),
             trigger: ['blur', 'change']
         }
     },
     {
         field: 'select',
-        label: '学历（测试）',
+        label: t('labelSelect'),
         type: FormTypeEnum.SELECT,
         select: [
             [
-                { text: '小学', id: '1' },
-                { text: '初中', id: '2' },
-                { text: '高中', id: '3' },
-                { text: '大学', id: '4' }
+                { text: t('primarySchool'), id: '1' },
+                { text: t('juniorHigh'), id: '2' },
+                { text: t('seniorHigh'), id: '3' },
+                { text: t('university'), id: '4' }
             ]
         ],
         rules: {
             required: true,
-            message: '请输入您的学历',
+            message: t('selectRequired'),
             trigger: ['blur', 'change']
         }
     },
     {
         field: 'age',
-        label: '年龄（测试）',
+        label: t('labelAge'),
         type: FormTypeEnum.NUMBER,
         rules: [
             {
                 required: true,
-                message: '请输入您的年龄',
+                message: t('ageRequired'),
                 trigger: ['blur', 'change']
             },
             {
                 required: true,
-                message: '不能小于最小值',
+                message: t('minError'),
                 min: 0,
                 trigger: ['blur', 'change']
             },
             {
-                message: '不能大于最大值',
+                message: t('maxError'),
                 max: 3,
                 trigger: ['change']
             }
@@ -175,12 +179,12 @@ const columns: FormColumnsType[] = reactive([
     },
     {
         field: 'custom',
-        label: '自定义',
+        label: t('labelCustom'),
         type: FormTypeEnum.CUSTOM
     },
     {
         field: 'remark',
-        label: '备注',
+        label: t('labelRemark'),
         type: FormTypeEnum.TEXTAREA
     }
 ])
@@ -189,7 +193,7 @@ const columns: FormColumnsType[] = reactive([
 const handleSubmit = async (data: any) => {
     const isSuccess = await formGroupRef.value?.submit()
     if (isSuccess) {
-        toast.success('提交成功')
+        toast.success(t('submitSuccess'))
     }
 }
 
@@ -197,9 +201,9 @@ const handleSubmit = async (data: any) => {
 const handleValidate = async () => {
     try {
         await (formGroupRef.value && formGroupRef.value.validate())
-        toast.success('校验成功')
+        toast.success(t('validateSuccess'))
     } catch (err) {
-        toast.error('表单校验失败')
+        toast.error(t('validateFail'))
     }
 }
 
@@ -207,9 +211,9 @@ const handleValidate = async () => {
 const handleReset = () => {
     try {
         formGroupRef.value && formGroupRef.value.resetFields()
-        toast.show('重置成功')
+        toast.show(t('resetSuccess'))
     } catch (err) {
-        toast.error('表单重置失败')
+        toast.error(t('resetFail'))
     }
 }
 

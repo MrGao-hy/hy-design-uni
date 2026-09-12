@@ -1,12 +1,12 @@
 <template>
     <the-root-page>
         <hy-tabs :list="list" is-swiper>
-            <template #line> 
+            <template #line>
                 <image
                     src="/static/logo.png"
                     mode="scaleToFill"
-                    style="width: 20px; height: 15px;"
-                /> 
+                    style="width: 20px; height: 15px"
+                />
             </template>
             <template #default="{ record, index }">
                 <scroll-view class="scroll-view" scroll-y>
@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import TheOrderDom from './components/TheOrderDom.vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import type { OrderItem } from '@/pages-design/tabs/components/types'
 import TheRootPage from '@/components/the-root-page.vue'
 import type { TabsItemVo } from '@/package'
@@ -33,16 +33,20 @@ definePage({
     }
 })
 
-const list: TabsItemVo[] = reactive([
-    { name: '关注', content: '我是内容' },
-    { name: '推荐', badge: { value: 1, isDot: true } },
-    { name: '电影', badge: { value: 5 } },
-    { name: '科技' },
-    { name: '音乐' },
-    { name: '美食' },
-    { name: '文化' },
-    { name: '财经' },
-    { name: '手工' }
+const { t } = useTranslate('tabs')
+usePageTitle('tabs')
+
+// 页签数据（computed 包裹以响应语言切换）
+const list = computed<TabsItemVo[]>(() => [
+    { name: t('follow'), content: t('content') },
+    { name: t('recommend'), badge: { value: 1, isDot: true } },
+    { name: t('movie'), badge: { value: 5 } },
+    { name: t('tech') },
+    { name: t('music') },
+    { name: t('food') },
+    { name: t('culture') },
+    { name: t('finance') },
+    { name: t('handcraft') }
 ])
 const orderList = ref<OrderItem[][]>([])
 
@@ -52,6 +56,8 @@ onMounted(() => {
 })
 
 function generateOrders(): OrderItem[][] {
+    // 订单状态使用稳定 key（pending/deleted/delivering/completed），展示时由 TheOrderDom 翻译
+    const statusKeys = ['pending', 'deleted', 'delivering', 'completed']
     return Array.from({ length: 9 }, (_, i) =>
         Array.from({ length: 10 }, (_, j) => {
             const storeId = 1001 + i
@@ -60,19 +66,19 @@ function generateOrders(): OrderItem[][] {
             return {
                 store: {
                     id: storeId,
-                    name: `自动门店_${storeId}`,
-                    address: `北京市朝阳区智慧路${storeId}号`,
+                    name: t('storeName', storeId),
+                    address: t('storeAddress', storeId),
                     phone: `138${10000000 + storeId}`
                 },
                 order: {
                     id: orderId,
                     createTime: new Date().toISOString(),
                     amount: (Math.random() * 200 + 30).toFixed(2),
-                    status: ['待支付', '已删除', '配送中', '已完成'][Math.floor(Math.random() * 4)]
+                    status: statusKeys[Math.floor(Math.random() * 4)]
                 },
                 product: {
                     skuId,
-                    name: `智能商品_${skuId}`,
+                    name: t('productName', skuId),
                     img: config.image, // 公网图
                     price: (Math.random() * 100 + 10).toFixed(2),
                     qty: Math.floor(Math.random() * 3) + 1

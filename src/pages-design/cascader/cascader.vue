@@ -1,10 +1,10 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础用法</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-cell>
                 <hy-cell-item
-                    title="选择地区"
+                    :title="t('selectRegion')"
                     :value="selectedValue.label.join(' / ')"
                     @click="showCascader = true"
                 >
@@ -19,25 +19,25 @@
             ></hy-cascader>
         </view>
 
-        <view class="hy-title">带输入框</view>
+        <view class="hy-title">{{ t('withInput') }}</view>
         <view class="hy-container">
             <hy-cascader
                 v-model="selectedValue2"
                 :options="chinaOptions"
                 has-input
-                title="请选择地址"
-                placeholder="请选择地区"
+                :title="t('selectAddress')"
+                :placeholder="t('placeholder')"
                 labelKey="name"
                 valueKey="code"
                 childrenKey="areas"
             ></hy-cascader>
         </view>
 
-        <view class="hy-title">异步加载</view>
+        <view class="hy-title">{{ t('asyncLoad') }}</view>
         <view class="hy-container">
             <hy-cell>
                 <hy-cell-item
-                    title="异步选择"
+                    :title="t('asyncSelect')"
                     :value="selectedValue3.label.join(' / ')"
                     @click="showAsyncCascader = true"
                 >
@@ -47,7 +47,7 @@
                 v-model="selectedValue3"
                 v-model:show="showAsyncCascader"
                 :lazy-load="lazyLoad"
-                title="异步加载示例"
+                :title="t('asyncDemoTitle')"
                 @confirm="onAsyncConfirm"
             ></hy-cascader>
         </view>
@@ -55,8 +55,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { useShareButton } from '@/composables'
+import { ref, reactive, computed } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import geoJson from '@/package/libs/utils/address.json'
 
 definePage({
@@ -64,6 +64,9 @@ definePage({
         navigationBarTitleText: '级联选择器'
     }
 })
+
+const { t } = useTranslate('cascader')
+usePageTitle('cascader')
 
 const showCascader = ref(false)
 const showAsyncCascader = ref(false)
@@ -73,36 +76,37 @@ const selectedValue2 = ref({ value: [], label: [] })
 const selectedValue3 = ref({ value: [], label: [] })
 
 const chinaOptions = reactive(geoJson)
-const options = reactive([
+// 静态选项：value 与 locale cascader.region.* 的 key 对应
+const options = computed(() => [
     {
         value: 'gansu',
-        label: '甘肃省',
+        label: t('region.gansu'),
         children: [
             {
                 value: 'jinchang',
-                label: '金昌市',
+                label: t('region.jinchang'),
                 children: [
                     {
                         value: 'jinchuan',
-                        label: '金川区'
+                        label: t('region.jinchuan')
                     },
                     {
                         value: 'yongchang',
-                        label: '永昌县'
+                        label: t('region.yongchang')
                     }
                 ]
             },
             {
                 value: 'lanzhou',
-                label: '兰州市',
+                label: t('region.lanzhou'),
                 children: [
                     {
                         value: 'chengguan',
-                        label: '城关区'
+                        label: t('region.chengguan')
                     },
                     {
-                        value: '安宁',
-                        label: '安宁区'
+                        value: 'anning',
+                        label: t('region.anning')
                     }
                 ]
             }
@@ -110,19 +114,19 @@ const options = reactive([
     },
     {
         value: 'qinghai',
-        label: '青海省',
+        label: t('region.qinghai'),
         children: [
             {
                 value: 'xining',
-                label: '西宁市',
+                label: t('region.xining'),
                 children: [
                     {
                         value: 'chengxi',
-                        label: '城西区'
+                        label: t('region.chengxi')
                     },
                     {
                         value: 'chengdong',
-                        label: '城东区'
+                        label: t('region.chengdong')
                     }
                 ]
             }
@@ -135,73 +139,81 @@ const onConfirm = (params: any) => {
     showCascader.value = false
 }
 
-const asyncOptions: any = {
+// 异步级联选项
+interface IAsyncOption {
+    value: string
+    label: string
+    isLeaf?: boolean
+}
+
+// 异步选项数据：value 同时作为子级数据的查找 key，并与 locale cascader.region.* 对应
+const asyncOptions = computed<Record<string, IAsyncOption[]>>(() => ({
     root: [
-        { value: 'beijing', label: '北京市' },
-        { value: 'shanghai', label: '上海市' },
-        { value: 'guangzhou', label: '广州市' },
-        { value: 'shenzhen', label: '深圳市' }
+        { value: 'beijing', label: t('region.beijing') },
+        { value: 'shanghai', label: t('region.shanghai') },
+        { value: 'guangzhou', label: t('region.guangzhou') },
+        { value: 'shenzhen', label: t('region.shenzhen') }
     ],
     beijing: [
-        { value: 'dongcheng', label: '东城区' },
-        { value: 'xicheng', label: '西城区' },
-        { value: 'chaoyang', label: '朝阳区' },
-        { value: 'haidian', label: '海淀区', isLeaf: true }
+        { value: 'dongcheng', label: t('region.dongcheng') },
+        { value: 'xicheng', label: t('region.xicheng') },
+        { value: 'chaoyang', label: t('region.chaoyang') },
+        { value: 'haidian', label: t('region.haidian'), isLeaf: true }
     ],
     shanghai: [
-        { value: 'huangpu', label: '黄浦区' },
-        { value: "jing'an", label: '静安区' },
-        { value: 'xuhui', label: '徐汇区' },
-        { value: 'pudong', label: '浦东新区' }
+        { value: 'huangpu', label: t('region.huangpu') },
+        { value: 'jingan', label: t('region.jingan') },
+        { value: 'xuhui', label: t('region.xuhui') },
+        { value: 'pudong', label: t('region.pudong') }
     ],
     guangzhou: [
-        { value: 'tianhe', label: '天河区' },
-        { value: 'yuexiu', label: '越秀区' },
-        { value: 'liwan', label: '荔湾区' }
+        { value: 'tianhe', label: t('region.tianhe') },
+        { value: 'yuexiu', label: t('region.yuexiu') },
+        { value: 'liwan', label: t('region.liwan') }
     ],
     shenzhen: [
-        { value: 'futian', label: '福田区' },
-        { value: 'nanshan', label: '南山区' },
-        { value: "bao'an", label: '宝安区' }
+        { value: 'futian', label: t('region.futian') },
+        { value: 'nanshan', label: t('region.nanshan') },
+        { value: 'baoan', label: t('region.baoan') }
     ],
     dongcheng: [
-        { value: 'chongwen', label: '崇文门' },
-        { value: 'wangfujing', label: '王府井' }
+        { value: 'chongwenmen', label: t('region.chongwenmen') },
+        { value: 'wangfujing', label: t('region.wangfujing') }
     ],
     xicheng: [
-        { value: "xi'anmen", label: '西直门' },
-        { value: 'fuxingmen', label: '复兴门' }
+        { value: 'xizhimen', label: t('region.xizhimen') },
+        { value: 'fuxingmen', label: t('region.fuxingmen') }
     ],
     chaoyang: [
-        { value: 'sanlitun', label: '三里屯' },
+        { value: 'sanlitun', label: t('region.sanlitun') },
         { value: 'cbd', label: 'CBD' }
     ],
     huangpu: [
-        { value: 'bund', label: '外滩' },
-        { value: 'people-square', label: '人民广场' }
+        { value: 'bund', label: t('region.bund') },
+        { value: 'peopleSquare', label: t('region.peopleSquare') }
     ],
-    "jing'an": [
-        { value: "jing'an-temple", label: '静安寺' },
-        { value: 'nanjing-west', label: '南京西路' }
+    jingan: [
+        { value: 'jinganTemple', label: t('region.jinganTemple') },
+        { value: 'nanjingWest', label: t('region.nanjingWest') }
     ],
     tianhe: [
-        { value: 'teemall', label: '天河城' },
-        { value: 'canton-tower', label: '广州塔' }
+        { value: 'teemall', label: t('region.teemall') },
+        { value: 'cantonTower', label: t('region.cantonTower') }
     ],
     futian: [
-        { value: 'cbd-futian', label: '福田CBD' },
-        { value: 'shenzhen-university', label: '深圳大学' }
+        { value: 'cbdFutian', label: t('region.cbdFutian') },
+        { value: 'szUniversity', label: t('region.szUniversity') }
     ],
     nanshan: [
-        { value: 'high-tech', label: '科技园' },
-        { value: 'window-of-world', label: '世界之窗' }
+        { value: 'highTechPark', label: t('region.highTechPark') },
+        { value: 'windowOfWorld', label: t('region.windowOfWorld') }
     ]
-}
+}))
 
 const lazyLoad = (option: any, tabIndex: number, resolve: (children: any[]) => void) => {
     setTimeout(() => {
         const value = option ? option.value : 'root'
-        const children = asyncOptions[value] || []
+        const children = asyncOptions.value[value] || []
         resolve(children)
     }, 2000)
 }

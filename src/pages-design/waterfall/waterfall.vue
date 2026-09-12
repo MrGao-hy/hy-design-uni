@@ -6,13 +6,13 @@
                     <!-- 微信小程序需要hx2.8.11版本才支持在template中引入其他组件，比如下方的u-lazy-load组件 -->
                     <hy-image width="100%" mode="widthFix" radius="5" :src="item.image"></hy-image>
                     <view class="demo-title">{{ item.title }}</view>
-                    <view class="demo-price">{{ item.price }}元</view>
+                    <view class="demo-price">{{ item.price }}{{ t('yuan') }}</view>
                     <view class="demo-tag">
                         <view class="demo-tag-owner">
-                            <text class="text">自营</text>
+                            <text class="text">{{ t('selfOperated') }}</text>
                         </view>
                         <view class="demo-tag-text">
-                            <text class="text">放心购</text>
+                            <text class="text">{{ t('worryFree') }}</text>
                         </view>
                     </view>
                     <view class="demo-shop">{{ item.shop }}</view>
@@ -30,13 +30,13 @@
                 <view class="demo-water" v-for="(item, index) in rightList" :key="index">
                     <hy-image width="100%" mode="widthFix" radius="5" :src="item.image"></hy-image>
                     <view class="demo-title">{{ item.title }}</view>
-                    <view class="demo-price">{{ item.price }}元</view>
+                    <view class="demo-price">{{ item.price }}{{ t('yuan') }}</view>
                     <view class="demo-tag">
                         <view class="demo-tag-owner">
-                            <text class="text">自营</text>
+                            <text class="text">{{ t('selfOperated') }}</text>
                         </view>
                         <view class="demo-tag-text">
-                            <text class="text">放心购</text>
+                            <text class="text">{{ t('worryFree') }}</text>
                         </view>
                     </view>
                     <view class="demo-shop">{{ item.shop }}</view>
@@ -56,11 +56,11 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { guid, random, IconConfig } from '@/package'
 import { onReachBottom } from '@dcloudio/uni-app'
-import { useShareButton } from '@/composables'
-import list from './data'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
+import waterfallData from './data'
 
 definePage({
     style: {
@@ -68,9 +68,14 @@ definePage({
     }
 })
 
+const { t } = useTranslate('waterfall')
+usePageTitle('waterfall')
+
 const flowList = ref<Record<string, any>[]>([])
 const waterfallRef = ref()
 const loadStatus = ref('noMore')
+// 数据源改为工厂函数（computed 包裹以响应语言切换）
+const list = computed(() => waterfallData(t))
 
 onMounted(() => {
     addRandomData()
@@ -86,9 +91,9 @@ onReachBottom(() => {
 
 const addRandomData = () => {
     for (let i = 0; i < 20; i++) {
-        let index = random(0, list.length - 1)
+        let index = random(0, list.value.length - 1)
         // 先转成字符串再转成对象，避免数组对象引用导致数据混乱
-        let item = JSON.parse(JSON.stringify(list[index]))
+        let item = JSON.parse(JSON.stringify(list.value[index]))
         item.id = guid()
         flowList.value.push(item)
     }

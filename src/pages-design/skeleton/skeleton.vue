@@ -38,13 +38,16 @@
 </template>
 
 <script setup lang="ts">
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '骨架屏'
     }
 })
+
+const { t } = useTranslate('skeleton')
+usePageTitle('skeleton')
 
 const imageGroup = [
     { height: '171px' },

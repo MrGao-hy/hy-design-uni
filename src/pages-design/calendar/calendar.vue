@@ -36,9 +36,9 @@
         <hy-calendar
             v-model:show="show5"
             mode="range"
-            startText="住店"
-            endText="离店"
-            confirmDisabledText="请选择离店日期"
+            :start-text="t('startText')"
+            :end-text="t('endText')"
+            :confirm-disabled-text="t('confirmDisabledText')"
             :formatter="formatter"
             @confirm="(e: any) => confirm(4, e)"
         ></hy-calendar>
@@ -81,7 +81,7 @@
             v-model:show="show10"
             mode="range"
             :maxRange="7"
-            rangePrompt="最多选择7天"
+            :range-prompt="t('rangePrompt')"
             allowSameDay
             @confirm="(e: any) => confirm(9, e)"
         ></hy-calendar>
@@ -93,7 +93,7 @@
             minDate="2025-05-09"
             maxDate="2025-07-05"
             :forbidDays="forbidDays"
-            forbidDaysToast="该日期已被预约"
+            :forbid-days-toast="t('forbidDaysToast')"
             @confirm="(e: any) => confirm(10, e)"
         ></hy-calendar>
 
@@ -126,14 +126,17 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { computed, ref } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '日历'
     }
 })
+
+const { t } = useTranslate('calendar')
+usePageTitle('calendar')
 
 const index = ref(0)
 const show1 = ref(false)
@@ -162,37 +165,48 @@ const formatter = (day: any) => {
     let month = d.getMonth() + 1
     const date = d.getDate()
     if (day.month == month && day.day == date + 3) {
-        day.bottomInfo = '有优惠'
+        day.bottomInfo = t('discount')
         day.dot = true
     }
     return day
 }
 
-const list = reactive([
-    { title: '单个日期', value: '' },
-    { title: '多个日期', value: '' },
-    { title: '日期范围', value: '' },
-    { title: '自定义主题颜色', value: '' },
-    { title: '自定义文案', value: '' },
-    { title: '日期最大范围', value: '' },
-    { title: '显示农历', value: '' },
-    { title: '默认日期', value: '' },
-    { title: '日期范围限制', value: '' },
-    { title: '范围选择限制（7天）', value: '' },
-    { title: '禁用日期', value: '' },
-    { title: '只读模式', value: '' },
-    { title: '多选限制数量', value: '' },
-    { title: '自定义星期文案', value: '' }
-])
+// 演示项配置：key 对应 locale calendar.demo.*，range 标记该日历是否为范围选择模式
+const demoConfigs = [
+    { key: 'single', range: false },
+    { key: 'multiple', range: false },
+    { key: 'range', range: true },
+    { key: 'themeColor', range: true },
+    { key: 'customText', range: true },
+    { key: 'maxRange', range: false },
+    { key: 'lunar', range: false },
+    { key: 'defaultDate', range: false },
+    { key: 'rangeLimit', range: false },
+    { key: 'rangeLimit7', range: true },
+    { key: 'forbid', range: false },
+    { key: 'readonly', range: true },
+    { key: 'multipleLimit', range: false },
+    { key: 'weekText', range: false }
+]
+
+// 各演示项选中的日期值（与标题分离存储，避免 computed 覆盖）
+const values = ref<string[]>(demoConfigs.map(() => ''))
+
+const list = computed(() =>
+    demoConfigs.map((config, i) => ({
+        title: t(`demo.${config.key}`),
+        value: values.value[i]
+    }))
+)
 
 const confirm = (idx: number, dates: string[]) => {
     index.value = idx
     if (dates.length === 1) {
-        list[idx].value = dates[0]
-    } else if (list[idx].title.includes('范围')) {
-        list[idx].value = `${dates[0]} ~ ${dates[dates.length - 1]}`
+        values.value[idx] = dates[0]
+    } else if (demoConfigs[idx].range) {
+        values.value[idx] = `${dates[0]} ~ ${dates[dates.length - 1]}`
     } else {
-        list[idx].value = dates.join('; ')
+        values.value[idx] = dates.join('; ')
     }
 }
 

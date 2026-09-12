@@ -52,7 +52,7 @@
 import type { DirectionType, JustifyContentType } from '@/package/libs/typing'
 import { reactive, ref } from 'vue'
 import type { NoticeBarModeType } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { IconConfig } from '@/package'
 
 definePage({
@@ -60,6 +60,9 @@ definePage({
         navigationBarTitleText: '滚动通知'
     }
 })
+
+const { t } = useTranslate('noticeBar')
+usePageTitle('noticeBar')
 
 const direction = ref<DirectionType>('column')
 const mode = ref<NoticeBarModeType>('')

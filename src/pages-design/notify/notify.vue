@@ -8,7 +8,7 @@
 <script setup lang="ts">
 import HyNotify from '@/package/components/hy-notify/hy-notify.vue'
 import { reactive, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import type { INotifyExpose } from '@/package/components/hy-notify/typing'
 
 definePage({
@@ -16,6 +16,9 @@ definePage({
         navigationBarTitleText: '消息提示'
     }
 })
+
+const { t } = useTranslate('notify')
+usePageTitle('notify')
 
 const hyNotifyRef = ref<InstanceType<typeof HyNotify> | INotifyExpose>()
 const list = reactive([

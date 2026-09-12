@@ -19,13 +19,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '分页'
     }
 })
+
+const { t } = useTranslate('pagination')
+usePageTitle('pagination')
 
 const current = ref(1)
 

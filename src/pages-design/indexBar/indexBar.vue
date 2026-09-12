@@ -32,16 +32,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, nextTick, onMounted } from 'vue'
+import { ref, computed, nextTick, onMounted } from 'vue'
 import { getRect, sleep } from '@/package'
 import type { LeftRightType } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '索引栏'
     }
 })
+
+const { t } = useTranslate('indexBar')
+usePageTitle('indexBar')
 
 // 索引栏位置
 const position = ref<LeftRightType>('right')
@@ -52,64 +55,111 @@ const showToast = ref<boolean>(true)
 // 当前激活的索引
 const currentActiveIndex = ref<string>('')
 const isScroll = ref<boolean>(true)
-// 模拟城市数据
-const cityData = reactive({
-    A: ['安庆', '安阳', '鞍山', '安顺', '安康', '阿克苏', '阿勒泰'],
+// 模拟城市数据（key 对应 locale 的 cityNames）
+const cityKeys: Record<string, string[]> = {
+    A: ['anqing', 'anyang', 'anshan', 'anshun', 'ankang', 'aksu', 'altay'],
     B: [
-        '北京',
-        '上海',
-        '广州',
-        '深圳',
-        '重庆',
-        '成都',
-        '杭州',
-        '武汉',
-        '西安',
-        '苏州',
-        '天津',
-        '南京',
-        '长沙',
-        '郑州',
-        '东莞',
-        '青岛',
-        '沈阳',
-        '宁波',
-        '昆明'
+        'beijing',
+        'shanghai',
+        'guangzhou',
+        'shenzhen',
+        'chongqing',
+        'chengdu',
+        'hangzhou',
+        'wuhan',
+        'xian',
+        'suzhou',
+        'tianjin',
+        'nanjing',
+        'changsha',
+        'zhengzhou',
+        'dongguan',
+        'qingdao',
+        'shenyang',
+        'ningbo',
+        'kunming'
     ],
-    C: ['长春', '常州', '长沙', '成都', '重庆', '福州', '长春', '长沙'],
-    D: ['大连', '东莞', '德州', '大同', '大庆', '大理'],
-    E: ['鄂州', '恩施', '鄂州'],
-    F: ['福州', '佛山', '抚顺', '阜新', '阜阳', '抚州'],
-    G: ['广州', '贵阳', '桂林', '赣州', '广元', '广安'],
-    H: ['杭州', '合肥', '哈尔滨', '海口', '呼和浩特', '湖州', '邯郸', '汉中', '衡水'],
-    J: ['济南', '长春', '吉林', '锦州', '荆州', '荆门', '晋江'],
-    K: ['昆明', '开封', '克拉玛依', '喀什'],
-    L: ['兰州', '洛阳', '临沂', '聊城', '龙岩', '丽江'],
-    M: ['绵阳', '马鞍山', '茂名', '梅州', '眉山'],
-    N: ['南京', '南昌', '南宁', '南通', '宁波', '南阳', '南充'],
-    P: ['平顶山', '盘锦', '攀枝花', '萍乡'],
-    Q: ['青岛', '泉州', '曲靖', '秦皇岛', '齐齐哈尔', '庆阳'],
-    R: ['日照', '日喀则', '荣昌'],
-    S: ['深圳', '苏州', '沈阳', '石家庄', '绍兴', '厦门', '商丘', '上饶', '十堰'],
-    T: ['天津', '太原', '唐山', '泰州', '台州', '通辽', '吐鲁番'],
-    W: ['武汉', '西安', '温州', '无锡', '潍坊', '乌鲁木齐', '威海', '渭南'],
-    X: ['西安', '厦门', '徐州', '新乡', '信阳', '襄阳', '西宁'],
-    Y: ['烟台', '扬州', '宜昌', '岳阳', '延安', '银川', '运城'],
-    Z: ['郑州', '株洲', '珠海', '中山', '湛江', '肇庆', '张家口', '枣庄']
+    C: [
+        'changchun',
+        'changzhou',
+        'changsha',
+        'chengdu',
+        'chongqing',
+        'fuzhou',
+        'changchun',
+        'changsha'
+    ],
+    D: ['dalian', 'dongguan', 'dezhou', 'datong', 'daqing', 'dali'],
+    E: ['ezhou', 'enshi', 'ezhou'],
+    F: ['fuzhou', 'foshan', 'fushun', 'fuxin', 'fuyang', 'fuzhouJx'],
+    G: ['guangzhou', 'guiyang', 'guilin', 'ganzhou', 'guangyuan', 'guangan'],
+    H: [
+        'hangzhou',
+        'hefei',
+        'harbin',
+        'haikou',
+        'huhhot',
+        'huzhou',
+        'handan',
+        'hanzhong',
+        'hengshui'
+    ],
+    J: ['jinan', 'changchun', 'jilin', 'jinzhou', 'jingzhou', 'jingmen', 'jinjiang'],
+    K: ['kunming', 'kaifeng', 'karamay', 'kashgar'],
+    L: ['lanzhou', 'luoyang', 'linyi', 'liaocheng', 'longyan', 'lijiang'],
+    M: ['mianyang', 'maanshan', 'maoming', 'meizhou', 'meishan'],
+    N: ['nanjing', 'nanchang', 'nanning', 'nantong', 'ningbo', 'nanyang', 'nanchong'],
+    P: ['pingdingshan', 'panjin', 'panzhihua', 'pingxiang'],
+    Q: ['qingdao', 'quanzhou', 'qujing', 'qinhuangdao', 'qiqihar', 'qingyang'],
+    R: ['rizhao', 'xigaze', 'rongchang'],
+    S: [
+        'shenzhen',
+        'suzhou',
+        'shenyang',
+        'shijiazhuang',
+        'shaoxing',
+        'xiamen',
+        'shangqiu',
+        'shangrao',
+        'shiyan'
+    ],
+    T: ['tianjin', 'taiyuan', 'tangshan', 'taizhou', 'taizhouZj', 'tongliao', 'turpan'],
+    W: ['wuhan', 'xian', 'wenzhou', 'wuxi', 'weifang', 'urumqi', 'weihai', 'weinan'],
+    X: ['xian', 'xiamen', 'xuzhou', 'xinxiang', 'xinyang', 'xiangyang', 'xining'],
+    Y: ['yantai', 'yangzhou', 'yichang', 'yueyang', 'yanan', 'yinchuan', 'yuncheng'],
+    Z: [
+        'zhengzhou',
+        'zhuzhou',
+        'zhuhai',
+        'zhongshan',
+        'zhanjiang',
+        'zhaoqing',
+        'zhangjiakou',
+        'zaozhuang'
+    ]
+}
+
+// 城市名响应语言切换
+const cityData = computed<Record<string, string[]>>(() => {
+    const result: Record<string, string[]> = {}
+    Object.keys(cityKeys).forEach((key) => {
+        result[key] = cityKeys[key].map((c) => t(`cityNames.${c}`))
+    })
+    return result
 })
 
 // 转换为索引列表格式
 const indexList = computed(() => {
-    return Object.keys(cityData)
+    return Object.keys(cityData.value)
         .sort()
         .map((key) => ({
             index: key,
             title: key,
-            data: cityData[key as keyof typeof cityData]
+            data: cityData.value[key]
         }))
 })
 const indexs = computed(() => {
-    return Object.keys(cityData).sort()
+    return Object.keys(cityData.value).sort()
 })
 
 onMounted(() => {
@@ -126,7 +176,7 @@ const handleScroll = (e: any) => {
     const scrollTop = e.detail.scrollTop
     if (isScroll.value) {
         const index = sectionRect.value.findIndex((item) => item.top! - 1 > scrollTop) - 1
-        const keys = Object.keys(cityData)
+        const keys = Object.keys(cityData.value)
         currentActiveIndex.value = keys[index]
     }
 }
@@ -143,7 +193,7 @@ const handleIndexScroll = (index: string | number) => {
 
 const scrollToSection = async (i: string | number) => {
     isScroll.value = false
-    const index = Object.keys(cityData).findIndex((item) => item === i)
+    const index = Object.keys(cityData.value).findIndex((item) => item === i)
     scrollTop.value = sectionRect.value[index]?.top!
     await sleep()
     isScroll.value = true

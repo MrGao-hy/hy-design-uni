@@ -1,11 +1,11 @@
 <template>
     <the-root-page>
-        <view class="hy-title">完整时间</view>
+        <view class="hy-title">{{ t('fullDatetime') }}</view>
         <view class="hy-container">
             <hy-datetime-picker v-model="value_1" has-input></hy-datetime-picker>
         </view>
 
-        <view class="hy-title">年月日</view>
+        <view class="hy-title">{{ t('dateOnly') }}</view>
         <view class="hy-container">
             <hy-datetime-picker
                 v-model="value_2"
@@ -14,7 +14,7 @@
             ></hy-datetime-picker>
         </view>
 
-        <view class="hy-title">年月</view>
+        <view class="hy-title">{{ t('yearMonth') }}</view>
         <view class="hy-container">
             <hy-datetime-picker
                 v-model="value_3"
@@ -23,7 +23,7 @@
             ></hy-datetime-picker>
         </view>
 
-        <view class="hy-title">月日</view>
+        <view class="hy-title">{{ t('monthDay') }}</view>
         <view class="hy-container">
             <hy-datetime-picker
                 v-model="value_4"
@@ -32,7 +32,7 @@
             ></hy-datetime-picker>
         </view>
 
-        <view class="hy-title">时间</view>
+        <view class="hy-title">{{ t('timeOnly') }}</view>
         <view class="hy-container">
             <hy-datetime-picker
                 v-model="value_5"
@@ -41,7 +41,7 @@
             ></hy-datetime-picker>
         </view>
 
-        <view class="hy-title">小时/分</view>
+        <view class="hy-title">{{ t('hourMinute') }}</view>
         <view class="hy-container">
             <hy-datetime-picker
                 v-model="value_6"
@@ -50,9 +50,9 @@
             ></hy-datetime-picker>
         </view>
 
-        <view class="hy-title">按钮</view>
+        <view class="hy-title">{{ t('buttonSection') }}</view>
         <view class="hy-container">
-            <hy-button @click="showPicker = true" :text="value_7 || '选择日期'"></hy-button>
+            <hy-button @click="showPicker = true" :text="value_7 || t('selectDate')"></hy-button>
             <hy-datetime-picker
                 v-model="value_7"
                 v-model:show="showPicker"
@@ -65,7 +65,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { DateModeEnum } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import TheRootPage from '@/components/the-root-page.vue'
 
 definePage({
@@ -73,6 +73,9 @@ definePage({
         navigationBarTitleText: '时间选择器'
     }
 })
+
+const { t } = useTranslate('datetimePicker')
+usePageTitle('datetimePicker')
 
 const value_1 = ref('')
 const value_2 = ref('')

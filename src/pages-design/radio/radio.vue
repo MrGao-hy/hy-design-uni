@@ -63,13 +63,16 @@
 <script setup lang="ts">
 import type { SizeType, ShapeType } from '@/package/libs/typing'
 import { reactive, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '单选框'
     }
 })
+
+const { t } = useTranslate('radio')
+usePageTitle('radio')
 
 const value = ref('')
 const size = ref<SizeType>('medium')

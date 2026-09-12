@@ -8,27 +8,27 @@
             clickable
         >
             <hy-cell-item
-                title="工具箱"
+                :title="t('toolbox')"
                 name="tools"
                 :icon="{ name: IconConfig.SETTING, color: 'red' }"
             ></hy-cell-item>
             <hy-cell-item
-                title="我的"
+                :title="t('mine')"
                 name="my"
-                sub="我是一个神奇的小箱子"
-                value="返回"
+                :sub="t('magicBox')"
+                :value="t('back')"
             ></hy-cell-item>
-            <hy-cell-item title="禁用" name="disabled" disabled></hy-cell-item>
+            <hy-cell-item :title="t('disabledCell')" name="disabled" disabled></hy-cell-item>
         </hy-cell>
 
         <view class="hy-setting__box">
-            <view class="hy-title">value定位</view>
+            <view class="hy-title">{{ t('valuePosition') }}</view>
             <hy-subsection :list="list_1" v-model="arrange"></hy-subsection>
 
-            <view class="hy-title">单元格大小</view>
+            <view class="hy-title">{{ t('cellSize') }}</view>
             <hy-subsection :list="list_2" v-model="size"></hy-subsection>
 
-            <view class="hy-title">右侧icon方向</view>
+            <view class="hy-title">{{ t('arrowDirection') }}</view>
             <hy-subsection :list="list_3" v-model="arrowDirection"></hy-subsection>
         </view>
     </the-root-page>
@@ -36,9 +36,9 @@
 
 <script setup lang="ts">
 import type { RowCenterType, SizeType, ArrowDirectionType } from '@/package/libs'
-import { reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { IconConfig } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
@@ -46,31 +46,34 @@ definePage({
     }
 })
 
+const { t } = useTranslate('cell')
+usePageTitle('cell')
+
 const arrange = ref<RowCenterType>('right')
 const size = ref<SizeType>('medium')
 const arrowDirection = ref<ArrowDirectionType>('right')
 
-const list_1 = reactive([
-    { name: '左边', value: 'left' },
-    { name: '中间', value: 'center' },
-    { name: '右边', value: 'right' }
+const list_1 = computed(() => [
+    { name: t('posLeft'), value: 'left' },
+    { name: t('posCenter'), value: 'center' },
+    { name: t('posRight'), value: 'right' }
 ])
 
-const list_2 = reactive([
-    { name: '大', value: 'large' },
-    { name: '默认', value: 'medium' },
-    { name: '小', value: 'small' }
+const list_2 = computed(() => [
+    { name: t('sizeLarge'), value: 'large' },
+    { name: t('sizeDefault'), value: 'medium' },
+    { name: t('sizeSmall'), value: 'small' }
 ])
 
-const list_3 = reactive([
-    { name: '向左', value: 'left' },
-    { name: '向右', value: 'right' },
-    { name: '向上', value: 'up' },
-    { name: '向下', value: 'down' }
+const list_3 = computed(() => [
+    { name: t('dirLeft'), value: 'left' },
+    { name: t('dirRight'), value: 'right' },
+    { name: t('dirUp'), value: 'up' },
+    { name: t('dirDown'), value: 'down' }
 ])
 
 const onClick = (name: string | number) => {
-    uni.showToast({ title: `点击执行了：${name}`, icon: 'none' })
+    uni.showToast({ title: t('clicked', name), icon: 'none' })
 }
 
 useShareButton()

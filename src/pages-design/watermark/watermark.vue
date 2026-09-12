@@ -2,8 +2,8 @@
     <the-root-page>
         <view class="hy-setting__box">
             <hy-watermark
-                title="华玥组件库"
-                content="基于vue3+ts的ui组件库"
+                :title="t('libraryName')"
+                :content="t('libraryDesc')"
                 image="/static/logo.png"
                 :width="150"
                 :height="120"
@@ -18,22 +18,22 @@
                 :isAntiTheft="isAntiTheft"
             ></hy-watermark>
 
-            <view class="hy-title">水印旋转角度</view>
+            <view class="hy-title">{{ t('rotateAngle') }}</view>
             <hy-subsection :list="list_2" v-model="rotate"></hy-subsection>
 
-            <view class="hy-title">是否全屏</view>
+            <view class="hy-title">{{ t('fullScreenSwitch') }}</view>
             <hy-switch v-model="fullScreen"></hy-switch>
 
-            <view class="hy-title">是否开启防盗</view>
+            <view class="hy-title">{{ t('antiTheft') }}</view>
             <hy-switch v-model="isAntiTheft"></hy-switch>
 
-            <view class="hy-title">边距</view>
+            <view class="hy-title">{{ t('gutter') }}</view>
             <hy-slider v-model="space" :min="0" :max="150" show-value />
 
-            <view class="hy-title">字体大小</view>
+            <view class="hy-title">{{ t('fontSize') }}</view>
             <hy-slider v-model="size" :min="12" :max="25" show-value />
 
-            <view class="hy-title">透明度</view>
+            <view class="hy-title">{{ t('opacity') }}</view>
             <hy-slider v-model="opacity" :min="0" :max="1" :step="0.1" show-value></hy-slider>
         </view>
     </the-root-page>
@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import TheRootPage from '@/components/the-root-page.vue'
 
 definePage({
@@ -49,6 +49,9 @@ definePage({
         navigationBarTitleText: '水印'
     }
 })
+
+const { t } = useTranslate('watermark')
+usePageTitle('watermark')
 
 const size = ref(12)
 const space = ref(0)

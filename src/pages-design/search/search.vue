@@ -37,13 +37,16 @@
 <script setup lang="ts">
 import type { ShapeType, LeftRightType } from '@/package/libs/typing'
 import { reactive, ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '搜索'
     }
 })
+
+const { t } = useTranslate('search')
+usePageTitle('search')
 
 const value = ref('测试')
 const label = ref('搜索')

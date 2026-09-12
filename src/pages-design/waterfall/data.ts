@@ -1,70 +1,74 @@
 import { designImage } from '@/config/config.ts'
 
-export default [
+/**
+ * 瀑布流演示数据
+ * @param t 翻译函数（由页面传入，语言切换后重新生成文案）
+ */
+export default (t: Function) => [
     {
-        price: '1300万',
-        title: '法拉利LaFerrari',
-        shop: '性能超群，领跑超级跑车界',
+        price: t('price1'),
+        title: t('title1'),
+        shop: t('shop1'),
         image: designImage('good_1.jpg')
     },
     {
-        price: '3300万',
-        title: '布加迪 Chiron',
-        shop: '性能超群，领跑超级跑车界',
+        price: t('price2'),
+        title: t('title2'),
+        shop: t('shop1'),
         image: designImage('good_2.jpg')
     },
     {
-        price: '2000万',
-        title: '法拉利296 GTS',
-        shop: '新时代混动法拉利敞篷跑车',
+        price: t('price3'),
+        title: t('title3'),
+        shop: t('shop2'),
         image: designImage('good_3.jpg')
     },
     {
-        price: '784万',
-        title: '柯尼塞格Jesko',
-        shop: '一头拥有超强马力和极致速度的“猛兽”',
+        price: t('price4'),
+        title: t('title4'),
+        shop: t('shop3'),
         image: designImage('good_4.jpg')
     },
     {
-        price: '9000万',
-        title: '兰博基尼Temerario',
-        shop: '李白杜甫白居易旗舰店',
+        price: t('price5'),
+        title: t('title5'),
+        shop: t('shop4'),
         image: designImage('good_5.jpg')
     },
     {
-        price: '400万',
-        shop: '保时捷963',
-        title: '保时捷963',
+        price: t('price6'),
+        shop: t('shop5'),
+        title: t('title6'),
         image: designImage('good_6.jpg')
     },
     {
-        price: '233万',
-        shop: '玛莎拉蒂Gran Turismo',
-        title: '玛莎拉蒂Gran Turismo',
+        price: t('price7'),
+        shop: t('shop6'),
+        title: t('title7'),
         image: designImage('good_7.jpg')
     },
     {
-        price: '1654万',
-        title: '阿斯顿马丁',
-        shop: '李白杜甫白居易旗舰店',
+        price: t('price8'),
+        title: t('title8'),
+        shop: t('shop4'),
         image: designImage('good_8.jpg')
     },
     {
-        price: '1678万',
-        title: '迈凯伦',
-        shop: '李白杜甫白居易旗舰店',
+        price: t('price9'),
+        title: t('title9'),
+        shop: t('shop4'),
         image: designImage('good_9.jpg')
     },
     {
-        price: '924万',
-        title: '兰博基尼 电鳗',
-        shop: '李白杜甫白居易旗舰店',
+        price: t('price10'),
+        title: t('title10'),
+        shop: t('shop4'),
         image: designImage('good_10.jpg')
     },
     {
-        price: '8243万',
-        title: '克尔维特',
-        shop: '克尔维特',
+        price: t('price11'),
+        title: t('title11'),
+        shop: t('shop7'),
         image: designImage('good_11.jpg')
     }
 ]

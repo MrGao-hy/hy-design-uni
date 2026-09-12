@@ -37,7 +37,7 @@
 import { getCurrentInstance, nextTick, onMounted, ref } from 'vue'
 import type { MenuParamsVo } from '@/package/components/hy-menu/typing'
 import { getRect, debounce, IconConfig } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { data } from './data'
 
 definePage({
@@ -45,6 +45,9 @@ definePage({
         navigationBarTitleText: '侧边菜单栏'
     }
 })
+
+const { t } = useTranslate('menu')
+usePageTitle('menu')
 
 interface ItemTopVo {
     id: string | number

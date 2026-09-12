@@ -123,13 +123,15 @@
 import { ref } from 'vue'
 import { IconConfig, Locale, useCurrentLang, useToast, useTranslate } from '@/package'
 import { config } from '@/config/config'
+import { useThemeStore } from '@/store'
+import type { LocaleType } from '@/store'
 
 const { t } = useTranslate('mine')
 
 // 当前语言
-const currentLang = useCurrentLang()
+const themeStore = useThemeStore()
 
-const isEn = ref(currentLang.value === 'en-US')
+const isEn = ref(themeStore.locale === 'en-US')
 
 const toast = useToast()
 
@@ -235,11 +237,9 @@ const handleNavigate = (route?: string) => {
 
 // 处理语言切换
 const handleLangChange = (val: boolean | string | number) => {
-    if (val) {
-        Locale.use('en-US')
-    } else {
-        Locale.use('zh-CN')
-    }
+    const newLang = val ? 'en-US' : 'zh-CN'
+    Locale.use(newLang)
+    localeStore.lang = newLang
     toast.success(val ? t('langSwitchEn') : t('langSwitch'))
 }
 </script>

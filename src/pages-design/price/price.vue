@@ -50,13 +50,16 @@
 </template>
 
 <script setup lang="ts">
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '金额'
     }
 })
+
+const { t } = useTranslate('price')
+usePageTitle('price')
 
 useShareButton()
 </script>

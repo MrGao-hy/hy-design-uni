@@ -148,13 +148,16 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { PickerColumnVo, IPickerExpose } from '@/package'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '选择器'
     }
 })
+
+const { t } = useTranslate('picker')
+usePageTitle('picker')
 
 // 1. 基础使用
 const show1 = ref(false)

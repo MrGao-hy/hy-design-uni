@@ -8,7 +8,7 @@
             <!--            <view class="hy-title">自定义列数</view>-->
             <!--            <hy-subsection :list="list_1" v-model="col"></hy-subsection>-->
 
-            <view class="hy-title">选择类型</view>
+            <view class="hy-title">{{ t('selectType') }}</view>
             <hy-check-button
                 :columns="list"
                 v-model="mode"
@@ -16,15 +16,15 @@
                 col="repeat(4, 1fr)"
             ></hy-check-button>
 
-            <view class="hy-title">边距</view>
+            <view class="hy-title">{{ t('padding') }}</view>
             <!--            <hy-slider v-model="gap" :min="0" :max="20" />-->
         </view>
     </the-root-page>
 </template>
 
 <script setup lang="ts">
-import { useShareButton } from '@/composables'
-import { reactive, ref } from 'vue'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
+import { computed, ref } from 'vue'
 import { EmptyModeType } from '@/package'
 
 definePage({
@@ -33,62 +33,65 @@ definePage({
     }
 })
 
+const { t } = useTranslate('empty')
+usePageTitle('empty')
+
 const mode = ref<EmptyModeType>('content')
-const list = reactive([
+const list = computed(() => [
     {
-        label: '无内容',
+        label: t('typeContent'),
         value: 'content'
     },
     {
-        label: '无搜索',
+        label: t('typeSearch'),
         value: 'search'
     },
     {
-        label: '无地址',
+        label: t('typeAddress'),
         value: 'address'
     },
     {
-        label: '无网络',
+        label: t('typeNetwork'),
         value: 'network'
     },
     {
-        label: '无订单',
+        label: t('typeOrder'),
         value: 'order'
     },
     {
-        label: '无优惠券',
+        label: t('typeCoupon'),
         value: 'coupon'
     },
     {
-        label: '无消息',
+        label: t('typeMessage'),
         value: 'message'
     },
     {
-        label: '无评论',
+        label: t('typeComment'),
         value: 'comment'
     },
     {
-        label: '无积分',
+        label: t('typeIntegral'),
         value: 'integral'
     },
     {
-        label: '无银行卡',
+        label: t('typeCard'),
         value: 'card'
     },
     {
-        label: '无通知',
+        label: t('typeNotification'),
         value: 'notification'
     },
     {
-        label: '无购物车',
+        label: t('typeShop'),
         value: 'shop'
     },
     {
-        label: '无活动',
+        label: t('typeActivity'),
         value: 'activity'
     },
     {
-        label: '加载中',
+        label: t('typeLoading'),
         value: 'loading'
     }
 ])

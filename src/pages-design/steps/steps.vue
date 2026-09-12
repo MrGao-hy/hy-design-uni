@@ -150,13 +150,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '步骤条'
     }
 })
+
+const { t } = useTranslate('steps')
+usePageTitle('steps')
 
 const currentStep = ref(1)
 const errorStep = ref(2)

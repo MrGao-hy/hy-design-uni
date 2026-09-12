@@ -1,34 +1,78 @@
 <template>
     <the-root-page>
         <!-- 基础功能 -->
-        <view class="hy-title">基础功能</view>
+        <view class="hy-title">{{ t('sectionBasic') }}</view>
         <hy-cell>
-            <hy-cell-item title="基础使用" clickable @click="showBasic = true"></hy-cell-item>
-            <hy-cell-item title="带标题" clickable @click="showTitle = true"></hy-cell-item>
-            <hy-cell-item title="带取消按钮" clickable @click="showCancel = true"></hy-cell-item>
+            <hy-cell-item
+                :title="t('basicUsage')"
+                clickable
+                @click="showBasic = true"
+            ></hy-cell-item>
+            <hy-cell-item
+                :title="t('withTitle')"
+                clickable
+                @click="showTitle = true"
+            ></hy-cell-item>
+            <hy-cell-item
+                :title="t('withCancel')"
+                clickable
+                @click="showCancel = true"
+            ></hy-cell-item>
         </hy-cell>
 
         <!-- 选项状态 -->
-        <view class="hy-title">选项状态</view>
+        <view class="hy-title">{{ t('sectionStatus') }}</view>
         <hy-cell>
-            <hy-cell-item title="禁用状态" clickable @click="showDisabled = true"></hy-cell-item>
-            <hy-cell-item title="加载状态" clickable @click="showLoading = true"></hy-cell-item>
-            <hy-cell-item title="自定义颜色" clickable @click="showColor = true"></hy-cell-item>
-            <hy-cell-item title="描述信息" clickable @click="showSub = true"></hy-cell-item>
+            <hy-cell-item
+                :title="t('disabledState')"
+                clickable
+                @click="showDisabled = true"
+            ></hy-cell-item>
+            <hy-cell-item
+                :title="t('loadingState')"
+                clickable
+                @click="showLoading = true"
+            ></hy-cell-item>
+            <hy-cell-item
+                :title="t('customColor')"
+                clickable
+                @click="showColor = true"
+            ></hy-cell-item>
+            <hy-cell-item
+                :title="t('withDescription')"
+                clickable
+                @click="showSub = true"
+            ></hy-cell-item>
         </hy-cell>
 
         <!-- 自定义面板 -->
-        <view class="hy-title">自定义面板</view>
+        <view class="hy-title">{{ t('sectionPanel') }}</view>
         <hy-cell>
-            <hy-cell-item title="单行面板" clickable @click="showPanelSingle = true"></hy-cell-item>
-            <hy-cell-item title="多行面板" clickable @click="showPanelMulti = true"></hy-cell-item>
+            <hy-cell-item
+                :title="t('singlePanel')"
+                clickable
+                @click="showPanelSingle = true"
+            ></hy-cell-item>
+            <hy-cell-item
+                :title="t('multiPanel')"
+                clickable
+                @click="showPanelMulti = true"
+            ></hy-cell-item>
         </hy-cell>
 
         <!-- 高级用法 -->
-        <view class="hy-title">高级用法</view>
+        <view class="hy-title">{{ t('sectionAdvanced') }}</view>
         <hy-cell>
-            <hy-cell-item title="点击不关闭" clickable @click="showNoClose = true"></hy-cell-item>
-            <hy-cell-item title="自定义内容插槽" clickable @click="showSlot = true"></hy-cell-item>
+            <hy-cell-item
+                :title="t('noCloseOnClick')"
+                clickable
+                @click="showNoClose = true"
+            ></hy-cell-item>
+            <hy-cell-item
+                :title="t('customSlot')"
+                clickable
+                @click="showSlot = true"
+            ></hy-cell-item>
         </hy-cell>
 
         <!-- ========== 基础功能 ========== -->
@@ -44,7 +88,7 @@
         <hy-action-sheet
             v-model="showTitle"
             :actions="actionsBasic"
-            title="我是标题"
+            :title="t('sheetTitle')"
             @select="onSelect"
         ></hy-action-sheet>
 
@@ -52,7 +96,7 @@
         <hy-action-sheet
             v-model="showCancel"
             :actions="actionsBasic"
-            cancel-text="取消"
+            :cancel-text="t('cancelText')"
             @select="onSelect"
             @cancel="onCancel"
         ></hy-action-sheet>
@@ -93,7 +137,7 @@
         <hy-action-sheet
             v-model="showPanelSingle"
             :panels="panelsSingle"
-            title="分享给"
+            :title="t('shareTo')"
             @select="onSelect"
         ></hy-action-sheet>
 
@@ -101,7 +145,7 @@
         <hy-action-sheet
             v-model="showPanelMulti"
             :panels="panelsMulti"
-            title="分享给"
+            :title="t('shareTo')"
             title-align="left"
             @select="onSelect"
         ></hy-action-sheet>
@@ -117,19 +161,23 @@
         ></hy-action-sheet>
 
         <!-- 自定义内容插槽 -->
-        <hy-action-sheet v-model="showSlot" title="自定义内容">
+        <hy-action-sheet v-model="showSlot" :title="t('customContentTitle')">
             <view class="custom-content">
-                <text class="custom-text">这里是自定义内容区域</text>
-                <hy-button text="确认关闭" type="primary" @click="showSlot = false"></hy-button>
+                <text class="custom-text">{{ t('customContentText') }}</text>
+                <hy-button
+                    :text="t('confirmClose')"
+                    type="primary"
+                    @click="showSlot = false"
+                ></hy-button>
             </view>
         </hy-action-sheet>
     </the-root-page>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { IActionSheetAction } from '@/package/components/hy-action-sheet/typing'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { config } from '@/config/config.ts'
 
 definePage({
@@ -137,6 +185,9 @@ definePage({
         navigationBarTitleText: '操作菜单'
     }
 })
+
+const { t } = useTranslate('actionSheet')
+usePageTitle('actionSheet')
 
 // ========== 显示状态 ==========
 const showBasic = ref(false)
@@ -152,92 +203,92 @@ const showNoClose = ref(false)
 const showSlot = ref(false)
 
 // ========== 基础选项 ==========
-const actionsBasic = ref<IActionSheetAction[]>([
-    { name: '选项1' },
-    { name: '选项2' },
-    { name: '选项3' }
+const actionsBasic = computed<IActionSheetAction[]>(() => [
+    { name: t('option', 1) },
+    { name: t('option', 2) },
+    { name: t('option', 3) }
 ])
 
 // ========== 禁用状态 ==========
-const actionsDisabled = ref<IActionSheetAction[]>([
-    { name: '正常选项' },
-    { name: '禁用选项', disabled: true },
-    { name: '其他选项' }
+const actionsDisabled = computed<IActionSheetAction[]>(() => [
+    { name: t('normalOption') },
+    { name: t('disabledOption'), disabled: true },
+    { name: t('otherOption') }
 ])
 
 // ========== 加载状态 ==========
-const actionsLoading = ref<IActionSheetAction[]>([
-    { name: '选项1' },
-    { name: '加载中...', loading: true },
-    { name: '选项3' }
+const actionsLoading = computed<IActionSheetAction[]>(() => [
+    { name: t('option', 1) },
+    { name: t('loadingOption'), loading: true },
+    { name: t('option', 3) }
 ])
 
 // ========== 自定义颜色 ==========
-const actionsColor = ref<IActionSheetAction[]>([
-    { name: '正常文字' },
-    { name: '红色警告', color: 'red' },
-    { name: '蓝色链接', color: '#2979ff' }
+const actionsColor = computed<IActionSheetAction[]>(() => [
+    { name: t('normalText') },
+    { name: t('redWarning'), color: 'red' },
+    { name: t('blueLink'), color: '#2979ff' }
 ])
 
 // ========== 描述信息 ==========
-const actionsSub = ref<IActionSheetAction[]>([
-    { name: '选项1', sub: '这是一段描述信息' },
-    { name: '选项2', sub: '这是另一段描述' },
-    { name: '选项3' }
+const actionsSub = computed<IActionSheetAction[]>(() => [
+    { name: t('option', 1), sub: t('desc1') },
+    { name: t('option', 2), sub: t('desc2') },
+    { name: t('option', 3) }
 ])
 
 // ========== 单行面板 ==========
-const panelsSingle = ref([
+const panelsSingle = computed(() => [
     {
         iconUrl: config.wx,
-        name: '微信'
+        name: t('wechat')
     },
     {
         iconUrl: config.wb,
-        name: '微博'
+        name: t('weibo')
     },
     {
         iconUrl: config.qq,
-        name: 'QQ'
+        name: t('qq')
     },
     {
         iconUrl: config.sc,
-        name: '收藏'
+        name: t('favorite')
     }
 ])
 
 // ========== 多行面板 ==========
-const panelsMulti = ref([
+const panelsMulti = computed(() => [
     [
         {
             iconUrl: config.wx,
-            name: '微信'
+            name: t('wechat')
         },
         {
             iconUrl: config.wb,
-            name: '微博'
+            name: t('weibo')
         },
         {
             iconUrl: config.qq,
-            name: 'QQ'
+            name: t('qq')
         },
         {
             iconUrl: config.sc,
-            name: '收藏'
+            name: t('favorite')
         }
     ],
     [
         {
             iconUrl: config.qq,
-            name: 'QQ好友'
+            name: t('qqFriend')
         },
         {
             iconUrl: config.wx,
-            name: '微信好友'
+            name: t('wechatFriend')
         },
         {
             iconUrl: config.wb,
-            name: '朋友圈'
+            name: t('moments')
         }
     ]
 ])
@@ -245,21 +296,21 @@ const panelsMulti = ref([
 // ========== 事件处理 ==========
 const onSelect = (params: any) => {
     uni.showToast({
-        title: `点击了: ${params.item.name}`,
+        title: t('clicked', params.item.name),
         icon: 'none'
     })
 }
 
 const onSelectNoClose = (params: any) => {
     uni.showToast({
-        title: `点击了: ${params.item.name} (不关闭)`,
+        title: t('clickedNoClose', params.item.name),
         icon: 'none'
     })
 }
 
 const onCancel = () => {
     uni.showToast({
-        title: '点击了取消',
+        title: t('clickedCancel'),
         icon: 'none'
     })
 }

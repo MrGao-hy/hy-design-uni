@@ -1,11 +1,11 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-address-picker v-model="value" has-input></hy-address-picker>
         </view>
 
-        <view class="hy-title">分割线</view>
+        <view class="hy-title">{{ t('separator') }}</view>
         <view class="hy-container">
             <hy-address-picker v-model="value" has-input separator="/"></hy-address-picker>
         </view>
@@ -14,13 +14,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
     style: {
         navigationBarTitleText: '地址选择器'
     }
 })
+
+const { t } = useTranslate('addressPicker')
+usePageTitle('addressPicker')
 
 const value = ref('')
 

@@ -106,7 +106,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useShareButton } from '@/composables'
+import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import HyButton from '@/package/components/hy-button/hy-button.vue'
 import HyPopup from '@/package/components/hy-popup/hy-popup.vue'
 
@@ -115,6 +115,9 @@ definePage({
         navigationBarTitleText: '滑动选择器'
     }
 })
+
+const { t } = useTranslate('slider')
+usePageTitle('slider')
 
 const value = ref(20)
 const value_3 = ref(0)
