@@ -37,7 +37,7 @@ import { getCurrentInstance, ref, watch, nextTick } from 'vue'
 import type { IQrcodeEmits } from './typing'
 import QRCode from './qrcode'
 import qrCodeProps from './props'
-import { addUnit, error } from '../../libs'
+import { addUnit, error, useTranslate } from '../../libs'
 // 组件
 import HyLoading from '../hy-loading/hy-loading.vue'
 import HyImage from '../hy-image/hy-image.vue'
@@ -50,6 +50,8 @@ defineOptions({})
 
 const props = defineProps(qrCodeProps)
 const emit = defineEmits<IQrcodeEmits>()
+
+const { t } = useTranslate('qrCode')
 
 const instance = getCurrentInstance()
 const loading = ref(true)
@@ -105,7 +107,7 @@ const _saveCode = () => {
             filePath: result.value,
             success: function () {
                 uni.showToast({
-                    title: '二维码保存成功',
+                    title: t('saveSuccess'),
                     icon: 'success',
                     duration: 2000
                 })
@@ -123,7 +125,7 @@ const preview = (url: string) => {
         uni.previewImage({
             urls: [result.value],
             longPressActions: {
-                itemList: ['保存二维码图片'],
+                itemList: [t('save')],
                 success: function (data) {
                     // console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
                     switch (data.tapIndex) {

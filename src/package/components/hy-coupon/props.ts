@@ -1,5 +1,8 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { HyButtonProps, CouponButtonModeType, CouponType } from '../../libs'
+import { useTranslate } from '../../libs'
+
+const { t } = useTranslate('coupon')
 
 const couponProps = {
     /** 优惠券标题 */
@@ -91,7 +94,7 @@ const couponProps = {
     /** 按钮文字 */
     btnText: {
         type: String,
-        default: '立即领取'
+        default: () => t('receive')
     },
     buttonProp: {
         type: Object as PropType<HyButtonProps>,

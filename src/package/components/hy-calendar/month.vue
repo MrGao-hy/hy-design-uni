@@ -84,6 +84,8 @@ import dayjs from 'dayjs'
 import { addUnit, colorGradient, getRect, sleep, formatTime, useTranslate } from '../../libs'
 import type { DateItem, IMonthProps, IMonthExpose } from './typing'
 
+const { t } = useTranslate('calendar')
+
 const props = withDefaults(defineProps<IMonthProps>(), {
     showMark: true,
     color: '#3c9cff',
@@ -91,8 +93,8 @@ const props = withDefaults(defineProps<IMonthProps>(), {
     mode: 'single',
     rowHeight: 58,
     maxCount: Infinity,
-    startText: '开始',
-    endText: '结束',
+    startText: () => t('startTime'),
+    endText: () => t('endTime'),
     defaultDate: null,
     minDate: 0,
     maxDate: 0,
@@ -107,7 +109,6 @@ const props = withDefaults(defineProps<IMonthProps>(), {
 })
 const emit = defineEmits(['monthSelected', 'updateMonthTop'])
 
-const { t } = useTranslate('calendar')
 // --- 响应式变量 ---
 const wrapperWidth = ref(0)
 const selected = ref<string[]>([])

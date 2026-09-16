@@ -22,6 +22,7 @@ export default {
         startMonth: '开始月',
         endMonth: '结束月',
         monthFormat: 'yyyy年MM月',
+        forbidDaysToast: '该日期已禁用',
         weeks: {
             sun: '日',
             mon: '一',
@@ -77,7 +78,8 @@ export default {
     },
     upload: {
         progressLabel: (value: number) => `上传进度${value}%`,
-        error: '上传失败'
+        error: '上传失败',
+        previewError: '预览图片失败'
     },
     signature: {
         confirm: '确认',
@@ -86,6 +88,54 @@ export default {
         restore: '恢复'
     },
     qrCode: {
-        loading: '二维码生成中...'
+        loading: '二维码生成中...',
+        saveSuccess: '二维码保存成功',
+        save: '保存二维码图片'
+    },
+    coupon: {
+        discountUnit: '折',
+        unit: '元',
+        receive: '立即领取',
+        typeMoneyOff: '满减券',
+        typeDiscount: '折扣券',
+        typeFixedAmount: '无门槛券',
+        typeUnknown: '未知券'
+    },
+    submitBar: {
+        addToCart: '加入购物车',
+        buyNow: '立即购买'
+    },
+    tooltip: {
+        copy: '复制',
+        copySuccess: '复制成功',
+        copyFail: '复制失败'
+    },
+    text: {
+        linkCopied: '链接已复制，请在浏览器打开'
+    },
+    parse: {
+        saveImage: '保存图片',
+        saveSuccess: '保存成功',
+        linkCopied: '链接已复制'
+    },
+    mine: {
+        vip: '会员',
+        bio: '这个人很懒，什么都没有留下',
+        components: '组件',
+        following: '关注',
+        followers: '粉丝',
+        likes: '获赞',
+        orders: '我的订单',
+        address: '收货地址',
+        messages: '我的消息',
+        favorites: '我的收藏',
+        settings: '设置',
+        help: '帮助中心',
+        about: '关于我们',
+        language: '语言',
+        logout: '退出登录',
+        pageNotExist: '页面不存在',
+        langSwitch: '已切换为中文',
+        langSwitchEn: '已切换为英文'
     }
 }

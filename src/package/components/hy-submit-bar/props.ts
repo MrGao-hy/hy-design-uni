@@ -1,5 +1,8 @@
 import type { ShapeType, SubmitBarIconMenus } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
+import { useTranslate } from '../../libs'
+
+const { t } = useTranslate('submitBar')
 
 const submitBarProps = {
     /** 左边菜单栏 */
@@ -49,12 +52,12 @@ const submitBarProps = {
     /** 左边按钮文字 */
     leftBtnText: {
         type: String,
-        default: '加入购物车'
+        default: () => t('addToCart')
     },
     /** 右边按钮文字 */
     rightBtnText: {
         type: String,
-        default: '立即购买'
+        default: () => t('buyNow')
     },
     /** 左边按钮颜色，支持渐变色 */
     leftBtnColor: {

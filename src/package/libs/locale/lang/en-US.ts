@@ -19,6 +19,7 @@ export default {
         startMonth: 'Start Month',
         endMonth: 'End Month',
         monthFormat: 'yyyy-MM',
+        forbidDaysToast: 'This date is disabled',
         weeks: {
             sun: 'Sun',
             mon: 'Mon',
@@ -74,7 +75,8 @@ export default {
     },
     upload: {
         progressLabel: (value: number) => `progress：${value}%`,
-        error: 'Failed to upload'
+        error: 'Failed to upload',
+        previewError: 'Failed to preview'
     },
     signature: {
         confirm: 'OK',
@@ -83,6 +85,54 @@ export default {
         restore: 'Restore'
     },
     qrCode: {
-        loading: 'Generate a QR code...'
+        loading: 'Generate a QR code...',
+        saveSuccess: 'QR code saved',
+        save: 'Save QR code image'
+    },
+    coupon: {
+        discountUnit: 'off',
+        unit: 'CNY',
+        receive: 'Claim now',
+        typeMoneyOff: 'Money Off',
+        typeDiscount: 'Discount',
+        typeFixedAmount: 'No Threshold',
+        typeUnknown: 'Unknown'
+    },
+    submitBar: {
+        addToCart: 'Add to Cart',
+        buyNow: 'Buy Now'
+    },
+    tooltip: {
+        copy: 'Copy',
+        copySuccess: 'Copied',
+        copyFail: 'Copy failed'
+    },
+    text: {
+        linkCopied: 'Link copied, please open it in your browser'
+    },
+    parse: {
+        saveImage: 'Save Image',
+        saveSuccess: 'Saved',
+        linkCopied: 'Link copied'
+    },
+    mine: {
+        vip: 'VIP',
+        bio: 'This person is lazy and left nothing',
+        components: 'Components',
+        following: 'Following',
+        followers: 'Followers',
+        likes: 'Likes',
+        orders: 'My Orders',
+        address: 'Shipping Address',
+        messages: 'Messages',
+        favorites: 'Favorites',
+        settings: 'Settings',
+        help: 'Help Center',
+        about: 'About Us',
+        language: 'Language',
+        logout: 'Log Out',
+        pageNotExist: 'Page not found',
+        langSwitch: 'Switched to Chinese',
+        langSwitchEn: 'Switched to English'
     }
 }

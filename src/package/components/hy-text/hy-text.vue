@@ -63,7 +63,15 @@ export default {
 import { computed, nextTick } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { ITextEmits } from './typing'
-import { addUnit, error, formatName, formatTime, isDate, priceFormat } from '../../libs'
+import {
+    addUnit,
+    error,
+    formatName,
+    formatTime,
+    isDate,
+    priceFormat,
+    useTranslate
+} from '../../libs'
 import type { InputOnConfirmEvent } from '@uni-helper/uni-types'
 import textProps from './props'
 // 组件
@@ -77,6 +85,8 @@ defineOptions({})
 
 const props = defineProps(textProps)
 const emit = defineEmits<ITextEmits>()
+
+const { t } = useTranslate('text')
 
 const wrapStyle = computed(() => {
     const style: CSSProperties = {
@@ -205,7 +215,7 @@ const toLink = () => {
         success: () => {
             uni.hideToast()
             nextTick(() => {
-                uni.showToast({ title: '链接已复制，请在浏览器打开' })
+                uni.showToast({ title: t('linkCopied') })
             })
         }
     })

@@ -1,5 +1,6 @@
 import { reactive, ref } from 'vue'
 import zhCN from './lang/zh-CN'
+import enUS from './lang/en-US'
 import { deepMerge } from '../index'
 
 type Message = Record<string, any>
@@ -7,7 +8,8 @@ type Messages = Record<string, Message>
 
 const lang = ref<string>('zh-CN')
 const messages = reactive<Messages>({
-    'zh-CN': zhCN
+    'zh-CN': zhCN,
+    'en-US': enUS
 })
 
 export const Locale = {

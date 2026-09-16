@@ -36,7 +36,7 @@
                         hover-class="hy-tooltip__container--list__btn--hover"
                         @tap.stop="setClipboardData"
                     >
-                        <text class="hy-tooltip__container--list__btn--text">复制</text>
+                        <text class="hy-tooltip__container--list__btn--text">{{ t('copy') }}</text>
                     </view>
                     <hy-line
                         direction="column"
@@ -92,7 +92,7 @@
                         hover-class="hy-tooltip__container--list__btn--hover"
                         @tap="setClipboardData"
                     >
-                        <text class="hy-tooltip__container--list__btn--text">复制</text>
+                        <text class="hy-tooltip__container--list__btn--text">{{ t('copy') }}</text>
                     </view>
                     <hy-line
                         direction="column"
@@ -143,6 +143,7 @@ import {
     type Queue,
     queueKey,
     usePopover,
+    useTranslate,
     closeOther,
     removeFromQueue,
     pushToQueue,
@@ -163,6 +164,8 @@ defineOptions({})
 
 const props = defineProps(tooltipProps)
 const emit = defineEmits<ITooltipEmits>()
+
+const { t } = useTranslate('tooltip')
 
 const queue = inject<Queue | null>(queueKey, null)
 const { proxy } = getCurrentInstance() as any
@@ -256,13 +259,13 @@ const setClipboardData = () => {
         success: () => {
             props.showToast &&
                 uni.showToast({
-                    title: '复制成功'
+                    title: t('copySuccess')
                 })
         },
         fail: () => {
             props.showToast &&
                 uni.showToast({
-                    title: '复制失败'
+                    title: t('copyFail')
                 })
         },
         complete: () => {

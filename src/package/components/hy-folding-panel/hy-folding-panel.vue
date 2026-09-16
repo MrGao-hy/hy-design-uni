@@ -11,97 +11,125 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { provide, ref, watch, toRefs } from 'vue'
-import type { IFoldingPanelGroupEmits, IFoldingPanelExpose } from './typing'
+import { computed, provide, watch } from 'vue'
+import type {
+    IFoldingPanelContext,
+    IFoldingPanelGroupEmits,
+    IFoldingPanelExpose,
+    FoldingPanelModelValue,
+    FoldingPanelValue
+} from './typing'
 import foldingPanelProps from './props'
 
 const props = defineProps(foldingPanelProps)
 const emit = defineEmits<IFoldingPanelGroupEmits>()
 
-// 内部激活索引
-const activeIndex = ref(props.modelValue)
+/** 归一化当前展开项，兼容旧的 -1 与空字符串表示空值 */
+const activeValues = computed<FoldingPanelValue[]>(() => {
+    const value = props.modelValue
 
-// 监听v-model变化
+    if (props.accordion) {
+        return Array.isArray(value) || value === -1 || value === '' ? [] : [value]
+    }
+    if (Array.isArray(value)) return value
+    return value === -1 || value === '' ? [] : [value]
+})
+
+/** 手风琴与普通模式的空值类型不同，切换模式时同步修正绑定值 */
 watch(
-    () => props.modelValue,
-    (newVal) => {
-        activeIndex.value = newVal
+    () => props.accordion,
+    (accordion) => {
+        const next: FoldingPanelModelValue = accordion ? '' : []
+        if (next !== props.modelValue) {
+            emit('update:modelValue', next)
+            emit('change', next)
+        }
     }
 )
 
-// 监听内部激活索引变化
-watch(activeIndex, (newVal) => {
-    emit('update:modelValue', newVal)
-    emit('change', newVal)
-})
+/** 统一更新受控值 */
+const updateValue = (value: FoldingPanelModelValue) => {
+    emit('update:modelValue', value)
+    emit('change', value)
+}
 
-// 提供给子组件的方法
-const updateActiveIndex = (index: number | string) => {
+/** 由子项驱动状态变化，父组件始终是唯一状态源 */
+const toggle = (index: FoldingPanelValue, expanded: boolean) => {
     if (props.disabled) return
 
     if (props.accordion) {
-        // 手风琴模式下，如果点击的是当前激活的索引，则关闭（设为-1）
-        const wasActive = activeIndex.value === index
-        activeIndex.value = wasActive ? -1 : index
+        const current = activeValues.value[0]
+        const next = expanded ? index : ''
 
-        // 触发相应的事件
-        if (!wasActive) {
+        if (current && current !== index) emit('close', current)
+        updateValue(next)
+
+        if (expanded) {
             emit('open', index)
-        } else {
+        } else if (current === index) {
             emit('close', index)
         }
-    } else {
-        // 非手风琴模式下，这里不做特殊处理，由子组件自己控制
-        activeIndex.value = index
+        return
     }
+
+    const current = activeValues.value
+    const next = expanded
+        ? current.includes(index)
+            ? current
+            : current.concat(index)
+        : current.filter((activeIndex) => activeIndex !== index)
+
+    updateValue(next)
+    if (expanded && !current.includes(index)) emit('open', index)
+    if (!expanded && current.includes(index)) emit('close', index)
 }
 
-// 提供给子组件的配置
-provide('hy-folding-panel', {
-    ...toRefs(props),
-    activeIndex,
-    updateActiveIndex
+/** 判断面板是否展开 */
+const isExpanded = (index: FoldingPanelValue) => activeValues.value.includes(index)
+
+provide<IFoldingPanelContext>('hy-folding-panel', {
+    props,
+    toggle,
+    isExpanded
 })
+
+/** 批量关闭当前展开项 */
+const closeActivePanels = () => {
+    activeValues.value.forEach((index) => emit('close', index))
+}
+
 // 对外暴露的方法
 defineExpose<IFoldingPanelExpose>({
     /**
      * 打开指定索引的面板
      */
     open: (index: number | string) => {
-        if (props.disabled) return
-        activeIndex.value = index
-        emit('open', index)
+        if (props.disabled || isExpanded(index)) return
+        toggle(index, true)
     },
 
     /**
      * 关闭所有面板
      */
     closeAll: () => {
-        if (props.disabled) return
-        const prevIndex = activeIndex.value
-        activeIndex.value = -1
-        if (prevIndex !== -1) {
-            emit('close', prevIndex)
-        }
+        if (props.disabled || activeValues.value.length === 0) return
+        closeActivePanels()
+        updateValue(props.accordion ? '' : [])
     },
 
     /**
      * 切换指定索引面板的状态
      */
     toggle: (index: number | string) => {
-        if (props.disabled) return
-        updateActiveIndex(index)
+        toggle(index, !isExpanded(index))
     },
 
     /**
      * 关闭指定索引的面板
      */
     close: (index: number | string) => {
-        if (props.disabled) return
-        if (activeIndex.value === index) {
-            activeIndex.value = -1
-            emit('close', index)
-        }
+        if (props.disabled || !isExpanded(index)) return
+        toggle(index, false)
     }
 })
 </script>

@@ -1,116 +1,97 @@
-@use "../../libs/css/theme.scss" as *;
-@use "../../libs/css/mixin" as *;
+@use '../../libs/css/theme.scss' as *;
+@use '../../libs/css/mixin' as *;
 
 @include b(folding-panel-item) {
-  position: relative;
-  width: 100%;
-
-  @include m(disabled) {
-    opacity: 0.6;
-    pointer-events: none;
-  }
-
-  @include m(border) {
-    border-bottom: $hy-border-line;
-  }
-
-  @include m(large) {
-    padding: $hy-border-margin-padding-lg;
-    font-size: $hy-font-size-lg;
-  }
-
-  @include m(medium) {
-    padding: $hy-border-margin-padding-base;
-    font-size: $hy-font-size-base;
-  }
-
-  @include m(small) {
-    padding: $hy-border-margin-padding-sm;
-    font-size: $hy-font-size-sm;
-  }
-
-  @include e(header) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.2s;
-    background: $hy-background--container;
-
-    @include pseudo(active) {
-      background-color: $hy-background--hover;
-    }
-  }
-
-  @include e(left) {
-    display: flex;
-    align-items: center;
-    flex: 1;
-  }
-
-  @include e(title) {
-    font-weight: 500;
-    flex: 1;
-  }
-
-  @include e(right) {
-    display: flex;
-    align-items: center;
-  }
-
-  @include e(value) {
-    font-size: 13px;
-    color: $hy-text-color--grey;
-    margin-right: 8px;
-  }
-
-  @include e(arrow) {
-    transition: transform 0.3s;
-
-    @include m(up) {
-      transform: rotate(180deg);
-    }
-  }
-
-  @include e(content-wrapper) {
     position: relative;
-    box-sizing: border-box;
     width: 100%;
-    overflow: hidden;
-    transition:
-    height 0.3s ease,
-    max-height 0.3s ease,
-    opacity 0.25s ease;
-    opacity: 0;
 
-    // 展开时渐显
-    &.is-expanded {
-      opacity: 1;
+    @include m(disabled) {
+        opacity: 0.6;
+        pointer-events: none;
     }
 
-    // 限高且动画结束后：内部可滚动
-    &.is-limited-scroll {
-      overflow: auto;
+    @include m(border) {
+        border-bottom: $hy-border-line;
     }
 
-    // 脱屏测量模式：脱离正常流、隐藏不可见、完整撑开内容，确保 getRect 测到真实高度
-    &.is-measuring {
-      position: absolute;
-      left: -99999rpx;
-      top: 0;
-      width: 100%;
-      height: auto;
-      max-height: none;
-      overflow: visible;
-      visibility: hidden;
-      opacity: 0;
-      z-index: -1;
-      pointer-events: none;
-      transition: none;
+    @include m(large) {
+        padding: $hy-border-margin-padding-lg;
+        font-size: $hy-font-size-lg;
     }
-  }
 
-  @include e(content) {
-    background-color: transparent;
-    box-sizing: border-box;
-  }
+    @include m(medium) {
+        padding: $hy-border-margin-padding-base;
+        font-size: $hy-font-size-base;
+    }
+
+    @include m(small) {
+        padding: $hy-border-margin-padding-sm;
+        font-size: $hy-font-size-sm;
+    }
+
+    @include e(header) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background-color 0.2s;
+        background: $hy-background--container;
+
+        @include pseudo(active) {
+            background-color: $hy-background--hover;
+        }
+    }
+
+    @include e(left) {
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    @include e(title) {
+        font-weight: 500;
+        flex: 1;
+    }
+
+    @include e(right) {
+        display: flex;
+        align-items: center;
+    }
+
+    @include e(value) {
+        font-size: 13px;
+        color: $hy-text-color--grey;
+        margin-right: 8px;
+    }
+
+    @include e(arrow) {
+        transition: transform 0.3s;
+
+        @include m(up) {
+            transform: rotate(180deg);
+        }
+    }
+
+    @include e(content-wrapper) {
+        position: relative;
+        box-sizing: border-box;
+        width: 100%;
+        overflow: hidden;
+        will-change: height;
+
+        // 首次同步选中态时不做入场动画，后续展开/收起走统一高度过渡
+        &.is-transitioned {
+            transition: height 0.3s ease-in-out;
+        }
+
+        // 限高且动画结束后：内部可滚动
+        &.is-limited-scroll {
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+
+    @include e(content) {
+        background-color: transparent;
+        box-sizing: border-box;
+    }
 }

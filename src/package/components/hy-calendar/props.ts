@@ -162,7 +162,7 @@ const calendarProps = {
     /** 单选与多选禁止选中的日期选择时提示 */
     forbidDaysToast: {
         type: String,
-        default: '该日期已禁用'
+        default: () => t('forbidDaysToast')
     }
 }
 

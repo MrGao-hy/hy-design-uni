@@ -135,7 +135,7 @@ const tabsRef = ref<ITabsExpose>()
  * @returns {TabsItemVo[]} 标签页列表
  */
 const tabsList = computed((): TabsItemVo[] => {
-    const tabs: TabsItemVo[] = [{ name: '请选择' }]
+    const tabs: TabsItemVo[] = [{ name: t('title') }]
     let currentOptions = innerOptions.value
 
     for (let i = 0; i < activePath.value.length; i++) {
@@ -144,7 +144,7 @@ const tabsList = computed((): TabsItemVo[] => {
         if (selected) {
             tabs[i] = { name: selected[props.labelKey] }
             if (selected[props.childrenKey]?.length) {
-                tabs[i + 1] = { name: '请选择' }
+                tabs[i + 1] = { name: t('title') }
             }
             currentOptions = selected[props.childrenKey] || []
         }

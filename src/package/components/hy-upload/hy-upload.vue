@@ -340,7 +340,7 @@ const onPreviewImage = (previewItem: FileVo, index: number) => {
         urls: urls,
         current: current,
         fail() {
-            uni.showToast({ title: '预览图片失败' })
+            uni.showToast({ title: t('previewError') })
         }
     })
 }

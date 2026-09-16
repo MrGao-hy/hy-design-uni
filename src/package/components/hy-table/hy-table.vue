@@ -160,7 +160,7 @@
         <!-- 表格主体 -->
         <view class="hy-table__body">
             <view v-if="loading" class="hy-table__body--loading">
-                <hy-loading text="加载中..." mode="circle"></hy-loading>
+                <hy-loading :text="t('loading')" mode="circle"></hy-loading>
             </view>
             <view v-if="!data.length" class="hy-table__body--empty">
                 <slot v-if="$slots.empty" name="empty"></slot>
@@ -326,7 +326,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted } from 'vue'
-import { addUnit, IconConfig, getPx } from '../../libs'
+import { addUnit, IconConfig, getPx, useTranslate } from '../../libs'
 import type { ITableColumn, ITableEmits, ITableSlots } from './typing'
 import tableProps from './props'
 // 组件
@@ -342,6 +342,8 @@ defineOptions({})
 
 const props = defineProps(tableProps)
 const emit = defineEmits<ITableEmits>()
+
+const { t } = useTranslate('loadMore')
 
 // 响应式数据
 const rowHeights = ref<number[]>([])

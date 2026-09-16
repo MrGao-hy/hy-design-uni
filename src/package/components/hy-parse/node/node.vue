@@ -290,6 +290,10 @@ module.exports = {
 </script>
 <script>
 import node from './node'
+import { useTranslate } from '../../../libs'
+
+const { t } = useTranslate('parse')
+
 export default {
     name: 'node',
     options: {
@@ -335,7 +339,7 @@ export default {
         // #ifdef H5 || APP-PLUS
         if (this.opts[0]) {
             let i
-            for (i = this.childs.length; i--; ) {
+            for (i = this.childs.length; i--;) {
                 if (this.childs[i].name === 'img') break
             }
             if (i !== -1) {
@@ -376,7 +380,7 @@ export default {
             if (this.root.pauseVideo) {
                 let flag = false
                 const id = e.target.id
-                for (let i = this.root._videos.length; i--; ) {
+                for (let i = this.root._videos.length; i--;) {
                     if (this.root._videos[i].id === id) {
                         flag = true
                     } else {
@@ -440,14 +444,14 @@ export default {
             const attrs = this.childs[e.currentTarget.dataset.i].attrs
             if (this.opts[3] && !attrs.ignore) {
                 uni.showActionSheet({
-                    itemList: ['保存图片'],
+                    itemList: [t('saveImage')],
                     success: () => {
                         const save = (path) => {
                             uni.saveImageToPhotosAlbum({
                                 filePath: path,
                                 success() {
                                     uni.showToast({
-                                        title: '保存成功'
+                                        title: t('saveSuccess')
                                     })
                                 }
                             })
@@ -536,7 +540,7 @@ export default {
                             data: href,
                             success: () =>
                                 uni.showToast({
-                                    title: '链接已复制'
+                                    title: t('linkCopied')
                                 })
                         })
                         // #endif

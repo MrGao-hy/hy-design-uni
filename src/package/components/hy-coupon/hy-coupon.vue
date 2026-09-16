@@ -25,8 +25,8 @@
                         </view>
                         <view class="hy-coupon__content--left__suffix">
                             <text v-if="unit">{{ unit }}</text>
-                            <text v-else-if="type === 'discount'">折</text>
-                            <text v-else>元</text>
+                            <text v-else-if="type === 'discount'">{{ t('discountUnit') }}</text>
+                            <text v-else>{{ t('unit') }}</text>
                         </view>
                     </view>
 
@@ -110,7 +110,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { ICouponEmits } from './typing'
-import { formatTime } from '../../libs'
+import { formatTime, useTranslate } from '../../libs'
 import couponProps from './props'
 
 // 组件
@@ -127,6 +127,8 @@ defineOptions({})
 const props = defineProps(couponProps)
 const emit = defineEmits<ICouponEmits>()
 
+const { t } = useTranslate('coupon')
+
 // 禁用功能
 const isDisable = computed(() => props.disabledStatus.includes(props.status))
 
@@ -137,16 +139,16 @@ const typeValue = computed(() => {
     } else {
         switch (props.type) {
             case 'moneyOff':
-                text = '满减券'
+                text = t('typeMoneyOff')
                 break
             case 'discount':
-                text = '折扣券'
+                text = t('typeDiscount')
                 break
             case 'fixedAmount':
-                text = '无门槛券'
+                text = t('typeFixedAmount')
                 break
             default:
-                text = '未知券'
+                text = t('typeUnknown')
                 break
         }
     }

@@ -16,7 +16,7 @@
             </hy-folding-panel-item>
 
             <!-- 中等高度：列表内容 -->
-            <hy-folding-panel-item :title="t('foodListTitle')" index="food" :default-open="true">
+            <hy-folding-panel-item :title="t('foodListTitle')" index="food">
                 <view class="content-box content-box--md">
                     <view v-for="(item, i) in foodList" :key="i" class="list-item">
                         <text class="list-item__name">{{ item.name }}</text>
@@ -88,6 +88,25 @@
                     </hy-button>
                 </view>
             </hy-folding-panel-item>
+
+            <!-- 嵌套折叠面板：面板内容里再嵌套一组可独立展开/收起的折叠面板 -->
+            <hy-folding-panel-item :title="t('nestedTitle')" index="nested">
+                <view class="nested-wrap">
+                    <hy-folding-panel v-model="nestedActiveIndex">
+                        <hy-folding-panel-item :title="t('nestedChildA')" index="nested-child-a">
+                            <view class="content-box content-box--sm">
+                                <text class="content-text">{{ t('nestedChildAContent') }}</text>
+                            </view>
+                        </hy-folding-panel-item>
+
+                        <hy-folding-panel-item :title="t('nestedChildB')" index="nested-child-b">
+                            <view class="content-box content-box--sm">
+                                <text class="content-text">{{ t('nestedChildBContent') }}</text>
+                            </view>
+                        </hy-folding-panel-item>
+                    </hy-folding-panel>
+                </view>
+            </hy-folding-panel-item>
         </hy-folding-panel>
 
         <view class="hy-setting__box">
@@ -110,6 +129,7 @@
 import type { SizeType } from '@/package/libs/typing'
 import { ref, computed } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
+import type { FoldingPanelModelValue } from '@/package/components/hy-folding-panel/typing'
 import type { IFoldingPanelItemExpose } from '@/package/components/hy-folding-panel-item/typing'
 
 definePage({
@@ -125,8 +145,9 @@ const size = ref<SizeType>('medium')
 const border = ref(true)
 const disabled = ref(false)
 const accordion = ref(false)
-// 初始不展开任何面板，避免与子项字符串索引不匹配
-const activeIndex = ref<string | number>('')
+// 普通模式为数组，手风琴模式由父组件自动同步为字符串
+const activeIndex = ref<FoldingPanelModelValue>(['food'])
+const nestedActiveIndex = ref<FoldingPanelModelValue>(['nested-child-b'])
 
 const list_1 = computed(() => [
     { name: t('sizeSmall'), value: 'small' },
@@ -160,7 +181,7 @@ const dynamicList = ref<string[]>([t('initialItem', 1), t('initialItem', 2)])
 const loadMore = async () => {
     const next = dynamicList.value.length + 1
     dynamicList.value.push(t('dynamicItem', next))
-    // 内容变化后重新测量高度，保证动画高度准确
+    // 内容变化后重新测量高度，保证下次折叠动画起始高度准确
     await dynamicRef.value?.resize()
 }
 
@@ -190,6 +211,12 @@ useShareButton()
     &--lg {
         min-height: 320rpx;
     }
+}
+
+// 嵌套面板容器：与外层内容留出间距
+.nested-wrap {
+    padding: 20rpx;
+    background-color: $hy-background--container;
 }
 
 .content-text {

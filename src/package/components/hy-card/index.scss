@@ -15,7 +15,8 @@
 
   @include m(border) {
     @include pseudo(after) {
-      border-radius: 16rpx;
+      /* 跟随 borderRadius 属性，与根元素圆角保持一致 */
+      border-radius: inherit;
     }
   }
 

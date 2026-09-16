@@ -18,7 +18,7 @@
                 :paddingFoot="padding"
             >
                 <template #body>
-                    <view class="" slot="body">
+                    <view class="body">
                         <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
                             <view class="u-body-item-title u-line-2">{{ t('bodyText') }}</view>
                             <hy-image :src="config.swiper1" width="100%" :radius="10"></hy-image>

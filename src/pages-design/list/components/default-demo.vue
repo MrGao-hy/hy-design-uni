@@ -41,7 +41,7 @@
                         <text class="list-item__price">
                             <text class="list-item__symbol">¥</text>{{ item.price }}
                         </text>
-                        <text class="list-item__sold">{{ item.sold }}人付款</text>
+                        <text class="list-item__sold">{{ item.sold }}{{ t('soldText') }}</text>
                     </view>
                 </view>
             </view>
@@ -50,8 +50,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { config } from '@/config/config.ts'
+import { useTranslate } from '@/composables'
+
+const { t } = useTranslate('list')
 
 // ====== 列表数据 ======
 const list = ref<AnyObject[]>([])
@@ -70,20 +73,20 @@ const isLoading = ref(false)
 const loadStatus = ref<'loadMore' | 'loading' | 'noMore'>('loadMore')
 
 // ====== 模拟数据 ======
-const categories = [
-    '阿莫西林胶囊',
-    '布洛芬缓释片',
-    '维生素C泡腾片',
-    '复方氨酚烷胺',
-    '板蓝根颗粒',
-    '藿香正气水',
-    '连花清瘟胶囊',
-    '六味地黄丸',
-    '健胃消食片',
-    '云南白药气雾剂',
-    '风油精',
-    '创可贴'
-]
+const categories = computed(() => [
+    t('med1'),
+    t('med2'),
+    t('med3'),
+    t('med4'),
+    t('med5'),
+    t('med6'),
+    t('med7'),
+    t('med8'),
+    t('med9'),
+    t('med10'),
+    t('med11'),
+    t('med12')
+])
 
 const fakeRequest = <T = any,>(data: T, delay?: number): Promise<T> => {
     const ms = delay || 800 + Math.random() * 400
@@ -93,7 +96,7 @@ const fakeRequest = <T = any,>(data: T, delay?: number): Promise<T> => {
 }
 
 const generateItem = (index: number): AnyObject => {
-    const category = categories[index % categories.length]
+    const category = categories.value[index % categories.value.length]
     const price = (Math.random() * 200 + 5).toFixed(2)
     const sold = Math.floor(Math.random() * 10000)
     const img = Math.floor(Math.random() * 11) + 1
@@ -102,7 +105,7 @@ const generateItem = (index: number): AnyObject => {
         id: index,
         name: category,
         price,
-        sold: sold > 9999 ? `${(sold / 10000).toFixed(1)}万` : String(sold),
+        sold: sold > 9999 ? `${(sold / 10000).toFixed(1)}${t('wan')}` : String(sold),
         image: config.good(imgName)
     }
 }
