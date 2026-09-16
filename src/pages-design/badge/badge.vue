@@ -41,7 +41,7 @@
         <view class="hy-title">{{ t('absoluteSection') }}</view>
         <view class="hy-flex hy-container">
             <view class="relative">
-                <hy-badge :value="12" absolute :offset="[-8, 50]"></hy-badge>
+                <hy-badge :value="12" absolute :offset="[-8, 50]" border></hy-badge>
                 <hy-avatar size="large" shape="square" :src="config.avatar"></hy-avatar>
             </view>
         </view>

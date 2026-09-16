@@ -82,31 +82,12 @@ export default {
 import { ref, watch, onMounted, getCurrentInstance, type CSSProperties } from 'vue'
 import dayjs from 'dayjs'
 import { addUnit, colorGradient, getRect, sleep, formatTime, useTranslate } from '../../libs'
-import type { DateItem, IMonthProps, IMonthExpose } from './typing'
+import type { DateItem, IMonthExpose } from './typing'
+import monthProps from './monthProps'
 
 const { t } = useTranslate('calendar')
 
-const props = withDefaults(defineProps<IMonthProps>(), {
-    showMark: true,
-    color: '#3c9cff',
-    months: () => [],
-    mode: 'single',
-    rowHeight: 58,
-    maxCount: Infinity,
-    startText: () => t('startTime'),
-    endText: () => t('endTime'),
-    defaultDate: null,
-    minDate: 0,
-    maxDate: 0,
-    maxMonth: 2,
-    readonly: false,
-    maxRange: Infinity,
-    rangePrompt: '',
-    showRangePrompt: true,
-    allowSameDay: false,
-    forbidDays: () => [],
-    forbidDaysToast: ''
-})
+const props = defineProps(monthProps)
 const emit = defineEmits(['monthSelected', 'updateMonthTop'])
 
 // --- 响应式变量 ---

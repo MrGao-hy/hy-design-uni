@@ -52,6 +52,11 @@ const badgeProps = {
         type: String as PropType<BadgeShapeType>,
         default: 'circle'
     },
+    /** 是否显示白边 */
+    border: {
+        type: Boolean,
+        default: false
+    },
     /**
      * 设置数字的显示方式
      * @values overflow,ellipsis,limit

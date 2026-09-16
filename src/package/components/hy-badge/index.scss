@@ -30,6 +30,11 @@ $hy-badge-text-font-size: 11px !default;
     border-bottom-left-radius: 0;
   }
 
+  /* 白边，使用box-shadow实现，不影响布局尺寸 */
+  @include m(border) {
+    box-shadow: 0 0 0 2px $hy-background--2;
+  }
+
   /* 主题色 */
   @include themeColor(primary, $hy-primary);
   @include themeColor(primary--inverted, "", transparent, $hy-primary);

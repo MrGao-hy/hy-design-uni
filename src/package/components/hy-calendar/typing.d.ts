@@ -27,28 +27,6 @@ export interface MonthData {
  */
 export type MonthModeType = 'single' | 'multiple' | 'range'
 
-export interface IMonthProps {
-    showMark?: boolean
-    color?: string
-    months?: MonthData[]
-    mode?: MonthMode
-    rowHeight?: string | number
-    maxCount?: number
-    startText?: string
-    endText?: string
-    defaultDate?: string | string[] | Date | null
-    minDate?: string | number
-    maxDate?: string | number
-    maxMonth?: number
-    readonly?: boolean
-    maxRange?: number
-    rangePrompt?: string
-    showRangePrompt?: boolean
-    allowSameDay?: boolean
-    forbidDays?: string[]
-    forbidDaysToast?: string
-}
-
 export interface ICalendarEmits {
     /** 日期选择完成后触发，则点击确认按钮后触发 */
     confirm: [selected: string[]]

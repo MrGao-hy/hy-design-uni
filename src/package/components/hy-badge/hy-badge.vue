@@ -6,6 +6,7 @@
             isDot ? 'hy-badge--dot' : 'hy-badge--not-dot',
             inverted && 'hy-badge--inverted',
             shape === 'horn' && 'hy-badge--horn',
+            border && 'hy-badge--border',
             `hy-badge--${type}${inverted ? '--inverted' : ''}`,
             customClass
         ]"
