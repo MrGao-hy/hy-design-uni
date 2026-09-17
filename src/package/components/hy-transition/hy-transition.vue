@@ -1,14 +1,32 @@
 <template>
+    <!-- #ifndef APP-NVUE -->
     <view
         v-if="hasInit"
         class="hy-transition"
         ref="hy-transition"
         :class="[classes, customClass]"
         :style="[mergeStyle]"
-        @tap.stop="clickHandler"
+        @tap="clickHandler"
+        @transitionend="onTransitionEnd"
+        @touchmove.stop.prevent="noop"
     >
         <slot />
     </view>
+    <!-- #endif -->
+
+    <!-- #ifdef APP-NVUE -->
+    <view
+        v-if="hasInit"
+        class="hy-transition"
+        ref="hy-transition"
+        :class="[classes, customClass]"
+        :style="[mergeStyle]"
+        @tap="clickHandler"
+        @touchmove.stop.prevent="noop"
+    >
+        <slot />
+    </view>
+    <!-- #endif -->
 </template>
 
 <script lang="ts">
@@ -23,7 +41,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, watch, nextTick } from 'vue'
+import { computed, ref, watch, nextTick, onBeforeUnmount } from 'vue'
 import type { CSSProperties } from 'vue'
 import { sleep } from '../../libs'
 import type { ITransitionEmits } from './typing'
@@ -38,74 +56,123 @@ defineOptions({})
 const props = defineProps(transitionProps)
 const emit = defineEmits<ITransitionEmits>()
 
-const hasInit = ref<boolean>(false) // 是否显示/隐藏组件
+const hasInit = ref<boolean>(false) // 是否渲染组件
 const viewStyle = ref<CSSProperties>({}) // 组件内部的样式
 const status = ref<string>('') // 记录组件动画的状态
 const transitionEnded = ref<boolean>(false) // 组件是否结束的标记
-const display = ref<boolean>(false) // 组件是否展示
 const classes = ref<string>('') // 应用的类名
+
+let transitionId = 0
+let endTimer: ReturnType<typeof setTimeout> | undefined
+let isAlive = true
+
+const clearEndTimer = () => {
+    if (endTimer) {
+        clearTimeout(endTimer)
+        endTimer = undefined
+    }
+}
 
 // #ifndef APP-NVUE
 // 定义类名，通过给元素动态切换类名，赋予元素一定的css动画样式
 const getClassNames = (name: string) => ({
-    enter: `u-${name}-enter u-${name}-enter-active`,
-    'enter-to': `u-${name}-enter-to u-${name}-enter-active`,
-    leave: `u-${name}-leave u-${name}-leave-active`,
-    'leave-to': `u-${name}-leave-to u-${name}-leave-active`
+    enter: `hy-${name}-enter hy-${name}-enter-active`,
+    'enter-to': `hy-${name}-enter-to hy-${name}-enter-active`,
+    leave: `hy-${name}-leave hy-${name}-leave-active`,
+    'leave-to': `hy-${name}-leave-to hy-${name}-leave-active`
 })
-// #endif
 
-// #ifndef APP-NVUE
+const finishTransition = (id: number) => {
+    if (!isAlive || id !== transitionId || transitionEnded.value) return
+
+    transitionEnded.value = true
+    clearEndTimer()
+
+    if (status.value === 'leave') {
+        emit('afterLeave')
+    } else if (status.value === 'enter') {
+        emit('afterEnter')
+    }
+
+    if (!props.show && hasInit.value) {
+        hasInit.value = false
+    }
+}
+
+const scheduleTransitionEnd = (id: number) => {
+    clearEndTimer()
+    // transitionend 在部分场景不会触发，定时器作为兜底。
+    endTimer = setTimeout(() => {
+        endTimer = undefined
+        finishTransition(id)
+    }, props.duration + 20)
+}
+
+type TransitionEndEvent = {
+    target?: unknown
+    currentTarget?: unknown
+}
+
+const onTransitionEnd = (event?: TransitionEndEvent) => {
+    // transitionend 会冒泡，只处理当前节点上的过渡结束事件。
+    if (event?.target && event?.currentTarget && event.target !== event.currentTarget) {
+        return
+    }
+    finishTransition(transitionId)
+}
+
 // vue版本的组件进场处理
 const vueEnter = async () => {
-    // 动画进入时的类名
+    const id = ++transitionId
+    clearEndTimer()
+
     const classNames = getClassNames(props.mode)
-    // 定义状态和发出动画进入前事件
     status.value = 'enter'
     emit('beforeEnter')
     hasInit.value = true
-    display.value = true
     classes.value = classNames.enter
+
     await nextTick()
-    {
-        // https://github.com/umicro/uView2.0/issues/545
-        await sleep(20)
-        // 标识动画尚未结束
-        emit('enter')
-        transitionEnded.value = false
-        // 组件动画进入后触发的事件
-        emit('afterEnter')
-        // 赋予组件enter-to类名
-        classes.value = classNames['enter-to']
-    }
+    if (!isAlive || id !== transitionId) return
+
+    // 等待一帧，确保初始状态类名已经生效。
+    await sleep(20)
+    if (!isAlive || id !== transitionId) return
+
+    emit('enter')
+    transitionEnded.value = false
+    classes.value = classNames['enter-to']
+    scheduleTransitionEnd(id)
 }
+
 // 动画离场处理
 const vueLeave = async () => {
-    // 如果不是展示状态，无需执行逻辑
-    if (!display.value) return
+    if (!hasInit.value) return
+
+    const id = ++transitionId
+    clearEndTimer()
+
     const classNames = getClassNames(props.mode)
-    // 标记离开状态和发出事件
     status.value = 'leave'
     emit('beforeLeave')
-    // 获得类名
     classes.value = classNames.leave
 
     await nextTick()
-    {
-        // 动画正在离场的状态
-        transitionEnded.value = false
-        emit('leave')
-        // 组件执行动画，到了执行的执行时间后，执行一些额外处理
-        setTimeout(() => onTransitionEnd(), props.duration)
-        classes.value = classNames['leave-to']
-    }
+    if (!isAlive || id !== transitionId) return
+
+    await sleep(20)
+    if (!isAlive || id !== transitionId) return
+
+    transitionEnded.value = false
+    emit('leave')
+    classes.value = classNames['leave-to']
+    scheduleTransitionEnd(id)
 }
 // #endif
 
 watch(
     () => props.show,
     (newVal) => {
-        // vue和nvue分别执行不同的方法
         // #ifdef APP-NVUE
         // newVal ? nvueEnter() : nvueLeave()
         // #endif
@@ -117,41 +184,42 @@ watch(
 )
 
 const mergeStyle = computed(() => {
-    return {
-        // #ifndef APP-NVUE
-        transitionDuration: `${props.duration}ms`,
-        // display: `${this.display ? '' : 'none'}`,
-        transitionTimingFunction: props.timingFunction,
-        // #endif
-        // 避免自定义样式影响到动画属性，所以写在viewStyle前面
+    const baseStyle = {
         ...props.customStyle,
-        ...viewStyle
+        ...viewStyle.value
     }
+
+    // #ifndef APP-NVUE
+    return {
+        ...baseStyle,
+        // 动画属性放在后面，避免自定义样式覆盖动画时长和缓动函数。
+        transitionDuration: `${props.duration}ms`,
+        transitionTimingFunction: props.timingFunction
+    }
+    // #endif
+
+    // #ifdef APP-NVUE
+    return baseStyle
+    // #endif
 })
 
 /**
- * @description 组件被点击发出事件
+ * 组件被点击发出事件
  * */
-const clickHandler = () => {
+const clickHandler = (e: Event) => {
+    if (props.stop) e.stopPropagation()
     emit('click')
 }
 
-const onTransitionEnd = () => {
-    // 如果已经是结束的状态，无需再处理
-    if (transitionEnded.value) return
-    transitionEnded.value = true
-    // 发出组件动画执行后的事件
-    status.value === 'leave' ? emit('afterLeave') : emit('afterEnter')
-    if (!props.show && display.value) {
-        display.value = false
-        hasInit.value = false
-    }
-}
+function noop() {}
+
+onBeforeUnmount(() => {
+    isAlive = false
+    transitionId++
+    clearEndTimer()
+})
 </script>
 
 <style lang="scss">
-/* #ifndef APP-NVUE */
-// vue版本动画相关的样式抽离在外部文件
 @use './index.scss';
-/* #endif */
 </style>

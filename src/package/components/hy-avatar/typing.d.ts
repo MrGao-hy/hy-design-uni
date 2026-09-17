@@ -5,7 +5,7 @@ export interface IAvatarClickConfig {
     url?: string
 }
 
-export interface IAvatarEmit {
+export interface IAvatarEmits {
     /** 点击头像触发 */
     click: [config: IAvatarClickConfig, e: Event]
 }

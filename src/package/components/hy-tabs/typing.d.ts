@@ -26,7 +26,7 @@ export interface ITabsExpose {
     resize: () => void
 }
 
-export interface TabsParamsVo extends TabsParamsVo {
+export interface TabsParamsVo extends TabsItemVo {
     index: number
 }
 export interface ITabsEmits {

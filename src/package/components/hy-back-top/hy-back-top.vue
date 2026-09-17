@@ -39,7 +39,7 @@ export default {
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
 import { IconConfig, addUnit, getPx } from '../../libs'
-import type { IBackTopEmit } from './typing'
+import type { IBackTopEmits } from './typing'
 import backTopProps from './props'
 // 组件
 import HyTransition from '../hy-transition/hy-transition.vue'
@@ -52,7 +52,7 @@ import HyIcon from '../hy-icon/hy-icon.vue'
 defineOptions({})
 
 const props = defineProps(backTopProps)
-const emit = defineEmits<IBackTopEmit>()
+const emit = defineEmits<IBackTopEmits>()
 
 const backTopStyle = computed<CSSProperties>(() => {
     return {

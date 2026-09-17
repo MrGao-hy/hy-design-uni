@@ -2,6 +2,8 @@
  * vue版本动画内置的动画模式有如下：
  * fade：淡入
  * zoom：缩放
+ * zoom-in：放大进入
+ * zoom-out：缩小进入
  * fade-zoom：缩放淡入
  * fade-up：上滑淡入
  * fade-down：下滑淡入
@@ -11,103 +13,204 @@
  * slide-down：下滑进入
  * slide-left：左滑进入
  * slide-right：右滑进入
+ * rotate：旋转进入
+ * flip-x：X轴3D翻转进入
+ * flip-y：Y轴3D翻转进入
+ * bounce：弹跳进入
  */
 
-$u-zoom-scale: scale(0.95);
+$hy-zoom-scale: scale(0.95);
 
-.u-fade-enter-active,
-.u-fade-leave-active {
+.hy-fade-enter-active,
+.hy-fade-leave-active {
   transition-property: opacity;
 }
 
-.u-fade-enter,
-.u-fade-leave-to {
+.hy-fade-enter,
+.hy-fade-leave-to {
   opacity: 0
 }
 
-.u-fade-zoom-enter,
-.u-fade-zoom-leave-to {
-  transform: $u-zoom-scale;
+.hy-fade-zoom-enter,
+.hy-fade-zoom-leave-to {
+  transform: $hy-zoom-scale;
   opacity: 0;
 }
 
-.u-fade-zoom-enter-active,
-.u-fade-zoom-leave-active {
+.hy-fade-zoom-enter-active,
+.hy-fade-zoom-leave-active {
   transition-property: transform, opacity;
 }
 
-.u-fade-down-enter-active,
-.u-fade-down-leave-active,
-.u-fade-left-enter-active,
-.u-fade-left-leave-active,
-.u-fade-right-enter-active,
-.u-fade-right-leave-active,
-.u-fade-up-enter-active,
-.u-fade-up-leave-active {
+.hy-fade-down-enter-active,
+.hy-fade-down-leave-active,
+.hy-fade-left-enter-active,
+.hy-fade-left-leave-active,
+.hy-fade-right-enter-active,
+.hy-fade-right-leave-active,
+.hy-fade-up-enter-active,
+.hy-fade-up-leave-active {
   transition-property: opacity, transform;
 }
 
-.u-fade-up-enter,
-.u-fade-up-leave-to {
+.hy-fade-up-enter,
+.hy-fade-up-leave-to {
   transform: translate3d(0, 100%, 0);
   opacity: 0
 }
 
-.u-fade-down-enter,
-.u-fade-down-leave-to {
+.hy-fade-down-enter,
+.hy-fade-down-leave-to {
   transform: translate3d(0, -100%, 0);
   opacity: 0
 }
 
-.u-fade-left-enter,
-.u-fade-left-leave-to {
+.hy-fade-left-enter,
+.hy-fade-left-leave-to {
   transform: translate3d(-100%, 0, 0);
   opacity: 0
 }
 
-.u-fade-right-enter,
-.u-fade-right-leave-to {
+.hy-fade-right-enter,
+.hy-fade-right-leave-to {
   transform: translate3d(100%, 0, 0);
   opacity: 0
 }
 
-.u-slide-down-enter-active,
-.u-slide-down-leave-active,
-.u-slide-left-enter-active,
-.u-slide-left-leave-active,
-.u-slide-right-enter-active,
-.u-slide-right-leave-active,
-.u-slide-up-enter-active,
-.u-slide-up-leave-active {
+.hy-slide-down-enter-active,
+.hy-slide-down-leave-active,
+.hy-slide-left-enter-active,
+.hy-slide-left-leave-active,
+.hy-slide-right-enter-active,
+.hy-slide-right-leave-active,
+.hy-slide-up-enter-active,
+.hy-slide-up-leave-active {
   transition-property: transform;
 }
 
-.u-slide-up-enter,
-.u-slide-up-leave-to {
+.hy-slide-up-enter,
+.hy-slide-up-leave-to {
   transform: translate3d(0, 100%, 0)
 }
 
-.u-slide-down-enter,
-.u-slide-down-leave-to {
+.hy-slide-down-enter,
+.hy-slide-down-leave-to {
   transform: translate3d(0, -100%, 0)
 }
 
-.u-slide-left-enter,
-.u-slide-left-leave-to {
+.hy-slide-left-enter,
+.hy-slide-left-leave-to {
   transform: translate3d(-100%, 0, 0)
 }
 
-.u-slide-right-enter,
-.u-slide-right-leave-to {
+.hy-slide-right-enter,
+.hy-slide-right-leave-to {
   transform: translate3d(100%, 0, 0)
 }
 
-.u-zoom-enter-active,
-.u-zoom-leave-active {
+.hy-zoom-enter-active,
+.hy-zoom-leave-active {
   transition-property: transform
 }
 
-.u-zoom-enter,
-.u-zoom-leave-to {
-  transform: $u-zoom-scale
+.hy-zoom-enter,
+.hy-zoom-leave-to {
+  transform: $hy-zoom-scale
+}
+
+.hy-zoom-in-enter-active,
+.hy-zoom-in-leave-active,
+.hy-zoom-out-enter-active,
+.hy-zoom-out-leave-active {
+  transition-property: transform
+}
+
+.hy-zoom-in-enter,
+.hy-zoom-in-leave-to {
+  transform: scale(0.8)
+}
+
+.hy-zoom-out-enter,
+.hy-zoom-out-leave-to {
+  transform: scale(1.2)
+}
+
+/* 旋转进入 */
+.hy-rotate-enter-active,
+.hy-rotate-leave-active {
+  transition-property: transform, opacity;
+}
+
+.hy-rotate-enter,
+.hy-rotate-leave-to {
+  transform: perspective(1000px) rotate(-180deg) scale(0.6);
+  opacity: 0;
+}
+
+/* X轴3D翻转进入 */
+.hy-flip-x-enter-active,
+.hy-flip-x-leave-active {
+  transition-property: transform, opacity;
+}
+
+.hy-flip-x-enter,
+.hy-flip-x-leave-to {
+  transform: perspective(1000px) rotateX(-90deg);
+  opacity: 0;
+}
+
+/* Y轴3D翻转进入 */
+.hy-flip-y-enter-active,
+.hy-flip-y-leave-active {
+  transition-property: transform, opacity;
+}
+
+.hy-flip-y-enter,
+.hy-flip-y-leave-to {
+  transform: perspective(1000px) rotateY(-90deg);
+  opacity: 0;
+}
+
+/* 弹跳进入，使用keyframes实现回弹效果，不受内联transition-timing-function影响 */
+.hy-bounce-enter-active {
+  animation: hy-bounce-in 0.4s;
+}
+
+.hy-bounce-leave-active {
+  animation: hy-bounce-out 0.3s;
+}
+
+@keyframes hy-bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  70% {
+    transform: scale(0.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes hy-bounce-out {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
 }

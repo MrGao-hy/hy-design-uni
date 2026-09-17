@@ -90,7 +90,7 @@
             </hy-folding-panel-item>
 
             <!-- 嵌套折叠面板：面板内容里再嵌套一组可独立展开/收起的折叠面板 -->
-            <hy-folding-panel-item :title="t('nestedTitle')" index="nested">
+            <hy-folding-panel-item :title="t('nestedTitle')" index="nested" default-open>
                 <view class="nested-wrap">
                     <hy-folding-panel v-model="nestedActiveIndex">
                         <hy-folding-panel-item :title="t('nestedChildA')" index="nested-child-a">

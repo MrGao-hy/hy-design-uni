@@ -1602,6 +1602,7 @@ export default {
     transition: {
         title: '动画',
         fade: '淡入',
+        fadeZoom: '缩放淡入',
         fadeUp: '上滑淡入',
         fadeDown: '下滑淡入',
         fadeLeft: '左滑淡入',
@@ -1610,8 +1611,12 @@ export default {
         slideDown: '下滑进入',
         slideLeft: '左滑进入',
         slideRight: '右滑进入',
-        zoomIn: '缩放进入',
-        zoomOut: '缩放退出'
+        zoomIn: '放大进入',
+        zoomOut: '缩小进入',
+        rotate: '旋转进入',
+        flipX: 'X轴翻转进入',
+        flipY: 'Y轴翻转进入',
+        bounce: '弹跳进入'
     },
 
     upload: {

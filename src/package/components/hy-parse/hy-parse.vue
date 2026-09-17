@@ -113,7 +113,7 @@ export default {
         useAnchor: [Boolean, Number]
     },
     // #ifdef VUE3
-    emits: ['load', 'ready', 'imgTap', 'linkTap', 'play', 'error'],
+    emits: ['load', 'ready', 'imgTap', 'linkTap', 'play', 'error', 'tap', 'click'],
     // #endif
     // #ifndef APP-PLUS-NVUE
     components: {

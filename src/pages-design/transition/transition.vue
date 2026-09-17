@@ -39,6 +39,7 @@ const style = computed((): CSSProperties => {
 // 动画模式列表（computed 包裹以响应语言切换）
 const list = computed(() => [
     { title: t('fade'), value: 'fade' },
+    { title: t('fadeZoom'), value: 'fade-zoom' },
     { title: t('fadeUp'), value: 'fade-up' },
     { title: t('fadeDown'), value: 'fade-down' },
     { title: t('fadeLeft'), value: 'fade-left' },
@@ -48,7 +49,11 @@ const list = computed(() => [
     { title: t('slideLeft'), value: 'slide-left' },
     { title: t('slideRight'), value: 'slide-right' },
     { title: t('zoomIn'), value: 'zoom-in' },
-    { title: t('zoomOut'), value: 'zoom-out' }
+    { title: t('zoomOut'), value: 'zoom-out' },
+    { title: t('rotate'), value: 'rotate' },
+    { title: t('flipX'), value: 'flip-x' },
+    { title: t('flipY'), value: 'flip-y' },
+    { title: t('bounce'), value: 'bounce' }
 ])
 
 const onClick = (temp: CommonType.CellItem) => {

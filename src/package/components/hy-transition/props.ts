@@ -9,7 +9,7 @@ const transitionProps = {
     },
     /**
      * 使用的动画模式
-     * @values fade,fade-zoom,fade-up,fade-down,fade-left,fade-right,slide-up,slide-down,slide-left,slide-right,zoom-in,zoom-out
+     * @values fade,fade-zoom,fade-up,fade-down,fade-left,fade-right,slide-up,slide-down,slide-left,slide-right,zoom-in,zoom-out,rotate,flip-x,flip-y,bounce
      * */
     mode: {
         type: String as PropType<TransitionModeType>,
@@ -19,6 +19,11 @@ const transitionProps = {
     duration: {
         type: Number,
         default: 300
+    },
+    /** 是否阻止点击事件冒泡 */
+    stop: {
+        type: Boolean,
+        default: false
     },
     /** 使用的动画过渡函数 */
     timingFunction: {

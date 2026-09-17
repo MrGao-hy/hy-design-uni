@@ -1586,6 +1586,7 @@ export default {
     transition: {
         title: 'Transition',
         fade: 'Fade',
+        fadeZoom: 'Fade Zoom',
         fadeUp: 'Fade Up',
         fadeDown: 'Fade Down',
         fadeLeft: 'Fade Left',
@@ -1595,7 +1596,11 @@ export default {
         slideLeft: 'Slide Left',
         slideRight: 'Slide Right',
         zoomIn: 'Zoom In',
-        zoomOut: 'Zoom Out'
+        zoomOut: 'Zoom Out',
+        rotate: 'Rotate',
+        flipX: 'Flip X',
+        flipY: 'Flip Y',
+        bounce: 'Bounce'
     },
 
     upload: {

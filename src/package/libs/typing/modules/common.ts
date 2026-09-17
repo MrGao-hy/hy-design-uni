@@ -289,6 +289,10 @@ export type LoadMoreStatus = 'loadMore' | 'loading' | 'noMore'
  * slide-right-向右滑入
  * zoom-in-放大进入
  * zoom-out-缩小进入
+ * rotate-旋转进入
+ * flip-x-X轴3D翻转进入
+ * flip-y-Y轴3D翻转进入
+ * bounce-弹跳进入
  */
 export type TransitionModeType =
     | 'fade'
@@ -303,3 +307,7 @@ export type TransitionModeType =
     | 'slide-right'
     | 'zoom-in'
     | 'zoom-out'
+    | 'rotate'
+    | 'flip-x'
+    | 'flip-y'
+    | 'bounce'

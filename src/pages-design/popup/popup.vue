@@ -4,7 +4,15 @@
             <the-cell :list="list" @click="onClick"></the-cell>
         </view>
 
-        <hy-popup :show="show" :mode="mode" closeable closeOnClickOverlay @close="show = false" round="10">
+        <hy-popup
+            safeAreaInsetTop
+            :show="show"
+            :mode="mode"
+            closeable
+            closeOnClickOverlay
+            @close="show = false"
+            round="10"
+        >
             <view style="padding: 20px">我是弹窗</view>
         </hy-popup>
     </the-root-page>

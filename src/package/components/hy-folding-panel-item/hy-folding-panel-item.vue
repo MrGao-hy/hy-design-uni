@@ -107,7 +107,7 @@ const contentId = guid(16)
 const wrapperId = guid(16)
 
 /** 父组件 modelValue 派生的选中态 */
-const isSelected = computed(() => groupConfig?.isExpanded(props.index) ?? false)
+const isSelected = computed(() => groupConfig?.isExpanded(props.index) || false)
 
 /** 统一读取自身与面板组的禁用状态 */
 const disabled = computed(() => props.disabled || groupConfig?.props.disabled)

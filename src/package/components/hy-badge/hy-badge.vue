@@ -31,7 +31,7 @@ export default {
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
-import type { IBadgeEmit } from './typing'
+import type { IBadgeEmits } from './typing'
 import { addUnit } from '../../libs'
 import badgeProps from './props'
 
@@ -42,7 +42,7 @@ import badgeProps from './props'
 defineOptions({})
 
 const props = defineProps(badgeProps)
-const emit = defineEmits<IBadgeEmit>()
+const emit = defineEmits<IBadgeEmits>()
 
 /**
  * @description 整个组件的样式
