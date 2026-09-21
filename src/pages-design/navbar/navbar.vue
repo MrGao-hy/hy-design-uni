@@ -1,29 +1,29 @@
 <template>
     <the-root-page>
-        <hy-navbar title="自定义导航栏" autoBack placeholder></hy-navbar>
+        <hy-navbar :title="t('navTitle')" autoBack placeholder></hy-navbar>
 
         <view class="demo-container">
             <view class="section">
-                <view class="hy-title">基础使用</view>
+                <view class="hy-title">{{ t('basicUsage') }}</view>
                 <view class="demo-card">
                     <hy-navbar
-                        title="标题"
-                        sub="副标题"
+                        :title="t('navTitleLabel')"
+                        :sub="t('navSub')"
                         :fixed="false"
-                        left-text="返回"
+                        :left-text="t('back')"
                         autoBack
                         :safeAreaInsetTop="false"
                         :right-icon="IconConfig.DELETE"
                     ></hy-navbar>
-                    <view class="demo-desc">基础导航栏，包含标题、副标题、返回按钮和右侧图标</view>
+                    <view class="demo-desc">{{ t('basicDesc') }}</view>
                 </view>
             </view>
 
             <view class="section">
-                <view class="hy-title">自定义颜色</view>
+                <view class="hy-title">{{ t('colorSection') }}</view>
                 <view class="demo-card">
                     <hy-navbar
-                        title="深色主题"
+                        :title="t('darkTheme')"
                         :fixed="false"
                         :safeAreaInsetTop="false"
                         bg-color="#2979ff"
@@ -33,11 +33,11 @@
                         placeholder
                         autoBack
                     ></hy-navbar>
-                    <view class="demo-desc">蓝色主题，适合重要页面或品牌色展示</view>
+                    <view class="demo-desc">{{ t('blueDesc') }}</view>
                 </view>
                 <view class="demo-card">
                     <hy-navbar
-                        title="绿色主题"
+                        :title="t('greenTheme')"
                         :fixed="false"
                         :safeAreaInsetTop="false"
                         bg-color="#19be6b"
@@ -46,14 +46,19 @@
                         autoBack
                         shadow
                     ></hy-navbar>
-                    <view class="demo-desc">绿色主题 + 阴影效果，突出层次感</view>
+                    <view class="demo-desc">{{ t('greenDesc') }}</view>
                 </view>
             </view>
 
             <view class="section">
-                <view class="hy-title">多图标操作</view>
+                <view class="hy-title">{{ t('multiIconSection') }}</view>
                 <view class="demo-card">
-                    <hy-navbar title="多操作导航" :fixed="false" :safeAreaInsetTop="false" autoBack>
+                    <hy-navbar
+                        :title="t('multiNav')"
+                        :fixed="false"
+                        :safeAreaInsetTop="false"
+                        autoBack
+                    >
                         <template #right>
                             <view class="multi-icon-slot">
                                 <hy-icon :name="IconConfig.SEARCH" size="18"></hy-icon>
@@ -70,12 +75,12 @@
                             </view>
                         </template>
                     </hy-navbar>
-                    <view class="demo-desc">右侧多图标布局，支持搜索、分享、更多等操作</view>
+                    <view class="demo-desc">{{ t('multiDesc') }}</view>
                 </view>
             </view>
 
             <view class="section">
-                <view class="hy-title">自定义标题</view>
+                <view class="hy-title">{{ t('customTitleSection') }}</view>
                 <view class="demo-card">
                     <hy-navbar :fixed="false" :safeAreaInsetTop="false" autoBack>
                         <template #title>
@@ -85,35 +90,35 @@
                                     size="16"
                                     color="#2979ff"
                                 ></hy-icon>
-                                <text class="custom-title-text">购物车</text>
+                                <text class="custom-title-text">{{ t('shoppingCart') }}</text>
                                 <hy-badge :count="3" type="error" :offset="[2, -4]"></hy-badge>
                             </view>
                         </template>
                     </hy-navbar>
-                    <view class="demo-desc">图标 + 文字 + Badge 角标组合，适合购物车等场景</view>
+                    <view class="demo-desc">{{ t('cartDesc') }}</view>
                 </view>
             </view>
 
             <view class="section">
-                <view class="hy-title">搜索栏导航</view>
+                <view class="hy-title">{{ t('searchSection') }}</view>
                 <view class="demo-card">
                     <hy-navbar :fixed="false" :safeAreaInsetTop="false" autoBack>
                         <template #title>
                             <hy-search></hy-search>
                         </template>
                     </hy-navbar>
-                    <view class="demo-desc">标题区域改为搜索框，适合搜索场景</view>
+                    <view class="demo-desc">{{ t('searchDesc') }}</view>
                 </view>
             </view>
 
             <view class="section">
-                <view class="hy-title">用户信息</view>
+                <view class="hy-title">{{ t('userSection') }}</view>
                 <view class="demo-card">
                     <hy-navbar :fixed="false" :safeAreaInsetTop="false">
                         <template #left>
                             <view class="user-slot">
                                 <hy-avatar :size="28" :src="config.avatar"></hy-avatar>
-                                <text class="user-name">用户名</text>
+                                <text class="user-name">{{ t('userName') }}</text>
                                 <hy-icon
                                     :name="IconConfig.ARROW_DOUBLE_LEFT"
                                     size="12"
@@ -125,17 +130,19 @@
                             <hy-icon :name="IconConfig.ELLIPSIS" size="18"></hy-icon>
                         </template>
                     </hy-navbar>
-                    <view class="demo-desc">左侧展示用户头像和名称，适合个人中心页面</view>
+                    <view class="demo-desc">{{ t('userDesc') }}</view>
                 </view>
             </view>
 
             <view class="section">
-                <view class="hy-title">Tab 切换</view>
+                <view class="hy-title">{{ t('tabSection') }}</view>
                 <view class="demo-card">
                     <hy-navbar :fixed="false" :safeAreaInsetTop="false" autoBack>
                         <template #center>
                             <view class="tabs-slot">
-                                <text class="tab-item tab-item--active">推荐</text>
+                                <text class="tab-item tab-item--active">{{
+                                    t('tabRecommend')
+                                }}</text>
                                 <hy-line
                                     direction="column"
                                     :hairline="false"
@@ -143,7 +150,7 @@
                                     margin="0 16px"
                                     color="#e8e8e8"
                                 ></hy-line>
-                                <text class="tab-item">关注</text>
+                                <text class="tab-item">{{ t('tabFollow') }}</text>
                                 <hy-line
                                     direction="column"
                                     :hairline="false"
@@ -151,19 +158,19 @@
                                     margin="0 16px"
                                     color="#e8e8e8"
                                 ></hy-line>
-                                <text class="tab-item">热榜</text>
+                                <text class="tab-item">{{ t('tabHot') }}</text>
                             </view>
                         </template>
                     </hy-navbar>
-                    <view class="demo-desc">center 区域完全自定义，实现 Tab 切换效果</view>
+                    <view class="demo-desc">{{ t('tabDesc') }}</view>
                 </view>
             </view>
 
             <view class="section">
-                <view class="hy-title">标签按钮</view>
+                <view class="hy-title">{{ t('tagSection') }}</view>
                 <view class="demo-card">
                     <hy-navbar
-                        title="样式定制"
+                        :title="t('styleNav')"
                         :fixed="false"
                         :safeAreaInsetTop="false"
                         :left-style="{ paddingLeft: '10px' }"
@@ -177,11 +184,13 @@
                         </template>
                         <template #right>
                             <view class="styled-right">
-                                <hy-button type="primary" plain :border="false">发布</hy-button>
+                                <hy-button type="primary" plain :border="false">{{
+                                    t('publish')
+                                }}</hy-button>
                             </view>
                         </template>
                     </hy-navbar>
-                    <view class="demo-desc">右侧使用 Tag 组件，支持自定义样式</view>
+                    <view class="demo-desc">{{ t('tagDesc') }}</view>
                 </view>
             </view>
         </view>

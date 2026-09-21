@@ -1,26 +1,26 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-number-step v-model="value"></hy-number-step>
         </view>
 
-        <view class="hy-title">步长设置</view>
+        <view class="hy-title">{{ t('stepSection') }}</view>
         <view class="hy-container">
             <hy-number-step v-model="value" :step="3"></hy-number-step>
         </view>
 
-        <view class="hy-title">禁用</view>
+        <view class="hy-title">{{ t('disabled') }}</view>
         <view class="hy-container">
             <hy-number-step v-model="value" disabled></hy-number-step>
         </view>
 
-        <view class="hy-title">现在范围</view>
+        <view class="hy-title">{{ t('rangeSection') }}</view>
         <view class="hy-container">
             <hy-number-step v-model="value" :min="10" :max="20"></hy-number-step>
         </view>
 
-        <view class="hy-title">隐藏减号</view>
+        <view class="hy-title">{{ t('hideMinus') }}</view>
         <view class="hy-container hidden">
             <hy-number-step
                 v-model="value2"
@@ -32,7 +32,7 @@
             ></hy-number-step>
         </view>
 
-        <view class="hy-title">自定义样式</view>
+        <view class="hy-title">{{ t('customStyle') }}</view>
         <view class="hy-container">
             <hy-number-step v-model="value" :showMinus="!!value" :min="0">
                 <template #minus>

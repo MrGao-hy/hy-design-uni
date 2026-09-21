@@ -1,28 +1,28 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-signature @confirm="onConfirmImage"></hy-signature>
         </view>
 
-        <view class="hy-title">自定义画笔</view>
+        <view class="hy-title">{{ t('customPen') }}</view>
         <view class="hy-container">
             <hy-signature pen-color="red" :lineWidth="5" @confirm="onConfirmImage"></hy-signature>
         </view>
 
-        <view class="hy-title">历史记录操作</view>
+        <view class="hy-title">{{ t('historySection') }}</view>
         <view class="hy-container">
             <hy-signature enableHistory @confirm="onConfirmImage"></hy-signature>
         </view>
 
-        <view class="hy-title">横向签名</view>
+        <view class="hy-title">{{ t('landscapeTitle') }}</view>
         <view class="hy-container">
-            <hy-button text="点击横向签名" @click="goLandscape"></hy-button>
+            <hy-button :text="t('goLandscape')" @click="goLandscape"></hy-button>
         </view>
 
-        <view class="hy-title">弹窗签名</view>
+        <view class="hy-title">{{ t('popupSection') }}</view>
         <view class="hy-container">
-            <hy-button text="点击打开弹窗签名" @click="onOpen"></hy-button>
+            <hy-button :text="t('openPopupSign')" @click="onOpen"></hy-button>
         </view>
 
         <hy-popup :show="showImage" mode="center" closeable @close="showImage = false">

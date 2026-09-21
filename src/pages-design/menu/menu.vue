@@ -34,11 +34,11 @@
 </template>
 
 <script setup lang="ts">
-import { getCurrentInstance, nextTick, onMounted, ref } from 'vue'
+import { computed, getCurrentInstance, nextTick, onMounted, ref } from 'vue'
 import type { MenuParamsVo } from '@/package/components/hy-menu/typing'
 import { getRect, debounce, IconConfig } from '@/package'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
-import { data } from './data'
+import { getData } from './data'
 
 definePage({
     style: {
@@ -58,27 +58,30 @@ const scrollTop = ref<number>(0)
 const itemScrollTop = ref<ItemTopVo[]>([])
 const current = ref<string | number>(1)
 const execute = ref(false) // 防止点击change事件时候执行onScroll事件
-const list = [
-    { id: 1, title: '盖浇饭', value: 'buttonReverse', icon: IconConfig.PHOTO },
-    { id: 2, title: '炒菜', value: 'title', disabled: true },
-    { id: 3, title: '米粉面条', value: 'showCancelButton', badge: 6 },
-    { id: 4, title: '汉堡披萨', value: 'buttonReverse' },
-    { id: 5, title: '饮品甜品', value: 'buttonReverse' },
-    { id: 6, title: '面点粥水饺混沌', value: 'buttonReverse' },
-    { id: 7, title: '小吃麻辣烫', value: 'buttonReverse' },
-    { id: 8, title: '中餐', value: 'buttonReverse' },
-    { id: 9, title: '西餐', value: 'buttonReverse' },
-    { id: 10, title: '大餐', value: 'buttonReverse' }
-]
+// 菜单分类（computed 保证语言切换时响应）
+const list = computed<MenuParamsVo[]>(() => [
+    { id: 1, title: t('catRice'), value: 'buttonReverse', icon: IconConfig.PHOTO },
+    { id: 2, title: t('catStirFry'), value: 'title', disabled: true },
+    { id: 3, title: t('catNoodle'), value: 'showCancelButton', badge: 6 },
+    { id: 4, title: t('catBurger'), value: 'buttonReverse' },
+    { id: 5, title: t('catDrink'), value: 'buttonReverse' },
+    { id: 6, title: t('catDumpling'), value: 'buttonReverse' },
+    { id: 7, title: t('catSnack'), value: 'buttonReverse' },
+    { id: 8, title: t('catChinese'), value: 'buttonReverse' },
+    { id: 9, title: t('catWestern'), value: 'buttonReverse' },
+    { id: 10, title: t('catFeast'), value: 'buttonReverse' }
+])
+// 内容区分类+菜品数据
+const data = computed(() => getData(t))
 
 onMounted(() => {
     nextTick(() => {
-        list.forEach((item) => {
+        list.value.forEach((item) => {
             // 需要吧instance放在里面，否则会失效
             const instance = getCurrentInstance()
             getRect(`.item--${item.id}`, false, instance).then((rect) => {
                 itemScrollTop.value.push({
-                    id: item.id,
+                    id: item.id as string | number,
                     top: (rect as UniApp.NodeInfo).top || 0
                 })
             })

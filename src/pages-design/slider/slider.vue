@@ -1,32 +1,32 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <hy-slider v-model="value"></hy-slider>
 
-        <view class="hy-title">设置最大最小值</view>
+        <view class="hy-title">{{ t('minMax') }}</view>
         <hy-slider v-model="value" showValue :min="10" :max="50"></hy-slider>
 
-        <view class="hy-title">自定义颜色</view>
+        <view class="hy-title">{{ t('customColor') }}</view>
         <hy-slider v-model="value" active-color="red" block-color="red"></hy-slider>
 
-        <view class="hy-title">自定义宽度</view>
+        <view class="hy-title">{{ t('customWidth') }}</view>
         <view style="width: 500rpx">
             <hy-slider v-model="value" :blockSize="30" height="8"></hy-slider>
 
             <hy-slider isRange showValue v-model:rangeValue="value_2"></hy-slider>
         </view>
 
-        <view class="hy-title">小数点</view>
+        <view class="hy-title">{{ t('decimal') }}</view>
         <hy-slider v-model="value_3" :min="0" :max="1" :step="0.1" show-value></hy-slider>
 
-        <view class="hy-title">区间选择</view>
+        <view class="hy-title">{{ t('rangeSection') }}</view>
         <hy-slider isRange showValue v-model:rangeValue="value_2"></hy-slider>
 
-        <view class="hy-title">弹窗内使用</view>
-        <hy-button text="打开弹窗调节" type="primary" @click="showPopup = true"></hy-button>
-        <view class="popup-tip">当前值：{{ popupValue }}</view>
+        <view class="hy-title">{{ t('inPopup') }}</view>
+        <hy-button :text="t('openPopup')" type="primary" @click="showPopup = true"></hy-button>
+        <view class="popup-tip">{{ t('currentValue') }}{{ popupValue }}</view>
 
-        <view class="hy-title">自定义滑块</view>
+        <view class="hy-title">{{ t('customSlider') }}</view>
         <hy-slider v-model="value">
             <template #default>
                 <view>

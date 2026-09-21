@@ -2,37 +2,37 @@
     <the-root-page>
         <!-- 头部占位 -->
         <view class="header-banner">
-            <text class="title">首页 Banner</text>
-            <text class="subtitle">上滑查看吸顶效果</text>
+            <text class="title">{{ t('bannerTitle') }}</text>
+            <text class="subtitle">{{ t('bannerSubtitle') }}</text>
         </view>
 
         <!-- 1. 基础吸顶：比如分类 Tabs -->
         <!-- offset-top: 0 表示吸附在最顶端 -->
         <hy-sticky :offset-top="offsetTop1" :duration="200" @change="onStickyChange">
             <view class="tabs-box" :class="{ 'active-shadow': isTabFixed }">
-                <view class="tab-item active">推荐</view>
-                <view class="tab-item">热门</view>
-                <view class="tab-item">最新</view>
-                <view class="tab-item">视频</view>
+                <view class="tab-item active">{{ t('tabRecommend') }}</view>
+                <view class="tab-item">{{ t('tabHot') }}</view>
+                <view class="tab-item">{{ t('tabNew') }}</view>
+                <view class="tab-item">{{ t('tabVideo') }}</view>
             </view>
         </hy-sticky>
 
         <!-- 模拟长列表内容 -->
         <view class="content-list">
-            <view class="list-item" v-for="i in 10" :key="`a-${i}`">内容区块 A - {{ i }}</view>
+            <view class="list-item" v-for="i in 10" :key="`a-${i}`">{{ t('contentA', i) }}</view>
         </view>
 
         <!-- 2. 二级吸顶：比如筛选栏 -->
         <!--         offset-top: 44px (假设上面的 Tabs 高度是 44px) -->
         <hy-sticky :offset-top="offsetTop2">
             <view class="filter-box">
-                <text>筛选条件：全部时间</text>
+                <text>{{ t('filterCondition') }}</text>
             </view>
         </hy-sticky>
 
         <!-- 模拟更多内容 -->
         <view class="content-list">
-            <view class="list-item" v-for="i in 20" :key="`b-${i}`">内容区块 B - {{ i }}</view>
+            <view class="list-item" v-for="i in 20" :key="`b-${i}`">{{ t('contentB', i) }}</view>
         </view>
     </the-root-page>
 </template>

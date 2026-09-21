@@ -1,23 +1,23 @@
 <template>
     <the-root-page>
-        <view class="hy-title">头像骨架屏</view>
+        <view class="hy-title">{{ t('avatarSection') }}</view>
         <view class="hy-container">
             <hy-skeleton theme="avatar" animation="gradient" />
         </view>
-        <view class="hy-title">图片骨架屏</view>
+        <view class="hy-title">{{ t('imageSection') }}</view>
         <view class="hy-container">
             <hy-skeleton theme="image" :row-col="imageGroup" animation="gradient" />
         </view>
-        <view class="hy-title">文本骨架屏</view>
+        <view class="hy-title">{{ t('textSection') }}</view>
         <view class="hy-container">
             <hy-skeleton theme="text" />
         </view>
-        <view class="hy-title">段落骨架屏</view>
+        <view class="hy-title">{{ t('paragraphSection') }}</view>
         <view class="hy-container">
             <hy-skeleton theme="paragraph" />
         </view>
 
-        <view class="hy-title">单元格骨架屏</view>
+        <view class="hy-title">{{ t('cellSection') }}</view>
         <view class="hy-container">
             <view class="hy-flex" style="margin-bottom: 20px">
                 <hy-skeleton :row-col="[{ size: '48px', type: 'circle' }]" />

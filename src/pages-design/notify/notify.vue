@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import HyNotify from '@/package/components/hy-notify/hy-notify.vue'
-import { reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import type { INotifyExpose } from '@/package/components/hy-notify/typing'
 
@@ -21,21 +21,21 @@ const { t } = useTranslate('notify')
 usePageTitle('notify')
 
 const hyNotifyRef = ref<InstanceType<typeof HyNotify> | INotifyExpose>()
-const list = reactive([
+const list = computed(() => [
     {
-        title: '默认',
+        title: t('typeDefault'),
         value: 'info'
     },
-    { title: '信息', value: 'primary' },
-    { title: '成功', value: 'success' },
-    { title: '错误', value: 'error' },
-    { title: '警告', value: 'warning' }
+    { title: t('typePrimary'), value: 'primary' },
+    { title: t('typeSuccess'), value: 'success' },
+    { title: t('typeError'), value: 'error' },
+    { title: t('typeWarning'), value: 'warning' }
 ])
 
 const showToast = (params: { title: string; value: string }) => {
     hyNotifyRef.value &&
         hyNotifyRef.value.show({
-            message: `${params.title}提示信息`,
+            message: `${params.title}${t('tipMessage')}`,
             type: params.value
         })
 }

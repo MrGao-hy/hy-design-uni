@@ -13,14 +13,14 @@
             @close="show = false"
             round="10"
         >
-            <view style="padding: 20px">我是弹窗</view>
+            <view style="padding: 20px">{{ t('popupContent') }}</view>
         </hy-popup>
     </the-root-page>
 </template>
 
 <script setup lang="ts">
 import type { LayoutType } from '@/package/libs/typing'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
@@ -34,13 +34,13 @@ usePageTitle('popup')
 
 const show = ref(false)
 const mode = ref<LayoutType>('center')
-const list = [
-    { title: '底部弹出', value: 'bottom' },
-    { title: '顶部弹出', value: 'top' },
-    { title: '中间弹出', value: 'center' },
-    { title: '右侧弹出', value: 'right' },
-    { title: '左侧弹出', value: 'left' }
-]
+const list = computed(() => [
+    { title: t('posBottom'), value: 'bottom' },
+    { title: t('posTop'), value: 'top' },
+    { title: t('posCenter'), value: 'center' },
+    { title: t('posRight'), value: 'right' },
+    { title: t('posLeft'), value: 'left' }
+])
 
 const onClick = (temp: AnyObject) => {
     mode.value = temp.value as LayoutType

@@ -1,16 +1,16 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础示例</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-pagination v-model="current" :total="999"></hy-pagination>
         </view>
 
-        <view class="hy-title">icon</view>
+        <view class="hy-title">{{ t('iconSection') }}</view>
         <view class="hy-container">
             <hy-pagination v-model="current" showIcon :total="12"></hy-pagination>
         </view>
 
-        <view class="hy-title">文字提示</view>
+        <view class="hy-title">{{ t('textTip') }}</view>
         <view class="hy-container">
             <hy-pagination v-model="current" showMessage :total="999"></hy-pagination>
         </view>

@@ -1,25 +1,25 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用（单列模式）</view>
+        <view class="hy-title">{{ t('basicSingleSection') }}</view>
         <view class="hy-container">
             <hy-picker v-model:show="show1" :columns="columns1" @confirm="onConfirm1"></hy-picker>
             <hy-cell clickable @click="onCellClick">
-                <hy-cell-item title="打开选择器" name="show1" :value="value1"></hy-cell-item>
+                <hy-cell-item :title="t('openPicker')" name="show1" :value="value1"></hy-cell-item>
             </hy-cell>
         </view>
 
-        <view class="hy-title">通过输入框打开</view>
+        <view class="hy-title">{{ t('inputSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 v-model="value2"
                 has-input
                 :columns="columns2"
-                :input="{ placeholder: '请选择国家' }"
+                :input="{ placeholder: t('selectCountry') }"
                 @confirm="onConfirm2"
             ></hy-picker>
         </view>
 
-        <view class="hy-title">多列模式（自定义分隔符）</view>
+        <view class="hy-title">{{ t('multiSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 v-model="value3"
@@ -30,7 +30,7 @@
             ></hy-picker>
         </view>
 
-        <view class="hy-title">多列联动</view>
+        <view class="hy-title">{{ t('linkageSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 ref="pickerRef"
@@ -42,7 +42,7 @@
             ></hy-picker>
         </view>
 
-        <view class="hy-title">对象数据格式</view>
+        <view class="hy-title">{{ t('objectSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 v-model="value5"
@@ -54,7 +54,7 @@
             ></hy-picker>
         </view>
 
-        <view class="hy-title">自定义弹窗位置（顶部）</view>
+        <view class="hy-title">{{ t('positionSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 :show="show6"
@@ -63,42 +63,42 @@
                 @confirm="onConfirm6"
             ></hy-picker>
             <hy-cell clickable @click="onCellClick">
-                <hy-cell-item title="顶部弹窗" name="show6" :value="value6"></hy-cell-item>
+                <hy-cell-item :title="t('topPopup')" name="show6" :value="value6"></hy-cell-item>
             </hy-cell>
         </view>
 
-        <view class="hy-title">自定义工具栏按钮</view>
+        <view class="hy-title">{{ t('toolbarSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 :show="show7"
                 :columns="columns7"
-                cancel-text="取消选择"
-                confirm-text="确认选择"
+                :cancel-text="t('cancelSelect')"
+                :confirm-text="t('confirmSelect')"
                 cancel-color="#999999"
                 confirm-color="#4F8EF7"
-                title="自定义标题"
+                :title="t('customTitle')"
                 @confirm="onConfirm7"
                 @cancel="onCancel7"
             ></hy-picker>
             <hy-cell clickable @click="onCellClick">
-                <hy-cell-item title="自定义按钮" name="show7" :value="value7"></hy-cell-item>
+                <hy-cell-item :title="t('customBtn')" name="show7" :value="value7"></hy-cell-item>
             </hy-cell>
         </view>
 
-        <view class="hy-title">自定义输入框样式</view>
+        <view class="hy-title">{{ t('inputStyleSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 v-model="value8"
                 has-input
                 :columns="columns8"
                 :input="{
-                    placeholder: '请选择选项',
+                    placeholder: t('selectOption'),
                     fontSize: 16
                 }"
             ></hy-picker>
         </view>
 
-        <view class="hy-title">设置默认选中项</view>
+        <view class="hy-title">{{ t('defaultSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 v-model="value9"
@@ -109,35 +109,39 @@
             ></hy-picker>
         </view>
 
-        <view class="hy-title">禁用点击遮罩关闭</view>
+        <view class="hy-title">{{ t('maskSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 v-model:show="show10"
                 :columns="columns10"
                 :closeOnClickOverlay="false"
-                title="必须点击按钮关闭"
+                :title="t('mustClickClose')"
                 @confirm="onConfirm10"
             ></hy-picker>
             <hy-cell clickable @click="onCellClick">
-                <hy-cell-item title="禁用遮罩关闭" name="show10" :value="value10"></hy-cell-item>
+                <hy-cell-item
+                    :title="t('maskDisabled')"
+                    name="show10"
+                    :value="value10"
+                ></hy-cell-item>
             </hy-cell>
         </view>
 
-        <view class="hy-title">自定义插槽内容</view>
+        <view class="hy-title">{{ t('slotSection') }}</view>
         <view class="hy-container">
             <hy-picker
                 ref="pickerRef11"
                 v-model="value11"
                 has-input
                 :columns="columns11"
-                title="自定义标题"
+                :title="t('customTitle')"
             >
                 <template #toolbar-right>
-                    <hy-button text="保存" size="small" @click="handleSave"></hy-button>
+                    <hy-button :text="t('save')" size="small" @click="handleSave"></hy-button>
                 </template>
                 <template #toolbar-bottom>
                     <view style="text-align: center; color: #999; padding: 10rpx">
-                        请选择您的选项
+                        {{ t('selectYourOption') }}
                     </view>
                 </template>
             </hy-picker>
@@ -146,7 +150,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { PickerColumnVo, IPickerExpose } from '@/package'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
@@ -162,17 +166,17 @@ usePageTitle('picker')
 // 1. 基础使用
 const show1 = ref(false)
 const value1 = ref('')
-const columns1 = reactive([['中国', '美国', '日本', '韩国']])
+const columns1 = computed(() => [[t('china'), t('usa'), t('japan'), t('korea')]])
 
 // 2. 输入框模式
 const value2 = ref('')
-const columns2 = reactive([['中国', '美国', '日本']])
+const columns2 = computed(() => [[t('china'), t('usa'), t('japan')]])
 
 // 3. 多列模式
 const value3 = ref([])
-const columns3 = reactive([
-    ['周一', '周二', '周三', '周四', '周五'],
-    ['上午', '下午', '晚上'],
+const columns3 = computed(() => [
+    [t('mon'), t('tue'), t('wed'), t('thu'), t('fri')],
+    [t('morning'), t('afternoon'), t('evening')],
     ['9:00', '10:00', '11:00']
 ])
 
@@ -181,45 +185,45 @@ const pickerRef = ref<IPickerExpose>()
 // 11. 自定义插槽 ref
 const pickerRef11 = ref<IPickerExpose>()
 const value4 = ref([])
-const columns4 = reactive([
-    ['中国', '美国'],
-    ['北京', '上海', '广州']
+const columns4 = computed(() => [
+    [t('china'), t('usa')],
+    [t('beijing'), t('shanghai'), t('guangzhou')]
 ])
 type CountryMap = {
     [key: string]: string[]
 }
-const cityData: CountryMap = reactive({
-    中国: ['北京', '上海', '广州', '深圳'],
-    美国: ['纽约', '洛杉矶', '芝加哥', '休斯顿']
-})
+const cityData = computed<CountryMap>(() => ({
+    [t('china')]: [t('beijing'), t('shanghai'), t('guangzhou'), t('shenzhen')],
+    [t('usa')]: [t('newYork'), t('losAngeles'), t('chicago'), t('houston')]
+}))
 
 // 5. 对象数据格式
 const value5 = ref('')
-const columns5: PickerColumnVo[][] = reactive([
+const columns5 = computed<PickerColumnVo[][]>(() => [
     [
-        { label: '雪月夜', value: 2021 },
-        { label: '冷夜雨', value: 804 },
-        { label: '清风颂', value: 305 }
+        { label: t('nameSnow'), value: 2021 },
+        { label: t('nameColdRain'), value: 804 },
+        { label: t('nameBreeze'), value: 305 }
     ]
 ])
 
 // 6. 自定义弹窗位置
 const show6 = ref(false)
 const value6 = ref('')
-const columns6 = reactive([['选项1', '选项2', '选项3']])
+const columns6 = computed(() => [[t('option1'), t('option2'), t('option3')]])
 
 // 7. 自定义工具栏按钮
 const show7 = ref(false)
 const value7 = ref('')
-const columns7 = reactive([['选项A', '选项B', '选项C']])
+const columns7 = computed(() => [[t('optionA'), t('optionB'), t('optionC')]])
 
 // 8. 自定义输入框样式
 const value8 = ref('')
-const columns8 = reactive([['选项1', '选项2', '选项3']])
+const columns8 = computed(() => [[t('option1'), t('option2'), t('option3')]])
 
 // 9. 默认选中项
 const value9 = ref(['B', '4'])
-const columns9 = reactive([
+const columns9 = computed(() => [
     ['A', 'B', 'C', 'D'],
     ['1', '2', '3', '4']
 ])
@@ -227,11 +231,11 @@ const columns9 = reactive([
 // 10. 禁用遮罩关闭
 const show10 = ref(false)
 const value10 = ref('')
-const columns10 = reactive([['选项1', '选项2', '选项3']])
+const columns10 = computed(() => [[t('option1'), t('option2'), t('option3')]])
 
 // 11. 自定义插槽
 const value11 = ref('')
-const columns11 = reactive([['选项1', '选项2', '选项3']])
+const columns11 = computed(() => [[t('option1'), t('option2'), t('option3')]])
 
 const onConfirm1 = (e: any) => {
     console.log('基础使用:', e.value)
@@ -251,7 +255,7 @@ const changeHandler = (e: any) => {
     const { columnIndex, value } = e
     if (columnIndex === 0) {
         const selectedCountry: string = value[0]
-        pickerRef.value && pickerRef.value.setColumnValues(1, cityData[selectedCountry])
+        pickerRef.value && pickerRef.value.setColumnValues(1, cityData.value[selectedCountry])
     }
 }
 

@@ -138,19 +138,19 @@ const click = () => {
     emit('click', props.index)
 }
 /**
- * @description 点击头部
+ * 点击头部
  * */
 const headClick = () => {
     emit('head-click', props.index)
 }
 /**
- * @description 点击身体
+ * 点击身体
  * */
 const bodyClick = () => {
     emit('body-click', props.index)
 }
 /**
- * @description 点击尾部
+ * 点击尾部
  * */
 const footClick = () => {
     emit('foot-click', props.index)

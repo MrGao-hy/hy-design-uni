@@ -1,6 +1,6 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-search
                 v-model="value"
@@ -16,19 +16,19 @@
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">搜索文字</view>
+            <view class="hy-title">{{ t('searchText') }}</view>
             <hy-input v-model="label"></hy-input>
 
-            <view class="hy-title">开启动画</view>
+            <view class="hy-title">{{ t('animationSection') }}</view>
             <hy-switch v-model="showClose"></hy-switch>
 
-            <view class="hy-title">禁用</view>
+            <view class="hy-title">{{ t('disabled') }}</view>
             <hy-switch v-model="disabled"></hy-switch>
 
-            <view class="hy-title">搜索框形状</view>
+            <view class="hy-title">{{ t('shapeSection') }}</view>
             <hy-subsection :list="list" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">输入框内文本位置</view>
+            <view class="hy-title">{{ t('alignSection') }}</view>
             <hy-subsection :list="list_1" v-model="inputAlign"></hy-subsection>
         </view>
     </the-root-page>
@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import type { ShapeType, LeftRightType } from '@/package/libs/typing'
-import { reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
@@ -48,21 +48,22 @@ definePage({
 const { t } = useTranslate('search')
 usePageTitle('search')
 
-const value = ref('测试')
-const label = ref('搜索')
+const value = ref(t('testValue'))
+const label = ref(t('searchLabel'))
 const disabled = ref(false)
 const shape = ref<ShapeType>('circle')
 const showClose = ref(false)
 const inputAlign = ref<LeftRightType>('left')
-const list = reactive([
-    { name: '圆形', value: 'circle' },
-    { name: '方形', value: 'square' }
+// 形状选项（computed 保证语言切换时响应）
+const list = computed(() => [
+    { name: t('shapeCircle'), value: 'circle' },
+    { name: t('shapeSquare'), value: 'square' }
 ])
 
-const list_1 = reactive([
-    { name: '左', value: 'left' },
-    { name: '中', value: 'center' },
-    { name: '右', value: 'right' }
+const list_1 = computed(() => [
+    { name: t('posLeft'), value: 'left' },
+    { name: t('posCenter'), value: 'center' },
+    { name: t('posRight'), value: 'right' }
 ])
 
 // 搜索函数

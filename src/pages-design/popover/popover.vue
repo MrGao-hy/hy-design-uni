@@ -3,8 +3,8 @@
         <hy-card>
             <template #header>
                 <view class="header">
-                    <view class="hy-title">基础使用</view>
-                    <hy-popover v-model="show" content="我是提示信息" placement="bottom-end">
+                    <view class="hy-title">{{ t('basicUsage') }}</view>
+                    <hy-popover v-model="show" :content="t('tipContent')" placement="bottom-end">
                         <hy-icon :name="IconConfig.HELP_CIRCLE"></hy-icon>
                     </hy-popover>
                 </view>
@@ -14,77 +14,77 @@
                 <view class="container">
                     <view class="top">
                         <hy-popover :content="content" placement="bottom-start">
-                            <hy-button text="左上角" :stop="false"></hy-button>
+                            <hy-button :text="t('posTopLeft')" :stop="false"></hy-button>
                         </hy-popover>
                         <hy-popover :content="content" placement="bottom">
-                            <hy-button text="中上" :stop="false"></hy-button>
+                            <hy-button :text="t('posTopCenter')" :stop="false"></hy-button>
                         </hy-popover>
                         <hy-popover :content="content" placement="bottom-end">
-                            <hy-button text="右上角" :stop="false"></hy-button>
+                            <hy-button :text="t('posTopRight')" :stop="false"></hy-button>
                         </hy-popover>
                     </view>
 
                     <view class="center">
                         <hy-popover :content="content" placement="right-start">
-                            <hy-button text="中左上" :stop="false"></hy-button>
+                            <hy-button :text="t('posLeftTop')" :stop="false"></hy-button>
                         </hy-popover>
                         <hy-popover :content="content" placement="left-start">
-                            <hy-button text="中右下" :stop="false"></hy-button>
+                            <hy-button :text="t('posRightBottom')" :stop="false"></hy-button>
                         </hy-popover>
                     </view>
                     <view class="center">
                         <hy-popover :content="content" placement="right">
-                            <hy-button text="中左" :stop="false"></hy-button>
+                            <hy-button :text="t('posLeftCenter')" :stop="false"></hy-button>
                         </hy-popover>
                         <hy-popover :content="content" placement="left">
-                            <hy-button text="中右" :stop="false"></hy-button>
+                            <hy-button :text="t('posRightCenter')" :stop="false"></hy-button>
                         </hy-popover>
                     </view>
                     <view class="center">
                         <hy-popover :content="content" placement="right-end">
-                            <hy-button text="中右上" :stop="false"></hy-button>
+                            <hy-button :text="t('posRightTop')" :stop="false"></hy-button>
                         </hy-popover>
                         <hy-popover :content="content" placement="left-end">
-                            <hy-button text="中右下" :stop="false"></hy-button>
+                            <hy-button :text="t('posRightBottom')" :stop="false"></hy-button>
                         </hy-popover>
                     </view>
 
                     <view class="bottom">
                         <hy-popover :content="content" placement="top-start">
-                            <hy-button text="左下角" :stop="false"></hy-button>
+                            <hy-button :text="t('posBottomLeft')" :stop="false"></hy-button>
                         </hy-popover>
                         <hy-popover :content="content" placement="top">
-                            <hy-button text="中下" :stop="false"></hy-button>
+                            <hy-button :text="t('posBottomCenter')" :stop="false"></hy-button>
                         </hy-popover>
                         <hy-popover :content="content" placement="top-end">
-                            <hy-button text="右下角" :stop="false"></hy-button>
+                            <hy-button :text="t('posBottomRight')" :stop="false"></hy-button>
                         </hy-popover>
                     </view>
                 </view>
             </template>
         </hy-card>
 
-        <view class="hy-title">多列联动</view>
+        <view class="hy-title">{{ t('linkageSection') }}</view>
         <view class="hy-container">
             <hy-popover mode="menu" :content="menus" placement="bottom-start" @menu-click="onMenu">
-                <hy-button text="菜单栏" :stop="false"></hy-button>
+                <hy-button :text="t('btnMenu')" :stop="false"></hy-button>
             </hy-popover>
         </view>
 
-        <view class="hy-title">自定义插槽</view>
+        <view class="hy-title">{{ t('slotSection') }}</view>
         <view class="hy-container hy-flex">
             <hy-popover placement="top-end">
                 <template #content>
-                    <view class="custom-content">这是一段自定义样式的内容。</view>
+                    <view class="custom-content">{{ t('slotContent') }}</view>
                 </template>
-                <hy-button text="自定义" :stop="false"></hy-button>
+                <hy-button :text="t('btnCustom')" :stop="false"></hy-button>
             </hy-popover>
         </view>
     </the-root-page>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, computed } from 'vue'
 import { useQueue, IconConfig, type PopoverItemParamsVo } from '@/package'
 // 组件
 import HyButton from '../../package/components/hy-button/hy-button.vue'
@@ -100,24 +100,26 @@ const { t } = useTranslate('popover')
 usePageTitle('popover')
 
 const { closeOutside } = useQueue()
-const content = ref('华玥组件库，我为自己代言，华玥组件库是一款集合了所以需求的现代化的组件库')
+// 提示内容（computed 保证语言切换时响应）
+const content = computed(() => t('introContent'))
 const count = ref(0)
-const menus = reactive([
+// 菜单项（computed 保证语言切换时响应）
+const menus = computed(() => [
     {
         icon: IconConfig.REMIND,
-        content: '全部标记已读'
+        content: t('menuMarkAll')
     },
     {
         icon: IconConfig.DELETE,
-        content: '清空最近会话'
+        content: t('menuClear')
     },
     {
         icon: IconConfig.SETTING,
-        content: '消息订阅设置'
+        content: t('menuSubscribe')
     },
     {
         icon: IconConfig.NOTICE,
-        content: '消息异常检测'
+        content: t('menuAnomaly')
     }
 ])
 const show = ref(false)

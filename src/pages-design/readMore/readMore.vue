@@ -1,6 +1,6 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-read-more>
                 <template #default>

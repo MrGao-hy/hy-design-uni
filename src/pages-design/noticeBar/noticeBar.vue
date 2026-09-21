@@ -1,6 +1,6 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container hy-gap">
             <hy-notice-bar
                 :text="text"
@@ -13,13 +13,13 @@
             ></hy-notice-bar>
 
             <hy-notice-bar
-                text="这是一个重要的通知, 你好"
+                :text="t('noticeText')"
                 mode="link"
                 url="/pages-design/icon/icon"
             ></hy-notice-bar>
 
             <hy-notice-bar
-                text="使用自定义图标"
+                :text="t('customIcon')"
                 :icon="{
                     name: IconConfig.SCAN,
                     color: 'red'
@@ -28,21 +28,19 @@
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">滚动方向</view>
+            <view class="hy-title">{{ t('directionSection') }}</view>
             <hy-subsection :list="list_1" v-model="direction"></hy-subsection>
 
-            <view class="hy-title">模式</view>
+            <view class="hy-title">{{ t('modeSection') }}</view>
             <hy-subsection :list="list_2" v-model="mode"></hy-subsection>
 
-            <view class="hy-title">文字位置</view>
+            <view class="hy-title">{{ t('justifySection') }}</view>
             <hy-subsection :list="list_3" v-model="justifyContent"></hy-subsection>
 
-            <view class="hy-title">横向轮播</view>
+            <view class="hy-title">{{ t('carouselSection') }}</view>
             <hy-switch v-model="step"></hy-switch>
 
-            <view class="hy-title"
-                >水平滚动速度(速度没有变不是失效，切换上面滚动方向在切回来就可以了)</view
-            >
+            <view class="hy-title">{{ t('speedSection') }}</view>
             <hy-slider v-model="speed" :min="50" :max="300" showValue></hy-slider>
         </view>
     </the-root-page>
@@ -50,7 +48,7 @@
 
 <script setup lang="ts">
 import type { DirectionType, JustifyContentType } from '@/package/libs/typing'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import type { NoticeBarModeType } from '@/package'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { IconConfig } from '@/package'
@@ -69,20 +67,21 @@ const mode = ref<NoticeBarModeType>('')
 const justifyContent = ref<JustifyContentType>('flex-start')
 const step = ref(false)
 const speed = ref(80)
-const list_1 = [
-    { name: '横向', value: 'row' },
-    { name: '纵向', value: 'column' }
-]
-const list_2 = [
-    { name: '无', value: '' },
-    { name: '关闭', value: 'closable' },
-    { name: '跳转', value: 'link' }
-]
-const list_3 = [
-    { name: '左', value: 'flex-start' },
-    { name: '中', value: 'center' },
-    { name: '右', value: 'flex-end' }
-]
+const list_1 = computed(() => [
+    { name: t('dirRow'), value: 'row' },
+    { name: t('dirColumn'), value: 'column' }
+])
+const list_2 = computed(() => [
+    { name: t('modeNone'), value: '' },
+    { name: t('modeClosable'), value: 'closable' },
+    { name: t('modeLink'), value: 'link' }
+])
+const list_3 = computed(() => [
+    { name: t('justifyLeft'), value: 'flex-start' },
+    { name: t('justifyCenter'), value: 'center' },
+    { name: t('justifyRight'), value: 'flex-end' }
+])
+// 木兰诗演示文本（文学作品保留中文）
 const text = reactive(['唧唧复唧唧，', '木兰当户织。', '不闻机杼声，', '唯闻女叹息。'])
 
 useShareButton()

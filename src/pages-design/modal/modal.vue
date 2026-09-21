@@ -6,8 +6,8 @@
 
         <hy-modal
             v-model="show"
-            :title="mode === 'title' ? '标题' : ''"
-            content="模态框，常用于消息提示、消息确认、在当前页面内完成特定的交互操作"
+            :title="mode === 'title' ? t('modalTitle') : ''"
+            :content="t('modalContent')"
             :showCancelButton="mode === 'showCancelButton' || mode === 'buttonReverse'"
             :buttonReverse="mode === 'buttonReverse'"
             @confirm="show = false"
@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { computed, ref } from 'vue'
 import { FormColumnsType, FormTypeEnum } from '@/package'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
@@ -54,10 +54,10 @@ const formData = ref({
     price: '',
     summary: ''
 })
-const formColumns: FormColumnsType[] = reactive([
+const formColumns = computed<FormColumnsType[]>(() => [
     {
         field: 'price',
-        label: '价格',
+        label: t('labelPrice'),
         type: FormTypeEnum.TEXT,
         rules: {
             required: true,
@@ -67,14 +67,14 @@ const formColumns: FormColumnsType[] = reactive([
     }
 ])
 
-const list = [
-    { title: '基础使用', value: '' },
-    { title: '有标题', value: 'title' },
-    { title: '带取消按钮', value: 'showCancelButton' },
-    { title: '对调按钮', value: 'buttonReverse' },
-    { title: '异步弹窗', value: 'async' },
-    { title: '调用接口', value: 'hooks' }
-]
+const list = computed(() => [
+    { title: t('basicUsage'), value: '' },
+    { title: t('withTitle'), value: 'title' },
+    { title: t('withCancel'), value: 'showCancelButton' },
+    { title: t('buttonReverse'), value: 'buttonReverse' },
+    { title: t('asyncPopup'), value: 'async' },
+    { title: t('callApi'), value: 'hooks' }
+])
 
 const onClick = (temp: AnyObject) => {
     if (temp.value === 'async') {

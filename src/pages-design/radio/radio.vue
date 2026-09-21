@@ -1,11 +1,11 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-radio :columns="columns" v-model="value" :size="size" :shape="shape"></hy-radio>
         </view>
 
-        <view class="hy-title">禁用</view>
+        <view class="hy-title">{{ t('disabled') }}</view>
         <view class="hy-container">
             <hy-radio
                 :columns="columns"
@@ -16,7 +16,7 @@
             ></hy-radio>
         </view>
 
-        <view class="hy-title">布局</view>
+        <view class="hy-title">{{ t('layout') }}</view>
         <view class="hy-container">
             <hy-radio
                 :columns="columns"
@@ -38,7 +38,7 @@
             ></hy-radio>
         </view>
 
-        <view class="hy-title">颜色配置</view>
+        <view class="hy-title">{{ t('colorSection') }}</view>
         <view class="hy-container">
             <hy-radio
                 :columns="columns"
@@ -51,10 +51,10 @@
         </view>
 
         <view class="hy-setting__box">
-            <view class="hy-title">形状</view>
+            <view class="hy-title">{{ t('shapeSection') }}</view>
             <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">大小</view>
+            <view class="hy-title">{{ t('sizeSection') }}</view>
             <hy-subsection :list="list_2" v-model="size"></hy-subsection>
         </view>
     </the-root-page>
@@ -62,7 +62,7 @@
 
 <script setup lang="ts">
 import type { SizeType, ShapeType } from '@/package/libs/typing'
-import { reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
@@ -78,20 +78,21 @@ const value = ref('')
 const size = ref<SizeType>('medium')
 const shape = ref<ShapeType>('circle')
 
-const columns = reactive([
-    { label: '老师', value: 0 },
-    { label: '护士', value: 1 },
-    { label: '空姐', value: 2 }
+// 选项数据（computed 保证语言切换时响应）
+const columns = computed(() => [
+    { label: t('jobs.teacher'), value: 0 },
+    { label: t('jobs.nurse'), value: 1 },
+    { label: t('jobs.stewardess'), value: 2 }
 ])
 
-const list_1 = reactive([
-    { name: '圆形', value: 'circle' },
-    { name: '方形', value: 'square' }
+const list_1 = computed(() => [
+    { name: t('shapeCircle'), value: 'circle' },
+    { name: t('shapeSquare'), value: 'square' }
 ])
-const list_2 = reactive([
-    { name: '小', value: 'small' },
-    { name: '中', value: 'medium' },
-    { name: '大', value: 'large' }
+const list_2 = computed(() => [
+    { name: t('sizeSmall'), value: 'small' },
+    { name: t('sizeMedium'), value: 'medium' },
+    { name: t('sizeLarge'), value: 'large' }
 ])
 
 useShareButton()

@@ -1,6 +1,6 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-scroll-list>
                 <view class="scroll-list" style="flex-direction: row">
@@ -14,7 +14,7 @@
                         <text class="scroll-list__goods-item__text">￥{{ item.price }}</text>
                     </view>
                     <view class="scroll-list__show-more" @tap="showMore">
-                        <text class="scroll-list__show-more__text">查看更多</text>
+                        <text class="scroll-list__show-more__text">{{ t('viewMore') }}</text>
                         <hy-icon name="arrow-leftward" color="#f56c6c" size="12"></hy-icon>
                     </view>
                 </view>

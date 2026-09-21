@@ -1,13 +1,13 @@
 <template>
     <the-root-page>
         <!-- 基础横向步骤条 -->
-        <view class="hy-title">基础横向步骤条</view>
+        <view class="hy-title">{{ t('basicRowSection') }}</view>
         <view class="hy-container">
             <hy-steps :list="basicList" v-model:current="currentStep" direction="row"></hy-steps>
         </view>
 
         <!-- 点状模式 -->
-        <view class="hy-title">点状模式</view>
+        <view class="hy-title">{{ t('dotSection') }}</view>
         <view class="hy-container">
             <hy-steps
                 :list="basicList"
@@ -18,7 +18,7 @@
         </view>
 
         <!-- 自定义颜色 -->
-        <view class="hy-title">自定义颜色</view>
+        <view class="hy-title">{{ t('colorSection') }}</view>
         <view class="hy-container">
             <hy-steps
                 :list="basicList"
@@ -29,7 +29,7 @@
         </view>
 
         <!-- 竖向步骤条 -->
-        <view class="hy-title">竖向步骤条</view>
+        <view class="hy-title">{{ t('verticalSection') }}</view>
         <view class="hy-container">
             <hy-steps
                 :list="verticalList"
@@ -39,13 +39,13 @@
         </view>
 
         <!-- 带错误状态 -->
-        <view class="hy-title">错误状态</view>
+        <view class="hy-title">{{ t('errorSection') }}</view>
         <view class="hy-container">
             <hy-steps :list="errorList" v-model:current="errorStep" direction="column"></hy-steps>
         </view>
 
         <!-- 自定义图标 -->
-        <view class="hy-title">自定义图标</view>
+        <view class="hy-title">{{ t('iconSection') }}</view>
         <view class="hy-container">
             <hy-steps
                 :list="basicList"
@@ -57,7 +57,7 @@
         </view>
 
         <!-- 自定义插槽 - 自定义图标 -->
-        <view class="hy-title">自定义插槽 - 图标</view>
+        <view class="hy-title">{{ t('slotIconSection') }}</view>
         <view class="hy-container">
             <hy-steps :list="basicList" v-model:current="currentStep">
                 <template #icon="{ index, error }">
@@ -71,7 +71,7 @@
         </view>
 
         <!-- 自定义插槽 - 标题和描述 -->
-        <view class="hy-title">自定义插槽 - 标题和描述</view>
+        <view class="hy-title">{{ t('slotTitleDescSection') }}</view>
         <view class="hy-container">
             <hy-steps :list="customList" v-model:current="currentStep">
                 <template #title="{ title, index }">
@@ -90,7 +90,7 @@
         </view>
 
         <!-- 自定义插槽 - 完整内容 -->
-        <view class="hy-title">自定义插槽 - 完整内容</view>
+        <view class="hy-title">{{ t('slotContentSection') }}</view>
         <view class="hy-container">
             <hy-steps :list="statusList" v-model:current="currentStep" direction="column">
                 <template #content="{ item, index }">
@@ -107,10 +107,10 @@
                             >
                                 {{
                                     index < currentStep
-                                        ? '已完成'
+                                        ? t('statusDone')
                                         : index === currentStep
-                                          ? '进行中'
-                                          : '待开始'
+                                          ? t('statusActive')
+                                          : t('statusPending')
                                 }}
                             </text>
                         </view>
@@ -126,18 +126,18 @@
         </view>
 
         <!-- 动态控制 -->
-        <view class="hy-title">动态控制步骤</view>
+        <view class="hy-title">{{ t('dynamicSection') }}</view>
         <view class="hy-container">
             <hy-steps :list="basicList" v-model:current="currentStep"></hy-steps>
             <view class="control-buttons">
                 <hy-button
-                    text="上一步"
+                    :text="t('prevStep')"
                     size="small"
                     :disabled="currentStep <= 0"
                     @click="currentStep--"
                 ></hy-button>
                 <hy-button
-                    text="下一步"
+                    :text="t('nextStep')"
                     type="primary"
                     size="small"
                     :disabled="currentStep >= basicList.length - 1"
@@ -149,7 +149,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
@@ -164,61 +164,66 @@ usePageTitle('steps')
 const currentStep = ref(1)
 const errorStep = ref(2)
 
-const basicList = ref([{ title: '注册用户' }, { title: '填写基本信息' }, { title: '登录' }])
+// 步骤数据（computed 保证语言切换时响应）
+const basicList = computed(() => [
+    { title: t('stepRegister') },
+    { title: t('stepFillInfo') },
+    { title: t('stepLogin') }
+])
 
-const verticalList = ref([
+const verticalList = computed(() => [
     {
-        title: '已下单',
-        docs: '【深证市】您的快递正在站点，快递员正在为你打包，请耐心等待发货',
+        title: t('orderPlaced'),
+        docs: t('orderPlacedDocs'),
         date: '2024-10-13'
     },
-    { title: '发货中', date: '2024-10-13' },
+    { title: t('shipping'), date: '2024-10-13' },
     {
-        title: '已发货',
-        docs: '【合肥市】温馨提醒：您的快递已处于运输配送途中，预计将在近期送达。',
+        title: t('shipped'),
+        docs: t('shippedDocs'),
         date: '2024-10-13'
     },
     {
-        title: '已签收',
+        title: t('signed'),
         date: '2024-10-14'
     }
 ])
 
-const errorList = ref([
+const errorList = computed(() => [
     {
-        title: '已下单',
-        docs: '订单已成功提交',
+        title: t('orderPlaced'),
+        docs: t('orderSubmitted'),
         date: '2024-10-13'
     },
     {
-        title: '支付完成',
-        docs: '支付金额：¥199.00',
+        title: t('paid'),
+        docs: t('paidDocs'),
         date: '2024-10-13'
     },
     {
-        title: '发货失败',
-        docs: '【重要通知】您的快递在运输过程中发生意外，包裹已受损。',
+        title: t('shipFailed'),
+        docs: t('shipFailedDocs'),
         date: '2024-10-14',
         error: true
     },
     {
-        title: '等待处理',
-        docs: '理赔专员将尽快与您联系',
+        title: t('waiting'),
+        docs: t('waitingDocs'),
         date: ''
     }
 ])
 
-const customList = ref([
-    { title: '订单提交', docs: '订单已成功提交', date: '2024-10-13 10:30' },
-    { title: '支付完成', docs: '支付金额：¥199.00', date: '2024-10-13 10:35' },
-    { title: '订单发货', docs: '快递单号：SF1234567890', date: '2024-10-13 14:00' }
+const customList = computed(() => [
+    { title: t('orderSubmitted'), docs: t('submittedDocs'), date: '2024-10-13 10:30' },
+    { title: t('paid'), docs: t('paidDocs'), date: '2024-10-13 10:35' },
+    { title: t('orderDeliver'), docs: t('trackingNo'), date: '2024-10-13 14:00' }
 ])
 
-const statusList = ref([
-    { title: '用户注册', docs: '填写手机号并验证', date: '2024-10-13 10:00' },
-    { title: '完善资料', docs: '填写姓名、头像等信息', date: '2024-10-13 10:15' },
-    { title: '邮箱验证', docs: '请查收邮件并点击验证链接', date: '2024-10-13 10:30' },
-    { title: '完成', docs: '注册成功', date: '' }
+const statusList = computed(() => [
+    { title: t('userRegister'), docs: t('registerDocs'), date: '2024-10-13 10:00' },
+    { title: t('profileFill'), docs: t('profileDocs'), date: '2024-10-13 10:15' },
+    { title: t('emailVerify'), docs: t('emailDocs'), date: '2024-10-13 10:30' },
+    { title: t('done'), docs: t('doneDocs'), date: '' }
 ])
 
 useShareButton()

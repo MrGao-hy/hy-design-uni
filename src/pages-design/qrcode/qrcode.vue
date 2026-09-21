@@ -1,16 +1,16 @@
 <template>
     <the-root-page>
-        <view class="hy-title">基础使用</view>
+        <view class="hy-title">{{ t('basicUsage') }}</view>
         <view class="hy-container">
             <hy-qrcode text="我是文本111"></hy-qrcode>
         </view>
 
-        <view class="hy-title">异步显示数据</view>
+        <view class="hy-title">{{ t('asyncSection') }}</view>
         <view class="hy-container">
             <hy-qrcode :show="showCode" cid="qrcode_2" :text="textContent"></hy-qrcode>
         </view>
 
-        <view class="hy-title">带logo</view>
+        <view class="hy-title">{{ t('logoSection') }}</view>
         <view class="hy-container">
             <hy-qrcode
                 cid="qrcode_3"
@@ -19,16 +19,16 @@
             ></hy-qrcode>
         </view>
 
-        <view class="hy-title">预览</view>
+        <view class="hy-title">{{ t('previewSection') }}</view>
         <view class="hy-container">
             <hy-qrcode cid="qrcode_4" text="https://www.hy-design-uni.top" allowPreview></hy-qrcode>
         </view>
 
-        <view class="hy-title">设置二维码颜色</view>
+        <view class="hy-title">{{ t('customColor') }}</view>
         <view class="hy-container">
             <hy-qrcode
                 cid="qrcode_5"
-                text="华玥组件库，中国13亿人都在用的组件库"
+                :text="t('promoText')"
                 background="red"
                 foreground="green"
                 pdGround="blue"

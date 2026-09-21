@@ -1,17 +1,17 @@
 <template>
     <the-root-page custom-class="rolling-num-page">
         <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">基础使用</view>
+            <view class="hy-title">{{ t('basicUsage') }}</view>
             <hy-rolling-num :value="val3" size="30px" height="70rpx" color="#FF5500" />
         </view>
 
         <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">异步触发</view>
+            <view class="hy-title">{{ t('asyncSection') }}</view>
             <hy-rolling-num :value="val6" size="60rpx" height="70rpx" color="#FF5500" />
         </view>
 
         <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">千分位</view>
+            <view class="hy-title">{{ t('thousandSection') }}</view>
             <hy-rolling-num
                 :value="val4"
                 size="60rpx"
@@ -24,7 +24,7 @@
         </view>
 
         <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">从左到右、从右到左</view>
+            <view class="hy-title">{{ t('directionSection') }}</view>
             <view class="hy-flex">
                 <hy-rolling-num
                     :value="val1"
@@ -48,7 +48,7 @@
         </view>
 
         <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">自定义样式</view>
+            <view class="hy-title">{{ t('customStyleSection') }}</view>
             <hy-rolling-num
                 :value="val5"
                 size="60rpx"
@@ -58,7 +58,7 @@
             />
         </view>
 
-        <hy-button text="随机变化数值" @click="randomize"></hy-button>
+        <hy-button :text="t('randomValue')" @click="randomize"></hy-button>
     </the-root-page>
 </template>
 

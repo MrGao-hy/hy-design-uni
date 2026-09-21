@@ -585,7 +585,8 @@ export default {
         nestedChildA: '二级面板 A',
         nestedChildAContent: '这是嵌套在外层面板内的二级折叠面板 A，内外层面板的展开状态互不影响。',
         nestedChildB: '二级面板 B（默认展开）',
-        nestedChildBContent: '二级面板 B 默认展开，内层面板同样支持手风琴、禁用等配置，与外层各自独立。'
+        nestedChildBContent:
+            '二级面板 B 默认展开，内层面板同样支持手风琴、禁用等配置，与外层各自独立。'
     },
 
     form: {
@@ -1067,37 +1068,136 @@ export default {
     },
 
     menu: {
-        title: '侧边菜单栏'
+        title: '侧边菜单栏',
+        // ===== 演示内容 =====
+        catRice: '盖浇饭',
+        catStirFry: '炒菜',
+        catNoodle: '米粉面条',
+        catBurger: '汉堡披萨',
+        catDrink: '饮品甜品',
+        catDumpling: '面点粥水饺混沌',
+        catSnack: '小吃麻辣烫',
+        catChinese: '中餐',
+        catWestern: '西餐',
+        catFeast: '大餐',
+        // 菜品
+        dishMushroom: '蘑菇青菜',
+        dishBeefMushroom: '牛肉蘑菇',
+        dishFishFlavor: '鱼香肉丝',
+        dishEggplant: '红烧茄子',
+        dishPork: '回锅肉',
+        dishPigFeet: '卤猪蹄'
     },
 
     modal: {
         title: '模态框',
         // 校验 message
-        requiredField: '没有填内容'
+        requiredField: '没有填内容',
+        // ===== 演示内容 =====
+        modalTitle: '标题',
+        modalContent: '模态框，常用于消息提示、消息确认、在当前页面内完成特定的交互操作',
+        labelPrice: '价格',
+        basicUsage: '基础使用',
+        withTitle: '有标题',
+        withCancel: '带取消按钮',
+        buttonReverse: '对调按钮',
+        asyncPopup: '异步弹窗',
+        callApi: '调用接口'
     },
 
     navbar: {
-        title: '自定义导航栏'
+        title: '自定义导航栏',
+        // ===== 演示内容 =====
+        navTitle: '自定义导航栏',
+        basicUsage: '基础使用',
+        navTitleLabel: '标题',
+        navSub: '副标题',
+        back: '返回',
+        basicDesc: '基础导航栏，包含标题、副标题、返回按钮和右侧图标',
+        colorSection: '自定义颜色',
+        darkTheme: '深色主题',
+        blueDesc: '蓝色主题，适合重要页面或品牌色展示',
+        greenTheme: '绿色主题',
+        greenDesc: '绿色主题 + 阴影效果，突出层次感',
+        multiIconSection: '多图标操作',
+        multiNav: '多操作导航',
+        multiDesc: '多个右侧图标，扩展操作入口',
+        customTitleSection: '自定义标题',
+        shoppingCart: '购物车',
+        cartDesc: '图标+文字+Badge 组合，适合电商场景',
+        searchSection: '搜索栏导航',
+        searchDesc: '标题区域改为搜索框，适合搜索场景',
+        userSection: '用户信息',
+        userName: '用户名',
+        userDesc: '左侧展示用户头像和名称，适合个人中心页面',
+        tabSection: 'Tab 切换',
+        tabRecommend: '推荐',
+        tabFollow: '关注',
+        tabHot: '热榜',
+        tabDesc: 'center 区域完全自定义，实现 Tab 切换效果',
+        tagSection: '标签按钮',
+        styleNav: '样式定制',
+        publish: '发布',
+        tagDesc: '右侧使用按钮组件，支持自定义样式'
     },
 
     noticeBar: {
-        title: '滚动通知'
+        title: '滚动通知',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        noticeText: '这是一个重要的通知, 你好',
+        customIcon: '使用自定义图标',
+        directionSection: '滚动方向',
+        modeSection: '模式',
+        justifySection: '文字位置',
+        carouselSection: '横向轮播',
+        speedSection: '水平滚动速度(速度没有变不是失效，切换上面滚动方向在切回来就可以了)',
+        dirRow: '横向',
+        dirColumn: '纵向',
+        modeNone: '无',
+        modeClosable: '关闭',
+        modeLink: '跳转',
+        justifyLeft: '左',
+        justifyCenter: '中',
+        justifyRight: '右'
     },
 
     notify: {
-        title: '消息提示'
+        title: '消息提示',
+        // ===== 演示内容 =====
+        typeDefault: '默认',
+        typePrimary: '主要',
+        typeSuccess: '成功',
+        typeError: '危险',
+        typeWarning: '警告',
+        tipMessage: ' 通知'
     },
 
     numberBox: {
-        title: '步进器'
+        title: '步进器',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        stepSection: '步长设置',
+        disabled: '禁用',
+        rangeSection: '现在范围',
+        hideMinus: '隐藏减号',
+        customStyle: '自定义样式'
     },
 
     overlay: {
-        title: '遮罩层'
+        title: '遮罩层',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        openMask: '打开遮罩',
+        opacity: '透明度'
     },
 
     pagination: {
-        title: '分页'
+        title: '分页',
+        // ===== 演示内容 =====
+        basicUsage: '基础示例',
+        iconSection: 'icon',
+        textTip: '显示文本信息'
     },
 
     parse: {
@@ -1105,72 +1205,302 @@ export default {
     },
 
     picker: {
-        title: '选择器'
+        title: '选择器',
+        // ===== 演示内容 =====
+        basicSingleSection: '基础使用（单列模式）',
+        inputSection: '通过输入框打开',
+        multiSection: '多列模式（自定义分隔符）',
+        linkageSection: '多列联动',
+        objectSection: '对象数据格式',
+        positionSection: '自定义弹窗位置（顶部）',
+        toolbarSection: '自定义工具栏按钮',
+        inputStyleSection: '自定义输入框样式',
+        defaultSection: '设置默认选中项',
+        maskSection: '禁用点击遮罩关闭',
+        slotSection: '自定义插槽内容',
+        openPicker: '打开选择器',
+        topPopup: '顶部弹窗',
+        customBtn: '自定义按钮',
+        maskDisabled: '禁用遮罩关闭',
+        selectCountry: '请选择国家',
+        selectOption: '请选择选项',
+        cancelSelect: '取消选择',
+        confirmSelect: '确认选择',
+        customTitle: '自定义标题',
+        mustClickClose: '必须点击按钮关闭',
+        save: '保存',
+        selectYourOption: '请选择您的选项',
+        // 选项数据
+        china: '中国',
+        usa: '美国',
+        japan: '日本',
+        korea: '韩国',
+        beijing: '北京',
+        shanghai: '上海',
+        guangzhou: '广州',
+        shenzhen: '深圳',
+        newYork: '纽约',
+        losAngeles: '洛杉矶',
+        chicago: '芝加哥',
+        houston: '休斯顿',
+        mon: '周一',
+        tue: '周二',
+        wed: '周三',
+        thu: '周四',
+        fri: '周五',
+        morning: '上午',
+        afternoon: '下午',
+        evening: '晚上',
+        nameSnow: '雪月夜',
+        nameColdRain: '冷夜雨',
+        nameBreeze: '清风颂',
+        option1: '选项1',
+        option2: '选项2',
+        option3: '选项3',
+        optionA: '选项A',
+        optionB: '选项B',
+        optionC: '选项C'
     },
 
     popover: {
         title: '气泡',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        tipContent: '我是提示信息',
+        introContent: '华玥组件库，我为自己代言，华玥组件库是一款集合了所以需求的现代化的组件库',
+        // 位置按钮
+        posTopLeft: '左上角',
+        posTopCenter: '中上',
+        posTopRight: '右上角',
+        posLeftTop: '中左上',
+        posRightBottom: '中右下',
+        posLeftCenter: '中左',
+        posRightCenter: '中右',
+        posRightTop: '中右上',
+        posBottomLeft: '左下角',
+        posBottomCenter: '中下',
+        posBottomRight: '右下角',
+        linkageSection: '菜单联动',
+        btnMenu: '菜单模式',
+        // 菜单项
+        menuMarkAll: '全部标记已读',
+        menuClear: '清空最近会话',
+        menuSubscribe: '消息订阅设置',
+        menuAnomaly: '消息异常检测',
+        slotSection: '自定义插槽',
+        slotContent: '插槽自定义内容',
+        btnCustom: '自定义内容',
         // 点击反馈（带变量）
         clicked: (index: number) => `点击了第${index}个`
     },
 
     popup: {
-        title: '弹出层'
+        title: '弹出层',
+        // ===== 演示内容 =====
+        posBottom: '底部弹出',
+        posTop: '顶部弹出',
+        posCenter: '居中弹出',
+        posRight: '右侧弹出',
+        posLeft: '左侧弹出',
+        popupContent: '我是弹窗'
     },
 
     price: {
-        title: '金额'
+        title: '金额',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        colorSection: '设置颜色',
+        sizeSection: '设置大小',
+        decimalSection: '保留不同小数',
+        prefixSection: '符号前缀',
+        slantBold: '倾斜加粗',
+        ratioSection: '缩放比例',
+        cash: '元'
     },
 
     qrcode: {
-        title: '二维码'
+        title: '二维码',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        asyncSection: '异步显示数据',
+        logoSection: '带logo',
+        previewSection: '预览',
+        customColor: '自定义颜色',
+        promoText: '华玥组件库'
     },
 
     radio: {
-        title: '单选框'
+        title: '单选框',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        disabled: '禁用',
+        layout: '布局',
+        colorSection: '自定义颜色',
+        shapeSection: '形状',
+        sizeSection: '大小',
+        jobs: {
+            teacher: '教师',
+            nurse: '护士',
+            stewardess: '空姐'
+        },
+        shapeCircle: '圆形',
+        shapeSquare: '方形',
+        sizeSmall: '小',
+        sizeMedium: '中',
+        sizeLarge: '大'
     },
 
     rate: {
-        title: '评分'
+        title: '评分',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        gutter: '星级间距',
+        size: '星级大小',
+        customColor: '自定义颜色',
+        useImage: '使用图片',
+        maxCount: '最多评分',
+        allowHalf: '允许半星'
     },
 
     readMore: {
-        title: '展开阅读更多'
+        title: '展开阅读更多',
+        basicUsage: '基础使用'
     },
 
     rollingNum: {
-        title: '翻滚数字'
+        title: '翻滚数字',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        asyncSection: '异步触发',
+        thousandSection: '千分位',
+        directionSection: '从左到右、从右到左',
+        customStyleSection: '自定义样式',
+        randomValue: '随机值'
     },
 
     scrollList: {
         title: '横向滚动列表',
-        viewMore: '查看更多'
+        viewMore: '查看更多',
+        basicUsage: '基础使用'
     },
 
     search: {
-        title: '搜索'
+        title: '搜索',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        testValue: '华玥组件库',
+        searchLabel: '搜索',
+        searchText: '搜索文字',
+        animationSection: '开启动画',
+        disabled: '禁用',
+        shapeSection: '搜索框形状',
+        alignSection: '输入框内文本位置',
+        shapeCircle: '圆形',
+        shapeSquare: '方形',
+        posLeft: '左侧',
+        posCenter: '居中',
+        posRight: '右侧'
     },
 
     signature: {
         title: '签名',
         // 横向签名子页面共用 namespace（Landscape.vue）
-        landscapeTitle: '横向签名'
+        landscapeTitle: '横向签名',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        customPen: '自定义画笔',
+        historySection: '历史记录操作',
+        popupSection: '弹窗签名',
+        goLandscape: '点击横向签名',
+        openPopupSign: '点击打开弹窗签名'
     },
 
     skeleton: {
-        title: '骨架屏'
+        title: '骨架屏',
+        // ===== 演示内容 =====
+        avatarSection: '头像骨架屏',
+        imageSection: '图片骨架屏',
+        textSection: '文本骨架屏',
+        paragraphSection: '段落骨架屏',
+        cellSection: '单元格骨架屏'
     },
 
     slider: {
-        title: '滑动选择器'
+        title: '滑动选择器',
+        // ===== 演示内容 =====
+        basicUsage: '基础使用',
+        minMax: '设置最大最小值',
+        customColor: '自定义颜色',
+        customWidth: '自定义宽度',
+        decimal: '小数点',
+        rangeSection: '区间选择',
+        inPopup: '弹窗内使用',
+        customSlider: '自定义滑块',
+        openPopup: '打开弹窗调节',
+        currentValue: '当前值：'
     },
 
     steps: {
-        title: '步骤条'
+        title: '步骤条',
+        // ===== 演示内容 =====
+        basicRowSection: '基础横向步骤条',
+        dotSection: '点状模式',
+        colorSection: '自定义颜色',
+        verticalSection: '竖向步骤条',
+        errorSection: '错误状态',
+        iconSection: '自定义图标',
+        slotIconSection: '自定义插槽 - 图标',
+        slotTitleDescSection: '自定义插槽 - 标题和描述',
+        slotContentSection: '自定义插槽 - 完整内容',
+        dynamicSection: '动态控制步骤',
+        statusDone: '已完成',
+        statusActive: '进行中',
+        statusPending: '待开始',
+        prevStep: '上一步',
+        nextStep: '下一步',
+        // 步骤数据
+        stepRegister: '注册用户',
+        stepFillInfo: '填写基本信息',
+        stepLogin: '登录',
+        orderPlaced: '已下单',
+        orderPlacedDocs: '【深证市】您的快递正在站点，快递员正在为你打包，请耐心等待发货',
+        shipping: '发货中',
+        shipped: '已发货',
+        shippedDocs: '【合肥市】温馨提醒：您的快递已处于运输配送途中，预计将在近期送达。',
+        signed: '已签收',
+        paid: '支付完成',
+        paidDocs: '支付金额：¥199.00',
+        shipFailed: '发货失败',
+        shipFailedDocs: '【重要通知】您的快递在运输过程中发生意外，包裹已受损。',
+        waiting: '等待处理',
+        waitingDocs: '理赔专员将尽快与您联系',
+        orderSubmitted: '订单提交',
+        submittedDocs: '订单已成功提交',
+        orderDeliver: '订单发货',
+        trackingNo: '快递单号：SF1234567890',
+        userRegister: '用户注册',
+        registerDocs: '填写手机号并验证',
+        profileFill: '完善资料',
+        profileDocs: '填写姓名、头像等信息',
+        emailVerify: '邮箱验证',
+        emailDocs: '请查收邮件并点击验证链接',
+        done: '完成',
+        doneDocs: '注册成功'
     },
 
     sticky: {
         title: '吸顶',
+        // ===== 演示内容 =====
+        bannerTitle: '首页 Banner',
+        bannerSubtitle: '上滑查看吸顶效果',
+        tabRecommend: '推荐',
+        tabHot: '热门',
+        tabNew: '最新',
+        tabVideo: '视频',
+        // 列表内容（带变量）
+        contentA: (n: number) => `内容区块 A - ${n}`,
+        contentB: (n: number) => `内容区块 B - ${n}`,
+        filterCondition: '筛选条件：全部时间',
         // 吸顶事件反馈（带变量）
         capture: (isFixed: boolean | string) => `⚡️ 捕获埋点事件:${isFixed}`
     },
@@ -1663,6 +1993,36 @@ export default {
 
     waterfall: {
         title: '瀑布流',
+        // ===== 演示内容 =====
+        title1: '北欧简约实木餐桌',
+        title2: '现代简约布艺沙发',
+        title3: '日式原木台灯',
+        title4: '人体工学电脑椅',
+        title5: '多功能收纳柜',
+        title6: '实木简易书架',
+        title7: '北欧风ins地毯',
+        title8: '全棉四件套床品',
+        title9: '陶瓷插花花瓶',
+        title10: 'ins风餐具套装',
+        title11: '现代简约装饰画',
+        price1: '899',
+        price2: '2199',
+        price3: '169',
+        price4: '599',
+        price5: '399',
+        price6: '259',
+        price7: '129',
+        price8: '329',
+        price9: '69',
+        price10: '99',
+        price11: '199',
+        shop1: '华玥旗舰店',
+        shop2: '精品家居馆',
+        shop3: '优选生活',
+        shop4: '潮流数码城',
+        shop5: '美妆小铺',
+        shop6: '零食集市',
+        shop7: '运动天地',
         yuan: '元',
         selfOperated: '自营',
         worryFree: '放心购'

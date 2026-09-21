@@ -582,9 +582,11 @@ export default {
         dynamicItem: (n: number) => `Dynamic ${n}`,
         nestedTitle: 'Nested Folding Panel (multi-level)',
         nestedChildA: 'Level-2 Panel A',
-        nestedChildAContent: 'A level-2 folding panel nested inside the outer panel. Inner and outer panels expand independently.',
+        nestedChildAContent:
+            'A level-2 folding panel nested inside the outer panel. Inner and outer panels expand independently.',
         nestedChildB: 'Level-2 Panel B (open by default)',
-        nestedChildBContent: 'Panel B is open by default. Inner panels also support accordion and disabled options, independent of the outer ones.'
+        nestedChildBContent:
+            'Panel B is open by default. Inner panels also support accordion and disabled options, independent of the outer ones.'
     },
 
     form: {
@@ -1064,36 +1066,136 @@ export default {
     },
 
     menu: {
-        title: 'Side Menu'
+        title: 'Side Menu',
+        // ===== Demo content =====
+        catRice: 'Rice Bowls',
+        catStirFry: 'Stir-fry',
+        catNoodle: 'Noodles',
+        catBurger: 'Burgers & Pizza',
+        catDrink: 'Drinks & Desserts',
+        catDumpling: 'Dim Sum & Dumplings',
+        catSnack: 'Snacks',
+        catChinese: 'Chinese',
+        catWestern: 'Western',
+        catFeast: 'Feast',
+        // Dishes
+        dishMushroom: 'Mushroom Greens',
+        dishBeefMushroom: 'Beef & Mushroom',
+        dishFishFlavor: 'Yu-shiang Pork',
+        dishEggplant: 'Braised Eggplant',
+        dishPork: 'Twice-cooked Pork',
+        dishPigFeet: 'Braised Trotter'
     },
 
     modal: {
         title: 'Modal',
-        requiredField: 'This field is required'
+        requiredField: 'This field is required',
+        // ===== Demo content =====
+        modalTitle: 'Title',
+        modalContent:
+            'Modal is often used for message prompts, message confirmation, and completing specific interactions within the current page',
+        labelPrice: 'Price',
+        basicUsage: 'Basic Usage',
+        withTitle: 'With Title',
+        withCancel: 'With Cancel Button',
+        buttonReverse: 'Reverse Buttons',
+        asyncPopup: 'Async Popup',
+        callApi: 'Call API'
     },
 
     navbar: {
-        title: 'Navbar'
+        title: 'Navbar',
+        // ===== Demo content =====
+        navTitle: 'Navbar',
+        basicUsage: 'Basic Usage',
+        navTitleLabel: 'Title',
+        navSub: 'Subtitle',
+        back: 'Back',
+        basicDesc: 'Basic navbar with title, subtitle, back button and right icon',
+        colorSection: 'Custom Colors',
+        darkTheme: 'Dark Theme',
+        blueDesc: 'Blue theme for important pages or brand display',
+        greenTheme: 'Green Theme',
+        greenDesc: 'Green theme with shadow for depth',
+        multiIconSection: 'Multi Icons',
+        multiNav: 'Multi-action Nav',
+        multiDesc: 'Multiple right icons for extended actions',
+        customTitleSection: 'Custom Title',
+        shoppingCart: 'Cart',
+        cartDesc: 'Icon + text + badge combo for e-commerce',
+        searchSection: 'Search Nav',
+        searchDesc: 'Title area replaced with search box',
+        userSection: 'User Info',
+        userName: 'Username',
+        userDesc: 'User avatar and name on left, for profile pages',
+        tabSection: 'Tab Switch',
+        tabRecommend: 'Recommend',
+        tabFollow: 'Follow',
+        tabHot: 'Trending',
+        tabDesc: 'Fully custom center area for tab switching',
+        tagSection: 'Tag Button',
+        styleNav: 'Styled Nav',
+        publish: 'Publish',
+        tagDesc: 'Button component on right with custom style'
     },
 
     noticeBar: {
-        title: 'Notice Bar'
+        title: 'Notice Bar',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        noticeText: 'This is an important notice, hello',
+        customIcon: 'Use Custom Icon',
+        directionSection: 'Direction',
+        modeSection: 'Mode',
+        justifySection: 'Text Alignment',
+        carouselSection: 'Horizontal Carousel',
+        speedSection: 'Horizontal Speed (if speed unchanged, switch the direction above and back)',
+        dirRow: 'Horizontal',
+        dirColumn: 'Vertical',
+        modeNone: 'None',
+        modeClosable: 'Close',
+        modeLink: 'Link',
+        justifyLeft: 'Left',
+        justifyCenter: 'Center',
+        justifyRight: 'Right'
     },
 
     notify: {
-        title: 'Notify'
+        title: 'Notify',
+        // ===== Demo content =====
+        typeDefault: 'Default',
+        typePrimary: 'Info',
+        typeSuccess: 'Success',
+        typeError: 'Error',
+        typeWarning: 'Warning',
+        tipMessage: ' notification'
     },
 
     numberBox: {
-        title: 'Number Box'
+        title: 'Number Box',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        stepSection: 'Step',
+        disabled: 'Disabled',
+        rangeSection: 'Range',
+        hideMinus: 'Hide Minus',
+        customStyle: 'Custom Style'
     },
 
     overlay: {
-        title: 'Overlay'
+        title: 'Overlay',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        openMask: 'Open Mask',
+        opacity: 'Opacity'
     },
 
     pagination: {
-        title: 'Pagination'
+        title: 'Pagination',
+        // ===== Demo content =====
+        basicUsage: 'Basic Example',
+        iconSection: 'Icon',
+        textTip: 'Show Text Message'
     },
 
     parse: {
@@ -1101,70 +1203,303 @@ export default {
     },
 
     picker: {
-        title: 'Picker'
+        title: 'Picker',
+        // ===== Demo content =====
+        basicSingleSection: 'Basic Usage (Single Column)',
+        inputSection: 'Open via Input',
+        multiSection: 'Multi Column (Custom Separator)',
+        linkageSection: 'Column Linkage',
+        objectSection: 'Object Data Format',
+        positionSection: 'Custom Popup Position (Top)',
+        toolbarSection: 'Custom Toolbar Buttons',
+        inputStyleSection: 'Custom Input Style',
+        defaultSection: 'Default Selected Item',
+        maskSection: 'Disable Overlay Close',
+        slotSection: 'Custom Slot Content',
+        openPicker: 'Open Picker',
+        topPopup: 'Top Popup',
+        customBtn: 'Custom Buttons',
+        maskDisabled: 'Overlay Close Disabled',
+        selectCountry: 'Select a country',
+        selectOption: 'Select an option',
+        cancelSelect: 'Cancel',
+        confirmSelect: 'Confirm',
+        customTitle: 'Custom Title',
+        mustClickClose: 'Must close via buttons',
+        save: 'Save',
+        selectYourOption: 'Please select your option',
+        // Option data
+        china: 'China',
+        usa: 'USA',
+        japan: 'Japan',
+        korea: 'Korea',
+        beijing: 'Beijing',
+        shanghai: 'Shanghai',
+        guangzhou: 'Guangzhou',
+        shenzhen: 'Shenzhen',
+        newYork: 'New York',
+        losAngeles: 'Los Angeles',
+        chicago: 'Chicago',
+        houston: 'Houston',
+        mon: 'Mon',
+        tue: 'Tue',
+        wed: 'Wed',
+        thu: 'Thu',
+        fri: 'Fri',
+        morning: 'Morning',
+        afternoon: 'Afternoon',
+        evening: 'Evening',
+        nameSnow: 'Snow Moon Night',
+        nameColdRain: 'Cold Night Rain',
+        nameBreeze: 'Breeze Ode',
+        option1: 'Option 1',
+        option2: 'Option 2',
+        option3: 'Option 3',
+        optionA: 'Option A',
+        optionB: 'Option B',
+        optionC: 'Option C'
     },
 
     popover: {
         title: 'Popover',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        tipContent: 'This is a tip message',
+        introContent:
+            'Hy-Design UI speaks for itself. It is a modern component library that covers all your needs.',
+        // Position buttons
+        posTopLeft: 'Top Left',
+        posTopCenter: 'Top Center',
+        posTopRight: 'Top Right',
+        posLeftTop: 'Left Top',
+        posRightBottom: 'Right Bottom',
+        posLeftCenter: 'Left Center',
+        posRightCenter: 'Right Center',
+        posRightTop: 'Right Top',
+        posBottomLeft: 'Bottom Left',
+        posBottomCenter: 'Bottom Center',
+        posBottomRight: 'Bottom Right',
+        linkageSection: 'Menu Linkage',
+        btnMenu: 'Menu Mode',
+        // Menu items
+        menuMarkAll: 'Mark all as read',
+        menuClear: 'Clear recent chats',
+        menuSubscribe: 'Subscription settings',
+        menuAnomaly: 'Anomaly detection',
+        slotSection: 'Custom Slot',
+        slotContent: 'Custom slot content',
+        btnCustom: 'Custom Content',
         clicked: (index: number) => `Clicked #${index}`
     },
 
     popup: {
-        title: 'Popup'
+        title: 'Popup',
+        // ===== Demo content =====
+        posBottom: 'Bottom',
+        posTop: 'Top',
+        posCenter: 'Center',
+        posRight: 'Right',
+        posLeft: 'Left',
+        popupContent: 'I am a popup'
     },
 
     price: {
-        title: 'Price'
+        title: 'Price',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        colorSection: 'Color',
+        sizeSection: 'Size',
+        decimalSection: 'Decimals',
+        prefixSection: 'Symbol Prefix',
+        slantBold: 'Slant & Bold',
+        ratioSection: 'Scale Ratio',
+        cash: 'CNY'
     },
 
     qrcode: {
-        title: 'QR Code'
+        title: 'QR Code',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        asyncSection: 'Async Data',
+        logoSection: 'With Logo',
+        previewSection: 'Preview',
+        customColor: 'Custom Color',
+        promoText: 'Hy-Design UI'
     },
 
     radio: {
-        title: 'Radio'
+        title: 'Radio',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        disabled: 'Disabled',
+        layout: 'Layout',
+        colorSection: 'Color',
+        shapeSection: 'Shape',
+        sizeSection: 'Size',
+        jobs: {
+            teacher: 'Teacher',
+            nurse: 'Nurse',
+            stewardess: 'Stewardess'
+        },
+        shapeCircle: 'Circle',
+        shapeSquare: 'Square',
+        sizeSmall: 'Small',
+        sizeMedium: 'Medium',
+        sizeLarge: 'Large'
     },
 
     rate: {
-        title: 'Rate'
+        title: 'Rate',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        gutter: 'Star Gutter',
+        size: 'Star Size',
+        customColor: 'Custom Color',
+        useImage: 'Use Image',
+        maxCount: 'Max Count',
+        allowHalf: 'Allow Half'
     },
 
     readMore: {
-        title: 'Read More'
+        title: 'Read More',
+        basicUsage: 'Basic Usage'
     },
 
     rollingNum: {
-        title: 'Rolling Number'
+        title: 'Rolling Number',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        asyncSection: 'Async Trigger',
+        thousandSection: 'Thousand Separator',
+        directionSection: 'LTR & RTL',
+        customStyleSection: 'Custom Style',
+        randomValue: 'Random Value'
     },
 
     scrollList: {
         title: 'Scroll List',
-        viewMore: 'View more'
+        viewMore: 'View more',
+        basicUsage: 'Basic Usage'
     },
 
     search: {
-        title: 'Search'
+        title: 'Search',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        testValue: 'Hy-Design UI',
+        searchLabel: 'Search',
+        searchText: 'Search Text',
+        animationSection: 'Animation',
+        disabled: 'Disabled',
+        shapeSection: 'Shape',
+        alignSection: 'Text Align',
+        shapeCircle: 'Circle',
+        shapeSquare: 'Square',
+        posLeft: 'Left',
+        posCenter: 'Center',
+        posRight: 'Right'
     },
 
     signature: {
         title: 'Signature',
-        landscapeTitle: 'Landscape Signature'
+        landscapeTitle: 'Landscape Signature',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        customPen: 'Custom Pen',
+        historySection: 'History',
+        popupSection: 'Popup Signature',
+        goLandscape: 'Landscape Signature',
+        openPopupSign: 'Open Popup Signature'
     },
 
     skeleton: {
-        title: 'Skeleton'
+        title: 'Skeleton',
+        // ===== Demo content =====
+        avatarSection: 'Avatar Skeleton',
+        imageSection: 'Image Skeleton',
+        textSection: 'Text Skeleton',
+        paragraphSection: 'Paragraph Skeleton',
+        cellSection: 'Cell Skeleton'
     },
 
     slider: {
-        title: 'Slider'
+        title: 'Slider',
+        // ===== Demo content =====
+        basicUsage: 'Basic Usage',
+        minMax: 'Min & Max',
+        customColor: 'Custom Color',
+        customWidth: 'Custom Width',
+        decimal: 'Decimal',
+        rangeSection: 'Range',
+        inPopup: 'In Popup',
+        customSlider: 'Custom Slider',
+        openPopup: 'Open Popup to Adjust',
+        currentValue: 'Current value: '
     },
 
     steps: {
-        title: 'Steps'
+        title: 'Steps',
+        // ===== Demo content =====
+        basicRowSection: 'Basic Horizontal Steps',
+        dotSection: 'Dot Mode',
+        colorSection: 'Custom Colors',
+        verticalSection: 'Vertical Steps',
+        errorSection: 'Error Status',
+        iconSection: 'Custom Icons',
+        slotIconSection: 'Custom Slot - Icon',
+        slotTitleDescSection: 'Custom Slot - Title & Desc',
+        slotContentSection: 'Custom Slot - Full Content',
+        dynamicSection: 'Dynamic Steps',
+        statusDone: 'Completed',
+        statusActive: 'In Progress',
+        statusPending: 'Pending',
+        prevStep: 'Previous',
+        nextStep: 'Next',
+        // Step data
+        stepRegister: 'Register',
+        stepFillInfo: 'Fill in Info',
+        stepLogin: 'Log In',
+        orderPlaced: 'Order Placed',
+        orderPlacedDocs:
+            '[Shenzhen] Your package is at the station being packed, please wait patiently',
+        shipping: 'Shipping',
+        shipped: 'Shipped',
+        shippedDocs: '[Hefei] Reminder: your package is in transit and will arrive soon.',
+        signed: 'Signed',
+        paid: 'Payment Completed',
+        paidDocs: 'Amount paid: ¥199.00',
+        shipFailed: 'Ship Failed',
+        shipFailedDocs:
+            '[Important] An accident occurred during transportation, the package was damaged.',
+        waiting: 'Waiting',
+        waitingDocs: 'A claims specialist will contact you soon',
+        orderSubmitted: 'Order Submitted',
+        submittedDocs: 'Order submitted successfully',
+        orderDeliver: 'Order Delivery',
+        trackingNo: 'Tracking No.: SF1234567890',
+        userRegister: 'Sign Up',
+        registerDocs: 'Enter phone number and verify',
+        profileFill: 'Complete Profile',
+        profileDocs: 'Fill in name, avatar and other info',
+        emailVerify: 'Email Verification',
+        emailDocs: 'Check your inbox and click the verification link',
+        done: 'Done',
+        doneDocs: 'Registration successful'
     },
 
     sticky: {
         title: 'Sticky',
+        // ===== Demo content =====
+        bannerTitle: 'Home Banner',
+        bannerSubtitle: 'Scroll up to see sticky effect',
+        tabRecommend: 'Recommend',
+        tabHot: 'Hot',
+        tabNew: 'New',
+        tabVideo: 'Video',
+        // List content (with variable)
+        contentA: (n: number) => `Content Block A - ${n}`,
+        contentB: (n: number) => `Content Block B - ${n}`,
+        filterCondition: 'Filter: All time',
         capture: (isFixed: boolean | string) => `⚡️ Captured event: ${isFixed}`
     },
 
@@ -1646,6 +1981,36 @@ export default {
 
     waterfall: {
         title: 'Waterfall',
+        // ===== Demo content =====
+        title1: 'Nordic Solid Wood Dining Table',
+        title2: 'Modern Fabric Sofa',
+        title3: 'Japanese Wooden Desk Lamp',
+        title4: 'Ergonomic Office Chair',
+        title5: 'Multi-functional Storage Cabinet',
+        title6: 'Simple Solid Wood Bookshelf',
+        title7: 'Nordic Style Carpet',
+        title8: 'Cotton Bedding Set',
+        title9: 'Ceramic Flower Vase',
+        title10: 'Tableware Set',
+        title11: 'Modern Decorative Painting',
+        price1: '899',
+        price2: '2199',
+        price3: '169',
+        price4: '599',
+        price5: '399',
+        price6: '259',
+        price7: '129',
+        price8: '329',
+        price9: '69',
+        price10: '99',
+        price11: '199',
+        shop1: 'Hy Flagship Store',
+        shop2: 'Home Select',
+        shop3: 'Quality Living',
+        shop4: 'Trendy Digital',
+        shop5: 'Beauty Shop',
+        shop6: 'Snack Market',
+        shop7: 'Sports World',
         yuan: ' yuan',
         selfOperated: 'Self-operated',
         worryFree: 'Worry-free'
