@@ -23,20 +23,20 @@ jobs:
           only-issue-labels: "可自动关闭"
 
           # 加入标签后，7 天无活动标记待关闭。
-          days-before-issue-stale: 7
+          days-before-issue-stale: 15
 
           # 标记待关闭后，再 7 天无活动自动关闭。
-          days-before-issue-close: 7
+          days-before-issue-close: 30
 
           stale-issue-label: "待关闭"
           stale-issue-message: |
             仓库管理员已确认该 Issue 可以关闭。
 
             如果还有补充信息，请直接回复；回复后会重新计时。
-            如果 7 天内没有新的反馈，该 Issue 将自动关闭。
+            如果 45 天内没有新的反馈，该 Issue 将自动关闭。
 
           close-issue-message: |
-            距离上次活动已超过 7 天，该 Issue 已自动关闭。
+            距离上次活动已超过 45 天，该 Issue 已自动关闭。
 
             如果问题仍未解决，欢迎重新打开或提交新的 Issue。
 
