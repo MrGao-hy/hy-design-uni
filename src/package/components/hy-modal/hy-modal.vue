@@ -104,7 +104,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, getCurrentInstance } from 'vue'
 import type { IModalEmits } from './typing'
 import { addUnit, sleep, useMessageInject } from '../../libs'
 import modalProps from './props'
@@ -124,18 +124,36 @@ const load = ref(props.loading)
 
 // 尝试从 useMessage 注入状态
 const messageState = useMessageInject()
+const instance = getCurrentInstance()
 
-// 计算属性，优先使用注入的状态
+/**
+ * 是否为 useMessage 全局消息驱动实例：
+ * 1. 显式传入 message 属性；
+ * 2. 兜底：存在注入状态且自身未绑定任何 v-model（无 modelValue / onUpdate:modelValue），
+ *    避免编译器把裸布尔属性编译成 "" 而丢失标记（如 uni-h5 平台）
+ */
+const isMessageDriven = computed(() => {
+    if (props.message) return true
+    if (!messageState) return false
+    const vnodeProps = instance?.vnode.props
+    if (!vnodeProps) return true
+    return !('modelValue' in vnodeProps || 'onUpdate:modelValue' in vnodeProps)
+})
+
+// 计算属性，message 驱动实例使用注入状态，独立 modal 使用自身 props
 const showModal = computed(() => {
-    return messageState?.showModal.value || props.modelValue
+    if (isMessageDriven.value) return messageState?.showModal.value || false
+    return props.modelValue
 })
 
 const modalLoading = computed(() => {
-    return messageState?.loading.value || props.loading
+    if (isMessageDriven.value) return messageState?.loading.value || false
+    return props.loading
 })
 
 const modalOptions = computed(() => {
-    return messageState?.modalOptions || {}
+    if (isMessageDriven.value) return messageState?.modalOptions || {}
+    return {}
 })
 
 watch(
@@ -158,8 +176,8 @@ watch(
 const confirmHandler = async () => {
     if (modalLoading.value) return
 
-    // 优先使用注入的确认处理
-    if (messageState?.confirmHandler) {
+    // 仅 message 驱动实例才接管注入的确认处理；独立 modal 正常 emit confirm
+    if (isMessageDriven.value && messageState?.confirmHandler) {
         messageState.confirmHandler()
     } else {
         // 如果配置了异步关闭，将按钮值为loading状态
@@ -176,8 +194,8 @@ const confirmHandler = async () => {
  * 点击取消按钮
  * */
 const cancelHandler = () => {
-    // 优先使用注入的取消处理
-    if (messageState?.cancelHandler) {
+    // 仅 message 驱动实例才接管注入的取消处理
+    if (isMessageDriven.value && messageState?.cancelHandler) {
         messageState.cancelHandler()
     } else {
         emit('update:modelValue', false)
@@ -192,8 +210,8 @@ const clickHandler = () => {
     const closeOnClickOverlay = modalOptions.value.closeOnClickOverlay || props.closeOnClickOverlay
 
     if (closeOnClickOverlay) {
-        // 优先使用注入的关闭处理
-        if (messageState?.closeHandler) {
+        // 仅 message 驱动实例才接管注入的关闭处理
+        if (isMessageDriven.value && messageState?.closeHandler) {
             messageState.closeHandler()
         } else {
             emit('update:modelValue', false)

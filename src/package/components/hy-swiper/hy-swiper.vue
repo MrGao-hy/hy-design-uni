@@ -35,7 +35,7 @@
                 v-for="(item, index) in list"
                 :key="index"
             >
-                <slot v-if="$slots.default" :record="item" :index="index"> </slot>
+                <slot v-if="$slots.default" :record="asRecord(item)" :index="index"> </slot>
                 <view v-else class="hy-swiper__wrapper--item__wrapper" :style="[itemStyle(index)]">
                     <!-- 在nvue中，image图片的宽度默认为屏幕宽度，需要通过flex:1撑开，另外必须设置高度才能显示图片 -->
                     <image
@@ -107,7 +107,7 @@ export default {
 import { computed, ref, watch, getCurrentInstance } from 'vue'
 import type { CSSProperties } from 'vue'
 import { addUnit, isVideo } from '../../libs'
-import type { ISwiperEmits, SwiperList, SwiperVo } from './typing'
+import type { ISwiperEmits, ISwiperSlots, SwiperList, SwiperVo } from './typing'
 import swiperProps from './props'
 // 组件
 import HyLoading from '../hy-loading/hy-loading.vue'
@@ -121,9 +121,10 @@ defineOptions({})
 
 const props = defineProps(swiperProps)
 const emit = defineEmits<ISwiperEmits>()
+defineSlots<ISwiperSlots>()
 
 const instance = getCurrentInstance()
-const currentIndex = ref<string | number>(0)
+const currentIndex = ref<number>(0)
 
 watch(
     () => props.current,
@@ -141,6 +142,11 @@ const hasTitle = computed(() => {
         }
     }
 })
+
+/**
+ * 自定义插槽按对象项暴露数据，字符串项访问自定义字段时得到 undefined
+ * */
+const asRecord = (item: string | SwiperList): SwiperList => item as SwiperList
 
 /**
  * 轮播图3D效果

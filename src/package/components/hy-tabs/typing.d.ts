@@ -29,6 +29,7 @@ export interface ITabsExpose {
 export interface TabsParamsVo extends TabsItemVo {
     index: number
 }
+
 export interface ITabsEmits {
     /** 点击标签时触发 */
     click: [params: TabsParamsVo]

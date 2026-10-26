@@ -24,5 +24,15 @@ export interface ISwiperEmits {
     /** 滑动轮播图触发 */
     change: [temp: SwiperVo['detail']]
     /** 滑动轮播图触发 */
-    'update:current': [value: string | number]
+    'update:current': [value: number]
+}
+
+export interface ISwiperSlots {
+    /**
+     * 自定义轮播内容
+     * record 为当前项数据，对象项携带自定义字段（如 subtitleKey）时可直接访问
+     */
+    default: (props: { record: SwiperList; index: number }) => any
+    /** 自定义指示器 */
+    indicator: (props: { current: number; length: number }) => any
 }

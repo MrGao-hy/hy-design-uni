@@ -11,7 +11,7 @@ const { darkMode } = storeToRefs(themeStore)
 // #ifdef H5
 const getMessage = (event: MessageEvent) => {
     // 判断消息是否来自可信任的源
-    if (event.origin === 'https://www.hy-design-uni.top') {
+    if (event.origin === 'https://www.hy-design-uni.top' && typeof event.data === 'boolean') {
         darkMode.value = event.data ? 'dark' : 'light'
     }
 }

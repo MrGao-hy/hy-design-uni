@@ -10,6 +10,15 @@ const modalProps = {
         type: Boolean,
         default: false
     },
+    /**
+     * 是否作为 useMessage 全局消息的驱动实例
+     * 为 true 时由 message.alert/confirm 控制显隐与回调；
+     * 为 false（默认）时是独立 modal，走 v-model 与 confirm/cancel 事件，不受注入状态劫持
+     */
+    message: {
+        type: Boolean,
+        default: false
+    },
     /** 标题内容 */
     title: String,
     /** 模态框内容，如传入slot内容，则此参数无效 */
