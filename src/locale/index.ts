@@ -1,6 +1,7 @@
 import { Locale } from '@/package'
 import enUS from './en-US'
-import zhCN from './zh-CN'
+import zhHans from './zh-Hans.ts'
+import zhCN from '@/package/libs/locale/lang/zh-CN.ts'
 
 /**
  * 多语言文案注册
@@ -9,16 +10,19 @@ import zhCN from './zh-CN'
  */
 const messages = {
     'en-US': enUS,
-    'zh-CN': zhCN
+    'zh-Hans': zhHans
 }
 
 /**
  * 初始化多语言
  * 默认使用英文
- * 切换语言：Locale.use('zh-CN') / Locale.use('en')
+ * 切换语言：Locale.use('zh-Hans') / Locale.use('en')
  */
 export function setupLocale() {
     Locale.add(messages)
+    Locale.add({
+        'zh-Hans': zhCN
+    })
 }
 
 export { Locale }

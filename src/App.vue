@@ -4,15 +4,27 @@ import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { enableTouchSimulation } from '@/utils'
 import type { ThemeModeType } from '@/package'
+import { Locale } from '@/locale'
 
 const themeStore = useThemeStore()
-const { darkMode } = storeToRefs(themeStore)
+const { darkMode, locale } = storeToRefs(themeStore)
 
 // #ifdef H5
 const getMessage = (event: MessageEvent) => {
+    const { data, origin } = event
     // 判断消息是否来自可信任的源
-    if (event.origin === 'https://www.hy-design-uni.top' && typeof event.data === 'boolean') {
-        darkMode.value = event.data ? 'dark' : 'light'
+    if (origin === 'https://www.hy-design-uni.top' || origin === 'http://localhost:6699') {
+        switch (data.type) {
+            case 'THEME':
+                darkMode.value = data.isDark ? 'dark' : 'light'
+                break
+            case 'LANG':
+                Locale.use(data.lang)
+                break
+            case 'SIMULATED_TOUCH':
+                // data.event
+                break
+        }
     }
 }
 window.addEventListener('message', getMessage)
@@ -40,7 +52,6 @@ uni.getSystemInfo({
 // #endif
 
 onThemeChange((option) => {
-    console.log(option)
     darkMode.value = option.theme
 })
 </script>

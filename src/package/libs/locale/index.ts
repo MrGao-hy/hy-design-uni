@@ -1,5 +1,5 @@
 import { reactive, ref } from 'vue'
-import zhCN from './lang/zh-CN'
+import zhCN from './lang/zh-CN.ts'
 import enUS from './lang/en-US'
 import { deepMerge } from '../index'
 

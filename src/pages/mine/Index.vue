@@ -237,7 +237,7 @@ const handleNavigate = (route?: string) => {
 
 // 处理语言切换
 const handleLangChange = (val: boolean | string | number) => {
-    const newLang = val ? 'en-US' : 'zh-CN'
+    const newLang = val ? 'en-US' : 'zh-Hans'
     Locale.use(newLang)
     themeStore.locale = newLang as LocaleType
     toast.success(val ? t('langSwitchEn') : t('langSwitch'))

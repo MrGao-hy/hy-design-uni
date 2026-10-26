@@ -1,74 +1,91 @@
-@use "@/package/index.scss" as hy;
+@use '@/package/index.scss' as hy;
 
 .hy-title {
-  padding: hy.$hy-border-margin-padding-base;
-  color: hy.$hy-info;
-  position: relative;
-  font-size: 34rpx;
+    padding: hy.$hy-border-margin-padding-base;
+    color: hy.$hy-info;
+    position: relative;
+    font-size: 34rpx;
 
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 18px;
-    background: hy.$hy-primary;
-    border-radius: hy.$hy-radius-semicircle;
-  }
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 18px;
+        background: hy.$hy-primary;
+        border-radius: hy.$hy-radius-semicircle;
+    }
 }
 .hy-flex {
-  display: flex;
-  justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
 }
 .hy-container {
-  //flex-wrap: wrap;
-  margin: 0 hy.$hy-border-margin-padding-base;
-  padding: hy.$hy-border-margin-padding-base;
-  border-radius: hy.$hy-radius-base;
-  background-color: hy.$hy-background--container;
-  box-shadow: hy.$hy-shadow-base;
+    //flex-wrap: wrap;
+    margin: 0 hy.$hy-border-margin-padding-base;
+    padding: hy.$hy-border-margin-padding-base;
+    border-radius: hy.$hy-radius-base;
+    background-color: hy.$hy-background--container;
+    box-shadow: hy.$hy-shadow-base;
 }
 
 .hy-margin {
-  padding: 10px 0 20px;
+    padding: 10px 0 20px;
 }
 
 .hy-margin-bottom {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .hy-setting__box {
-  background-color: hy.$hy-background--container;
-  border: hy.$hy-border-line;
-  box-shadow: hy.$hy-shadow-base;
-  margin: 120px hy.$hy-border-margin-padding-base 0;
-  border-radius: hy.$hy-radius-base;
-  padding: hy.$hy-border-margin-padding-lg;
+    background-color: hy.$hy-background--container;
+    border: hy.$hy-border-line;
+    box-shadow: hy.$hy-shadow-base;
+    margin: 120px hy.$hy-border-margin-padding-base 0;
+    border-radius: hy.$hy-radius-base;
+    padding: hy.$hy-border-margin-padding-lg;
 }
 
 .hy-grid {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
-
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
 }
 .hy-gap {
-  display: grid;
-  gap: 15px;
+    display: grid;
+    gap: 15px;
 }
 .hy-page2 {
-  box-sizing: border-box;
-  width: 100%;
-  /* #ifdef H5 */
-  height: calc(100vh - 44px);
-  /* #endif */
-  /* #ifndef H5 */
-  height: 100vh;
-  /* #endif */
-  overflow: auto;
+    box-sizing: border-box;
+    width: 100%;
+    /* #ifdef H5 */
+    height: calc(100vh - 44px);
+    /* #endif */
+    /* #ifndef H5 */
+    height: 100vh;
+    /* #endif */
+    overflow: auto;
 }
+
+/* 全局隐藏页面原生滚动条（webkit 内核：H5/App，小程序需显式匹配 page） */
+::-webkit-scrollbar,
+page::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+
+/* #ifdef H5 */
+/* Firefox/IE 下隐藏页面级滚动条 */
+html,
+body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+/* #endif */
 
 /* 暗色主题 */
 //@include hy.b(theme--dark){
