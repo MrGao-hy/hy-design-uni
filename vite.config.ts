@@ -4,11 +4,13 @@ import Uni from '@uni-helper/plugin-uni'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { useUniPages } from './src/composables/useUniPages'
+import UniKuRoot from '@uni-ku/root'
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
         UniPages(useUniPages),
+        UniKuRoot(),
         Uni(),
         visualizer({
             filename: 'dist/stats.html', // 生成报告

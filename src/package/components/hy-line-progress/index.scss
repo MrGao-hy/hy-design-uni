@@ -1,6 +1,13 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 进度文字字号 */
+$hy-line-progress-text-font-size: var(--hy-line-progress-text-font-size, 10px) !default;
+/* 进度条圆角，默认跟随全局半圆角 token */
+$hy-line-progress-radius: var(--hy-line-progress-radius, #{$hy-radius-semicircle}) !default;
+/* 进度文字颜色 */
+$hy-line-progress-text-color: var(--hy-line-progress-text-color, #ffffff) !default;
+
 @include b(line-progress) {
   align-items: stretch;
   position: relative;
@@ -8,11 +15,11 @@
   flex: 1;
   width: 100%;
   overflow: hidden;
-  border-radius: $hy-radius-semicircle;
+  border-radius: $hy-line-progress-radius;
 
   @include e(background) {
     background-color: $hy-background--empty;
-    border-radius: $hy-radius-semicircle;
+    border-radius: $hy-line-progress-radius;
     flex: 1;
   }
 
@@ -23,16 +30,16 @@
     bottom: 0;
     align-items: center;
     @include flex(row);
-    color: #ffffff;
-    border-radius: $hy-radius-semicircle;
+    color: $hy-line-progress-text-color;
+    border-radius: $hy-line-progress-radius;
     transition: width 0.5s ease;
     justify-content: flex-end;
     background-color: $hy-primary;
   }
 
   @include e(text) {
-    font-size: 10px;
-    color: #ffffff;
+    font-size: $hy-line-progress-text-font-size;
+    color: $hy-line-progress-text-color;
     margin-bottom: 1px;
     margin-right: 5px;
     transform: scale(0.8);

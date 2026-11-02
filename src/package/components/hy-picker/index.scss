@@ -1,70 +1,80 @@
-@use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin" as *;
+@use '../../libs/css/theme' as *;
+@use '../../libs/css/mixin' as *;
 
+/* 选项禁用透明度 */
+$hy-picker-item-disabled-opacity: var(--hy-picker-item-disabled-opacity, 0.35) !default;
+/* 加载层缀 */
+$hy-picker-loading-z-index: var(--hy-picker-loading-z-index, 1000) !default;
+/* 标题字号，默认跟随全局基础字体 token */
+$hy-picker-title-font-size: var(--hy-picker-title-font-size, #{$hy-font-size-base}) !default;
+/* 标题颜色 */
+$hy-picker-title-color: var(--hy-picker-title-color, #{$hy-text-color--grey}) !default;
+/* 选项文字颜色 */
+$hy-picker-item-color: var(--hy-picker-item-color, #{$hy-text-color}) !default;
 
 @include b(picker) {
-  position: relative;
-  &-input {
     position: relative;
-    .input-cover {
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 1;
-    }
-  }
-
-  @include e(title) {
-    @include flex();
-    justify-content: space-between;
-    padding: $hy-border-margin-padding-lg;
-    @include m(center) {
-      font-size: $hy-font-size-base;
-      color: $hy-text-color--grey;
-    }
-
-    @include m(right) {
-      color: $hy-primary;
-    }
-  }
-
-  @include m(view) {
-    @include e(column) {
-      @include flex;
-      flex: 1;
-      justify-content: center;
-      text-align: center;
-
-      :deep(.uni-picker-view-indicator) {
-        background: $hy-background--hover;
-      }
-
-      @include e(item) {
-        color: $hy-text-color !important;
-        @include lineEllipsis;
-        @include m(disabled) {
-          /* #ifndef APP-NVUE */
-          cursor: not-allowed;
-          /* #endif */
-          opacity: 0.35;
+    &-input {
+        position: relative;
+        .input-cover {
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
         }
-      }
+    }
+
+    @include e(title) {
+        @include flex();
+        justify-content: space-between;
+        padding: $hy-border-margin-padding-lg;
+        @include m(center) {
+            font-size: $hy-picker-title-font-size;
+            color: $hy-picker-title-color;
+        }
+
+        @include m(right) {
+            color: $hy-primary;
+        }
+    }
+
+    @include m(view) {
+        @include e(column) {
+            @include flex;
+            flex: 1;
+            justify-content: center;
+            text-align: center;
+
+            :deep(.uni-picker-view-indicator) {
+                background: $hy-background--hover;
+            }
+
+            @include e(item) {
+                color: $hy-picker-item-color !important;
+                @include lineEllipsis;
+                @include m(disabled) {
+                    /* #ifndef APP-NVUE */
+                    cursor: not-allowed;
+                    /* #endif */
+                    opacity: $hy-picker-item-disabled-opacity;
+                }
+            }
+        }
+
+        @include edeep(loading) {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            z-index: $hy-picker-loading-z-index;
+        }
     }
 
     @include edeep(mask) {
-      background-image: $hy-background-image--mask--two-flanks;
+        background-image: $hy-background-image--mask--two-flanks;
     }
-
-    @include edeep(loading) {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      z-index: 1000;
-    }
-  }
 }

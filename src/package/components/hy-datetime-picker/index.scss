@@ -1,4 +1,12 @@
 @use "../../libs/css/mixin" as *;
+@use "../../libs/css/theme" as *;
+
+/* 输入占位容器圆角 */
+$hy-datetime-picker-radius: var(--hy-datetime-picker-radius, 4px) !default;
+/* 输入占位容器边框 */
+$hy-datetime-picker-border: var(--hy-datetime-picker-border, 1px solid #eee) !default;
+/* 输入占位容器内边距 */
+$hy-datetime-picker-padding: var(--hy-datetime-picker-padding, 0 10px) !default;
 
 @include b(datetime-picker) {
   flex: 1;
@@ -20,9 +28,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-radius: 4px;
-      border: 1px solid #eee;
-      padding: 0 10px;
+      border-radius: $hy-datetime-picker-radius;
+      border: $hy-datetime-picker-border;
+      padding: $hy-datetime-picker-padding;
     }
   }
 }

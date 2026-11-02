@@ -1,25 +1,23 @@
 <template>
-    <the-root-page>
-        <view class="hy-container">
-            <hy-empty :show="true" :mode="mode"></hy-empty>
-        </view>
+    <view class="hy-container">
+        <hy-empty :show="true" :mode="mode"></hy-empty>
+    </view>
 
-        <view class="hy-setting__box">
-            <!--            <view class="hy-title">自定义列数</view>-->
-            <!--            <hy-subsection :list="list_1" v-model="col"></hy-subsection>-->
+    <view class="hy-setting__box">
+        <!--            <view class="hy-title">自定义列数</view>-->
+        <!--            <hy-subsection :list="list_1" v-model="col"></hy-subsection>-->
 
-            <view class="hy-title">{{ t('selectType') }}</view>
-            <hy-check-button
-                :columns="list"
-                v-model="mode"
-                selectType="radio"
-                col="repeat(4, 1fr)"
-            ></hy-check-button>
+        <view class="hy-title">{{ t('selectType') }}</view>
+        <hy-check-button
+            :columns="list"
+            v-model="mode"
+            selectType="radio"
+            col="repeat(4, 1fr)"
+        ></hy-check-button>
 
-            <view class="hy-title">{{ t('padding') }}</view>
-            <!--            <hy-slider v-model="gap" :min="0" :max="20" />-->
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('padding') }}</view>
+        <!--            <hy-slider v-model="gap" :min="0" :max="20" />-->
+    </view>
 </template>
 
 <script setup lang="ts">

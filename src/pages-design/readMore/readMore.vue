@@ -1,14 +1,12 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-read-more>
-                <template #default>
-                    {{ text }}
-                </template>
-            </hy-read-more>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-read-more>
+            <template #default>
+                {{ text }}
+            </template>
+        </hy-read-more>
+    </view>
 </template>
 
 <script setup lang="ts">

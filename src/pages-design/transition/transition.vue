@@ -1,11 +1,9 @@
 <template>
-    <the-root-page>
-        <the-cell :list="list" @click="onClick"></the-cell>
+    <the-cell :list="list" @click="onClick"></the-cell>
 
-        <hy-transition :mode="mode" :show="show" :custom-style="style">
-            <view class="transition"></view>
-        </hy-transition>
-    </the-root-page>
+    <hy-transition :mode="mode" :show="show" :custom-style="style">
+        <view class="transition"></view>
+    </hy-transition>
 </template>
 
 <script setup lang="ts">

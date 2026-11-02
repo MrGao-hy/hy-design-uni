@@ -1,67 +1,65 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-count-down :time="30 * 60 * 60 * 1000"></hy-count-down>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-count-down :time="30 * 60 * 60 * 1000"></hy-count-down>
+    </view>
 
-        <view class="hy-title">{{ t('customFormat') }}</view>
-        <view class="hy-container">
-            <hy-count-down
-                :time="30 * 60 * 60 * 1000"
-                :format="t('formatWithUnits')"
-            ></hy-count-down>
-        </view>
+    <view class="hy-title">{{ t('customFormat') }}</view>
+    <view class="hy-container">
+        <hy-count-down
+            :time="30 * 60 * 60 * 1000"
+            :format="t('formatWithUnits')"
+        ></hy-count-down>
+    </view>
 
-        <view class="hy-title">{{ t('millisecondRender') }}</view>
-        <view class="hy-container">
-            <hy-count-down
-                :time="30 * 60 * 60 * 1000"
-                format="HH:mm:ss:SSS"
-                autoStart
-                millisecond
-            />
-        </view>
+    <view class="hy-title">{{ t('millisecondRender') }}</view>
+    <view class="hy-container">
+        <hy-count-down
+            :time="30 * 60 * 60 * 1000"
+            format="HH:mm:ss:SSS"
+            autoStart
+            millisecond
+        />
+    </view>
 
-        <view class="hy-title">{{ t('customStyle') }}</view>
-        <view class="hy-container">
-            <hy-count-down :time="30 * 60 * 60 * 1000" autoStart>
-                <template #default="{ record: timeData }">
-                    <view class="time">
-                        <view class="time__custom">
-                            <text class="time__custom__item">
-                                {{ timeData.hours > 10 ? timeData.hours : '0' + timeData.hours }}
-                            </text>
-                        </view>
-                        <text class="time__doc">:</text>
-                        <view class="time__custom">
-                            <text class="time__custom__item">{{ timeData.minutes }}</text>
-                        </view>
-                        <text class="time__doc">:</text>
-                        <view class="time__custom">
-                            <text class="time__custom__item">{{ timeData.seconds }}</text>
-                        </view>
+    <view class="hy-title">{{ t('customStyle') }}</view>
+    <view class="hy-container">
+        <hy-count-down :time="30 * 60 * 60 * 1000" autoStart>
+            <template #default="{ record: timeData }">
+                <view class="time">
+                    <view class="time__custom">
+                        <text class="time__custom__item">
+                            {{ timeData.hours > 10 ? timeData.hours : '0' + timeData.hours }}
+                        </text>
                     </view>
-                </template>
-            </hy-count-down>
-        </view>
+                    <text class="time__doc">:</text>
+                    <view class="time__custom">
+                        <text class="time__custom__item">{{ timeData.minutes }}</text>
+                    </view>
+                    <text class="time__doc">:</text>
+                    <view class="time__custom">
+                        <text class="time__custom__item">{{ timeData.seconds }}</text>
+                    </view>
+                </view>
+            </template>
+        </hy-count-down>
+    </view>
 
-        <view class="hy-title">{{ t('manualControl') }}</view>
-        <view class="hy-container">
-            <hy-count-down
-                ref="countDownRef"
-                :time="10 * 1000"
-                format="ss:SSS"
-                :autoStart="false"
-                millisecond
-            ></hy-count-down>
-            <view class="hy-flex">
-                <hy-button :text="t('reset')" type="info" @click="reset"></hy-button>
-                <hy-button :text="t('start')" type="success" @click="start"></hy-button>
-                <hy-button :text="t('pause')" type="error" @click="pause"></hy-button>
-            </view>
+    <view class="hy-title">{{ t('manualControl') }}</view>
+    <view class="hy-container">
+        <hy-count-down
+            ref="countDownRef"
+            :time="10 * 1000"
+            format="ss:SSS"
+            :autoStart="false"
+            millisecond
+        ></hy-count-down>
+        <view class="hy-flex">
+            <hy-button :text="t('reset')" type="info" @click="reset"></hy-button>
+            <hy-button :text="t('start')" type="success" @click="start"></hy-button>
+            <hy-button :text="t('pause')" type="error" @click="pause"></hy-button>
         </view>
-    </the-root-page>
+    </view>
 </template>
 
 <script setup lang="ts">

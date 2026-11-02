@@ -1,8 +1,6 @@
 <template>
-    <the-root-page>
-        <the-cell :list="list" @click="showToast"></the-cell>
-        <hy-notify ref="hyNotifyRef"></hy-notify>
-    </the-root-page>
+    <the-cell :list="list" @click="showToast"></the-cell>
+    <hy-notify ref="hyNotifyRef"></hy-notify>
 </template>
 
 <script setup lang="ts">

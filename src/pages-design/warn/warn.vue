@@ -1,55 +1,53 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container hy-gap">
-            <hy-warn
-                :title="t('poem1')"
-                type="primary"
-                :theme="theme"
-                :showIcon="showIcon"
-                :closable="closable"
-            ></hy-warn>
-            <hy-warn
-                :title="t('poem2')"
-                type="success"
-                :theme="theme"
-                :showIcon="showIcon"
-                :closable="closable"
-            ></hy-warn>
-            <hy-warn
-                :title="t('poem3')"
-                type="info"
-                :theme="theme"
-                :showIcon="showIcon"
-                :closable="closable"
-            ></hy-warn>
-            <hy-warn
-                :title="t('poem4')"
-                type="warning"
-                :theme="theme"
-                :showIcon="showIcon"
-                :closable="closable"
-            ></hy-warn>
-            <hy-warn
-                :title="t('poem5')"
-                type="error"
-                :theme="theme"
-                :showIcon="showIcon"
-                :closable="closable"
-            ></hy-warn>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container hy-gap">
+        <hy-warn
+            :title="t('poem1')"
+            type="primary"
+            :theme="theme"
+            :showIcon="showIcon"
+            :closable="closable"
+        ></hy-warn>
+        <hy-warn
+            :title="t('poem2')"
+            type="success"
+            :theme="theme"
+            :showIcon="showIcon"
+            :closable="closable"
+        ></hy-warn>
+        <hy-warn
+            :title="t('poem3')"
+            type="info"
+            :theme="theme"
+            :showIcon="showIcon"
+            :closable="closable"
+        ></hy-warn>
+        <hy-warn
+            :title="t('poem4')"
+            type="warning"
+            :theme="theme"
+            :showIcon="showIcon"
+            :closable="closable"
+        ></hy-warn>
+        <hy-warn
+            :title="t('poem5')"
+            type="error"
+            :theme="theme"
+            :showIcon="showIcon"
+            :closable="closable"
+        ></hy-warn>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('darkLight') }}</view>
-            <hy-subsection :list="list_1" v-model="theme"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('darkLight') }}</view>
+        <hy-subsection :list="list_1" v-model="theme"></hy-subsection>
 
-            <view class="hy-title">{{ t('showCloseBtn') }}</view>
-            <hy-switch v-model="closable"></hy-switch>
+        <view class="hy-title">{{ t('showCloseBtn') }}</view>
+        <hy-switch v-model="closable"></hy-switch>
 
-            <view class="hy-title">{{ t('showIcon') }}</view>
-            <hy-switch v-model="showIcon"></hy-switch>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('showIcon') }}</view>
+        <hy-switch v-model="showIcon"></hy-switch>
+    </view>
 </template>
 
 <script setup lang="ts">

@@ -1,34 +1,63 @@
 @use '../../libs/css/mixin' as *;
 @use '../../libs/css/theme' as *;
 
+/* 弹出层缀 */
+$hy-toast-z-index: var(--hy-toast-z-index, 11000) !default;
+/* 内容区内边距 */
+$hy-toast-padding: var(--hy-toast-padding, 20rpx 32rpx) !default;
+/* 内容区圆角 */
+$hy-toast-radius: var(--hy-toast-radius, 16rpx) !default;
+/* 内容区背景色 */
+$hy-toast-bg-color: var(--hy-toast-bg-color, #585858) !default;
+/* 内容区最大宽度 */
+$hy-toast-max-width: var(--hy-toast-max-width, 600rpx) !default;
+/* 内容区阴影 */
+$hy-toast-box-shadow: var(--hy-toast-box-shadow, 0 8rpx 24rpx rgba(0, 0, 0, 0.15)) !default;
+/* loading 模式内边距 */
+$hy-toast-loading-padding: var(--hy-toast-loading-padding, 40rpx) !default;
+/* 状态图标尺寸 */
+$hy-toast-icon-size: var(--hy-toast-icon-size, 40rpx) !default;
+/* 状态图标与文字间距 */
+$hy-toast-icon-margin-right: var(--hy-toast-icon-margin-right, 16rpx) !default;
+/* 文本最大宽度 */
+$hy-toast-text-max-width: var(--hy-toast-text-max-width, 480rpx) !default;
+/* default 主题背景色 */
+$hy-toast-default-bg-color: var(--hy-toast-default-bg-color, rgba(0, 0, 0, 0.75)) !default;
+/* 图标圆角，默认跟随全局半圆 token */
+$hy-toast-icon-radius: var(--hy-toast-icon-radius, #{$hy-radius-semicircle}) !default;
+/* 文字颜色 */
+$hy-toast-text-color: var(--hy-toast-text-color, #ffffff) !default;
+/* 文字字号，默认跟随全局基础字体 token */
+$hy-toast-text-font-size: var(--hy-toast-text-font-size, #{$hy-font-size-base}) !default;
+
 @include b(toast) {
   @include e(content) {
     @include flex;
-    padding: 20rpx 32rpx;
-    border-radius: 16rpx;
-    background-color: #585858;
+    padding: $hy-toast-padding;
+    border-radius: $hy-toast-radius;
+    background-color: $hy-toast-bg-color;
     color: #ffffff;
     align-items: center;
     /* #ifndef APP-NVUE */
-    max-width: 600rpx;
+    max-width: $hy-toast-max-width;
     /* #endif */
     position: relative;
-    z-index: 11000;
+    z-index: $hy-toast-z-index;
     /* #ifndef APP-NVUE */
-    box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+    box-shadow: $hy-toast-box-shadow;
     /* #endif */
 
     @include m(loading) {
       flex-direction: column;
-      padding: 40rpx;
+      padding: $hy-toast-loading-padding;
     }
 
     @include m(icon) {
-      width: 40rpx;
-      height: 40rpx;
-      border-radius: $hy-radius-semicircle;
+      width: $hy-toast-icon-size;
+      height: $hy-toast-icon-size;
+      border-radius: $hy-toast-icon-radius;
       box-sizing: border-box;
-      margin-right: 16rpx;
+      margin-right: $hy-toast-icon-margin-right;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -56,10 +85,10 @@
     }
 
     @include m(text) {
-      color: #ffffff;
-      font-size: $hy-font-size-base;
+      color: $hy-toast-text-color;
+      font-size: $hy-toast-text-font-size;
       line-height: 1.5;
-      max-width: 480rpx;
+      max-width: $hy-toast-text-max-width;
       word-break: break-all;
 
       @include e(info) {
@@ -86,6 +115,6 @@
 
   @include m(default) {
     color: #ffffff;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: $hy-toast-default-bg-color;
   }
 }

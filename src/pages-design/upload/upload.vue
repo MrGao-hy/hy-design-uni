@@ -1,110 +1,108 @@
 <template>
-    <the-root-page>
-        <!-- 基础使用 -->
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-upload
-                :fileList="list"
-                name="1"
-                multiple
-                :maxCount="1"
-                @afterRead="afterRead"
-            ></hy-upload>
-        </view>
+    <!-- 基础使用 -->
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-upload
+            :fileList="list"
+            name="1"
+            multiple
+            :maxCount="1"
+            @afterRead="afterRead"
+        ></hy-upload>
+    </view>
 
-        <!-- 限制图片上传大小 -->
-        <view class="hy-title">{{ t('limitSize') }}</view>
-        <view class="hy-container">
-            <hy-upload
-                :fileList="list_2"
-                :max-size="maxSize"
-                @oversize="oversizeFn"
-                @afterRead="afterRead_2"
-            ></hy-upload>
-        </view>
+    <!-- 限制图片上传大小 -->
+    <view class="hy-title">{{ t('limitSize') }}</view>
+    <view class="hy-container">
+        <hy-upload
+            :fileList="list_2"
+            :max-size="maxSize"
+            @oversize="oversizeFn"
+            @afterRead="afterRead_2"
+        ></hy-upload>
+    </view>
 
-        <!-- 多张图片上传 -->
-        <view class="hy-title">{{ t('multipleUpload') }}</view>
-        <view class="hy-container">
-            <hy-upload
-                :fileList="list_1"
-                @afterRead="afterRead_1"
-                multiple
-                :upload-text="t('uploadImage')"
-            ></hy-upload>
-        </view>
+    <!-- 多张图片上传 -->
+    <view class="hy-title">{{ t('multipleUpload') }}</view>
+    <view class="hy-container">
+        <hy-upload
+            :fileList="list_1"
+            @afterRead="afterRead_1"
+            multiple
+            :upload-text="t('uploadImage')"
+        ></hy-upload>
+    </view>
 
-        <!-- 限制只上传视频 -->
-        <view class="hy-title">{{ t('onlyVideo') }}</view>
-        <view class="hy-container">
-            <hy-upload
-                :fileList="list_3"
-                @afterRead="afterRead_3"
-                :upload-text="t('uploadVideo')"
-                accept="video"
-            ></hy-upload>
-        </view>
+    <!-- 限制只上传视频 -->
+    <view class="hy-title">{{ t('onlyVideo') }}</view>
+    <view class="hy-container">
+        <hy-upload
+            :fileList="list_3"
+            @afterRead="afterRead_3"
+            :upload-text="t('uploadVideo')"
+            accept="video"
+        ></hy-upload>
+    </view>
 
-        <!-- 自定义上传按钮 -->
-        <view class="hy-title">{{ t('customUploadBtn') }}</view>
-        <view class="hy-container">
-            <hy-upload :fileList="list_4" @afterRead="afterRead_4">
-                <view class="custom-upload-btn">
-                    <hy-icon name="plus" color="#999" size="32"></hy-icon>
-                    <text class="custom-upload-text">{{ t('clickUpload') }}</text>
+    <!-- 自定义上传按钮 -->
+    <view class="hy-title">{{ t('customUploadBtn') }}</view>
+    <view class="hy-container">
+        <hy-upload :fileList="list_4" @afterRead="afterRead_4">
+            <view class="custom-upload-btn">
+                <hy-icon name="plus" color="#999" size="32"></hy-icon>
+                <text class="custom-upload-text">{{ t('clickUpload') }}</text>
+            </view>
+        </hy-upload>
+    </view>
+
+    <!-- 自定义触发区域 -->
+    <view class="hy-title">{{ t('customTrigger') }}</view>
+    <view class="hy-container">
+        <hy-upload :fileList="list_5" @afterRead="afterRead_5">
+            <template #trigger>
+                <view class="custom-trigger">
+                    <hy-icon name="upload" color="#2979ff" size="48"></hy-icon>
+                    <text class="custom-trigger-text">{{ t('dragOrClick') }}</text>
                 </view>
-            </hy-upload>
-        </view>
+            </template>
+        </hy-upload>
+    </view>
 
-        <!-- 自定义触发区域 -->
-        <view class="hy-title">{{ t('customTrigger') }}</view>
-        <view class="hy-container">
-            <hy-upload :fileList="list_5" @afterRead="afterRead_5">
-                <template #trigger>
-                    <view class="custom-trigger">
-                        <hy-icon name="upload" color="#2979ff" size="48"></hy-icon>
-                        <text class="custom-trigger-text">{{ t('dragOrClick') }}</text>
-                    </view>
-                </template>
-            </hy-upload>
-        </view>
+    <!-- 禁用状态 -->
+    <view class="hy-title">{{ t('disabledState') }}</view>
+    <view class="hy-container">
+        <hy-upload :fileList="list_6" disabled>
+            <view class="disabled-btn">
+                <hy-icon name="lock" color="#ccc" size="24"></hy-icon>
+                <text class="disabled-text">{{ t('uploadDisabled') }}</text>
+            </view>
+        </hy-upload>
+    </view>
 
-        <!-- 禁用状态 -->
-        <view class="hy-title">{{ t('disabledState') }}</view>
-        <view class="hy-container">
-            <hy-upload :fileList="list_6" disabled>
-                <view class="disabled-btn">
-                    <hy-icon name="lock" color="#ccc" size="24"></hy-icon>
-                    <text class="disabled-text">{{ t('uploadDisabled') }}</text>
-                </view>
-            </hy-upload>
-        </view>
+    <!-- 不显示删除按钮 -->
+    <view class="hy-title">{{ t('hideDelete') }}</view>
+    <view class="hy-container">
+        <hy-upload :fileList="list_7" :deletable="false" @afterRead="afterRead_7"> </hy-upload>
+    </view>
 
-        <!-- 不显示删除按钮 -->
-        <view class="hy-title">{{ t('hideDelete') }}</view>
-        <view class="hy-container">
-            <hy-upload :fileList="list_7" :deletable="false" @afterRead="afterRead_7"> </hy-upload>
-        </view>
+    <!-- 自定义尺寸 -->
+    <view class="hy-title">{{ t('customSize') }}</view>
+    <view class="hy-container">
+        <hy-upload
+            :fileList="list_8"
+            :width="120"
+            :height="120"
+            :upload-text="t('largeSize')"
+            @afterRead="afterRead_8"
+        ></hy-upload>
+    </view>
 
-        <!-- 自定义尺寸 -->
-        <view class="hy-title">{{ t('customSize') }}</view>
-        <view class="hy-container">
-            <hy-upload
-                :fileList="list_8"
-                :width="120"
-                :height="120"
-                :upload-text="t('largeSize')"
-                @afterRead="afterRead_8"
-            ></hy-upload>
-        </view>
-
-        <!-- 上传失败状态 -->
-        <view class="hy-title">{{ t('failedState') }}</view>
-        <view class="hy-container">
-            <hy-upload :fileList="list_9"></hy-upload>
-            <view class="tip-text">{{ t('reupload') }}</view>
-        </view>
-    </the-root-page>
+    <!-- 上传失败状态 -->
+    <view class="hy-title">{{ t('failedState') }}</view>
+    <view class="hy-container">
+        <hy-upload :fileList="list_9"></hy-upload>
+        <view class="tip-text">{{ t('reupload') }}</view>
+    </view>
 </template>
 
 <script setup lang="ts">

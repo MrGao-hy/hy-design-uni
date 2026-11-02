@@ -1,37 +1,35 @@
 <template>
-    <the-root-page>
-        <hy-cell
-            :arrange="arrange"
-            :size="size"
-            :arrowDirection="arrowDirection"
-            @click="onClick"
-            clickable
-        >
-            <hy-cell-item
-                :title="t('toolbox')"
-                name="tools"
-                :icon="{ name: IconConfig.SETTING, color: 'red' }"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('mine')"
-                name="my"
-                :sub="t('magicBox')"
-                :value="t('back')"
-            ></hy-cell-item>
-            <hy-cell-item :title="t('disabledCell')" name="disabled" disabled></hy-cell-item>
-        </hy-cell>
+    <hy-cell
+        :arrange="arrange"
+        :size="size"
+        :arrowDirection="arrowDirection"
+        @click="onClick"
+        clickable
+    >
+        <hy-cell-item
+            :title="t('toolbox')"
+            name="tools"
+            :icon="{ name: IconConfig.SETTING, color: 'red' }"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('mine')"
+            name="my"
+            :sub="t('magicBox')"
+            :value="t('back')"
+        ></hy-cell-item>
+        <hy-cell-item :title="t('disabledCell')" name="disabled" disabled></hy-cell-item>
+    </hy-cell>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('valuePosition') }}</view>
-            <hy-subsection :list="list_1" v-model="arrange"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('valuePosition') }}</view>
+        <hy-subsection :list="list_1" v-model="arrange"></hy-subsection>
 
-            <view class="hy-title">{{ t('cellSize') }}</view>
-            <hy-subsection :list="list_2" v-model="size"></hy-subsection>
+        <view class="hy-title">{{ t('cellSize') }}</view>
+        <hy-subsection :list="list_2" v-model="size"></hy-subsection>
 
-            <view class="hy-title">{{ t('arrowDirection') }}</view>
-            <hy-subsection :list="list_3" v-model="arrowDirection"></hy-subsection>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('arrowDirection') }}</view>
+        <hy-subsection :list="list_3" v-model="arrowDirection"></hy-subsection>
+    </view>
 </template>
 
 <script setup lang="ts">

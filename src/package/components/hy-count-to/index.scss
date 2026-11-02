@@ -1,11 +1,14 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 数字文字颜色，默认跟随全局主文字 token */
+$hy-count-to-color: var(--hy-count-to-color, #{$hy-text-color}) !default;
+
 
 @include b(count-to) {
   /* #ifndef APP-NVUE */
   display: inline-flex;
   /* #endif */
   text-align: center;
-  color: $hy-text-color;
+  color: $hy-count-to-color;
 }

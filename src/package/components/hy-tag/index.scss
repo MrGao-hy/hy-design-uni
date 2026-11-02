@@ -1,5 +1,25 @@
-@use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin" as *;
+@use '../../libs/css/theme' as *;
+@use '../../libs/css/mixin' as *;
+
+/* 边框宽度 */
+$hy-tag-border-width: var(--hy-tag-border-width, 2rpx) !default;
+/* 各尺寸内边距 */
+$hy-tag-padding-mini: var(--hy-tag-padding-mini, 4rpx 12rpx) !default;
+$hy-tag-padding-small: var(--hy-tag-padding-small, 6rpx 16rpx) !default;
+$hy-tag-padding-medium: var(--hy-tag-padding-medium, 8rpx 20rpx) !default;
+$hy-tag-padding-large: var(--hy-tag-padding-large, 10rpx 24rpx) !default;
+/* 各尺寸文字字号，行高同步引用 */
+$hy-tag-font-size-mini: var(--hy-tag-font-size-mini, #{$hy-font-size-xs}) !default;
+$hy-tag-font-size-small: var(--hy-tag-font-size-small, #{$hy-font-size-sm}) !default;
+$hy-tag-font-size-medium: var(--hy-tag-font-size-medium, #{$hy-font-size-base}) !default;
+$hy-tag-font-size-large: var(--hy-tag-font-size-large, #{$hy-font-size-md}) !default;
+/* 关闭按钮圆角，默认跟随全局半圆 token */
+$hy-tag-close-radius: var(--hy-tag-close-radius, #{$hy-radius-semicircle}) !default;
+/* 关闭按钮尺寸 */
+$hy-tag-close-size-mini: var(--hy-tag-close-size-mini, 14px) !default;
+$hy-tag-close-size-small: var(--hy-tag-close-size-small, 16px) !default;
+$hy-tag-close-size-medium: var(--hy-tag-close-size-medium, 20px) !default;
+$hy-tag-close-size-large: var(--hy-tag-close-size-large, 22px) !default;
 
 /* tag 各尺寸设计参数
    mini:   20rpx 字号, 4rpx/12rpx padding, 6rpx 圆角
@@ -10,7 +30,7 @@
 
 @include b(tag) {
   border-style: solid;
-  border-width: 2rpx;
+  border-width: $hy-tag-border-width;
   @include flex;
   align-items: center;
   box-sizing: border-box;
@@ -40,41 +60,41 @@
     font-weight: $hy-font-weight-medium;
 
     @include m(mini) {
-      font-size: $hy-font-size-xs;
-      line-height: $hy-font-size-xs;
+      font-size: $hy-tag-font-size-mini;
+      line-height: $hy-tag-font-size-mini;
     }
 
     @include m(small) {
-      font-size: $hy-font-size-sm;
-      line-height: $hy-font-size-sm;
+      font-size: $hy-tag-font-size-small;
+      line-height: $hy-tag-font-size-small;
     }
 
     @include m(medium) {
-      font-size: $hy-font-size-base;
-      line-height: $hy-font-size-base;
+      font-size: $hy-tag-font-size-medium;
+      line-height: $hy-tag-font-size-medium;
     }
 
     @include m(large) {
-      font-size: $hy-font-size-md;
-      line-height: $hy-font-size-md;
+      font-size: $hy-tag-font-size-large;
+      line-height: $hy-tag-font-size-large;
     }
   }
 
   /* ---- 尺寸 padding ---- */
   @include m(mini) {
-    padding: 4rpx 12rpx;
+    padding: $hy-tag-padding-mini;
   }
 
   @include m(small) {
-    padding: 6rpx 16rpx;
+    padding: $hy-tag-padding-small;
   }
 
   @include m(medium) {
-    padding: 8rpx 20rpx;
+    padding: $hy-tag-padding-medium;
   }
 
   @include m(large) {
-    padding: 10rpx 24rpx;
+    padding: $hy-tag-padding-large;
   }
 
   /* 主题色 */
@@ -100,7 +120,7 @@
 
   /* ---- 关闭按钮 ---- */
   @include e(close) {
-    border-radius: $hy-radius-semicircle;
+    border-radius: $hy-tag-close-radius;
     background-color: $hy-background--line;
     margin-left: $hy-border-margin-padding-sm;
     @include flex(row);
@@ -114,23 +134,23 @@
     /* #endif */
 
     @include m(mini) {
-      width: 14px;
-      height: 14px;
+      width: $hy-tag-close-size-mini;
+      height: $hy-tag-close-size-mini;
     }
 
     @include m(small) {
-      width: 16px;
-      height: 16px;
+      width: $hy-tag-close-size-small;
+      height: $hy-tag-close-size-small;
     }
 
     @include m(medium) {
-      width: 20px;
-      height: 20px;
+      width: $hy-tag-close-size-medium;
+      height: $hy-tag-close-size-medium;
     }
 
     @include m(large) {
-      width: 22px;
-      height: 22px;
+      width: $hy-tag-close-size-large;
+      height: $hy-tag-close-size-large;
     }
   }
 }

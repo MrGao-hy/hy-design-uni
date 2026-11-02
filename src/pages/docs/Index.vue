@@ -1,176 +1,162 @@
 <template>
-    <the-root-page>
-        <scroll-view
-            class="tools-page"
-            scroll-y
-            :show-scrollbar="false"
-            :scroll-into-view="scrollIntoView"
-            scroll-with-animation
-        >
-            <!-- Hero 头部 -->
-            <view class="hero">
-                <!-- 装饰光斑 -->
-                <view class="hero__orb hero__orb--1" />
-                <view class="hero__orb hero__orb--2" />
-                <view class="hero__orb hero__orb--3" />
+    <scroll-view
+        class="tools-page"
+        scroll-y
+        :show-scrollbar="false"
+        :scroll-into-view="scrollIntoView"
+        scroll-with-animation
+    >
+        <!-- Hero 头部 -->
+        <view class="hero">
+            <!-- 装饰光斑 -->
+            <view class="hero__orb hero__orb--1" />
+            <view class="hero__orb hero__orb--2" />
+            <view class="hero__orb hero__orb--3" />
 
-                <view class="hero__logo-wrap">
-                    <image
-                        class="hero__logo"
-                        src="/static/hy_logo_light.png"
-                        mode="aspectFit"
-                        lazy-load
+            <view class="hero__logo-wrap">
+                <image
+                    class="hero__logo"
+                    src="/static/hy_logo_light.png"
+                    mode="aspectFit"
+                    lazy-load
+                />
+                <view class="hero__version">v1.0.4</view>
+            </view>
+            <view class="hero__title">华玥组件库</view>
+            <view class="hero__slogan">多生态、丰富的移动端 UI 组件库</view>
+            <view class="hero__tags">
+                <hy-tag
+                    v-for="(tag, index) in heroTags"
+                    :key="index"
+                    :label="tag"
+                    type="primary"
+                    plain
+                    size="mini"
+                    shape="circle"
+                />
+            </view>
+            <view class="hero__actions">
+                <hy-button text="开始使用" type="primary" size="medium" @click="openDocs" />
+                <hy-button text="查看文档" type="info" plain size="medium" @click="openDocs" />
+            </view>
+            <view class="hero__scroll-hint" @click="handleNav('install')">
+                <hy-icon name="down" :size="14" color="rgba(255,255,255,0.7)" />
+            </view>
+        </view>
+
+        <!-- 升级提醒 -->
+        <view class="tools-container">
+            <view class="notice-wrap">
+                <hy-notice-bar
+                    :text="noticeText"
+                    mode="closable"
+                    color="#e6a23c"
+                    bg-color="#fdf6ec"
+                    :font-size="12"
+                />
+            </view>
+
+            <!-- 锚点导航 -->
+            <view class="anchor-nav">
+                <view
+                    v-for="(item, index) in navItems"
+                    :key="item.key"
+                    class="anchor-nav__item"
+                    :class="{ 'is-active': activeNav === item.key }"
+                    @click="handleNav(item.key)"
+                >
+                    <hy-icon
+                        :name="item.icon"
+                        :size="13"
+                        :color="activeNav === item.key ? '#fff' : $hyTextColor3"
                     />
-                    <view class="hero__version">v1.0.4</view>
-                </view>
-                <view class="hero__title">华玥组件库</view>
-                <view class="hero__slogan">多生态、丰富的移动端 UI 组件库</view>
-                <view class="hero__tags">
-                    <hy-tag
-                        v-for="(tag, index) in heroTags"
-                        :key="index"
-                        :label="tag"
-                        type="primary"
-                        plain
-                        size="mini"
-                        shape="circle"
-                    />
-                </view>
-                <view class="hero__actions">
-                    <hy-button text="开始使用" type="primary" size="medium" @click="openDocs" />
-                    <hy-button text="查看文档" type="info" plain size="medium" @click="openDocs" />
-                </view>
-                <view class="hero__scroll-hint" @click="handleNav('install')">
-                    <hy-icon name="down" :size="14" color="rgba(255,255,255,0.7)" />
+                    <text class="anchor-nav__text">{{ item.label }}</text>
                 </view>
             </view>
 
-            <!-- 升级提醒 -->
-            <view class="tools-container">
-                <view class="notice-wrap">
-                    <hy-notice-bar
-                        :text="noticeText"
-                        mode="closable"
-                        color="#e6a23c"
-                        bg-color="#fdf6ec"
-                        :font-size="12"
-                    />
-                </view>
-
-                <!-- 锚点导航 -->
-                <view class="anchor-nav">
+            <!-- 快速开始 -->
+            <view id="install" class="anchor-target">
+                <the-tools-section title="快速开始" desc="三步即可完成安装" icon="download">
                     <view
-                        v-for="(item, index) in navItems"
-                        :key="item.key"
-                        class="anchor-nav__item"
-                        :class="{ 'is-active': activeNav === item.key }"
-                        @click="handleNav(item.key)"
+                        v-for="(step, index) in installSteps"
+                        :key="index"
+                        class="step"
+                        :class="{ 'has-line': index < installSteps.length - 1 }"
                     >
-                        <hy-icon
-                            :name="item.icon"
-                            :size="13"
-                            :color="activeNav === item.key ? '#fff' : $hyTextColor3"
+                        <view class="step__header">
+                            <view class="step__index">{{ index + 1 }}</view>
+                            <view class="step__title">{{ step.title }}</view>
+                            <view class="step__duration">{{ step.duration }}</view>
+                        </view>
+                        <view class="step__tip">{{ step.tip }}</view>
+                        <the-code-block
+                            :tabs="step.tabs"
+                            :title="step.filename"
+                            :code="step.code"
                         />
-                        <text class="anchor-nav__text">{{ item.label }}</text>
                     </view>
-                </view>
+                </the-tools-section>
+            </view>
 
-                <!-- 快速开始 -->
-                <view id="install" class="anchor-target">
-                    <the-tools-section title="快速开始" desc="三步即可完成安装" icon="download">
-                        <view
-                            v-for="(step, index) in installSteps"
-                            :key="index"
-                            class="step"
-                            :class="{ 'has-line': index < installSteps.length - 1 }"
-                        >
-                            <view class="step__header">
-                                <view class="step__index">{{ index + 1 }}</view>
-                                <view class="step__title">{{ step.title }}</view>
-                                <view class="step__duration">{{ step.duration }}</view>
-                            </view>
-                            <view class="step__tip">{{ step.tip }}</view>
-                            <the-code-block
-                                :tabs="step.tabs"
-                                :title="step.filename"
-                                :code="step.code"
-                            />
-                        </view>
-                    </the-tools-section>
-                </view>
-
-                <!-- 快速配置 -->
-                <view id="config" class="anchor-target">
-                    <the-tools-section
-                        title="快速配置"
-                        desc="让项目全局自动引入组件"
-                        icon="setting"
+            <!-- 快速配置 -->
+            <view id="config" class="anchor-target">
+                <the-tools-section title="快速配置" desc="让项目全局自动引入组件" icon="setting">
+                    <view
+                        v-for="(step, index) in configSteps"
+                        :key="index"
+                        class="step"
+                        :class="{ 'has-line': index < configSteps.length - 1 }"
                     >
-                        <view
-                            v-for="(step, index) in configSteps"
-                            :key="index"
-                            class="step"
-                            :class="{ 'has-line': index < configSteps.length - 1 }"
-                        >
-                            <view class="step__header">
-                                <view class="step__index">{{ index + 1 }}</view>
-                                <view class="step__title">{{ step.title }}</view>
-                            </view>
-                            <view class="step__tip">{{ step.tip }}</view>
-                            <the-code-block :title="step.filename" :code="step.code" />
+                        <view class="step__header">
+                            <view class="step__index">{{ index + 1 }}</view>
+                            <view class="step__title">{{ step.title }}</view>
                         </view>
-                    </the-tools-section>
-                </view>
+                        <view class="step__tip">{{ step.tip }}</view>
+                        <the-code-block :title="step.filename" :code="step.code" />
+                    </view>
+                </the-tools-section>
+            </view>
 
-                <!-- 页面使用 -->
-                <view id="usage" class="anchor-target">
-                    <the-tools-section title="页面使用" desc="在所需页面直接使用组件" icon="send">
-                        <the-code-block title="index.vue" :code="usageCode" />
-                    </the-tools-section>
-                </view>
+            <!-- 页面使用 -->
+            <view id="usage" class="anchor-target">
+                <the-tools-section title="页面使用" desc="在所需页面直接使用组件" icon="send">
+                    <the-code-block title="index.vue" :code="usageCode" />
+                </the-tools-section>
+            </view>
 
-                <!-- 平台支持 -->
-                <view id="platform" class="anchor-target">
-                    <the-tools-section title="多端支持" desc="一套代码，多端运行" icon="layers">
-                        <view class="platform-grid">
-                            <view
-                                v-for="item in platformList"
-                                :key="item.name"
-                                class="platform-item"
-                            >
-                                <view class="platform-item__icon">
-                                    <hy-icon :name="item.icon" :size="20" :color="item.color" />
-                                </view>
-                                <text class="platform-item__name">{{ item.name }}</text>
+            <!-- 平台支持 -->
+            <view id="platform" class="anchor-target">
+                <the-tools-section title="多端支持" desc="一套代码，多端运行" icon="layers">
+                    <view class="platform-grid">
+                        <view v-for="item in platformList" :key="item.name" class="platform-item">
+                            <view class="platform-item__icon">
+                                <hy-icon :name="item.icon" :size="20" :color="item.color" />
                             </view>
+                            <text class="platform-item__name">{{ item.name }}</text>
                         </view>
-                    </the-tools-section>
-                </view>
+                    </view>
+                </the-tools-section>
+            </view>
 
-                <!-- 文档入口 -->
-                <view class="doc-entry" @click="openDocs">
-                    <view class="doc-entry__icon">
-                        <hy-icon name="link" :size="20" color="#fff" />
-                    </view>
-                    <view class="doc-entry__info">
-                        <text class="doc-entry__text">在线文档</text>
-                        <text class="doc-entry__url">{{ DOC_URL }}</text>
-                    </view>
-                    <view class="doc-entry__arrow">
-                        <hy-icon name="right" :size="14" color="#fff" />
-                    </view>
+            <!-- 文档入口 -->
+            <view class="doc-entry" @click="openDocs">
+                <view class="doc-entry__icon">
+                    <hy-icon name="link" :size="20" color="#fff" />
+                </view>
+                <view class="doc-entry__info">
+                    <text class="doc-entry__text">在线文档</text>
+                    <text class="doc-entry__url">{{ DOC_URL }}</text>
+                </view>
+                <view class="doc-entry__arrow">
+                    <hy-icon name="right" :size="14" color="#fff" />
                 </view>
             </view>
-        </scroll-view>
-    </the-root-page>
+        </view>
+    </scroll-view>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import HyButton from '@/package/components/hy-button/hy-button.vue'
-import HyIcon from '@/package/components/hy-icon/hy-icon.vue'
-import HyNoticeBar from '@/package/components/hy-notice-bar/hy-notice-bar.vue'
-import HyTag from '@/package/components/hy-tag/hy-tag.vue'
 
 // 文档地址常量
 const DOC_URL = 'https://www.hy-design-uni.top/'

@@ -1,6 +1,19 @@
 @use '../../libs/css/theme' as *;
 @use '../../libs/css/mixin' as *;
 
+/* 底部栏高度（不含安全区） */
+$hy-tabbar-height: var(--hy-tabbar-height, 60px) !default;
+/* 底部栏顶部圆角 */
+$hy-tabbar-radius: var(--hy-tabbar-radius, 15rpx 15rpx 0 0) !default;
+/* 容器水平内边距 */
+$hy-tabbar-padding: var(--hy-tabbar-padding, 0 20rpx) !default;
+/* 单个选项卡宽度 */
+$hy-tabbar-item-width: var(--hy-tabbar-item-width, 60px) !default;
+/* 凸起指示器尺寸 */
+$hy-tabbar-indicator-size: var(--hy-tabbar-indicator-size, 50px) !default;
+/* 凸起圆形尺寸 */
+$hy-tabbar-circle-size: var(--hy-tabbar-circle-size, 40px) !default;
+
 @include b(tabbar) {
     bottom: 0;
     left: 0;
@@ -19,11 +32,11 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        height: calc(60px + env(safe-area-inset-bottom));
+        height: calc(#{$hy-tabbar-height} + env(safe-area-inset-bottom));
         display: flex;
         justify-content: center;
         align-items: center;
-        border-radius: 15rpx 15rpx 0 0;
+        border-radius: $hy-tabbar-radius;
         /* #ifndef APP-PLUS-NVUE */
         box-sizing: border-box;
         /* #endif */
@@ -34,10 +47,10 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        padding: 0 20rpx;
+        padding: $hy-tabbar-padding;
         &__item {
             position: relative;
-            width: 60px;
+            width: $hy-tabbar-item-width;
             height: 100%;
             z-index: 1;
             //padding-bottom: constant(safe-area-inset-bottom);
@@ -95,8 +108,8 @@
                     /* #ifndef APP-PLUS-NVUE */
                     display: block;
                     /* #endif */
-                    width: 40px;
-                    height: 40px;
+                    width: $hy-tabbar-circle-size;
+                    height: $hy-tabbar-circle-size;
                     background: transparent;
                     border-radius: 50%;
                     border: 3rpx solid #fff;
@@ -134,8 +147,8 @@
         position: absolute;
         top: -36px;
         left: 0;
-        width: 50px;
-        height: 50px;
+        width: $hy-tabbar-indicator-size;
+        height: $hy-tabbar-indicator-size;
         border-radius: 50%;
         display: flex;
         justify-content: center;

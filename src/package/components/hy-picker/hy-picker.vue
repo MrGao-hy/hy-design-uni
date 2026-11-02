@@ -75,7 +75,7 @@
                     :style="{
                         height: `${addUnit(visibleItemCount * itemHeight)}`
                     }"
-                    mask-class="hy-picker--view__mask"
+                    mask-class="hy-picker__mask"
                     @change="changeHandler"
                 >
                     <picker-view-column

@@ -1,101 +1,99 @@
 <template>
-    <the-root-page>
-        <!-- 基础使用 -->
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-tooltip :text="t('copyContent')">
-                <text class="tooltip-text">{{ t('longpressCopy') }}</text>
-            </hy-tooltip>
-        </view>
+    <!-- 基础使用 -->
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-tooltip :text="t('copyContent')">
+            <text class="tooltip-text">{{ t('longpressCopy') }}</text>
+        </hy-tooltip>
+    </view>
 
-        <!-- 触发模式 -->
-        <view class="hy-title">{{ t('triggerMode') }}</view>
-        <view class="hy-container hy-flex">
-            <hy-tooltip :text="t('longpressTrigger')" triggerMode="longpress">
-                <text class="tooltip-text">{{ t('pressMe') }}</text>
-            </hy-tooltip>
-            <hy-tooltip :text="t('clickTrigger')" triggerMode="click">
-                <text class="tooltip-text">{{ t('clickMe') }}</text>
-            </hy-tooltip>
-        </view>
+    <!-- 触发模式 -->
+    <view class="hy-title">{{ t('triggerMode') }}</view>
+    <view class="hy-container hy-flex">
+        <hy-tooltip :text="t('longpressTrigger')" triggerMode="longpress">
+            <text class="tooltip-text">{{ t('pressMe') }}</text>
+        </hy-tooltip>
+        <hy-tooltip :text="t('clickTrigger')" triggerMode="click">
+            <text class="tooltip-text">{{ t('clickMe') }}</text>
+        </hy-tooltip>
+    </view>
 
-        <!-- 弹出位置 -->
-        <view class="hy-title">{{ t('placement') }}</view>
-        <view class="hy-container position-demo">
-            <view class="position-row">
-                <hy-tooltip text="top" placement="top">
-                    <text class="position-btn">{{ t('posTop') }}</text>
-                </hy-tooltip>
-            </view>
-            <view class="position-row">
-                <hy-tooltip text="left" placement="left">
-                    <text class="position-btn">{{ t('posLeft') }}</text>
-                </hy-tooltip>
-                <hy-tooltip text="bottom" placement="bottom">
-                    <text class="position-btn">{{ t('posBottom') }}</text>
-                </hy-tooltip>
-                <hy-tooltip text="right" placement="right">
-                    <text class="position-btn">{{ t('posRight') }}</text>
-                </hy-tooltip>
-            </view>
+    <!-- 弹出位置 -->
+    <view class="hy-title">{{ t('placement') }}</view>
+    <view class="hy-container position-demo">
+        <view class="position-row">
+            <hy-tooltip text="top" placement="top">
+                <text class="position-btn">{{ t('posTop') }}</text>
+            </hy-tooltip>
         </view>
+        <view class="position-row">
+            <hy-tooltip text="left" placement="left">
+                <text class="position-btn">{{ t('posLeft') }}</text>
+            </hy-tooltip>
+            <hy-tooltip text="bottom" placement="bottom">
+                <text class="position-btn">{{ t('posBottom') }}</text>
+            </hy-tooltip>
+            <hy-tooltip text="right" placement="right">
+                <text class="position-btn">{{ t('posRight') }}</text>
+            </hy-tooltip>
+        </view>
+    </view>
 
-        <!-- 复制功能 -->
-        <view class="hy-title">{{ t('copyFeature') }}</view>
-        <view class="hy-container">
-            <hy-tooltip :text="t('copyText')" @click="onCopyClick">
-                <text class="tooltip-text">{{ t('copyDisplay') }}</text>
-            </hy-tooltip>
-        </view>
+    <!-- 复制功能 -->
+    <view class="hy-title">{{ t('copyFeature') }}</view>
+    <view class="hy-container">
+        <hy-tooltip :text="t('copyText')" @click="onCopyClick">
+            <text class="tooltip-text">{{ t('copyDisplay') }}</text>
+        </hy-tooltip>
+    </view>
 
-        <!-- 扩展按钮 -->
-        <view class="hy-title">{{ t('extButtons') }}</view>
-        <view class="hy-container grid">
-            <hy-tooltip :text="t('action')" :buttons="[t('favorite')]" @click="onClick">
-                <text class="tooltip-text">{{ t('singleExtBtn') }}</text>
-            </hy-tooltip>
-            <hy-tooltip :text="t('action')" :buttons="[t('favorite'), t('share')]" @click="onClick">
-                <text class="tooltip-text">{{ t('multiExtBtn') }}</text>
-            </hy-tooltip>
-            <hy-tooltip
-                :text="t('action')"
-                :buttons="[t('edit'), t('delete')]"
-                :showCopy="false"
-                @click="onClick"
-            >
-                <text class="tooltip-text">{{ t('onlyExtBtn') }}</text>
-            </hy-tooltip>
-        </view>
+    <!-- 扩展按钮 -->
+    <view class="hy-title">{{ t('extButtons') }}</view>
+    <view class="hy-container grid">
+        <hy-tooltip :text="t('action')" :buttons="[t('favorite')]" @click="onClick">
+            <text class="tooltip-text">{{ t('singleExtBtn') }}</text>
+        </hy-tooltip>
+        <hy-tooltip :text="t('action')" :buttons="[t('favorite'), t('share')]" @click="onClick">
+            <text class="tooltip-text">{{ t('multiExtBtn') }}</text>
+        </hy-tooltip>
+        <hy-tooltip
+            :text="t('action')"
+            :buttons="[t('edit'), t('delete')]"
+            :showCopy="false"
+            @click="onClick"
+        >
+            <text class="tooltip-text">{{ t('onlyExtBtn') }}</text>
+        </hy-tooltip>
+    </view>
 
-        <!-- 自定义样式 -->
-        <view class="hy-title">{{ t('customStyle') }}</view>
-        <view class="hy-container">
-            <hy-tooltip :text="t('highlightText')" bgColor="#e3e4e6">
-                <text class="tooltip-text">{{ t('highlightBg') }}</text>
-            </hy-tooltip>
-            <hy-tooltip :text="t('redBold')" color="red" size="30" bold>
-                <text class="tooltip-text">{{ t('changeFont') }}</text>
-            </hy-tooltip>
-            <hy-tooltip
-                :text="t('customStyle')"
-                :customStyle="{ padding: '20rpx 40rpx', borderRadius: '12rpx' }"
-                customClass="custom-tooltip"
-            >
-                <text class="tooltip-text">{{ t('customOuter') }}</text>
-            </hy-tooltip>
-        </view>
+    <!-- 自定义样式 -->
+    <view class="hy-title">{{ t('customStyle') }}</view>
+    <view class="hy-container">
+        <hy-tooltip :text="t('highlightText')" bgColor="#e3e4e6">
+            <text class="tooltip-text">{{ t('highlightBg') }}</text>
+        </hy-tooltip>
+        <hy-tooltip :text="t('redBold')" color="red" size="30" bold>
+            <text class="tooltip-text">{{ t('changeFont') }}</text>
+        </hy-tooltip>
+        <hy-tooltip
+            :text="t('customStyle')"
+            :customStyle="{ padding: '20rpx 40rpx', borderRadius: '12rpx' }"
+            customClass="custom-tooltip"
+        >
+            <text class="tooltip-text">{{ t('customOuter') }}</text>
+        </hy-tooltip>
+    </view>
 
-        <!-- 遮罩层 -->
-        <view class="hy-title">{{ t('overlaySection') }}</view>
-        <view class="hy-container hy-flex">
-            <hy-tooltip :text="t('showOverlayText')" :overlay="false">
-                <text class="tooltip-text">{{ t('forbidTouch') }}</text>
-            </hy-tooltip>
-            <hy-tooltip :text="t('hideOverlayText')" :overlay="true">
-                <text class="tooltip-text">{{ t('allowTouch') }}</text>
-            </hy-tooltip>
-        </view>
-    </the-root-page>
+    <!-- 遮罩层 -->
+    <view class="hy-title">{{ t('overlaySection') }}</view>
+    <view class="hy-container hy-flex">
+        <hy-tooltip :text="t('showOverlayText')" :overlay="false">
+            <text class="tooltip-text">{{ t('forbidTouch') }}</text>
+        </hy-tooltip>
+        <hy-tooltip :text="t('hideOverlayText')" :overlay="true">
+            <text class="tooltip-text">{{ t('allowTouch') }}</text>
+        </hy-tooltip>
+    </view>
 </template>
 
 <script setup lang="ts">

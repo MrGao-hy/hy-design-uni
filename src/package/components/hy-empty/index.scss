@@ -1,6 +1,13 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 描述文本最大宽度 */
+$hy-empty-description-width: var(--hy-empty-description-width, 70%) !default;
+/* 底部按钮上间距 */
+$hy-empty-button-margin-top: var(--hy-empty-button-margin-top, 100rpx) !default;
+/* 描述文字颜色，默认跟随全局灰度文字 token */
+$hy-empty-description-color: var(--hy-empty-description-color, #{$hy-text-color--grey}) !default;
+
 
 @include b(empty) {
   top: 0;
@@ -12,13 +19,13 @@
   align-items: center;
   flex-direction: column;
   @include m(description) {
-    width: 70%;
+    width: $hy-empty-description-width;
     text-align: center;
     margin-top: $hy-border-margin-padding-base;
-    color: $hy-text-color--grey;
+    color: $hy-empty-description-color;
   }
 
   @include m(button) {
-    margin-top: 100rpx;
+    margin-top: $hy-empty-button-margin-top;
   }
 }

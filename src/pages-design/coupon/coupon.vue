@@ -1,104 +1,102 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('demoTitle') }}</view>
-        <view class="hy-container">
-            <template v-for="item in list" :key="item.id">
-                <hy-coupon
-                    :title="item.name"
-                    :amount="item.value"
-                    :description="item.description"
-                    :startDate="item.validFrom"
-                    :endDate="item.validTo"
-                    :type="item.type"
-                    :status="item.status"
-                    :btnMode="btnMode"
-                    :disabled-status="['used', 'expired', 'redeemed']"
-                    :boxShadow="boxShadow"
-                    :custom-style="{ marginBottom: '20px' }"
-                    @used="onUse"
-                />
-            </template>
-        </view>
-
-        <view class="hy-title">{{ t('bgColorSection') }}</view>
-
-        <view class="hy-container">
+    <view class="hy-title">{{ t('demoTitle') }}</view>
+    <view class="hy-container">
+        <template v-for="item in list" :key="item.id">
             <hy-coupon
-                :title="t('testCoupon')"
-                amount="10"
-                :description="t('testCouponDesc')"
-                :date-desc="t('longTerm')"
-                type="moneyOff"
-                status="unused"
+                :title="item.name"
+                :amount="item.value"
+                :description="item.description"
+                :startDate="item.validFrom"
+                :endDate="item.validTo"
+                :type="item.type"
+                :status="item.status"
                 :btnMode="btnMode"
-                :boxShadow="boxShadow"
                 :disabled-status="['used', 'expired', 'redeemed']"
-                bg-color="linear-gradient(135deg, #7b61ff 0%, #4134c1 100%)"
+                :boxShadow="boxShadow"
+                :custom-style="{ marginBottom: '20px' }"
                 @used="onUse"
             />
-        </view>
+        </template>
+    </view>
 
-        <view class="hy-title">{{ t('longContent') }}</view>
+    <view class="hy-title">{{ t('bgColorSection') }}</view>
 
-        <view class="hy-container">
+    <view class="hy-container">
+        <hy-coupon
+            :title="t('testCoupon')"
+            amount="10"
+            :description="t('testCouponDesc')"
+            :date-desc="t('longTerm')"
+            type="moneyOff"
+            status="unused"
+            :btnMode="btnMode"
+            :boxShadow="boxShadow"
+            :disabled-status="['used', 'expired', 'redeemed']"
+            bg-color="linear-gradient(135deg, #7b61ff 0%, #4134c1 100%)"
+            @used="onUse"
+        />
+    </view>
+
+    <view class="hy-title">{{ t('longContent') }}</view>
+
+    <view class="hy-container">
+        <hy-coupon
+            :title="t('couponTitle')"
+            amount="10"
+            :description="t('couponDesc')"
+            :date-desc="t('longTerm')"
+            type="fixedAmount"
+            status="unused"
+            :btnMode="btnMode"
+            :boxShadow="boxShadow"
+            :disabled-status="['used', 'expired', 'redeemed']"
+            :custom-style="{ marginBottom: '20px' }"
+            @used="onUse"
+        />
+
+        <hy-coupon
+            :title="t('couponTitle')"
+            amount="10"
+            :description="t('couponDesc')"
+            desEllipsis="2"
+            :date-desc="t('longTerm')"
+            type="fixedAmount"
+            status="unused"
+            :btnMode="btnMode"
+            :boxShadow="boxShadow"
+            :disabled-status="['used', 'expired', 'redeemed']"
+            @used="onUse"
+        />
+    </view>
+
+    <view class="hy-title">{{ t('disabledSection') }}</view>
+    <view class="hy-container">
+        <template v-for="item in list2" :key="item.id">
             <hy-coupon
-                :title="t('couponTitle')"
-                amount="10"
-                :description="t('couponDesc')"
-                :date-desc="t('longTerm')"
-                type="fixedAmount"
-                status="unused"
+                :title="item.name"
+                :amount="item.value"
+                :description="item.description"
+                :startDate="item.validFrom"
+                :endDate="item.validTo"
+                :type="item.type"
+                :status="item.status"
                 :btnMode="btnMode"
                 :boxShadow="boxShadow"
                 :disabled-status="['used', 'expired', 'redeemed']"
                 :custom-style="{ marginBottom: '20px' }"
+                :btnText="t('expired')"
                 @used="onUse"
             />
+        </template>
+    </view>
 
-            <hy-coupon
-                :title="t('couponTitle')"
-                amount="10"
-                :description="t('couponDesc')"
-                desEllipsis="2"
-                :date-desc="t('longTerm')"
-                type="fixedAmount"
-                status="unused"
-                :btnMode="btnMode"
-                :boxShadow="boxShadow"
-                :disabled-status="['used', 'expired', 'redeemed']"
-                @used="onUse"
-            />
-        </view>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('shadowSection') }}</view>
+        <hy-switch v-model="boxShadow" />
 
-        <view class="hy-title">{{ t('disabledSection') }}</view>
-        <view class="hy-container">
-            <template v-for="item in list2" :key="item.id">
-                <hy-coupon
-                    :title="item.name"
-                    :amount="item.value"
-                    :description="item.description"
-                    :startDate="item.validFrom"
-                    :endDate="item.validTo"
-                    :type="item.type"
-                    :status="item.status"
-                    :btnMode="btnMode"
-                    :boxShadow="boxShadow"
-                    :disabled-status="['used', 'expired', 'redeemed']"
-                    :custom-style="{ marginBottom: '20px' }"
-                    :btnText="t('expired')"
-                    @used="onUse"
-                />
-            </template>
-        </view>
-
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('shadowSection') }}</view>
-            <hy-switch v-model="boxShadow" />
-
-            <view class="hy-title">{{ t('btnStyleSection') }}</view>
-            <hy-subsection :list="btnModeOptions" v-model="btnMode"></hy-subsection>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('btnStyleSection') }}</view>
+        <hy-subsection :list="btnModeOptions" v-model="btnMode"></hy-subsection>
+    </view>
 </template>
 
 <script setup lang="ts">

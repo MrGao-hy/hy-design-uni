@@ -1,156 +1,154 @@
 <template>
-    <the-root-page>
-        <!-- 基础使用 - 字符串数组 -->
-        <view class="hy-title">{{ t('basicString') }}</view>
-        <view class="hy-container">
-            <hy-subsection :list="stringList" v-model="stringValue"></hy-subsection>
-        </view>
+    <!-- 基础使用 - 字符串数组 -->
+    <view class="hy-title">{{ t('basicString') }}</view>
+    <view class="hy-container">
+        <hy-subsection :list="stringList" v-model="stringValue"></hy-subsection>
+    </view>
 
-        <!-- 基础使用 - 对象数组 -->
-        <view class="hy-title">{{ t('basicObject') }}</view>
-        <view class="hy-container">
-            <hy-subsection :list="objectList" v-model="objectValue"></hy-subsection>
-        </view>
+    <!-- 基础使用 - 对象数组 -->
+    <view class="hy-title">{{ t('basicObject') }}</view>
+    <view class="hy-container">
+        <hy-subsection :list="objectList" v-model="objectValue"></hy-subsection>
+    </view>
 
-        <!-- 基础使用 - 数字数组 -->
-        <view class="hy-title">{{ t('basicNumber') }}</view>
-        <view class="hy-container">
-            <hy-subsection :list="numberList" v-model="numberValue"></hy-subsection>
-        </view>
+    <!-- 基础使用 - 数字数组 -->
+    <view class="hy-title">{{ t('basicNumber') }}</view>
+    <view class="hy-container">
+        <hy-subsection :list="numberList" v-model="numberValue"></hy-subsection>
+    </view>
 
-        <!-- 默认选中项 -->
-        <view class="hy-title">{{ t('defaultCurrent') }}</view>
-        <view class="hy-container">
-            <hy-subsection :list="stringList" v-model="defaultValue" :current="1"></hy-subsection>
-        </view>
+    <!-- 默认选中项 -->
+    <view class="hy-title">{{ t('defaultCurrent') }}</view>
+    <view class="hy-container">
+        <hy-subsection :list="stringList" v-model="defaultValue" :current="1"></hy-subsection>
+    </view>
 
-        <!-- 按钮模式 -->
-        <view class="hy-title">{{ t('buttonMode') }}</view>
-        <view class="hy-container">
-            <hy-subsection :list="stringList" v-model="buttonValue" mode="button"></hy-subsection>
-        </view>
+    <!-- 按钮模式 -->
+    <view class="hy-title">{{ t('buttonMode') }}</view>
+    <view class="hy-container">
+        <hy-subsection :list="stringList" v-model="buttonValue" mode="button"></hy-subsection>
+    </view>
 
-        <!-- 分段器模式 -->
-        <view class="hy-title">{{ t('subsectionMode') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="stringList"
-                v-model="subsectionValue"
-                mode="subsection"
-            ></hy-subsection>
-        </view>
+    <!-- 分段器模式 -->
+    <view class="hy-title">{{ t('subsectionMode') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="stringList"
+            v-model="subsectionValue"
+            mode="subsection"
+        ></hy-subsection>
+    </view>
 
-        <!-- 自定义激活和未激活颜色 -->
-        <view class="hy-title">{{ t('customColor') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="stringList"
-                v-model="colorValue"
-                activeColor="#4F8EF7"
-                inactiveColor="#999999"
-                mode="subsection"
-            ></hy-subsection>
-        </view>
+    <!-- 自定义激活和未激活颜色 -->
+    <view class="hy-title">{{ t('customColor') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="stringList"
+            v-model="colorValue"
+            activeColor="#4F8EF7"
+            inactiveColor="#999999"
+            mode="subsection"
+        ></hy-subsection>
+    </view>
 
-        <!-- 自定义背景颜色（按钮模式） -->
-        <view class="hy-title">{{ t('customBgColor') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="stringList"
-                v-model="bgColorValue"
-                bgColor="red"
-                mode="button"
-            ></hy-subsection>
-        </view>
+    <!-- 自定义背景颜色（按钮模式） -->
+    <view class="hy-title">{{ t('customBgColor') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="stringList"
+            v-model="bgColorValue"
+            bgColor="red"
+            mode="button"
+        ></hy-subsection>
+    </view>
 
-        <!-- 自定义字体大小 -->
-        <view class="hy-title">{{ t('customFontSize') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="stringList"
-                v-model="fontSizeValue"
-                :fontSize="20"
-                mode="subsection"
-            ></hy-subsection>
-        </view>
+    <!-- 自定义字体大小 -->
+    <view class="hy-title">{{ t('customFontSize') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="stringList"
+            v-model="fontSizeValue"
+            :fontSize="20"
+            mode="subsection"
+        ></hy-subsection>
+    </view>
 
-        <!-- 激活字体不加粗 -->
-        <view class="hy-title">{{ t('noBold') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="stringList"
-                v-model="boldValue"
-                :bold="false"
-                mode="subsection"
-            ></hy-subsection>
-        </view>
+    <!-- 激活字体不加粗 -->
+    <view class="hy-title">{{ t('noBold') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="stringList"
+            v-model="boldValue"
+            :bold="false"
+            mode="subsection"
+        ></hy-subsection>
+    </view>
 
-        <!-- 自定义键名 -->
-        <view class="hy-title">{{ t('customKeyNames') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="customKeyList"
-                v-model="customKeyValue"
-                :customKeys="{ name: 'title', value: 'id' }"
-                mode="subsection"
-            ></hy-subsection>
-        </view>
+    <!-- 自定义键名 -->
+    <view class="hy-title">{{ t('customKeyNames') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="customKeyList"
+            v-model="customKeyValue"
+            :customKeys="{ name: 'title', value: 'id' }"
+            mode="subsection"
+        ></hy-subsection>
+    </view>
 
-        <!-- 事件监听 -->
-        <view class="hy-title">{{ t('eventListen') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="stringList"
-                v-model="eventValue"
-                @change="handleChange"
-            ></hy-subsection>
-            <view class="info-box">
-                <text>{{ t('currentValue') }}{{ eventValue }}</text>
-                <text>{{ t('currentIndex') }}{{ currentIndex }}</text>
+    <!-- 事件监听 -->
+    <view class="hy-title">{{ t('eventListen') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="stringList"
+            v-model="eventValue"
+            @change="handleChange"
+        ></hy-subsection>
+        <view class="info-box">
+            <text>{{ t('currentValue') }}{{ eventValue }}</text>
+            <text>{{ t('currentIndex') }}{{ currentIndex }}</text>
+        </view>
+    </view>
+
+    <!-- 配合内容切换 -->
+    <view class="hy-title">{{ t('contentSwitch') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="statusList"
+            v-model="statusValue"
+            mode="subsection"
+        ></hy-subsection>
+        <view class="content-box">
+            <view v-if="statusValue === 'all'" class="content-item">
+                <view class="content-title">{{ t('all') }}</view>
+                <view class="content-desc">{{ t('allOrdersDesc') }}</view>
+            </view>
+            <view v-else-if="statusValue === 'pending'" class="content-item">
+                <view class="content-title">{{ t('pendingPayment') }}</view>
+                <view class="content-desc">{{ t('pendingDesc') }}</view>
+            </view>
+            <view v-else-if="statusValue === 'shipped'" class="content-item">
+                <view class="content-title">{{ t('toReceive') }}</view>
+                <view class="content-desc">{{ t('receiveDesc') }}</view>
+            </view>
+            <view v-else class="content-item">
+                <view class="content-title">{{ t('completed') }}</view>
+                <view class="content-desc">{{ t('completedDesc') }}</view>
             </view>
         </view>
+    </view>
 
-        <!-- 配合内容切换 -->
-        <view class="hy-title">{{ t('contentSwitch') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="statusList"
-                v-model="statusValue"
-                mode="subsection"
-            ></hy-subsection>
-            <view class="content-box">
-                <view v-if="statusValue === 'all'" class="content-item">
-                    <view class="content-title">{{ t('all') }}</view>
-                    <view class="content-desc">{{ t('allOrdersDesc') }}</view>
-                </view>
-                <view v-else-if="statusValue === 'pending'" class="content-item">
-                    <view class="content-title">{{ t('pendingPayment') }}</view>
-                    <view class="content-desc">{{ t('pendingDesc') }}</view>
-                </view>
-                <view v-else-if="statusValue === 'shipped'" class="content-item">
-                    <view class="content-title">{{ t('toReceive') }}</view>
-                    <view class="content-desc">{{ t('receiveDesc') }}</view>
-                </view>
-                <view v-else class="content-item">
-                    <view class="content-title">{{ t('completed') }}</view>
-                    <view class="content-desc">{{ t('completedDesc') }}</view>
-                </view>
-            </view>
+    <!-- 配合 Tab 切换 -->
+    <view class="hy-title">{{ t('listFilter') }}</view>
+    <view class="hy-container">
+        <hy-subsection
+            :list="filterList"
+            v-model="filterValue"
+            mode="subsection"
+        ></hy-subsection>
+        <view class="filter-result">
+            <text>{{ t('currentFilter') }}{{ filterText }}</text>
         </view>
-
-        <!-- 配合 Tab 切换 -->
-        <view class="hy-title">{{ t('listFilter') }}</view>
-        <view class="hy-container">
-            <hy-subsection
-                :list="filterList"
-                v-model="filterValue"
-                mode="subsection"
-            ></hy-subsection>
-            <view class="filter-result">
-                <text>{{ t('currentFilter') }}{{ filterText }}</text>
-            </view>
-        </view>
-    </the-root-page>
+    </view>
 </template>
 
 <script setup lang="ts">

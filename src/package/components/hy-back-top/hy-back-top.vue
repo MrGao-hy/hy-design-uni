@@ -61,7 +61,7 @@ const backTopStyle = computed<CSSProperties>(() => {
         width: '40px',
         height: '40px',
         position: 'fixed',
-        zIndex: 10
+        zIndex: props.zIndex
     }
 })
 const contentStyle = computed<CSSProperties>(() => {

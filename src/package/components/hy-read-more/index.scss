@@ -1,10 +1,17 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 内容字号 */
+$hy-read-more-font-size: var(--hy-read-more-font-size, 15px) !default;
+/* 遮罩高度 */
+$hy-read-more-mask-height: var(--hy-read-more-mask-height, 100px) !default;
+/* 展开按钮行高 */
+$hy-read-more-line-height: var(--hy-read-more-line-height, 30px) !default;
+
 @include b(read-more) {
   @include e(content) {
     overflow: hidden;
-    font-size: 15px;
+    font-size: $hy-read-more-font-size;
     text-align: left;
     transition: height 0.3s ease;
   }
@@ -17,8 +24,8 @@
     @include m(mask) {
       background-image:
               linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, $hy-background--container 80%);
-      padding-top: 100px;
-      margin-top: -100px;
+      padding-top: $hy-read-more-mask-height;
+      margin-top: calc(-1 * #{$hy-read-more-mask-height});
     }
 
     @include m(content) {
@@ -26,7 +33,7 @@
       align-items: center;
       justify-content: center;
       margin: $hy-border-margin-padding-sm 0;
-      line-height: 30px;
+      line-height: $hy-read-more-line-height;
 
       @include e(text) {
         color: $hy-primary;

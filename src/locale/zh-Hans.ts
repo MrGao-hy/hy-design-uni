@@ -1723,6 +1723,8 @@ export default {
         label: '标签',
         plain: '镂空',
         plainFill: '镂空带背景色',
+        darkPreview: '暗色模式',
+        borderNone: '无边框',
         size: '尺寸',
         shape: '形状',
         circle: '圆形',

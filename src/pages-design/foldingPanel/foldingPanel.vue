@@ -1,128 +1,126 @@
 <template>
-    <the-root-page>
-        <!-- 演示区：不同高度的折叠内容 -->
-        <hy-folding-panel
-            v-model="activeIndex"
-            :accordion="accordion"
-            :border="border"
-            :disabled="disabled"
-            :size="size"
+    <!-- 演示区：不同高度的折叠内容 -->
+    <hy-folding-panel
+        v-model="activeIndex"
+        :accordion="accordion"
+        :border="border"
+        :disabled="disabled"
+        :size="size"
+    >
+        <!-- 短文本：高度小 -->
+        <hy-folding-panel-item :title="t('fruits')" index="fruits" :value="t('fruitsValue')">
+            <view class="content-box content-box--sm">
+                <text class="content-text">{{ t('fruitContent') }}</text>
+            </view>
+        </hy-folding-panel-item>
+
+        <!-- 中等高度：列表内容 -->
+        <hy-folding-panel-item :title="t('foodListTitle')" index="food">
+            <view class="content-box content-box--md">
+                <view v-for="(item, i) in foodList" :key="i" class="list-item">
+                    <text class="list-item__name">{{ item.name }}</text>
+                    <text class="list-item__price">¥{{ item.price }}</text>
+                </view>
+            </view>
+        </hy-folding-panel-item>
+
+        <!-- 长文本：高度大 -->
+        <hy-folding-panel-item
+            :title="t('beverageTitle')"
+            index="beverage"
+            :value="t('beverageValue')"
         >
-            <!-- 短文本：高度小 -->
-            <hy-folding-panel-item :title="t('fruits')" index="fruits" :value="t('fruitsValue')">
-                <view class="content-box content-box--sm">
-                    <text class="content-text">{{ t('fruitContent') }}</text>
+            <view class="content-box content-box--lg">
+                <text class="content-text">{{ longText }}</text>
+            </view>
+        </hy-folding-panel-item>
+
+        <!-- 自定义标题插槽 -->
+        <hy-folding-panel-item index="title">
+            <template #title>
+                <view class="custom-title">
+                    <text class="custom-title__icon">🔥</text>
+                    <text class="custom-title__text">{{ t('customTitle') }}</text>
                 </view>
-            </hy-folding-panel-item>
+            </template>
+            <view class="content-box content-box--sm">
+                <text class="content-text">{{ t('customTitleTip') }}</text>
+            </view>
+        </hy-folding-panel-item>
 
-            <!-- 中等高度：列表内容 -->
-            <hy-folding-panel-item :title="t('foodListTitle')" index="food">
-                <view class="content-box content-box--md">
-                    <view v-for="(item, i) in foodList" :key="i" class="list-item">
-                        <text class="list-item__name">{{ item.name }}</text>
-                        <text class="list-item__price">¥{{ item.price }}</text>
-                    </view>
+        <!-- 自定义头部插槽 -->
+        <hy-folding-panel-item index="header">
+            <template #header>
+                <view class="custom-header">
+                    <text class="custom-header__text">{{ t('customHeader') }}</text>
+                    <text class="custom-header__badge">NEW</text>
                 </view>
-            </hy-folding-panel-item>
+            </template>
+            <view class="content-box content-box--md">
+                <text class="content-text">{{ t('customHeaderTip') }}</text>
+            </view>
+        </hy-folding-panel-item>
 
-            <!-- 长文本：高度大 -->
-            <hy-folding-panel-item
-                :title="t('beverageTitle')"
-                index="beverage"
-                :value="t('beverageValue')"
-            >
-                <view class="content-box content-box--lg">
-                    <text class="content-text">{{ longText }}</text>
+        <!-- 内容超过上限：内部滚动 -->
+        <hy-folding-panel-item :title="t('scrollTitle')" index="scroll" :content-height="300">
+            <view class="content-box content-box--lg">
+                <view v-for="(item, i) in longList" :key="i" class="list-item">
+                    <text class="list-item__name">{{ t('itemN', i + 1) }}</text>
+                    <text class="list-item__price">¥{{ (i + 1) * 10 }}</text>
                 </view>
-            </hy-folding-panel-item>
+            </view>
+        </hy-folding-panel-item>
 
-            <!-- 自定义标题插槽 -->
-            <hy-folding-panel-item index="title">
-                <template #title>
-                    <view class="custom-title">
-                        <text class="custom-title__icon">🔥</text>
-                        <text class="custom-title__text">{{ t('customTitle') }}</text>
-                    </view>
-                </template>
-                <view class="content-box content-box--sm">
-                    <text class="content-text">{{ t('customTitleTip') }}</text>
+        <!-- 动态内容：演示 resize 方法 -->
+        <hy-folding-panel-item ref="dynamicRef" :title="t('dynamicTitle')" index="dynamic">
+            <view class="content-box">
+                <view v-for="(item, i) in dynamicList" :key="i" class="list-item">
+                    <text class="list-item__name">{{ item }}</text>
                 </view>
-            </hy-folding-panel-item>
+                <hy-button
+                    type="primary"
+                    size="small"
+                    :custom-style="{ marginTop: '20rpx', width: '100%' }"
+                    @click="loadMore"
+                >
+                    {{ t('loadMore', dynamicList.length) }}
+                </hy-button>
+            </view>
+        </hy-folding-panel-item>
 
-            <!-- 自定义头部插槽 -->
-            <hy-folding-panel-item index="header">
-                <template #header>
-                    <view class="custom-header">
-                        <text class="custom-header__text">{{ t('customHeader') }}</text>
-                        <text class="custom-header__badge">NEW</text>
-                    </view>
-                </template>
-                <view class="content-box content-box--md">
-                    <text class="content-text">{{ t('customHeaderTip') }}</text>
-                </view>
-            </hy-folding-panel-item>
+        <!-- 嵌套折叠面板：面板内容里再嵌套一组可独立展开/收起的折叠面板 -->
+        <hy-folding-panel-item :title="t('nestedTitle')" index="nested" default-open>
+            <view class="nested-wrap">
+                <hy-folding-panel v-model="nestedActiveIndex">
+                    <hy-folding-panel-item :title="t('nestedChildA')" index="nested-child-a">
+                        <view class="content-box content-box--sm">
+                            <text class="content-text">{{ t('nestedChildAContent') }}</text>
+                        </view>
+                    </hy-folding-panel-item>
 
-            <!-- 内容超过上限：内部滚动 -->
-            <hy-folding-panel-item :title="t('scrollTitle')" index="scroll" :content-height="300">
-                <view class="content-box content-box--lg">
-                    <view v-for="(item, i) in longList" :key="i" class="list-item">
-                        <text class="list-item__name">{{ t('itemN', i + 1) }}</text>
-                        <text class="list-item__price">¥{{ (i + 1) * 10 }}</text>
-                    </view>
-                </view>
-            </hy-folding-panel-item>
+                    <hy-folding-panel-item :title="t('nestedChildB')" index="nested-child-b">
+                        <view class="content-box content-box--sm">
+                            <text class="content-text">{{ t('nestedChildBContent') }}</text>
+                        </view>
+                    </hy-folding-panel-item>
+                </hy-folding-panel>
+            </view>
+        </hy-folding-panel-item>
+    </hy-folding-panel>
 
-            <!-- 动态内容：演示 resize 方法 -->
-            <hy-folding-panel-item ref="dynamicRef" :title="t('dynamicTitle')" index="dynamic">
-                <view class="content-box">
-                    <view v-for="(item, i) in dynamicList" :key="i" class="list-item">
-                        <text class="list-item__name">{{ item }}</text>
-                    </view>
-                    <hy-button
-                        type="primary"
-                        size="small"
-                        :custom-style="{ marginTop: '20rpx', width: '100%' }"
-                        @click="loadMore"
-                    >
-                        {{ t('loadMore', dynamicList.length) }}
-                    </hy-button>
-                </view>
-            </hy-folding-panel-item>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('sizeSection') }}</view>
+        <hy-subsection :list="list_1" v-model="size"></hy-subsection>
 
-            <!-- 嵌套折叠面板：面板内容里再嵌套一组可独立展开/收起的折叠面板 -->
-            <hy-folding-panel-item :title="t('nestedTitle')" index="nested" default-open>
-                <view class="nested-wrap">
-                    <hy-folding-panel v-model="nestedActiveIndex">
-                        <hy-folding-panel-item :title="t('nestedChildA')" index="nested-child-a">
-                            <view class="content-box content-box--sm">
-                                <text class="content-text">{{ t('nestedChildAContent') }}</text>
-                            </view>
-                        </hy-folding-panel-item>
+        <view class="hy-title">{{ t('disabledSection') }}</view>
+        <hy-switch v-model="disabled"></hy-switch>
 
-                        <hy-folding-panel-item :title="t('nestedChildB')" index="nested-child-b">
-                            <view class="content-box content-box--sm">
-                                <text class="content-text">{{ t('nestedChildBContent') }}</text>
-                            </view>
-                        </hy-folding-panel-item>
-                    </hy-folding-panel>
-                </view>
-            </hy-folding-panel-item>
-        </hy-folding-panel>
+        <view class="hy-title">{{ t('borderSection') }}</view>
+        <hy-switch v-model="border"></hy-switch>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('sizeSection') }}</view>
-            <hy-subsection :list="list_1" v-model="size"></hy-subsection>
-
-            <view class="hy-title">{{ t('disabledSection') }}</view>
-            <hy-switch v-model="disabled"></hy-switch>
-
-            <view class="hy-title">{{ t('borderSection') }}</view>
-            <hy-switch v-model="border"></hy-switch>
-
-            <view class="hy-title">{{ t('accordionSection') }}</view>
-            <hy-switch v-model="accordion"></hy-switch>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('accordionSection') }}</view>
+        <hy-switch v-model="accordion"></hy-switch>
+    </view>
 </template>
 
 <script setup lang="ts">

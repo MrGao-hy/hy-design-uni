@@ -1,42 +1,40 @@
 <template>
-    <the-root-page>
-        <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">{{ t('ellipsis') }}</view>
-            <hy-table height="300" :data="tableData" :columns="columns"></hy-table>
-        </view>
+    <view class="hy-container hy-margin-bottom">
+        <view class="hy-title">{{ t('ellipsis') }}</view>
+        <hy-table height="300" :data="tableData" :columns="columns"></hy-table>
+    </view>
 
-        <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">{{ t('slot') }}</view>
-            <hy-table :data="tableData" :columns="columns2" stripe :row-height="80">
-                <!-- 自定义操作列 -->
-                <template #default="{ row, col, index }">
-                    <view v-if="col.key === 'avatar'" :style="{ display: 'flex' }">
-                        <hy-avatar></hy-avatar>
-                    </view>
-                    <text v-else>{{ row[col.key] }}</text>
-                </template>
-                <!-- 自定义操作列 -->
-                <template #right="{ row, col, index }">
-                    <hy-flex v-if="col.key === 'action'" gap="2">
-                        <hy-button :text="t('edit')" size="mini" plain :border="false"></hy-button>
-                        <hy-button
-                            type="error"
-                            size="mini"
-                            :text="t('delete')"
-                            plain
-                            :border="false"
-                        ></hy-button>
-                    </hy-flex>
-                    <text v-else>{{ row[col.key] }}</text>
-                </template>
-            </hy-table>
-        </view>
+    <view class="hy-container hy-margin-bottom">
+        <view class="hy-title">{{ t('slot') }}</view>
+        <hy-table :data="tableData" :columns="columns2" stripe :row-height="80">
+            <!-- 自定义操作列 -->
+            <template #default="{ row, col, index }">
+                <view v-if="col.key === 'avatar'" :style="{ display: 'flex' }">
+                    <hy-avatar></hy-avatar>
+                </view>
+                <text v-else>{{ row[col.key] }}</text>
+            </template>
+            <!-- 自定义操作列 -->
+            <template #right="{ row, col, index }">
+                <hy-flex v-if="col.key === 'action'" gap="2">
+                    <hy-button :text="t('edit')" size="mini" plain :border="false"></hy-button>
+                    <hy-button
+                        type="error"
+                        size="mini"
+                        :text="t('delete')"
+                        plain
+                        :border="false"
+                    ></hy-button>
+                </hy-flex>
+                <text v-else>{{ row[col.key] }}</text>
+            </template>
+        </hy-table>
+    </view>
 
-        <view class="hy-container hy-margin-bottom">
-            <view class="hy-title">{{ t('emptyState') }}</view>
-            <hy-table :data="[]" :columns="columns"></hy-table>
-        </view>
-    </the-root-page>
+    <view class="hy-container hy-margin-bottom">
+        <view class="hy-title">{{ t('emptyState') }}</view>
+        <hy-table :data="[]" :columns="columns"></hy-table>
+    </view>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue'

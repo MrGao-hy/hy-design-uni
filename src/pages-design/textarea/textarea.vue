@@ -1,187 +1,185 @@
 <template>
-    <the-root-page>
-        <!-- 基础使用 -->
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-textarea v-model="basicValue" :placeholder="t('inputPlaceholder')"></hy-textarea>
-        </view>
+    <!-- 基础使用 -->
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-textarea v-model="basicValue" :placeholder="t('inputPlaceholder')"></hy-textarea>
+    </view>
 
-        <!-- 边框类型 -->
-        <view class="hy-title">{{ t('borderType') }}</view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="surroundValue"
-                border="surround"
-                :placeholder="t('borderSurround')"
-            ></hy-textarea>
-        </view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="bottomValue"
-                border="bottom"
-                :placeholder="t('borderBottom')"
-            ></hy-textarea>
-        </view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="noneValue"
-                border="none"
-                :placeholder="t('borderNone')"
-            ></hy-textarea>
-        </view>
+    <!-- 边框类型 -->
+    <view class="hy-title">{{ t('borderType') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="surroundValue"
+            border="surround"
+            :placeholder="t('borderSurround')"
+        ></hy-textarea>
+    </view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="bottomValue"
+            border="bottom"
+            :placeholder="t('borderBottom')"
+        ></hy-textarea>
+    </view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="noneValue"
+            border="none"
+            :placeholder="t('borderNone')"
+        ></hy-textarea>
+    </view>
 
-        <!-- 字数统计 -->
-        <view class="hy-title">{{ t('count') }}</view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="countValue"
-                :placeholder="t('countPlaceholder')"
-                :maxlength="200"
-                count
-            ></hy-textarea>
-        </view>
+    <!-- 字数统计 -->
+    <view class="hy-title">{{ t('count') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="countValue"
+            :placeholder="t('countPlaceholder')"
+            :maxlength="200"
+            count
+        ></hy-textarea>
+    </view>
 
-        <!-- 自动增高 -->
-        <view class="hy-title">{{ t('autoHeight') }}</view>
-        <view class="hy-container">
+    <!-- 自动增高 -->
+    <view class="hy-title">{{ t('autoHeight') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="autoHeightValue"
+            :placeholder="t('autoHeightPlaceholder')"
+            :maxlength="500"
+            autoHeight
+            count
+        ></hy-textarea>
+    </view>
+
+    <!-- 禁用状态 -->
+    <view class="hy-title">{{ t('disabledState') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="disabledValue"
+            disabled
+            :placeholder="t('disabledState')"
+        ></hy-textarea>
+    </view>
+
+    <!-- 自动聚焦 -->
+    <view class="hy-title">{{ t('autoFocus') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="focusValue"
+            :focus="isFocus"
+            :placeholder="t('focusPlaceholder')"
+            @focus="onFocus"
+            @blur="onBlur"
+        ></hy-textarea>
+    </view>
+    <view class="hy-container">
+        <hy-button :text="t('focusBtn')" size="small" @click="handleFocus"></hy-button>
+    </view>
+
+    <!-- 自定义高度 -->
+    <view class="hy-title">{{ t('customHeight') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="customHeightValue"
+            :placeholder="t('fixedHeightPlaceholder')"
+            :height="120"
+            count
+        ></hy-textarea>
+    </view>
+
+    <!-- 格式化处理 - 数字 -->
+    <view class="hy-title">{{ t('formatNumber') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="numberValue"
+            :formatter="formatterNumber"
+            :placeholder="t('onlyNumber')"
+            count
+        ></hy-textarea>
+    </view>
+
+    <!-- 格式化处理 - 字母 -->
+    <view class="hy-title">{{ t('formatLetter') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="letterValue"
+            :formatter="formatterLetter"
+            :placeholder="t('onlyLetter')"
+            count
+        ></hy-textarea>
+    </view>
+
+    <!-- 聊天输入框场景 -->
+    <view class="hy-title">{{ t('chatScene') }}</view>
+    <view class="hy-container chat-container">
+        <view class="chat-messages">
+            <view
+                v-for="(msg, index) in chatMessages"
+                :key="index"
+                :class="[
+                    'chat-message',
+                    msg.isMine ? 'chat-message--mine' : 'chat-message--other'
+                ]"
+            >
+                <view class="chat-bubble">{{ msg.text }}</view>
+            </view>
+        </view>
+        <view class="chat-input-box">
             <hy-textarea
-                v-model="autoHeightValue"
-                :placeholder="t('autoHeightPlaceholder')"
-                :maxlength="500"
+                v-model="chatInput"
                 autoHeight
-                count
+                :maxlength="500"
+                confirmType="send"
+                :placeholder="t('inputMessage')"
+                @confirm="sendMessage"
             ></hy-textarea>
-        </view>
-
-        <!-- 禁用状态 -->
-        <view class="hy-title">{{ t('disabledState') }}</view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="disabledValue"
-                disabled
-                :placeholder="t('disabledState')"
-            ></hy-textarea>
-        </view>
-
-        <!-- 自动聚焦 -->
-        <view class="hy-title">{{ t('autoFocus') }}</view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="focusValue"
-                :focus="isFocus"
-                :placeholder="t('focusPlaceholder')"
-                @focus="onFocus"
-                @blur="onBlur"
-            ></hy-textarea>
-        </view>
-        <view class="hy-container">
-            <hy-button :text="t('focusBtn')" size="small" @click="handleFocus"></hy-button>
-        </view>
-
-        <!-- 自定义高度 -->
-        <view class="hy-title">{{ t('customHeight') }}</view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="customHeightValue"
-                :placeholder="t('fixedHeightPlaceholder')"
-                :height="120"
-                count
-            ></hy-textarea>
-        </view>
-
-        <!-- 格式化处理 - 数字 -->
-        <view class="hy-title">{{ t('formatNumber') }}</view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="numberValue"
-                :formatter="formatterNumber"
-                :placeholder="t('onlyNumber')"
-                count
-            ></hy-textarea>
-        </view>
-
-        <!-- 格式化处理 - 字母 -->
-        <view class="hy-title">{{ t('formatLetter') }}</view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="letterValue"
-                :formatter="formatterLetter"
-                :placeholder="t('onlyLetter')"
-                count
-            ></hy-textarea>
-        </view>
-
-        <!-- 聊天输入框场景 -->
-        <view class="hy-title">{{ t('chatScene') }}</view>
-        <view class="hy-container chat-container">
-            <view class="chat-messages">
-                <view
-                    v-for="(msg, index) in chatMessages"
-                    :key="index"
-                    :class="[
-                        'chat-message',
-                        msg.isMine ? 'chat-message--mine' : 'chat-message--other'
-                    ]"
-                >
-                    <view class="chat-bubble">{{ msg.text }}</view>
-                </view>
-            </view>
-            <view class="chat-input-box">
-                <hy-textarea
-                    v-model="chatInput"
-                    autoHeight
-                    :maxlength="500"
-                    confirmType="send"
-                    :placeholder="t('inputMessage')"
-                    @confirm="sendMessage"
-                ></hy-textarea>
-                <view class="chat-send">
-                    <text class="chat-count">{{ chatInput.length }}/500</text>
-                    <hy-button type="primary" size="small" @click="sendMessage">{{
-                        t('send')
-                    }}</hy-button>
-                </view>
+            <view class="chat-send">
+                <text class="chat-count">{{ chatInput.length }}/500</text>
+                <hy-button type="primary" size="small" @click="sendMessage">{{
+                    t('send')
+                }}</hy-button>
             </view>
         </view>
+    </view>
 
-        <!-- 配合表单使用 -->
-        <view class="hy-title">{{ t('withForm') }}</view>
-        <view class="hy-container">
-            <hy-cell>
-                <hy-cell-item :title="t('remark')" name="remark" :border="false">
-                    <template #value>
-                        <hy-textarea
-                            v-model="formData.remark"
-                            border="none"
-                            :placeholder="t('remarkPlaceholder')"
-                            :maxlength="200"
-                            count
-                        ></hy-textarea>
-                    </template>
-                </hy-cell-item>
-            </hy-cell>
-        </view>
+    <!-- 配合表单使用 -->
+    <view class="hy-title">{{ t('withForm') }}</view>
+    <view class="hy-container">
+        <hy-cell>
+            <hy-cell-item :title="t('remark')" name="remark" :border="false">
+                <template #value>
+                    <hy-textarea
+                        v-model="formData.remark"
+                        border="none"
+                        :placeholder="t('remarkPlaceholder')"
+                        :maxlength="200"
+                        count
+                    ></hy-textarea>
+                </template>
+            </hy-cell-item>
+        </hy-cell>
+    </view>
 
-        <!-- 事件监听 -->
-        <view class="hy-title">{{ t('eventListen') }}</view>
-        <view class="hy-container">
-            <hy-textarea
-                v-model="eventValue"
-                :placeholder="t('eventPlaceholder')"
-                count
-                @focus="handleFocusEvent"
-                @blur="handleBlurEvent"
-                @change="handleChangeEvent"
-                @lineChange="handleLineChange"
-            ></hy-textarea>
+    <!-- 事件监听 -->
+    <view class="hy-title">{{ t('eventListen') }}</view>
+    <view class="hy-container">
+        <hy-textarea
+            v-model="eventValue"
+            :placeholder="t('eventPlaceholder')"
+            count
+            @focus="handleFocusEvent"
+            @blur="handleBlurEvent"
+            @change="handleChangeEvent"
+            @lineChange="handleLineChange"
+        ></hy-textarea>
+    </view>
+    <view class="hy-container event-log">
+        <view class="event-title">{{ t('eventLog') }}</view>
+        <view v-for="(log, index) in eventLogs" :key="index" class="event-item">
+            {{ log }}
         </view>
-        <view class="hy-container event-log">
-            <view class="event-title">{{ t('eventLog') }}</view>
-            <view v-for="(log, index) in eventLogs" :key="index" class="event-item">
-                {{ log }}
-            </view>
-        </view>
-    </the-root-page>
+    </view>
 </template>
 
 <script setup lang="ts">

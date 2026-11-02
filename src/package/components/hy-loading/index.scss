@@ -1,6 +1,21 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 文字字号 */
+$hy-loading-text-font-size: var(--hy-loading-text-font-size, 14px) !default;
+/* 文字行高 */
+$hy-loading-text-line-height: var(--hy-loading-text-line-height, 20px) !default;
+/* 旋转边框宽度 */
+$hy-loading-border-width: var(--hy-loading-border-width, 3px) !default;
+/* circle 模式底色 */
+$hy-loading-bg-color: var(--hy-loading-bg-color, #e5e5e5) !default;
+/* dots 模式圆点间距 */
+$hy-loading-dots-gap: var(--hy-loading-dots-gap, 6px) !default;
+/* bars 模式柱条间距 */
+$hy-loading-bars-gap: var(--hy-loading-bars-gap, 3px) !default;
+/* 垂直排列文字颜色，默认跟随全局灰度文字 token */
+$hy-loading-vertical-text-color: var(--hy-loading-vertical-text-color, #{$hy-text-color--grey}) !default;
+
 
 @include b(loading-icon) {
   align-items: center;
@@ -9,8 +24,8 @@
 
   @include e(text) {
     color: $hy-primary;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: $hy-loading-text-font-size;
+    line-height: $hy-loading-text-line-height;
   }
 
   @include e(spinner) {
@@ -23,14 +38,14 @@
     /* #endif */
 
     @include m(semicircle) {
-      border: 3px solid transparent;
+      border: $hy-loading-border-width solid transparent;
       border-top-color: currentColor;
       border-radius: 50%;
     }
 
     @include m(circle) {
       border-radius: 50%;
-      border: 3px solid #e5e5e5;
+      border: $hy-loading-border-width solid $hy-loading-bg-color;
       border-top-color: currentColor;
     }
 
@@ -42,7 +57,7 @@
       @include flex(row);
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: $hy-loading-dots-gap;
       /* #endif */
     }
 
@@ -54,7 +69,7 @@
       @include flex(row);
       align-items: center;
       justify-content: center;
-      gap: 3px;
+      gap: $hy-loading-bars-gap;
       /* #endif */
     }
   }
@@ -94,7 +109,7 @@
   }
 
   @include e(vertical, text) {
-    color: $hy-text-color--grey;
+    color: $hy-loading-vertical-text-color;
   }
 
   @include e(dot) {

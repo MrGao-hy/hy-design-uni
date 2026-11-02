@@ -1,6 +1,21 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 关闭按钮尺寸 */
+$hy-cascader-close-size: var(--hy-cascader-close-size, 60rpx) !default;
+/* 加载遮罩层级 */
+$hy-cascader-loading-z-index: var(--hy-cascader-loading-z-index, 10) !default;
+/* 标题字号，默认跟随全局基础字号 token */
+$hy-cascader-title-font-size: var(--hy-cascader-title-font-size, #{$hy-font-size-base}) !default;
+/* 标题文字颜色，默认跟随全局主文字 token */
+$hy-cascader-title-color: var(--hy-cascader-title-color, #{$hy-text-color}) !default;
+/* 选项字号，默认跟随全局基础字号 token */
+$hy-cascader-item-font-size: var(--hy-cascader-item-font-size, #{$hy-font-size-base}) !default;
+/* 选项文字颜色，默认跟随全局主文字 token */
+$hy-cascader-item-color: var(--hy-cascader-item-color, #{$hy-text-color}) !default;
+/* 标题栏底部分隔线，默认跟随全局边框线 token */
+$hy-cascader-border: var(--hy-cascader-border, #{$hy-border-line}) !default;
+
 @include b(cascader) {
   position: relative;
   width: 100%;
@@ -24,18 +39,18 @@
     justify-content: space-between;
     align-items: center;
     padding: $hy-border-margin-padding-base;
-    border-bottom: $hy-border-line;
+    border-bottom: $hy-cascader-border;
   }
 
   @include e(header-title) {
-    font-size: $hy-font-size-base;
+    font-size: $hy-cascader-title-font-size;
     font-weight: $hy-font-weight-bold;
-    color: $hy-text-color;
+    color: $hy-cascader-title-color;
   }
 
   @include e(header-close) {
-    width: 60rpx;
-    height: 60rpx;
+    width: $hy-cascader-close-size;
+    height: $hy-cascader-close-size;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,8 +68,8 @@
     align-items: center;
     justify-content: space-between;
     padding: $hy-border-margin-padding-lg $hy-border-margin-padding-base;
-    font-size: $hy-font-size-base;
-    color: $hy-text-color;
+    font-size: $hy-cascader-item-font-size;
+    color: $hy-cascader-item-color;
     position: relative;
 
     @include m(active) {
@@ -79,6 +94,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 10;
+      z-index: $hy-cascader-loading-z-index;
   }
 }

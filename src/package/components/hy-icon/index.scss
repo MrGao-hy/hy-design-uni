@@ -2,6 +2,13 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/iconfont" as *;
 
+/* 图标文字标签最大宽度 */
+$hy-icon-label-max-width: var(--hy-icon-label-max-width, 150rpx) !default;
+/* 标签文字颜色，默认跟随全局灰度文字 token */
+$hy-icon-label-color: var(--hy-icon-label-color, #{$hy-text-color--grey}) !default;
+/* 标签字号，默认跟随全局小号字体 token */
+$hy-icon-label-font-size: var(--hy-icon-label-font-size, #{$hy-font-size-sm}) !default;
+
 @include b(icon) {
   /* #ifndef APP-NVUE */
   display: flex;
@@ -65,9 +72,9 @@
 
   @include e(label) {
     @include lineEllipsis;
-    color: $hy-text-color--grey;
-    font-size: $hy-font-size-sm;
-    max-width: 150rpx;
+    color: $hy-icon-label-color;
+    font-size: $hy-icon-label-font-size;
+    max-width: $hy-icon-label-max-width;
   }
 }
 @include b(rotate) {

@@ -1,12 +1,33 @@
 @use '../../libs/css/mixin' as *;
 @use '../../libs/css/theme' as *;
 
+/* 边框宽度 */
+$hy-check-button-border-width: var(--hy-check-button-border-width, 2rpx) !default;
+/* 按下透明度 */
+$hy-check-button-hover-opacity: var(--hy-check-button-hover-opacity, 0.8) !default;
+/* 各尺寸内边距 */
+$hy-check-button-padding-small: var(--hy-check-button-padding-small, 10rpx 16rpx) !default;
+$hy-check-button-padding-medium: var(--hy-check-button-padding-medium, 16rpx 20rpx) !default;
+$hy-check-button-padding-large: var(--hy-check-button-padding-large, 20rpx 24rpx) !default;
+/* 各尺寸文字字号，行高同步引用 */
+$hy-check-button-font-size-small: var(--hy-check-button-font-size-small, #{$hy-font-size-sm}) !default;
+$hy-check-button-font-size-medium: var(--hy-check-button-font-size-medium, #{$hy-font-size-base}) !default;
+$hy-check-button-font-size-large: var(--hy-check-button-font-size-large, #{$hy-font-size-md}) !default;
+/* 胶囊形圆角，默认跟随全局半圆 token */
+$hy-check-button-radius-circle: var(--hy-check-button-radius-circle, #{$hy-radius-semicircle}) !default;
+/* 方形圆角，默认跟随全局小圆角 token */
+$hy-check-button-radius-square: var(--hy-check-button-radius-square, #{$hy-radius-sm}) !default;
+/* 禁用文字颜色 */
+$hy-check-button-disabled-color: var(--hy-check-button-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 禁用态边框颜色 */
+$hy-check-button-disabled-border-color: var(--hy-check-button-disabled-border-color, #{$hy-background--disabled}) !default;
+
 @include b(check-button) {
     display: grid;
 
     @include e(item) {
         border-style: solid;
-        border-width: 2rpx;
+        border-width: $hy-check-button-border-width;
         @include flex;
         align-items: center;
         justify-content: center;
@@ -15,39 +36,39 @@
         cursor: pointer;
 
         &:active {
-            opacity: 0.8;
+            opacity: $hy-check-button-hover-opacity;
         }
 
         @include m(small) {
-            padding: 10rpx 16rpx;
-            font-size: $hy-font-size-sm;
-            line-height: $hy-font-size-sm;
+            padding: $hy-check-button-padding-small;
+            font-size: $hy-check-button-font-size-small;
+            line-height: $hy-check-button-font-size-small;
         }
 
         @include m(medium) {
-            padding: 16rpx 20rpx;
-            font-size: $hy-font-size-base;
-            line-height: $hy-font-size-base;
+            padding: $hy-check-button-padding-medium;
+            font-size: $hy-check-button-font-size-medium;
+            line-height: $hy-check-button-font-size-medium;
         }
 
         @include m(large) {
-            padding: 20rpx 24rpx;
-            font-size: $hy-font-size-md;
-            line-height: $hy-font-size-md;
+            padding: $hy-check-button-padding-large;
+            font-size: $hy-check-button-font-size-large;
+            line-height: $hy-check-button-font-size-large;
         }
 
         @include m(circle) {
-            border-radius: $hy-radius-semicircle;
+            border-radius: $hy-check-button-radius-circle;
         }
 
         @include m(square) {
-            border-radius: $hy-radius-sm;
+            border-radius: $hy-check-button-radius-square;
         }
 
         @include m(disabled) {
             background-color: $hy-background--disabled;
-            border-color: $hy-background--disabled;
-            color: $hy-text-color--disabled;
+            border-color: $hy-check-button-disabled-border-color;
+            color: $hy-check-button-disabled-color;
             cursor: not-allowed;
             opacity: $hy-opacity-disabled;
         }

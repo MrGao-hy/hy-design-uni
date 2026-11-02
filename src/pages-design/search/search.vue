@@ -1,37 +1,35 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-search
-                v-model="value"
-                :animation="showClose"
-                clearabled
-                :shape="shape"
-                :action-text="label"
-                :disabled="disabled"
-                :inputAlign="inputAlign"
-                @change="onChange"
-                @search="onSearch"
-            ></hy-search>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-search
+            v-model="value"
+            :animation="showClose"
+            clearabled
+            :shape="shape"
+            :action-text="label"
+            :disabled="disabled"
+            :inputAlign="inputAlign"
+            @change="onChange"
+            @search="onSearch"
+        ></hy-search>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('searchText') }}</view>
-            <hy-input v-model="label"></hy-input>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('searchText') }}</view>
+        <hy-input v-model="label"></hy-input>
 
-            <view class="hy-title">{{ t('animationSection') }}</view>
-            <hy-switch v-model="showClose"></hy-switch>
+        <view class="hy-title">{{ t('animationSection') }}</view>
+        <hy-switch v-model="showClose"></hy-switch>
 
-            <view class="hy-title">{{ t('disabled') }}</view>
-            <hy-switch v-model="disabled"></hy-switch>
+        <view class="hy-title">{{ t('disabled') }}</view>
+        <hy-switch v-model="disabled"></hy-switch>
 
-            <view class="hy-title">{{ t('shapeSection') }}</view>
-            <hy-subsection :list="list" v-model="shape"></hy-subsection>
+        <view class="hy-title">{{ t('shapeSection') }}</view>
+        <hy-subsection :list="list" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">{{ t('alignSection') }}</view>
-            <hy-subsection :list="list_1" v-model="inputAlign"></hy-subsection>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('alignSection') }}</view>
+        <hy-subsection :list="list_1" v-model="inputAlign"></hy-subsection>
+    </view>
 </template>
 
 <script setup lang="ts">

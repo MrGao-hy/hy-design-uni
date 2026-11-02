@@ -114,6 +114,9 @@ importers:
       '@uni-helper/vite-plugin-uni-pages':
         specifier: ^0.3.22
         version: 0.3.24(vite@5.4.21(@types/node@24.13.3)(sass@1.102.0)(terser@5.49.2))
+      '@uni-ku/root':
+        specifier: ^1.5.0
+        version: 1.5.0(vite@5.4.21(@types/node@24.13.3)(sass@1.102.0)(terser@5.49.2))
       '@vue/runtime-core':
         specifier: ^3.4.21
         version: 3.5.41
@@ -2283,6 +2286,11 @@ packages:
 
   '@uni-helper/vite-plugin-uni-pages@0.3.24':
     resolution: {integrity: sha512-2jlX2XaoB1xUzk2qeih0oqDwItat5wlkBfhcdJMe5XU5OjJwLw6vuL3vEUNWT16a0EbdItWzh+4xKrttx4KRuA==}
+    peerDependencies:
+      vite: ^5.0.0
+
+  '@uni-ku/root@1.5.0':
+    resolution: {integrity: sha512-+d5aJAhD+VxEelCzzBTBl+Qgb6BDJR19J+AF451xYdLH6p0DXPptO+3htloGmXR5iMuNVPGFyn/Wav62fu7YKw==}
     peerDependencies:
       vite: ^5.0.0
 
@@ -8809,6 +8817,13 @@ snapshots:
       yaml: 2.9.0
     transitivePeerDependencies:
       - supports-color
+
+  '@uni-ku/root@1.5.0(vite@5.4.21(@types/node@24.13.3)(sass@1.102.0)(terser@5.49.2))':
+    dependencies:
+      '@vue/compiler-sfc': 3.4.21
+      chokidar: 3.6.0
+      jsonc-parser: 3.3.1
+      vite: 5.4.21(@types/node@24.13.3)(sass@1.102.0)(terser@5.49.2)
 
   '@vitejs/plugin-legacy@5.3.2(terser@5.49.2)(vite@5.4.21(@types/node@24.13.3)(sass@1.102.0)(terser@5.49.2))':
     dependencies:

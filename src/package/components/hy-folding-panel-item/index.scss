@@ -1,6 +1,21 @@
 @use '../../libs/css/theme.scss' as *;
 @use '../../libs/css/mixin' as *;
 
+/* 右侧值字号 */
+$hy-folding-panel-value-font-size: var(--hy-folding-panel-value-font-size, 13px) !default;
+/* 右侧值右边距 */
+$hy-folding-panel-value-margin-right: var(--hy-folding-panel-value-margin-right, 8px) !default;
+/* large 字号，默认跟随全局大号字体 token */
+$hy-folding-panel-font-size-large: var(--hy-folding-panel-font-size-large, #{$hy-font-size-lg}) !default;
+/* medium 字号，默认跟随全局基础字体 token */
+$hy-folding-panel-font-size-medium: var(--hy-folding-panel-font-size-medium, #{$hy-font-size-base}) !default;
+/* small 字号，默认跟随全局小号字体 token */
+$hy-folding-panel-font-size-small: var(--hy-folding-panel-font-size-small, #{$hy-font-size-sm}) !default;
+/* 面板底部分隔线，默认跟随全局边框线 token */
+$hy-folding-panel-border: var(--hy-folding-panel-border, #{$hy-border-line}) !default;
+/* 右侧值文字颜色，默认跟随全局灰度文字 token */
+$hy-folding-panel-value-color: var(--hy-folding-panel-value-color, #{$hy-text-color--grey}) !default;
+
 @include b(folding-panel-item) {
     position: relative;
     width: 100%;
@@ -11,22 +26,22 @@
     }
 
     @include m(border) {
-        border-bottom: $hy-border-line;
+        border-bottom: $hy-folding-panel-border;
     }
 
     @include m(large) {
         padding: $hy-border-margin-padding-lg;
-        font-size: $hy-font-size-lg;
+        font-size: $hy-folding-panel-font-size-large;
     }
 
     @include m(medium) {
         padding: $hy-border-margin-padding-base;
-        font-size: $hy-font-size-base;
+        font-size: $hy-folding-panel-font-size-medium;
     }
 
     @include m(small) {
         padding: $hy-border-margin-padding-sm;
-        font-size: $hy-font-size-sm;
+        font-size: $hy-folding-panel-font-size-small;
     }
 
     @include e(header) {
@@ -58,9 +73,9 @@
     }
 
     @include e(value) {
-        font-size: 13px;
-        color: $hy-text-color--grey;
-        margin-right: 8px;
+        font-size: $hy-folding-panel-value-font-size;
+        color: $hy-folding-panel-value-color;
+        margin-right: $hy-folding-panel-value-margin-right;
     }
 
     @include e(arrow) {

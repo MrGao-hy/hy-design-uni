@@ -1,6 +1,16 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 通知栏内边距 */
+$hy-notice-bar-padding: var(--hy-notice-bar-padding, 9px 12px) !default;
+/* 通知栏背景色 */
+$hy-notice-bar-bg: var(--hy-notice-bar-bg, #fff6c8) !default;
+/* 通知文字字号 */
+$hy-notice-bar-font-size: var(--hy-notice-bar-font-size, 14px) !default;
+/* 垂直滚动区域高度 */
+$hy-notice-bar-swiper-height: var(--hy-notice-bar-swiper-height, 16px) !default;
+/* 通知栏圆角，默认跟随全局小圆角 token */
+$hy-notice-bar-radius: var(--hy-notice-bar-radius, #{$hy-radius-sm}) !default;
 
 @include b(notice) {
   @include flex;
@@ -9,11 +19,11 @@
 
   &-bar {
     overflow: hidden;
-    padding: 9px 12px;
+    padding: $hy-notice-bar-padding;
     flex: 1;
-    background-color: #FFF6C8;
+    background-color: $hy-notice-bar-bg;
     color: $hy-warning;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-notice-bar-radius;
   }
 
   @include e(left-icon) {
@@ -37,7 +47,7 @@
     overflow: hidden;
 
     @include m(text) {
-      font-size: 14px;
+      font-size: $hy-notice-bar-font-size;
       color: $hy-warning;
       /* #ifndef APP-NVUE */
       // 这一句很重要，为了能让滚动左右连接起来
@@ -52,7 +62,7 @@
   }
 
   @include e(swiper) {
-    height: 16px;
+    height: $hy-notice-bar-swiper-height;
     @include flex;
     align-items: center;
     flex: 1;
@@ -64,7 +74,7 @@
       //overflow: hidden;
 
       @include e(text) {
-        font-size: 14px;
+        font-size: $hy-notice-bar-font-size;
         color: $hy-warning;
       }
     }

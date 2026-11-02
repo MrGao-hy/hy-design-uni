@@ -1,12 +1,19 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 分割线区域最小高度 */
+$hy-divider-min-height: var(--hy-divider-min-height, 35px) !default;
+/* 文字颜色，默认跟随全局辅助文字 token */
+$hy-divider-text-color: var(--hy-divider-text-color, #{$hy-text-color--3}) !default;
+/* 圆点字号，默认跟随全局小号字体 token */
+$hy-divider-dot-font-size: var(--hy-divider-dot-font-size, #{$hy-font-size-sm}) !default;
+
 @include b(divider) {
   @include flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  min-height: 35px;
+  min-height: $hy-divider-min-height;
 
   @include e(line) {
     /* #ifndef APP-NVUE */
@@ -15,13 +22,13 @@
   }
 
   @include e(text) {
-    color: $hy-text-color--3;
+    color: $hy-divider-text-color;
     margin: 0 $hy-border-margin-padding-sm;
   }
 
   @include e(dot) {
-    font-size: $hy-font-size-sm;
+    font-size: $hy-divider-dot-font-size;
     margin: 0 $hy-border-margin-padding-sm;
-    color: $hy-text-color--3;
+    color: $hy-divider-text-color;
   }
 }

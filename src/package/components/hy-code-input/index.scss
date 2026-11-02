@@ -1,6 +1,25 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 字符字号 */
+$hy-code-input-font-size: var(--hy-code-input-font-size, 15px) !default;
+/* 密码圆点尺寸 */
+$hy-code-input-dot-size: var(--hy-code-input-dot-size, 7px) !default;
+/* 线条模式线条宽度 */
+$hy-code-input-line-width: var(--hy-code-input-line-width, 40px) !default;
+/* 输入文字颜色 */
+$hy-code-input-text-color: var(--hy-code-input-text-color, #{$hy-icon-color}) !default;
+/* 密码圆点圆角，默认跟随全局半圆 token */
+$hy-code-input-dot-radius: var(--hy-code-input-dot-radius, #{$hy-radius-semicircle}) !default;
+/* 无边框模式格子圆角，默认跟随全局小圆角 token */
+$hy-code-input-no-radius: var(--hy-code-input-no-radius, #{$hy-radius-sm}) !default;
+/* 光标闪烁线颜色 */
+$hy-code-input-cursor-color: var(--hy-code-input-cursor-color, #{$hy-text-color}) !default;
+/* 线条模式线尾圆角，默认跟随全局半圆 token */
+$hy-code-input-line-radius: var(--hy-code-input-line-radius, #{$hy-radius-semicircle}) !default;
+/* 默认态边框/线条颜色，默认跟随全局边框色 token */
+$hy-code-input-border-color: var(--hy-code-input-border-color, #{$hy-border-color--2}) !default;
+
 @include b(code-input) {
   @include flex;
   position: relative;
@@ -13,25 +32,25 @@
     position: relative;
 
     @include e(text) {
-      font-size: 15px;
-      color: $hy-icon-color;
+      font-size: $hy-code-input-font-size;
+      color: $hy-code-input-text-color;
     }
 
     @include e(dot) {
-      width: 7px;
-      height: 7px;
-      border-radius: 100px;
+      width: $hy-code-input-dot-size;
+      height: $hy-code-input-dot-size;
+      border-radius: $hy-code-input-dot-radius;
       background-color: $hy-icon-color;
     }
 
     /* 无边框 */
     @include e(no) {
       background-color: $hy-background--track;
-      border-radius: $hy-radius-sm;
+      border-radius: $hy-code-input-no-radius;
       @include m(active) {
         &:before {
           content: "";
-          background-color: $hy-text-color;
+          background-color: $hy-code-input-cursor-color;
           width: 2rpx;
           border-radius: 2px;
           height: 50%;
@@ -42,7 +61,7 @@
 
     /* 方块模式 */
     @include e(box) {
-      border-color: $hy-border-color--2;
+      border-color: $hy-code-input-border-color;
       @include e(border) {
         border-color: $hy-primary !important;
 
@@ -67,9 +86,9 @@
         content: "";
         position: absolute;
         bottom: 0;
-        border-radius: $hy-radius-semicircle;
-        width: 40px;
-        background-color: $hy-border-color--2;
+        border-radius: $hy-code-input-line-radius;
+        width: $hy-code-input-line-width;
+        background-color: $hy-code-input-border-color;
       }
 
       /* 边框 */

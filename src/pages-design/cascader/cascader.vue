@@ -1,57 +1,55 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-cell>
-                <hy-cell-item
-                    :title="t('selectRegion')"
-                    :value="selectedValue.label.join(' / ')"
-                    @click="showCascader = true"
-                >
-                </hy-cell-item>
-            </hy-cell>
-            <hy-cascader
-                v-model="selectedValue"
-                v-model:show="showCascader"
-                :options="options"
-                @close="showCascader = false"
-                @confirm="onConfirm"
-            ></hy-cascader>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-cell>
+            <hy-cell-item
+                :title="t('selectRegion')"
+                :value="selectedValue.label.join(' / ')"
+                @click="showCascader = true"
+            >
+            </hy-cell-item>
+        </hy-cell>
+        <hy-cascader
+            v-model="selectedValue"
+            v-model:show="showCascader"
+            :options="options"
+            @close="showCascader = false"
+            @confirm="onConfirm"
+        ></hy-cascader>
+    </view>
 
-        <view class="hy-title">{{ t('withInput') }}</view>
-        <view class="hy-container">
-            <hy-cascader
-                v-model="selectedValue2"
-                :options="chinaOptions"
-                has-input
-                :title="t('selectAddress')"
-                :placeholder="t('placeholder')"
-                labelKey="name"
-                valueKey="code"
-                childrenKey="areas"
-            ></hy-cascader>
-        </view>
+    <view class="hy-title">{{ t('withInput') }}</view>
+    <view class="hy-container">
+        <hy-cascader
+            v-model="selectedValue2"
+            :options="chinaOptions"
+            has-input
+            :title="t('selectAddress')"
+            :placeholder="t('placeholder')"
+            labelKey="name"
+            valueKey="code"
+            childrenKey="areas"
+        ></hy-cascader>
+    </view>
 
-        <view class="hy-title">{{ t('asyncLoad') }}</view>
-        <view class="hy-container">
-            <hy-cell>
-                <hy-cell-item
-                    :title="t('asyncSelect')"
-                    :value="selectedValue3.label.join(' / ')"
-                    @click="showAsyncCascader = true"
-                >
-                </hy-cell-item>
-            </hy-cell>
-            <hy-cascader
-                v-model="selectedValue3"
-                v-model:show="showAsyncCascader"
-                :lazy-load="lazyLoad"
-                :title="t('asyncDemoTitle')"
-                @confirm="onAsyncConfirm"
-            ></hy-cascader>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('asyncLoad') }}</view>
+    <view class="hy-container">
+        <hy-cell>
+            <hy-cell-item
+                :title="t('asyncSelect')"
+                :value="selectedValue3.label.join(' / ')"
+                @click="showAsyncCascader = true"
+            >
+            </hy-cell-item>
+        </hy-cell>
+        <hy-cascader
+            v-model="selectedValue3"
+            v-model:show="showAsyncCascader"
+            :lazy-load="lazyLoad"
+            :title="t('asyncDemoTitle')"
+            @confirm="onAsyncConfirm"
+        ></hy-cascader>
+    </view>
 </template>
 
 <script setup lang="ts">

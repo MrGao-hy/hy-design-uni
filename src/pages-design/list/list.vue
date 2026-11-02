@@ -1,17 +1,15 @@
 <template>
-    <the-root-page>
-        <!-- 顶部搜索栏 -->
-        <view class="page-header">
-            <hy-search :placeholder="t('searchPlaceholder')"></hy-search>
-            <hy-tabs v-model:current="current" :list="tabs"></hy-tabs>
-        </view>
+    <!-- 顶部搜索栏 -->
+    <view class="page-header">
+        <hy-search :placeholder="t('searchPlaceholder')"></hy-search>
+        <hy-tabs v-model:current="current" :list="tabs"></hy-tabs>
+    </view>
 
-        <!-- 示例区域 -->
-        <view class="page-body">
-            <default-demo v-if="current" />
-            <waterfall-demo v-else-if="!current" />
-        </view>
-    </the-root-page>
+    <!-- 示例区域 -->
+    <view class="page-body">
+        <default-demo v-if="current" />
+        <waterfall-demo v-else-if="!current" />
+    </view>
 </template>
 
 <script setup lang="ts">

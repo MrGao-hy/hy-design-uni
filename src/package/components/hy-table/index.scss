@@ -1,25 +1,41 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
-$header-text-color: #909399;
-$stripe-bg: $hy-background--table-header;
+$header-text-color: var(--hy-table-header-text-color, #909399) !default;
+$stripe-bg: var(--hy-table-stripe-bg, #{$hy-background--table-header}) !default;
+/* 头部高度 */
+$hy-table-header-height: var(--hy-table-header-height, 50px) !default;
+/* 头部单元格内边距 */
+$hy-table-header-cell-padding: var(--hy-table-header-cell-padding, 0 20rpx) !default;
+/* 头部单元格字号 */
+$hy-table-header-cell-font-size: var(--hy-table-header-cell-font-size, 28rpx) !default;
+/* 内容单元格内边距 */
+$hy-table-cell-padding: var(--hy-table-cell-padding, 0 8px) !default;
+/* 内容单元格字号 */
+$hy-table-cell-font-size: var(--hy-table-cell-font-size, 14px) !default;
+/* 固定列阴影（左侧） */
+$hy-table-fixed-left-shadow: var(--hy-table-fixed-left-shadow, 4px 0 10px rgba(0, 0, 0, 0.1)) !default;
+/* 固定列阴影（右侧） */
+$hy-table-fixed-right-shadow: var(--hy-table-fixed-right-shadow, -4px 0 10px rgba(0, 0, 0, 0.1)) !default;
+/* 表格边框，默认跟随全局边框线 token */
+$hy-table-border: var(--hy-table-border, #{$hy-border-line}) !default;
 
 @include b(table) {
   position: relative;
   width: 100%;
   overflow: hidden;
-  border: $hy-border-line;
+  border: $hy-table-border;
   @include flex(column);
 
   /* 表格头部 */
   @include e(header) {
     position: relative;
     z-index: 10;
-    border-bottom: $hy-border-line;
+    border-bottom: $hy-table-border;
 
     @include m(scroll) {
       width: 100%;
-      height: 50px;
+      height: $hy-table-header-height;
       white-space: nowrap;
     }
 
@@ -32,11 +48,11 @@ $stripe-bg: $hy-background--table-header;
         align-items: center;
         justify-content: center;
         height: 100%;
-        padding: 0 20rpx;
+        padding: $hy-table-header-cell-padding;
         font-weight: bold;
         color: $header-text-color;
-        font-size: 28rpx;
-        border-right: $hy-border-line;
+        font-size: $hy-table-header-cell-font-size;
+        border-right: $hy-table-border;
         box-sizing: border-box;
         position: relative;
         flex-shrink: 0;
@@ -64,19 +80,19 @@ $stripe-bg: $hy-background--table-header;
 
       @include e(left) {
         left: 0;
-        border-right: $hy-border-line;
+        border-right: $hy-table-border;
 
         @include is(shadow) {
-          box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+          box-shadow: $hy-table-fixed-left-shadow;
         }
       }
 
       @include e(right) {
         right: 0;
-        border-left: $hy-border-line;
+        border-left: $hy-table-border;
 
         @include is(shadow) {
-          box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+          box-shadow: $hy-table-fixed-right-shadow;
         }
       }
     }
@@ -115,7 +131,7 @@ $stripe-bg: $hy-background--table-header;
       @include e(row) {
         display: flex;
         width: 100%;
-        border-bottom: $hy-border-line;
+        border-bottom: $hy-table-border;
         box-sizing: border-box;
         background-color: $hy-background--container;
 
@@ -130,9 +146,9 @@ $stripe-bg: $hy-background--table-header;
         @include m(cell) {
           display: flex;
           align-items: center;
-          padding: 0 8px;
-          font-size: 14px;
-          border-right: $hy-border-line;
+          padding: $hy-table-cell-padding;
+          font-size: $hy-table-cell-font-size;
+          border-right: $hy-table-border;
           box-sizing: border-box;
           flex-shrink: 0;
           white-space: nowrap;
@@ -169,16 +185,16 @@ $stripe-bg: $hy-background--table-header;
       left: 0;
 
       @include is(shadow) {
-        box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: $hy-table-fixed-left-shadow;
       }
     }
 
     @include m(right) {
       right: 0;
-      border-left: $hy-border-line;
+      border-left: $hy-table-border;
 
       @include is(shadow) {
-        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: $hy-table-fixed-right-shadow;
       }
     }
   }

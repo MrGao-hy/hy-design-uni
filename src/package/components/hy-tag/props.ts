@@ -48,6 +48,11 @@ const tagProps = {
     color: String,
     /** 镂空形式标签的边框颜色 */
     borderColor: String,
+    /** 是否显示边框，设置为false可去掉边框 */
+    border: {
+        type: Boolean,
+        default: true
+    },
     /** 关闭按钮图标的颜色 */
     closeColor: {
         type: String,

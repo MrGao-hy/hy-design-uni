@@ -1,6 +1,9 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 提示文字字号 */
+$hy-back-top-tips-font-size: var(--hy-back-top-tips-font-size, 12px) !default;
+
 @include b(back-top) {
   @include flex;
   flex-direction: column;
@@ -11,7 +14,7 @@
   background-color: $hy-background--3;
 
   @include e(tips) {
-    font-size: 12px;
+    font-size: $hy-back-top-tips-font-size;
     transform: scale(0.8);
   }
 }

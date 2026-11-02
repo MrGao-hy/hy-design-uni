@@ -1,56 +1,54 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-number-step v-model="value"></hy-number-step>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-number-step v-model="value"></hy-number-step>
+    </view>
 
-        <view class="hy-title">{{ t('stepSection') }}</view>
-        <view class="hy-container">
-            <hy-number-step v-model="value" :step="3"></hy-number-step>
-        </view>
+    <view class="hy-title">{{ t('stepSection') }}</view>
+    <view class="hy-container">
+        <hy-number-step v-model="value" :step="3"></hy-number-step>
+    </view>
 
-        <view class="hy-title">{{ t('disabled') }}</view>
-        <view class="hy-container">
-            <hy-number-step v-model="value" disabled></hy-number-step>
-        </view>
+    <view class="hy-title">{{ t('disabled') }}</view>
+    <view class="hy-container">
+        <hy-number-step v-model="value" disabled></hy-number-step>
+    </view>
 
-        <view class="hy-title">{{ t('rangeSection') }}</view>
-        <view class="hy-container">
-            <hy-number-step v-model="value" :min="10" :max="20"></hy-number-step>
-        </view>
+    <view class="hy-title">{{ t('rangeSection') }}</view>
+    <view class="hy-container">
+        <hy-number-step v-model="value" :min="10" :max="20"></hy-number-step>
+    </view>
 
-        <view class="hy-title">{{ t('hideMinus') }}</view>
-        <view class="hy-container hidden">
-            <hy-number-step
-                v-model="value2"
-                :min="0"
-                :miniMode="true"
-                input-bg-color="transparent"
-                :plusIcon="{ color: '#ffffff' }"
-                button-radius="50%"
-            ></hy-number-step>
-        </view>
+    <view class="hy-title">{{ t('hideMinus') }}</view>
+    <view class="hy-container hidden">
+        <hy-number-step
+            v-model="value2"
+            :min="0"
+            :miniMode="true"
+            input-bg-color="transparent"
+            :plusIcon="{ color: '#ffffff' }"
+            button-radius="50%"
+        ></hy-number-step>
+    </view>
 
-        <view class="hy-title">{{ t('customStyle') }}</view>
-        <view class="hy-container">
-            <hy-number-step v-model="value" :showMinus="!!value" :min="0">
-                <template #minus>
-                    <view class="minus">
-                        <hy-icon :name="IconConfig.MINUS" size="12"></hy-icon>
-                    </view>
-                </template>
-                <template #input>
-                    <text style="width: 30px; text-align: center" class="input">{{ value }}</text>
-                </template>
-                <template #plus>
-                    <view class="plus">
-                        <hy-icon :name="IconConfig.PLUS" color="#FFFFFF" size="12"></hy-icon>
-                    </view>
-                </template>
-            </hy-number-step>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('customStyle') }}</view>
+    <view class="hy-container">
+        <hy-number-step v-model="value" :showMinus="!!value" :min="0">
+            <template #minus>
+                <view class="minus">
+                    <hy-icon :name="IconConfig.MINUS" size="12"></hy-icon>
+                </view>
+            </template>
+            <template #input>
+                <text style="width: 30px; text-align: center" class="input">{{ value }}</text>
+            </template>
+            <template #plus>
+                <view class="plus">
+                    <hy-icon :name="IconConfig.PLUS" color="#FFFFFF" size="12"></hy-icon>
+                </view>
+            </template>
+        </hy-number-step>
+    </view>
 </template>
 
 <script setup lang="ts">

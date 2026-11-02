@@ -1,4 +1,12 @@
 @use "../../libs/css/mixin" as *;
+
+/* 输入框圆角 */
+$hy-address-picker-radius: var(--hy-address-picker-radius, 4px) !default;
+/* 输入框边框 */
+$hy-address-picker-border: var(--hy-address-picker-border, 1px solid #eee) !default;
+/* 输入框内边距 */
+$hy-address-picker-padding: var(--hy-address-picker-padding, 0 10px) !default;
+
 @include b(address-picker) {
   flex: 1;
   @include e(has-input) {
@@ -19,9 +27,9 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      border-radius: 4px;
-      border: 1px solid #eee;
-      padding: 0 10px;
+      border-radius: $hy-address-picker-radius;
+      border: $hy-address-picker-border;
+      padding: $hy-address-picker-padding;
     }
   }
 }

@@ -1,6 +1,9 @@
 @use '../../libs/css/theme' as *;
 @use '../../libs/css/mixin' as *;
 
+/* 文字字号，默认跟随全局基础字号 token */
+$hy-notify-font-size: var(--hy-notify-font-size, #{$hy-font-size-base}) !default;
+
 @include b(notify) {
   padding: $hy-border-margin-padding-base;
 
@@ -10,7 +13,7 @@
     justify-content: center;
 
     @include m(text) {
-      font-size: $hy-font-size-base;
+      font-size: $hy-notify-font-size;
       line-height: 1;
       text-align: center;
     }

@@ -1,7 +1,24 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
-$z-index: 998;
+/* 弹出层层级 */
+$hy-popover-z-index: var(--hy-popover-z-index, 998) !default;
+/* 图标字号 */
+$hy-popover-icon-size: var(--hy-popover-icon-size, 18px) !default;
+/* 菜单行上下内边距 */
+$hy-popover-menu-padding: var(--hy-popover-menu-padding, 20rpx 0) !default;
+/* 弹出层最小高度 */
+$hy-popover-min-height: var(--hy-popover-min-height, 36px) !default;
+/* 弹出层宽度 */
+$hy-popover-width: var(--hy-popover-width, 200px) !default;
+/* 弹出层行高 */
+$hy-popover-line-height: var(--hy-popover-line-height, 22px) !default;
+/* 气泡圆角，默认跟随全局小圆角 token */
+$hy-popover-radius: var(--hy-popover-radius, #{$hy-radius-sm}) !default;
+/* 菜单行分隔线，默认跟随全局边框线 token */
+$hy-popover-border: var(--hy-popover-border, #{$hy-border-line}) !default;
+
+$z-index: $hy-popover-z-index;
 
 @include b(popover) {
   position: relative;
@@ -9,19 +26,19 @@ $z-index: 998;
 
   @include edeep(icon) {
     vertical-align: middle;
-    font-size: 18px;
+    font-size: $hy-popover-icon-size;
     margin-right: 5px;
   }
 
   /* 菜单 */
   @include e(menu-inner) {
     position: relative;
-    padding: 20rpx 0;
+    padding: $hy-popover-menu-padding;
     display: flex;
     align-items: center;
 
     &:not(:last-child) {
-      border-bottom: $hy-border-line;
+      border-bottom: $hy-popover-border;
     }
   }
 
@@ -32,7 +49,7 @@ $z-index: 998;
     z-index: $z-index;
     position: relative;
     background-color: $hy-background--box;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-popover-radius;
   }
 
   @include edeep(pos) {
@@ -40,11 +57,11 @@ $z-index: 998;
     box-sizing: border-box;
     background-clip: padding-box;
     text-align: center;
-    min-height: 36px;
+    min-height: $hy-popover-min-height;
     z-index: $z-index;
     transition: opacity 0.2s;
     box-shadow: $hy-shadow-base;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-popover-radius;
   }
 
 
@@ -55,18 +72,18 @@ $z-index: 998;
 
   @include e(container) {
     position: relative;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-popover-radius;
   }
 
   @include e(inner) {
     position: relative;
     padding: $hy-border-margin-padding-base;
-    line-height: 22px;
+    line-height: $hy-popover-line-height;
     z-index: $z-index;
     background-color: $hy-background--box;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-popover-radius;
     box-sizing: content-box;
-    width: 200px;
+    width: $hy-popover-width;
   }
 
 

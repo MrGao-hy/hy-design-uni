@@ -1,15 +1,13 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">基础使用</view>
-        <!--        <hy-parse-->
-        <!--            :content="parseContent"-->
-        <!--            :tag-style="tagStyle"-->
-        <!--            lazy-load-->
-        <!--            scroll-table-->
-        <!--            selectable-->
-        <!--            use-anchor-->
-        <!--        ></hy-parse>-->
-    </the-root-page>
+    <view class="hy-title">基础使用</view>
+    <!--        <hy-parse-->
+    <!--            :content="parseContent"-->
+    <!--            :tag-style="tagStyle"-->
+    <!--            lazy-load-->
+    <!--            scroll-table-->
+    <!--            selectable-->
+    <!--            use-anchor-->
+    <!--        ></hy-parse>-->
 </template>
 
 <script setup lang="ts">

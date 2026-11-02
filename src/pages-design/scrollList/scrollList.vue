@@ -1,26 +1,24 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-scroll-list>
-                <view class="scroll-list" style="flex-direction: row">
-                    <view
-                        class="scroll-list__goods-item"
-                        v-for="(item, index) in goodsArr"
-                        :key="index"
-                        :class="[index === 9 && 'scroll-list__goods-item--no-margin-right']"
-                    >
-                        <image class="scroll-list__goods-item__image" :src="item.thumbnail"></image>
-                        <text class="scroll-list__goods-item__text">￥{{ item.price }}</text>
-                    </view>
-                    <view class="scroll-list__show-more" @tap="showMore">
-                        <text class="scroll-list__show-more__text">{{ t('viewMore') }}</text>
-                        <hy-icon name="arrow-leftward" color="#f56c6c" size="12"></hy-icon>
-                    </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-scroll-list>
+            <view class="scroll-list" style="flex-direction: row">
+                <view
+                    class="scroll-list__goods-item"
+                    v-for="(item, index) in goodsArr"
+                    :key="index"
+                    :class="[index === 9 && 'scroll-list__goods-item--no-margin-right']"
+                >
+                    <image class="scroll-list__goods-item__image" :src="item.thumbnail"></image>
+                    <text class="scroll-list__goods-item__text">￥{{ item.price }}</text>
                 </view>
-            </hy-scroll-list>
-        </view>
-    </the-root-page>
+                <view class="scroll-list__show-more" @tap="showMore">
+                    <text class="scroll-list__show-more__text">{{ t('viewMore') }}</text>
+                    <hy-icon name="arrow-leftward" color="#f56c6c" size="12"></hy-icon>
+                </view>
+            </view>
+        </hy-scroll-list>
+    </view>
 </template>
 
 <script setup lang="ts">

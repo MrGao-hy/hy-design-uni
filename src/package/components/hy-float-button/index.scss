@@ -1,6 +1,13 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 方形圆角，默认跟随全局小圆角 */
+$hy-float-button-radius: var(--hy-float-button-radius, #{$hy-radius-sm}) !default;
+/* 展开菜单最大高度 */
+$hy-float-button-menus-max-height: var(--hy-float-button-menus-max-height, 250px) !default;
+/* 菜单项字号，默认跟随全局基础字号 */
+$hy-float-button-menu-font-size: var(--hy-float-button-menu-font-size, #{$hy-font-size-base}) !default;
+
 
 @include b(float-button) {
   position: relative;
@@ -8,7 +15,7 @@
   color: #FFFFFF;
 
   @include borderRadio(circle);
-  @include borderRadio(square);
+  @include borderRadio(square, $hy-float-button-radius);
 
   @include e(shadow) {
     box-shadow: $hy-shadow-base;
@@ -45,11 +52,11 @@
     position: absolute;
     z-index: -1;
     overflow: hidden;
-    max-height: 250px;
+    max-height: $hy-float-button-menus-max-height;
     box-sizing: border-box;
     background-color: $hy-primary;
     @include m(item) {
-      font-size: 28rpx;
+      font-size: $hy-float-button-menu-font-size;
       box-sizing: border-box;
       white-space: nowrap;
       overflow: hidden;
@@ -59,6 +66,6 @@
     }
 
     @include borderRadio(circle);
-    @include borderRadio(square);
+    @include borderRadio(square, $hy-float-button-radius);
   }
 }

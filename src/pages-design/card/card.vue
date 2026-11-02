@@ -1,60 +1,58 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view>
-            <hy-card
-                :title="t('cardTitle')"
-                thumbCircle
-                :sub-title="t('cardSubTitle')"
-                right-text="2020-05-15"
-                :thumb="config.avatar"
-                thumb-width="40"
-                full
-                :showHead="showHead"
-                :showFoot="showFoot"
-                :boxShadow="boxShadow"
-                :paddingHead="padding"
-                :paddingBody="padding"
-                :paddingFoot="padding"
-            >
-                <template #body>
-                    <view class="body">
-                        <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
-                            <view class="u-body-item-title u-line-2">{{ t('bodyText') }}</view>
-                            <hy-image :src="config.swiper1" width="100%" :radius="10"></hy-image>
-                        </view>
-                        <view class="u-body-item u-flex u-row-between u-p-b-0">
-                            <view class="u-body-item-title u-line-2">{{ t('cardSubTitle') }}</view>
-                            <hy-image :src="config.swiper2" width="100%" :radius="10"></hy-image>
-                        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view>
+        <hy-card
+            :title="t('cardTitle')"
+            thumbCircle
+            :sub-title="t('cardSubTitle')"
+            right-text="2020-05-15"
+            :thumb="config.avatar"
+            thumb-width="40"
+            full
+            :showHead="showHead"
+            :showFoot="showFoot"
+            :boxShadow="boxShadow"
+            :paddingHead="padding"
+            :paddingBody="padding"
+            :paddingFoot="padding"
+        >
+            <template #body>
+                <view class="body">
+                    <view class="u-body-item u-flex u-border-bottom u-col-between u-p-t-0">
+                        <view class="u-body-item-title u-line-2">{{ t('bodyText') }}</view>
+                        <hy-image :src="config.swiper1" width="100%" :radius="10"></hy-image>
                     </view>
-                </template>
-                <template #footer>
-                    <view>
-                        <hy-icon
-                            :name="IconConfig.MESSAGE"
-                            size="25"
-                            :label="t('commentCount')"
-                        ></hy-icon>
+                    <view class="u-body-item u-flex u-row-between u-p-b-0">
+                        <view class="u-body-item-title u-line-2">{{ t('cardSubTitle') }}</view>
+                        <hy-image :src="config.swiper2" width="100%" :radius="10"></hy-image>
                     </view>
-                </template>
-            </hy-card>
-        </view>
+                </view>
+            </template>
+            <template #footer>
+                <view>
+                    <hy-icon
+                        :name="IconConfig.MESSAGE"
+                        size="25"
+                        :label="t('commentCount')"
+                    ></hy-icon>
+                </view>
+            </template>
+        </hy-card>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('showHead') }}</view>
-            <hy-switch v-model="showHead" />
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('showHead') }}</view>
+        <hy-switch v-model="showHead" />
 
-            <view class="hy-title">{{ t('showFoot') }}</view>
-            <hy-switch v-model="showFoot" />
+        <view class="hy-title">{{ t('showFoot') }}</view>
+        <hy-switch v-model="showFoot" />
 
-            <view class="hy-title">{{ t('showShadow') }}</view>
-            <hy-switch v-model="boxShadow" />
+        <view class="hy-title">{{ t('showShadow') }}</view>
+        <hy-switch v-model="boxShadow" />
 
-            <view class="hy-title">{{ t('padding') }}</view>
-            <hy-subsection :list="list" v-model="padding"></hy-subsection>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('padding') }}</view>
+        <hy-subsection :list="list" v-model="padding"></hy-subsection>
+    </view>
 </template>
 
 <script setup lang="ts">

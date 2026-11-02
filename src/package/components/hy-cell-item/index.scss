@@ -1,6 +1,27 @@
 @use '../../libs/css/mixin' as *;
 @use '../../libs/css/theme' as *;
 
+/* 左侧图标与文字的间距 */
+$hy-cell-item-icon-margin: var(--hy-cell-item-icon-margin, 10px) !default;
+/* 值区域最大宽度 */
+$hy-cell-item-value-max-width: var(--hy-cell-item-value-max-width, 90%) !default;
+/* large 字号，默认跟随全局大号字体 token */
+$hy-cell-item-font-size-large: var(--hy-cell-item-font-size-large, #{$hy-font-size-lg}) !default;
+/* medium 字号，默认跟随全局基础字体 token */
+$hy-cell-item-font-size-medium: var(--hy-cell-item-font-size-medium, #{$hy-font-size-base}) !default;
+/* small 字号，默认跟随全局小号字体 token */
+$hy-cell-item-font-size-small: var(--hy-cell-item-font-size-small, #{$hy-font-size-sm}) !default;
+/* 副标题颜色 */
+$hy-cell-item-sub-color: var(--hy-cell-item-sub-color, #{$hy-text-color--grey}) !default;
+/* 副标题字号 */
+$hy-cell-item-sub-font-size: var(--hy-cell-item-sub-font-size, #{$hy-font-size-sm}) !default;
+/* 值文字颜色 */
+$hy-cell-item-value-color: var(--hy-cell-item-value-color, #{$hy-text-color--grey}) !default;
+/* 右侧箭头颜色 */
+$hy-cell-item-arrow-color: var(--hy-cell-item-arrow-color, #{$hy-text-color--3}) !default;
+/* 禁用文字颜色 */
+$hy-cell-item-disabled-color: var(--hy-cell-item-disabled-color, #{$hy-text-color--disabled}) !default;
+
 @include b(cell-item) {
     @include flex(row);
     align-items: center;
@@ -10,21 +31,21 @@
 
     /* 大 */
     @include m(large) {
-        font-size: $hy-font-size-lg;
+        font-size: $hy-cell-item-font-size-large;
         padding: $hy-border-margin-padding-lg;
         line-height: $hy-line-height-lg;
     }
 
     /* 默认 */
     @include m(medium) {
-        font-size: $hy-font-size-base;
+        font-size: $hy-cell-item-font-size-medium;
         padding: $hy-border-margin-padding-base;
         line-height: $hy-line-height-base;
     }
 
     /* 小 */
     @include m(small) {
-        font-size: $hy-font-size-sm;
+        font-size: $hy-cell-item-font-size-small;
         padding: $hy-border-margin-padding-sm;
         line-height: $hy-line-height-sm;
     }
@@ -40,7 +61,7 @@
         @include m(icon) {
             @include flex;
             align-items: center;
-            margin-right: 10px;
+            margin-right: $hy-cell-item-icon-margin;
         }
         /*行头部*/
         @include m(title) {
@@ -51,8 +72,8 @@
 
             /*sub值*/
             @include e(sub) {
-                color: $hy-text-color--grey;
-                font-size: $hy-font-size-sm;
+                color: $hy-cell-item-sub-color;
+                font-size: $hy-cell-item-sub-font-size;
             }
         }
     }
@@ -60,11 +81,11 @@
     /*cell值*/
     @include e(center) {
         @include flex;
-        max-width: 90%;
+        max-width: $hy-cell-item-value-max-width;
         flex: 1;
         @include m(value) {
             line-height: $hy-line-height-base;
-            color: $hy-text-color--grey;
+            color: $hy-cell-item-value-color;
             margin-right: $hy-border-margin-padding-sm;
         }
     }
@@ -73,7 +94,7 @@
     @include e(right) {
         transition: transform 0.3s;
         :deep(.hy-icon) {
-            color: $hy-text-color--3;
+            color: $hy-cell-item-arrow-color;
         }
 
         @include m(up) {
@@ -90,7 +111,7 @@
     }
 
     @include e(disabled) {
-        color: $hy-text-color--disabled;
+        color: $hy-cell-item-disabled-color;
         background: $hy-background--disabled;
         /* #ifndef APP-NVUE */
         cursor: not-allowed;

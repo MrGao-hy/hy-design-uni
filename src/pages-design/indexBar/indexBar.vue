@@ -1,34 +1,32 @@
 <template>
-    <the-root-page>
-        <scroll-view class="hy-scroll-view" scroll-y :scroll-top="scrollTop" @scroll="handleScroll">
-            <view
-                v-for="item in indexList"
-                :key="item.index"
-                class="hy-index-section"
-                :id="`index-${item.index}`"
-            >
-                <view class="hy-index-section__title hy-title">{{ item.index }}</view>
-                <view class="hy-index-section__container">
-                    <view
-                        v-for="(city, cityIndex) in item.data"
-                        :key="cityIndex"
-                        class="hy-index-section__item"
-                    >
-                        {{ city }}
-                    </view>
+    <scroll-view class="hy-scroll-view" scroll-y :scroll-top="scrollTop" @scroll="handleScroll">
+        <view
+            v-for="item in indexList"
+            :key="item.index"
+            class="hy-index-section"
+            :id="`index-${item.index}`"
+        >
+            <view class="hy-index-section__title hy-title">{{ item.index }}</view>
+            <view class="hy-index-section__container">
+                <view
+                    v-for="(city, cityIndex) in item.data"
+                    :key="cityIndex"
+                    class="hy-index-section__item"
+                >
+                    {{ city }}
                 </view>
             </view>
-        </scroll-view>
+        </view>
+    </scroll-view>
 
-        <hy-index-bar
-            v-model="currentActiveIndex"
-            :index-list="indexs"
-            :position="position"
-            :show-toast="showToast"
-            @click="handleIndexClick"
-            @scroll="handleIndexScroll"
-        />
-    </the-root-page>
+    <hy-index-bar
+        v-model="currentActiveIndex"
+        :index-list="indexs"
+        :position="position"
+        :show-toast="showToast"
+        @click="handleIndexClick"
+        @scroll="handleIndexScroll"
+    />
 </template>
 
 <script setup lang="ts">

@@ -1,6 +1,23 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 标签项高度 */
+$hy-tabs-item-height: var(--hy-tabs-item-height, 44px) !default;
+/* 标签项水平内边距 */
+$hy-tabs-item-padding: var(--hy-tabs-item-padding, 0 11px) !default;
+/* 标签字号 */
+$hy-tabs-font-size: var(--hy-tabs-font-size, 15px) !default;
+/* 下划线宽度 */
+$hy-tabs-line-width: var(--hy-tabs-line-width, 30px) !default;
+/* 下划线高度 */
+$hy-tabs-line-height: var(--hy-tabs-line-height, 3px) !default;
+/* 标签默认文字颜色，默认跟随全局主文字 token */
+$hy-tabs-text-color: var(--hy-tabs-text-color, #{$hy-text-color}) !default;
+/* 标签激活文字颜色，默认跟随全局主文字 token */
+$hy-tabs-text-active-color: var(--hy-tabs-text-active-color, #{$hy-text-color}) !default;
+/* 下划线圆角，默认跟随全局半圆角 token */
+$hy-tabs-line-radius: var(--hy-tabs-line-radius, #{$hy-radius-semicircle}) !default;
+
 @include b(tabs) {
   @include e(wrapper) {
     @include flex;
@@ -23,8 +40,8 @@
       position: relative;
 
       @include e(item) {
-        height: 44px;
-        padding: 0 11px;
+        height: $hy-tabs-item-height;
+        padding: $hy-tabs-item-padding;
         @include flex;
         align-items: center;
         justify-content: center;
@@ -41,13 +58,13 @@
 
         @include m(active) {
           .hy-tabs__wrapper__nav__item--text {
-            color: $hy-text-color;
+            color: $hy-tabs-text-active-color;
           }
         }
 
         @include m(text) {
-          font-size: 15px;
-          color: $hy-text-color;
+          font-size: $hy-tabs-font-size;
+          color: $hy-tabs-text-color;
           white-space: nowrap;
 
           @include e(disabled) {
@@ -57,17 +74,17 @@
       }
 
       @include e(line) {
-        width: 30px;
+        width: $hy-tabs-line-width;
         position: absolute;
         bottom: -7px;
         transition-property: transform;
         transition-duration: 300ms;
 
         @include is(line) {
-          height: 3px;
+          height: $hy-tabs-line-height;
           bottom: 2px;
           background: $hy-primary;
-          border-radius: $hy-radius-semicircle;
+          border-radius: $hy-tabs-line-radius;
         }
       }
     }

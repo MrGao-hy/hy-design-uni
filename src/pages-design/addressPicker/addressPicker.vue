@@ -1,15 +1,13 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-address-picker v-model="value" has-input></hy-address-picker>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-address-picker v-model="value" has-input></hy-address-picker>
+    </view>
 
-        <view class="hy-title">{{ t('separator') }}</view>
-        <view class="hy-container">
-            <hy-address-picker v-model="value" has-input separator="/"></hy-address-picker>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('separator') }}</view>
+    <view class="hy-container">
+        <hy-address-picker v-model="value" has-input separator="/"></hy-address-picker>
+    </view>
 </template>
 
 <script setup lang="ts">

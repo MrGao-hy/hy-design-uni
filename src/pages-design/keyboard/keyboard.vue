@@ -1,209 +1,207 @@
 <template>
-    <the-root-page>
-        <!-- 组件类型 -->
-        <view class="hy-title">{{ t('sectionType') }}</view>
-        <view class="hy-subtitle">{{ t('subtitleKeyboardType') }}</view>
-        <hy-cell>
-            <hy-cell-item
-                :title="t('defaultKeyboard')"
-                clickable
-                @click="showDefaultKeyboard = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('sidebarKeyboard')"
-                clickable
-                @click="showSidebarKeyboard = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('idcardKeyboard')"
-                clickable
-                @click="showIdcardKeyboard = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('carUncontrolled')"
-                clickable
-                @click="showCarUncontrolledKeyboard = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('carControlled')"
-                clickable
-                @click="showCarControlledKeyboard = true"
-            ></hy-cell-item>
-        </hy-cell>
+    <!-- 组件类型 -->
+    <view class="hy-title">{{ t('sectionType') }}</view>
+    <view class="hy-subtitle">{{ t('subtitleKeyboardType') }}</view>
+    <hy-cell>
+        <hy-cell-item
+            :title="t('defaultKeyboard')"
+            clickable
+            @click="showDefaultKeyboard = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('sidebarKeyboard')"
+            clickable
+            @click="showSidebarKeyboard = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('idcardKeyboard')"
+            clickable
+            @click="showIdcardKeyboard = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('carUncontrolled')"
+            clickable
+            @click="showCarUncontrolledKeyboard = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('carControlled')"
+            clickable
+            @click="showCarControlledKeyboard = true"
+        ></hy-cell-item>
+    </hy-cell>
 
-        <!-- 组件变体 -->
-        <view class="hy-title">{{ t('sectionVariant') }}</view>
-        <view class="hy-subtitle">{{ t('subtitleTitleExtra') }}</view>
-        <hy-cell>
-            <hy-cell-item
-                :title="t('titleKeyboard')"
-                clickable
-                @click="showTitleKeyboard = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('slotTitle')"
-                clickable
-                @click="showSlotTitleKeyboard = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('multipleExtra')"
-                clickable
-                @click="showMultipleExtraKeyboard = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('randomKeyboard')"
-                clickable
-                @click="showRandomKeyboard = true"
-            ></hy-cell-item>
-        </hy-cell>
+    <!-- 组件变体 -->
+    <view class="hy-title">{{ t('sectionVariant') }}</view>
+    <view class="hy-subtitle">{{ t('subtitleTitleExtra') }}</view>
+    <hy-cell>
+        <hy-cell-item
+            :title="t('titleKeyboard')"
+            clickable
+            @click="showTitleKeyboard = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('slotTitle')"
+            clickable
+            @click="showSlotTitleKeyboard = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('multipleExtra')"
+            clickable
+            @click="showMultipleExtraKeyboard = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('randomKeyboard')"
+            clickable
+            @click="showRandomKeyboard = true"
+        ></hy-cell-item>
+    </hy-cell>
 
-        <!-- 自定义配置 -->
-        <view class="hy-title">{{ t('sectionConfig') }}</view>
-        <view class="hy-subtitle">{{ t('subtitleDotControl') }}</view>
-        <hy-cell>
-            <hy-cell-item
-                :title="t('noDot')"
-                clickable
-                @click="showNoDotKeyboard = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('customExtra')"
-                clickable
-                @click="showCustomExtraKeyboard = true"
-            ></hy-cell-item>
-        </hy-cell>
+    <!-- 自定义配置 -->
+    <view class="hy-title">{{ t('sectionConfig') }}</view>
+    <view class="hy-subtitle">{{ t('subtitleDotControl') }}</view>
+    <hy-cell>
+        <hy-cell-item
+            :title="t('noDot')"
+            clickable
+            @click="showNoDotKeyboard = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('customExtra')"
+            clickable
+            @click="showCustomExtraKeyboard = true"
+        ></hy-cell-item>
+    </hy-cell>
 
-        <!-- 默认键盘 -->
-        <hy-keyboard
-            v-model:show="showDefaultKeyboard"
-            mode="default"
-            v-model="defaultValue"
-            :close-text="t('done')"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('default')"
-        ></hy-keyboard>
+    <!-- 默认键盘 -->
+    <hy-keyboard
+        v-model:show="showDefaultKeyboard"
+        mode="default"
+        v-model="defaultValue"
+        :close-text="t('done')"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('default')"
+    ></hy-keyboard>
 
-        <!-- 带右侧栏的键盘 -->
-        <hy-keyboard
-            v-model:show="showSidebarKeyboard"
-            v-model="sidebarValue"
-            mode="custom"
-            :close-text="t('done')"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('sidebar')"
-        ></hy-keyboard>
+    <!-- 带右侧栏的键盘 -->
+    <hy-keyboard
+        v-model:show="showSidebarKeyboard"
+        v-model="sidebarValue"
+        mode="custom"
+        :close-text="t('done')"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('sidebar')"
+    ></hy-keyboard>
 
-        <!-- 身份证键盘 -->
-        <hy-keyboard
-            v-model:show="showIdcardKeyboard"
-            mode="idcard"
-            v-model="idcardValue"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('idcard')"
-        ></hy-keyboard>
+    <!-- 身份证键盘 -->
+    <hy-keyboard
+        v-model:show="showIdcardKeyboard"
+        mode="idcard"
+        v-model="idcardValue"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('idcard')"
+    ></hy-keyboard>
 
-        <!-- 车牌号键盘(非受控) -->
-        <hy-keyboard
-            v-model:show="showCarUncontrolledKeyboard"
-            mode="car"
-            :auto-switch-lang="true"
-            v-model="carUncontrolledValue"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('carUncontrolled')"
-        ></hy-keyboard>
+    <!-- 车牌号键盘(非受控) -->
+    <hy-keyboard
+        v-model:show="showCarUncontrolledKeyboard"
+        mode="car"
+        :auto-switch-lang="true"
+        v-model="carUncontrolledValue"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('carUncontrolled')"
+    ></hy-keyboard>
 
-        <!-- 车牌号键盘(受控) -->
-        <hy-keyboard
-            v-model:show="showCarControlledKeyboard"
-            mode="car"
-            v-model="carControlledValue"
-            v-model:car-lang="carLang"
-            @input="handleCarInput"
-            @delete="handleCarDelete"
-            @close="handleClose('carControlled')"
-        ></hy-keyboard>
+    <!-- 车牌号键盘(受控) -->
+    <hy-keyboard
+        v-model:show="showCarControlledKeyboard"
+        mode="car"
+        v-model="carControlledValue"
+        v-model:car-lang="carLang"
+        @input="handleCarInput"
+        @delete="handleCarDelete"
+        @close="handleClose('carControlled')"
+    ></hy-keyboard>
 
-        <!-- 带标题的键盘 -->
-        <hy-keyboard
-            v-model:show="showTitleKeyboard"
-            mode="default"
-            v-model="titleValue"
-            :title="t('demoTitle')"
-            :close-text="t('done')"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('title')"
-        ></hy-keyboard>
+    <!-- 带标题的键盘 -->
+    <hy-keyboard
+        v-model:show="showTitleKeyboard"
+        mode="default"
+        v-model="titleValue"
+        :title="t('demoTitle')"
+        :close-text="t('done')"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('title')"
+    ></hy-keyboard>
 
-        <!-- slot自定义标题 -->
-        <hy-keyboard
-            v-model:show="showSlotTitleKeyboard"
-            mode="default"
-            v-model="slotTitleValue"
-            :close-text="t('done')"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('slotTitle')"
-        >
-            <template #title>
-                <view class="custom-title">
-                    <text class="custom-title-text">{{ t('customTitleText') }}</text>
-                </view>
-            </template>
-        </hy-keyboard>
+    <!-- slot自定义标题 -->
+    <hy-keyboard
+        v-model:show="showSlotTitleKeyboard"
+        mode="default"
+        v-model="slotTitleValue"
+        :close-text="t('done')"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('slotTitle')"
+    >
+        <template #title>
+            <view class="custom-title">
+                <text class="custom-title-text">{{ t('customTitleText') }}</text>
+            </view>
+        </template>
+    </hy-keyboard>
 
-        <!-- 多个额外按键 -->
-        <hy-keyboard
-            v-model:show="showMultipleExtraKeyboard"
-            mode="custom"
-            v-model="multipleExtraValue"
-            :extra-key="['00', '.']"
-            :close-text="t('done')"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('multipleExtra')"
-        ></hy-keyboard>
+    <!-- 多个额外按键 -->
+    <hy-keyboard
+        v-model:show="showMultipleExtraKeyboard"
+        mode="custom"
+        v-model="multipleExtraValue"
+        :extra-key="['00', '.']"
+        :close-text="t('done')"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('multipleExtra')"
+    ></hy-keyboard>
 
-        <!-- 随机数字键盘 -->
-        <hy-keyboard
-            v-model:show="showRandomKeyboard"
-            mode="default"
-            v-model="randomValue"
-            :random-key-order="true"
-            :close-text="t('done')"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('random')"
-        ></hy-keyboard>
+    <!-- 随机数字键盘 -->
+    <hy-keyboard
+        v-model:show="showRandomKeyboard"
+        mode="default"
+        v-model="randomValue"
+        :random-key-order="true"
+        :close-text="t('done')"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('random')"
+    ></hy-keyboard>
 
-        <!-- 不显示小数点 -->
-        <hy-keyboard
-            v-model:show="showNoDotKeyboard"
-            mode="default"
-            v-model="noDotValue"
-            :show-dot-key="false"
-            :close-text="t('done')"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('noDot')"
-        ></hy-keyboard>
+    <!-- 不显示小数点 -->
+    <hy-keyboard
+        v-model:show="showNoDotKeyboard"
+        mode="default"
+        v-model="noDotValue"
+        :show-dot-key="false"
+        :close-text="t('done')"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('noDot')"
+    ></hy-keyboard>
 
-        <!-- 自定义额外按键 -->
-        <hy-keyboard
-            v-model:show="showCustomExtraKeyboard"
-            mode="default"
-            v-model="customExtraValue"
-            extra-key="+"
-            :close-text="t('done')"
-            @input="handleInput"
-            @delete="handleDelete"
-            @close="handleClose('customExtra')"
-        ></hy-keyboard>
-    </the-root-page>
+    <!-- 自定义额外按键 -->
+    <hy-keyboard
+        v-model:show="showCustomExtraKeyboard"
+        mode="default"
+        v-model="customExtraValue"
+        extra-key="+"
+        :close-text="t('done')"
+        @input="handleInput"
+        @delete="handleDelete"
+        @close="handleClose('customExtra')"
+    ></hy-keyboard>
 </template>
 
 <script setup lang="ts">

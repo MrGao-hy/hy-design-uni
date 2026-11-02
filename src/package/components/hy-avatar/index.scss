@@ -1,17 +1,22 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 圆形头像圆角，默认跟随全局圆形 token */
+$hy-avatar-circle-radius: var(--hy-avatar-circle-radius, #{$hy-radius-circle}) !default;
+/* 方形头像圆角，默认跟随全局小间距 token */
+$hy-avatar-square-radius: var(--hy-avatar-square-radius, #{$hy-border-margin-padding-sm}) !default;
+
 @include b(avatar) {
   @include flex;
   align-items: center;
   justify-content: center;
 
   @include m(circle) {
-    border-radius: $hy-radius-circle;
+    border-radius: $hy-avatar-circle-radius;
   }
 
   @include m(square) {
-    border-radius: $hy-border-margin-padding-sm;
+    border-radius: $hy-avatar-square-radius;
   }
 
   @include m(small) {
@@ -34,12 +39,12 @@
     height: 100%;
 
     @include m(circle) {
-      border-radius: $hy-radius-circle;
+      border-radius: $hy-avatar-circle-radius;
       overflow: hidden;
     }
 
     @include m(square) {
-      border-radius: $hy-border-margin-padding-sm;
+      border-radius: $hy-avatar-square-radius;
     }
   }
 }

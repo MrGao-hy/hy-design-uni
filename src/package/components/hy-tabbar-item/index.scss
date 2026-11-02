@@ -1,6 +1,13 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 图标字号 */
+$hy-tabbar-item-icon-size: var(--hy-tabbar-item-icon-size, 40rpx) !default;
+/* 标题字号，默认跟随全局小号字体 token */
+$hy-tabbar-item-title-font-size: var(--hy-tabbar-item-title-font-size, #{$hy-font-size-sm}) !default;
+/* 未激活文字颜色，默认跟随全局灰度文字 token */
+$hy-tabbar-item-inactive-color: var(--hy-tabbar-item-inactive-color, #{$hy-text-color--grey}) !default;
+
 
 @include b(tabbar-item) {
   flex: 1;
@@ -25,19 +32,19 @@
       }
 
       @include is(inactive) {
-        color: $hy-text-color--grey;
+        color: $hy-tabbar-item-inactive-color;
       }
     }
   }
 
 
   @include e(body-title) {
-    font-size: $hy-font-size-sm;
+    font-size: $hy-tabbar-item-title-font-size;
     line-height: initial;
   }
 
   @include edeep(body-icon) {
-    font-size: 40rpx;
+    font-size: $hy-tabbar-item-icon-size;
   }
 
 }

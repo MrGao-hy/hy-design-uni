@@ -1,8 +1,28 @@
 @use '../../libs/css/mixin' as *;
 @use '../../libs/css/theme.scss' as *;
 
-$hy-coupon--box-width: 180rpx;
-$hy-coupon--bg-height: 166rpx;
+/* 左侧金额区宽度 */
+$hy-coupon-box-width: var(--hy-coupon-box-width, 180rpx) !default;
+/* 背景高度 */
+$hy-coupon-bg-height: var(--hy-coupon-bg-height, 166rpx) !default;
+/* 卡片圆角 */
+$hy-coupon-radius: var(--hy-coupon-radius, 16rpx) !default;
+/* 金额字号 */
+$hy-coupon-value-font-size: var(--hy-coupon-value-font-size, 64rpx) !default;
+/* 金额单位字号 */
+$hy-coupon-suffix-font-size: var(--hy-coupon-suffix-font-size, 28rpx) !default;
+/* 优惠券名称字号 */
+$hy-coupon-name-font-size: var(--hy-coupon-name-font-size, 30rpx) !default;
+/* 描述文字字号 */
+$hy-coupon-desc-font-size: var(--hy-coupon-desc-font-size, 22rpx) !default;
+/* 状态标签宽度 */
+$hy-coupon-tag-width: var(--hy-coupon-tag-width, 120rpx) !default;
+/* 状态标签字号 */
+$hy-coupon-tag-font-size: var(--hy-coupon-tag-font-size, 26rpx) !default;
+/* 状态标签背景色 */
+$hy-coupon-tag-bg: var(--hy-coupon-tag-bg, #ffd16d) !default;
+/* 状态标签文字颜色 */
+$hy-coupon-tag-color: var(--hy-coupon-tag-color, #d43c33) !default;
 @include b(coupon) {
   width: 100%;
   min-height: 190rpx;
@@ -20,7 +40,7 @@ $hy-coupon--bg-height: 166rpx;
   @include e(card) {
     position: relative;
     display: flex;
-    border-radius: 16rpx;
+    border-radius: $hy-coupon-radius;
     overflow: hidden;
     transition: transform 0.3s ease;
     transform-style: preserve-3d; /* 子元素将保持 3D 位置 */
@@ -33,10 +53,10 @@ $hy-coupon--bg-height: 166rpx;
   /* 不同类型优惠券的背景色 */
   @include m(moneyOff) {
     background:
-            radial-gradient(circle at $hy-coupon--box-width top, transparent 15rpx, #ff7d00 0) top / 100% $hy-coupon--bg-height
+            radial-gradient(circle at $hy-coupon-box-width top, transparent 15rpx, #ff7d00 0) top / 100% $hy-coupon-bg-height
             no-repeat,
-            radial-gradient(circle at $hy-coupon--box-width bottom, transparent 15rpx, #ff7d00 0) bottom / 100%
-            $hy-coupon--bg-height no-repeat;
+            radial-gradient(circle at $hy-coupon-box-width bottom, transparent 15rpx, #ff7d00 0) bottom / 100%
+            $hy-coupon-bg-height no-repeat;
     //background:
     //        radial-gradient(circle at left center, transparent 15rpx, #ff7d00 0) left center / 30rpx 100% no-repeat,
     //        radial-gradient(circle at right center, transparent 15rpx, #ff7d00 0) right center / 30rpx 100% no-repeat;
@@ -45,17 +65,17 @@ $hy-coupon--bg-height: 166rpx;
   }
   @include m(discount) {
     background:
-            radial-gradient(circle at $hy-coupon--box-width top, transparent 15rpx, #00c6ff 0) top / 100% $hy-coupon--bg-height
+            radial-gradient(circle at $hy-coupon-box-width top, transparent 15rpx, #00c6ff 0) top / 100% $hy-coupon-bg-height
             no-repeat,
-            radial-gradient(circle at $hy-coupon--box-width bottom, transparent 15rpx, #00c6ff 0) bottom / 100%
-            $hy-coupon--bg-height no-repeat;
+            radial-gradient(circle at $hy-coupon-box-width bottom, transparent 15rpx, #00c6ff 0) bottom / 100%
+            $hy-coupon-bg-height no-repeat;
   }
   @include m(fixedAmount) {
     background:
-            radial-gradient(circle at $hy-coupon--box-width top, transparent 15rpx, $hy-error 0) top / 100% $hy-coupon--bg-height
+            radial-gradient(circle at $hy-coupon-box-width top, transparent 15rpx, $hy-error 0) top / 100% $hy-coupon-bg-height
             no-repeat,
-            radial-gradient(circle at $hy-coupon--box-width bottom, transparent 15rpx, $hy-error 0) bottom / 100%
-            $hy-coupon--bg-height no-repeat;
+            radial-gradient(circle at $hy-coupon-box-width bottom, transparent 15rpx, $hy-error 0) bottom / 100%
+            $hy-coupon-bg-height no-repeat;
   }
 
   /* 优惠券内容区域 */
@@ -73,7 +93,7 @@ $hy-coupon--bg-height: 166rpx;
       justify-content: center;
       align-items: center;
       height: 100%;
-      width: $hy-coupon--box-width;
+      width: $hy-coupon-box-width;
       padding: $hy-border-margin-padding-base;
       box-sizing: border-box;
       flex-shrink: 0;
@@ -85,14 +105,14 @@ $hy-coupon--bg-height: 166rpx;
       }
 
       @include e(value) {
-        font-size: 64rpx;
+        font-size: $hy-coupon-value-font-size;
         font-weight: 800;
         line-height: 1;
         display: inline-block;
         vertical-align: baseline; /* 关键：基线对齐 */
       }
       @include e(suffix) {
-        font-size: 28rpx;
+        font-size: $hy-coupon-suffix-font-size;
         font-weight: 500;
         display: inline-block;
         vertical-align: baseline; /* 关键：基线对齐 */
@@ -107,7 +127,7 @@ $hy-coupon--bg-height: 166rpx;
       padding: $hy-border-margin-padding-base;
 
       @include e(name) {
-        font-size: 30rpx;
+        font-size: $hy-coupon-name-font-size;
         font-weight: 600;
         margin-bottom: 8rpx;
       }
@@ -122,7 +142,7 @@ $hy-coupon--bg-height: 166rpx;
       }
 
       @include e(desc, validity) {
-        font-size: 22rpx;
+        font-size: $hy-coupon-desc-font-size;
         opacity: 0.9;
         line-height: 1.4;
       }
@@ -138,13 +158,13 @@ $hy-coupon--bg-height: 166rpx;
   @include e(tag) {
     height: 100%;
     margin-left: 20rpx;
-    width: 120rpx;
+    width: $hy-coupon-tag-width;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffd16d;
-    color: #d43c33;
-    font-size: 26rpx;
+    background-color: $hy-coupon-tag-bg;
+    color: $hy-coupon-tag-color;
+    font-size: $hy-coupon-tag-font-size;
     font-weight: bold;
     z-index: 2;
     transform-origin: top right;

@@ -1,23 +1,27 @@
 import { useShare, Locale } from '@/package'
-import { createApp } from 'vue'
+import { createSSRApp } from 'vue'
 import App from './App.vue'
 import pinia from '@/store'
 import { setupLocale } from "@/locale"
 import { useThemeStore } from '@/store/useTheme'
 // import router from './router'
 
-const app = createApp(App)
-app.use(pinia)
-setupLocale()
+// uni-app 标准入口写法，@uni-ku/root 依赖此结构向入口注入 global-ku-root 组件的全局注册
+export function createApp() {
+    const app = createSSRApp(App)
 
-// 恢复持久化的语言设置
-const themeStore = useThemeStore()
-Locale.use(themeStore.locale)
-// app.use(router)
-app.mixin(
-    useShare({
-        title: '华玥组件库'
-    })
-)
+    app.use(pinia)
+    setupLocale()
 
-app.mount('#app')
+    // 恢复持久化的语言设置
+    const themeStore = useThemeStore()
+    Locale.use(themeStore.locale)
+    // app.use(router)
+    app.mixin(
+        useShare({
+            title: '华玥组件库'
+        })
+    )
+
+    return { app }
+}

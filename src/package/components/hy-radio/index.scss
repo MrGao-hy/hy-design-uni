@@ -1,14 +1,29 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 选项上下间距 */
+$hy-radio-margin: var(--hy-radio-margin, 5px) !default;
+/* 方形图标圆角 */
+$hy-radio-radius-square: var(--hy-radio-radius-square, 3px) !default;
+/* 禁用选中透明度 */
+$hy-radio-disabled-checked-opacity: var(--hy-radio-disabled-checked-opacity, 0.5) !default;
+/* 选项文字颜色 */
+$hy-radio-label-color: var(--hy-radio-label-color, #{$hy-text-color}) !default;
+/* 选项文字字号，默认跟随全局基础字体 token */
+$hy-radio-font-size: var(--hy-radio-font-size, #{$hy-font-size-base}) !default;
+/* 选项禁用文字颜色 */
+$hy-radio-disabled-color: var(--hy-radio-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 圆点框边框，默认跟随全局边框线 token */
+$hy-radio-border: var(--hy-radio-border, #{$hy-border-line}) !default;
+
 
 @include b(radio) {
   @include flex(row);
   overflow: hidden;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin-bottom: $hy-radio-margin;
+  margin-top: $hy-radio-margin;
 
   &-group {
     flex: 1;
@@ -40,12 +55,12 @@
       word-wrap: break-word;
       /* #endif */
 
-      color: $hy-text-color;
-      font-size: $hy-font-size-base;
+      color: $hy-radio-label-color;
+      font-size: $hy-radio-font-size;
       margin-right: $hy-border-margin-padding-sm;
 
       @include m(disabled) {
-        color: $hy-text-color--disabled;
+        color: $hy-radio-disabled-color;
       }
     }
 
@@ -64,7 +79,7 @@
     color: transparent;
     text-align: center;
     margin-right: $hy-border-margin-padding-sm;
-    border: $hy-border-line;
+    border: $hy-radio-border;
 
     /* #ifdef MP-TOUTIAO */
     // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
@@ -79,7 +94,7 @@
     }
 
     @include m(square) {
-      border-radius: 3px;
+      border-radius: $hy-radio-radius-square;
     }
 
     @include m(checked) {
@@ -98,7 +113,7 @@
     @include m(disabled--checked) {
       background-color: $hy-primary;
       border-color: $hy-primary;
-      opacity: 0.5;
+      opacity: $hy-radio-disabled-checked-opacity;
       :deep(.hy-icon) {
         display: block;
       }

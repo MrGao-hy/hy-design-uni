@@ -1,8 +1,25 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
-$hy-tooltip--z-index: 998;
-$hy-tooltip--background-color: rgb(50, 50, 51);
+/* 弹出层层级 */
+$hy-tooltip-z-index: var(--hy-tooltip-z-index, 998) !default;
+/* 弹出层背景色 */
+$hy-tooltip-bg: var(--hy-tooltip-bg, rgb(50, 50, 51)) !default;
+/* 弹出层最小高度 */
+$hy-tooltip-min-height: var(--hy-tooltip-min-height, 36px) !default;
+/* 弹出层宽度 */
+$hy-tooltip-width: var(--hy-tooltip-width, 200px) !default;
+/* 弹出层行高 */
+$hy-tooltip-line-height: var(--hy-tooltip-line-height, 22px) !default;
+/* 按钮字号 */
+$hy-tooltip-btn-font-size: var(--hy-tooltip-btn-font-size, 13px) !default;
+/* 气泡圆角，默认跟随全局小圆角 token */
+$hy-tooltip-radius: var(--hy-tooltip-radius, #{$hy-radius-sm}) !default;
+/* 按钮文字颜色 */
+$hy-tooltip-btn-color: var(--hy-tooltip-btn-color, #ffffff) !default;
+
+$hy-tooltip--z-index: $hy-tooltip-z-index;
+$hy-tooltip--background-color: $hy-tooltip-bg;
 
 @include b(tooltip) {
   position: relative;
@@ -15,10 +32,10 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
     box-sizing: border-box;
     background-clip: padding-box;
     text-align: center;
-    min-height: 36px;
+    min-height: $hy-tooltip-min-height;
     transition: opacity 0.2s;
     box-shadow: $hy-shadow-base;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-tooltip-radius;
   }
 
 
@@ -29,17 +46,17 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
 
   @include e(container) {
     position: relative;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-tooltip-radius;
   }
 
   @include e(inner) {
     position: relative;
     padding: $hy-border-margin-padding-base;
-    line-height: 22px;
+    line-height: $hy-tooltip-line-height;
     z-index: $hy-tooltip--z-index;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-tooltip-radius;
     box-sizing: content-box;
-    width: 200px;
+    width: $hy-tooltip-width;
   }
 
   @include e(content) {
@@ -58,7 +75,7 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
       background-color: $hy-tooltip--background-color;
       position: relative;
       flex: 1;
-      border-radius: $hy-radius-sm;
+      border-radius: $hy-tooltip-radius;
       padding: 0;
       @include flex(row);
       align-items: center;
@@ -74,8 +91,8 @@ $hy-tooltip--background-color: rgb(50, 50, 51);
         }
 
         @include m(text) {
-          font-size: 13px;
-          color: #ffffff;
+          font-size: $hy-tooltip-btn-font-size;
+          color: $hy-tooltip-btn-color;
           white-space: nowrap;
         }
       }

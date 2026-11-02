@@ -20,7 +20,7 @@ const emptyProps = {
     /** 组件层级 */
     zIndex: {
         type: Number,
-        default: 889
+        default: 89
     },
     /** 图片组件宽度，单位px */
     width: {

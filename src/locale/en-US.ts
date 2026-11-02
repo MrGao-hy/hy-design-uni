@@ -1717,6 +1717,8 @@ export default {
         label: 'Tag',
         plain: 'Plain',
         plainFill: 'Plain with Fill',
+        darkPreview: 'Dark Mode',
+        borderNone: 'No Border',
         size: 'Size',
         shape: 'Shape',
         circle: 'Circle',

@@ -1,43 +1,41 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('iconImageRounded') }}</view>
-        <view class="hy-flex">
-            <hy-icon :name="config.avatar" size="80" round="5px" />
-        </view>
+    <view class="hy-title">{{ t('iconImageRounded') }}</view>
+    <view class="hy-flex">
+        <hy-icon :name="config.avatar" size="80" round="5px" />
+    </view>
 
-        <view class="hy-title">{{ t('labelPositionSection') }}</view>
-        <view class="hy-flex">
-            <hy-icon :name="IconConfig.LOCK" :label="t('labelHorizontal')" label-pos="right" />
-            <hy-icon :name="IconConfig.LOCK" :label="t('labelVertical')" label-pos="bottom" />
-        </view>
+    <view class="hy-title">{{ t('labelPositionSection') }}</view>
+    <view class="hy-flex">
+        <hy-icon :name="IconConfig.LOCK" :label="t('labelHorizontal')" label-pos="right" />
+        <hy-icon :name="IconConfig.LOCK" :label="t('labelVertical')" label-pos="bottom" />
+    </view>
 
-        <view class="hy-title">{{ t('rotateSection') }}</view>
-        <view class="hy-flex">
-            <hy-icon :name="IconConfig.LOCK" is-rotate />
-        </view>
+    <view class="hy-title">{{ t('rotateSection') }}</view>
+    <view class="hy-flex">
+        <hy-icon :name="IconConfig.LOCK" is-rotate />
+    </view>
 
-        <view class="hy-title">{{ t('sizeSection') }}</view>
-        <view class="hy-flex">
-            <hy-icon :name="IconConfig.LOCK" size="12px" />
-            <hy-icon :name="IconConfig.LOCK" size="30" />
-        </view>
+    <view class="hy-title">{{ t('sizeSection') }}</view>
+    <view class="hy-flex">
+        <hy-icon :name="IconConfig.LOCK" size="12px" />
+        <hy-icon :name="IconConfig.LOCK" size="30" />
+    </view>
 
-        <view class="hy-title">{{ t('colorSection') }}</view>
-        <view class="hy-flex">
-            <hy-icon :name="IconConfig.LOCK" color="red" />
-            <hy-icon :name="IconConfig.LOCK" color="#FFD04B" />
-        </view>
+    <view class="hy-title">{{ t('colorSection') }}</view>
+    <view class="hy-flex">
+        <hy-icon :name="IconConfig.LOCK" color="red" />
+        <hy-icon :name="IconConfig.LOCK" color="#FFD04B" />
+    </view>
 
-        <view class="hy-title">{{ t('customIconSection') }}</view>
-        <view class="hy-flex">
-            <hy-icon name="renzheng" customPrefix="icon" />
-        </view>
+    <view class="hy-title">{{ t('customIconSection') }}</view>
+    <view class="hy-flex">
+        <hy-icon name="renzheng" customPrefix="icon" />
+    </view>
 
-        <view class="hy-title">{{ t('iconSetSection') }}</view>
-        <view class="hy-container">
-            <hy-grid :list="icons" size="30" border itemHeight="100" :col="4"></hy-grid>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('iconSetSection') }}</view>
+    <view class="hy-container">
+        <hy-grid :list="icons" size="30" border itemHeight="100" :col="4"></hy-grid>
+    </view>
 </template>
 
 <script setup lang="ts">

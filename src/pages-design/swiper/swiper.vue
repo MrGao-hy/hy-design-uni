@@ -1,63 +1,60 @@
 <template>
-    <the-root-page>
-        <view class="hy-margin">
-            <hy-swiper
-                :list="list"
-                indicator
-                :indicatorMode="mode"
-                :height="height"
-                :duration="duration"
-                :interval="interval"
-                circular
-            ></hy-swiper>
-        </view>
+    <view class="hy-margin">
+        <hy-swiper
+            :list="list"
+            indicator
+            :indicatorMode="mode"
+            :height="height"
+            :duration="duration"
+            :interval="interval"
+            circular
+        ></hy-swiper>
+    </view>
 
-        <view class="hy-margin">
-            <hy-swiper
-                :list="list_2"
-                :autoplay="false"
-                indicator
-                :indicatorMode="mode"
-                previousMargin="30"
-                nextMargin="30"
-                radius="5"
-                bgColor="#ffffff"
-                showTitle
-                circular
-            ></hy-swiper>
-        </view>
+    <view class="hy-margin">
+        <hy-swiper
+            :list="list_2"
+            :autoplay="false"
+            indicator
+            :indicatorMode="mode"
+            previousMargin="30"
+            nextMargin="30"
+            radius="5"
+            bgColor="#ffffff"
+            showTitle
+            circular
+        ></hy-swiper>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('indicator') }}</view>
-            <hy-subsection :list="list_1" v-model="mode"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('indicator') }}</view>
+        <hy-subsection :list="list_1" v-model="mode"></hy-subsection>
 
-            <view class="hy-title">{{ t('height') }}</view>
-            <hy-slider v-model="height" :max="500"></hy-slider>
+        <view class="hy-title">{{ t('height') }}</view>
+        <hy-slider v-model="height" :max="500"></hy-slider>
 
-            <view class="hy-title">{{ t('duration') }}</view>
-            <hy-slider v-model="duration" :min="100" :max="1000"></hy-slider>
+        <view class="hy-title">{{ t('duration') }}</view>
+        <hy-slider v-model="duration" :min="100" :max="1000"></hy-slider>
 
-            <view class="hy-title">{{ t('interval') }}</view>
-            <hy-slider v-model="interval" :min="1000" :max="5000"></hy-slider>
-        </view>
+        <view class="hy-title">{{ t('interval') }}</view>
+        <hy-slider v-model="interval" :min="1000" :max="5000"></hy-slider>
+    </view>
 
-        <view class="hy-title">{{ t('customIndicator') }}</view>
-        <hy-swiper :list="list" :autoplay="false" height="300">
-            <template #indicator="{ current, length }">
-                <view class="indicator">
-                    <text>{{ current }}</text>
-                    <text>/</text>
-                    <text>{{ length }}</text>
-                </view>
-            </template>
-        </hy-swiper>
-    </the-root-page>
+    <view class="hy-title">{{ t('customIndicator') }}</view>
+    <hy-swiper :list="list" :autoplay="false" height="300">
+        <template #indicator="{ current, length }">
+            <view class="indicator">
+                <text>{{ current }}</text>
+                <text>/</text>
+                <text>{{ length }}</text>
+            </view>
+        </template>
+    </hy-swiper>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
-import TheRootPage from '@/components/the-root-page.vue'
 import type { SwiperList, IndicatorMode } from '@/package'
 import { config } from '@/config/config.ts'
 

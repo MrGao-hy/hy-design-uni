@@ -1,9 +1,22 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 菜单最大宽度 */
+$hy-menu-max-width: var(--hy-menu-max-width, 260rpx) !default;
+/* 选中指示条宽度 */
+$hy-menu-indicator-width: var(--hy-menu-indicator-width, 4px) !default;
+/* 选中指示条高度 */
+$hy-menu-indicator-height: var(--hy-menu-indicator-height, 15px) !default;
+/* 选中指示条圆角，默认跟随全局半圆角 token */
+$hy-menu-indicator-radius: var(--hy-menu-indicator-radius, #{$hy-radius-semicircle}) !default;
+/* 标题字号，默认跟随全局基础字号 token */
+$hy-menu-title-font-size: var(--hy-menu-title-font-size, #{$hy-font-size-base}) !default;
+/* 禁用文字颜色，默认跟随全局禁用文字 token */
+$hy-menu-disabled-color: var(--hy-menu-disabled-color, #{$hy-text-color--disabled}) !default;
+
 
 @include b(menu) {
-  max-width: 260rpx;
+  max-width: $hy-menu-max-width;
   background-color: $hy-background--track;
 
   @include e(item) {
@@ -29,11 +42,11 @@
         position: absolute;
         top: 50%;
         left: 0;
-        width: 4px;
-        height: 15px;
+        width: $hy-menu-indicator-width;
+        height: $hy-menu-indicator-height;
         background: $hy-primary;
         transform: translateY(-50%);
-        border-radius: $hy-radius-semicircle;
+        border-radius: $hy-menu-indicator-radius;
       }
 
       &:active {
@@ -42,13 +55,13 @@
     }
     @include m(title) {
       margin-left: 10rpx;
-      font-size: $hy-font-size-base;
-      line-height: $hy-font-size-base;
+      font-size: $hy-menu-title-font-size;
+      line-height: $hy-menu-title-font-size;
       @include lineEllipsis;
       position: relative;
     }
     @include m(disabled) {
-      color: $hy-text-color--disabled;
+      color: $hy-menu-disabled-color;
       background-color: $hy-background--disabled;
       cursor: not-allowed;
 

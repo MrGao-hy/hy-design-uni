@@ -1,21 +1,19 @@
 <template>
-    <the-root-page>
-        <hy-tabs :list="list" is-swiper>
-            <template #line>
-                <image
-                    src="/static/logo.png"
-                    mode="scaleToFill"
-                    style="width: 20px; height: 15px"
-                />
-            </template>
-            <template #default="{ record, index }">
-                <scroll-view class="scroll-view" scroll-y>
-                    <the-order-dom v-for="(item, i) in orderList[index]" :key="i" :order="item">
-                    </the-order-dom>
-                </scroll-view>
-            </template>
-        </hy-tabs>
-    </the-root-page>
+    <hy-tabs :list="list" is-swiper>
+        <template #line>
+            <image
+                src="/static/logo.png"
+                mode="scaleToFill"
+                style="width: 20px; height: 15px"
+            />
+        </template>
+        <template #default="{ record, index }">
+            <scroll-view class="scroll-view" scroll-y>
+                <the-order-dom v-for="(item, i) in orderList[index]" :key="i" :order="item">
+                </the-order-dom>
+            </scroll-view>
+        </template>
+    </hy-tabs>
 </template>
 
 <script setup lang="ts">
@@ -23,7 +21,6 @@ import { onMounted, computed, ref } from 'vue'
 import TheOrderDom from './components/TheOrderDom.vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import type { OrderItem } from '@/pages-design/tabs/components/types'
-import TheRootPage from '@/components/the-root-page.vue'
 import type { TabsItemVo } from '@/package'
 import { config } from '@/config/config.ts'
 

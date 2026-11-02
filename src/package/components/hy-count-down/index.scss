@@ -1,9 +1,14 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 文字字号 */
+$hy-count-down-font-size: var(--hy-count-down-font-size, 15px) !default;
+/* 文字行高 */
+$hy-count-down-line-height: var(--hy-count-down-line-height, 22px) !default;
+
 @include b(count-down) {
   @include e(text) {
-    font-size: 15px;
-    line-height: 22px;
+    font-size: $hy-count-down-font-size;
+    line-height: $hy-count-down-line-height;
   }
 }

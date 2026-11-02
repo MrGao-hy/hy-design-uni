@@ -1,6 +1,27 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 标题字号 */
+$hy-swiper-title-font-size: var(--hy-swiper-title-font-size, 28rpx) !default;
+/* 标题背景色 */
+$hy-swiper-title-bg: var(--hy-swiper-title-bg, rgba(0, 0, 0, 0.3)) !default;
+/* 线型指示器高度 */
+$hy-swiper-indicator-height: var(--hy-swiper-indicator-height, 4px) !default;
+/* 线型指示器滑块宽度 */
+$hy-swiper-indicator-bar-width: var(--hy-swiper-indicator-bar-width, 22px) !default;
+/* 点型指示器尺寸 */
+$hy-swiper-dot-size: var(--hy-swiper-dot-size, 5px) !default;
+/* 点型指示器选中宽度 */
+$hy-swiper-dot-active-width: var(--hy-swiper-dot-active-width, 12px) !default;
+/* 标题文字颜色 */
+$hy-swiper-title-color: var(--hy-swiper-title-color, #ffffff) !default;
+/* 线型指示器滑块圆角，默认跟随全局半圆角 token */
+$hy-swiper-indicator-bar-radius: var(--hy-swiper-indicator-bar-radius, #{$hy-radius-semicircle}) !default;
+/* 线型指示器滑块背景色 */
+$hy-swiper-indicator-bar-bg: var(--hy-swiper-indicator-bar-bg, #ffffff) !default;
+/* 点型指示器圆角，默认跟随全局半圆角 token */
+$hy-swiper-dot-radius: var(--hy-swiper-dot-radius, #{$hy-radius-semicircle}) !default;
+
 
 @include b(swiper) {
   @include flex;
@@ -30,13 +51,13 @@
 
         @include m(title) {
           position: absolute;
-          background-color: rgba(0, 0, 0, 0.3);
+          background-color: $hy-swiper-title-bg;
           bottom: 0;
           left: 0;
           right: 0;
-          font-size: 28rpx;
+          font-size: $hy-swiper-title-font-size;
           padding: $hy-border-margin-padding-sm $hy-border-margin-padding-lg;
-          color: #ffffff;
+          color: $hy-swiper-title-color;
           flex: 1;
         }
       }
@@ -56,25 +77,25 @@
 
     @include m(line){
       border-radius: 100px;
-      height: 4px;
+      height: $hy-swiper-indicator-height;
 
       @include e(bar) {
-        width: 22px;
-        height: 4px;
-        border-radius: $hy-radius-semicircle;
-        background-color: #ffffff;
+        width: $hy-swiper-indicator-bar-width;
+        height: $hy-swiper-indicator-height;
+        border-radius: $hy-swiper-indicator-bar-radius;
+        background-color: $hy-swiper-indicator-bar-bg;
         transition: transform 0.3s;
       }
     }
 
     @include m(dot) {
-      width: 5px;
-      height: 5px;
-      border-radius: $hy-radius-semicircle;
+      width: $hy-swiper-dot-size;
+      height: $hy-swiper-dot-size;
+      border-radius: $hy-swiper-dot-radius;
       margin: 0 $hy-border-margin-padding-sm;
 
       @include e(active) {
-        width: 12px;
+        width: $hy-swiper-dot-active-width;
       }
     }
   }

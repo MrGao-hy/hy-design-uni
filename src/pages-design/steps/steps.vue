@@ -1,151 +1,149 @@
 <template>
-    <the-root-page>
-        <!-- 基础横向步骤条 -->
-        <view class="hy-title">{{ t('basicRowSection') }}</view>
-        <view class="hy-container">
-            <hy-steps :list="basicList" v-model:current="currentStep" direction="row"></hy-steps>
-        </view>
+    <!-- 基础横向步骤条 -->
+    <view class="hy-title">{{ t('basicRowSection') }}</view>
+    <view class="hy-container">
+        <hy-steps :list="basicList" v-model:current="currentStep" direction="row"></hy-steps>
+    </view>
 
-        <!-- 点状模式 -->
-        <view class="hy-title">{{ t('dotSection') }}</view>
-        <view class="hy-container">
-            <hy-steps
-                :list="basicList"
-                v-model:current="currentStep"
-                direction="row"
-                dot
-            ></hy-steps>
-        </view>
+    <!-- 点状模式 -->
+    <view class="hy-title">{{ t('dotSection') }}</view>
+    <view class="hy-container">
+        <hy-steps
+            :list="basicList"
+            v-model:current="currentStep"
+            direction="row"
+            dot
+        ></hy-steps>
+    </view>
 
-        <!-- 自定义颜色 -->
-        <view class="hy-title">{{ t('colorSection') }}</view>
-        <view class="hy-container">
-            <hy-steps
-                :list="basicList"
-                v-model:current="currentStep"
-                activeColor="#4F8EF7"
-                inactiveColor="#CCCCCC"
-            ></hy-steps>
-        </view>
+    <!-- 自定义颜色 -->
+    <view class="hy-title">{{ t('colorSection') }}</view>
+    <view class="hy-container">
+        <hy-steps
+            :list="basicList"
+            v-model:current="currentStep"
+            activeColor="#4F8EF7"
+            inactiveColor="#CCCCCC"
+        ></hy-steps>
+    </view>
 
-        <!-- 竖向步骤条 -->
-        <view class="hy-title">{{ t('verticalSection') }}</view>
-        <view class="hy-container">
-            <hy-steps
-                :list="verticalList"
-                v-model:current="currentStep"
-                direction="column"
-            ></hy-steps>
-        </view>
+    <!-- 竖向步骤条 -->
+    <view class="hy-title">{{ t('verticalSection') }}</view>
+    <view class="hy-container">
+        <hy-steps
+            :list="verticalList"
+            v-model:current="currentStep"
+            direction="column"
+        ></hy-steps>
+    </view>
 
-        <!-- 带错误状态 -->
-        <view class="hy-title">{{ t('errorSection') }}</view>
-        <view class="hy-container">
-            <hy-steps :list="errorList" v-model:current="errorStep" direction="column"></hy-steps>
-        </view>
+    <!-- 带错误状态 -->
+    <view class="hy-title">{{ t('errorSection') }}</view>
+    <view class="hy-container">
+        <hy-steps :list="errorList" v-model:current="errorStep" direction="column"></hy-steps>
+    </view>
 
-        <!-- 自定义图标 -->
-        <view class="hy-title">{{ t('iconSection') }}</view>
-        <view class="hy-container">
-            <hy-steps
-                :list="basicList"
-                v-model:current="currentStep"
-                activeIcon="check-circle"
-                inactiveIcon="circle"
-                :iconSize="20"
-            ></hy-steps>
-        </view>
+    <!-- 自定义图标 -->
+    <view class="hy-title">{{ t('iconSection') }}</view>
+    <view class="hy-container">
+        <hy-steps
+            :list="basicList"
+            v-model:current="currentStep"
+            activeIcon="check-circle"
+            inactiveIcon="circle"
+            :iconSize="20"
+        ></hy-steps>
+    </view>
 
-        <!-- 自定义插槽 - 自定义图标 -->
-        <view class="hy-title">{{ t('slotIconSection') }}</view>
-        <view class="hy-container">
-            <hy-steps :list="basicList" v-model:current="currentStep">
-                <template #icon="{ index, error }">
-                    <view class="custom-icon" :class="{ error }">
-                        <text v-if="index < currentStep">{{ index + 1 }}</text>
-                        <text v-else-if="index === currentStep">●</text>
-                        <text v-else>○</text>
+    <!-- 自定义插槽 - 自定义图标 -->
+    <view class="hy-title">{{ t('slotIconSection') }}</view>
+    <view class="hy-container">
+        <hy-steps :list="basicList" v-model:current="currentStep">
+            <template #icon="{ index, error }">
+                <view class="custom-icon" :class="{ error }">
+                    <text v-if="index < currentStep">{{ index + 1 }}</text>
+                    <text v-else-if="index === currentStep">●</text>
+                    <text v-else>○</text>
+                </view>
+            </template>
+        </hy-steps>
+    </view>
+
+    <!-- 自定义插槽 - 标题和描述 -->
+    <view class="hy-title">{{ t('slotTitleDescSection') }}</view>
+    <view class="hy-container">
+        <hy-steps :list="customList" v-model:current="currentStep">
+            <template #title="{ title, index }">
+                <view class="custom-title">
+                    <text class="step-num">{{ index + 1 }}.</text>
+                    <text>{{ title }}</text>
+                </view>
+            </template>
+            <template #desc="{ docs, date }">
+                <view class="custom-desc" v-if="docs">
+                    <text class="desc-text">{{ docs }}</text>
+                    <text class="desc-date" v-if="date">{{ date }}</text>
+                </view>
+            </template>
+        </hy-steps>
+    </view>
+
+    <!-- 自定义插槽 - 完整内容 -->
+    <view class="hy-title">{{ t('slotContentSection') }}</view>
+    <view class="hy-container">
+        <hy-steps :list="statusList" v-model:current="currentStep" direction="column">
+            <template #content="{ item, index }">
+                <view class="custom-content">
+                    <view class="content-header">
+                        <text class="content-title">{{ item.title }}</text>
+                        <text
+                            :class="[
+                                'status-tag',
+                                index < currentStep ? 'static-done' : '',
+                                index === currentStep ? 'static-active' : '',
+                                index > currentStep ? 'static-pending' : ''
+                            ]"
+                        >
+                            {{
+                                index < currentStep
+                                    ? t('statusDone')
+                                    : index === currentStep
+                                      ? t('statusActive')
+                                      : t('statusPending')
+                            }}
+                        </text>
                     </view>
-                </template>
-            </hy-steps>
-        </view>
-
-        <!-- 自定义插槽 - 标题和描述 -->
-        <view class="hy-title">{{ t('slotTitleDescSection') }}</view>
-        <view class="hy-container">
-            <hy-steps :list="customList" v-model:current="currentStep">
-                <template #title="{ title, index }">
-                    <view class="custom-title">
-                        <text class="step-num">{{ index + 1 }}.</text>
-                        <text>{{ title }}</text>
+                    <view class="content-info" v-if="item?.docs">
+                        <text>{{ item.docs }}</text>
                     </view>
-                </template>
-                <template #desc="{ docs, date }">
-                    <view class="custom-desc" v-if="docs">
-                        <text class="desc-text">{{ docs }}</text>
-                        <text class="desc-date" v-if="date">{{ date }}</text>
+                    <view class="content-date" v-if="item?.date">
+                        <text>{{ item.date }}</text>
                     </view>
-                </template>
-            </hy-steps>
-        </view>
+                </view>
+            </template>
+        </hy-steps>
+    </view>
 
-        <!-- 自定义插槽 - 完整内容 -->
-        <view class="hy-title">{{ t('slotContentSection') }}</view>
-        <view class="hy-container">
-            <hy-steps :list="statusList" v-model:current="currentStep" direction="column">
-                <template #content="{ item, index }">
-                    <view class="custom-content">
-                        <view class="content-header">
-                            <text class="content-title">{{ item.title }}</text>
-                            <text
-                                :class="[
-                                    'status-tag',
-                                    index < currentStep ? 'static-done' : '',
-                                    index === currentStep ? 'static-active' : '',
-                                    index > currentStep ? 'static-pending' : ''
-                                ]"
-                            >
-                                {{
-                                    index < currentStep
-                                        ? t('statusDone')
-                                        : index === currentStep
-                                          ? t('statusActive')
-                                          : t('statusPending')
-                                }}
-                            </text>
-                        </view>
-                        <view class="content-info" v-if="item?.docs">
-                            <text>{{ item.docs }}</text>
-                        </view>
-                        <view class="content-date" v-if="item?.date">
-                            <text>{{ item.date }}</text>
-                        </view>
-                    </view>
-                </template>
-            </hy-steps>
+    <!-- 动态控制 -->
+    <view class="hy-title">{{ t('dynamicSection') }}</view>
+    <view class="hy-container">
+        <hy-steps :list="basicList" v-model:current="currentStep"></hy-steps>
+        <view class="control-buttons">
+            <hy-button
+                :text="t('prevStep')"
+                size="small"
+                :disabled="currentStep <= 0"
+                @click="currentStep--"
+            ></hy-button>
+            <hy-button
+                :text="t('nextStep')"
+                type="primary"
+                size="small"
+                :disabled="currentStep >= basicList.length - 1"
+                @click="currentStep++"
+            ></hy-button>
         </view>
-
-        <!-- 动态控制 -->
-        <view class="hy-title">{{ t('dynamicSection') }}</view>
-        <view class="hy-container">
-            <hy-steps :list="basicList" v-model:current="currentStep"></hy-steps>
-            <view class="control-buttons">
-                <hy-button
-                    :text="t('prevStep')"
-                    size="small"
-                    :disabled="currentStep <= 0"
-                    @click="currentStep--"
-                ></hy-button>
-                <hy-button
-                    :text="t('nextStep')"
-                    type="primary"
-                    size="small"
-                    :disabled="currentStep >= basicList.length - 1"
-                    @click="currentStep++"
-                ></hy-button>
-            </view>
-        </view>
-    </the-root-page>
+    </view>
 </template>
 
 <script setup lang="ts">

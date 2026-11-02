@@ -1,6 +1,19 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 索引栏层级 */
+$hy-index-bar-z-index: var(--hy-index-bar-z-index, 999) !default;
+/* 提示气泡尺寸 */
+$hy-index-bar-toast-size: var(--hy-index-bar-toast-size, 50px) !default;
+/* 索引文字颜色，默认跟随全局辅助文字 token */
+$hy-index-bar-index-color: var(--hy-index-bar-index-color, #{$hy-text-color--3}) !default;
+/* 索引项圆角，默认跟随全局小圆角 token */
+$hy-index-bar-index-radius: var(--hy-index-bar-index-radius, #{$hy-radius-sm}) !default;
+/* 提示气泡文字颜色 */
+$hy-index-bar-toast-color: var(--hy-index-bar-toast-color, #ffffff) !default;
+/* 提示气泡文字字号，默认跟随全局大号字体 token */
+$hy-index-bar-toast-font-size: var(--hy-index-bar-toast-font-size, #{$hy-font-size-lg}) !default;
+
 @include b(index-bar) {
   position: fixed;
   top: 0;
@@ -9,7 +22,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: $hy-index-bar-z-index;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 
@@ -32,9 +45,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: $hy-text-color--3;
+        color: $hy-index-bar-index-color;
         margin: 2rpx 0;
-        border-radius: $hy-radius-sm;
+        border-radius: $hy-index-bar-index-radius;
 
         @include is(active) {
           position: relative;
@@ -46,11 +59,11 @@
   }
 
   @include e(toast) {
-    width: 50px;
-    height: 50px;
+    width: $hy-index-bar-toast-size;
+    height: $hy-index-bar-toast-size;
     border-radius: 100px 100px 0 100px;
     text-align: center;
-    color: #ffffff;
+    color: $hy-index-bar-toast-color;
     background-color: $hy-background--empty;
     transform: rotate(-45deg);
     display: flex;
@@ -59,7 +72,7 @@
 
     @include m(text) {
       transform: rotate(45deg);
-      font-size: $hy-font-size-lg;
+      font-size: $hy-index-bar-toast-font-size;
     }
   }
 }

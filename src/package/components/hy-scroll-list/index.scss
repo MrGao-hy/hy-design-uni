@@ -1,6 +1,15 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 指示条宽度 */
+$hy-scroll-list-indicator-width: var(--hy-scroll-list-indicator-width, 60px) !default;
+/* 指示条高度 */
+$hy-scroll-list-indicator-height: var(--hy-scroll-list-indicator-height, 4px) !default;
+/* 指示条滑块宽度 */
+$hy-scroll-list-indicator-bar-width: var(--hy-scroll-list-indicator-bar-width, 20px) !default;
+/* 指示条圆角，默认跟随全局半圆角 token */
+$hy-scroll-list-indicator-radius: var(--hy-scroll-list-indicator-radius, #{$hy-radius-semicircle}) !default;
+
 /* 暗色主题 */
 @include b(theme){
   @include m(dark) {
@@ -26,16 +35,16 @@
     margin-top: $hy-border-margin-padding-lg;
 
     @include m(line) {
-      width: 60px;
-      height: 4px;
-      border-radius: $hy-radius-semicircle;
+      width: $hy-scroll-list-indicator-width;
+      height: $hy-scroll-list-indicator-height;
+      border-radius: $hy-scroll-list-indicator-radius;
       overflow: hidden;
       background-color: $hy-background--empty;
 
       @include e(bar) {
-        width: 20px;
-        height: 4px;
-        border-radius: $hy-radius-semicircle;
+        width: $hy-scroll-list-indicator-bar-width;
+        height: $hy-scroll-list-indicator-height;
+        border-radius: $hy-scroll-list-indicator-radius;
         background-color: $hy-primary;
       }
     }

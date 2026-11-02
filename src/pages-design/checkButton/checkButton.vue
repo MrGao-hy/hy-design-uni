@@ -1,41 +1,39 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('checkboxBtn') }}</view>
-        <view class="hy-container">
-            <hy-check-button
-                v-model="value_1"
-                :columns="columns"
-                :type="type"
-                :shape="shape"
-                :size="size"
-                selectType="checkbox"
-            >
-            </hy-check-button>
-        </view>
+    <view class="hy-title">{{ t('checkboxBtn') }}</view>
+    <view class="hy-container">
+        <hy-check-button
+            v-model="value_1"
+            :columns="columns"
+            :type="type"
+            :shape="shape"
+            :size="size"
+            selectType="checkbox"
+        >
+        </hy-check-button>
+    </view>
 
-        <view class="hy-title">{{ t('radioBtn') }}</view>
-        <view class="hy-container">
-            <hy-check-button
-                v-model="value_2"
-                :columns="columns"
-                :type="type"
-                :shape="shape"
-                :size="size"
-                selectType="radio"
-            ></hy-check-button>
-        </view>
+    <view class="hy-title">{{ t('radioBtn') }}</view>
+    <view class="hy-container">
+        <hy-check-button
+            v-model="value_2"
+            :columns="columns"
+            :type="type"
+            :shape="shape"
+            :size="size"
+            selectType="radio"
+        ></hy-check-button>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('shapeSection') }}</view>
-            <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('shapeSection') }}</view>
+        <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">{{ t('themeSection') }}</view>
-            <hy-subsection :list="list_2" v-model="type"></hy-subsection>
+        <view class="hy-title">{{ t('themeSection') }}</view>
+        <hy-subsection :list="list_2" v-model="type"></hy-subsection>
 
-            <view class="hy-title">{{ t('sizeSection') }}</view>
-            <hy-subsection :list="list_3" v-model="size"></hy-subsection>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('sizeSection') }}</view>
+        <hy-subsection :list="list_3" v-model="size"></hy-subsection>
+    </view>
 </template>
 
 <script setup lang="ts">

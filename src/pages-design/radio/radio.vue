@@ -1,63 +1,61 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-radio :columns="columns" v-model="value" :size="size" :shape="shape"></hy-radio>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-radio :columns="columns" v-model="value" :size="size" :shape="shape"></hy-radio>
+    </view>
 
-        <view class="hy-title">{{ t('disabled') }}</view>
-        <view class="hy-container">
-            <hy-radio
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-                disabled
-            ></hy-radio>
-        </view>
+    <view class="hy-title">{{ t('disabled') }}</view>
+    <view class="hy-container">
+        <hy-radio
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+            disabled
+        ></hy-radio>
+    </view>
 
-        <view class="hy-title">{{ t('layout') }}</view>
-        <view class="hy-container">
-            <hy-radio
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-                placement="column"
-            ></hy-radio>
-        </view>
-        <view class="hy-container" style="margin-top: 10px">
-            <hy-radio
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-                placement="column"
-                iconPlacement="right"
-                borderBottom
-            ></hy-radio>
-        </view>
+    <view class="hy-title">{{ t('layout') }}</view>
+    <view class="hy-container">
+        <hy-radio
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+            placement="column"
+        ></hy-radio>
+    </view>
+    <view class="hy-container" style="margin-top: 10px">
+        <hy-radio
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+            placement="column"
+            iconPlacement="right"
+            borderBottom
+        ></hy-radio>
+    </view>
 
-        <view class="hy-title">{{ t('colorSection') }}</view>
-        <view class="hy-container">
-            <hy-radio
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-                activeColor="red"
-                inactiveColor="green"
-            ></hy-radio>
-        </view>
+    <view class="hy-title">{{ t('colorSection') }}</view>
+    <view class="hy-container">
+        <hy-radio
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+            activeColor="red"
+            inactiveColor="green"
+        ></hy-radio>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('shapeSection') }}</view>
-            <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('shapeSection') }}</view>
+        <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">{{ t('sizeSection') }}</view>
-            <hy-subsection :list="list_2" v-model="size"></hy-subsection>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('sizeSection') }}</view>
+        <hy-subsection :list="list_2" v-model="size"></hy-subsection>
+    </view>
 </template>
 
 <script setup lang="ts">

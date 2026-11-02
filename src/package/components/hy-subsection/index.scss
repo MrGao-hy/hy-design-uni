@@ -1,6 +1,19 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 分段器高度 */
+$hy-subsection-height: var(--hy-subsection-height, 35px) !default;
+/* 分段器内边距 */
+$hy-subsection-padding: var(--hy-subsection-padding, 3px) !default;
+/* 子分段器高度 */
+$hy-subsection-inner-height: var(--hy-subsection-inner-height, 32px) !default;
+/* 文字字号 */
+$hy-subsection-font-size: var(--hy-subsection-font-size, 12px) !default;
+/* 文字行高 */
+$hy-subsection-line-height: var(--hy-subsection-line-height, 14px) !default;
+/* 整体圆角，默认跟随全局小圆角 token */
+$hy-subsection-radius: var(--hy-subsection-radius, #{$hy-radius-sm}) !default;
+
 
 @include b(subsection) {
   @include flex;
@@ -12,20 +25,20 @@
   /* #endif */
 
   @include e(button) {
-    height: 35px;
+    height: $hy-subsection-height;
     background-color: $hy-background--3;
-    padding: 3px;
-    border-radius: $hy-radius-sm;
+    padding: $hy-subsection-padding;
+    border-radius: $hy-subsection-radius;
     align-items: stretch;
 
     @include m(bar) {
       background-color: $hy-background--container !important;
-      border-radius: $hy-radius-sm;
+      border-radius: $hy-subsection-radius;
     }
   }
 
   @include e(subsection) {
-    height: 32px;
+    height: $hy-subsection-inner-height;
   }
 
   @include e(bar) {
@@ -38,7 +51,7 @@
     background-color: $hy-primary;
 
     @include m(first) {
-      border-radius: $hy-radius-sm 0 0 $hy-radius-sm;
+      border-radius: $hy-subsection-radius 0 0 $hy-subsection-radius;
     }
 
     @include m(center) {
@@ -46,7 +59,7 @@
     }
 
     @include m(last) {
-      border-radius: 0 $hy-radius-sm $hy-radius-sm 0;
+      border-radius: 0 $hy-subsection-radius $hy-subsection-radius 0;
     }
   }
 
@@ -67,18 +80,18 @@
     }
 
     @include m(first) {
-      border-top-left-radius: $hy-radius-sm;
-      border-bottom-left-radius: $hy-radius-sm;
+      border-top-left-radius: $hy-subsection-radius;
+      border-bottom-left-radius: $hy-subsection-radius;
     }
 
     @include m(last) {
-      border-top-right-radius: $hy-radius-sm;
-      border-bottom-right-radius: $hy-radius-sm;
+      border-top-right-radius: $hy-subsection-radius;
+      border-bottom-right-radius: $hy-subsection-radius;
     }
 
     @include m(text) {
-      font-size: 12px;
-      line-height: 14px;
+      font-size: $hy-subsection-font-size;
+      line-height: $hy-subsection-line-height;
       @include flex;
       align-items: center;
       transition-property: color;

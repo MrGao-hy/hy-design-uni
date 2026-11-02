@@ -1,49 +1,47 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container hy-gap">
-            <hy-notice-bar
-                :text="text"
-                :direction="direction"
-                :mode="mode"
-                :step="step"
-                :justifyContent="justifyContent"
-                :speed="speed"
-                url="/pages/index/Index"
-            ></hy-notice-bar>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container hy-gap">
+        <hy-notice-bar
+            :text="text"
+            :direction="direction"
+            :mode="mode"
+            :step="step"
+            :justifyContent="justifyContent"
+            :speed="speed"
+            url="/pages/index/Index"
+        ></hy-notice-bar>
 
-            <hy-notice-bar
-                :text="t('noticeText')"
-                mode="link"
-                url="/pages-design/icon/icon"
-            ></hy-notice-bar>
+        <hy-notice-bar
+            :text="t('noticeText')"
+            mode="link"
+            url="/pages-design/icon/icon"
+        ></hy-notice-bar>
 
-            <hy-notice-bar
-                :text="t('customIcon')"
-                :icon="{
-                    name: IconConfig.SCAN,
-                    color: 'red'
-                }"
-            ></hy-notice-bar>
-        </view>
+        <hy-notice-bar
+            :text="t('customIcon')"
+            :icon="{
+                name: IconConfig.SCAN,
+                color: 'red'
+            }"
+        ></hy-notice-bar>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('directionSection') }}</view>
-            <hy-subsection :list="list_1" v-model="direction"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('directionSection') }}</view>
+        <hy-subsection :list="list_1" v-model="direction"></hy-subsection>
 
-            <view class="hy-title">{{ t('modeSection') }}</view>
-            <hy-subsection :list="list_2" v-model="mode"></hy-subsection>
+        <view class="hy-title">{{ t('modeSection') }}</view>
+        <hy-subsection :list="list_2" v-model="mode"></hy-subsection>
 
-            <view class="hy-title">{{ t('justifySection') }}</view>
-            <hy-subsection :list="list_3" v-model="justifyContent"></hy-subsection>
+        <view class="hy-title">{{ t('justifySection') }}</view>
+        <hy-subsection :list="list_3" v-model="justifyContent"></hy-subsection>
 
-            <view class="hy-title">{{ t('carouselSection') }}</view>
-            <hy-switch v-model="step"></hy-switch>
+        <view class="hy-title">{{ t('carouselSection') }}</view>
+        <hy-switch v-model="step"></hy-switch>
 
-            <view class="hy-title">{{ t('speedSection') }}</view>
-            <hy-slider v-model="speed" :min="50" :max="300" showValue></hy-slider>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('speedSection') }}</view>
+        <hy-slider v-model="speed" :min="50" :max="300" showValue></hy-slider>
+    </view>
 </template>
 
 <script setup lang="ts">

@@ -1,6 +1,29 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 方形圆角（radius=square） */
+$hy-input-radius-square: var(--hy-input-radius-square, 4px) !default;
+/* 胶囊圆角（radius=circle），默认跟随全局半圆圆角 */
+$hy-input-radius-circle: var(--hy-input-radius-circle, #{$hy-radius-semicircle}) !default;
+/* 输入框高度 */
+$hy-input-height: var(--hy-input-height, 24px) !default;
+/* 输入框行高 */
+$hy-input-line-height: var(--hy-input-line-height, 26px) !default;
+/* 输入框字号 */
+$hy-input-font-size: var(--hy-input-font-size, 15px) !default;
+/* 清除按钮尺寸 */
+$hy-input-clear-size: var(--hy-input-clear-size, 20px) !default;
+/* 输入文字颜色（含光标） */
+$hy-input-color: var(--hy-input-color, #{$hy-text-color}) !default;
+/* 占位符颜色 */
+$hy-input-placeholder-color: var(--hy-input-placeholder-color, #{$hy-text-color--placeholder}) !default;
+/* 禁用文字颜色 */
+$hy-input-disabled-color: var(--hy-input-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 清除按钮圆角，默认跟随全局半圆 token */
+$hy-input-clear-radius: var(--hy-input-clear-radius, #{$hy-radius-semicircle}) !default;
+/* 边框，默认跟随全局边框线 token */
+$hy-input-border: var(--hy-input-border, #{$hy-border-line}) !default;
+
 @include b(input) {
   @include flex(row);
   align-items: center;
@@ -9,22 +32,22 @@
   color: $hy-text-color;
   
   @include e(border) {
-  	border: $hy-border-line;
+  	border: $hy-input-border;
   }
 
   @include e(radius, square) {
-    border-radius: 4px;
+    border-radius: $hy-input-radius-square;
   }
 
   @include e(disabled) {
     background-color: $hy-background--disabled;
-    color: $hy-text-color--disabled;
+    color: $hy-input-disabled-color;
     :deep(.hy-icon) {
-      color: $hy-text-color--disabled;
+      color: $hy-input-disabled-color;
     }
 
     &-text {
-      color: $hy-text-color--disabled !important;
+      color: $hy-input-disabled-color !important;
     }
   }
 
@@ -33,7 +56,7 @@
   }
 
   @include e(circle) {
-    border-radius: 100px;
+    border-radius: $hy-input-radius-circle;
   }
 
   @include e(content) {
@@ -50,24 +73,24 @@
 
       @include e(field) {
         background: transparent;
-        line-height: 26px;
+        line-height: $hy-input-line-height;
         text-align: left;
-        height: 24px;
-        font-size: 15px;
+        height: $hy-input-height;
+        font-size: $hy-input-font-size;
         flex: 1;
-        color: $hy-text-color;
-        caret-color: $hy-text-color;
+        color: $hy-input-color;
+        caret-color: $hy-input-color;
       }
 
       :deep(.input-placeholder) {
-        color: $hy-text-color--placeholder;
+        color: $hy-input-placeholder-color;
       }
     }
 
     @include m(clear) {
-      width: 20px;
-      height: 20px;
-      border-radius: 100px;
+      width: $hy-input-clear-size;
+      height: $hy-input-clear-size;
+      border-radius: $hy-input-clear-radius;
       background-color: $hy-background--track;
       @include flex(row);
       align-items: center;

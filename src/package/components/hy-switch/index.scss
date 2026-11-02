@@ -1,6 +1,15 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 边框颜色 */
+$hy-switch-border-color: var(--hy-switch-border-color, rgba(0, 0, 0, 0.12)) !default;
+/* 滑块阴影 */
+$hy-switch-node-box-shadow: var(--hy-switch-node-box-shadow, 1px 1px 1px 0 rgba(0, 0, 0, 0.25)) !default;
+/* 禁用透明度 */
+$hy-switch-disabled-opacity: var(--hy-switch-disabled-opacity, 0.6) !default;
+/* 开关圆角（含圆点/背景），默认跟随全局半圆 token */
+$hy-switch-radius: var(--hy-switch-radius, #{$hy-radius-semicircle}) !default;
+
 @include b(switch) {
   @include flex(row);
   /* #ifndef APP-NVUE */
@@ -8,9 +17,9 @@
   /* #endif */
   background-color: $hy-background--3;
   position: relative;
-  border-radius: $hy-radius-semicircle;
+  border-radius: $hy-switch-radius;
   transition: background-color 0.4s;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1px solid $hy-switch-border-color;
   justify-content: flex-end;
   align-items: center;
   // 由于weex为阿里逗着玩的KPI项目，导致bug奇多，这必须要写这一行，
@@ -25,8 +34,8 @@
     align-items: center;
     justify-content: center;
     background-color: $hy-background--container;
-    border-radius: $hy-radius-semicircle;
-    box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.25);
+    border-radius: $hy-switch-radius;
+    box-shadow: $hy-switch-node-box-shadow;
     transition-property: transform;
     transition-duration: 0.4s;
     transition-timing-function: cubic-bezier(0.3, 1.05, 0.4, 1.05);
@@ -34,7 +43,7 @@
 
   @include e(bg) {
     position: absolute;
-    border-radius: $hy-radius-semicircle;
+    border-radius: $hy-switch-radius;
     background-color: $hy-background--3;
     transition-property: transform;
     transition-duration: 0.4s;
@@ -42,6 +51,6 @@
   }
 
   @include e(disabled) {
-    opacity: 0.6;
+    opacity: $hy-switch-disabled-opacity;
   }
 }

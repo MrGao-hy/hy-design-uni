@@ -1,36 +1,34 @@
 <template>
-    <the-root-page>
-        <view class="menu">
-            <hy-menu v-model="current" :list="list" @change="onChange"></hy-menu>
+    <view class="menu">
+        <hy-menu v-model="current" :list="list" @change="onChange"></hy-menu>
 
-            <scroll-view
-                class="scroll-view"
-                scroll-y
-                scroll-with-animation
-                :scroll-top="scrollTop"
-                :throttle="false"
-                @scroll="onScroll"
+        <scroll-view
+            class="scroll-view"
+            scroll-y
+            scroll-with-animation
+            :scroll-top="scrollTop"
+            :throttle="false"
+            @scroll="onScroll"
+        >
+            <view
+                :class="['item', `item--${item.id}`]"
+                v-for="(item, index) in data"
+                :key="index"
             >
-                <view
-                    :class="['item', `item--${item.id}`]"
-                    v-for="(item, index) in data"
-                    :key="index"
-                >
-                    <view class="hy-title">
-                        <text class="text">{{ item.name }}</text>
-                    </view>
-                    <view class="hy-container">
-                        <hy-grid
-                            :list="item.children"
-                            :col="2"
-                            :custom-keys="{ icon: 'url', name: 'name' }"
-                            :icon-config="{ size: 50 }"
-                        ></hy-grid>
-                    </view>
+                <view class="hy-title">
+                    <text class="text">{{ item.name }}</text>
                 </view>
-            </scroll-view>
-        </view>
-    </the-root-page>
+                <view class="hy-container">
+                    <hy-grid
+                        :list="item.children"
+                        :col="2"
+                        :custom-keys="{ icon: 'url', name: 'name' }"
+                        :icon-config="{ size: 50 }"
+                    ></hy-grid>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
 </template>
 
 <script setup lang="ts">

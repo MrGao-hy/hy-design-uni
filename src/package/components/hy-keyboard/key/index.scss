@@ -1,9 +1,18 @@
 @use "../../../libs/css/theme" as *;
 @use "../../../libs/css/mixin" as *;
 
-$keyboard-key-height: 100rpx;
-$keyboard-key-border-radius: 12rpx;
-$keyboard-key-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+/* 按键高度 */
+$hy-keyboard-key-height: var(--hy-keyboard-key-height, 100rpx) !default;
+/* 按键圆角 */
+$hy-keyboard-key-radius: var(--hy-keyboard-key-radius, 12rpx) !default;
+/* 按键阴影 */
+$hy-keyboard-key-shadow: var(--hy-keyboard-key-shadow, 0 2rpx 8rpx rgba(0, 0, 0, 0.06)) !default;
+/* 车牌键高度 */
+$hy-keyboard-car-key-height: var(--hy-keyboard-car-key-height, 88rpx) !default;
+/* 车牌键字号 */
+$hy-keyboard-car-key-font-size: var(--hy-keyboard-car-key-font-size, 28rpx) !default;
+/* 按键文字字号，默认跟随全局大号字体 token */
+$hy-keyboard-key-font-size: var(--hy-keyboard-key-font-size, #{$hy-font-size-lg}) !default;
 
 @include b(keyboard) {
   @include e(key) {
@@ -11,10 +20,10 @@ $keyboard-key-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
     display: flex;
     align-items: center;
     justify-content: center;
-    height: $keyboard-key-height;
+    height: $hy-keyboard-key-height;
     background: $hy-background--container;
-    border-radius: $keyboard-key-border-radius;
-    box-shadow: $keyboard-key-shadow;
+    border-radius: $hy-keyboard-key-radius;
+    box-shadow: $hy-keyboard-key-shadow;
     box-sizing: border-box;
     transition: all 0.15s;
 
@@ -25,8 +34,8 @@ $keyboard-key-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
 
     @include m(car) {
       flex-basis: 8.7%;
-      height: 88rpx;
-      font-size: 28rpx;
+      height: $hy-keyboard-car-key-height;
+      font-size: $hy-keyboard-car-key-font-size;
     }
 
     @include m(wider) {
@@ -56,7 +65,7 @@ $keyboard-key-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
     }
 
     &-text {
-      font-size: $hy-font-size-lg;
+      font-size: $hy-keyboard-key-font-size;
     }
 
     @include e(delete-line) {

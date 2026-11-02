@@ -1,11 +1,18 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 默认宽度 */
+$hy-image-width: var(--hy-image-width, 250px) !default;
+/* 默认高度 */
+$hy-image-height: var(--hy-image-height, 200px) !default;
+/* 加载/失败占位文字颜色，默认跟随全局灰度文字 token */
+$hy-image-placeholder-color: var(--hy-image-placeholder-color, #{$hy-text-color--grey}) !default;
+
 @include b(image) {
   position: relative;
   transition: opacity 0.5s ease-in-out;
-  width: 250px;
-  height: 200px;
+  width: $hy-image-width;
+  height: $hy-image-height;
 
   @include e(url) {
     width: 100%;
@@ -38,6 +45,6 @@
     align-items: center;
     justify-content: center;
     background-color: $hy-background--empty;
-    color: $hy-text-color--grey;
+    color: $hy-image-placeholder-color;
   }
 }

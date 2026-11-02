@@ -1,12 +1,55 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 确认按钮内边距 */
+$hy-calendar-confirm-padding: var(--hy-calendar-confirm-padding, 7px 18px) !default;
+/* 标题字号 */
+$hy-calendar-title-font-size: var(--hy-calendar-title-font-size, 16px) !default;
+/* 标题高度（含行高） */
+$hy-calendar-title-height: var(--hy-calendar-title-height, 42px) !default;
+/* 副标题字号 */
+$hy-calendar-subtitle-font-size: var(--hy-calendar-subtitle-font-size, 14px) !default;
+/* 副标题高度（含行高） */
+$hy-calendar-subtitle-height: var(--hy-calendar-subtitle-height, 40px) !default;
+/* 星期字号 */
+$hy-calendar-weekday-font-size: var(--hy-calendar-weekday-font-size, 13px) !default;
+/* 星期行高 */
+$hy-calendar-weekday-line-height: var(--hy-calendar-weekday-line-height, 30px) !default;
+/* 月份标题字号 */
+$hy-calendar-month-title-font-size: var(--hy-calendar-month-title-font-size, 14px) !default;
+/* 月份标题高度（含行高） */
+$hy-calendar-month-title-height: var(--hy-calendar-month-title-height, 42px) !default;
+/* 月份水印文字大小 */
+$hy-calendar-month-mark-font-size: var(--hy-calendar-month-mark-font-size, 155px) !default;
+/* 选中日期圆角 */
+$hy-calendar-day-selected-radius: var(--hy-calendar-day-selected-radius, 3px) !default;
+/* 日期圆点尺寸 */
+$hy-calendar-day-dot-size: var(--hy-calendar-day-dot-size, 7px) !default;
+/* 日期数字字号 */
+$hy-calendar-day-info-font-size: var(--hy-calendar-day-info-font-size, 16px) !default;
+/* 日期底部信息字号 */
+$hy-calendar-day-bottom-info-font-size: var(--hy-calendar-day-bottom-info-font-size, 10px) !default;
+/* 副标题文字颜色，默认跟随全局次级文字 token */
+$hy-calendar-subtitle-color: var(--hy-calendar-subtitle-color, #{$hy-text-color--2}) !default;
+/* 星期文字颜色，默认跟随全局灰度文字 token */
+$hy-calendar-weekday-color: var(--hy-calendar-weekday-color, #{$hy-text-color--grey}) !default;
+/* 月份标题文字颜色，默认跟随全局次级文字 token */
+$hy-calendar-month-title-color: var(--hy-calendar-month-title-color, #{$hy-text-color--2}) !default;
+/* 月份水印文字颜色，默认跟随全局最浅文字 token */
+$hy-calendar-month-mark-color: var(--hy-calendar-month-mark-color, #{$hy-text-color--4}) !default;
+/* 日期选中文字颜色 */
+$hy-calendar-day-selected-color: var(--hy-calendar-day-selected-color, #ffffff) !default;
+/* 日期禁用文字颜色，默认跟随全局禁用文字 token */
+$hy-calendar-day-disabled-color: var(--hy-calendar-day-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 日期底部信息文字颜色，默认跟随全局次级文字 token */
+$hy-calendar-day-bottom-info-color: var(--hy-calendar-day-bottom-info-color, #{$hy-text-color--2}) !default;
+
 
 /* 主样式 */
 @include b(calendar){
   /* 确认按钮 */
   @include e(confirm) {
-    padding: 7px 18px;
+    padding: $hy-calendar-confirm-padding;
   }
 
   /* 头部样式 */
@@ -16,19 +59,19 @@
     padding-bottom: 4px;
 
     @include e(title) {
-      font-size: 16px;
+      font-size: $hy-calendar-title-font-size;
       text-align: center;
-      height: 42px;
-      line-height: 42px;
+      height: $hy-calendar-title-height;
+      line-height: $hy-calendar-title-height;
       font-weight: bold;
     }
 
     @include e(subtitle) {
-      font-size: 14px;
-      color: $hy-text-color--2;
-      height: 40px;
+      font-size: $hy-calendar-subtitle-font-size;
+      color: $hy-calendar-subtitle-color;
+      height: $hy-calendar-subtitle-height;
       text-align: center;
-      line-height: 40px;
+      line-height: $hy-calendar-subtitle-height;
       font-weight: bold;
     }
 
@@ -37,9 +80,9 @@
       justify-content: space-between;
 
       @include e(weekday) {
-        font-size: 13px;
-        color: $hy-text-color--grey;
-        line-height: 30px;
+        font-size: $hy-calendar-weekday-font-size;
+        color: $hy-calendar-weekday-color;
+        line-height: $hy-calendar-weekday-line-height;
         flex: 1;
         text-align: center;
       }
@@ -51,10 +94,10 @@
     @include e(title) {
       display: flex;
       flex-direction: column;
-      font-size: 14px;
-      line-height: 42px;
-      height: 42px;
-      color: $hy-text-color--2;
+      font-size: $hy-calendar-month-title-font-size;
+      line-height: $hy-calendar-month-title-height;
+      height: $hy-calendar-month-title-height;
+      color: $hy-calendar-month-title-color;
       text-align: center;
       font-weight: bold;
     }
@@ -80,8 +123,8 @@
         align-items: center;
 
         @include e(text) {
-          font-size: 155px;
-          color: $hy-text-color--4;
+          font-size: $hy-calendar-month-mark-font-size;
+          color: $hy-calendar-month-mark-color;
         }
       }
 
@@ -106,7 +149,7 @@
               justify-content: center;
               align-items: center;
               flex: 1;
-              border-radius: 3px;
+              border-radius: $hy-calendar-day-selected-radius;
               @include m(center) {
                 border-radius: 0;
                 background-color: $hy-primary-light;
@@ -115,8 +158,8 @@
             }
 
             @include e(dot) {
-              width: 7px;
-              height: 7px;
+              width: $hy-calendar-day-dot-size;
+              height: $hy-calendar-day-dot-size;
               border-radius: 100px;
               background-color: $hy-error;
               position: absolute;
@@ -132,33 +175,33 @@
             }
 
             @include e(button-info) {
-              color: $hy-text-color--2;
+              color: $hy-calendar-day-bottom-info-color;
               text-align: center;
-              font-size: 10px;
+              font-size: $hy-calendar-day-bottom-info-font-size;
               line-height: 12px;
               margin-top: 2px;
 
               @include m(selected) {
-                color: #ffffff;
+                color: $hy-calendar-day-selected-color;
               }
 
               @include m(disabled) {
-                color: $hy-text-color--disabled;
+                color: $hy-calendar-day-disabled-color;
               }
             }
 
             @include e(info) {
               text-align: center;
-              font-size: 16px;
+              font-size: $hy-calendar-day-info-font-size;
               line-height: 18px;
 
               @include m(selected) {
-                color: #ffffff;
+                color: $hy-calendar-day-selected-color;
                 background-color: $hy-primary;
               }
 
               @include m(disabled) {
-                color: $hy-text-color--disabled;
+                color: $hy-calendar-day-disabled-color;
               }
             }
 

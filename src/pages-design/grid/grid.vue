@@ -1,53 +1,51 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-grid :list="list" :col="col" :gap="gap" :border="border" @click="onClick"></hy-grid>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-grid :list="list" :col="col" :gap="gap" :border="border" @click="onClick"></hy-grid>
+    </view>
 
-        <view class="hy-title">{{ t('nestedCard') }}</view>
-        <view class="hy-container">
-            <hy-grid :list="courseList" :col="2" :gap="10" item-height="100%">
-                <template #default="{ record }">
-                    <hy-card
-                        padding-body="0"
-                        border-radius="10"
-                        margin="0"
-                        :show-head="false"
-                        :custom-style="{ overflow: 'hidden' }"
-                    >
-                        <hy-image width="100%" height="187px" :src="record.image"></hy-image>
-                        <template #footer>
-                            <view>
-                                <text class="course-title">{{ record.title }}</text>
-                                <view class="course-info">
-                                    <hy-button
-                                        type="primary"
-                                        size="small"
-                                        :text="t('watchNow')"
-                                    ></hy-button>
-                                    <text class="course-count">{{
-                                        t('viewers', record.count)
-                                    }}</text>
-                                </view>
+    <view class="hy-title">{{ t('nestedCard') }}</view>
+    <view class="hy-container">
+        <hy-grid :list="courseList" :col="2" :gap="10" item-height="100%">
+            <template #default="{ record }">
+                <hy-card
+                    padding-body="0"
+                    border-radius="10"
+                    margin="0"
+                    :show-head="false"
+                    :custom-style="{ overflow: 'hidden' }"
+                >
+                    <hy-image width="100%" height="187px" :src="record.image"></hy-image>
+                    <template #footer>
+                        <view>
+                            <text class="course-title">{{ record.title }}</text>
+                            <view class="course-info">
+                                <hy-button
+                                    type="primary"
+                                    size="small"
+                                    :text="t('watchNow')"
+                                ></hy-button>
+                                <text class="course-count">{{
+                                    t('viewers', record.count)
+                                }}</text>
                             </view>
-                        </template>
-                    </hy-card>
-                </template>
-            </hy-grid>
-        </view>
+                        </view>
+                    </template>
+                </hy-card>
+            </template>
+        </hy-grid>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('colSection') }}</view>
-            <hy-subsection :list="list_1" v-model="col"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('colSection') }}</view>
+        <hy-subsection :list="list_1" v-model="col"></hy-subsection>
 
-            <view class="hy-title">{{ t('borderSection') }}</view>
-            <hy-switch :list="list_1" v-model="border"></hy-switch>
+        <view class="hy-title">{{ t('borderSection') }}</view>
+        <hy-switch :list="list_1" v-model="border"></hy-switch>
 
-            <view class="hy-title">{{ t('padding') }}</view>
-            <hy-slider v-model="gap" :min="0" :max="20" />
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('padding') }}</view>
+        <hy-slider v-model="gap" :min="0" :max="20" />
+    </view>
 </template>
 
 <script setup lang="ts">

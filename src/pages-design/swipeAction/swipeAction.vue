@@ -1,182 +1,180 @@
 <template>
-    <the-root-page>
-        <!-- 基础示例 -->
-        <view class="hy-title">{{ t('basicDemo') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom :beforeClose="beforeClose">
-                <view class="cell">
-                    <view class="cell-title">{{ t('cellTitle') }}</view>
-                    <view class="cell-value">{{ t('cellValue') }}</view>
-                </view>
-            </hy-swipe-action>
-        </view>
-
-        <!-- 右侧操作按钮 -->
-        <view class="hy-title">{{ t('rightButtons') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom :options="rightOptions">
-                <view class="cell">
-                    <view class="cell-title">{{ t('swipeLeft') }}</view>
-                    <view class="cell-value">{{ t('swipeLeftDesc') }}</view>
-                </view>
-            </hy-swipe-action>
-        </view>
-
-        <!-- 左侧操作按钮 -->
-        <view class="hy-title">{{ t('leftButtons') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom>
-                <view class="cell">
-                    <view class="cell-title">{{ t('swipeRight') }}</view>
-                    <view class="cell-value">{{ t('swipeRightDesc') }}</view>
-                </view>
-                <template #left>
-                    <view class="action">
-                        <view class="action-btn" style="background-color: #3c9cff">
-                            {{ t('mark') }}
-                        </view>
-                        <view class="action-btn" style="background-color: #f56c6c">
-                            {{ t('delete') }}
-                        </view>
-                    </view>
-                </template>
-            </hy-swipe-action>
-        </view>
-
-        <!-- 双侧操作按钮 -->
-        <view class="hy-title">{{ t('bothButtons') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom>
-                <view class="cell">
-                    <view class="cell-title">{{ t('swipeBoth') }}</view>
-                    <view class="cell-value">{{ t('swipeBothDesc') }}</view>
-                </view>
-                <template #left>
-                    <view class="action">
-                        <view class="action-btn" style="background-color: #3c9cff">
-                            {{ t('favorite') }}
-                        </view>
-                    </view>
-                </template>
-                <template #right>
-                    <view class="action">
-                        <view class="action-btn" style="background-color: #19be6b">
-                            {{ t('edit') }}
-                        </view>
-                        <view class="action-btn" style="background-color: #f56c6c">
-                            {{ t('delete') }}
-                        </view>
-                    </view>
-                </template>
-            </hy-swipe-action>
-        </view>
-
-        <!-- 禁用滑动 -->
-        <view class="hy-title">{{ t('disabledSwipe') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom :disabled="true">
-                <view class="cell">
-                    <view class="cell-title">{{ t('disabledState') }}</view>
-                    <view class="cell-value">{{ t('disabledDesc') }}</view>
-                </view>
-            </hy-swipe-action>
-        </view>
-
-        <!-- 自定义动画时间 -->
-        <view class="hy-title">{{ t('customDuration') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom :duration="500" :options="rightOptions">
-                <view class="cell">
-                    <view class="cell-title">{{ t('slowAnimation') }}</view>
-                    <view class="cell-value">{{ t('slowAnimDesc') }}</view>
-                </view>
-            </hy-swipe-action>
-        </view>
-
-        <!-- 监听点击事件 -->
-        <view class="hy-title">{{ t('listenClick') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action
-                borderBottom
-                :options="rightOptions"
-                @click="handleClick"
-                @clickAction="handleAction"
-            >
-                <view class="cell">
-                    <view class="cell-title">{{ t('clickEvent') }}</view>
-                    <view class="cell-value">{{ t('clickEventDesc') }}</view>
-                </view>
-            </hy-swipe-action>
-        </view>
-
-        <!-- 程序控制开关 -->
-        <view class="hy-title">{{ t('programControl') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom v-model="controlStatus" :options="rightOptions">
-                <view class="cell">
-                    <view class="cell-title">{{ t('controlByCode') }}</view>
-                    <view class="cell-value">{{ t('controlDesc') }}</view>
-                </view>
-            </hy-swipe-action>
-            <view class="controls">
-                <hy-button
-                    :text="t('open')"
-                    size="small"
-                    @click="controlStatus = 'right'"
-                ></hy-button>
-                <hy-button
-                    :text="t('close')"
-                    size="small"
-                    @click="controlStatus = 'close'"
-                ></hy-button>
+    <!-- 基础示例 -->
+    <view class="hy-title">{{ t('basicDemo') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom :beforeClose="beforeClose">
+            <view class="cell">
+                <view class="cell-title">{{ t('cellTitle') }}</view>
+                <view class="cell-value">{{ t('cellValue') }}</view>
             </view>
-        </view>
+        </hy-swipe-action>
+    </view>
 
-        <!-- 列表场景 -->
-        <view class="hy-title">{{ t('listScene') }}</view>
-        <view class="hy-container list-container">
-            <hy-swipe-action
-                v-for="(item, index) in list"
-                :key="index"
-                borderBottom
-                :options="deleteOptions"
-                @clickAction="handleDelete(index)"
-            >
-                <view class="cell">
-                    <view class="cell-title">{{ t('listItem', item) }}</view>
-                    <view class="cell-value">{{ t('listItemDesc', item) }}</view>
-                </view>
-            </hy-swipe-action>
-        </view>
+    <!-- 右侧操作按钮 -->
+    <view class="hy-title">{{ t('rightButtons') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom :options="rightOptions">
+            <view class="cell">
+                <view class="cell-title">{{ t('swipeLeft') }}</view>
+                <view class="cell-value">{{ t('swipeLeftDesc') }}</view>
+            </view>
+        </hy-swipe-action>
+    </view>
 
-        <!-- 复杂内容 -->
-        <view class="hy-title">{{ t('complexContent') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom :options="complexOptions">
-                <view class="cell complex-cell">
-                    <view class="cell-avatar">
-                        <hy-avatar :text="item.name" size="large"></hy-avatar>
+    <!-- 左侧操作按钮 -->
+    <view class="hy-title">{{ t('leftButtons') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom>
+            <view class="cell">
+                <view class="cell-title">{{ t('swipeRight') }}</view>
+                <view class="cell-value">{{ t('swipeRightDesc') }}</view>
+            </view>
+            <template #left>
+                <view class="action">
+                    <view class="action-btn" style="background-color: #3c9cff">
+                        {{ t('mark') }}
                     </view>
-                    <view class="cell-content">
-                        <view class="cell-title">{{ item.name }}</view>
-                        <view class="cell-value">{{ item.message }}</view>
-                        <view class="cell-time">{{ item.time }}</view>
+                    <view class="action-btn" style="background-color: #f56c6c">
+                        {{ t('delete') }}
                     </view>
                 </view>
-            </hy-swipe-action>
-        </view>
+            </template>
+        </hy-swipe-action>
+    </view>
 
-        <!-- 多种操作 -->
-        <view class="hy-title">{{ t('multiAction') }}</view>
-        <view class="hy-container">
-            <hy-swipe-action borderBottom :options="multiOptions" @clickAction="handleMultiAction">
-                <view class="cell">
-                    <view class="cell-title">{{ t('multiAction') }}</view>
-                    <view class="cell-value">{{ t('multiActionDesc') }}</view>
+    <!-- 双侧操作按钮 -->
+    <view class="hy-title">{{ t('bothButtons') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom>
+            <view class="cell">
+                <view class="cell-title">{{ t('swipeBoth') }}</view>
+                <view class="cell-value">{{ t('swipeBothDesc') }}</view>
+            </view>
+            <template #left>
+                <view class="action">
+                    <view class="action-btn" style="background-color: #3c9cff">
+                        {{ t('favorite') }}
+                    </view>
                 </view>
-            </hy-swipe-action>
+            </template>
+            <template #right>
+                <view class="action">
+                    <view class="action-btn" style="background-color: #19be6b">
+                        {{ t('edit') }}
+                    </view>
+                    <view class="action-btn" style="background-color: #f56c6c">
+                        {{ t('delete') }}
+                    </view>
+                </view>
+            </template>
+        </hy-swipe-action>
+    </view>
+
+    <!-- 禁用滑动 -->
+    <view class="hy-title">{{ t('disabledSwipe') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom :disabled="true">
+            <view class="cell">
+                <view class="cell-title">{{ t('disabledState') }}</view>
+                <view class="cell-value">{{ t('disabledDesc') }}</view>
+            </view>
+        </hy-swipe-action>
+    </view>
+
+    <!-- 自定义动画时间 -->
+    <view class="hy-title">{{ t('customDuration') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom :duration="500" :options="rightOptions">
+            <view class="cell">
+                <view class="cell-title">{{ t('slowAnimation') }}</view>
+                <view class="cell-value">{{ t('slowAnimDesc') }}</view>
+            </view>
+        </hy-swipe-action>
+    </view>
+
+    <!-- 监听点击事件 -->
+    <view class="hy-title">{{ t('listenClick') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action
+            borderBottom
+            :options="rightOptions"
+            @click="handleClick"
+            @clickAction="handleAction"
+        >
+            <view class="cell">
+                <view class="cell-title">{{ t('clickEvent') }}</view>
+                <view class="cell-value">{{ t('clickEventDesc') }}</view>
+            </view>
+        </hy-swipe-action>
+    </view>
+
+    <!-- 程序控制开关 -->
+    <view class="hy-title">{{ t('programControl') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom v-model="controlStatus" :options="rightOptions">
+            <view class="cell">
+                <view class="cell-title">{{ t('controlByCode') }}</view>
+                <view class="cell-value">{{ t('controlDesc') }}</view>
+            </view>
+        </hy-swipe-action>
+        <view class="controls">
+            <hy-button
+                :text="t('open')"
+                size="small"
+                @click="controlStatus = 'right'"
+            ></hy-button>
+            <hy-button
+                :text="t('close')"
+                size="small"
+                @click="controlStatus = 'close'"
+            ></hy-button>
         </view>
-    </the-root-page>
+    </view>
+
+    <!-- 列表场景 -->
+    <view class="hy-title">{{ t('listScene') }}</view>
+    <view class="hy-container list-container">
+        <hy-swipe-action
+            v-for="(item, index) in list"
+            :key="index"
+            borderBottom
+            :options="deleteOptions"
+            @clickAction="handleDelete(index)"
+        >
+            <view class="cell">
+                <view class="cell-title">{{ t('listItem', item) }}</view>
+                <view class="cell-value">{{ t('listItemDesc', item) }}</view>
+            </view>
+        </hy-swipe-action>
+    </view>
+
+    <!-- 复杂内容 -->
+    <view class="hy-title">{{ t('complexContent') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom :options="complexOptions">
+            <view class="cell complex-cell">
+                <view class="cell-avatar">
+                    <hy-avatar :text="item.name" size="large"></hy-avatar>
+                </view>
+                <view class="cell-content">
+                    <view class="cell-title">{{ item.name }}</view>
+                    <view class="cell-value">{{ item.message }}</view>
+                    <view class="cell-time">{{ item.time }}</view>
+                </view>
+            </view>
+        </hy-swipe-action>
+    </view>
+
+    <!-- 多种操作 -->
+    <view class="hy-title">{{ t('multiAction') }}</view>
+    <view class="hy-container">
+        <hy-swipe-action borderBottom :options="multiOptions" @clickAction="handleMultiAction">
+            <view class="cell">
+                <view class="cell-title">{{ t('multiAction') }}</view>
+                <view class="cell-value">{{ t('multiActionDesc') }}</view>
+            </view>
+        </hy-swipe-action>
+    </view>
 </template>
 
 <script setup lang="ts">

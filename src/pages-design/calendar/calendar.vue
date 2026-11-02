@@ -1,128 +1,126 @@
 <template>
-    <the-root-page>
-        <the-cell :list="list" @click="onClick"></the-cell>
+    <the-cell :list="list" @click="onClick"></the-cell>
 
-        <!-- 1. 单个日期 -->
-        <hy-calendar
-            v-model:show="show1"
-            defaultDate="2022-02-15"
-            @confirm="(e: any) => confirm(0, e)"
-        ></hy-calendar>
+    <!-- 1. 单个日期 -->
+    <hy-calendar
+        v-model:show="show1"
+        defaultDate="2022-02-15"
+        @confirm="(e: any) => confirm(0, e)"
+    ></hy-calendar>
 
-        <!-- 2. 多个日期 -->
-        <hy-calendar
-            v-model:show="show2"
-            mode="multiple"
-            :defaultDate="['2022-03-01']"
-            @confirm="(e: any) => confirm(1, e)"
-        ></hy-calendar>
+    <!-- 2. 多个日期 -->
+    <hy-calendar
+        v-model:show="show2"
+        mode="multiple"
+        :defaultDate="['2022-03-01']"
+        @confirm="(e: any) => confirm(1, e)"
+    ></hy-calendar>
 
-        <!-- 3. 日期范围 -->
-        <hy-calendar
-            v-model:show="show3"
-            mode="range"
-            @confirm="(e: any) => confirm(2, e)"
-        ></hy-calendar>
+    <!-- 3. 日期范围 -->
+    <hy-calendar
+        v-model:show="show3"
+        mode="range"
+        @confirm="(e: any) => confirm(2, e)"
+    ></hy-calendar>
 
-        <!-- 4. 自定义主题颜色 -->
-        <hy-calendar
-            v-model:show="show4"
-            mode="range"
-            color="#f56c6c"
-            @confirm="(e: any) => confirm(3, e)"
-        ></hy-calendar>
+    <!-- 4. 自定义主题颜色 -->
+    <hy-calendar
+        v-model:show="show4"
+        mode="range"
+        color="#f56c6c"
+        @confirm="(e: any) => confirm(3, e)"
+    ></hy-calendar>
 
-        <!-- 5. 自定义文案 -->
-        <hy-calendar
-            v-model:show="show5"
-            mode="range"
-            :start-text="t('startText')"
-            :end-text="t('endText')"
-            :confirm-disabled-text="t('confirmDisabledText')"
-            :formatter="formatter"
-            @confirm="(e: any) => confirm(4, e)"
-        ></hy-calendar>
+    <!-- 5. 自定义文案 -->
+    <hy-calendar
+        v-model:show="show5"
+        mode="range"
+        :start-text="t('startText')"
+        :end-text="t('endText')"
+        :confirm-disabled-text="t('confirmDisabledText')"
+        :formatter="formatter"
+        @confirm="(e: any) => confirm(4, e)"
+    ></hy-calendar>
 
-        <!-- 6. 日期最大范围 -->
-        <hy-calendar
-            v-model:show="show6"
-            maxDate="2025-05-05"
-            @confirm="(e: any) => confirm(5, e)"
-        ></hy-calendar>
+    <!-- 6. 日期最大范围 -->
+    <hy-calendar
+        v-model:show="show6"
+        maxDate="2025-05-05"
+        @confirm="(e: any) => confirm(5, e)"
+    ></hy-calendar>
 
-        <!-- 7. 显示农历 -->
-        <hy-calendar
-            v-model:show="show7"
-            showLunar
-            @confirm="(e: any) => confirm(6, e)"
-        ></hy-calendar>
+    <!-- 7. 显示农历 -->
+    <hy-calendar
+        v-model:show="show7"
+        showLunar
+        @confirm="(e: any) => confirm(6, e)"
+    ></hy-calendar>
 
-        <!-- 8. 默认日期 -->
-        <hy-calendar
-            v-model:show="show8"
-            mode="multiple"
-            minDate="2025-04-09"
-            maxDate="2025-05-05"
-            :defaultDate="['2025-04-25', '2025-04-30']"
-            @confirm="(e: any) => confirm(7, e)"
-        ></hy-calendar>
+    <!-- 8. 默认日期 -->
+    <hy-calendar
+        v-model:show="show8"
+        mode="multiple"
+        minDate="2025-04-09"
+        maxDate="2025-05-05"
+        :defaultDate="['2025-04-25', '2025-04-30']"
+        @confirm="(e: any) => confirm(7, e)"
+    ></hy-calendar>
 
-        <!-- 9. 日期范围限制 -->
-        <hy-calendar
-            v-model:show="show9"
-            minDate="2025-05-09"
-            maxDate="2025-07-05"
-            defaultDate="2025-06-09"
-            @confirm="(e: any) => confirm(8, e)"
-        ></hy-calendar>
+    <!-- 9. 日期范围限制 -->
+    <hy-calendar
+        v-model:show="show9"
+        minDate="2025-05-09"
+        maxDate="2025-07-05"
+        defaultDate="2025-06-09"
+        @confirm="(e: any) => confirm(8, e)"
+    ></hy-calendar>
 
-        <!-- 10. 范围选择限制 -->
-        <hy-calendar
-            v-model:show="show10"
-            mode="range"
-            :maxRange="7"
-            :range-prompt="t('rangePrompt')"
-            allowSameDay
-            @confirm="(e: any) => confirm(9, e)"
-        ></hy-calendar>
+    <!-- 10. 范围选择限制 -->
+    <hy-calendar
+        v-model:show="show10"
+        mode="range"
+        :maxRange="7"
+        :range-prompt="t('rangePrompt')"
+        allowSameDay
+        @confirm="(e: any) => confirm(9, e)"
+    ></hy-calendar>
 
-        <!-- 11. 禁用日期 -->
-        <hy-calendar
-            v-model:show="show11"
-            mode="single"
-            minDate="2025-05-09"
-            maxDate="2025-07-05"
-            :forbidDays="forbidDays"
-            :forbid-days-toast="t('forbidDaysToast')"
-            @confirm="(e: any) => confirm(10, e)"
-        ></hy-calendar>
+    <!-- 11. 禁用日期 -->
+    <hy-calendar
+        v-model:show="show11"
+        mode="single"
+        minDate="2025-05-09"
+        maxDate="2025-07-05"
+        :forbidDays="forbidDays"
+        :forbid-days-toast="t('forbidDaysToast')"
+        @confirm="(e: any) => confirm(10, e)"
+    ></hy-calendar>
 
-        <!-- 12. 只读模式 -->
-        <hy-calendar
-            v-model:show="show12"
-            readonly
-            mode="range"
-            minDate="2025-05-09"
-            maxDate="2025-07-05"
-            :defaultDate="['2025-06-01', '2025-06-15']"
-            @confirm="(e: any) => confirm(11, e)"
-        ></hy-calendar>
+    <!-- 12. 只读模式 -->
+    <hy-calendar
+        v-model:show="show12"
+        readonly
+        mode="range"
+        minDate="2025-05-09"
+        maxDate="2025-07-05"
+        :defaultDate="['2025-06-01', '2025-06-15']"
+        @confirm="(e: any) => confirm(11, e)"
+    ></hy-calendar>
 
-        <!-- 13. 多选限制数量 -->
-        <hy-calendar
-            v-model:show="show13"
-            mode="multiple"
-            :maxCount="3"
-            @confirm="(e: any) => confirm(12, e)"
-        ></hy-calendar>
+    <!-- 13. 多选限制数量 -->
+    <hy-calendar
+        v-model:show="show13"
+        mode="multiple"
+        :maxCount="3"
+        @confirm="(e: any) => confirm(12, e)"
+    ></hy-calendar>
 
-        <!-- 14. 自定义星期文案 -->
-        <hy-calendar
-            v-model:show="show14"
-            :weekText="weekText"
-            @confirm="(e: any) => confirm(13, e)"
-        ></hy-calendar>
-    </the-root-page>
+    <!-- 14. 自定义星期文案 -->
+    <hy-calendar
+        v-model:show="show14"
+        :weekText="weekText"
+        @confirm="(e: any) => confirm(13, e)"
+    ></hy-calendar>
 </template>
 
 <script setup lang="ts">

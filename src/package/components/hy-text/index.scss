@@ -1,6 +1,13 @@
 @use '../../libs/css/mixin' as *;
 @use '../../libs/css/theme' as *;
 
+/* 价格字号 */
+$hy-text-price-font-size: var(--hy-text-price-font-size, 14px) !default;
+/* 主体字号，默认跟随全局基础字号 token */
+$hy-text-font-size: var(--hy-text-font-size, #{$hy-font-size-base}) !default;
+/* 价格文字颜色，默认跟随全局灰度文字 token */
+$hy-text-price-color: var(--hy-text-price-color, #{$hy-text-color--grey}) !default;
+
 @include b(text) {
     @include flex(row);
     align-items: center;
@@ -8,12 +15,12 @@
     color: $hy-text-color;
 
     @include e(price) {
-        font-size: 14px;
-        color: $hy-text-color--grey;
+        font-size: $hy-text-price-font-size;
+        color: $hy-text-price-color;
     }
 
     @include e(value) {
-        font-size: $hy-font-size-base;
+        font-size: $hy-text-font-size;
         @include flex;
         flex-wrap: wrap;
         // flex: 1;

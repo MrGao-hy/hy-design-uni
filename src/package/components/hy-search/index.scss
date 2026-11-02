@@ -1,7 +1,34 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
-$hy-search-close-size: 20px !default;
+/* 清除按钮尺寸 */
+$hy-search-close-size: var(--hy-search-close-size, 20px) !default;
+/* 占位符字号 */
+$hy-search-placeholder-font-size: var(--hy-search-placeholder-font-size, 25rpx) !default;
+/* 占位符行高 */
+$hy-search-placeholder-line-height: var(--hy-search-placeholder-line-height, 30rpx) !default;
+/* 搜索框边框宽度 */
+$hy-search-border-width: var(--hy-search-border-width, 1px) !default;
+/* 取消按钮展开宽度 */
+$hy-search-action-width: var(--hy-search-action-width, 100rpx) !default;
+/* 搜索提示文字颜色 */
+$hy-search-label-color: var(--hy-search-label-color, #{$hy-text-color}) !default;
+/* 搜索提示文字字号，默认跟随全局基础字体 token */
+$hy-search-label-font-size: var(--hy-search-label-font-size, #{$hy-font-size-base}) !default;
+/* 清除按钮圆角，默认跟随全局圆形 token */
+$hy-search-close-radius: var(--hy-search-close-radius, #{$hy-radius-circle}) !default;
+/* 输入文字颜色 */
+$hy-search-input-color: var(--hy-search-input-color, #{$hy-text-color}) !default;
+/* 输入文字字号，默认跟随全局基础字体 token */
+$hy-search-input-font-size: var(--hy-search-input-font-size, #{$hy-font-size-base}) !default;
+/* 禁用文字颜色 */
+$hy-search-disabled-color: var(--hy-search-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 占位符颜色 */
+$hy-search-placeholder-color: var(--hy-search-placeholder-color, #{$hy-text-color--placeholder}) !default;
+/* 右侧操作文字颜色 */
+$hy-search-action-color: var(--hy-search-action-color, #{$hy-text-color}) !default;
+/* 右侧操作字号，默认跟随全局基础字体 token */
+$hy-search-action-font-size: var(--hy-search-action-font-size, #{$hy-font-size-base}) !default;
 
 /* #ifdef H5 */
 // iOS15在H5下，hx的某些版本，input type=search时，会多了一个搜索图标，进行移除
@@ -21,7 +48,7 @@ $hy-search-close-size: 20px !default;
     padding: 0 $hy-border-margin-padding-lg;
     flex: 1;
     justify-content: space-between;
-    border-width: 1px;
+    border-width: $hy-search-border-width;
     border-color: transparent;
     border-style: solid;
     overflow: hidden;
@@ -33,8 +60,8 @@ $hy-search-close-size: 20px !default;
     }
 
     @include e(label) {
-      color: $hy-text-color;
-      font-size: $hy-font-size-base;
+      color: $hy-search-label-color;
+      font-size: $hy-search-label-font-size;
       margin: 0 4px;
     }
 
@@ -42,7 +69,7 @@ $hy-search-close-size: 20px !default;
     @include e(close) {
       width: $hy-search-close-size;
       height: $hy-search-close-size;
-      border-radius: $hy-radius-circle;
+      border-radius: $hy-search-close-radius;
       background-color: $hy-background--track;
       @include flex(row);
       align-items: center;
@@ -53,27 +80,27 @@ $hy-search-close-size: 20px !default;
     /*输入框样式*/
     @include e(input) {
       flex: 1;
-      font-size: $hy-font-size-base;
+      font-size: $hy-search-input-font-size;
       line-height: 1;
       margin: 0 $hy-border-margin-padding-sm;
-      color: $hy-text-color;
+      color: $hy-search-input-color;
       background-color: $hy-background--empty;
 
       @include m(disabled) {
-        color: $hy-text-color--disabled;
+        color: $hy-search-disabled-color;
       }
 
       @include m(placeholder) {
-        font-size: 25rpx;
-        color: $hy-text-color--placeholder;
-        line-height: 30rpx;
+        font-size: $hy-search-placeholder-font-size;
+        color: $hy-search-placeholder-color;
+        line-height: $hy-search-placeholder-line-height;
       }
     }
   }
 
   @include e(action) {
-    font-size: $hy-font-size-base;
-    color: $hy-text-color;
+    font-size: $hy-search-action-font-size;
+    color: $hy-search-action-color;
     width: 0;
     overflow: hidden;
     transition-property: width;
@@ -84,7 +111,7 @@ $hy-search-close-size: 20px !default;
     text-align: center;
 
     @include m(active) {
-      width: 100rpx;
+      width: $hy-search-action-width;
       margin-left: $hy-border-margin-padding-sm;
     }
   }

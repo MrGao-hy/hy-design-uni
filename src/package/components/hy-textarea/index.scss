@@ -1,19 +1,38 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 输入区最小高度 */
+$hy-textarea-min-height: var(--hy-textarea-min-height, 50rpx) !default;
+/* 输入区最大高度 */
+$hy-textarea-max-height: var(--hy-textarea-max-height, 200rpx) !default;
+/* 输入区字号 */
+$hy-textarea-font-size: var(--hy-textarea-font-size, 15px) !default;
+/* 字数统计字号 */
+$hy-textarea-count-font-size: var(--hy-textarea-count-font-size, 12px) !default;
+/* 输入区文字颜色（含光标） */
+$hy-textarea-color: var(--hy-textarea-color, #{$hy-text-color}) !default;
+/* 禁用文字颜色 */
+$hy-textarea-disabled-color: var(--hy-textarea-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 容器默认圆角，默认跟随全局小圆角 token */
+$hy-textarea-radius: var(--hy-textarea-radius, #{$hy-radius-sm}) !default;
+/* 字数统计圆角，默认跟随全局小圆角 token */
+$hy-textarea-count-radius: var(--hy-textarea-count-radius, #{$hy-radius-sm}) !default;
+/* 边框，默认跟随全局边框线 token */
+$hy-textarea-border: var(--hy-textarea-border, #{$hy-border-line}) !default;
+
 @include b(textarea) {
-  border-radius: $hy-radius-sm;
+  border-radius: $hy-textarea-radius;
   position: relative;
   @include flex;
   flex: 1;
   padding: $hy-border-margin-padding-sm;
 
   @include e(border) {
-    border: $hy-border-line;
+    border: $hy-textarea-border;
   }
 
   @include e(radius) {
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-textarea-radius;
   }
 
   @include e(no-radius) {
@@ -22,20 +41,20 @@
 
   @include e(disabled) {
     background-color: $hy-background--disabled;
-    color: $hy-text-color--disabled !important;
+    color: $hy-textarea-disabled-color !important;
 
     &-text {
-      color: $hy-text-color--disabled !important;
+      color: $hy-textarea-disabled-color !important;
     }
   }
 
   @include e(field) {
-    min-height: 50rpx;
-    max-height: 200rpx;
-    color: $hy-text-color;
-    caret-color: $hy-text-color;
+    min-height: $hy-textarea-min-height;
+    max-height: $hy-textarea-max-height;
+    color: $hy-textarea-color;
+    caret-color: $hy-textarea-color;
     flex: 1;
-    font-size: 15px;
+    font-size: $hy-textarea-font-size;
     width: 100%;
     background-color: transparent;
     border: none;
@@ -45,9 +64,9 @@
     position: absolute;
     right: 5px;
     bottom: 2px;
-    font-size: 12px;
+    font-size: $hy-textarea-count-font-size;
     background-color: $hy-background--3;
     padding: 1px 4px;
-    border-radius: $hy-radius-sm;
+    border-radius: $hy-textarea-count-radius;
   }
 }

@@ -1,8 +1,13 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 价格字号 */
+$hy-price-font-size: var(--hy-price-font-size, 32rpx) !default;
+/* 价格上间距 */
+$hy-price-margin-top: var(--hy-price-margin-top, 5px) !default;
+
 @include b(price) {
-  font-size: 32rpx;
+  font-size: $hy-price-font-size;
   font-weight: 500;
-  margin-top: 5px;
+  margin-top: $hy-price-margin-top;
 }

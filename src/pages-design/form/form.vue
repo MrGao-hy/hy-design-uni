@@ -1,5 +1,5 @@
 <template>
-    <the-root-page :custom-style="{ padding: '10px' }">
+    <view :style="{ padding: '10px' }">
         <view class="demo-header">
             <text class="demo-title">{{ t('demoTitle') }}</text>
         </view>
@@ -91,7 +91,7 @@
             <text class="result-title">{{ t('resultTitle') }}</text>
             <text class="result-content">{{ JSON.stringify(formData, null, 2) }}</text>
         </view>
-    </the-root-page>
+    </view>
 </template>
 
 <script setup lang="ts">

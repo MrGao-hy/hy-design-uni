@@ -80,6 +80,7 @@
         "@uni-helper/uni-app-types": "^1.1.0",
         "@uni-helper/uni-types": "1.0.0-alpha.6",
         "@uni-helper/vite-plugin-uni-pages": "^0.3.22",
+        "@uni-ku/root": "^1.5.0",
         "@vue/runtime-core": "^3.4.21",
         "@vue/tsconfig": "^0.7.0",
         "components-helper": "^2.2.0",

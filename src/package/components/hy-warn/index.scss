@@ -1,13 +1,26 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 标题字号 */
+$hy-warn-title-font-size: var(--hy-warn-title-font-size, 14px) !default;
+/* 描述字号 */
+$hy-warn-desc-font-size: var(--hy-warn-desc-font-size, 14px) !default;
+/* 关闭按钮上偏移 */
+$hy-warn-close-top: var(--hy-warn-close-top, 11px) !default;
+/* 关闭按钮右偏移 */
+$hy-warn-close-right: var(--hy-warn-close-right, 10px) !default;
+/* 容器圆角，默认跟随全局小圆角 token */
+$hy-warn-radius: var(--hy-warn-radius, #{$hy-radius-sm}) !default;
+/* 标题/描述文字颜色 */
+$hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
+
 @include b(warn) {
   position: relative;
   background-color: $hy-primary;
   padding: $hy-border-margin-padding-base;
   @include flex(row);
   align-items: center;
-  border-radius: $hy-radius-sm;
+  border-radius: $hy-warn-radius;
 
   @include e(primary) {
 
@@ -98,16 +111,16 @@
     flex: 1;
 
     @include m(title) {
-      font-size: 14px;
+      font-size: $hy-warn-title-font-size;
       font-weight: bold;
-      color: #fff;
+      color: $hy-warn-text-color;
       margin-bottom: 2px;
     }
 
     @include m(desc) {
-      font-size: 14px;
+      font-size: $hy-warn-desc-font-size;
       flex-wrap: wrap;
-      color: #fff;
+      color: $hy-warn-text-color;
     }
   }
 
@@ -136,7 +149,7 @@
 
   @include e(close) {
     position: absolute;
-    top: 11px;
-    right: 10px;
+    top: $hy-warn-close-top;
+    right: $hy-warn-close-right;
   }
 }

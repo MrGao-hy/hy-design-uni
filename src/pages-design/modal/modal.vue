@@ -1,34 +1,32 @@
 <template>
-    <the-root-page>
-        <view class="hy-container">
-            <the-cell :list="list" @click="onClick"></the-cell>
-        </view>
+    <view class="hy-container">
+        <the-cell :list="list" @click="onClick"></the-cell>
+    </view>
 
-        <hy-modal
-            v-model="show"
-            :title="mode === 'title' ? t('modalTitle') : ''"
-            :content="t('modalContent')"
-            :showCancelButton="mode === 'showCancelButton' || mode === 'buttonReverse'"
-            :buttonReverse="mode === 'buttonReverse'"
-            @confirm="show = false"
-            @cancel="show = false"
-        ></hy-modal>
+    <hy-modal
+        v-model="show"
+        :title="mode === 'title' ? t('modalTitle') : ''"
+        :content="t('modalContent')"
+        :showCancelButton="mode === 'showCancelButton' || mode === 'buttonReverse'"
+        :buttonReverse="mode === 'buttonReverse'"
+        @confirm="show = false"
+        @cancel="show = false"
+    ></hy-modal>
 
-        <hy-modal
-            v-model="showAsync"
-            show-cancel-button
-            :autoClose="false"
-            :loading="asyncClose"
-            @confirm="onAsyncClose"
-        >
-            <hy-form-group
-                ref="formRef"
-                :columns="formColumns"
-                :form-data="formData"
-                label-width="60"
-            ></hy-form-group>
-        </hy-modal>
-    </the-root-page>
+    <hy-modal
+        v-model="showAsync"
+        show-cancel-button
+        :autoClose="false"
+        :loading="asyncClose"
+        @confirm="onAsyncClose"
+    >
+        <hy-form-group
+            ref="formRef"
+            :columns="formColumns"
+            :form-data="formData"
+            label-width="60"
+        ></hy-form-group>
+    </hy-modal>
 </template>
 
 <script setup lang="ts">

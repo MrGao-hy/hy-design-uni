@@ -1,32 +1,30 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-line-progress :percentage="value"></hy-line-progress>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-line-progress :percentage="value"></hy-line-progress>
+    </view>
 
-        <view class="hy-title">{{ t('customHeight') }}</view>
-        <view class="hy-container">
-            <hy-line-progress :percentage="value" height="20"></hy-line-progress>
-        </view>
+    <view class="hy-title">{{ t('customHeight') }}</view>
+    <view class="hy-container">
+        <hy-line-progress :percentage="value" height="20"></hy-line-progress>
+    </view>
 
-        <view class="hy-title">{{ t('customColor') }}</view>
-        <view class="hy-container">
-            <hy-line-progress :percentage="value" activeColor="red"></hy-line-progress>
-        </view>
+    <view class="hy-title">{{ t('customColor') }}</view>
+    <view class="hy-container">
+        <hy-line-progress :percentage="value" activeColor="red"></hy-line-progress>
+    </view>
 
-        <view class="hy-title">{{ t('manualControl') }}</view>
-        <view class="hy-container">
-            <hy-flex justify="space-around">
-                <hy-button
-                    type="error"
-                    :text="t('minus')"
-                    @click="computedWidth('minus')"
-                ></hy-button>
-                <hy-button :text="t('plus')" @click="computedWidth('plus')"></hy-button>
-            </hy-flex>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('manualControl') }}</view>
+    <view class="hy-container">
+        <hy-flex justify="space-around">
+            <hy-button
+                type="error"
+                :text="t('minus')"
+                @click="computedWidth('minus')"
+            ></hy-button>
+            <hy-button :text="t('plus')" @click="computedWidth('plus')"></hy-button>
+        </hy-flex>
+    </view>
 </template>
 
 <script setup lang="ts">

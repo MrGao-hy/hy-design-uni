@@ -1,5 +1,5 @@
 <template>
-    <the-root-page @click="closeOutside">
+    <view @click="closeOutside">
         <hy-card>
             <template #header>
                 <view class="header">
@@ -80,7 +80,7 @@
                 <hy-button :text="t('btnCustom')" :stop="false"></hy-button>
             </hy-popover>
         </view>
-    </the-root-page>
+    </view>
 </template>
 
 <script setup lang="ts">

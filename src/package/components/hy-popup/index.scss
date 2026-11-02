@@ -1,6 +1,13 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 内容区层级 */
+$hy-popup-z-index: var(--hy-popup-z-index, 9999) !default;
+/* 圆角弹窗圆角（round 模式），默认跟随全局大圆角 */
+$hy-popup-radius: var(--hy-popup-radius, #{$hy-radius-lg}) !default;
+/* 关闭按钮按下透明度 */
+$hy-popup-close-hover-opacity: var(--hy-popup-close-hover-opacity, 0.4) !default;
+
 
 @include b(popup) {
   flex: 1;
@@ -8,29 +15,29 @@
   @include e(content) {
     background-color: $hy-background--container;
     position: relative;
-    z-index: 9999;
+    z-index: $hy-popup-z-index;
     overflow: hidden;
 
     @include m(round) {
 
       &-top {
-        border-radius: 0 0 $hy-radius-lg $hy-radius-lg;
+        border-radius: 0 0 $hy-popup-radius $hy-popup-radius;
       }
 
       &-left {
-        border-radius: 0 $hy-radius-lg $hy-radius-lg 0;
+        border-radius: 0 $hy-popup-radius $hy-popup-radius 0;
       }
 
       &-right {
-        border-radius: $hy-radius-lg 0 0 $hy-radius-lg;
+        border-radius: $hy-popup-radius 0 0 $hy-popup-radius;
       }
 
       &-bottom {
-        border-radius: $hy-radius-lg $hy-radius-lg 0 0;
+        border-radius: $hy-popup-radius $hy-popup-radius 0 0;
       }
 
       &-center {
-        border-radius: $hy-radius-lg;
+        border-radius: $hy-popup-radius;
       }
     }
 
@@ -38,7 +45,7 @@
       position: absolute;
 
       @include m(hover) {
-        opacity: 0.4;
+        opacity: $hy-popup-close-hover-opacity;
       }
     }
 

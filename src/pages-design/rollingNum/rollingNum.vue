@@ -1,5 +1,5 @@
 <template>
-    <the-root-page custom-class="rolling-num-page">
+    <view class="rolling-num-page">
         <view class="hy-container hy-margin-bottom">
             <view class="hy-title">{{ t('basicUsage') }}</view>
             <hy-rolling-num :value="val3" size="30px" height="70rpx" color="#FF5500" />
@@ -59,7 +59,7 @@
         </view>
 
         <hy-button :text="t('randomValue')" @click="randomize"></hy-button>
-    </the-root-page>
+    </view>
 </template>
 
 <script setup lang="ts">

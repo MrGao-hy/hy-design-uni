@@ -1,6 +1,13 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 左侧内容字号 */
+$hy-submit-bar-left-font-size: var(--hy-submit-bar-left-font-size, 20rpx) !default;
+/* 右侧内容字号 */
+$hy-submit-bar-right-font-size: var(--hy-submit-bar-right-font-size, 26rpx) !default;
+/* 右侧内容宽度 */
+$hy-submit-bar-right-width: var(--hy-submit-bar-right-width, 400rpx) !default;
+
 
 @include b(submit-bar) {
   display: flex;
@@ -12,7 +19,7 @@
   /*左边内容*/
   @include e(left) {
     display: flex;
-    font-size: 20rpx;
+    font-size: $hy-submit-bar-left-font-size;
     flex: 1;
     @include m(item) {
       margin: 0 $hy-border-margin-padding-base;
@@ -24,9 +31,9 @@
   @include e(right) {
     display: flex;
     justify-content: flex-end;
-    font-size: 26rpx;
+    font-size: $hy-submit-bar-right-font-size;
     align-items: center;
-    width: 400rpx;
+    width: $hy-submit-bar-right-width;
     @include m(button) {
       padding: $hy-border-margin-padding-base $hy-border-margin-padding-lg;
       color: #ffffff;

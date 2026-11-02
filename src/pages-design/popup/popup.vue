@@ -1,21 +1,19 @@
 <template>
-    <the-root-page>
-        <view class="hy-box">
-            <the-cell :list="list" @click="onClick"></the-cell>
-        </view>
+    <view class="hy-box">
+        <the-cell :list="list" @click="onClick"></the-cell>
+    </view>
 
-        <hy-popup
-            safeAreaInsetTop
-            :show="show"
-            :mode="mode"
-            closeable
-            closeOnClickOverlay
-            @close="show = false"
-            round="10"
-        >
-            <view style="padding: 20px">{{ t('popupContent') }}</view>
-        </hy-popup>
-    </the-root-page>
+    <hy-popup
+        safeAreaInsetTop
+        :show="show"
+        :mode="mode"
+        closeable
+        closeOnClickOverlay
+        @close="show = false"
+        round="10"
+    >
+        <view style="padding: 20px">{{ t('popupContent') }}</view>
+    </hy-popup>
 </template>
 
 <script setup lang="ts">

@@ -1,77 +1,75 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <view class="hy-title">{{ t('combinedComponent') }}</view>
-            <hy-checkbox
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-            ></hy-checkbox>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <view class="hy-title">{{ t('combinedComponent') }}</view>
+        <hy-checkbox
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+        ></hy-checkbox>
 
-            <view class="hy-title">{{ t('separateComponent') }}</view>
-            <hy-checkbox-group v-model="value2" :size="size" :shape="shape" icon-color="green">
-                <hy-checkbox-item value="f" :label="t('cars.ferrari')"></hy-checkbox-item>
-                <hy-checkbox-item value="l" :label="t('cars.lamborghini')"></hy-checkbox-item>
-                <hy-checkbox-item value="b" :label="t('cars.bugatti')"></hy-checkbox-item>
-                <hy-checkbox-item value="a" :label="t('cars.astonMartin')"></hy-checkbox-item>
-            </hy-checkbox-group>
-        </view>
+        <view class="hy-title">{{ t('separateComponent') }}</view>
+        <hy-checkbox-group v-model="value2" :size="size" :shape="shape" icon-color="green">
+            <hy-checkbox-item value="f" :label="t('cars.ferrari')"></hy-checkbox-item>
+            <hy-checkbox-item value="l" :label="t('cars.lamborghini')"></hy-checkbox-item>
+            <hy-checkbox-item value="b" :label="t('cars.bugatti')"></hy-checkbox-item>
+            <hy-checkbox-item value="a" :label="t('cars.astonMartin')"></hy-checkbox-item>
+        </hy-checkbox-group>
+    </view>
 
-        <view class="hy-title">{{ t('disabledSection') }}</view>
-        <view class="hy-container">
-            <hy-checkbox
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-                disabled
-            ></hy-checkbox>
-        </view>
+    <view class="hy-title">{{ t('disabledSection') }}</view>
+    <view class="hy-container">
+        <hy-checkbox
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+            disabled
+        ></hy-checkbox>
+    </view>
 
-        <view class="hy-title">{{ t('layoutSection') }}</view>
-        <view class="hy-container">
-            <hy-checkbox
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-                placement="column"
-            ></hy-checkbox>
-        </view>
-        <view class="hy-container" style="margin-top: 10px">
-            <hy-checkbox
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-                placement="column"
-                iconPlacement="right"
-                borderBottom
-            ></hy-checkbox>
-        </view>
+    <view class="hy-title">{{ t('layoutSection') }}</view>
+    <view class="hy-container">
+        <hy-checkbox
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+            placement="column"
+        ></hy-checkbox>
+    </view>
+    <view class="hy-container" style="margin-top: 10px">
+        <hy-checkbox
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+            placement="column"
+            iconPlacement="right"
+            borderBottom
+        ></hy-checkbox>
+    </view>
 
-        <view class="hy-title">{{ t('colorSection') }}</view>
-        <view class="hy-container">
-            <hy-checkbox
-                :columns="columns"
-                v-model="value"
-                :size="size"
-                :shape="shape"
-                activeColor="red"
-                inactiveColor="green"
-            ></hy-checkbox>
-        </view>
+    <view class="hy-title">{{ t('colorSection') }}</view>
+    <view class="hy-container">
+        <hy-checkbox
+            :columns="columns"
+            v-model="value"
+            :size="size"
+            :shape="shape"
+            activeColor="red"
+            inactiveColor="green"
+        ></hy-checkbox>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('shapeSection') }}</view>
-            <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('shapeSection') }}</view>
+        <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">{{ t('sizeSection') }}</view>
-            <hy-subsection :list="list_2" v-model="size"></hy-subsection>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('sizeSection') }}</view>
+        <hy-subsection :list="list_2" v-model="size"></hy-subsection>
+    </view>
 </template>
 
 <script setup lang="ts">

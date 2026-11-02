@@ -1,20 +1,18 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-pagination v-model="current" :total="999"></hy-pagination>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-pagination v-model="current" :total="999"></hy-pagination>
+    </view>
 
-        <view class="hy-title">{{ t('iconSection') }}</view>
-        <view class="hy-container">
-            <hy-pagination v-model="current" showIcon :total="12"></hy-pagination>
-        </view>
+    <view class="hy-title">{{ t('iconSection') }}</view>
+    <view class="hy-container">
+        <hy-pagination v-model="current" showIcon :total="12"></hy-pagination>
+    </view>
 
-        <view class="hy-title">{{ t('textTip') }}</view>
-        <view class="hy-container">
-            <hy-pagination v-model="current" showMessage :total="999"></hy-pagination>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('textTip') }}</view>
+    <view class="hy-container">
+        <hy-pagination v-model="current" showMessage :total="999"></hy-pagination>
+    </view>
 </template>
 
 <script setup lang="ts">

@@ -48,8 +48,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { CSSProperties } from 'vue'
+import { computed, inject } from 'vue'
+import type { CSSProperties, Ref } from 'vue'
 import type { ITagEmits } from './typing'
 import { IconConfig, colorGradient } from '../../libs'
 import tagProps from './props'
@@ -66,6 +66,11 @@ defineOptions({})
 
 const props = defineProps(tagProps)
 const emit = defineEmits<ITagEmits>()
+
+/**
+ * 注入主题配置（由 hy-config-provider 提供），未包裹时为 null
+ * */
+const themeConfig = inject<{ theme?: Ref<string> } | null>('hy-config-provider', null)
 
 /**
  * tag类名
@@ -98,12 +103,21 @@ const tagStyle = computed<CSSProperties>(() => {
         if (props.plain) {
             style.borderColor = props.color
             if (props.plainFill) {
-                style.background = colorGradient(props.color, '#FFFFFF', 100)[90]
+                // 暗色下向黑混色（与 hy-config-provider 暗色 tint 算法一致），亮色保持原混白视觉
+                style.background =
+                    themeConfig?.theme?.value === 'dark'
+                        ? colorGradient(props.color, '#000')[60]
+                        : colorGradient(props.color, '#FFFFFF', 100)[90]
             }
         } else {
             style.background = props.color
             style.borderColor = props.color
         }
+    }
+
+    // 去边框，覆盖默认的border-width
+    if (!props.border) {
+        style.borderWidth = 0
     }
 
     return Object.assign(style, props.customStyle)

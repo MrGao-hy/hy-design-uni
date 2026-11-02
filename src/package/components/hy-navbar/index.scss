@@ -1,6 +1,19 @@
 @use '../../libs/css/theme' as *;
 @use '../../libs/css/mixin' as *;
 
+/* 固定导航层级 */
+$hy-navbar-z-index: var(--hy-navbar-z-index, 9999) !default;
+/* 导航栏内容区高度 */
+$hy-navbar-height: var(--hy-navbar-height, 44px) !default;
+/* 左右文字字号 */
+$hy-navbar-text-font-size: var(--hy-navbar-text-font-size, 15px) !default;
+/* 标题字号，默认跟随全局基础字号 token */
+$hy-navbar-title-font-size: var(--hy-navbar-title-font-size, #{$hy-font-size-base}) !default;
+/* 副标题字号，默认跟随全局小号字体 token */
+$hy-navbar-sub-font-size: var(--hy-navbar-sub-font-size, #{$hy-font-size-sm}) !default;
+/* 副标题文字颜色，默认跟随全局灰度文字 token */
+$hy-navbar-sub-color: var(--hy-navbar-sub-color, #{$hy-text-color--grey}) !default;
+
 @include b(navbar) {
 
     @include e(placeholder) {
@@ -11,7 +24,7 @@
         left: 0;
         right: 0;
         top: 0;
-        z-index: 9999;
+        z-index: $hy-navbar-z-index;
         background-color: $hy-background--container;
         
     }
@@ -19,7 +32,7 @@
     @include e(content) {
         @include flex(row);
         align-items: center;
-        height: 44px;
+        height: $hy-navbar-height;
         background-color: $hy-background--container;
         position: relative;
         justify-content: center;
@@ -37,7 +50,7 @@
             }
 
             @include m(text) {
-                font-size: 15px;
+                font-size: $hy-navbar-text-font-size;
                 margin-left: 3px;
             }
         }
@@ -49,12 +62,12 @@
             justify-content: center;
             flex: 1;
             @include m(title) {
-                font-size: $hy-font-size-base;
+                font-size: $hy-navbar-title-font-size;
                 text-align: center;
             }
             @include m(sub) {
-                font-size: $hy-font-size-sm;
-                color: $hy-text-color--grey;
+                font-size: $hy-navbar-sub-font-size;
+                color: $hy-navbar-sub-color;
                 text-align: center;
             }
         }
@@ -63,7 +76,7 @@
             right: 0;
 
             @include m(text) {
-                font-size: 15px;
+                font-size: $hy-navbar-text-font-size;
                 margin-left: 3px;
             }
         }

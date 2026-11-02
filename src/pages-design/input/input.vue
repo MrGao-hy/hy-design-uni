@@ -1,72 +1,70 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicUsage') }}</view>
-        <view class="hy-container">
-            <hy-input
-                v-model="value"
-                :shape="shape"
-                :border="border"
-                :type="type"
-                clearable
-                :disabled="disabled"
-                :placeholder="t('phValue')"
-            ></hy-input>
-        </view>
+    <view class="hy-title">{{ t('basicUsage') }}</view>
+    <view class="hy-container">
+        <hy-input
+            v-model="value"
+            :shape="shape"
+            :border="border"
+            :type="type"
+            clearable
+            :disabled="disabled"
+            :placeholder="t('phValue')"
+        ></hy-input>
+    </view>
 
-        <view class="hy-title">{{ t('amountFormatSection') }}</view>
-        <view class="hy-container">
-            <hy-input
-                v-model="value3"
-                type="digit"
-                :maxlength="999"
-                clearable
-                @change="onChange"
-            ></hy-input>
-        </view>
+    <view class="hy-title">{{ t('amountFormatSection') }}</view>
+    <view class="hy-container">
+        <hy-input
+            v-model="value3"
+            type="digit"
+            :maxlength="999"
+            clearable
+            @change="onChange"
+        ></hy-input>
+    </view>
 
-        <view class="hy-title">{{ t('clearableSection') }}</view>
-        <view class="hy-container">
-            <hy-input v-model="value2" clearable focus :placeholder="t('phValue')"></hy-input>
-        </view>
+    <view class="hy-title">{{ t('clearableSection') }}</view>
+    <view class="hy-container">
+        <hy-input v-model="value2" clearable focus :placeholder="t('phValue')"></hy-input>
+    </view>
 
-        <view class="hy-title">{{ t('iconSection') }}</view>
-        <view class="hy-container">
-            <hy-input
-                v-model="value"
-                :prefixIcon="{
-                    name: IconConfig.LOCK
-                }"
-                :suffix-icon="{
-                    name: IconConfig.DOWN
-                }"
-                :disabled="disabled"
-                border="bottom"
-            ></hy-input>
-        </view>
+    <view class="hy-title">{{ t('iconSection') }}</view>
+    <view class="hy-container">
+        <hy-input
+            v-model="value"
+            :prefixIcon="{
+                name: IconConfig.LOCK
+            }"
+            :suffix-icon="{
+                name: IconConfig.DOWN
+            }"
+            :disabled="disabled"
+            border="bottom"
+        ></hy-input>
+    </view>
 
-        <view class="hy-title">{{ t('customIconSection') }}</view>
-        <view class="hy-container">
-            <hy-input v-model="value" clearable :disabled="disabled">
-                <template #suffix>
-                    <hy-button :text="t('sendCode')"></hy-button>
-                </template>
-            </hy-input>
-        </view>
+    <view class="hy-title">{{ t('customIconSection') }}</view>
+    <view class="hy-container">
+        <hy-input v-model="value" clearable :disabled="disabled">
+            <template #suffix>
+                <hy-button :text="t('sendCode')"></hy-button>
+            </template>
+        </hy-input>
+    </view>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('disabledSection') }}</view>
-            <hy-switch v-model="disabled"></hy-switch>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('disabledSection') }}</view>
+        <hy-switch v-model="disabled"></hy-switch>
 
-            <view class="hy-title">{{ t('shapeSection') }}</view>
-            <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
+        <view class="hy-title">{{ t('shapeSection') }}</view>
+        <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">{{ t('typeSection') }}</view>
-            <hy-subsection :list="list_2" v-model="type"></hy-subsection>
+        <view class="hy-title">{{ t('typeSection') }}</view>
+        <hy-subsection :list="list_2" v-model="type"></hy-subsection>
 
-            <view class="hy-title">{{ t('borderSection') }}</view>
-            <hy-subsection :list="list_3" v-model="border"></hy-subsection>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('borderSection') }}</view>
+        <hy-subsection :list="list_3" v-model="border"></hy-subsection>
+    </view>
 </template>
 
 <script setup lang="ts">

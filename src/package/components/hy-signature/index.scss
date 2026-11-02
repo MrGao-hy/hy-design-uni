@@ -1,6 +1,11 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 画布区域圆角，默认跟随全局基础圆角 token */
+$hy-signature-radius: var(--hy-signature-radius, #{$hy-radius-base}) !default;
+/* 画布区域边框，默认跟随全局边框线 token */
+$hy-signature-border: var(--hy-signature-border, #{$hy-border-line}) !default;
+
 @include b(signature) {
   @include e(content) {
     justify-content: center;
@@ -8,8 +13,8 @@
     display: flex;
     overflow: hidden;
     background: $hy-background--3;
-    border-radius: $hy-radius-base;
-    border: $hy-border-line;
+    border-radius: $hy-signature-radius;
+    border: $hy-signature-border;
   }
 
   @include e(content-canvas) {

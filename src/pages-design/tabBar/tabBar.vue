@@ -1,64 +1,62 @@
 <template>
-    <the-root-page>
-        <view class="hy-title"> {{ t('basicUsage') }}</view>
-        <hy-tabbar-group v-model="current" @change="onChange">
-            <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
-        </hy-tabbar-group>
+    <view class="hy-title"> {{ t('basicUsage') }}</view>
+    <hy-tabbar-group v-model="current" @change="onChange">
+        <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
+    </hy-tabbar-group>
 
-        <view class="hy-title"> {{ t('badge') }} </view>
-        <hy-tabbar-group
-            :custom-style="{ marginBottom: '20px' }"
-            :badgeProps="{ isDot: true }"
-            v-model="current"
-            @change="onChange"
-        >
-            <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('mine')" icon="mine" :value="1"></hy-tabbar-item>
-        </hy-tabbar-group>
+    <view class="hy-title"> {{ t('badge') }} </view>
+    <hy-tabbar-group
+        :custom-style="{ marginBottom: '20px' }"
+        :badgeProps="{ isDot: true }"
+        v-model="current"
+        @change="onChange"
+    >
+        <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('mine')" icon="mine" :value="1"></hy-tabbar-item>
+    </hy-tabbar-group>
 
-        <hy-tabbar-group v-model="current" @change="onChange">
-            <hy-tabbar-item :title="t('home')" icon="home" :value="10"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
-        </hy-tabbar-group>
+    <hy-tabbar-group v-model="current" @change="onChange">
+        <hy-tabbar-item :title="t('home')" icon="home" :value="10"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
+    </hy-tabbar-group>
 
-        <view class="hy-title"> {{ t('circleBar') }} </view>
-        <hy-tabbar-group v-model="current" @change="onChange" shape="circle">
-            <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
-        </hy-tabbar-group>
+    <view class="hy-title"> {{ t('circleBar') }} </view>
+    <hy-tabbar-group v-model="current" @change="onChange" shape="circle">
+        <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
+    </hy-tabbar-group>
 
-        <view class="hy-title"> {{ t('customColor') }} </view>
-        <hy-tabbar-group
-            v-model="current"
-            @change="onChange"
-            activeColor="red"
-            inactiveColor="green"
-            bgColor="yellow"
-        >
-            <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
-        </hy-tabbar-group>
+    <view class="hy-title"> {{ t('customColor') }} </view>
+    <hy-tabbar-group
+        v-model="current"
+        @change="onChange"
+        activeColor="red"
+        inactiveColor="green"
+        bgColor="yellow"
+    >
+        <hy-tabbar-item :title="t('home')" icon="home"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
+    </hy-tabbar-group>
 
-        <view class="hy-title"> {{ t('customIcon') }} </view>
-        <hy-tabbar-group v-model="current" @change="onChange">
-            <hy-tabbar-item :title="t('home')" icon="home">
-                <template #icon>
-                    <hy-image :src="config.avatar" width="30" height="30"></hy-image>
-                </template>
-            </hy-tabbar-item>
-            <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
-            <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
-        </hy-tabbar-group>
+    <view class="hy-title"> {{ t('customIcon') }} </view>
+    <hy-tabbar-group v-model="current" @change="onChange">
+        <hy-tabbar-item :title="t('home')" icon="home">
+            <template #icon>
+                <hy-image :src="config.avatar" width="30" height="30"></hy-image>
+            </template>
+        </hy-tabbar-item>
+        <hy-tabbar-item :title="t('category')" icon="class"></hy-tabbar-item>
+        <hy-tabbar-item :title="t('mine')" icon="mine"></hy-tabbar-item>
+    </hy-tabbar-group>
 
-        <!-- 底部固定的tabbar测试 -->
-        <hy-tabbar v-model="fixedCurrent" :list="list"></hy-tabbar>
-    </the-root-page>
+    <!-- 底部固定的tabbar测试 -->
+    <hy-tabbar v-model="fixedCurrent" :list="list"></hy-tabbar>
 </template>
 
 <script setup lang="ts">

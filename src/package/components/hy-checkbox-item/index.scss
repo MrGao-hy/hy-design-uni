@@ -1,6 +1,19 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 选项上下间距 */
+$hy-checkbox-margin: var(--hy-checkbox-margin, 5px) !default;
+/* 方形图标圆角 */
+$hy-checkbox-radius-square: var(--hy-checkbox-radius-square, 3px) !default;
+/* 禁用选中透明度 */
+$hy-checkbox-disabled-checked-opacity: var(--hy-checkbox-disabled-checked-opacity, 0.5) !default;
+/* 选项文字字号，默认跟随全局基础字体 token */
+$hy-checkbox-font-size: var(--hy-checkbox-font-size, #{$hy-font-size-base}) !default;
+/* 选项禁用文字颜色 */
+$hy-checkbox-disabled-color: var(--hy-checkbox-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 勾选框边框，默认跟随全局边框线 token */
+$hy-checkbox-border: var(--hy-checkbox-border, #{$hy-border-line}) !default;
+
 @include b(checkbox) {
   /* #ifndef APP-NVUE */
   @include flex(row);
@@ -8,8 +21,8 @@
   overflow: hidden;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin-bottom: $hy-checkbox-margin;
+  margin-top: $hy-checkbox-margin;
 
   @include m(label) {
     @include e(left) {
@@ -24,11 +37,11 @@
       /* #ifndef APP-NVUE */
       word-wrap: break-word;
       /* #endif */
-      font-size: $hy-font-size-base;
+      font-size: $hy-checkbox-font-size;
       margin-right: $hy-border-margin-padding-sm;
 
       @include m(disabled) {
-        color: $hy-text-color--disabled;
+        color: $hy-checkbox-disabled-color;
       }
     }
   }
@@ -46,7 +59,7 @@
     color: transparent;
     text-align: center;
     margin-right: $hy-border-margin-padding-sm;
-    border: $hy-border-line;
+    border: $hy-checkbox-border;
 
     /* #ifdef MP-TOUTIAO */
     // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
@@ -61,7 +74,7 @@
     }
 
     @include m(square) {
-      border-radius: 3px;
+      border-radius: $hy-checkbox-radius-square;
     }
 
     @include m(checked) {
@@ -80,7 +93,7 @@
     @include m(disabled--checked){
       background-color: $hy-primary;
       border-color: $hy-primary;
-      opacity: 0.5;
+      opacity: $hy-checkbox-disabled-checked-opacity;
       :deep(.hy-icon) {
         display: block;
       }

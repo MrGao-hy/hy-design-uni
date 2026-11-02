@@ -1,58 +1,56 @@
 <template>
-    <the-root-page>
-        <hy-waterfall v-model="flowList" ref="waterfallRef">
-            <template v-slot:left="{ leftList }">
-                <view class="demo-water" v-for="(item, index) in leftList" :key="index">
-                    <!-- 微信小程序需要hx2.8.11版本才支持在template中引入其他组件，比如下方的u-lazy-load组件 -->
-                    <hy-image width="100%" mode="widthFix" radius="5" :src="item.image"></hy-image>
-                    <view class="demo-title">{{ item.title }}</view>
-                    <view class="demo-price">{{ item.price }}{{ t('yuan') }}</view>
-                    <view class="demo-tag">
-                        <view class="demo-tag-owner">
-                            <text class="text">{{ t('selfOperated') }}</text>
-                        </view>
-                        <view class="demo-tag-text">
-                            <text class="text">{{ t('worryFree') }}</text>
-                        </view>
+    <hy-waterfall v-model="flowList" ref="waterfallRef">
+        <template v-slot:left="{ leftList }">
+            <view class="demo-water" v-for="(item, index) in leftList" :key="index">
+                <!-- 微信小程序需要hx2.8.11版本才支持在template中引入其他组件，比如下方的u-lazy-load组件 -->
+                <hy-image width="100%" mode="widthFix" radius="5" :src="item.image"></hy-image>
+                <view class="demo-title">{{ item.title }}</view>
+                <view class="demo-price">{{ item.price }}{{ t('yuan') }}</view>
+                <view class="demo-tag">
+                    <view class="demo-tag-owner">
+                        <text class="text">{{ t('selfOperated') }}</text>
                     </view>
-                    <view class="demo-shop">{{ item.shop }}</view>
-                    <view class="u-close">
-                        <hy-icon
-                            :name="IconConfig.CLOSE_CIRCLE_FILL"
-                            color="#fa3534"
-                            size="24"
-                            @click="remove(item.id)"
-                        ></hy-icon>
+                    <view class="demo-tag-text">
+                        <text class="text">{{ t('worryFree') }}</text>
                     </view>
                 </view>
-            </template>
-            <template v-slot:right="{ rightList }">
-                <view class="demo-water" v-for="(item, index) in rightList" :key="index">
-                    <hy-image width="100%" mode="widthFix" radius="5" :src="item.image"></hy-image>
-                    <view class="demo-title">{{ item.title }}</view>
-                    <view class="demo-price">{{ item.price }}{{ t('yuan') }}</view>
-                    <view class="demo-tag">
-                        <view class="demo-tag-owner">
-                            <text class="text">{{ t('selfOperated') }}</text>
-                        </view>
-                        <view class="demo-tag-text">
-                            <text class="text">{{ t('worryFree') }}</text>
-                        </view>
+                <view class="demo-shop">{{ item.shop }}</view>
+                <view class="u-close">
+                    <hy-icon
+                        :name="IconConfig.CLOSE_CIRCLE_FILL"
+                        color="#fa3534"
+                        size="24"
+                        @click="remove(item.id)"
+                    ></hy-icon>
+                </view>
+            </view>
+        </template>
+        <template v-slot:right="{ rightList }">
+            <view class="demo-water" v-for="(item, index) in rightList" :key="index">
+                <hy-image width="100%" mode="widthFix" radius="5" :src="item.image"></hy-image>
+                <view class="demo-title">{{ item.title }}</view>
+                <view class="demo-price">{{ item.price }}{{ t('yuan') }}</view>
+                <view class="demo-tag">
+                    <view class="demo-tag-owner">
+                        <text class="text">{{ t('selfOperated') }}</text>
                     </view>
-                    <view class="demo-shop">{{ item.shop }}</view>
-                    <view class="u-close">
-                        <hy-icon
-                            :name="IconConfig.CLOSE_CIRCLE_FILL"
-                            color="#fa3534"
-                            size="24"
-                            @click="remove(item.id)"
-                        ></hy-icon>
+                    <view class="demo-tag-text">
+                        <text class="text">{{ t('worryFree') }}</text>
                     </view>
                 </view>
-            </template>
-        </hy-waterfall>
-        <hy-divider :text="loadStatus"></hy-divider>
-    </the-root-page>
+                <view class="demo-shop">{{ item.shop }}</view>
+                <view class="u-close">
+                    <hy-icon
+                        :name="IconConfig.CLOSE_CIRCLE_FILL"
+                        color="#fa3534"
+                        size="24"
+                        @click="remove(item.id)"
+                    ></hy-icon>
+                </view>
+            </view>
+        </template>
+    </hy-waterfall>
+    <hy-divider :text="loadStatus"></hy-divider>
 </template>
 
 <script setup lang="ts">

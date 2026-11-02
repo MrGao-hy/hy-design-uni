@@ -1,74 +1,92 @@
-@use "../../libs/css/mixin" as *;
-@use "../../libs/css/theme" as *;
+@use '../../libs/css/mixin' as *;
+@use '../../libs/css/theme' as *;
 
+/* 卡片默认字号，默认跟随全局基础字号 */
+$hy-card-font-size: var(--hy-card-font-size, #{$hy-font-size-base}) !default;
+/* 标题最大宽度 */
+$hy-card-title-max-width: var(--hy-card-title-max-width, 400rpx) !default;
+/* 头部内边距 */
+$hy-card-head-padding: var(--hy-card-head-padding, 20rpx 20rpx 10rpx) !default;
+/* 内容区内边距 */
+$hy-card-body-padding: var(--hy-card-body-padding, 10rpx 20rpx 10rpx) !default;
+/* 底部内边距 */
+$hy-card-foot-padding: var(--hy-card-foot-padding, 10rpx 20rpx 20rpx) !default;
+/* 标题字号，默认跟随全局基础字号 token */
+$hy-card-title-font-size: var(--hy-card-title-font-size, #{$hy-font-size-base}) !default;
+/* 副标题文字颜色，默认跟随全局灰度文字 token */
+$hy-card-sub-color: var(--hy-card-sub-color, #{$hy-text-color--grey}) !default;
+/* 副标题字号，默认跟随全局小号字体 token */
+$hy-card-sub-font-size: var(--hy-card-sub-font-size, #{$hy-font-size-sm}) !default;
+/* 头部右侧文字颜色，默认跟随全局灰度文字 token */
+$hy-card-right-color: var(--hy-card-right-color, #{$hy-text-color--grey}) !default;
 
 @include b(card) {
-  position: relative;
-  font-size: 28rpx;
-  background-color: $hy-background--container;
-  box-sizing: border-box;
-  overflow: hidden;
+    position: relative;
+    font-size: $hy-card-font-size;
+    background-color: $hy-background--container;
+    box-sizing: border-box;
+    overflow: hidden;
 
-  @include e(full) {
-    margin-left: $hy-border-margin-padding-base !important;
-    margin-right: $hy-border-margin-padding-base !important;
-  }
-
-  @include m(border) {
-    @include pseudo(after) {
-      /* 跟随 borderRadius 属性，与根元素圆角保持一致 */
-      border-radius: inherit;
-    }
-  }
-
-  /* 头部 */
-  @include e(head) {
-    padding: 20rpx 20rpx 10rpx;
-    @include m(flex) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    @include m(left) {
-      display: flex;
-      align-items: center;
-      flex: 1;
-
-      @include edeep(thumb) {
+    @include edeep(thumb) {
         margin-right: $hy-border-margin-padding-base;
-        flex-shrink: 0
-      }
-
-      @include e(title) {
-        max-width: 400rpx;
-        font-size: $hy-font-size-base;
-        @include lineEllipsis;
-      }
-
-      @include e(sub) {
-        color: $hy-text-color--grey;
-        font-size: $hy-font-size-sm;
-      }
+        flex-shrink: 0;
     }
 
-    @include m(right) {
-      color: $hy-text-color--grey;
-      margin-left: $hy-border-margin-padding-sm;
-
-      @include e(text) {
-        white-space: nowrap;
-      }
+    @include e(full) {
+        margin-left: $hy-border-margin-padding-base !important;
+        margin-right: $hy-border-margin-padding-base !important;
     }
-  }
 
-  /* 身体 */
-  @include e(body) {
-    padding: 10rpx 20rpx 10rpx;
-  }
+    @include m(border) {
+        @include pseudo(after) {
+            /* 跟随 borderRadius 属性，与根元素圆角保持一致 */
+            border-radius: inherit;
+        }
+    }
 
-  /* 尾部 */
-  @include e(foot) {
-    padding: 10rpx 20rpx 20rpx;
-  }
+    /* 头部 */
+    @include e(head) {
+        padding: $hy-card-head-padding;
+        @include m(flex) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        @include m(left) {
+            display: flex;
+            align-items: center;
+            flex: 1;
+
+            @include e(title) {
+                max-width: $hy-card-title-max-width;
+                font-size: $hy-card-title-font-size;
+                @include lineEllipsis;
+            }
+
+            @include e(sub) {
+                color: $hy-card-sub-color;
+                font-size: $hy-card-sub-font-size;
+            }
+        }
+
+        @include m(right) {
+            color: $hy-card-right-color;
+            margin-left: $hy-border-margin-padding-sm;
+
+            @include e(text) {
+                white-space: nowrap;
+            }
+        }
+    }
+
+    /* 身体 */
+    @include e(body) {
+        padding: $hy-card-body-padding;
+    }
+
+    /* 尾部 */
+    @include e(foot) {
+        padding: $hy-card-foot-padding;
+    }
 }

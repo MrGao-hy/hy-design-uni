@@ -1,26 +1,24 @@
 <template>
-    <the-root-page>
-        <hy-dropdown>
-            <hy-dropdown-item
-                :title="t('all')"
-                :menus="options1"
-                v-model="value1"
-                @change="handleChange"
-            ></hy-dropdown-item>
-            <hy-dropdown-item
-                :title="t('chineseAnimation')"
-                :menus="options_2"
-                v-model="value_2"
-                @change="handleChange"
-            ></hy-dropdown-item>
-            <hy-dropdown-item
-                :title="t('country')"
-                :menus="options_3"
-                v-model="value_3"
-                @change="handleChange"
-            ></hy-dropdown-item>
-        </hy-dropdown>
-    </the-root-page>
+    <hy-dropdown>
+        <hy-dropdown-item
+            :title="t('all')"
+            :menus="options1"
+            v-model="value1"
+            @change="handleChange"
+        ></hy-dropdown-item>
+        <hy-dropdown-item
+            :title="t('chineseAnimation')"
+            :menus="options_2"
+            v-model="value_2"
+            @change="handleChange"
+        ></hy-dropdown-item>
+        <hy-dropdown-item
+            :title="t('country')"
+            :menus="options_3"
+            v-model="value_3"
+            @change="handleChange"
+        ></hy-dropdown-item>
+    </hy-dropdown>
 </template>
 
 <script setup lang="ts">

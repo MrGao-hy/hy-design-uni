@@ -1,9 +1,40 @@
-@use "../../libs/css/theme" as *;
-@use "../../libs/css/mixin" as *;
+@use '../../libs/css/theme' as *;
+@use '../../libs/css/mixin' as *;
+
+/* 弹窗最大宽度 */
+$hy-modal-max-width: var(--hy-modal-max-width, 650rpx) !default;
+/* 弹窗圆角，默认跟随全局基础圆角 */
+$hy-modal-radius: var(--hy-modal-radius, #{$hy-radius-base}) !default;
+/* 标题上内边距 */
+$hy-modal-title-padding-top: var(--hy-modal-title-padding-top, 25px) !default;
+/* 内容区内边距 */
+$hy-modal-content-padding: var(--hy-modal-content-padding, 20px) !default;
+/* 按钮组内边距 */
+$hy-modal-button-group-padding: var(--hy-modal-button-group-padding, 20px) !default;
+/* 自定义确认按钮内边距 */
+$hy-modal-confirm-button-padding: var(--hy-modal-confirm-button-padding, 0 25px 15px) !default;
+/* 底部按钮高度 */
+$hy-modal-button-height: var(--hy-modal-button-height, 43px) !default;
+/* 底部按钮圆角，默认跟随全局半圆圆角 */
+$hy-modal-button-radius: var(--hy-modal-button-radius, #{$hy-radius-semicircle}) !default;
+/* 底部按钮字号 */
+$hy-modal-button-font-size: var(--hy-modal-button-font-size, 16px) !default;
+/* 标题字号，默认跟随全局基础字体 token */
+$hy-modal-title-font-size: var(--hy-modal-title-font-size, #{$hy-font-size-base}) !default;
+/* 标题颜色 */
+$hy-modal-title-color: var(--hy-modal-title-color, #{$hy-text-color}) !default;
+/* 内容文字字号，默认跟随全局小号字体 token */
+$hy-modal-content-font-size: var(--hy-modal-content-font-size, #{$hy-font-size-sm}) !default;
+/* 内容文字颜色 */
+$hy-modal-content-color: var(--hy-modal-content-color, #{$hy-text-color--grey}) !default;
+/* 确认按钮文字颜色 */
+$hy-modal-button-confirm-color: var(--hy-modal-button-confirm-color, #FFFFFF) !default;
+/* 取消按钮文字颜色 */
+$hy-modal-button-cancel-color: var(--hy-modal-button-cancel-color, #{$hy-text-color}) !default;
 
 @include b(modal) {
-  max-width: 650rpx;
-  border-radius: $hy-radius-base;
+  max-width: $hy-modal-max-width;
+  border-radius: $hy-modal-radius;
   overflow: hidden;
 
   /* 标题 */
@@ -12,22 +43,22 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: $hy-font-size-base;
+    font-size: $hy-modal-title-font-size;
     font-weight: bold;
-    color: $hy-text-color;
+    color: $hy-modal-title-color;
     text-align: center;
-    padding-top: 25px;
+    padding-top: $hy-modal-title-padding-top;
   }
 
   /* 内容 */
   @include e(content) {
-    padding: 20px;
+    padding: $hy-modal-content-padding;
     @include flex;
     justify-content: center;
 
     @include m(text) {
-      font-size: $hy-font-size-sm;
-      color: $hy-text-color--grey;
+      font-size: $hy-modal-content-font-size;
+      color: $hy-modal-content-color;
       flex: 1;
       text-align: center;
     }
@@ -50,12 +81,12 @@
 
     @include m(group) {
       @include flex;
-      padding: 20px;
+      padding: $hy-modal-button-group-padding;
 
       /* 自定义底部按钮 */
       @include e(confirm-button) {
         flex-direction: column;
-        padding: 0 25px 15px;
+        padding: $hy-modal-confirm-button-padding;
       }
 
 
@@ -64,14 +95,14 @@
         @include flex;
         justify-content: center;
         align-items: center;
-        height: 43px;
-        border-radius: $hy-radius-semicircle;
+        height: $hy-modal-button-height;
+        border-radius: $hy-modal-button-radius;
 
         /* 确认 */
         @include m(confirm) {
           background-color: $hy-primary;
           @include e(text) {
-            color: #FFFFFF;
+            color: $hy-modal-button-confirm-color;
           }
         }
 
@@ -81,7 +112,7 @@
           background-color: $hy-background--empty;
 
           @include e(text) {
-            color: $hy-text-color;
+            color: $hy-modal-button-cancel-color;
           }
         }
 
@@ -90,7 +121,7 @@
         }
 
         @include m(text) {
-          font-size: 16px;
+          font-size: $hy-modal-button-font-size;
           text-align: center;
         }
       }

@@ -1,20 +1,18 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('darkSection') }}</view>
-        <view class="hy-container">
-            <hy-switch v-model="darkMode" activeValue="dark" inactiveValue="light"></hy-switch>
-        </view>
+    <view class="hy-title">{{ t('darkSection') }}</view>
+    <view class="hy-container">
+        <hy-switch v-model="darkMode" activeValue="dark" inactiveValue="light"></hy-switch>
+    </view>
 
-        <view class="hy-title">{{ t('themeSection') }}</view>
-        <view class="hy-container">
-            <hy-check-button
-                :columns="columns"
-                v-model="color"
-                select-type="radio"
-                @change="changeFn"
-            ></hy-check-button>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('themeSection') }}</view>
+    <view class="hy-container">
+        <hy-check-button
+            :columns="columns"
+            v-model="color"
+            select-type="radio"
+            @change="changeFn"
+        ></hy-check-button>
+    </view>
 </template>
 
 <script setup lang="ts">

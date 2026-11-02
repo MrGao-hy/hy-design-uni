@@ -1,10 +1,20 @@
 @use '../../libs/css/theme' as *;
 @use '../../libs/css/mixin' as *;
 
-$keyboard-header-height: 80rpx;
-$keyboard-title-font-size: 32rpx;
-$keyboard-close-font-size: 28rpx;
-$keyboard-key-gap: $hy-border-margin-padding-sm;
+/* 头部高度 */
+$hy-keyboard-header-height: var(--hy-keyboard-header-height, 80rpx) !default;
+/* 头部内边距 */
+$hy-keyboard-header-padding: var(--hy-keyboard-header-padding, 0 32rpx) !default;
+/* 标题字号 */
+$hy-keyboard-title-font-size: var(--hy-keyboard-title-font-size, 32rpx) !default;
+/* 关闭按钮字号 */
+$hy-keyboard-close-font-size: var(--hy-keyboard-close-font-size, 28rpx) !default;
+/* 按键间距，默认跟随全局间距 token */
+$hy-keyboard-key-gap: var(--hy-keyboard-key-gap, #{$hy-border-margin-padding-sm}) !default;
+/* 侧边栏宽度 */
+$hy-keyboard-sidebar-width: var(--hy-keyboard-sidebar-width, 160rpx) !default;
+/* 头部分隔线，默认跟随全局边框线 token */
+$hy-keyboard-border: var(--hy-keyboard-border, #{$hy-border-line}) !default;
 
 @include b(keyboard) {
     background: $hy-background--track;
@@ -16,21 +26,21 @@ $keyboard-key-gap: $hy-border-margin-padding-sm;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: $keyboard-header-height;
-        padding: 0 32rpx;
+        height: $hy-keyboard-header-height;
+        padding: $hy-keyboard-header-padding;
         background: $hy-background--track;
-        border-bottom: $hy-border-line;
+        border-bottom: $hy-keyboard-border;
         width: 100%;
         box-sizing: border-box;
     }
 
     @include e(title) {
-        font-size: $keyboard-title-font-size;
+        font-size: $hy-keyboard-title-font-size;
         font-weight: 500;
     }
 
     @include e(close) {
-        font-size: $keyboard-close-font-size;
+        font-size: $hy-keyboard-close-font-size;
         padding: 10rpx 20rpx;
 
         &--hover:active {
@@ -40,7 +50,7 @@ $keyboard-key-gap: $hy-border-margin-padding-sm;
 
     @include e(body) {
         display: flex;
-        gap: $keyboard-key-gap;
+        gap: $hy-keyboard-key-gap;
         width: 100%;
         padding: $hy-border-margin-padding-sm;
         box-sizing: border-box;
@@ -50,23 +60,23 @@ $keyboard-key-gap: $hy-border-margin-padding-sm;
         display: flex;
         flex-wrap: wrap;
         flex: 3;
-        gap: $keyboard-key-gap;
+        gap: $hy-keyboard-key-gap;
         width: 100%;
         box-sizing: border-box;
         justify-content: space-between;
     }
 
     @include e(sidebar) {
-        width: 160rpx;
+        width: $hy-keyboard-sidebar-width;
         display: flex;
         flex-direction: column;
-        gap: $keyboard-key-gap;
+        gap: $hy-keyboard-key-gap;
     }
 
     @include e(car-keys) {
         display: flex;
         flex-wrap: wrap;
-        gap: $keyboard-key-gap;
+        gap: $hy-keyboard-key-gap;
         width: 100%;
         box-sizing: border-box;
     }

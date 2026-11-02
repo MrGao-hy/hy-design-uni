@@ -1,6 +1,9 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 列表项分隔线，默认跟随全局边框线 token */
+$hy-dropdown-item-border: var(--hy-dropdown-item-border, #{$hy-border-line}) !default;
+
 @include b(dropdown-item) {
   @include e(header) {
     width: 100%;
@@ -71,7 +74,7 @@
           }
 
           &:not(:last-of-type) {
-            border-bottom: $hy-border-line;
+            border-bottom: $hy-dropdown-item-border;
           }
 
           @include m(label) {

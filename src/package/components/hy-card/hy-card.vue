@@ -16,7 +16,7 @@
                     <hy-icon
                         v-if="thumb"
                         :name="thumb"
-                        custom-class="hy-card__head--left__thumb"
+                        custom-class="hy-card__thumb"
                         :height="thumbWidth"
                         :width="thumbWidth"
                         :round="thumbCircle ? '50%' : '4px'"

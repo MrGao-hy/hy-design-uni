@@ -1,11 +1,48 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 面板宽度（两侧留边） */
+$hy-action-sheet-width: var(--hy-action-sheet-width, calc(100vw - 20px)) !default;
+/* 选项高度 */
+$hy-action-sheet-item-height: var(--hy-action-sheet-item-height, 48px) !default;
+/* 头部行高 */
+$hy-action-sheet-header-line-height: var(--hy-action-sheet-header-line-height, 44px) !default;
+/* 取消按钮宽度 */
+$hy-action-sheet-cancel-width: var(--hy-action-sheet-cancel-width, calc(100% - 48px)) !default;
+/* 取消按钮下间距 */
+$hy-action-sheet-cancel-margin: var(--hy-action-sheet-cancel-margin, 0 auto 24px) !default;
+/* 关闭按钮上偏移 */
+$hy-action-sheet-close-top: var(--hy-action-sheet-close-top, 20px) !default;
+/* 关闭按钮右偏移 */
+$hy-action-sheet-close-right: var(--hy-action-sheet-close-right, 15px) !default;
+/* 面板行高度 */
+$hy-action-sheet-panel-height: var(--hy-action-sheet-panel-height, 160rpx) !default;
+/* 单个面板宽度 */
+$hy-action-sheet-panel-width: var(--hy-action-sheet-panel-width, 140rpx) !default;
+/* 面板整体字号，默认跟随全局基础字体 token */
+$hy-action-sheet-font-size: var(--hy-action-sheet-font-size, #{$hy-font-size-base}) !default;
+/* 选项文字颜色 */
+$hy-action-sheet-item-color: var(--hy-action-sheet-item-color, #{$hy-text-color}) !default;
+/* 选项禁用文字颜色 */
+$hy-action-sheet-disabled-color: var(--hy-action-sheet-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 描述文字字号，默认跟随全局小号字体 token */
+$hy-action-sheet-subname-font-size: var(--hy-action-sheet-subname-font-size, #{$hy-font-size-sm}) !default;
+/* 描述文字颜色 */
+$hy-action-sheet-subname-color: var(--hy-action-sheet-subname-color, #{$hy-text-color--grey}) !default;
+/* 取消按钮文字颜色 */
+$hy-action-sheet-cancel-color: var(--hy-action-sheet-cancel-color, #{$hy-text-color}) !default;
+/* 关闭按钮圆角，默认跟随全局圆形 token */
+$hy-action-sheet-close-radius: var(--hy-action-sheet-close-radius, #{$hy-radius-circle}) !default;
+/* 面板图片圆角，默认跟随全局基础圆角 token */
+$hy-action-sheet-panel-img-radius: var(--hy-action-sheet-panel-img-radius, #{$hy-radius-base}) !default;
+/* 面板标题字号，默认跟随全局小号字体 token */
+$hy-action-sheet-panel-title-font-size: var(--hy-action-sheet-panel-title-font-size, #{$hy-font-size-sm}) !default;
+
 
 @include b(action-sheet) {
   padding-bottom: 1px;
-  font-size: $hy-font-size-base;
-  width: calc(100vw - 20px);
+  font-size: $hy-action-sheet-font-size;
+  width: $hy-action-sheet-width;
 
 
   @include e(actions) {
@@ -19,10 +56,10 @@
     position: relative;
     display: block;
     width: 100%;
-    height: 48px;
-    line-height: 48px;
-    color: $hy-text-color;
-    font-size: $hy-font-size-base;
+    height: $hy-action-sheet-item-height;
+    line-height: $hy-action-sheet-item-height;
+    color: $hy-action-sheet-item-color;
+    font-size: $hy-action-sheet-font-size;
     text-align: center;
     border-radius: 0;
     background: transparent;
@@ -30,7 +67,7 @@
     padding: 0;
 
     @include m(disabled) {
-      color: $hy-text-color--disabled;
+      color: $hy-action-sheet-disabled-color;
       cursor: not-allowed;
     }
 
@@ -49,39 +86,39 @@
   @include e(subname) {
     display: inline-block;
     margin-left: 4px;
-    font-size: $hy-font-size-sm;
-    color: $hy-text-color--grey;
+    font-size: $hy-action-sheet-subname-font-size;
+    color: $hy-action-sheet-subname-color;
   }
 
   /* 取消按钮 */
   @include edeep(cancel) {
-    color: $hy-text-color;
-    width: calc(100% - 48px);
+    color: $hy-action-sheet-cancel-color;
+    width: $hy-action-sheet-cancel-width;
     background: $hy-background--track;
-    margin: 0 auto 24px;
+    margin: $hy-action-sheet-cancel-margin;
     border: none;
   }
 
   /* 头部 */
   @include e(header) {
     position: relative;
-    line-height: 44px;
+    line-height: $hy-action-sheet-header-line-height;
     font-weight: 700;
     padding: $hy-border-margin-padding-base $hy-border-margin-padding-base 0;
   }
 
   @include edeep(close) {
     position: absolute;
-    top: 20px;
-    right: 15px;
+    top: $hy-action-sheet-close-top;
+    right: $hy-action-sheet-close-right;
     background-color: rgba(128, 128, 128, 0.25);
-    border-radius: $hy-radius-circle;
+    border-radius: $hy-action-sheet-close-radius;
     padding: $hy-border-margin-padding-sm;
   }
 
   /* 面板样式 */
   @include e(panels) {
-    height: 160rpx;
+    height: $hy-action-sheet-panel-height;
     width: 100%;
     overflow-y: hidden;
 
@@ -101,7 +138,7 @@
   }
 
   @include e(panel) {
-    width: 140rpx;
+    width: $hy-action-sheet-panel-width;
     flex: 0 0 auto;
     display: inline-block;
     padding: $hy-border-margin-padding-sm $hy-border-margin-padding-base;
@@ -112,11 +149,11 @@
     width: $hy-img-size-base;
     height: $hy-img-size-base;
     margin: 0 auto 7px;
-    border-radius: $hy-radius-base;
+    border-radius: $hy-action-sheet-panel-img-radius;
   }
 
   @include e(panel-title) {
-    font-size: $hy-font-size-sm;
+    font-size: $hy-action-sheet-panel-title-font-size;
     text-align: center;
     @include lineEllipsis;
   }

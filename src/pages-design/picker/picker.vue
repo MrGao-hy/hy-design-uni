@@ -1,152 +1,150 @@
 <template>
-    <the-root-page>
-        <view class="hy-title">{{ t('basicSingleSection') }}</view>
-        <view class="hy-container">
-            <hy-picker v-model:show="show1" :columns="columns1" @confirm="onConfirm1"></hy-picker>
-            <hy-cell clickable @click="onCellClick">
-                <hy-cell-item :title="t('openPicker')" name="show1" :value="value1"></hy-cell-item>
-            </hy-cell>
-        </view>
+    <view class="hy-title">{{ t('basicSingleSection') }}</view>
+    <view class="hy-container">
+        <hy-picker v-model:show="show1" :columns="columns1" @confirm="onConfirm1"></hy-picker>
+        <hy-cell clickable @click="onCellClick">
+            <hy-cell-item :title="t('openPicker')" name="show1" :value="value1"></hy-cell-item>
+        </hy-cell>
+    </view>
 
-        <view class="hy-title">{{ t('inputSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                v-model="value2"
-                has-input
-                :columns="columns2"
-                :input="{ placeholder: t('selectCountry') }"
-                @confirm="onConfirm2"
-            ></hy-picker>
-        </view>
+    <view class="hy-title">{{ t('inputSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            v-model="value2"
+            has-input
+            :columns="columns2"
+            :input="{ placeholder: t('selectCountry') }"
+            @confirm="onConfirm2"
+        ></hy-picker>
+    </view>
 
-        <view class="hy-title">{{ t('multiSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                v-model="value3"
-                has-input
-                :columns="columns3"
-                separator="-"
-                @confirm="onConfirm3"
-            ></hy-picker>
-        </view>
+    <view class="hy-title">{{ t('multiSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            v-model="value3"
+            has-input
+            :columns="columns3"
+            separator="-"
+            @confirm="onConfirm3"
+        ></hy-picker>
+    </view>
 
-        <view class="hy-title">{{ t('linkageSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                ref="pickerRef"
-                v-model="value4"
-                :columns="columns4"
-                has-input
-                @change="changeHandler"
-                @confirm="onConfirm4"
-            ></hy-picker>
-        </view>
+    <view class="hy-title">{{ t('linkageSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            ref="pickerRef"
+            v-model="value4"
+            :columns="columns4"
+            has-input
+            @change="changeHandler"
+            @confirm="onConfirm4"
+        ></hy-picker>
+    </view>
 
-        <view class="hy-title">{{ t('objectSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                v-model="value5"
-                has-input
-                :columns="columns5"
-                label-key="label"
-                value-key="value"
-                @confirm="onConfirm5"
-            ></hy-picker>
-        </view>
+    <view class="hy-title">{{ t('objectSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            v-model="value5"
+            has-input
+            :columns="columns5"
+            label-key="label"
+            value-key="value"
+            @confirm="onConfirm5"
+        ></hy-picker>
+    </view>
 
-        <view class="hy-title">{{ t('positionSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                :show="show6"
-                :columns="columns6"
-                popup-mode="top"
-                @confirm="onConfirm6"
-            ></hy-picker>
-            <hy-cell clickable @click="onCellClick">
-                <hy-cell-item :title="t('topPopup')" name="show6" :value="value6"></hy-cell-item>
-            </hy-cell>
-        </view>
+    <view class="hy-title">{{ t('positionSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            :show="show6"
+            :columns="columns6"
+            popup-mode="top"
+            @confirm="onConfirm6"
+        ></hy-picker>
+        <hy-cell clickable @click="onCellClick">
+            <hy-cell-item :title="t('topPopup')" name="show6" :value="value6"></hy-cell-item>
+        </hy-cell>
+    </view>
 
-        <view class="hy-title">{{ t('toolbarSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                :show="show7"
-                :columns="columns7"
-                :cancel-text="t('cancelSelect')"
-                :confirm-text="t('confirmSelect')"
-                cancel-color="#999999"
-                confirm-color="#4F8EF7"
-                :title="t('customTitle')"
-                @confirm="onConfirm7"
-                @cancel="onCancel7"
-            ></hy-picker>
-            <hy-cell clickable @click="onCellClick">
-                <hy-cell-item :title="t('customBtn')" name="show7" :value="value7"></hy-cell-item>
-            </hy-cell>
-        </view>
+    <view class="hy-title">{{ t('toolbarSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            :show="show7"
+            :columns="columns7"
+            :cancel-text="t('cancelSelect')"
+            :confirm-text="t('confirmSelect')"
+            cancel-color="#999999"
+            confirm-color="#4F8EF7"
+            :title="t('customTitle')"
+            @confirm="onConfirm7"
+            @cancel="onCancel7"
+        ></hy-picker>
+        <hy-cell clickable @click="onCellClick">
+            <hy-cell-item :title="t('customBtn')" name="show7" :value="value7"></hy-cell-item>
+        </hy-cell>
+    </view>
 
-        <view class="hy-title">{{ t('inputStyleSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                v-model="value8"
-                has-input
-                :columns="columns8"
-                :input="{
-                    placeholder: t('selectOption'),
-                    fontSize: 16
-                }"
-            ></hy-picker>
-        </view>
+    <view class="hy-title">{{ t('inputStyleSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            v-model="value8"
+            has-input
+            :columns="columns8"
+            :input="{
+                placeholder: t('selectOption'),
+                fontSize: 16
+            }"
+        ></hy-picker>
+    </view>
 
-        <view class="hy-title">{{ t('defaultSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                v-model="value9"
-                :columns="columns9"
-                :defaultIndex="[1, 2]"
-                has-input
-                @confirm="onConfirm9"
-            ></hy-picker>
-        </view>
+    <view class="hy-title">{{ t('defaultSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            v-model="value9"
+            :columns="columns9"
+            :defaultIndex="[1, 2]"
+            has-input
+            @confirm="onConfirm9"
+        ></hy-picker>
+    </view>
 
-        <view class="hy-title">{{ t('maskSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                v-model:show="show10"
-                :columns="columns10"
-                :closeOnClickOverlay="false"
-                :title="t('mustClickClose')"
-                @confirm="onConfirm10"
-            ></hy-picker>
-            <hy-cell clickable @click="onCellClick">
-                <hy-cell-item
-                    :title="t('maskDisabled')"
-                    name="show10"
-                    :value="value10"
-                ></hy-cell-item>
-            </hy-cell>
-        </view>
+    <view class="hy-title">{{ t('maskSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            v-model:show="show10"
+            :columns="columns10"
+            :closeOnClickOverlay="false"
+            :title="t('mustClickClose')"
+            @confirm="onConfirm10"
+        ></hy-picker>
+        <hy-cell clickable @click="onCellClick">
+            <hy-cell-item
+                :title="t('maskDisabled')"
+                name="show10"
+                :value="value10"
+            ></hy-cell-item>
+        </hy-cell>
+    </view>
 
-        <view class="hy-title">{{ t('slotSection') }}</view>
-        <view class="hy-container">
-            <hy-picker
-                ref="pickerRef11"
-                v-model="value11"
-                has-input
-                :columns="columns11"
-                :title="t('customTitle')"
-            >
-                <template #toolbar-right>
-                    <hy-button :text="t('save')" size="small" @click="handleSave"></hy-button>
-                </template>
-                <template #toolbar-bottom>
-                    <view style="text-align: center; color: #999; padding: 10rpx">
-                        {{ t('selectYourOption') }}
-                    </view>
-                </template>
-            </hy-picker>
-        </view>
-    </the-root-page>
+    <view class="hy-title">{{ t('slotSection') }}</view>
+    <view class="hy-container">
+        <hy-picker
+            ref="pickerRef11"
+            v-model="value11"
+            has-input
+            :columns="columns11"
+            :title="t('customTitle')"
+        >
+            <template #toolbar-right>
+                <hy-button :text="t('save')" size="small" @click="handleSave"></hy-button>
+            </template>
+            <template #toolbar-bottom>
+                <view style="text-align: center; color: #999; padding: 10rpx">
+                    {{ t('selectYourOption') }}
+                </view>
+            </template>
+        </hy-picker>
+    </view>
 </template>
 
 <script setup lang="ts">

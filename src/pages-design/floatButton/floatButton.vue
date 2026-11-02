@@ -1,44 +1,42 @@
 <template>
-    <the-root-page>
-        <hy-float-button
-            :shape="shape"
-            :size="size"
-            :menus="menus"
-            :float="float"
-            :direction="direction"
-            :shadow="shadow"
-            :opacity="opacity"
-            :position="position"
-            :draggable="draggable"
-            :expandable="expandable"
-        ></hy-float-button>
+    <hy-float-button
+        :shape="shape"
+        :size="size"
+        :menus="menus"
+        :float="float"
+        :direction="direction"
+        :shadow="shadow"
+        :opacity="opacity"
+        :position="position"
+        :draggable="draggable"
+        :expandable="expandable"
+    ></hy-float-button>
 
-        <view class="hy-setting__box">
-            <view class="hy-title">{{ t('shapeSection') }}</view>
-            <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
+    <view class="hy-setting__box">
+        <view class="hy-title">{{ t('shapeSection') }}</view>
+        <hy-subsection :list="list_1" v-model="shape"></hy-subsection>
 
-            <view class="hy-title">{{ t('sizeSection') }}</view>
-            <hy-subsection :list="list_2" v-model="size"></hy-subsection>
+        <view class="hy-title">{{ t('sizeSection') }}</view>
+        <hy-subsection :list="list_2" v-model="size"></hy-subsection>
 
-            <view class="hy-title">{{ t('directionSection') }}</view>
-            <hy-subsection :list="list_3" v-model="direction"></hy-subsection>
+        <view class="hy-title">{{ t('directionSection') }}</view>
+        <hy-subsection :list="list_3" v-model="direction"></hy-subsection>
 
-            <view class="hy-title">{{ t('positionSection') }}</view>
-            <hy-subsection :list="list_4" v-model="position"></hy-subsection>
+        <view class="hy-title">{{ t('positionSection') }}</view>
+        <hy-subsection :list="list_4" v-model="position"></hy-subsection>
 
-            <view class="hy-title">{{ t('floatSwitch') }}</view>
-            <hy-switch v-model="float"></hy-switch>
+        <view class="hy-title">{{ t('floatSwitch') }}</view>
+        <hy-switch v-model="float"></hy-switch>
 
-            <view class="hy-title">{{ t('shadowSwitch') }}</view>
-            <hy-switch v-model="shadow"></hy-switch>
+        <view class="hy-title">{{ t('shadowSwitch') }}</view>
+        <hy-switch v-model="shadow"></hy-switch>
 
-            <view class="hy-title">{{ t('draggableSwitch') }}</view>
-            <hy-switch v-model="draggable"></hy-switch>
+        <view class="hy-title">{{ t('draggableSwitch') }}</view>
+        <hy-switch v-model="draggable"></hy-switch>
 
-            <view class="hy-title">{{ t('expandSwitch') }}</view>
-            <hy-switch v-model="expandable"></hy-switch>
-        </view>
-    </the-root-page>
+        <view class="hy-title">{{ t('expandSwitch') }}</view>
+        <hy-switch v-model="expandable"></hy-switch>
+    </view>
 </template>
 
 <script setup lang="ts">

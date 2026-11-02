@@ -1,6 +1,13 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 按钮内边距 */
+$hy-swipe-action-button-padding: var(--hy-swipe-action-button-padding, 0 15px) !default;
+/* 按钮行高 */
+$hy-swipe-action-button-line-height: var(--hy-swipe-action-button-line-height, 46px) !default;
+/* 按钮文字颜色 */
+$hy-swipe-action-button-color: var(--hy-swipe-action-button-color, #ffffff) !default;
+
 @include b(swipe-action) {
   position: relative;
   overflow: hidden;
@@ -25,12 +32,12 @@
       height: 100%;
 
       @include e(btn) {
-        padding: 0 15px;
-        line-height: 46px;
+        padding: $hy-swipe-action-button-padding;
+        line-height: $hy-swipe-action-button-line-height;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #FFFFFF;
+        color: $hy-swipe-action-button-color;
       }
     }
   }

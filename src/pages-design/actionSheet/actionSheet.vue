@@ -1,177 +1,175 @@
 <template>
-    <the-root-page>
-        <!-- 基础功能 -->
-        <view class="hy-title">{{ t('sectionBasic') }}</view>
-        <hy-cell>
-            <hy-cell-item
-                :title="t('basicUsage')"
-                clickable
-                @click="showBasic = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('withTitle')"
-                clickable
-                @click="showTitle = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('withCancel')"
-                clickable
-                @click="showCancel = true"
-            ></hy-cell-item>
-        </hy-cell>
+    <!-- 基础功能 -->
+    <view class="hy-title">{{ t('sectionBasic') }}</view>
+    <hy-cell>
+        <hy-cell-item
+            :title="t('basicUsage')"
+            clickable
+            @click="showBasic = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('withTitle')"
+            clickable
+            @click="showTitle = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('withCancel')"
+            clickable
+            @click="showCancel = true"
+        ></hy-cell-item>
+    </hy-cell>
 
-        <!-- 选项状态 -->
-        <view class="hy-title">{{ t('sectionStatus') }}</view>
-        <hy-cell>
-            <hy-cell-item
-                :title="t('disabledState')"
-                clickable
-                @click="showDisabled = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('loadingState')"
-                clickable
-                @click="showLoading = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('customColor')"
-                clickable
-                @click="showColor = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('withDescription')"
-                clickable
-                @click="showSub = true"
-            ></hy-cell-item>
-        </hy-cell>
+    <!-- 选项状态 -->
+    <view class="hy-title">{{ t('sectionStatus') }}</view>
+    <hy-cell>
+        <hy-cell-item
+            :title="t('disabledState')"
+            clickable
+            @click="showDisabled = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('loadingState')"
+            clickable
+            @click="showLoading = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('customColor')"
+            clickable
+            @click="showColor = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('withDescription')"
+            clickable
+            @click="showSub = true"
+        ></hy-cell-item>
+    </hy-cell>
 
-        <!-- 自定义面板 -->
-        <view class="hy-title">{{ t('sectionPanel') }}</view>
-        <hy-cell>
-            <hy-cell-item
-                :title="t('singlePanel')"
-                clickable
-                @click="showPanelSingle = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('multiPanel')"
-                clickable
-                @click="showPanelMulti = true"
-            ></hy-cell-item>
-        </hy-cell>
+    <!-- 自定义面板 -->
+    <view class="hy-title">{{ t('sectionPanel') }}</view>
+    <hy-cell>
+        <hy-cell-item
+            :title="t('singlePanel')"
+            clickable
+            @click="showPanelSingle = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('multiPanel')"
+            clickable
+            @click="showPanelMulti = true"
+        ></hy-cell-item>
+    </hy-cell>
 
-        <!-- 高级用法 -->
-        <view class="hy-title">{{ t('sectionAdvanced') }}</view>
-        <hy-cell>
-            <hy-cell-item
-                :title="t('noCloseOnClick')"
-                clickable
-                @click="showNoClose = true"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('customSlot')"
-                clickable
-                @click="showSlot = true"
-            ></hy-cell-item>
-        </hy-cell>
+    <!-- 高级用法 -->
+    <view class="hy-title">{{ t('sectionAdvanced') }}</view>
+    <hy-cell>
+        <hy-cell-item
+            :title="t('noCloseOnClick')"
+            clickable
+            @click="showNoClose = true"
+        ></hy-cell-item>
+        <hy-cell-item
+            :title="t('customSlot')"
+            clickable
+            @click="showSlot = true"
+        ></hy-cell-item>
+    </hy-cell>
 
-        <!-- ========== 基础功能 ========== -->
+    <!-- ========== 基础功能 ========== -->
 
-        <!-- 基础使用 -->
-        <hy-action-sheet
-            v-model="showBasic"
-            :actions="actionsBasic"
-            @select="onSelect"
-        ></hy-action-sheet>
+    <!-- 基础使用 -->
+    <hy-action-sheet
+        v-model="showBasic"
+        :actions="actionsBasic"
+        @select="onSelect"
+    ></hy-action-sheet>
 
-        <!-- 带标题 -->
-        <hy-action-sheet
-            v-model="showTitle"
-            :actions="actionsBasic"
-            :title="t('sheetTitle')"
-            @select="onSelect"
-        ></hy-action-sheet>
+    <!-- 带标题 -->
+    <hy-action-sheet
+        v-model="showTitle"
+        :actions="actionsBasic"
+        :title="t('sheetTitle')"
+        @select="onSelect"
+    ></hy-action-sheet>
 
-        <!-- 带取消按钮 -->
-        <hy-action-sheet
-            v-model="showCancel"
-            :actions="actionsBasic"
-            :cancel-text="t('cancelText')"
-            @select="onSelect"
-            @cancel="onCancel"
-        ></hy-action-sheet>
+    <!-- 带取消按钮 -->
+    <hy-action-sheet
+        v-model="showCancel"
+        :actions="actionsBasic"
+        :cancel-text="t('cancelText')"
+        @select="onSelect"
+        @cancel="onCancel"
+    ></hy-action-sheet>
 
-        <!-- ========== 选项状态 ========== -->
+    <!-- ========== 选项状态 ========== -->
 
-        <!-- 禁用状态 -->
-        <hy-action-sheet
-            v-model="showDisabled"
-            :actions="actionsDisabled"
-            @select="onSelect"
-        ></hy-action-sheet>
+    <!-- 禁用状态 -->
+    <hy-action-sheet
+        v-model="showDisabled"
+        :actions="actionsDisabled"
+        @select="onSelect"
+    ></hy-action-sheet>
 
-        <!-- 加载状态 -->
-        <hy-action-sheet
-            v-model="showLoading"
-            :actions="actionsLoading"
-            @select="onSelect"
-        ></hy-action-sheet>
+    <!-- 加载状态 -->
+    <hy-action-sheet
+        v-model="showLoading"
+        :actions="actionsLoading"
+        @select="onSelect"
+    ></hy-action-sheet>
 
-        <!-- 自定义颜色 -->
-        <hy-action-sheet
-            v-model="showColor"
-            :actions="actionsColor"
-            @select="onSelect"
-        ></hy-action-sheet>
+    <!-- 自定义颜色 -->
+    <hy-action-sheet
+        v-model="showColor"
+        :actions="actionsColor"
+        @select="onSelect"
+    ></hy-action-sheet>
 
-        <!-- 描述信息 -->
-        <hy-action-sheet
-            v-model="showSub"
-            :actions="actionsSub"
-            @select="onSelect"
-        ></hy-action-sheet>
+    <!-- 描述信息 -->
+    <hy-action-sheet
+        v-model="showSub"
+        :actions="actionsSub"
+        @select="onSelect"
+    ></hy-action-sheet>
 
-        <!-- ========== 自定义面板 ========== -->
+    <!-- ========== 自定义面板 ========== -->
 
-        <!-- 单行面板 -->
-        <hy-action-sheet
-            v-model="showPanelSingle"
-            :panels="panelsSingle"
-            :title="t('shareTo')"
-            @select="onSelect"
-        ></hy-action-sheet>
+    <!-- 单行面板 -->
+    <hy-action-sheet
+        v-model="showPanelSingle"
+        :panels="panelsSingle"
+        :title="t('shareTo')"
+        @select="onSelect"
+    ></hy-action-sheet>
 
-        <!-- 多行面板 -->
-        <hy-action-sheet
-            v-model="showPanelMulti"
-            :panels="panelsMulti"
-            :title="t('shareTo')"
-            title-align="left"
-            @select="onSelect"
-        ></hy-action-sheet>
+    <!-- 多行面板 -->
+    <hy-action-sheet
+        v-model="showPanelMulti"
+        :panels="panelsMulti"
+        :title="t('shareTo')"
+        title-align="left"
+        @select="onSelect"
+    ></hy-action-sheet>
 
-        <!-- ========== 高级用法 ========== -->
+    <!-- ========== 高级用法 ========== -->
 
-        <!-- 点击不关闭 -->
-        <hy-action-sheet
-            v-model="showNoClose"
-            :actions="actionsBasic"
-            :close-on-click-action="false"
-            @select="onSelectNoClose"
-        ></hy-action-sheet>
+    <!-- 点击不关闭 -->
+    <hy-action-sheet
+        v-model="showNoClose"
+        :actions="actionsBasic"
+        :close-on-click-action="false"
+        @select="onSelectNoClose"
+    ></hy-action-sheet>
 
-        <!-- 自定义内容插槽 -->
-        <hy-action-sheet v-model="showSlot" :title="t('customContentTitle')">
-            <view class="custom-content">
-                <text class="custom-text">{{ t('customContentText') }}</text>
-                <hy-button
-                    :text="t('confirmClose')"
-                    type="primary"
-                    @click="showSlot = false"
-                ></hy-button>
-            </view>
-        </hy-action-sheet>
-    </the-root-page>
+    <!-- 自定义内容插槽 -->
+    <hy-action-sheet v-model="showSlot" :title="t('customContentTitle')">
+        <view class="custom-content">
+            <text class="custom-text">{{ t('customContentText') }}</text>
+            <hy-button
+                :text="t('confirmClose')"
+                type="primary"
+                @click="showSlot = false"
+            ></hy-button>
+        </view>
+    </hy-action-sheet>
 </template>
 
 <script setup lang="ts">

@@ -73,16 +73,18 @@ $B: null;
     }
 }
 
-/* 定义元素（e），对于伪类，会自动将 e 嵌套在 伪类 底下 */
+/* 定义元素（e）并穿透子组件样式。类名统一由块名拼接（块__元素），不受嵌套层级影响；
+   外层叠加 .块 父级选择器：小程序端编译会剥离 :deep()，叠加父级可保证
+   后代选择器优先级（0,2,0）高于子组件内部的单类样式（0,1,0） */
 @mixin edeep($element...) {
     $selector: &;
     $selectors: '';
 
-    @if function.containsPseudo($selector) {
-        @each $item in $element {
-            $selectors: #{$selectors + '.' + $B + config.$element-separator + $item + ','};
-        }
+    @each $item in $element {
+        $selectors: #{$selectors + '.' + $B + config.$element-separator + $item + ','};
+    }
 
+    @if function.containsPseudo($selector) {
         @at-root {
             #{$selector} {
                 :deep() {
@@ -93,14 +95,12 @@ $B: null;
             }
         }
     } @else {
-        @each $item in $element {
-            $selectors: #{$selectors + $selector + config.$element-separator + $item + ','};
-        }
-
         @at-root {
-            :deep() {
-                #{$selectors} {
-                    @content;
+            .#{$B} {
+                :deep() {
+                    #{$selectors} {
+                        @content;
+                    }
                 }
             }
         }
@@ -142,12 +142,16 @@ $B: null;
 /**
   * 圆角形状
   * @param $shape circle-半圆形，square-方形带圆角
+  * @param $radius 自定义圆角值（可选，不传则使用全局圆角变量），
+  *                 用于传入组件级变量以支持单独覆盖某个组件的圆角
 */
-@mixin borderRadio($shape) {
+@mixin borderRadio($shape, $radius: null) {
     @include m($shape) {
-        @if $shape == circle {
+        @if $radius {
+            border-radius: $radius;
+        } @else if $shape == circle {
             border-radius: theme.$hy-radius-semicircle;
-        } @else if($shape == square) {
+        } @else if $shape == square {
             border-radius: theme.$hy-radius-sm;
         } @else {
             border-radius: 28rpx theme.$hy-radius-sm;

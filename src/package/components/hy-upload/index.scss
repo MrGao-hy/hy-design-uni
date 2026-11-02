@@ -1,8 +1,20 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
-$hy-upload-image-width: 80px !default;
-$hy-upload-text-font-size: 11px !default;
+/* 预览图尺寸 */
+$hy-upload-image-width: var(--hy-upload-image-width, 80px) !default;
+/* 文字字号 */
+$hy-upload-text-font-size: var(--hy-upload-text-font-size, 11px) !default;
+/* 上传项圆角 */
+$hy-upload-radius: var(--hy-upload-radius, 2px) !default;
+/* 上传项外边距 */
+$hy-upload-item-margin: var(--hy-upload-item-margin, 0 8px 8px 0) !default;
+/* 删除按钮尺寸 */
+$hy-upload-deletable-size: var(--hy-upload-deletable-size, 14px) !default;
+/* 文件类型背景色 */
+$hy-upload-other-bg: var(--hy-upload-other-bg, rgb(242, 242, 242)) !default;
+/* 提示文字颜色 */
+$hy-upload-text-color: var(--hy-upload-text-color, #{$hy-text-color--grey}) !default;
 
 
 @include b(upload) {
@@ -15,8 +27,8 @@ $hy-upload-text-font-size: 11px !default;
     flex: 1;
 
     @include m(preview) {
-      border-radius: 2px;
-      margin: 0 8px 8px 0;
+      border-radius: $hy-upload-radius;
+      margin: $hy-upload-item-margin;
       position: relative;
       overflow: hidden;
       @include flex;
@@ -29,7 +41,7 @@ $hy-upload-text-font-size: 11px !default;
       @include e(other) {
         width: $hy-upload-image-width;
         height: $hy-upload-image-width;
-        background-color: rgb(242, 242, 242);
+        background-color: $hy-upload-other-bg;
         flex: 1;
         @include flex(column);
         justify-content: center;
@@ -37,7 +49,7 @@ $hy-upload-text-font-size: 11px !default;
 
         @include m(text) {
           font-size: $hy-upload-text-font-size;
-          color: $hy-text-color--grey;
+          color: $hy-upload-text-color;
           margin-top: 2px;
         }
       }
@@ -70,8 +82,8 @@ $hy-upload-text-font-size: 11px !default;
     top: 0;
     right: 0;
     background-color: rgb(55, 55, 55);
-    height: 14px;
-    width: 14px;
+    height: $hy-upload-deletable-size;
+    width: $hy-upload-deletable-size;
     @include flex;
     border-bottom-left-radius: 100px;
     align-items: center;
@@ -127,15 +139,15 @@ $hy-upload-text-font-size: 11px !default;
     width: $hy-upload-image-width;
     height: $hy-upload-image-width;
     background-color: $hy-background--empty;
-    border-radius: 2px;
-    margin: 0 8px 8px 0;
+    border-radius: $hy-upload-radius;
+    margin: $hy-upload-item-margin;
     /* #ifndef APP-NVUE */
     box-sizing: border-box;
     /* #endif */
 
     @include m(text) {
       font-size: $hy-upload-text-font-size;
-      color: $hy-text-color--grey;
+      color: $hy-upload-text-color;
       margin-top: 2px;
     }
 

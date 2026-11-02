@@ -1,122 +1,120 @@
 <template>
-    <the-root-page>
-        <scroll-view class="mine-page" scroll-y :show-scrollbar="false">
-            <!-- 用户信息区域 -->
-            <hy-card custom-class="user-card">
-                <hy-flex align="center" gap="24rpx">
-                    <hy-avatar
-                        :src="userInfo.avatar"
-                        size="large"
-                        shape="circle"
-                        @click="handleEditProfile"
-                    />
-                    <hy-flex vertical :flex="1" justify="center" gap="4rpx">
-                        <hy-flex align="center" justify="space-between">
-                            <hy-text :text="userInfo.nickname" size="18rpx" :bold="true" />
-                            &ensp;
-                            <hy-tag :label="t('vip')" type="primary" plain size="mini" />
-                        </hy-flex>
-                        <hy-text :text="'ID: ' + userInfo.userId" size="12rpx" color="#999" />
-                        <hy-text :text="t('bio')" size="12rpx" color="#666" />
+    <scroll-view class="mine-page" scroll-y :show-scrollbar="false">
+        <!-- 用户信息区域 -->
+        <hy-card custom-class="user-card">
+            <hy-flex align="center" gap="24rpx">
+                <hy-avatar
+                    :src="userInfo.avatar"
+                    size="large"
+                    shape="circle"
+                    @click="handleEditProfile"
+                />
+                <hy-flex vertical :flex="1" justify="center" gap="4rpx">
+                    <hy-flex align="center" justify="space-between">
+                        <hy-text :text="userInfo.nickname" size="18rpx" :bold="true" />
+                        &ensp;
+                        <hy-tag :label="t('vip')" type="primary" plain size="mini" />
                     </hy-flex>
+                    <hy-text :text="'ID: ' + userInfo.userId" size="12rpx" color="#999" />
+                    <hy-text :text="t('bio')" size="12rpx" color="#666" />
                 </hy-flex>
-            </hy-card>
+            </hy-flex>
+        </hy-card>
 
-            <!-- 统计数据 -->
-            <hy-card custom-class="stats-card">
-                <hy-flex justify="space-around">
-                    <view
-                        v-for="stat in stats"
-                        :key="stat.key"
-                        class="stat-item"
-                        @click="handleStatClick(stat.key)"
-                    >
-                        <hy-text :text="String(stat.value)" size="36rpx" :bold="true" block />
-                        <hy-text :text="t(stat.key)" size="24rpx" color="#999" block />
-                    </view>
-                </hy-flex>
-            </hy-card>
-
-            <!-- 我的服务 -->
-            <!-- <hy-card>
+        <!-- 统计数据 -->
+        <hy-card custom-class="stats-card">
+            <hy-flex justify="space-around">
                 <view
-                    v-for="item in serviceFeatures"
-                    :key="item.key"
-                    class="cell-row"
-                    :class="{ 'cell-border': item.key !== 'favorites' }"
-                    @click="handleNavigate(item.route)"
+                    v-for="stat in stats"
+                    :key="stat.key"
+                    class="stat-item"
+                    @click="handleStatClick(stat.key)"
                 >
-                    <view class="cell-icon" :style="{ backgroundColor: item.iconBg }">
-                        <hy-icon :name="item.icon" size="20" color="#fff" />
-                    </view>
-                    <hy-text :text="t(item.key)" size="28rpx" :flex="true" />
-                    <view class="cell-right">
-                        <hy-badge
-                            v-if="item.badge"
-                            :value="Number(item.badge)"
-                            :max="99"
-                            type="error"
-                        />
-                        <hy-icon v-else name="right" size="20" color="#c0c4cc" />
-                    </view>
+                    <hy-text :text="String(stat.value)" size="36rpx" :bold="true" block />
+                    <hy-text :text="t(stat.key)" size="24rpx" color="#999" block />
                 </view>
-            </hy-card> -->
+            </hy-flex>
+        </hy-card>
 
-            <!-- 设置与帮助 -->
-            <!-- <hy-card>
-                <view
-                    v-for="item in settingFeatures"
-                    :key="item.key"
-                    class="cell-row"
-                    :class="{ 'cell-border': item.key !== 'about' }"
-                    @click="handleNavigate(item.route)"
-                >
-                    <view class="cell-icon" :style="{ backgroundColor: item.iconBg }">
-                        <hy-icon :name="item.icon" size="20" color="#fff" />
-                    </view>
-                    <hy-text :text="t(item.key)" size="28rpx" :flex="true" />
-                    <view class="cell-right">
-                        <hy-text
-                            v-if="item.version"
-                            :text="item.version"
-                            size="24rpx"
-                            color="#999"
-                        />
-                        <hy-icon v-else name="right" size="20" color="#c0c4cc" />
-                    </view>
-                </view>
-            </hy-card> -->
-
-            <!-- 语言切换 -->
-            <hy-card>
-                <view class="cell-row">
-                    <view class="cell-icon" style="background-color: #4299e1">
-                        <hy-icon name="switch" size="20" color="#fff" />
-                    </view>
-                    <hy-text :text="t('language')" size="28rpx" :flex="true" />
-                    <hy-switch
-                        v-model="isEn"
-                        size="small"
-                        :activeValue="true"
-                        :inactiveValue="false"
-                        @change="handleLangChange"
-                    />
-                </view>
-            </hy-card>
-
-            <!-- 退出登录 -->
-            <!-- <hy-button
-                type="error"
-                plain
-                :loading="isLoggingOut"
-                :disabled="isLoggingOut"
-                custom-class="logout-btn"
-                @click="handleLogout"
+        <!-- 我的服务 -->
+        <!-- <hy-card>
+            <view
+                v-for="item in serviceFeatures"
+                :key="item.key"
+                class="cell-row"
+                :class="{ 'cell-border': item.key !== 'favorites' }"
+                @click="handleNavigate(item.route)"
             >
-                {{ t('logout') }}
-            </hy-button> -->
-        </scroll-view>
-    </the-root-page>
+                <view class="cell-icon" :style="{ backgroundColor: item.iconBg }">
+                    <hy-icon :name="item.icon" size="20" color="#fff" />
+                </view>
+                <hy-text :text="t(item.key)" size="28rpx" :flex="true" />
+                <view class="cell-right">
+                    <hy-badge
+                        v-if="item.badge"
+                        :value="Number(item.badge)"
+                        :max="99"
+                        type="error"
+                    />
+                    <hy-icon v-else name="right" size="20" color="#c0c4cc" />
+                </view>
+            </view>
+        </hy-card> -->
+
+        <!-- 设置与帮助 -->
+        <!-- <hy-card>
+            <view
+                v-for="item in settingFeatures"
+                :key="item.key"
+                class="cell-row"
+                :class="{ 'cell-border': item.key !== 'about' }"
+                @click="handleNavigate(item.route)"
+            >
+                <view class="cell-icon" :style="{ backgroundColor: item.iconBg }">
+                    <hy-icon :name="item.icon" size="20" color="#fff" />
+                </view>
+                <hy-text :text="t(item.key)" size="28rpx" :flex="true" />
+                <view class="cell-right">
+                    <hy-text
+                        v-if="item.version"
+                        :text="item.version"
+                        size="24rpx"
+                        color="#999"
+                    />
+                    <hy-icon v-else name="right" size="20" color="#c0c4cc" />
+                </view>
+            </view>
+        </hy-card> -->
+
+        <!-- 语言切换 -->
+        <hy-card>
+            <view class="cell-row">
+                <view class="cell-icon" style="background-color: #4299e1">
+                    <hy-icon name="switch" size="20" color="#fff" />
+                </view>
+                <hy-text :text="t('language')" size="28rpx" :flex="true" />
+                <hy-switch
+                    v-model="isEn"
+                    size="small"
+                    :activeValue="true"
+                    :inactiveValue="false"
+                    @change="handleLangChange"
+                />
+            </view>
+        </hy-card>
+
+        <!-- 退出登录 -->
+        <!-- <hy-button
+            type="error"
+            plain
+            :loading="isLoggingOut"
+            :disabled="isLoggingOut"
+            custom-class="logout-btn"
+            @click="handleLogout"
+        >
+            {{ t('logout') }}
+        </hy-button> -->
+    </scroll-view>
 </template>
 
 <script setup lang="ts">

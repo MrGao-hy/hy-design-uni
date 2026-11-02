@@ -1,9 +1,12 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 线条颜色，默认跟随全局边框色 token */
+$hy-line-color: var(--hy-line-color, #{$hy-border-color}) !default;
+
 @include b(line) {
   /* #ifndef APP-NVUE */
   vertical-align: middle;
   /* #endif */
-  border-color: $hy-border-color;
+  border-color: $hy-line-color;
 }

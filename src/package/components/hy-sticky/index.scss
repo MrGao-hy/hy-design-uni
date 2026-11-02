@@ -1,6 +1,9 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 吸顶背景色，默认跟随全局容器背景 */
+$hy-sticky-bg: var(--hy-sticky-bg, #{$hy-background--container}) !default;
+
 @include b(sticky) {
   width: 100%;
   /* 默认 sticky（非 fixed）样式 */
@@ -9,7 +12,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background: #fff;
+  background: $hy-sticky-bg;
   box-sizing: border-box;
 
   @include e(fixed) {

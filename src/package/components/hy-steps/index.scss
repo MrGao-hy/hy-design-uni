@@ -1,6 +1,31 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 图标圆尺寸 */
+$hy-steps-icon-size: var(--hy-steps-icon-size, 20px) !default;
+/* 点形状尺寸 */
+$hy-steps-dot-size: var(--hy-steps-dot-size, 10px) !default;
+/* 图标内文字字号 */
+$hy-steps-icon-text-font-size: var(--hy-steps-icon-text-font-size, 11px) !default;
+/* 标题字号 */
+$hy-steps-title-font-size: var(--hy-steps-title-font-size, 30rpx) !default;
+/* 选中标题字号 */
+$hy-steps-title-active-font-size: var(--hy-steps-title-active-font-size, 34rpx) !default;
+/* 内容区最小高度（纵向） */
+$hy-steps-content-min-height: var(--hy-steps-content-min-height, 60px) !default;
+/* 图标容器圆角，默认跟随全局半圆角 token */
+$hy-steps-icon-radius: var(--hy-steps-icon-radius, #{$hy-radius-semicircle}) !default;
+/* 点形状圆角，默认跟随全局圆形 token */
+$hy-steps-dot-radius: var(--hy-steps-dot-radius, #{$hy-radius-circle}) !default;
+/* 图标内文字颜色，默认跟随全局灰度文字 token */
+$hy-steps-icon-text-color: var(--hy-steps-icon-text-color, #{$hy-text-color--grey}) !default;
+/* 日期字号 */
+$hy-steps-date-font-size: var(--hy-steps-date-font-size, 24rpx) !default;
+/* 日期文字颜色 */
+$hy-steps-date-color: var(--hy-steps-date-color, #999) !default;
+/* 图标容器边框，默认跟随全局边框线 token */
+$hy-steps-icon-border: var(--hy-steps-icon-border, #{$hy-border-line}) !default;
+
 @include b(steps) {
   @include flex;
 
@@ -40,7 +65,7 @@
       align-items: center;
       position: relative;
       background-color: transparent;
-      border-radius: $hy-radius-semicircle;
+      border-radius: $hy-steps-icon-radius;
 
       /* 选择 */
       &.process {
@@ -56,21 +81,21 @@
       }
 
       @include m(column) {
-        width: 20px;
-        height: 20px;
+        width: $hy-steps-icon-size;
+        height: $hy-steps-icon-size;
       }
 
       @include m(row) {
-        width: 20px;
-        height: 20px;
+        width: $hy-steps-icon-size;
+        height: $hy-steps-icon-size;
       }
 
       /* 点形状 */
       @include m(dot) {
         @include e(item) {
-          width: 10px;
-          height: 10px;
-          border-radius: $hy-radius-circle;
+          width: $hy-steps-dot-size;
+          height: $hy-steps-dot-size;
+          border-radius: $hy-steps-dot-radius;
           background-color: $hy-info;
           border: none;
         }
@@ -83,27 +108,27 @@
       }
 
       @include e(circle) {
-        width: 20px;
-        height: 20px;
+        width: $hy-steps-icon-size;
+        height: $hy-steps-icon-size;
         /* #ifndef APP-NVUE */
         box-sizing: border-box;
         flex-shrink: 0;
         /* #endif */
-        border-radius: $hy-radius-semicircle;
-        border: $hy-border-line;
+        border-radius: $hy-steps-icon-radius;
+        border: $hy-steps-icon-border;
         @include flex(row);
         align-items: center;
         justify-content: center;
         transition: background-color 0.3s;
 
         @include e(text) {
-          color: $hy-text-color--grey;
-          font-size: 11px;
+          color: $hy-steps-icon-text-color;
+          font-size: $hy-steps-icon-text-font-size;
           @include flex(row);
           align-items: center;
           justify-content: center;
           text-align: center;
-          line-height: 11px;
+          line-height: $hy-steps-icon-text-font-size;
         }
       }
     }
@@ -114,10 +139,10 @@
 
       @include e(title) {
         line-height: 25px;
-        font-size: 30rpx;
+        font-size: $hy-steps-title-font-size;
         @include m(active) {
           color: $hy-primary;
-          font-size: 34rpx;
+          font-size: $hy-steps-title-active-font-size;
         }
 
         @include m(error) {
@@ -134,12 +159,12 @@
         flex-direction: column;
         justify-content: flex-start;
         margin-left: $hy-border-margin-padding-sm;
-        min-height: 60px;
+        min-height: $hy-steps-content-min-height;
       }
 
       @include m(date) {
-        font-size: 24rpx;
-        color: #999;
+        font-size: $hy-steps-date-font-size;
+        color: $hy-steps-date-color;
       }
     }
 

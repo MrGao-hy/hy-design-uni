@@ -1,5 +1,5 @@
 <template>
-    <the-root-page :custom-style="{ height: '10000px' }">
+    <view :style="{ height: '10000px' }">
         <hy-back-top
             :scrollTop="scrollTop"
             :mode="mode"
@@ -20,7 +20,7 @@
             <view class="hy-title">{{ t('bottomDistance') }}</view>
             <hy-slider v-model="bottom" :max="500" show-value></hy-slider>
         </view>
-    </the-root-page>
+    </view>
 </template>
 
 <script setup lang="ts">

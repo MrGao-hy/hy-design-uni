@@ -1,19 +1,17 @@
 <template>
-    <the-root-page>
-        <hy-submit-bar
-            :menus="menus"
-            :left-loading="true"
-            @menu-click="clickMenuFn"
-        ></hy-submit-bar>
-        <view class="hy-title">{{ t('oneButton') }}</view>
-        <hy-submit-bar
-            :menus="menus"
-            :fixed="false"
-            :show-left-btn="false"
-            right-btn-color="linear-gradient(to right, #4bfcfc, #FB39F5)"
-        ></hy-submit-bar>
-        <hy-submit-bar :menus="menus" :fixed="false" :show-right-btn="false"></hy-submit-bar>
-    </the-root-page>
+    <hy-submit-bar
+        :menus="menus"
+        :left-loading="true"
+        @menu-click="clickMenuFn"
+    ></hy-submit-bar>
+    <view class="hy-title">{{ t('oneButton') }}</view>
+    <hy-submit-bar
+        :menus="menus"
+        :fixed="false"
+        :show-left-btn="false"
+        right-btn-color="linear-gradient(to right, #4bfcfc, #FB39F5)"
+    ></hy-submit-bar>
+    <hy-submit-bar :menus="menus" :fixed="false" :show-right-btn="false"></hy-submit-bar>
 </template>
 
 <script setup lang="ts">

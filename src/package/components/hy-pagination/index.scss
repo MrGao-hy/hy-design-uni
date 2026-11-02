@@ -1,6 +1,15 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* 导航按钮最小宽度 */
+$hy-pagination-nav-min-width: var(--hy-pagination-nav-min-width, 60px) !default;
+/* 导航可用颜色 */
+$hy-pagination-nav-active-color: var(--hy-pagination-nav-active-color, rgba(0, 0, 0, 0.65)) !default;
+/* 导航禁用颜色 */
+$hy-pagination-nav-disabled-color: var(--hy-pagination-nav-disabled-color, rgba(0, 0, 0, 0.15)) !default;
+/* 信息文字字号，默认跟随全局小号字体 token */
+$hy-pagination-font-size: var(--hy-pagination-font-size, #{$hy-font-size-sm}) !default;
+
 
 @include b(pagination) {
   user-select: none;
@@ -18,24 +27,24 @@
 
   @include e(message) {
     text-align: center;
-    font-size: $hy-font-size-sm;
+    font-size: $hy-pagination-font-size;
     padding: 1px 0 16px 0;
   }
 
   @include e(nav) {
-    min-width: 60px;
+    min-width: $hy-pagination-nav-min-width;
     @include m(active){
-      color: rgba(0,0,0,0.65)
+      color: $hy-pagination-nav-active-color
     }
     @include m(disabled){
-      color: rgba(0,0,0,0.15)
+      color: $hy-pagination-nav-disabled-color
     }
   }
 
   @include e(size){
     flex: 1;
     text-align: center;
-    font-size: $hy-font-size-sm;
+    font-size: $hy-pagination-font-size;
   }
 
   @include e(separator){
