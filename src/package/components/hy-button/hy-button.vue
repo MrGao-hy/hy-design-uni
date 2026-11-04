@@ -30,8 +30,12 @@
         :class="['hy-button', !border && 'hy-button__no-border', bemClass, customClass]"
     >
         <template v-if="loading">
-            <hy-loading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></hy-loading>
-            <text class="hy-button__loading-text" :style="[{ fontSize: textSize + 'px' }]">
+            <hy-loading
+                :mode="loadingMode"
+                :size="loadingSizeCom"
+                :color="loadingColor"
+            ></hy-loading>
+            <text class="hy-button__loading-text">
                 {{ loadingText || text }}
             </text>
         </template>
@@ -40,7 +44,7 @@
                 v-if="icon?.name"
                 :name="icon?.name"
                 :color="iconColorCom"
-                :size="icon?.size || textSize * 1.35"
+                :size="iconSizeCom"
                 :bold="icon?.bold"
                 :customPrefix="icon?.customPrefix"
                 :imgMode="icon?.imgMode"
@@ -53,9 +57,7 @@
             ></hy-icon>
             <!-- @slot 插入默认的值 -->
             <slot v-if="$slots.default"></slot>
-            <text v-else class="hy-button__text" :style="[{ fontSize: textSize + 'px' }]">{{
-                text
-            }}</text>
+            <text v-else class="hy-button__text">{{ text }}</text>
         </template>
     </button>
     <!-- #endif -->
@@ -77,7 +79,11 @@
         :style="[baseColor, customStyle]"
     >
         <template v-if="loading">
-            <hy-loading :mode="loadingMode" :size="loadingSize" :color="loadingColor"></hy-loading>
+            <hy-loading
+                :mode="loadingMode"
+                :size="loadingSizeCom"
+                :color="loadingColor"
+            ></hy-loading>
             <text
                 class="hy-button__loading-text"
                 :style="[nvueTextStyle]"
@@ -91,7 +97,7 @@
                 v-if="icon?.name"
                 :name="icon?.name"
                 :color="iconColorCom"
-                :size="icon?.size || textSize * 1.35"
+                :size="iconSizeCom"
                 :bold="icon?.bold"
                 :customPrefix="icon?.customPrefix"
                 :imgMode="icon?.imgMode"
@@ -164,6 +170,26 @@ const bemClass = computed(() => {
     }
 })
 
+/**
+ * @description 生成尺寸计算属性：显式传入优先，否则按按钮档位取默认映射
+ * @param map 各档位（large/medium/small/mini）默认尺寸
+ * @param value 用户显式传入的尺寸
+ */
+const createSizeCom = (map: Record<string, number>, value: () => number | string | undefined | null) =>
+    computed((): number | string => {
+        const val = value()
+        if (val === '' || val === undefined || val === null) {
+            return map[props.size] ?? map.medium
+        }
+        return val
+    })
+
+/* 加载图标各档位默认大小，与按钮高度、字号协调 */
+const loadingSizeCom = createSizeCom({ large: 20, medium: 15, small: 12, mini: 10 }, () => props.loadingSize)
+
+/* 图标字形实际绘制面积小于字号，默认略大于字号以平衡视觉 */
+const iconSizeCom = createSizeCom({ large: 26, medium: 21, small: 13, mini: 12 }, () => props.icon?.size)
+
 const loadingColor = computed(() => {
     if (props.plain) {
         // 如果有设置color值，则用color值，否则使用type主题颜色
@@ -227,19 +253,7 @@ const nvueTextStyle = computed((): CSSProperties => {
     if (props.color) {
         style.color = props.plain ? props.color : 'white'
     }
-    style.fontSize = textSize.value + 'px'
     return style
-})
-/**
- * 字体大小
- * */
-const textSize = computed((): number => {
-    let fontSize = 14
-    if (props.size === 'large') fontSize = 16
-    if (props.size === 'medium') fontSize = 14
-    if (props.size === 'small') fontSize = 12
-    if (props.size === 'mini') fontSize = 10
-    return fontSize
 })
 
 const clickHandler = (e: any) => {

@@ -13,8 +13,9 @@
         "暗黑模式",
         "国际化",
         "vue3",
-        "uniApp",
-        "ai"
+        "uni-app",
+        "ai",
+        "typescript"
     ],
     "vetur": {
         "tags": "./tags.json",

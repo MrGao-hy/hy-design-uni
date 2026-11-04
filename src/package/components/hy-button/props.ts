@@ -69,10 +69,12 @@ const buttonProps = {
         type: String as PropType<LoadingMode>,
         default: 'spinner'
     },
-    /** 加载图标大小 */
+    /**
+     * 加载图标大小，默认跟随按钮尺寸（large:20 / medium:15 / small:12 / mini:10）
+     * */
     loadingSize: {
         type: [Number, String],
-        default: 13
+        default: ''
     },
     /** 开放能力，具体请看uniapp稳定关于button组件部分说明 */
     openType: String as PropType<ButtonOpenType>,

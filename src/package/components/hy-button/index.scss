@@ -1,15 +1,15 @@
-@use "../../libs/css/mixin" as *;
-@use "../../libs/css/theme" as *;
+@use '../../libs/css/mixin' as *;
+@use '../../libs/css/theme' as *;
 
 /* 按钮高度（medium 沿用默认高度） */
-$hy-button-height: var(--hy-button-height, 40px) !default;
 $hy-button-height-large: var(--hy-button-height-large, 50px) !default;
+$hy-button-height-medium: var(--hy-button-height-medium, 40px) !default;
 $hy-button-height-small: var(--hy-button-height-small, 30px) !default;
 $hy-button-height-mini: var(--hy-button-height-mini, 22px) !default;
 
 /* 按钮文字大小（prop: text-size 内联样式优先，此处为兜底值） */
-$hy-button-font-size: var(--hy-button-font-size, 15px) !default;
-$hy-button-font-size-medium: var(--hy-button-font-size-medium, 14px) !default;
+$hy-button-font-size-large: var(--hy-button-font-size-large, 20px) !default;
+$hy-button-font-size-medium: var(--hy-button-font-size-medium, 15px) !default;
 $hy-button-font-size-small: var(--hy-button-font-size-small, 12px) !default;
 $hy-button-font-size-mini: var(--hy-button-font-size-mini, 10px) !default;
 
@@ -32,125 +32,112 @@ $hy-button-disabled-opacity: var(--hy-button-disabled-opacity, 0.5) !default;
 /* 细边框宽度（hairline） */
 $hy-button-hairline-width: var(--hy-button-hairline-width, 0.5px) !default;
 
-@include b(button){
-  height: $hy-button-height;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  margin: 0;
-  @include flex;
-  /* #ifndef APP-NVUE */
-  box-sizing: border-box;
-  /* #endif */
-  flex-direction: row;
-  /* 防止文字内容被压缩换行 */
-  flex-shrink: 0;
-
-  @include m(active) {
-    /* 亮光效果 */
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(
-                      90deg,
-                      transparent,
-                      rgba(255, 255, 255, 0.4),
-                      transparent
-      );
-      transition: left 0.7s;
-      z-index: 1;
-    }
-    &:active::before {
-      left: 100%;
-      transition: left 0.2s;
-    }
-  }
-
-
-  /* 去除原生按钮边框 */
-  &::after {
-    border: none !important;
-  }
-
-  @include e(text) {
-    font-size: $hy-button-font-size;
-  }
-
-  @include e(loading-text) {
-    font-size: $hy-button-font-size;
-    margin-left: 4px;
-  }
-
-  @include m(large) {
-    /* #ifndef APP-NVUE */
-    width: 100%;
-    /* #endif */
-    height: $hy-button-height-large;
-    padding: $hy-button-padding-large;
-  }
-
-  @include m(medium) {
-    padding: $hy-button-padding-medium;
-    font-size: $hy-button-font-size-medium;
-  }
-
-  @include m(small) {
-    /* #ifndef APP-NVUE */
-    min-width: $hy-button-min-width-small;
-    /* #endif */
-    height: $hy-button-height-small;
-    padding: $hy-button-padding-small;
-    font-size: $hy-button-font-size-small;
-  }
-
-  @include m(mini) {
-    height: $hy-button-height-mini;
-    font-size: $hy-button-font-size-mini;
-    /* #ifndef APP-NVUE */
-    min-width: $hy-button-min-width-mini;
-    /* #endif */
-    padding: $hy-button-padding-mini;
-  }
-
-  @include m(disabled) {
-    opacity: $hy-button-disabled-opacity;
-  }
-
-  @include e(no-border) {
-    border: none !important;
-  }
-
-  @include themeColor(info,  $hy-info, $hy-info);
-  @include themeColor(success,  $hy-success, $hy-success);
-  @include themeColor(primary,  $hy-primary, $hy-primary);
-  @include themeColor(error, $hy-error, $hy-error);
-  @include themeColor(warning, $hy-warning, $hy-warning);
-
-  @include themeColor(info__plain, transparent, $hy-info, $hy-info);
-  @include themeColor(success__plain, transparent, $hy-success, $hy-success);
-  @include themeColor(primary__plain, transparent, $hy-primary, $hy-primary);
-  @include themeColor(error__plain, transparent, $hy-error, $hy-error);
-  @include themeColor(warning__plain, transparent, $hy-warning, $hy-warning);
-
-
-
-  @include m(block) {
+@include b(button) {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    margin: 0;
     @include flex;
-    width: 100%;
-  }
+    /* #ifndef APP-NVUE */
+    box-sizing: border-box;
+    /* #endif */
+    flex-direction: row;
+    /* 防止文字内容被压缩换行 */
+    flex-shrink: 0;
 
-  /* 圆形按钮圆角默认跟随全局 --hy-radius-semicircle */
-  @include borderRadio(circle);
-  /* 方形按钮圆角支持组件级变量 --hy-button-radius 覆盖 */
-  @include borderRadio(square, $hy-button-radius);
+    @include m(active) {
+        /* 亮光效果 */
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.7s;
+            z-index: 1;
+        }
+        &:active::before {
+            left: 100%;
+            transition: left 0.2s;
+        }
+    }
 
+    /* 去除原生按钮边框 */
+    &::after {
+        border: none !important;
+    }
 
-  @include m(hairline) {
-    border-width: $hy-button-hairline-width;
-  }
+    @include e(loading-text) {
+        margin-left: 4px;
+    }
+
+    @include m(large) {
+        /* #ifndef APP-NVUE */
+        width: 100%;
+        /* #endif */
+        height: $hy-button-height-large;
+        padding: $hy-button-padding-large;
+        font-size: $hy-button-font-size-large;
+    }
+
+    @include m(medium) {
+        height: $hy-button-height-medium;
+        padding: $hy-button-padding-medium;
+        font-size: $hy-button-font-size-medium;
+    }
+
+    @include m(small) {
+        /* #ifndef APP-NVUE */
+        min-width: $hy-button-min-width-small;
+        /* #endif */
+        height: $hy-button-height-small;
+        padding: $hy-button-padding-small;
+        font-size: $hy-button-font-size-small;
+    }
+
+    @include m(mini) {
+        height: $hy-button-height-mini;
+        font-size: $hy-button-font-size-mini;
+        /* #ifndef APP-NVUE */
+        min-width: $hy-button-min-width-mini;
+        /* #endif */
+        padding: $hy-button-padding-mini;
+    }
+
+    @include m(disabled) {
+        opacity: $hy-button-disabled-opacity;
+    }
+
+    @include e(no-border) {
+        border: none !important;
+    }
+
+    @include themeColor(info, $hy-info, $hy-info);
+    @include themeColor(success, $hy-success, $hy-success);
+    @include themeColor(primary, $hy-primary, $hy-primary);
+    @include themeColor(error, $hy-error, $hy-error);
+    @include themeColor(warning, $hy-warning, $hy-warning);
+
+    @include themeColor(info__plain, transparent, $hy-info, $hy-info);
+    @include themeColor(success__plain, transparent, $hy-success, $hy-success);
+    @include themeColor(primary__plain, transparent, $hy-primary, $hy-primary);
+    @include themeColor(error__plain, transparent, $hy-error, $hy-error);
+    @include themeColor(warning__plain, transparent, $hy-warning, $hy-warning);
+
+    @include m(block) {
+        @include flex;
+        width: 100%;
+    }
+
+    /* 圆形按钮圆角默认跟随全局 --hy-radius-semicircle */
+    @include borderRadio(circle);
+    /* 方形按钮圆角支持组件级变量 --hy-button-radius 覆盖 */
+    @include borderRadio(square, $hy-button-radius);
+
+    @include m(hairline) {
+        border-width: $hy-button-hairline-width;
+    }
 }

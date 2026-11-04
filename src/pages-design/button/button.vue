@@ -41,6 +41,7 @@
         <hy-button
             type="error"
             :text="t('delete')"
+            size="large"
             :icon="{ name: IconConfig.DELETE }"
             :custom-style="{ marginBottom: '20px' }"
         ></hy-button>
@@ -52,12 +53,14 @@
         <hy-button
             :text="t('delete')"
             plain
+            size="small"
             :icon="{ name: IconConfig.DELETE }"
             :custom-style="{ marginBottom: '20px' }"
         ></hy-button>
         <hy-button
             type="error"
             :text="t('delete')"
+            size="mini"
             plain
             :icon="{ name: IconConfig.DELETE }"
         ></hy-button>
