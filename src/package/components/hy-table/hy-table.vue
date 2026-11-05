@@ -1,8 +1,8 @@
 <template>
     <view class="hy-table" :style="{ height: addUnit(height) }">
-        <!-- 列头：位于纵向滚动容器之外天然吸顶，中间列通过平移轨道跟随主体横向滚动。
-             全平台（微信/支付宝等）不依赖 scroll-view 双向滚动与 CSS sticky，
-             支付宝小程序 scroll-view 不支持 scroll-x 与 scroll-y 同时生效 -->
+        <!-- 列头：位于纵向滚动容器之外天然吸顶。
+             中间列头自身为 scroll-x 容器，与主体横向滚动双向联动：
+             拖动表头可滚动表格，拖动表格表头同步跟随，全平台（含支付宝小程序）一致 -->
         <view v-if="showHeader" class="hy-table__header">
             <!-- 左侧固定列头 -->
             <view
@@ -44,9 +44,17 @@
                 </view>
             </view>
 
-            <!-- 中间滚动列头：裁剪容器 + 平移轨道，跟随主体横向滚动 -->
-            <view class="hy-table__clip">
-                <view class="hy-table__track" :style="headerTrackStyle">
+            <!-- 中间滚动列头：自身横向可拖动，与主体横向滚动双向联动 -->
+            <scroll-view
+                class="hy-table__header--scroll"
+                scroll-x
+                :show-scrollbar="false"
+                :scroll-left="headerScrollLeft"
+                :lower-threshold="0"
+                @scroll="onHeaderScroll"
+                @scrolltolower="onReachEnd"
+            >
+                <view class="hy-table__track" :style="{ width: addUnit(scrollWidth) }">
                     <view
                         v-for="col in scrollColumns"
                         :key="col.key"
@@ -76,7 +84,7 @@
                         </view>
                     </view>
                 </view>
-            </view>
+            </scroll-view>
 
             <!-- 右侧固定列头 -->
             <view
@@ -166,12 +174,15 @@
                         </view>
                     </view>
 
-                    <!-- 中间滚动列：全组件唯一横向滚动源，表头轨道与其单向联动 -->
+                    <!-- 中间滚动列：横向滚动与表头双向联动 -->
                     <scroll-view
-                        class="hy-table__body--hscroll"
+                        class="hy-table__body--scroll__inner"
                         scroll-x
                         enable-flex
+                        :scroll-left="bodyScrollLeft"
+                        :lower-threshold="0"
                         @scroll="onHScroll"
+                        @scrolltolower="onReachEnd"
                     >
                         <view
                             class="hy-table__body--track"
@@ -298,15 +309,19 @@ const emit = defineEmits<ITableEmits>()
 
 const { t } = useTranslate('loadMore')
 
-// 组件实例，用于节点查询（支付宝小程序中会自动忽略）
+// 组件实例，用于节点查询（支付宝小程序下改用其原生 $scope）
 const instance = getCurrentInstance()
 
 // 响应式数据
 const rowHeights = ref<number[]>([])
 const sortField = ref<string>('')
 const sortOrder = ref<'asc' | 'desc'>('asc')
-// 主体中间列横向滚动位置，表头轨道据此平移跟随
-const tableScrollLeft = ref(0)
+// 表头横向滚动目标位置（由主体滚动驱动）
+const headerScrollLeft = ref(0)
+// 主体横向滚动目标位置（由拖动表头驱动）
+const bodyScrollLeft = ref(0)
+// 当前横向滚动位置，仅用于固定列投影显隐
+const currentScrollLeft = ref(0)
 // 横向是否已滚动到底（内容未超宽时同样视为已到底），用于右侧固定列投影显隐
 const isReachEnd = ref(false)
 // 横向滚动容器实际宽度（仅用于投影判断，无需响应式）
@@ -332,22 +347,13 @@ const scrollWidth = computed(() =>
 )
 
 /**
- * 表头中间轨道样式：宽度与主体中间列一致，横向位移跟随主体滚动。
- * 单向数据流驱动，无滚动事件回环，快速滚动不会出现联动打架
- * */
-const headerTrackStyle = computed(() => ({
-    width: addUnit(scrollWidth.value),
-    transform: `translateX(${-tableScrollLeft.value}px)`
-}))
-
-/**
  * 固定列投影显隐
  * @param type left-左侧固定列 right-右侧固定列
  * */
 const isShadow = computed(() => {
     return (type: 'left' | 'right') => {
         if (type === 'left') {
-            return tableScrollLeft.value > 0
+            return currentScrollLeft.value > 0
         }
         return !isReachEnd.value
     }
@@ -423,13 +429,49 @@ const getCellValue = (row: Record<string, any>, col: ITableColumn) => {
 }
 
 /**
- * 中间列横向滚动：更新表头轨道平移量与投影状态。
- * 纵向滚动在单一容器内天然同步，此处仅处理横向
+ * 更新横向是否已滚动到底
+ * @param left 当前横向滚动位置
+ * @param contentWidth 滚动内容宽度（取自滚动事件，缺省时用列宽计算值）
+ * */
+const updateReachEnd = (left: number, contentWidth?: number) => {
+    const width = Number(contentWidth) || scrollWidth.value
+    if (!hscrollWidth || !width) return
+    isReachEnd.value = left + hscrollWidth >= width - 1
+}
+
+/**
+ * 表头横向滚动：拖动表头时驱动主体横向滚动
+ * */
+const onHeaderScroll = (e: any) => {
+    const detail = e.detail || {}
+    const left = Math.round(Number(detail.scrollLeft) || 0)
+    currentScrollLeft.value = left
+    updateReachEnd(left, detail.scrollWidth)
+
+    // 与下发给表头的目标位置一致，说明是主体联动触发的回声，不再反向驱动主体
+    if (Math.abs(left - headerScrollLeft.value) <= 1) return
+    bodyScrollLeft.value = left
+}
+
+/**
+ * 主体横向滚动：驱动表头跟随
  * */
 const onHScroll = (e: any) => {
-    const { scrollLeft, scrollWidth } = e.detail
-    tableScrollLeft.value = Math.round(scrollLeft)
-    isReachEnd.value = scrollLeft + hscrollWidth >= scrollWidth - 1
+    const detail = e.detail || {}
+    const left = Math.round(Number(detail.scrollLeft) || 0)
+    currentScrollLeft.value = left
+    updateReachEnd(left, detail.scrollWidth)
+
+    // 与下发给主体的目标位置一致，说明是表头联动触发的回声，不再反向驱动表头
+    if (Math.abs(left - bodyScrollLeft.value) <= 1) return
+    headerScrollLeft.value = left
+}
+
+/**
+ * 滚动到横向末端（支付宝小程序等无法测量容器宽度时的兜底）
+ * */
+const onReachEnd = () => {
+    isReachEnd.value = true
 }
 
 /**
@@ -468,8 +510,13 @@ const onCellClick = (row: unknown, index: number) => {
  * 测量横向滚动容器宽度，用于"是否滚到底"判断
  * */
 const measureHScroll = async () => {
+    // 支付宝小程序 createSelectorQuery().in() 只认原生组件实例，需传入 $scope
+    let scope: any = instance
+    // #ifdef MP-ALIPAY
+    scope = (instance?.proxy as any)?.$scope
+    // #endif
     try {
-        const rect = await getRect('.hy-table__body--hscroll', false, instance)
+        const rect = await getRect('.hy-table__body--scroll__inner', false, scope)
         if (rect?.width) {
             hscrollWidth = rect.width
             // 内容未超宽时视为已到底，隐藏右侧固定列投影
@@ -483,7 +530,8 @@ const measureHScroll = async () => {
 // 初始化行高并测量横向滚动容器宽度
 onMounted(() => {
     rowHeights.value = new Array(props.data.length).fill(props.rowHeight)
-    measureHScroll()
+
+    if (props.data.length) measureHScroll()
 })
 
 // 监听数据变化
