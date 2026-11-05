@@ -27,91 +27,96 @@ $hy-table-border: var(--hy-table-border, #{$hy-border-line}) !default;
   border: $hy-table-border;
   @include flex(column);
 
-  /* 表格头部 */
+  /* 列头：位于纵向滚动容器之外，天然吸顶 */
   @include e(header) {
     position: relative;
     z-index: 10;
+    display: flex;
+    flex-shrink: 0;
+    width: 100%;
+    height: $hy-table-header-height;
+    background-color: $hy-background--table-header;
     border-bottom: $hy-table-border;
+  }
 
-    @include m(scroll) {
-      width: 100%;
-      height: $hy-table-header-height;
-      white-space: nowrap;
-    }
+  /* 固定列组（列头与主体通用）：位于横向滚动区之外，天然固定无需遮挡 */
+  @include e(fixed) {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-shrink: 0;
 
-    @include m(wrapper) {
-      display: flex;
-      height: 100%;
+    @include m(left) {
+      border-right: $hy-table-border;
 
-      @include e(cell) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        padding: $hy-table-header-cell-padding;
-        font-weight: bold;
-        color: $header-text-color;
-        font-size: $hy-table-header-cell-font-size;
-        border-right: $hy-table-border;
-        box-sizing: border-box;
-        position: relative;
-        flex-shrink: 0;
-        background-color: $hy-background--table-header;
-
-        &:last-child {
-          border-right: none;
-        }
-
-        @include m(sortable) {
-          :deep(.is-active) {
-            color: $hy-primary;
-          }
-        }
-      }
-
-      @include e(left, center, right) {
-        display: flex;
-        height: 100%;
-      }
-
-      @include e(left, right) {
-        position: sticky;
-      }
-
-      @include e(left) {
-        left: 0;
-        border-right: $hy-table-border;
-
-        @include is(shadow) {
-          box-shadow: $hy-table-fixed-left-shadow;
-        }
-      }
-
-      @include e(right) {
-        right: 0;
-        border-left: $hy-table-border;
-
-        @include is(shadow) {
-          box-shadow: $hy-table-fixed-right-shadow;
-        }
+      @include is(shadow) {
+        box-shadow: $hy-table-fixed-left-shadow;
       }
     }
+
+    @include m(right) {
+      border-left: $hy-table-border;
+
+      @include is(shadow) {
+        box-shadow: $hy-table-fixed-right-shadow;
+      }
+    }
+  }
+
+  /* 列头中间裁剪容器：只露出一屏宽度，内部轨道平移 */
+  @include e(clip) {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  /* 列头中间平移轨道：由 transform 单向跟随主体横向滚动 */
+  @include e(track) {
+    display: flex;
+    height: 100%;
   }
 
   /* 表格主体 */
   @include e(body) {
     position: relative;
+    flex: 1;
+    min-height: 0;
     width: 100%;
-    height: 100%;
+
+    /* 唯一纵向滚动容器：左/中/右三列同容器滚动，纵向天然同步 */
+    @include m(scroll) {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* 左/中/右三列并排 */
+    @include m(inner) {
+      display: flex;
+      width: 100%;
+    }
+
+    /* 中间横向滚动容器：与外层仅构成"横+纵"单向嵌套，全平台兼容 */
+    @include m(hscroll) {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* 主体行容器（中间列与固定列通用），行纵向排列 */
+    @include m(track) {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
 
     /* 加载状态 */
     @include m(loading) {
-      z-index: 999;
       position: absolute;
       top: 0;
-      bottom: 0;
       left: 0;
       right: 0;
+      bottom: 0;
+      z-index: 999;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -120,86 +125,76 @@ $hy-table-border: var(--hy-table-border, #{$hy-border-line}) !default;
 
     /* 空状态 */
     @include m(empty) {
-      width: 100%;
-      height: 100%;
-    }
-
-    @include m(content) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       display: flex;
       flex-direction: column;
+      justify-content: center;
+    }
+  }
 
-      @include e(row) {
-        display: flex;
-        width: 100%;
-        border-bottom: $hy-table-border;
-        box-sizing: border-box;
-        background-color: $hy-background--container;
+  /* 数据行 */
+  @include e(row) {
+    display: flex;
+    width: 100%;
+    border-bottom: $hy-table-border;
+    box-sizing: border-box;
+    background-color: $hy-background--container;
 
-        &:last-child {
-          border-right: none;
-        }
+    @include is(stripe) {
+      background: $stripe-bg;
+    }
+  }
 
-        @include is(stripe) {
-          background: $stripe-bg;
-        }
+  /* 单元格（列头与内容通用） */
+  @include e(cell) {
+    display: flex;
+    align-items: center;
+    padding: $hy-table-cell-padding;
+    font-size: $hy-table-cell-font-size;
+    border-right: $hy-table-border;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    white-space: nowrap;
 
-        @include m(cell) {
-          display: flex;
-          align-items: center;
-          padding: $hy-table-cell-padding;
-          font-size: $hy-table-cell-font-size;
-          border-right: $hy-table-border;
-          box-sizing: border-box;
-          flex-shrink: 0;
-          white-space: nowrap;
-
-          @include e(text) {
-            width: 100%;
-            overflow: hidden;
-
-            @include is(ellipsis) {
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
-            }
-          }
-        }
-      }
+    &:last-child {
+      border-right: none;
     }
 
-    @include m(center) {
-      position: absolute;
-      top: 0;
-      z-index: 1;
-      overflow: scroll;
-    }
-
-    @include m(left, right) {
-      position: absolute;
-      top: 0;
-      z-index: 5;
+    /* 单元格文本 */
+    @include m(text) {
+      width: 100%;
       overflow: hidden;
-    }
 
-    @include m(left) {
-      left: 0;
-
-      @include is(shadow) {
-        box-shadow: $hy-table-fixed-left-shadow;
+      @include is(ellipsis) {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
 
-    @include m(right) {
-      right: 0;
-      border-left: $hy-table-border;
+    /* 排序图标容器 */
+    @include m(sortable) {
+      display: flex;
+      flex-direction: column;
+      margin-left: 4px;
 
-      @include is(shadow) {
-        box-shadow: $hy-table-fixed-right-shadow;
+      :deep(.is-active) {
+        color: $hy-primary;
       }
+    }
+
+    /* 列头单元格 */
+    @include m(header) {
+      justify-content: center;
+      height: 100%;
+      padding: $hy-table-header-cell-padding;
+      font-weight: bold;
+      color: $header-text-color;
+      font-size: $hy-table-header-cell-font-size;
     }
   }
 }
-
-//.is-shadow {
-//  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
-//}
