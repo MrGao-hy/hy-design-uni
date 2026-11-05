@@ -20,9 +20,9 @@
 ## 📱 移动端预览
 
 <p style="display:flex;gap:24px">
-<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f37.png" width="200" height="200" />
-<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f38.jpg" width="200" height="200" />
-<img src="https://pic.imgdd.cc/item/690c01291095cbb336f01f36.png" width="200" height="200" />
+<img src="http://img.hy-design-uni.top/qr_code/h5_qrcode.png?e=1793868446&token=h-z8kSTbNSycdSRSiAZ8ubArlDzwewF7iAAhCg6a:KAA-6DUb3A0VulHStO89EdSpgEU=" width="200" height="200" />
+<img src="http://img.hy-design-uni.top/qr_code/weixin_qrcode.png?e=1793868483&token=h-z8kSTbNSycdSRSiAZ8ubArlDzwewF7iAAhCg6a:Ebo8q1WuZivQ0cjcCjK_8qRPKrU=" width="200" height="200" />
+<img src="http://img.hy-design-uni.top/qr_code/ali_qrcode.jpg?e=1793868393&token=h-z8kSTbNSycdSRSiAZ8ubArlDzwewF7iAAhCg6a:OtsQ0nn-xjVXGTdUQ4GowLamZuY=" width="200" height="200" />
 </p>
 
 ## 安装教程

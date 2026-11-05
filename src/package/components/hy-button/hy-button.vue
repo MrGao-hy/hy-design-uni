@@ -175,20 +175,29 @@ const bemClass = computed(() => {
  * @param map 各档位（large/medium/small/mini）默认尺寸
  * @param value 用户显式传入的尺寸
  */
-const createSizeCom = (map: Record<string, number>, value: () => number | string | undefined | null) =>
+const createSizeCom = (
+    map: Record<string, number>,
+    value: () => number | string | undefined | null
+) =>
     computed((): number | string => {
         const val = value()
         if (val === '' || val === undefined || val === null) {
-            return map[props.size] ?? map.medium
+            return map[props.size] || map.medium
         }
         return val
     })
 
 /* 加载图标各档位默认大小，与按钮高度、字号协调 */
-const loadingSizeCom = createSizeCom({ large: 20, medium: 15, small: 12, mini: 10 }, () => props.loadingSize)
+const loadingSizeCom = createSizeCom(
+    { large: 20, medium: 15, small: 12, mini: 10 },
+    () => props.loadingSize
+)
 
 /* 图标字形实际绘制面积小于字号，默认略大于字号以平衡视觉 */
-const iconSizeCom = createSizeCom({ large: 26, medium: 21, small: 13, mini: 12 }, () => props.icon?.size)
+const iconSizeCom = createSizeCom(
+    { large: 26, medium: 21, small: 13, mini: 12 },
+    () => props.icon?.size
+)
 
 const loadingColor = computed(() => {
     if (props.plain) {
