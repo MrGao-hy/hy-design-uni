@@ -76,6 +76,8 @@ $hy-notice-bar-radius: var(--hy-notice-bar-radius, #{$hy-radius-sm}) !default;
       @include e(text) {
         font-size: $hy-notice-bar-font-size;
         color: $hy-warning;
+        /* 行高与滚动区域高度保持一致，避免微信小程序原生swiper将文字上下裁剪 */
+        line-height: $hy-notice-bar-swiper-height;
       }
     }
   }

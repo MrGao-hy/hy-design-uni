@@ -19,6 +19,18 @@
     </swiper>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'hy-column-notice',
+    options: {
+        addGlobalClass: true,
+        // 微信小程序中开启虚拟节点，避免组件宿主节点破坏父级flex布局
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+}
+</script>
+
 <script setup lang="ts">
 import { type CSSProperties, toRefs, computed, watch } from 'vue'
 import noticeBarProps from './props'

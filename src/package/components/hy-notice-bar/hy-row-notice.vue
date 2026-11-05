@@ -12,8 +12,30 @@
     </view>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'hy-row-notice',
+    options: {
+        addGlobalClass: true,
+        // 微信小程序中必须开启虚拟节点，否则组件宿主节点会破坏父级flex布局，
+        // 导致长文本无法收缩裁剪、滚动动画错乱
+        virtualHost: true,
+        styleIsolation: 'shared'
+    }
+}
+</script>
+
 <script setup lang="ts">
-import { ref, watch, toRefs, computed, type CSSProperties, getCurrentInstance } from 'vue'
+import {
+    ref,
+    watch,
+    toRefs,
+    computed,
+    onMounted,
+    nextTick,
+    type CSSProperties,
+    getCurrentInstance
+} from 'vue'
 import noticeBarProps from './props'
 import { addUnit, getRect, sleep } from '../../libs'
 
@@ -22,30 +44,58 @@ const { text, speed, fontSize, color } = toRefs(props)
 const emit = defineEmits(['change'])
 
 const instance = getCurrentInstance()
-const animationDuration = ref<string>('0') // 动画执行时间
+const animationDuration = ref<string>('10s') // 动画执行时间
 const animationPlayState = ref<string>('paused') // 动画的开始和结束执行
-const initValue = ref<string>('')
+// 初始值必须同步初始化，保证首帧渲染就有文字，否则测量出来的文字宽度不准确
+const initValue = ref<string>(Array.isArray(text.value) ? text.value.join('') : text.value)
 
-watch(
-    () => text.value,
-    async (newValue) => {
-        initValue.value = Array.isArray(newValue) ? newValue.join('') : newValue
-        let boxWidth = 0,
-            textWidth = 0
-        // 进行一定的延时
-        await sleep()
-        // 查询盒子和文字的宽度
-        textWidth = (await getRect('.hy-notice__content--text', false, instance)).width!
-        boxWidth = (await getRect('.hy-notice__content', false, instance)).width!
-        // 根据t=s/v(时间=路程/速度)，这里为何不需要加上#u-notice-box的宽度，因为中设置了.u-notice-content样式中设置了padding-left: 100%
-        // 恰巧计算出来的结果中已经包含了#u-notice-box的宽度
+/**
+ * @description 查询文字宽度
+ * 微信小程序中组件首次渲染未完成时查询会失败，所以失败后需要进行重试
+ * */
+const queryTextWidth = async (): Promise<number | null> => {
+    let retryCount = 3
+    while (retryCount-- > 0) {
+        try {
+            const rect = await getRect('.hy-notice__content--text', false, instance)
+            return rect.width || null
+        } catch (err) {
+            await sleep(50)
+        }
+    }
+    return null
+}
+
+/**
+ * @description 初始化动画
+ * */
+const init = async () => {
+    // 等待DOM渲染完成后再进行测量
+    await nextTick()
+    const textWidth = await queryTextWidth()
+    // 根据t=s/v(时间=路程/速度)，这里为何不需要加上#u-notice-box的宽度，因为样式中设置了padding-left: 100%
+    // 恰巧计算出来的结果中已经包含了容器的宽度
+    if (textWidth) {
         animationDuration.value = `${textWidth / speed.value}s`
-        // 这里必须这样开始动画，否则在APP上动画速度不会改变
-        animationPlayState.value = 'paused'
-        await sleep(10)
-        animationPlayState.value = 'running'
-    },
-    { immediate: true }
+    }
+    // 这里必须这样开始动画，否则在APP上动画速度不会改变
+    animationPlayState.value = 'paused'
+    await sleep(10)
+    animationPlayState.value = 'running'
+}
+
+// 挂载后再测量宽度，避免在组件渲染完成前测量失败导致动画不执行（微信小程序渲染是异步的）
+onMounted(() => {
+    init()
+})
+
+// 文案、速度、字号变化时需要重新计算动画时长
+watch(
+    () => [text.value, speed.value, fontSize.value],
+    async () => {
+        initValue.value = Array.isArray(text.value) ? text.value.join('') : text.value
+        await init()
+    }
 )
 
 /**
