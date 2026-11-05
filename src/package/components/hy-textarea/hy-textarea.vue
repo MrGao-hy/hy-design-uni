@@ -4,7 +4,7 @@
         :style="[textareaStyle, borderStyle(isFocus)]"
     >
         <textarea
-            :class="['hy-textarea__field', disabled && 'hy-textarea__disabled-test']"
+            :class="['hy-textarea__field', disabled && 'hy-textarea__disabled--text']"
             :value="innerValue"
             :style="`height: ${autoHeight ? 'auto' : addUnit(height)}`"
             :placeholder="placeholder || ''"
