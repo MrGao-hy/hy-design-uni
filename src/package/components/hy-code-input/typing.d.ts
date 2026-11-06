@@ -10,6 +10,8 @@
 export type CodeInputModeType = 'box' | 'line'
 
 export interface ICodeInputEmits {
+    /** 点击组件时触发 */
+    click: []
     /** 输入内容发生改变时触发 */
     change: [value: string | number]
     /** 输入字符个数达maxlength值时触发确认 */
