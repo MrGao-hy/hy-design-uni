@@ -59,7 +59,6 @@ const priceData = computed(() => {
 
     if (hasDecimal) {
         const [integer, decimal] = value.split('.', 2)
-        console.log(integer, decimal)
         return {
             integer: formatThousand(integer),
             decimal: props.num ? '.' + addZero(decimal, props.num) : ''

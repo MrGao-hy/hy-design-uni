@@ -196,7 +196,6 @@ const cancel = () => {
  * @description 点击工具栏的确定按钮
  * */
 const confirm = ({ value }: SelectValueVo) => {
-    console.log(value)
     inputValue.value = value
         .map((item) => {
             if (isObject(item)) return item.name

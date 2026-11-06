@@ -120,14 +120,12 @@ const _saveCode = () => {
  * */
 const preview = (url: string) => {
     // 预览图片
-    // console.log(this.result)
     if (props.allowPreview) {
         uni.previewImage({
             urls: [result.value],
             longPressActions: {
                 itemList: [t('save')],
                 success: function (data) {
-                    // console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
                     switch (data.tapIndex) {
                         case 0:
                             _saveCode()

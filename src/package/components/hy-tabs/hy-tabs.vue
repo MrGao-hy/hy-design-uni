@@ -94,7 +94,11 @@
                                     // 使用自定义插槽时不再渲染默认背景，避免与插槽内容叠加
                                     ...($slots.line
                                         ? {}
-                                        : { background: lineColor, backgroundSize: lineBgSize, height: addUnit(lineHeight), })
+                                        : {
+                                              background: lineColor,
+                                              backgroundSize: lineBgSize,
+                                              height: addUnit(lineHeight)
+                                          })
                                 }
                             ]"
                         >
@@ -284,7 +288,6 @@ const resize = () => {
                     Math.floor(tabsRect_1.left / tabsRect_1.width) * tabsRect_1.width
                 tabsRect_1.left = tabsRect_1.left % tabsRect_1.width
             }
-            // console.log(tabsRect)
             tabsRect.value = tabsRect_1
             scrollViewWidth.value = 0
             itemRect.map((item: UniApp.NodeInfo, index: number) => {

@@ -241,8 +241,6 @@ function genCustomKeys(): Key[] {
 
     // 第四行根据extraKey数量调整
     if (extraKeys.length === 1) {
-        console.log(extraKeys)
-
         result.push({ ...basicKeys[0], wider: true }, { text: extraKeys[0] || '.', type: 'extra' })
     } else if (extraKeys.length >= 2) {
         result.push({ text: extraKeys[0], type: 'extra' }, basicKeys[0], {
