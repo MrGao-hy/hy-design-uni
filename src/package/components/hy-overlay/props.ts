@@ -22,9 +22,9 @@ const overlayProps = {
         default: 0.5
     },
     /** 是否锁住底部滚动 */
-    LockScroll: {
+    lockScroll: {
         type: Boolean,
-        default: true
+        default: false
     },
     /** 定义需要用到的外部样式 */
     customStyle: {

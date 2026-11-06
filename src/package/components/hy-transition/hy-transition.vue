@@ -1,7 +1,9 @@
 <template>
     <!-- #ifndef APP-NVUE -->
+
+    <!-- 开启 lockScroll：根节点 catchtouchmove 阻断 slot 区域冒泡 + blocker 兄弟节点覆盖根节点范围外 -->
     <view
-        v-if="hasInit"
+        v-if="hasInit && lockScroll"
         class="hy-transition"
         ref="hy-transition"
         :class="[classes, customClass]"
@@ -12,17 +14,41 @@
     >
         <slot />
     </view>
+
+    <!-- 未开启 lockScroll -->
+    <view
+        v-else-if="hasInit"
+        class="hy-transition"
+        ref="hy-transition"
+        :class="[classes, customClass]"
+        :style="[mergeStyle]"
+        @tap="clickHandler"
+        @transitionend="onTransitionEnd"
+    >
+        <slot />
+    </view>
+
     <!-- #endif -->
 
     <!-- #ifdef APP-NVUE -->
     <view
-        v-if="hasInit"
+        v-if="hasInit && lockScroll"
         class="hy-transition"
         ref="hy-transition"
         :class="[classes, customClass]"
         :style="[mergeStyle]"
         @tap="clickHandler"
         @touchmove.stop.prevent="noop"
+    >
+        <slot />
+    </view>
+    <view
+        v-else-if="hasInit"
+        class="hy-transition"
+        ref="hy-transition"
+        :class="[classes, customClass]"
+        :style="[mergeStyle]"
+        @tap="clickHandler"
     >
         <slot />
     </view>
@@ -65,6 +91,138 @@ const classes = ref<string>('') // 应用的类名
 let transitionId = 0
 let endTimer: ReturnType<typeof setTimeout> | undefined
 let isAlive = true
+
+/**
+ * H5 + MP-WEIXIN + APP 端页面滚动锁定策略：
+ * - H5：body overflow hidden + window 级 wheel/touchmove/keydown 监听兜底
+ * - MP-WEIXIN：wx.setPageStyle 从原生层锁 page 滚动（模拟器+真机都生效）
+ *              根节点 catchtouchmove 在模拟器不生效，但真机可以，双重保障
+ * - MP-ALIPAY：无 my.setPageStyle 等价 API，仅靠根节点 catchtouchmove
+ *              （注意：支付宝小程序 catchtouchmove 真机生效，模拟器无效）
+ * - APP：类似 H5，同时 body overflow 和 catchtouchmove 兜底
+ *
+ * 采用计数式锁状态，支持多弹窗叠加：一个弹窗解锁时，若还有其他弹窗持有锁，
+ * 页面保持锁定，避免弹窗层叠时提前解锁导致滚动穿透
+ * */
+/**
+ * 页面滚动锁：模块级计数式，支持多弹窗叠加
+ * 每个 hy-transition 在 show && lockScroll 时 acquire 锁，show=false 或 unmount 时 release
+ * 全局锁计数归零时才真正解除页面级禁止滚动
+ */
+// #ifdef H5
+let prevBodyOverflow: string | null = null
+// #endif
+// #ifndef MP-ALIPAY
+let pageLockCount = 0
+let pageLockAcquired = false
+
+const _acquirePageLock = () => {
+    if (pageLockCount++ > 0) return
+
+    // #ifdef H5
+    if (prevBodyOverflow === null) {
+        prevBodyOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+    }
+    window.addEventListener('wheel', onWheelLock, { passive: false })
+    window.addEventListener('touchmove', onTouchLock, { passive: false })
+    window.addEventListener('keydown', onKeyLock)
+    // #endif
+
+    // #ifdef MP-WEIXIN
+    if (typeof wx !== 'undefined' && typeof wx.setPageStyle === 'function') {
+        try {
+            wx.setPageStyle({ style: { overflow: 'hidden' } })
+        } catch (e) {
+            // setPageStyle 在低版本基础库不可用，静默降级到 catchtouchmove
+        }
+    }
+    // #endif
+
+    // #ifdef APP-PLUS
+    if (prevBodyOverflow === null) {
+        // APP 端与 H5 同属 webview 渲染，document API 可用
+        prevBodyOverflow = document.body.style.overflow
+        document.body.style.overflow = 'hidden'
+    }
+    // #endif
+
+    pageLockAcquired = true
+}
+
+const _releasePageLock = () => {
+    if (pageLockCount > 0 && --pageLockCount > 0) return
+    pageLockCount = 0
+
+    if (!pageLockAcquired) return
+    pageLockAcquired = false
+
+    // #ifdef H5 || APP-PLUS
+    if (prevBodyOverflow !== null) {
+        document.body.style.overflow = prevBodyOverflow
+        prevBodyOverflow = null
+    }
+    // #ifdef H5
+    window.removeEventListener('wheel', onWheelLock)
+    window.removeEventListener('touchmove', onTouchLock)
+    window.removeEventListener('keydown', onKeyLock)
+    // #endif
+    // #endif
+
+    // #ifdef MP-WEIXIN
+    if (typeof wx !== 'undefined' && typeof wx.setPageStyle === 'function') {
+        try {
+            wx.setPageStyle({ style: { overflow: 'auto' } })
+        } catch (e) {
+            /* ignore */
+        }
+    }
+    // #endif
+}
+// #endif
+
+// #ifdef H5 || APP-PLUS
+const isScrollableInside = (target: EventTarget | null) => {
+    if (!(target instanceof Element)) return false
+    let node: Element | null = target
+    while (node && node !== document.body) {
+        const el = node as HTMLElement
+        const overflowX = getComputedStyle(el).overflowX
+        const overflowY = getComputedStyle(el).overflowY
+        const isScroller =
+            overflowX === 'auto' ||
+            overflowX === 'scroll' ||
+            overflowY === 'auto' ||
+            overflowY === 'scroll' ||
+            el.tagName === 'TEXTAREA' ||
+            (el as any).tagName === 'SELECT'
+        if (isScroller) return true
+        node = node.parentElement
+    }
+    return false
+}
+
+const onWheelLock = (e: WheelEvent) => {
+    if (isScrollableInside(e.target)) return
+    e.preventDefault()
+}
+const onTouchLock = (e: TouchEvent) => {
+    if (isScrollableInside(e.target)) return
+    e.preventDefault()
+}
+const onKeyLock = (e: KeyboardEvent) => {
+    const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Space']
+    if (keys.includes(e.key)) e.preventDefault()
+}
+// #endif
+
+const pageLockState = computed(() => props.show && props.lockScroll)
+watch(pageLockState, (locked) => {
+    // #ifndef MP-ALIPAY
+    if (locked) _acquirePageLock()
+    else _releasePageLock()
+    // #endif
+})
 
 const clearEndTimer = () => {
     if (endTimer) {
@@ -217,6 +375,9 @@ onBeforeUnmount(() => {
     isAlive = false
     transitionId++
     clearEndTimer()
+    // #ifndef MP-ALIPAY
+    _releasePageLock()
+    // #endif
 })
 </script>
 

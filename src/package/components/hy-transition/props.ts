@@ -25,6 +25,11 @@ const transitionProps = {
         type: Boolean,
         default: false
     },
+    /** 是否阻止触摸滚动穿透，遮罩类组件需开启，内容型组件（如图片）需保持页面可滚动则不开启 */
+    lockScroll: {
+        type: Boolean,
+        default: false
+    },
     /** 使用的动画过渡函数 */
     timingFunction: {
         type: String,

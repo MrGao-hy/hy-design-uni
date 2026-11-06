@@ -1,7 +1,7 @@
 <template>
     <hy-overlay
         :show="isShow"
-        :LockScroll="!tmpConfig.overlay"
+        :lock-scroll="!tmpConfig.overlay"
         :opacity="tmpConfig.cover ? 0.5 : 0"
         :custom-style="overlayStyle"
     >
