@@ -1,5 +1,5 @@
 <template>
-    <view :class="['hy-code-input', customClass]">
+    <view :class="['hy-code-input', customClass]" @click="handleClick">
         <view
             :class="itemClass(index)"
             :style="[itemStyle(index)]"
@@ -85,12 +85,23 @@ watch(
         inputValue.value = newValueStr
         current.value = newValueStr.length
 
+        // 外部传入的值超出maxlength时（如键盘未限制长度），回写截断后的值，
+        // 保证v-model与显示一致；后续change/finish由回写触发的下一次watch补发
+        if (newValueStr.length < String(newValue).length) {
+            emit('update:modelValue', newValueStr)
+            return
+        }
+
         // 当值从外部更新时（如键盘组件），也触发change事件
         if (newValue !== oldValue) {
             emit('change', newValueStr)
         }
 
         if (String(inputValue.value).length >= Number(props.maxlength)) {
+            // 禁用原生键盘时，输满后模拟失焦，配合外部收起自定义键盘
+            if (props.disabledKeyboard) {
+                isFocus.value = false
+            }
             emit('finish', inputValue.value)
         }
     },
@@ -203,6 +214,18 @@ const handleFocus = () => {
 }
 
 /**
+ * 点击组件时触发
+ * 禁用原生键盘时 input 处于 disabled 状态不会触发 focus 事件，
+ * 此处通过点击模拟 focus，供外部唤起自定义键盘
+ * */
+const handleClick = () => {
+    if (props.disabledKeyboard) {
+        handleFocus()
+    }
+    emit('click')
+}
+
+/**
  * 输入框失去焦点时触发
  * */
 const handleBlur = () => {
@@ -227,6 +250,11 @@ const inputHandler = (e: InputOnInputEvent) => {
     // 修改通过v-model双向绑定的值
     emit('update:modelValue', value)
 }
+
+// 暴露失焦方法，供外部在自定义键盘关闭等场景模拟失焦
+defineExpose({
+    blur: handleBlur
+})
 </script>
 
 <style lang="scss">
