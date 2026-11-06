@@ -1,5 +1,10 @@
 <template>
-    <scroll-view class="hy-scroll-view" scroll-y :scroll-top="scrollTop" @scroll="handleScroll">
+    <scroll-view
+        class="hy-scroll-view"
+        scroll-y
+        :scroll-into-view="scrollIntoView"
+        @scroll="handleScroll"
+    >
         <view
             v-for="item in indexList"
             :key="item.index"
@@ -47,7 +52,8 @@ usePageTitle('indexBar')
 // 索引栏位置
 const position = ref<LeftRightType>('right')
 const sectionRect = ref<UniNamespace.NodeInfo[]>([])
-const scrollTop = ref<number>(0)
+// scroll-into-view 锚点，用于点击/滑动索引时定位到对应分组
+const scrollIntoView = ref<string>('')
 // 是否显示提示
 const showToast = ref<boolean>(true)
 // 当前激活的索引
@@ -160,23 +166,34 @@ const indexs = computed(() => {
     return Object.keys(cityData.value).sort()
 })
 
-onMounted(() => {
-    nextTick(() => {
-        getRect('.hy-index-section', true).then((rect) => {
-            sectionRect.value = rect
-        })
-    })
+onMounted(async () => {
+    await nextTick()
+    // 小程序端首帧节点可能尚未就绪，等待一帧再测量，避免漏测
+    await sleep()
+    const [rect, viewRect] = await Promise.all([
+        getRect('.hy-index-section', true),
+        getRect('.hy-scroll-view', false)
+    ])
+    // boundingClientRect 为视口坐标，需换算成相对滚动容器内容顶部的偏移，
+    // 否则 H5 导航栏等占位会让定位与高亮计算出现固定偏差
+    sectionRect.value = rect.map((item) => ({
+        ...item,
+        top: (item.top || 0) - (viewRect.top || 0)
+    }))
 })
 
-// 处理滚动事件
+// 处理滚动事件：根据滚动位置同步索引栏高亮
 const handleScroll = (e: any) => {
-    // 使用uni.createSelectorQuery()获取所有索引section的位置信息
-    const scrollTop = e.detail.scrollTop
-    if (isScroll.value) {
-        const index = sectionRect.value.findIndex((item) => item.top! - 1 > scrollTop) - 1
-        const keys = Object.keys(cityData.value)
-        currentActiveIndex.value = keys[index]
-    }
+    if (!isScroll.value) return
+    const { scrollTop } = e.detail
+    // 取最后一个顶部已滚过滚动位置的分组，天然兼容顶部与底部边界
+    let activeIndex = 0
+    sectionRect.value.forEach((item, index) => {
+        if ((item.top || 0) <= scrollTop + 1) {
+            activeIndex = index
+        }
+    })
+    currentActiveIndex.value = indexs.value[activeIndex]
 }
 
 // 处理索引点击事件
@@ -191,10 +208,15 @@ const handleIndexScroll = (index: string | number) => {
 
 const scrollToSection = async (i: string | number) => {
     isScroll.value = false
-    const index = Object.keys(cityData.value).findIndex((item) => item === i)
-    scrollTop.value = sectionRect.value[index]?.top!
-    await sleep()
-    isScroll.value = true
+    try {
+        // scroll-into-view 重复设置相同值不会触发滚动，先重置再定位
+        scrollIntoView.value = ''
+        await nextTick()
+        scrollIntoView.value = `index-${i}`
+        await sleep()
+    } finally {
+        isScroll.value = true
+    }
 }
 
 useShareButton()
@@ -203,7 +225,13 @@ useShareButton()
 <style scoped lang="scss">
 .hy-scroll-view {
     width: 100%;
-    height: 100%;
+    /* H5 端页面高度不确定，height: 100% 会塌陷导致滚动发生在页面级，索引栏无法同步 */
+    /* #ifdef H5 */
+    height: calc(100vh - 44px);
+    /* #endif */
+    /* #ifndef H5 */
+    height: 100vh;
+    /* #endif */
 }
 
 .hy-index-section {

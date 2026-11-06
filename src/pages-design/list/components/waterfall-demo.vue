@@ -28,7 +28,7 @@
         :show-divider="list.length > 0"
         @scroll-to-lower="loadMore"
     >
-        <!-- #ifdef H5 || APP_PLUS -->
+        <!-- #ifdef H5 || APP-PLUS -->
         <template #left="{ record }">
             <view class="product-card">
                 <image
@@ -85,7 +85,7 @@
         </template>
         <!-- #endif -->
 
-        <!-- #ifndef H5 || APP_PLUS -->
+        <!-- #ifndef H5 || APP-PLUS -->
         <template #left-list="{ record }">
             <view
                 class="product-card"
@@ -277,18 +277,6 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.page {
-    &-header {
-        padding: $hy-border-margin-padding-base $hy-border-margin-padding-base 0;
-        background: $hy-background--container;
-    }
-
-    &-body {
-        padding: $hy-border-margin-padding-sm $hy-border-margin-padding-sm 0;
-        height: calc(100vh - 180rpx);
-    }
-}
-
 /* 骨架屏 */
 .skeleton-wrapper {
     display: flex;

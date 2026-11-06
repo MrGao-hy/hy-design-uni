@@ -359,7 +359,10 @@ export default {
         boldText: 'Bold',
         hairlineBorder: 'Hairline',
         autoFocus: 'Auto Focus',
-        keyboardTip: 'Tap the input to open the custom keyboard',
+        keyboardTip:
+            'System keyboard is disabled. Tap the input to open the custom keyboard, then tap the suggestion to auto-fill the code',
+        clipboardCode: 'Code from clipboard',
+        fillCode: 'Tap to fill',
         done: 'Done'
     },
 
@@ -1187,7 +1190,16 @@ export default {
         // ===== Demo content =====
         basicUsage: 'Basic Usage',
         openMask: 'Open Mask',
-        opacity: 'Opacity'
+        opacity: 'Opacity',
+        // ===== Scroll modes =====
+        scrollSection: 'Scroll Mode',
+        scrollDesc:
+            'Swipe while the overlay is open: the page stays still in lock mode, and scrolls along in bubble mode.',
+        scrollTopLabel: 'Current page scrollTop',
+        lockScrollBtn: 'Lock Scroll',
+        bubbleScrollBtn: 'Bubble Scroll',
+        close: 'Close',
+        placeholderItem: (i: number) => `Placeholder ${i}`
     },
 
     pagination: {

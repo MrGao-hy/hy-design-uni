@@ -1,5 +1,6 @@
 <template>
     <hy-card
+        show-head
         :thumb="IconConfig.SHOP"
         :title="order.store.name"
         :sub-title="order.store.address"

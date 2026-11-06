@@ -28,7 +28,7 @@
         @scroll-to-lower="loadMore"
     >
         <template #default="{ record }">
-            <view v-for="item in record" class="list-item" @click="onItemClick(item)">
+            <view v-for="item in record" :key="item.id" class="list-item" @click="onItemClick(item)">
                 <image
                     :src="item.image"
                     class="list-item__image"
@@ -165,18 +165,6 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-.page {
-    &-header {
-        padding: $hy-border-margin-padding-base $hy-border-margin-padding-base 0;
-        background: $hy-background--container;
-    }
-
-    &-body {
-        padding: $hy-border-margin-padding-sm $hy-border-margin-padding-sm 0;
-        height: calc(100vh - 180rpx);
-    }
-}
-
 /* 骨架屏 */
 .skeleton-wrapper {
     display: flex;

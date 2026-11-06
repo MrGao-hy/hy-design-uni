@@ -44,7 +44,7 @@
     <hy-swiper :list="list" :autoplay="false" height="300">
         <template #indicator="{ current, length }">
             <view class="indicator">
-                <text>{{ current }}</text>
+                <text>{{ current + 1 }}</text>
                 <text>/</text>
                 <text>{{ length }}</text>
             </view>

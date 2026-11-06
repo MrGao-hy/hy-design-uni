@@ -14,7 +14,7 @@
         <hy-qrcode
             cid="qrcode_3"
             text="https://www.hy-design-uni.top"
-            icon="../../static/hy_logo_light.png"
+            icon="/static/logo.png"
         ></hy-qrcode>
     </view>
 

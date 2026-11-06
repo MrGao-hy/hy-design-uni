@@ -25,8 +25,8 @@
     <view class="hy-container">
         <hy-rate
             v-model="value"
-            activeIcon="/src/pages-design/z_static/images/activeIcon.jpg"
-            inactiveIcon="/src/pages-design/z_static/images/inactiveIcon.jpg"
+            :activeIcon="config.activeIcon"
+            :inactiveIcon="config.inactiveIcon"
         ></hy-rate>
     </view>
 
@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
+import { config } from '@/config/config.ts'
 
 definePage({
     style: {

@@ -29,5 +29,7 @@ export const config = {
     qq: designImage('qq.jpg'),
     wx: designImage('wx.jpg'),
     wb: designImage('wb.jpg'),
-    sc: designImage('sc.jpg')
+    sc: designImage('sc.jpg'),
+    activeIcon: designImage('activeIcon.jpg'),
+    inactiveIcon: designImage('inactiveIcon.jpg')
 }

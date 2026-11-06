@@ -359,7 +359,9 @@ export default {
         boldText: '字体加粗',
         hairlineBorder: '细边框',
         autoFocus: '自动获取焦点',
-        keyboardTip: '点击输入框即可打开自定义键盘',
+        keyboardTip: '已屏蔽系统键盘，点击输入框唤起自定义键盘，检测到剪贴板验证码时点击建议条自动填充',
+        clipboardCode: '剪贴板验证码',
+        fillCode: '点击填充',
         done: '完成'
     },
 
@@ -1187,9 +1189,17 @@ export default {
     overlay: {
         title: '遮罩层',
         // ===== 演示内容 =====
-        basicUsage: '基础使用',
+        basicUsage: '基础用法',
         openMask: '打开遮罩',
-        opacity: '透明度'
+        opacity: '透明度',
+        // ===== 滚动模式 =====
+        scrollSection: '滚动模式',
+        scrollDesc: '打开遮罩后滑动屏幕：阻止滚动模式下页面纹丝不动；冒泡滚动模式下页面跟随滚动。',
+        scrollTopLabel: '当前页面滚动位置',
+        lockScrollBtn: '阻止滚动',
+        bubbleScrollBtn: '冒泡滚动',
+        close: '关闭',
+        placeholderItem: (i: number) => `占位内容 ${i}`
     },
 
     pagination: {

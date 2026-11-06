@@ -1,6 +1,6 @@
 <template>
     <view class="hy-menu" :style="{ width: addUnit(width) }">
-        <template v-for="(item, i) in list">
+        <template v-for="(item, i) in list" :key="i">
             <view @click="handleClick(item, i)" :class="menuItemClass(item)" :style="customStyle">
                 <template v-if="item.icon">
                     <slot v-if="$slots.icon" name="icon" :value="item.icon"></slot>

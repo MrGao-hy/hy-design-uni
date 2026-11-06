@@ -1,19 +1,15 @@
 <template>
-    <hy-tabs :list="list" is-swiper>
-        <template #line>
-            <image
-                src="/static/logo.png"
-                mode="scaleToFill"
-                style="width: 20px; height: 15px"
-            />
-        </template>
-        <template #default="{ record, index }">
-            <scroll-view class="scroll-view" scroll-y>
-                <the-order-dom v-for="(item, i) in orderList[index]" :key="i" :order="item">
-                </the-order-dom>
-            </scroll-view>
-        </template>
-    </hy-tabs>
+    <!-- 外层容器提供确定高度，供 swiper 的 calc(100% - 44px) 百分比高度参照 -->
+    <view class="tabs-page">
+        <hy-tabs :list="list" is-swiper>
+            <template #default="{ record, index }">
+                <scroll-view class="scroll-view" scroll-y>
+                    <the-order-dom v-for="(item, i) in orderList[index]" :key="i" :order="item">
+                    </the-order-dom>
+                </scroll-view>
+            </template>
+        </hy-tabs>
+    </view>
 </template>
 
 <script setup lang="ts">
@@ -89,6 +85,17 @@ useShareButton()
 </script>
 
 <style scoped lang="scss">
+.tabs-page {
+    box-sizing: border-box;
+    width: 100%;
+    /* #ifdef H5 */
+    height: calc(100vh - 44px);
+    /* #endif */
+    /* #ifndef H5 */
+    height: 100vh;
+    /* #endif */
+}
+
 .scroll-view {
     display: flex;
     flex-direction: column;
