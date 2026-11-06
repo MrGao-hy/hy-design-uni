@@ -20,7 +20,6 @@ $hy-keyboard-border: var(--hy-keyboard-border, #{$hy-border-line}) !default;
     background: $hy-background--track;
     overflow: hidden;
     box-sizing: border-box;
-    padding-bottom: calc(env(safe-area-inset-bottom));
 
     @include e(header) {
         display: flex;
