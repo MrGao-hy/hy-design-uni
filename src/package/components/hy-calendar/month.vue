@@ -80,7 +80,7 @@ export default {
 
 <script setup lang="ts">
 import { ref, watch, onMounted, getCurrentInstance, type CSSProperties } from 'vue'
-import dayjs from 'dayjs'
+import dayjs from 'dayjs/esm'
 import { addUnit, colorGradient, getRect, sleep, formatTime, useTranslate } from '../../libs'
 import type { DateItem, IMonthExpose } from './typing'
 import monthProps from './monthProps'
