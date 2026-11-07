@@ -7,7 +7,10 @@
         :lock-scroll="lockScroll"
         @click="clickHandler"
     >
-        <slot />
+        <!-- lockScroll=false 时容器整体 pointer-events: none（背景触摸穿透），内容层需显式恢复交互，否则插槽内容继承 none 不可点击 -->
+        <view class="hy-overlay__content">
+            <slot />
+        </view>
     </hy-transition>
 </template>
 
@@ -47,7 +50,7 @@ const overlayStyle = computed<CSSProperties>(() => {
         right: 0,
         zIndex: props.zIndex,
         bottom: 0,
-        pointerEvents: !props.lockScroll ? 'none' : 'auto',
+        pointerEvents: props.passThrough ? 'none' : 'auto',
         'background-color': `rgba(0, 0, 0, ${props.opacity})`
     }
     return Object.assign(style, props.customStyle)

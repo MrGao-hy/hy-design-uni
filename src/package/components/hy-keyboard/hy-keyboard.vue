@@ -8,7 +8,7 @@
         :overlay="overlay"
         :overlayOpacity="overlayOpacity"
         :close-on-click-modal="hideOnClickOutside"
-        :lock-scroll="lockScroll"
+        :lock-scroll="false"
         @close="handleClose"
     >
         <view :class="`hy-keyboard ${customClass}`" :style="customStyle">

@@ -11,4 +11,10 @@ $hy-overlay-bg: var(--hy-overlay-bg, rgba(0, 0, 0, 0.7)) !default;
   width: 100%;
   height: 100%;
   background-color: $hy-overlay-bg;
+
+  /* 内容层：容器在 lockScroll=false 时整体 pointer-events: none（背景触摸穿透），
+     插槽内容需显式恢复交互，否则继承 none 导致点击失效 */
+  @include e(content) {
+    pointer-events: auto;
+  }
 }

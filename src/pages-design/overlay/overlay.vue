@@ -21,11 +21,11 @@
 
     <!--
         lockScroll=true 时锁住页面滚动，列表自身仍可滚，点击空白处关闭；
-        lockScroll=false 时遮罩为 pointer-events: none，空白处触摸穿透页面滚动（冒泡），需按钮关闭
+        lockScroll=false 时不锁滚动，触摸遮罩空白处页面照样滚动（冒泡），点击空白处同样可关闭
     -->
     <hy-overlay :show="overlayShow" :lock-scroll="lockScroll" @click="overlayShow = false">
-        <!-- 冒泡模式下遮罩整体为 pointer-events: none，内容层需显式恢复交互，否则列表与按钮均不可点 -->
-        <view v-if="overlayShow" class="scroll-mode__mask-box" :style="{ pointerEvents: 'auto' }">
+        <!-- 插槽内容层由组件内置恢复交互（hy-overlay__content），无需手动设置 pointer-events -->
+        <view v-if="overlayShow" class="scroll-mode__mask-box">
             <text class="scroll-mode__mask-title">{{ maskTitle }}</text>
             <scroll-view class="scroll-mode__scroll" scroll-y>
                 <view v-for="i in 20" :key="i" class="scroll-mode__scroll-item">

@@ -71,11 +71,6 @@ export const keyboardProps = {
         type: Boolean,
         default: true
     },
-    /** 是否锁定滚动 */
-    lockScroll: {
-        type: Boolean,
-        default: true
-    },
     /** 是否在底部安全区域内 */
     safeAreaInsetBottom: {
         type: Boolean,

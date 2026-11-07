@@ -14,7 +14,7 @@
             :customStyle="transitionStyle"
             :mode="positionMode"
             :duration="duration"
-            lock-scroll
+            :lock-scroll="lockScroll"
             @afterEnter="afterEnter"
             @click="clickHandler"
         >

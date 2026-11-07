@@ -123,11 +123,7 @@
             ></hy-cell-item>
         </hy-cell>
         <view class="hy-button-group">
-            <hy-button
-                :text="t('closeLoading')"
-                size="small"
-                @click="toast.close()"
-            ></hy-button>
+            <hy-button :text="t('closeLoading')" size="small" @click="toast.close()"></hy-button>
         </view>
     </view>
 
@@ -140,10 +136,7 @@
                 @click="handleCustomIcon({ name: 'time', size: '24', color: '#2979ff' })"
             ></hy-cell-item>
             <hy-cell-item :title="t('mapIcon')" @click="handleCustomIcon('map')"></hy-cell-item>
-            <hy-cell-item
-                :title="t('smileIcon')"
-                @click="handleCustomIcon('smile')"
-            ></hy-cell-item>
+            <hy-cell-item :title="t('smileIcon')" @click="handleCustomIcon('smile')"></hy-cell-item>
         </hy-cell>
     </view>
 
@@ -166,14 +159,8 @@
     <view class="hy-title">{{ t('touchThrough') }}</view>
     <view class="hy-container">
         <hy-cell>
-            <hy-cell-item
-                :title="t('allowThrough')"
-                @click="handleOverlay(true)"
-            ></hy-cell-item>
-            <hy-cell-item
-                :title="t('forbidThrough')"
-                @click="handleOverlay(false)"
-            ></hy-cell-item>
+            <hy-cell-item :title="t('allowThrough')" @click="handleOverlay(false)"></hy-cell-item>
+            <hy-cell-item :title="t('forbidThrough')" @click="handleOverlay(true)"></hy-cell-item>
             <hy-cell-item :title="t('showCover')" @click="handleCover(true)"></hy-cell-item>
         </hy-cell>
     </view>

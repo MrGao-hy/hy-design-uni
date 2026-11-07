@@ -47,6 +47,11 @@ const popupProps = {
         type: Number,
         default: 10086
     },
+    /** 是否锁住页面滚动 */
+    lockScroll: {
+        type: Boolean,
+        default: true
+    },
     /** 是否为iPhoneX留出底部安全距离 */
     safeAreaInsetBottom: {
         type: Boolean,
