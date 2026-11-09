@@ -60,7 +60,7 @@ const REGEX = {
     EVENT_WITH_COMMENT: /\/\*\*[\s\S]*?\*\/\s*\(e:\s*["']([\w-]+)["']/g,
     EVENT_TUPLE: /\/\*\*[\s\S]*?\*\/\s*['"]?([^\s'"]+)['"]?\s*:\s*\[([^\]]*)\]/g,
     EVENT_TUPLE_NO_COMMENT: /['"]?([^\s'"]+)['"]?\s*:\s*\[([^\]]*)\]/g,
-    EMIT_CALL: /emit\(['"]([\w-]+)['"]/g,
+    EMIT_CALL: /emit\(['"]([\w:-]+)['"]/g,
     
     // 属性文件提取
     PROPS_OBJECT_DEF: /(?:export\s+)?const\s+\w+\s*=\s*\{/g,
@@ -421,19 +421,58 @@ function extractAllPropsFromPropsFile(propsFilePath, componentName, specialConfi
             processProp(prop.name, prop.jsdoc, props, prop.value);
         });
         
+        // 使用尖括号配对算法提取 PropType<...> 的完整内部类型（支持嵌套泛型与箭头函数）
+        function extractPropTypeInner(str) {
+            const idx = str.indexOf('PropType<')
+            if (idx === -1) return null
+            let i = idx + 'PropType<'.length
+            let depth = 1
+            const start = i
+            while (i < str.length) {
+                const ch = str[i]
+                if (ch === '<') depth++
+                else if (ch === '>') {
+                    // 跳过箭头函数 => 中的 >，避免误判泛型闭合
+                    if (str[i - 1] !== '=') {
+                        depth--
+                        if (depth === 0) return str.slice(start, i)
+                    }
+                }
+                i++
+            }
+            return null
+        }
+
         // 辅助函数：处理类型字符串
         function processType(typeString) {
             let processedType = typeString.trim()
-            
-            // 处理 PropType
-            const propTypeMatch = 
-                processedType.match(/PropType<([^>]+)>/) || 
-                processedType.match(/as\s+unknown\s+as\s+PropType<([^>]+)>/) || 
-                processedType.match(/as\s+PropType<([^>]+)>/) || 
-                processedType.match(/as\s+([^>]+)\s*$/) || 
-                processedType.match(/String\s+as\s+.*?([^\s>]+)/)
-            if (propTypeMatch) {
-                processedType = propTypeMatch[1]
+
+            // 清理误捕获的对象闭合大括号（type 值行尾无逗号时，正则会把 \n}\n 一并捕获），并压平换行
+            processedType = processedType
+                .replace(/\}\s*$/, '')
+                .replace(/\s+/g, ' ')
+                .trim()
+
+            // 处理 PropType（尖括号配对提取，避免嵌套泛型被截断）
+            const propTypeInner = extractPropTypeInner(processedType)
+            if (propTypeInner !== null) {
+                processedType = propTypeInner
+            } else {
+                const propTypeMatch =
+                    processedType.match(/as\s+unknown\s+as\s+PropType<([^>]+)>/) ||
+                    processedType.match(/as\s+PropType<([^>]+)>/) ||
+                    processedType.match(/as\s+([^>]+)\s*$/) ||
+                    processedType.match(/String\s+as\s+.*?([^\s>]+)/)
+                if (propTypeMatch) {
+                    processedType = propTypeMatch[1]
+                }
+            }
+
+            // 泛型参数含逗号会被 components-helper 按 separator 误拆为多个类型，做等价简化
+            if (processedType.includes('<') && processedType.includes(',')) {
+                processedType = /^Record\b/.test(processedType)
+                    ? 'object'
+                    : processedType.slice(0, processedType.indexOf('<')).trim()
             }
             
             // 处理类型数组（如 [Number, String]）
@@ -600,7 +639,8 @@ function extractAllPropsFromPropsFile(propsFilePath, componentName, specialConfi
                 // 提取描述
                 const descriptionMatch = jsdoc.match(/\/\*\*\s*([\s\S]*?)\s*(?:@|\*\/)/)
                 if (descriptionMatch) {
-                    propObj.description = descriptionMatch[1].replace(/\*\s?/g, '').trim()
+                    // 压平为单行，避免换行符破坏 Markdown 表格结构
+                    propObj.description = descriptionMatch[1].replace(/\*\s?/g, '').replace(/\s+/g, ' ').trim()
                 }
                 
                 // 提取 @values
@@ -754,7 +794,7 @@ function extractEmitsFromVueFile(vueFilePath, componentName, customEmitsInterfac
 
                         const descriptionMatch = fullMatch.match(/\/\*\*\s*([\s\S]*?)\s*\*\//)
                         const description = descriptionMatch
-                            ? descriptionMatch[1].replace(/\*\s?/g, '').trim()
+                            ? descriptionMatch[1].replace(/\*\s?/g, '').replace(/\s+/g, ' ').trim()
                             : ''
 
                         const parameters = rawParams.trim() || '-'
@@ -787,7 +827,7 @@ function extractEmitsFromVueFile(vueFilePath, componentName, customEmitsInterfac
                             const fullMatch = eventMatch[0]
                             const descriptionMatch = fullMatch.match(/\/\*\*\s*([\s\S]*?)\s*\*\//)
                             const description = descriptionMatch
-                                ? descriptionMatch[1].replace(/\*\s?/g, '').trim()
+                                ? descriptionMatch[1].replace(/\*\s?/g, '').replace(/\s+/g, ' ').trim()
                                 : ''
                             eventInfoMap[eventName] = { description, parameters: 'event' }
                             if (CONFIG.DEBUG) {
@@ -821,7 +861,7 @@ function extractEmitsFromVueFile(vueFilePath, componentName, customEmitsInterfac
         const emitCallMatches = content.match(REGEX.EMIT_CALL)
         if (emitCallMatches) {
             const uniqueEmits = [
-                ...new Set(emitCallMatches.map((match) => match.match(/emit\(['"]([\w-]+)['"]/)[1]))
+                ...new Set(emitCallMatches.map((match) => match.match(/emit\(['"]([\w:-]+)['"]/)[1]))
             ]
             uniqueEmits.forEach((eventName) => {
                 if (allEvents.has(eventName)) {
@@ -1087,6 +1127,11 @@ function extractComponentInfoFromVueFile(vueFilePath) {
     }
 }
 
+// 转义 Markdown 表格单元格中的竖线，避免破坏表格列结构（components-helper 支持 \| 还原）
+function escapeCell(value) {
+    return String(value ?? '').replace(/\|/g, '\\|')
+}
+
 // 生成 Markdown 文档的函数
 function generateMarkdown(componentConfig) {
     const { vuePath, name: componentName, propsPath, ...specialConfig } = componentConfig
@@ -1123,8 +1168,8 @@ function generateMarkdown(componentConfig) {
 
         props.forEach((prop) => {
             const values = prop.values.length > 0 ? prop.values.join(', ') : '-'
-            // 对类型字符串中的特殊字符进行转义
-            const escapedType = prop.type.replace(/[\(\)\[\]\{\}]/g, '\\$&')
+            // 对类型字符串中的特殊字符进行转义（含 |，避免联合类型破坏表格列）
+            const escapedType = prop.type.replace(/[\(\)\[\]\{\}\|]/g, '\\$&')
             // 确保默认值存在，如果不存在或为 undefined 则设置为单引号空字符串
             let defaultValue = prop.default
             if (defaultValue === undefined || defaultValue === 'undefined') {
@@ -1134,7 +1179,7 @@ function generateMarkdown(componentConfig) {
                 // 特别是对竖线字符(|)进行转义，它是Markdown表格的分隔符
                 defaultValue = defaultValue.replace(/\|/g, '\\|')
             }
-            markdown += `| ${prop.name} | ${prop.description} | ${escapedType} | ${values} | ${defaultValue} |\n`
+            markdown += `| ${prop.name} | ${escapeCell(prop.description)} | ${escapedType} | ${values} | ${defaultValue} |\n`
         })
 
         markdown += '\n'
@@ -1148,7 +1193,7 @@ function generateMarkdown(componentConfig) {
         markdown += '| ---------- | ---------- | ----------- |\n'
 
         emits.forEach((event) => {
-            markdown += `| ${event.name} | ${event.parameters} | ${event.description} |\n`
+            markdown += `| ${event.name} | ${escapeCell(event.parameters)} | ${escapeCell(event.description)} |\n`
         })
 
         markdown += '\n'
@@ -1162,7 +1207,7 @@ function generateMarkdown(componentConfig) {
         markdown += '| --------- | ----------- |\n'
 
         slots.forEach((slot) => {
-            markdown += `| ${slot.name} | ${slot.description} |\n`
+            markdown += `| ${slot.name} | ${escapeCell(slot.description)} |\n`
         })
 
         markdown += '\n'

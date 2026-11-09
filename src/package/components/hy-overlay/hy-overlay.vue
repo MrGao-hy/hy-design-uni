@@ -50,7 +50,6 @@ const overlayStyle = computed<CSSProperties>(() => {
         right: 0,
         zIndex: props.zIndex,
         bottom: 0,
-        pointerEvents: props.passThrough ? 'none' : 'auto',
         'background-color': `rgba(0, 0, 0, ${props.opacity})`
     }
     return Object.assign(style, props.customStyle)

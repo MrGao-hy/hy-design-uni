@@ -47,6 +47,7 @@ const emptyProps = {
     button: {
         type: Object as PropType<Partial<HyButtonProps>>
     },
+    /** 跳转路径，跳转到非tabBar页面 */
     navigateUrl: String,
     /** 定义需要用到的外部样式 */
     customStyle: {

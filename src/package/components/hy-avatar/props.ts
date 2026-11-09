@@ -14,7 +14,7 @@ const avatarProps = {
     },
     /**
      * 头像尺寸
-     * @values large, medium, small
+     * @values large,medium,small,mini
      * */
     size: {
         type: [String, Number] as PropType<SizeType | number>,

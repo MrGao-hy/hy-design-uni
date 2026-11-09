@@ -5,7 +5,7 @@
         :opacity="tmpConfig.cover ? 0.5 : 0"
         :custom-style="overlayStyle"
     >
-        <view :style="[contentStyle]" :class="contentClass">
+        <view :style="[contentStyle, customStyle]" :class="[contentClass, customClass]">
             <hy-loading
                 v-if="tmpConfig.loading"
                 :mode="tmpConfig.loadMode || 'circle'"
@@ -56,6 +56,7 @@ import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { IToastExpose, ToastOptions } from './typing'
 import { ColorConfig, iconName, getWindowInfo, hexToRgb } from '../../libs'
+import toastProps from './props'
 // 组件
 import HyOverlay from '../hy-overlay/hy-overlay.vue'
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -67,17 +68,21 @@ import HyLoading from '../hy-loading/hy-loading.vue'
  */
 defineOptions({})
 
+const props = defineProps(toastProps)
+
 const isShow = ref(false)
 const tmpConfig = ref<ToastOptions>({})
 const config: ToastOptions = reactive({
-    message: '',
-    type: '',
-    duration: 2000,
-    icon: false,
-    position: 'center',
+    message: props.message,
+    type: props.type,
+    duration: props.duration,
+    icon: props.icon,
+    position: props.position,
     complete: null,
-    overlay: true,
-    loading: false
+    overlay: props.overlay,
+    cover: props.cover,
+    loading: props.loading,
+    loadMode: props.loadMode
 })
 let timer: any = null
 

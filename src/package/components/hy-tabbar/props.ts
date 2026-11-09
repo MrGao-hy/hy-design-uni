@@ -23,6 +23,7 @@ const tabBarProps = {
         type: Boolean,
         default: false
     },
+    /** 层级 */
     zIndex: {
         type: Number,
         default: 10086

@@ -96,6 +96,7 @@ const couponProps = {
         type: String,
         default: () => t('receive')
     },
+    /** 按钮插槽内容 */
     buttonProp: {
         type: Object as PropType<HyButtonProps>,
         default: () => ({})
