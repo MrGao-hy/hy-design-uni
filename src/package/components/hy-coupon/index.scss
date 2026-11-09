@@ -81,6 +81,7 @@ $hy-coupon-tag-color: var(--hy-coupon-tag-color, #d43c33) !default;
   /* 优惠券内容区域 */
   @include e(content) {
     flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     color: #ffffff;
@@ -125,6 +126,7 @@ $hy-coupon-tag-color: var(--hy-coupon-tag-color, #d43c33) !default;
       flex-direction: column;
       box-sizing: border-box;
       padding: $hy-border-margin-padding-base;
+      min-width: 0;
 
       @include e(name) {
         font-size: $hy-coupon-name-font-size;
@@ -137,8 +139,8 @@ $hy-coupon-tag-color: var(--hy-coupon-tag-color, #d43c33) !default;
       }
 
       @include e(validity) {
-        width: 100%;
-        @include lineEllipsis;
+        /* 有效期单行完整显示：不换行不省略，允许向右溢出容器（穿过按钮下方） */
+        white-space: nowrap;
       }
 
       @include e(desc, validity) {
@@ -154,6 +156,7 @@ $hy-coupon-tag-color: var(--hy-coupon-tag-color, #d43c33) !default;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-shrink: 0;
   }
   @include e(tag) {
     height: 100%;
