@@ -13,11 +13,35 @@ $hy-warn-close-right: var(--hy-warn-close-right, 10px) !default;
 $hy-warn-radius: var(--hy-warn-radius, #{$hy-radius-sm}) !default;
 /* 标题/描述文字颜色 */
 $hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
+/* hy-warn 主题色，默认跟随全局主题色 token */
+$hy-warn-primary: var(--hy-warn-primary, #{$hy-primary}) !default;
+/* hy-warn 基础间距，默认跟随全局 token */
+$hy-warn-margin-padding-base: var(--hy-warn-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-warn 主题色浅色，默认跟随全局主题色浅色 token */
+$hy-warn-primary-light: var(--hy-warn-primary-light, #{$hy-primary-light}) !default;
+/* hy-warn 危险色，默认跟随全局危险色 token */
+$hy-warn-error: var(--hy-warn-error, #{$hy-error}) !default;
+/* hy-warn 危险色浅色，默认跟随全局危险色浅色 token */
+$hy-warn-error-light: var(--hy-warn-error-light, #{$hy-error-light}) !default;
+/* hy-warn 成功色，默认跟随全局成功色 token */
+$hy-warn-success: var(--hy-warn-success, #{$hy-success}) !default;
+/* hy-warn 成功色浅色，默认跟随全局成功色浅色 token */
+$hy-warn-success-light: var(--hy-warn-success-light, #{$hy-success-light}) !default;
+/* hy-warn 警告色，默认跟随全局警告色 token */
+$hy-warn-warning: var(--hy-warn-warning, #{$hy-warning}) !default;
+/* hy-warn 警告色浅色，默认跟随全局警告色浅色 token */
+$hy-warn-warning-light: var(--hy-warn-warning-light, #{$hy-warning-light}) !default;
+/* hy-warn 信息色，默认跟随全局信息色 token */
+$hy-warn-info: var(--hy-warn-info, #{$hy-info}) !default;
+/* hy-warn 信息色浅色，默认跟随全局信息色浅色 token */
+$hy-warn-info-light: var(--hy-warn-info-light, #{$hy-info-light}) !default;
+/* hy-warn 小间距，默认跟随全局 token */
+$hy-warn-margin-padding-sm: var(--hy-warn-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(warn) {
   position: relative;
-  background-color: $hy-primary;
-  padding: $hy-border-margin-padding-base;
+  background-color: $hy-warn-primary;
+  padding: $hy-warn-margin-padding-base;
   @include flex(row);
   align-items: center;
   border-radius: $hy-warn-radius;
@@ -25,14 +49,14 @@ $hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
   @include e(primary) {
 
     @include m(dark) {
-      background-color: $hy-primary;
+      background-color: $hy-warn-primary;
     }
 
     @include m(light) {
-      background-color: $hy-primary-light;
+      background-color: $hy-warn-primary-light;
       .tips {
         :deep(.hy-icon) {
-          color: $hy-primary;
+          color: $hy-warn-primary;
         }
       }
     }
@@ -42,14 +66,14 @@ $hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
   @include e(error) {
 
     @include m(dark) {
-      background-color: $hy-error;
+      background-color: $hy-warn-error;
     }
 
     @include m(light) {
-      background-color: $hy-error-light;
+      background-color: $hy-warn-error-light;
       .tips {
         :deep(.hy-icon) {
-          color: $hy-error;
+          color: $hy-warn-error;
         }
       }
     }
@@ -57,14 +81,14 @@ $hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
 
   @include e(success) {
     @include m(dark) {
-      background-color: $hy-success;
+      background-color: $hy-warn-success;
     }
 
     @include m(light) {
-      background-color: $hy-success-light;
+      background-color: $hy-warn-success-light;
       .tips {
         :deep(.hy-icon) {
-          color: $hy-success;
+          color: $hy-warn-success;
         }
       }
     }
@@ -73,14 +97,14 @@ $hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
   @include e(warning) {
 
     @include m(dark) {
-      background-color: $hy-warning;
+      background-color: $hy-warn-warning;
     }
 
     @include m(light) {
-      background-color: $hy-warning-light;
+      background-color: $hy-warn-warning-light;
       .tips {
         :deep(.hy-icon) {
-          color: $hy-warning;
+          color: $hy-warn-warning;
         }
       }
     }
@@ -89,21 +113,21 @@ $hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
   @include e(info) {
 
     @include m(dark) {
-      background-color: $hy-info;
+      background-color: $hy-warn-info;
     }
 
     @include m(light) {
-      background-color: $hy-info-light;
+      background-color: $hy-warn-info-light;
       .tips {
         :deep(.hy-icon) {
-          color: $hy-info;
+          color: $hy-warn-info;
         }
       }
     }
   }
 
   @include e(icon) {
-    margin-right: $hy-border-margin-padding-sm;
+    margin-right: $hy-warn-margin-padding-sm;
   }
 
   @include e(content) {
@@ -127,23 +151,23 @@ $hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
   @include e(text) {
 
     @include m(primary__light) {
-      color: $hy-primary;
+      color: $hy-warn-primary;
     }
 
     @include m(success__light) {
-      color: $hy-success;
+      color: $hy-warn-success;
     }
 
     @include m(warning__light) {
-      color: $hy-warning;
+      color: $hy-warn-warning;
     }
 
     @include m(error__light) {
-      color: $hy-error;
+      color: $hy-warn-error;
     }
 
     @include m(info__light) {
-      color: $hy-info;
+      color: $hy-warn-info;
     }
   }
 

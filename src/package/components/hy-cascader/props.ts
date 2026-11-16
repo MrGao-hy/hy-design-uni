@@ -1,5 +1,5 @@
 import type { CascaderOption, CascaderValue, CascaderLazyLoad } from './typing'
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 import type { HyInputProps } from '../hy-input/typing'
 import { useTranslate } from '../../libs'
 
@@ -82,7 +82,11 @@ const cascaderProps = {
     isLeafKey: {
         type: String,
         default: 'isLeaf'
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default cascaderProps

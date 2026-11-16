@@ -1,6 +1,10 @@
 <template>
     <!-- 标题栏 -->
-    <view :class="['hy-dropdown-item__header', isOpen && 'is-active']" @click="handleClick">
+    <view
+        :class="['hy-dropdown-item__header', isOpen && 'is-active', customClass]"
+        :style="customStyle"
+        @click="handleClick"
+    >
         <text
             class="hy-dropdown-item__header--title"
             :style="{ color: currentColor, fontSize: addUnit(titleSize) }"

@@ -21,38 +21,60 @@ $hy-cell-item-value-color: var(--hy-cell-item-value-color, #{$hy-text-color--gre
 $hy-cell-item-arrow-color: var(--hy-cell-item-arrow-color, #{$hy-text-color--3}) !default;
 /* 禁用文字颜色 */
 $hy-cell-item-disabled-color: var(--hy-cell-item-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 容器背景色 */
+$hy-cell-item-background: var(--hy-cell-item-background, #{$hy-background--container}) !default;
+/* 大间距 */
+$hy-cell-item-padding-lg: var(--hy-cell-item-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* 大行高 */
+$hy-cell-item-line-height-lg: var(--hy-cell-item-line-height-lg, #{$hy-line-height-lg}) !default;
+/* 基础间距 */
+$hy-cell-item-padding-base: var(--hy-cell-item-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 基础行高 */
+$hy-cell-item-line-height-base: var(--hy-cell-item-line-height-base, #{$hy-line-height-base}) !default;
+/* 小间距 */
+$hy-cell-item-padding-sm: var(--hy-cell-item-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 小行高 */
+$hy-cell-item-line-height-sm: var(--hy-cell-item-line-height-sm, #{$hy-line-height-sm}) !default;
+/* 点击状态背景色 */
+$hy-cell-item-background--hover: var(--hy-cell-item-background--hover, #{$hy-background--hover}) !default;
+/* 禁用背景色 */
+$hy-cell-item-background--disabled: var(--hy-cell-item-background--disabled, #{$hy-background--disabled}) !default;
+/* 标题间距 */
+$hy-cell-item-title-margin: var(--hy-cell-item-title-margin, #{$hy-border-margin-padding-sm}) !default;
+/* 值间距 */
+$hy-cell-item-value-margin: var(--hy-cell-item-value-margin, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(cell-item) {
     @include flex(row);
     align-items: center;
     justify-content: space-between;
     flex: 1;
-    background-color: $hy-background--container;
+    background-color: $hy-cell-item-background;
 
     /* 大 */
     @include m(large) {
         font-size: $hy-cell-item-font-size-large;
-        padding: $hy-border-margin-padding-lg;
-        line-height: $hy-line-height-lg;
+        padding: $hy-cell-item-padding-lg;
+        line-height: $hy-cell-item-line-height-lg;
     }
 
     /* 默认 */
     @include m(medium) {
         font-size: $hy-cell-item-font-size-medium;
-        padding: $hy-border-margin-padding-base;
-        line-height: $hy-line-height-base;
+        padding: $hy-cell-item-padding-base;
+        line-height: $hy-cell-item-line-height-base;
     }
 
     /* 小 */
     @include m(small) {
         font-size: $hy-cell-item-font-size-small;
-        padding: $hy-border-margin-padding-sm;
-        line-height: $hy-line-height-sm;
+        padding: $hy-cell-item-padding-sm;
+        line-height: $hy-cell-item-line-height-sm;
     }
 
     /*点击状态*/
     @include e(clickable) {
-        background-color: $hy-background--hover;
+        background-color: $hy-cell-item-background--hover;
     }
 
     @include e(left) {
@@ -65,7 +87,7 @@ $hy-cell-item-disabled-color: var(--hy-cell-item-disabled-color, #{$hy-text-colo
         }
         /*行头部*/
         @include m(title) {
-            margin-right: $hy-border-margin-padding-sm;
+            margin-right: $hy-cell-item-title-margin;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -84,9 +106,9 @@ $hy-cell-item-disabled-color: var(--hy-cell-item-disabled-color, #{$hy-text-colo
         max-width: $hy-cell-item-value-max-width;
         flex: 1;
         @include m(value) {
-            line-height: $hy-line-height-base;
+            line-height: $hy-cell-item-line-height-base;
             color: $hy-cell-item-value-color;
-            margin-right: $hy-border-margin-padding-sm;
+            margin-right: $hy-cell-item-value-margin;
         }
     }
 
@@ -112,7 +134,7 @@ $hy-cell-item-disabled-color: var(--hy-cell-item-disabled-color, #{$hy-text-colo
 
     @include e(disabled) {
         color: $hy-cell-item-disabled-color;
-        background: $hy-background--disabled;
+        background: $hy-cell-item-background--disabled;
         /* #ifndef APP-NVUE */
         cursor: not-allowed;
         /* #endif */

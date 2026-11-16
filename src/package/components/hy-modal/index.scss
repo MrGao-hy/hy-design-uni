@@ -31,6 +31,12 @@ $hy-modal-content-color: var(--hy-modal-content-color, #{$hy-text-color--grey}) 
 $hy-modal-button-confirm-color: var(--hy-modal-button-confirm-color, #FFFFFF) !default;
 /* 取消按钮文字颜色 */
 $hy-modal-button-cancel-color: var(--hy-modal-button-cancel-color, #{$hy-text-color}) !default;
+/* hy-modal 大间距，默认跟随全局 token */
+$hy-modal-margin-padding-lg: var(--hy-modal-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* hy-modal 主题色，默认跟随全局主题色 token */
+$hy-modal-primary: var(--hy-modal-primary, #{$hy-primary}) !default;
+/* hy-modal 空数据背景色，默认跟随全局 token */
+$hy-modal-background--empty: var(--hy-modal-background--empty, #{$hy-background--empty}) !default;
 
 @include b(modal) {
   max-width: $hy-modal-max-width;
@@ -69,11 +75,11 @@ $hy-modal-button-cancel-color: var(--hy-modal-button-cancel-color, #{$hy-text-co
     /* 两个按钮的样式 */
     @include m(exact) {
       .first {
-        margin-right: $hy-border-margin-padding-lg;
+        margin-right: $hy-modal-margin-padding-lg;
       }
       @include m(reverse) {
         .last {
-          margin-right: $hy-border-margin-padding-lg;
+          margin-right: $hy-modal-margin-padding-lg;
         }
       }
     }
@@ -100,7 +106,7 @@ $hy-modal-button-cancel-color: var(--hy-modal-button-cancel-color, #{$hy-text-co
 
         /* 确认 */
         @include m(confirm) {
-          background-color: $hy-primary;
+          background-color: $hy-modal-primary;
           @include e(text) {
             color: $hy-modal-button-confirm-color;
           }
@@ -109,7 +115,7 @@ $hy-modal-button-cancel-color: var(--hy-modal-button-cancel-color, #{$hy-text-co
         /* 取消 */
         @include m(cancel) {
           //background-color: $hy-background--empty;
-          background-color: $hy-background--empty;
+          background-color: $hy-modal-background--empty;
 
           @include e(text) {
             color: $hy-modal-button-cancel-color;

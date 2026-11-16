@@ -98,7 +98,9 @@ const addressPickerProps = {
     /** 自定义输入框外部样式 */
     customStyle: {
         type: Object as PropType<CSSProperties>
-    }
+    },
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default addressPickerProps

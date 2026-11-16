@@ -9,6 +9,8 @@ $hy-search-placeholder-font-size: var(--hy-search-placeholder-font-size, 25rpx) 
 $hy-search-placeholder-line-height: var(--hy-search-placeholder-line-height, 30rpx) !default;
 /* 搜索框边框宽度 */
 $hy-search-border-width: var(--hy-search-border-width, 1px) !default;
+/* 搜索框背景色，默认跟随全局空状态背景 token */
+$hy-search-background: var(--hy-search-background, #{$hy-background--track}) !default;
 /* 取消按钮展开宽度 */
 $hy-search-action-width: var(--hy-search-action-width, 100rpx) !default;
 /* 搜索提示文字颜色 */
@@ -29,6 +31,14 @@ $hy-search-placeholder-color: var(--hy-search-placeholder-color, #{$hy-text-colo
 $hy-search-action-color: var(--hy-search-action-color, #{$hy-text-color}) !default;
 /* 右侧操作字号，默认跟随全局基础字体 token */
 $hy-search-action-font-size: var(--hy-search-action-font-size, #{$hy-font-size-base}) !default;
+/* hy-search 搜索容器的padding间距 */
+$hy-search-padding: var(--hy-search-padding, #{$hy-border-margin-padding-lg}) !default;
+/* hy-search 删除按钮背景颜色 */
+$hy-search-close-color: var(--hy-search-close-color, #{$hy-background--empty}) !default;
+/* hy-search 输入框两边间距 */
+$hy-search-input-margin: var(--hy-search-input-margin, #{$hy-border-margin-padding-sm}) !default;
+/* hy-search 右边按钮距离搜索间距 */
+$hy-search-action-active-margin: var(--hy-search-action-active-margin, #{$hy-border-margin-padding-sm}) !default;
 
 /* #ifdef H5 */
 // iOS15在H5下，hx的某些版本，input type=search时，会多了一个搜索图标，进行移除
@@ -45,14 +55,14 @@ $hy-search-action-font-size: var(--hy-search-action-font-size, #{$hy-font-size-b
   @include e(content) {
     @include flex;
     align-items: center;
-    padding: 0 $hy-border-margin-padding-lg;
+    padding: 0 $hy-search-padding;
     flex: 1;
     justify-content: space-between;
     border-width: $hy-search-border-width;
     border-color: transparent;
     border-style: solid;
     overflow: hidden;
-    background-color: $hy-background--empty;
+    background-color: $hy-search-background;
 
     @include e(icon) {
       @include flex;
@@ -70,7 +80,7 @@ $hy-search-action-font-size: var(--hy-search-action-font-size, #{$hy-font-size-b
       width: $hy-search-close-size;
       height: $hy-search-close-size;
       border-radius: $hy-search-close-radius;
-      background-color: $hy-background--track;
+      background-color: $hy-search-close-color;
       @include flex(row);
       align-items: center;
       justify-content: center;
@@ -82,9 +92,9 @@ $hy-search-action-font-size: var(--hy-search-action-font-size, #{$hy-font-size-b
       flex: 1;
       font-size: $hy-search-input-font-size;
       line-height: 1;
-      margin: 0 $hy-border-margin-padding-sm;
+      margin: 0 $hy-search-input-margin;
       color: $hy-search-input-color;
-      background-color: $hy-background--empty;
+      background-color: $hy-search-background;
 
       @include m(disabled) {
         color: $hy-search-disabled-color;
@@ -112,7 +122,7 @@ $hy-search-action-font-size: var(--hy-search-action-font-size, #{$hy-font-size-b
 
     @include m(active) {
       width: $hy-search-action-width;
-      margin-left: $hy-border-margin-padding-sm;
+      margin-left: $hy-search-action-active-margin;
     }
   }
 }

@@ -1,3 +1,5 @@
+import type { CSSProperties, PropType } from 'vue'
+
 const checkboxItemProps = {
     /** checkbox的名称 */
     value: {
@@ -18,7 +20,11 @@ const checkboxItemProps = {
     label: {
         type: String,
         default: ''
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default checkboxItemProps

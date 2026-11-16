@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-address-picker">
+    <view class="hy-address-picker" :class="customClass" :style="customStyle">
         <view v-if="hasInput" class="hy-address-picker__has-input" @tap="onShowByClickInput">
             <!-- @slot 自定义输入框 -->
             <slot v-if="$slots.trigger" name="trigger" :value="inputValue"></slot>

@@ -13,6 +13,16 @@ $hy-keyboard-car-key-height: var(--hy-keyboard-car-key-height, 88rpx) !default;
 $hy-keyboard-car-key-font-size: var(--hy-keyboard-car-key-font-size, 28rpx) !default;
 /* 按键文字字号，默认跟随全局大号字体 token */
 $hy-keyboard-key-font-size: var(--hy-keyboard-key-font-size, #{$hy-font-size-lg}) !default;
+/* hy-keyboard-key 容器背景色，默认跟随全局 token */
+$hy-keyboard-key-background--container: var(--hy-keyboard-key-background--container, #{$hy-background--container}) !default;
+/* hy-keyboard-key 危险色，默认跟随全局危险色 token */
+$hy-keyboard-key-error: var(--hy-keyboard-key-error, #{$hy-error}) !default;
+/* hy-keyboard-key 深色弹窗背景色，默认跟随全局 token */
+$hy-keyboard-key-background--3: var(--hy-keyboard-key-background--3, #{$hy-background--3}) !default;
+/* hy-keyboard-key 主题色，默认跟随全局主题色 token */
+$hy-keyboard-key-primary: var(--hy-keyboard-key-primary, #{$hy-primary}) !default;
+/* hy-keyboard-key 点击状态背景色，默认跟随全局 token */
+$hy-keyboard-key-background--hover: var(--hy-keyboard-key-background--hover, #{$hy-background--hover}) !default;
 
 @include b(keyboard) {
   @include e(key) {
@@ -21,7 +31,7 @@ $hy-keyboard-key-font-size: var(--hy-keyboard-key-font-size, #{$hy-font-size-lg}
     align-items: center;
     justify-content: center;
     height: $hy-keyboard-key-height;
-    background: $hy-background--container;
+    background: $hy-keyboard-key-background--container;
     border-radius: $hy-keyboard-key-radius;
     box-shadow: $hy-keyboard-key-shadow;
     box-sizing: border-box;
@@ -44,7 +54,7 @@ $hy-keyboard-key-font-size: var(--hy-keyboard-key-font-size, #{$hy-font-size-lg}
 
     @include m(delete) {
       color: #FFFFFF;
-      background: $hy-error;
+      background: $hy-keyboard-key-error;
       display: flex;
       flex-direction: column-reverse;
       align-items: center;
@@ -52,16 +62,16 @@ $hy-keyboard-key-font-size: var(--hy-keyboard-key-font-size, #{$hy-font-size-lg}
     }
 
     @include m(extra) {
-      background: $hy-background--3;
+      background: $hy-keyboard-key-background--3;
     }
 
     @include m(close) {
       color: #ffffff;
-      background: $hy-primary;
+      background: $hy-keyboard-key-primary;
     }
 
     &:active {
-      background: $hy-background--hover;
+      background: $hy-keyboard-key-background--hover;
     }
 
     &-text {

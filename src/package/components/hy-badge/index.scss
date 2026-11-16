@@ -13,6 +13,8 @@ $hy-badge-padding: var(--hy-badge-padding, 2px 5px) !default;
 $hy-badge-inverted-font-size: var(--hy-badge-inverted-font-size, 13px) !default;
 /* 白边（border 模式）宽度 */
 $hy-badge-border-width: var(--hy-badge-border-width, 2px) !default;
+/* hy-badge 弹窗背景色，默认跟随全局 token */
+$hy-badge-background--2: var(--hy-badge-background--2, #{$hy-background--2}) !default;
 
 @include b(badge) {
     border-radius: $hy-badge-radius;
@@ -40,7 +42,7 @@ $hy-badge-border-width: var(--hy-badge-border-width, 2px) !default;
 
     /* 白边，使用box-shadow实现，不影响布局尺寸 */
     @include m(border) {
-        box-shadow: 0 0 0 $hy-badge-border-width $hy-background--2;
+        box-shadow: 0 0 0 $hy-badge-border-width $hy-badge-background--2;
     }
 
     /* 主题色 */

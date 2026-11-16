@@ -15,6 +15,16 @@ $hy-upload-deletable-size: var(--hy-upload-deletable-size, 14px) !default;
 $hy-upload-other-bg: var(--hy-upload-other-bg, rgb(242, 242, 242)) !default;
 /* 提示文字颜色 */
 $hy-upload-text-color: var(--hy-upload-text-color, #{$hy-text-color--grey}) !default;
+/* hy-upload 主题色，默认跟随全局主题色 token */
+$hy-upload-primary: var(--hy-upload-primary, #{$hy-primary}) !default;
+/* hy-upload 成功色，默认跟随全局成功色 token */
+$hy-upload-success: var(--hy-upload-success, #{$hy-success}) !default;
+/* hy-upload 危险色，默认跟随全局危险色 token */
+$hy-upload-error: var(--hy-upload-error, #{$hy-error}) !default;
+/* hy-upload 空数据背景色，默认跟随全局 token */
+$hy-upload-background--empty: var(--hy-upload-background--empty, #{$hy-background--empty}) !default;
+/* hy-upload 点击状态背景色，默认跟随全局 token */
+$hy-upload-background--hover: var(--hy-upload-background--hover, #{$hy-background--hover}) !default;
 
 
 @include b(upload) {
@@ -71,7 +81,7 @@ $hy-upload-text-color: var(--hy-upload-text-color, #{$hy-text-color--grey}) !def
 
         @include m(value) {
           font-size: 20rpx;
-          color: $hy-primary;
+          color: $hy-upload-primary;
         }
       }
     }
@@ -112,7 +122,7 @@ $hy-upload-text-color: var(--hy-upload-text-color, #{$hy-text-color--grey}) !def
   }
 
   @include e(success) {
-    border-color: transparent $hy-success $hy-success transparent;
+    border-color: transparent $hy-upload-success $hy-upload-success transparent;
 
     @include m(icon) {
       /* #ifndef APP-NVUE */
@@ -129,7 +139,7 @@ $hy-upload-text-color: var(--hy-upload-text-color, #{$hy-text-color--grey}) !def
   }
 
   @include e(error) {
-    border-color: transparent $hy-error $hy-error transparent;
+    border-color: transparent $hy-upload-error $hy-upload-error transparent;
   }
 
   @include e(button) {
@@ -138,7 +148,7 @@ $hy-upload-text-color: var(--hy-upload-text-color, #{$hy-text-color--grey}) !def
     justify-content: center;
     width: $hy-upload-image-width;
     height: $hy-upload-image-width;
-    background-color: $hy-background--empty;
+    background-color: $hy-upload-background--empty;
     border-radius: $hy-upload-radius;
     margin: $hy-upload-item-margin;
     /* #ifndef APP-NVUE */
@@ -152,7 +162,7 @@ $hy-upload-text-color: var(--hy-upload-text-color, #{$hy-text-color--grey}) !def
     }
 
     @include m(hover) {
-      background-color: $hy-background--hover;
+      background-color: $hy-upload-background--hover;
     }
 
     @include m(disabled) {

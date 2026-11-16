@@ -8,13 +8,25 @@ $hy-icon-label-max-width: var(--hy-icon-label-max-width, 150rpx) !default;
 $hy-icon-label-color: var(--hy-icon-label-color, #{$hy-text-color--grey}) !default;
 /* 标签字号，默认跟随全局小号字体 token */
 $hy-icon-label-font-size: var(--hy-icon-label-font-size, #{$hy-font-size-sm}) !default;
+/* hy-icon 图标颜色，默认跟随全局图标 token */
+$hy-icon-icon-color: var(--hy-icon-icon-color, #{$hy-icon-color}) !default;
+/* hy-icon 主题色，默认跟随全局主题色 token */
+$hy-icon-primary: var(--hy-icon-primary, #{$hy-primary}) !default;
+/* hy-icon 成功色，默认跟随全局成功色 token */
+$hy-icon-success: var(--hy-icon-success, #{$hy-success}) !default;
+/* hy-icon 危险色，默认跟随全局危险色 token */
+$hy-icon-error: var(--hy-icon-error, #{$hy-error}) !default;
+/* hy-icon 警告色，默认跟随全局警告色 token */
+$hy-icon-warning: var(--hy-icon-warning, #{$hy-warning}) !default;
+/* hy-icon 信息色，默认跟随全局信息色 token */
+$hy-icon-info: var(--hy-icon-info, #{$hy-info}) !default;
 
 @include b(icon) {
   /* #ifndef APP-NVUE */
   display: flex;
   /* #endif */
   align-items: center;
-  color: $hy-icon-color;
+  color: $hy-icon-icon-color;
 
   @include m(left) {
     flex-direction: row-reverse;
@@ -43,23 +55,23 @@ $hy-icon-label-font-size: var(--hy-icon-label-font-size, #{$hy-font-size-sm}) !d
     vertical-align: -100%;
 
     @include m(primary) {
-      color: $hy-primary;
+      color: $hy-icon-primary;
     }
 
     @include m(success) {
-      color: $hy-success;
+      color: $hy-icon-success;
     }
 
     @include m(error) {
-      color: $hy-error;
+      color: $hy-icon-error;
     }
 
     @include m(warning) {
-      color: $hy-warning;
+      color: $hy-icon-warning;
     }
 
     @include m(info) {
-      color: $hy-info;
+      color: $hy-icon-info;
     }
   }
 

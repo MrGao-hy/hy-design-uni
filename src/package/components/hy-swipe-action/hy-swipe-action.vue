@@ -2,7 +2,8 @@
     <!--注意阻止横向滑动的穿透：横向移动时阻止冒泡-->
     <view
         class="hy-swipe-action"
-        :style="touchActionStyle"
+        :class="customClass"
+        :style="[touchActionStyle, customStyle]"
         @click.stop="onClick"
         @touchstart="startDrag"
         @touchmove="onDrag"

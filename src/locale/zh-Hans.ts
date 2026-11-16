@@ -1180,9 +1180,16 @@ export default {
         // ===== 演示内容 =====
         basicUsage: '基础使用',
         stepSection: '步长设置',
+        decimalSection: '限制小数位数',
         disabled: '禁用',
+        disabledInput: '禁用输入框',
+        disablePlus: '禁用加号',
         rangeSection: '现在范围',
+        asyncSection: '异步变更',
+        asyncLoading: '异步变更中...',
         hideMinus: '隐藏减号',
+        customAppearance: '自定义外观',
+        customIcon: '自定义图标',
         customStyle: '自定义样式'
     },
 

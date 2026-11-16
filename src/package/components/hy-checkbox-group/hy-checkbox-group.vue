@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-checkbox-group" :class="bemClass">
+    <view class="hy-checkbox-group" :class="[bemClass, customClass]" :style="customStyle">
         <slot></slot>
     </view>
 </template>

@@ -1,5 +1,5 @@
 import type { HyIconProps } from '../hy-icon/typing'
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 
 const numberStepProps = {
     /** 用于双向绑定的值，初始化时设置设为默认min值(最小值) */
@@ -106,7 +106,11 @@ const numberStepProps = {
     miniMode: {
         type: Boolean,
         default: false
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default numberStepProps

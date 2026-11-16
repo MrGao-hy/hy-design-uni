@@ -1,3 +1,5 @@
+import type { CSSProperties, PropType } from 'vue'
+
 const watermarkProps = {
     /** 显示主标题 */
     title: {
@@ -103,7 +105,11 @@ const watermarkProps = {
     isAntiTheft: {
         type: Boolean,
         default: false
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default watermarkProps

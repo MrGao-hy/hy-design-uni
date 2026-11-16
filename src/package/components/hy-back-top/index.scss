@@ -3,6 +3,8 @@
 
 /* 提示文字字号 */
 $hy-back-top-tips-font-size: var(--hy-back-top-tips-font-size, 12px) !default;
+/* hy-back-top 深色弹窗背景色，默认跟随全局 token */
+$hy-back-top-background--3: var(--hy-back-top-background--3, #{$hy-background--3}) !default;
 
 @include b(back-top) {
   @include flex;
@@ -11,7 +13,7 @@ $hy-back-top-tips-font-size: var(--hy-back-top-tips-font-size, 12px) !default;
   flex: 1;
   height: 100%;
   justify-content: center;
-  background-color: $hy-background--3;
+  background-color: $hy-back-top-background--3;
 
   @include e(tips) {
     font-size: $hy-back-top-tips-font-size;

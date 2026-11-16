@@ -1,10 +1,13 @@
 <template>
-    <hy-transition mode="fade" :show="show" :style="transStyle" :duration="fade ? 1000 : 0">
-        <view
-            :class="['hy-image', 'box-border', customClass]"
-            @tap="clickHandler"
-            :style="[wrapStyle, backgroundStyle]"
-        >
+    <hy-transition
+        mode="fade"
+        :show="show"
+        :style="transStyle"
+        :duration="fade ? 1000 : 0"
+        :custom-class="customClass"
+        :custom-style="wrapStyle"
+    >
+        <view class="hy-image box-border" @tap="clickHandler" :style="[wrapStyle, backgroundStyle]">
             <image
                 v-if="!isError"
                 :src="src"

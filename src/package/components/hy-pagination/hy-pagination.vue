@@ -1,5 +1,10 @@
 <template>
-    <view class="hy-pagination" :style="customStyle" v-if="!(hideIfOnePage && totalPageNum === 1)">
+    <view
+        class="hy-pagination"
+        :class="customClass"
+        :style="customStyle"
+        v-if="!(hideIfOnePage && totalPageNum === 1)"
+    >
         <view class="hy-pagination__content">
             <hy-button
                 :plain="modelValue > 1"

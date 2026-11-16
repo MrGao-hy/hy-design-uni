@@ -79,7 +79,7 @@ hy-xxx/
 └── index.scss        # 可选：组件样式
 ```
 
-**AI 注意**：`props.ts` 是必选文件，当前 `hy-safe-bottom` 和 `hy-watermark` 缺少该文件，需尽快补全。
+**AI 注意**：`props.ts` 是必选文件，所有组件目录均已包含该文件（含 `hy-safe-bottom`、`hy-watermark`），新增组件时必须同步创建。
 
 ### 子组件/辅助组件
 

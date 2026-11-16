@@ -13,6 +13,12 @@ $hy-subsection-font-size: var(--hy-subsection-font-size, 12px) !default;
 $hy-subsection-line-height: var(--hy-subsection-line-height, 14px) !default;
 /* 整体圆角，默认跟随全局小圆角 token */
 $hy-subsection-radius: var(--hy-subsection-radius, #{$hy-radius-sm}) !default;
+/* hy-subsection 深色弹窗背景色，默认跟随全局 token */
+$hy-subsection-background--3: var(--hy-subsection-background--3, #{$hy-background--3}) !default;
+/* hy-subsection 容器背景色，默认跟随全局 token */
+$hy-subsection-background--container: var(--hy-subsection-background--container, #{$hy-background--container}) !default;
+/* hy-subsection 主题色，默认跟随全局主题色 token */
+$hy-subsection-primary: var(--hy-subsection-primary, #{$hy-primary}) !default;
 
 
 @include b(subsection) {
@@ -26,13 +32,13 @@ $hy-subsection-radius: var(--hy-subsection-radius, #{$hy-radius-sm}) !default;
 
   @include e(button) {
     height: $hy-subsection-height;
-    background-color: $hy-background--3;
+    background-color: $hy-subsection-background--3;
     padding: $hy-subsection-padding;
     border-radius: $hy-subsection-radius;
     align-items: stretch;
 
     @include m(bar) {
-      background-color: $hy-background--container !important;
+      background-color: $hy-subsection-background--container !important;
       border-radius: $hy-subsection-radius;
     }
   }
@@ -48,7 +54,7 @@ $hy-subsection-radius: var(--hy-subsection-radius, #{$hy-radius-sm}) !default;
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
     /* #endif */
-    background-color: $hy-primary;
+    background-color: $hy-subsection-primary;
 
     @include m(first) {
       border-radius: $hy-subsection-radius 0 0 $hy-subsection-radius;
@@ -72,7 +78,7 @@ $hy-subsection-radius: var(--hy-subsection-radius, #{$hy-radius-sm}) !default;
     position: relative;
 
     @include m(subsection) {
-      border: 1px solid $hy-primary;
+      border: 1px solid $hy-subsection-primary;
     }
 
     @include m(no-border-right) {

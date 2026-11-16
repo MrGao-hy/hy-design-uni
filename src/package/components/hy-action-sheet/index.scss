@@ -37,6 +37,14 @@ $hy-action-sheet-close-radius: var(--hy-action-sheet-close-radius, #{$hy-radius-
 $hy-action-sheet-panel-img-radius: var(--hy-action-sheet-panel-img-radius, #{$hy-radius-base}) !default;
 /* 面板标题字号，默认跟随全局小号字体 token */
 $hy-action-sheet-panel-title-font-size: var(--hy-action-sheet-panel-title-font-size, #{$hy-font-size-sm}) !default;
+/* hy-action-sheet 基础间距，默认跟随全局 token */
+$hy-action-sheet-margin-padding-base: var(--hy-action-sheet-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-action-sheet 轨道背景色，默认跟随全局 token */
+$hy-action-sheet-background--track: var(--hy-action-sheet-background--track, #{$hy-background--track}) !default;
+/* hy-action-sheet 小间距，默认跟随全局 token */
+$hy-action-sheet-margin-padding-sm: var(--hy-action-sheet-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* hy-action-sheet 图标尺寸，默认跟随全局图片尺寸 token */
+$hy-action-sheet-img-size-base: var(--hy-action-sheet-img-size-base, #{$hy-img-size-base}) !default;
 
 
 @include b(action-sheet) {
@@ -46,7 +54,7 @@ $hy-action-sheet-panel-title-font-size: var(--hy-action-sheet-panel-title-font-s
 
 
   @include e(actions) {
-    padding: $hy-border-margin-padding-base 0;
+    padding: $hy-action-sheet-margin-padding-base 0;
     max-height: 50vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -94,7 +102,7 @@ $hy-action-sheet-panel-title-font-size: var(--hy-action-sheet-panel-title-font-s
   @include edeep(cancel) {
     color: $hy-action-sheet-cancel-color;
     width: $hy-action-sheet-cancel-width;
-    background: $hy-background--track;
+    background: $hy-action-sheet-background--track;
     margin: $hy-action-sheet-cancel-margin;
     border: none;
   }
@@ -104,7 +112,7 @@ $hy-action-sheet-panel-title-font-size: var(--hy-action-sheet-panel-title-font-s
     position: relative;
     line-height: $hy-action-sheet-header-line-height;
     font-weight: 700;
-    padding: $hy-border-margin-padding-base $hy-border-margin-padding-base 0;
+    padding: $hy-action-sheet-margin-padding-base $hy-action-sheet-margin-padding-base 0;
   }
 
   @include edeep(close) {
@@ -113,7 +121,7 @@ $hy-action-sheet-panel-title-font-size: var(--hy-action-sheet-panel-title-font-s
     right: $hy-action-sheet-close-right;
     background-color: rgba(128, 128, 128, 0.25);
     border-radius: $hy-action-sheet-close-radius;
-    padding: $hy-border-margin-padding-sm;
+    padding: $hy-action-sheet-margin-padding-sm;
   }
 
   /* 面板样式 */
@@ -141,13 +149,13 @@ $hy-action-sheet-panel-title-font-size: var(--hy-action-sheet-panel-title-font-s
     width: $hy-action-sheet-panel-width;
     flex: 0 0 auto;
     display: inline-block;
-    padding: $hy-border-margin-padding-sm $hy-border-margin-padding-base;
+    padding: $hy-action-sheet-margin-padding-sm $hy-action-sheet-margin-padding-base;
   }
 
   @include e(panel-img) {
     display: block;
-    width: $hy-img-size-base;
-    height: $hy-img-size-base;
+    width: $hy-action-sheet-img-size-base;
+    height: $hy-action-sheet-img-size-base;
     margin: 0 auto 7px;
     border-radius: $hy-action-sheet-panel-img-radius;
   }

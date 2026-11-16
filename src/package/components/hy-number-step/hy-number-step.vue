@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-number-box">
+    <view class="hy-number-box" :class="customClass" :style="customStyle">
         <!-- 减号 -->
         <view
             v-if="showMinus && !hideMinus && $slots.minus"

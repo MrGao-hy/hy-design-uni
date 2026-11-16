@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 
 const waterfallProps = {
     /** 数据列表 */
@@ -15,7 +15,11 @@ const waterfallProps = {
     idKey: {
         type: String,
         default: 'id'
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default waterfallProps

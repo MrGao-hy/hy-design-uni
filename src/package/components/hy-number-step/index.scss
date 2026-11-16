@@ -13,6 +13,12 @@ $hy-number-step-input-margin: var(--hy-number-step-input-margin, 0 2px) !default
 $hy-number-step-input-color: var(--hy-number-step-input-color, #{$hy-text-color}) !default;
 /* 禁用文字颜色 */
 $hy-number-step-disabled-color: var(--hy-number-step-disabled-color, #{$hy-text-color--disabled}) !default;
+/* hy-number-step 空数据背景色，默认跟随全局 token */
+$hy-number-step-background--empty: var(--hy-number-step-background--empty, #{$hy-background--empty}) !default;
+/* hy-number-step 点击状态背景色，默认跟随全局 token */
+$hy-number-step-background--hover: var(--hy-number-step-background--hover, #{$hy-background--hover}) !default;
+/* hy-number-step 禁用背景色，默认跟随全局 token */
+$hy-number-step-background--disabled: var(--hy-number-step-background--disabled, #{$hy-background--disabled}) !default;
 
 
 @include b(number-box) {
@@ -26,7 +32,7 @@ $hy-number-step-disabled-color: var(--hy-number-step-disabled-color, #{$hy-text-
   }
 
   @include e(input, plus, minus) {
-    background-color: $hy-background--empty;
+    background-color: $hy-number-step-background--empty;
     width: $hy-number-step-btn-width;
     @include flex;
     justify-content: center;
@@ -41,12 +47,12 @@ $hy-number-step-disabled-color: var(--hy-number-step-disabled-color, #{$hy-text-
     border-bottom-right-radius: $hy-number-step-radius;
 
     @include m(hover) {
-      background-color: $hy-background--hover;
+      background-color: $hy-number-step-background--hover;
     }
 
     @include m(disabled) {
       color: $hy-number-step-disabled-color;
-      background-color: $hy-background--disabled;
+      background-color: $hy-number-step-background--disabled;
     }
   }
 
@@ -55,12 +61,12 @@ $hy-number-step-disabled-color: var(--hy-number-step-disabled-color, #{$hy-text-
     border-bottom-left-radius: $hy-number-step-radius;
 
     @include m(hover) {
-      background-color: $hy-background--hover;
+      background-color: $hy-number-step-background--hover;
     }
 
     @include m(disabled) {
       color: $hy-number-step-disabled-color;
-      background-color: $hy-background--disabled;
+      background-color: $hy-number-step-background--disabled;
     }
   }
 
@@ -78,7 +84,7 @@ $hy-number-step-disabled-color: var(--hy-number-step-disabled-color, #{$hy-text-
 
     @include m(disabled) {
       color: $hy-number-step-disabled-color;
-      background-color: $hy-background--disabled;
+      background-color: $hy-number-step-background--disabled;
     }
   }
 }

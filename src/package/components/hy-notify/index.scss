@@ -3,9 +3,11 @@
 
 /* 文字字号，默认跟随全局基础字号 token */
 $hy-notify-font-size: var(--hy-notify-font-size, #{$hy-font-size-base}) !default;
+/* hy-notify 基础间距，默认跟随全局 token */
+$hy-notify-margin-padding-base: var(--hy-notify-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
 
 @include b(notify) {
-  padding: $hy-border-margin-padding-base;
+  padding: $hy-notify-margin-padding-base;
 
   @include e(wrapper) {
     @include flex;

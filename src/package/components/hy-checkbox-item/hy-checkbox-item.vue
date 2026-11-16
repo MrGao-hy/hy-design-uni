@@ -2,12 +2,13 @@
     <view
         class="hy-checkbox cursor-pointer"
         @tap.stop="wrapperClickHandler"
-        :style="checkboxStyle"
+        :style="[checkboxStyle, customStyle]"
         :class="[
             `hy-checkbox--label__${checkboxGroup?.iconPlacement?.value}`,
             checkboxGroup?.borderBottom?.value &&
                 checkboxGroup?.placement?.value === 'column' &&
-                'hy-border__bottom'
+                'hy-border__bottom',
+            customClass
         ]"
     >
         <view @tap.stop="iconClickHandler" :class="iconClasses" :style="iconWrapStyle">

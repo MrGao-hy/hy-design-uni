@@ -67,6 +67,9 @@ const rootClass = computed(() => {
     if (props.fullScreen) {
         classes.push('is-fullscreen')
     }
+    if (props.customClass) {
+        classes.push(props.customClass)
+    }
     return classes
 })
 
@@ -91,7 +94,7 @@ const rootStyle = computed(() => {
     if (waterMarkUrl.value) {
         style['backgroundImage'] = `url('${waterMarkUrl.value}')`
     }
-    return style
+    return Object.assign(style, props.customStyle)
 })
 
 function doReset() {

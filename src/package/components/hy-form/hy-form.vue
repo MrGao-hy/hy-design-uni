@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-form">
+    <view class="hy-form" :class="customClass" :style="customStyle">
         <slot></slot>
     </view>
 </template>

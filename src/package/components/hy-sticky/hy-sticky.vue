@@ -8,8 +8,8 @@
 
         <view
             ref="stickyRef"
-            :class="['hy-sticky', isFixed ? 'hy-sticky__fixed' : '']"
-            :style="mergedStyle"
+            :class="['hy-sticky', isFixed ? 'hy-sticky__fixed' : '', customClass]"
+            :style="[mergedStyle, customStyle]"
         >
             <slot />
         </view>

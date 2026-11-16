@@ -7,6 +7,8 @@ $hy-tabbar-item-icon-size: var(--hy-tabbar-item-icon-size, 40rpx) !default;
 $hy-tabbar-item-title-font-size: var(--hy-tabbar-item-title-font-size, #{$hy-font-size-sm}) !default;
 /* 未激活文字颜色，默认跟随全局灰度文字 token */
 $hy-tabbar-item-inactive-color: var(--hy-tabbar-item-inactive-color, #{$hy-text-color--grey}) !default;
+/* hy-tabbar-item 主题色，默认跟随全局主题色 token */
+$hy-tabbar-item-primary: var(--hy-tabbar-item-primary, #{$hy-primary}) !default;
 
 
 @include b(tabbar-item) {
@@ -28,7 +30,7 @@ $hy-tabbar-item-inactive-color: var(--hy-tabbar-item-inactive-color, #{$hy-text-
 
     :deep(){
       @include is(active) {
-        color: $hy-primary;
+        color: $hy-tabbar-item-primary;
       }
 
       @include is(inactive) {

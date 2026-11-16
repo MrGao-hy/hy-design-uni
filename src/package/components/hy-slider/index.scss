@@ -9,6 +9,14 @@ $hy-slider-button-size: var(--hy-slider-button-size, 24px) !default;
 $hy-slider-button-box-shadow: var(--hy-slider-button-box-shadow, 0 1px 2px rgba(0, 0, 0, 0.5)) !default;
 /* 轨道圆角，默认跟随全局半圆 token */
 $hy-slider-track-radius: var(--hy-slider-track-radius, #{$hy-radius-semicircle}) !default;
+/* 滑块内padding间距 */
+$hy-slider-inner-padding: var(--hy-slider-inner-padding, #{$hy-border-margin-padding-sm}) !default;
+/* 滑块轨道背景色 */
+$hy-slider-base-background: var(--hy-slider-base-background, #{$hy-background--track}) !default;
+/* 滑块主题色 */
+$hy-slider-color: var(--hy-slider-color, #{$hy-primary}) !default;
+/* 滑块按钮颜色 */
+$hy-slider-button-color: var(--hy-slider-button-color, #{$hy-background--block}) !default;
 
 @include b(slider) {
     position: relative;
@@ -24,13 +32,8 @@ $hy-slider-track-radius: var(--hy-slider-track-radius, #{$hy-radius-semicircle})
         @include flex(column);
         position: relative;
         border-radius: $hy-slider-track-radius;
-        padding: $hy-border-margin-padding-base $hy-border-margin-padding-lg;
+        padding: $hy-slider-inner-padding;
         justify-content: center;
-    }
-
-    @include e(show-value) {
-        margin: $hy-border-margin-padding-base $hy-border-margin-padding-lg
-            $hy-border-margin-padding-base 0;
     }
 
     @include e(show-range-value) {
@@ -42,7 +45,7 @@ $hy-slider-track-radius: var(--hy-slider-track-radius, #{$hy-radius-semicircle})
     }
 
     @include e(base) {
-        background-color: $hy-background--empty;
+        background-color: $hy-slider-base-background;
         border-radius: $hy-slider-track-radius;
     }
 
@@ -62,9 +65,9 @@ $hy-slider-track-radius: var(--hy-slider-track-radius, #{$hy-radius-semicircle})
         position: relative;
         border-radius: $hy-slider-track-radius;
         transition: width 0.2s;
-        background-color: $hy-primary;
+        background-color: $hy-slider-color;
         &-0 {
-            background-color: $hy-background--empty;
+            background-color: $hy-slider-base-background;
         }
     }
 
@@ -73,7 +76,7 @@ $hy-slider-track-radius: var(--hy-slider-track-radius, #{$hy-radius-semicircle})
         height: $hy-slider-button-size;
         border-radius: 50%;
         box-shadow: $hy-slider-button-box-shadow;
-        background-color: $hy-background--3;
+        background-color: $hy-slider-button-color;
         transform: scale(0.9);
         /* #ifdef H5 */
         cursor: pointer;
@@ -81,7 +84,6 @@ $hy-slider-track-radius: var(--hy-slider-track-radius, #{$hy-radius-semicircle})
 
         @include m(wrap) {
             position: absolute;
-            // transform: translate3d(50%, -50%, 0);
         }
     }
 

@@ -23,13 +23,21 @@ $hy-textarea-radius: var(--hy-textarea-radius, #{$hy-radius-sm}) !default;
 $hy-textarea-count-radius: var(--hy-textarea-count-radius, #{$hy-radius-sm}) !default;
 /* 边框，默认跟随全局边框线 token */
 $hy-textarea-border: var(--hy-textarea-border, #{$hy-border-line}) !default;
+/* hy-textarea 小间距，默认跟随全局 token */
+$hy-textarea-margin-padding-sm: var(--hy-textarea-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* hy-textarea 无圆角，默认跟随全局 token */
+$hy-textarea-radius-no: var(--hy-textarea-radius-no, #{$hy-radius-no}) !default;
+/* hy-textarea 禁用背景色，默认跟随全局 token */
+$hy-textarea-background--disabled: var(--hy-textarea-background--disabled, #{$hy-background--disabled}) !default;
+/* hy-textarea 深色弹窗背景色，默认跟随全局 token */
+$hy-textarea-background--3: var(--hy-textarea-background--3, #{$hy-background--3}) !default;
 
 @include b(textarea) {
     border-radius: $hy-textarea-radius;
     position: relative;
     @include flex;
     flex: 1;
-    padding: $hy-border-margin-padding-sm;
+    padding: $hy-textarea-margin-padding-sm;
 
     @include e(border) {
         border: $hy-textarea-border;
@@ -40,11 +48,11 @@ $hy-textarea-border: var(--hy-textarea-border, #{$hy-border-line}) !default;
     }
 
     @include e(no-radius) {
-        border-radius: $hy-radius-no;
+        border-radius: $hy-textarea-radius-no;
     }
 
     @include e(disabled) {
-        background-color: $hy-background--disabled;
+        background-color: $hy-textarea-background--disabled;
         color: $hy-textarea-disabled-color !important;
 
         @include m(text) {
@@ -70,7 +78,7 @@ $hy-textarea-border: var(--hy-textarea-border, #{$hy-border-line}) !default;
         right: 5px;
         bottom: 2px;
         font-size: $hy-textarea-count-font-size;
-        background-color: $hy-background--3;
+        background-color: $hy-textarea-background--3;
         padding: 1px 4px;
         border-radius: $hy-textarea-count-radius;
     }

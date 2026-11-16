@@ -3,12 +3,20 @@
 
 /* 列表项分隔线，默认跟随全局边框线 token */
 $hy-dropdown-item-border: var(--hy-dropdown-item-border, #{$hy-border-line}) !default;
+/* hy-dropdown-item 基础间距，默认跟随全局 token */
+$hy-dropdown-item-margin-padding-base: var(--hy-dropdown-item-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-dropdown-item 容器背景色，默认跟随全局 token */
+$hy-dropdown-item-background--container: var(--hy-dropdown-item-background--container, #{$hy-background--container}) !default;
+/* hy-dropdown-item 图标颜色，默认跟随全局图标 token */
+$hy-dropdown-item-icon-color: var(--hy-dropdown-item-icon-color, #{$hy-icon-color}) !default;
+/* hy-dropdown-item 主题色，默认跟随全局主题色 token */
+$hy-dropdown-item-primary: var(--hy-dropdown-item-primary, #{$hy-primary}) !default;
 
 @include b(dropdown-item) {
   @include e(header) {
     width: 100%;
     height: 100%;
-    padding: $hy-border-margin-padding-base;
+    padding: $hy-dropdown-item-margin-padding-base;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -18,13 +26,13 @@ $hy-dropdown-item-border: var(--hy-dropdown-item-border, #{$hy-border-line}) !de
     text-align: center;
     position: relative;
     z-index: 999;
-    background-color: $hy-background--container;
-    color: $hy-icon-color;
+    background-color: $hy-dropdown-item-background--container;
+    color: $hy-dropdown-item-icon-color;
 
     @include is(active) {
-      color: $hy-primary;
+      color: $hy-dropdown-item-primary;
       :deep(.hy-icon) {
-        color: $hy-primary;
+        color: $hy-dropdown-item-primary;
       }
     }
   }
@@ -40,7 +48,7 @@ $hy-dropdown-item-border: var(--hy-dropdown-item-border, #{$hy-border-line}) !de
     background-color: rgba(0, 0, 0, 0);
 
     @include m(container) {
-      background-color: $hy-background--container;
+      background-color: $hy-dropdown-item-background--container;
       min-height: 200rpx;
       position: absolute;
       top: -100%;
@@ -67,9 +75,9 @@ $hy-dropdown-item-border: var(--hy-dropdown-item-border, #{$hy-border-line}) !de
           align-items: center;
 
           @include is(active) {
-            color: $hy-primary;
+            color: $hy-dropdown-item-primary;
             :deep(.hy-icon) {
-              color: $hy-primary;
+              color: $hy-dropdown-item-primary;
             }
           }
 

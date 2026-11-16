@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-picker">
+    <view class="hy-picker" :class="customClass" :style="customStyle">
         <view v-if="hasInput" class="hy-picker-input cursor-pointer" @click="onShowByClickInput">
             <slot v-if="$slots.default"></slot>
             <template v-else>

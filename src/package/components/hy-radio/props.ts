@@ -98,7 +98,9 @@ const radioProps = {
     customStyle: {
         type: Object as PropType<CSSProperties>,
         default: () => {}
-    }
+    },
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default radioProps

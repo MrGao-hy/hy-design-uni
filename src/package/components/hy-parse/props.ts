@@ -14,6 +14,8 @@ const defaultProps: IProps = {
   setTitle: true,
   showImgMenu: true,
   useAnchor: false,
+  customStyle: {},
+  customClass: "",
 };
 
 export default defaultProps;

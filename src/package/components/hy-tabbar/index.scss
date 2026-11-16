@@ -13,6 +13,10 @@ $hy-tabbar-item-width: var(--hy-tabbar-item-width, 60px) !default;
 $hy-tabbar-indicator-size: var(--hy-tabbar-indicator-size, 50px) !default;
 /* 凸起圆形尺寸 */
 $hy-tabbar-circle-size: var(--hy-tabbar-circle-size, 40px) !default;
+/* hy-tabbar 容器背景色，默认跟随全局 token */
+$hy-tabbar-background--container: var(--hy-tabbar-background--container, #{$hy-background--container}) !default;
+/* hy-tabbar 主题色，默认跟随全局主题色 token */
+$hy-tabbar-primary: var(--hy-tabbar-primary, #{$hy-primary}) !default;
 
 @include b(tabbar) {
     bottom: 0;
@@ -40,7 +44,7 @@ $hy-tabbar-circle-size: var(--hy-tabbar-circle-size, 40px) !default;
         /* #ifndef APP-PLUS-NVUE */
         box-sizing: border-box;
         /* #endif */
-        background-color: $hy-background--container;
+        background-color: $hy-tabbar-background--container;
     }
     @include m(container) {
         width: 100%;
@@ -153,7 +157,7 @@ $hy-tabbar-circle-size: var(--hy-tabbar-circle-size, 40px) !default;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $hy-primary;
+        background-color: $hy-tabbar-primary;
         /* #ifndef APP-PLUS-NVUE */
         transition: 0.5s;
         /* #endif */

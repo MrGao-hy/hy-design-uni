@@ -78,7 +78,9 @@ const foldingPanelItemProps = {
     /**
      * 自定义样式
      */
-    customStyle: Object as PropType<CSSProperties>
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default foldingPanelItemProps

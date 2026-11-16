@@ -6,7 +6,7 @@ const { t } = useTranslate('readMore')
 const readMoreProps = {
     /** 内容超出此高度才会显示展开全文按钮，单位px */
     showHeight: {
-        type: Number,
+        type: [Number, String],
         default: 200
     },
     /** 展开后是否显示收起按钮 */
@@ -42,7 +42,11 @@ const readMoreProps = {
     shadowStyle: {
         type: Object as PropType<CSSProperties>,
         default: () => {}
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default readMoreProps

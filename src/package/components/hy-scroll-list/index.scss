@@ -9,6 +9,14 @@ $hy-scroll-list-indicator-height: var(--hy-scroll-list-indicator-height, 4px) !d
 $hy-scroll-list-indicator-bar-width: var(--hy-scroll-list-indicator-bar-width, 20px) !default;
 /* 指示条圆角，默认跟随全局半圆角 token */
 $hy-scroll-list-indicator-radius: var(--hy-scroll-list-indicator-radius, #{$hy-radius-semicircle}) !default;
+/* hy-scroll-list 基础间距，默认跟随全局 token */
+$hy-scroll-list-margin-padding-base: var(--hy-scroll-list-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-scroll-list 大间距，默认跟随全局 token */
+$hy-scroll-list-margin-padding-lg: var(--hy-scroll-list-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* hy-scroll-list 空数据背景色，默认跟随全局 token */
+$hy-scroll-list-background--empty: var(--hy-scroll-list-background--empty, #{$hy-background--empty}) !default;
+/* hy-scroll-list 主题色，默认跟随全局主题色 token */
+$hy-scroll-list-primary: var(--hy-scroll-list-primary, #{$hy-primary}) !default;
 
 /* 暗色主题 */
 @include b(theme){
@@ -18,7 +26,7 @@ $hy-scroll-list-indicator-radius: var(--hy-scroll-list-indicator-radius, #{$hy-r
 }
 
 @include b(scroll-list) {
-  padding-bottom: $hy-border-margin-padding-base;
+  padding-bottom: $hy-scroll-list-margin-padding-base;
 
   @include e(scroll-view) {
     @include flex;
@@ -32,20 +40,20 @@ $hy-scroll-list-indicator-radius: var(--hy-scroll-list-indicator-radius, #{$hy-r
   @include e(indicator) {
     @include flex;
     justify-content: center;
-    margin-top: $hy-border-margin-padding-lg;
+    margin-top: $hy-scroll-list-margin-padding-lg;
 
     @include m(line) {
       width: $hy-scroll-list-indicator-width;
       height: $hy-scroll-list-indicator-height;
       border-radius: $hy-scroll-list-indicator-radius;
       overflow: hidden;
-      background-color: $hy-background--empty;
+      background-color: $hy-scroll-list-background--empty;
 
       @include e(bar) {
         width: $hy-scroll-list-indicator-bar-width;
         height: $hy-scroll-list-indicator-height;
         border-radius: $hy-scroll-list-indicator-radius;
-        background-color: $hy-primary;
+        background-color: $hy-scroll-list-primary;
       }
     }
   }

@@ -7,12 +7,18 @@ $hy-submit-bar-left-font-size: var(--hy-submit-bar-left-font-size, 20rpx) !defau
 $hy-submit-bar-right-font-size: var(--hy-submit-bar-right-font-size, 26rpx) !default;
 /* 右侧内容宽度 */
 $hy-submit-bar-right-width: var(--hy-submit-bar-right-width, 400rpx) !default;
+/* hy-submit-bar 容器背景色，默认跟随全局 token */
+$hy-submit-bar-background--container: var(--hy-submit-bar-background--container, #{$hy-background--container}) !default;
+/* hy-submit-bar 基础间距，默认跟随全局 token */
+$hy-submit-bar-margin-padding-base: var(--hy-submit-bar-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-submit-bar 大间距，默认跟随全局 token */
+$hy-submit-bar-margin-padding-lg: var(--hy-submit-bar-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
 
 
 @include b(submit-bar) {
   display: flex;
-  background-color: $hy-background--container;
-  padding: $hy-border-margin-padding-base;
+  background-color: $hy-submit-bar-background--container;
+  padding: $hy-submit-bar-margin-padding-base;
   width: 100%;
   box-sizing: border-box;
 
@@ -22,7 +28,7 @@ $hy-submit-bar-right-width: var(--hy-submit-bar-right-width, 400rpx) !default;
     font-size: $hy-submit-bar-left-font-size;
     flex: 1;
     @include m(item) {
-      margin: 0 $hy-border-margin-padding-base;
+      margin: 0 $hy-submit-bar-margin-padding-base;
       position: relative;
     }
   }
@@ -35,7 +41,7 @@ $hy-submit-bar-right-width: var(--hy-submit-bar-right-width, 400rpx) !default;
     align-items: center;
     width: $hy-submit-bar-right-width;
     @include m(button) {
-      padding: $hy-border-margin-padding-base $hy-border-margin-padding-lg;
+      padding: $hy-submit-bar-margin-padding-base $hy-submit-bar-margin-padding-lg;
       color: #ffffff;
       display: flex;
       justify-content: center;

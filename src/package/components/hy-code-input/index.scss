@@ -19,6 +19,12 @@ $hy-code-input-cursor-color: var(--hy-code-input-cursor-color, #{$hy-text-color}
 $hy-code-input-line-radius: var(--hy-code-input-line-radius, #{$hy-radius-semicircle}) !default;
 /* 默认态边框/线条颜色，默认跟随全局边框色 token */
 $hy-code-input-border-color: var(--hy-code-input-border-color, #{$hy-border-color--2}) !default;
+/* hy-code-input 图标颜色，默认跟随全局图标 token */
+$hy-code-input-icon-color: var(--hy-code-input-icon-color, #{$hy-icon-color}) !default;
+/* hy-code-input 轨道背景色，默认跟随全局 token */
+$hy-code-input-background--track: var(--hy-code-input-background--track, #{$hy-background--track}) !default;
+/* hy-code-input 主题色，默认跟随全局主题色 token */
+$hy-code-input-primary: var(--hy-code-input-primary, #{$hy-primary}) !default;
 
 @include b(code-input) {
   @include flex;
@@ -40,12 +46,12 @@ $hy-code-input-border-color: var(--hy-code-input-border-color, #{$hy-border-colo
       width: $hy-code-input-dot-size;
       height: $hy-code-input-dot-size;
       border-radius: $hy-code-input-dot-radius;
-      background-color: $hy-icon-color;
+      background-color: $hy-code-input-icon-color;
     }
 
     /* 无边框 */
     @include e(no) {
-      background-color: $hy-background--track;
+      background-color: $hy-code-input-background--track;
       border-radius: $hy-code-input-no-radius;
       @include m(active) {
         &:before {
@@ -63,19 +69,19 @@ $hy-code-input-border-color: var(--hy-code-input-border-color, #{$hy-border-colo
     @include e(box) {
       border-color: $hy-code-input-border-color;
       @include e(border) {
-        border-color: $hy-primary !important;
+        border-color: $hy-code-input-primary !important;
 
         @include b(code-input--item__dot) {
-          background-color: $hy-primary;
+          background-color: $hy-code-input-primary;
         }
 
         @include b(code-input--item__text) {
-          color: $hy-primary;
+          color: $hy-code-input-primary;
         }
       }
 
       @include e(active) {
-        border-color: $hy-primary !important;
+        border-color: $hy-code-input-primary !important;
         animation: 1.5s hy-cursor-flicker infinite;
       }
     }
@@ -94,14 +100,14 @@ $hy-code-input-border-color: var(--hy-code-input-border-color, #{$hy-border-colo
       /* 边框 */
       @include e(border) {
         @include b(code-input--item__dot) {
-          background-color: $hy-primary;
+          background-color: $hy-code-input-primary;
         }
         &::after {
           content: "";
-          background-color: $hy-primary !important;
+          background-color: $hy-code-input-primary !important;
         }
         text {
-          color: $hy-primary;
+          color: $hy-code-input-primary;
         }
       }
 
@@ -109,7 +115,7 @@ $hy-code-input-border-color: var(--hy-code-input-border-color, #{$hy-border-colo
       @include e(active) {
         &::after {
           content: "";
-          background-color: $hy-primary !important;
+          background-color: $hy-code-input-primary !important;
           animation: 1.5s hy-cursor-flicker infinite;
         }
       }

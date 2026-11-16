@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-cascader">
+    <view class="hy-cascader" :class="customClass" :style="customStyle">
         <view v-if="hasInput" class="hy-cascader-input cursor-pointer" @click="onShowByClickInput">
             <slot v-if="$slots.default"></slot>
             <template v-else>

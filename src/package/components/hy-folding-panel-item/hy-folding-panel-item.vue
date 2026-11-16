@@ -1,11 +1,14 @@
 <template>
     <view
         class="hy-folding-panel-item"
-        :class="{
-            'hy-folding-panel-item--disabled': groupConfig?.props.disabled || disabled,
-            'is-active': isSelected,
-            'hy-folding-panel-item--border': groupConfig?.props.border
-        }"
+        :class="[
+            {
+                'hy-folding-panel-item--disabled': groupConfig?.props.disabled || disabled,
+                'is-active': isSelected,
+                'hy-folding-panel-item--border': groupConfig?.props.border
+            },
+            customClass
+        ]"
     >
         <!-- 面板头部 -->
         <view

@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-scroll-list" ref="hy-scroll-list">
+    <view class="hy-scroll-list" :class="customClass" :style="customStyle" ref="hy-scroll-list">
         <scroll-view
             class="hy-scroll-list__scroll-view scroll-view-native"
             scroll-x

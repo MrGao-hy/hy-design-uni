@@ -20,12 +20,18 @@ $hy-tooltip-btn-color: var(--hy-tooltip-btn-color, #ffffff) !default;
 
 $hy-tooltip--z-index: $hy-tooltip-z-index;
 $hy-tooltip--background-color: $hy-tooltip-bg;
+/* hy-tooltip 基础阴影，默认跟随全局 token */
+$hy-tooltip-shadow-base: var(--hy-tooltip-shadow-base, #{$hy-shadow-base}) !default;
+/* hy-tooltip 基础间距，默认跟随全局 token */
+$hy-tooltip-margin-padding-base: var(--hy-tooltip-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-tooltip 点击状态背景色，默认跟随全局 token */
+$hy-tooltip-background--hover: var(--hy-tooltip-background--hover, #{$hy-background--hover}) !default;
 
 @include b(tooltip) {
   position: relative;
   @include flex;
 
-  @include squareArrow(6px, $hy-tooltip--background-color, -1, $hy-shadow-base);
+  @include squareArrow(6px, $hy-tooltip--background-color, -1, $hy-tooltip-shadow-base);
 
   @include edeep(popup) {
     position: absolute;
@@ -34,7 +40,7 @@ $hy-tooltip--background-color: $hy-tooltip-bg;
     text-align: center;
     min-height: $hy-tooltip-min-height;
     transition: opacity 0.2s;
-    box-shadow: $hy-shadow-base;
+    box-shadow: $hy-tooltip-shadow-base;
     border-radius: $hy-tooltip-radius;
   }
 
@@ -51,7 +57,7 @@ $hy-tooltip--background-color: $hy-tooltip-bg;
 
   @include e(inner) {
     position: relative;
-    padding: $hy-border-margin-padding-base;
+    padding: $hy-tooltip-margin-padding-base;
     line-height: $hy-tooltip-line-height;
     z-index: $hy-tooltip--z-index;
     border-radius: $hy-tooltip-radius;
@@ -81,13 +87,13 @@ $hy-tooltip--background-color: $hy-tooltip-bg;
       align-items: center;
 
       @include e(btn) {
-        padding: $hy-border-margin-padding-base;
+        padding: $hy-tooltip-margin-padding-base;
         display: flex;
         justify-content: center;
         align-items: center;
 
         @include m(hover) {
-          background-color: $hy-background--hover;
+          background-color: $hy-tooltip-background--hover;
         }
 
         @include m(text) {

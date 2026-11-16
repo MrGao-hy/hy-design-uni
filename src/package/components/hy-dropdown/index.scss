@@ -1,11 +1,14 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
+/* hy-dropdown 背景色，默认跟随全局页面背景 token */
+$hy-dropdown-background: var(--hy-dropdown-background, #{$hy-background}) !default;
+
 @include b(dropdown) {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: $hy-background;
+  background-color: $hy-dropdown-background;
   box-sizing: border-box;
 }
 

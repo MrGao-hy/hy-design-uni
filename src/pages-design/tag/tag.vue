@@ -70,7 +70,7 @@
 
     <view class="hy-title">{{ t('withIcon') }}</view>
     <view class="hy-flex hy-container">
-        <hy-tag :label="t('address')" :icon="{ name: IconConfig.MAP }"></hy-tag>
+        <hy-tag :label="t('address')" :icon="{ name: IconConfig.MAP }" plain></hy-tag>
     </view>
 
     <view class="hy-title">{{ t('closable') }}</view>

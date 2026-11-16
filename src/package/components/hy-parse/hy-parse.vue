@@ -1,5 +1,9 @@
 <template>
-    <view id="_root" :class="(selectable ? '_select ' : '') + '_root'" :style="containerStyle">
+    <view
+        id="_root"
+        :class="[(selectable ? '_select ' : '') + '_root', customClass]"
+        :style="[containerStyle, customStyle]"
+    >
         <slot v-if="!nodes[0]" />
         <!-- #ifndef APP-PLUS-NVUE -->
         <node

@@ -2,9 +2,7 @@
     <view class="hy-title">{{ t('basicUsage') }}</view>
     <view class="hy-container">
         <hy-read-more>
-            <template #default>
-                {{ text }}
-            </template>
+            {{ text }}
         </hy-read-more>
     </view>
 </template>

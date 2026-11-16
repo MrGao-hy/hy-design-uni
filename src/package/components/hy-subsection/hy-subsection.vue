@@ -13,7 +13,8 @@
             v-for="(item, index) in list"
             :key="index"
         >
-            <text class="hy-subsection__item--text" :style="[textStyle(index)]">{{
+            <slot v-if="$slots.default" :option="isObject(item) ? item : { value: item }"></slot>
+            <text v-else class="hy-subsection__item--text" :style="[textStyle(index)]">{{
                 getName(item)
             }}</text>
         </view>
@@ -35,7 +36,7 @@ export default {
 import { computed, ref, onMounted, getCurrentInstance } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { ISubsectionEmits, SubSectionVo } from './typing'
-import { addUnit, getRect, guid } from '../../libs'
+import { addUnit, getRect, guid, isObject } from '../../libs'
 import subsectionProps from './props'
 
 /**

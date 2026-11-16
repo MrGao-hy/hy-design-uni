@@ -25,6 +25,16 @@ $hy-steps-date-font-size: var(--hy-steps-date-font-size, 24rpx) !default;
 $hy-steps-date-color: var(--hy-steps-date-color, #999) !default;
 /* 图标容器边框，默认跟随全局边框线 token */
 $hy-steps-icon-border: var(--hy-steps-icon-border, #{$hy-border-line}) !default;
+/* hy-steps 主题色，默认跟随全局主题色 token */
+$hy-steps-primary: var(--hy-steps-primary, #{$hy-primary}) !default;
+/* hy-steps 信息色，默认跟随全局信息色 token */
+$hy-steps-info: var(--hy-steps-info, #{$hy-info}) !default;
+/* hy-steps 危险色，默认跟随全局危险色 token */
+$hy-steps-error: var(--hy-steps-error, #{$hy-error}) !default;
+/* hy-steps 小间距，默认跟随全局 token */
+$hy-steps-margin-padding-sm: var(--hy-steps-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* hy-steps 细线背景色，默认跟随全局 token */
+$hy-steps-background--line: var(--hy-steps-background--line, #{$hy-background--line}) !default;
 
 @include b(steps) {
   @include flex;
@@ -69,14 +79,14 @@ $hy-steps-icon-border: var(--hy-steps-icon-border, #{$hy-border-line}) !default;
 
       /* 选择 */
       &.process {
-        background-color: $hy-primary;
+        background-color: $hy-steps-primary;
       }
 
       /* 已完成 */
       &.finish {
-       border: 1px solid $hy-primary;
+       border: 1px solid $hy-steps-primary;
         :deep(.hy-icon) {
-          color: $hy-primary;
+          color: $hy-steps-primary;
         }
       }
 
@@ -96,14 +106,14 @@ $hy-steps-icon-border: var(--hy-steps-icon-border, #{$hy-border-line}) !default;
           width: $hy-steps-dot-size;
           height: $hy-steps-dot-size;
           border-radius: $hy-steps-dot-radius;
-          background-color: $hy-info;
+          background-color: $hy-steps-info;
           border: none;
         }
         @include e(finish) {
-          background-color: $hy-primary;
+          background-color: $hy-steps-primary;
         }
         @include e(process) {
-          background-color: $hy-primary;
+          background-color: $hy-steps-primary;
         }
       }
 
@@ -141,12 +151,12 @@ $hy-steps-icon-border: var(--hy-steps-icon-border, #{$hy-border-line}) !default;
         line-height: 25px;
         font-size: $hy-steps-title-font-size;
         @include m(active) {
-          color: $hy-primary;
+          color: $hy-steps-primary;
           font-size: $hy-steps-title-active-font-size;
         }
 
         @include m(error) {
-          color: $hy-error;
+          color: $hy-steps-error;
         }
       }
 
@@ -158,7 +168,7 @@ $hy-steps-icon-border: var(--hy-steps-icon-border, #{$hy-border-line}) !default;
       @include m(column) {
         flex-direction: column;
         justify-content: flex-start;
-        margin-left: $hy-border-margin-padding-sm;
+        margin-left: $hy-steps-margin-padding-sm;
         min-height: $hy-steps-content-min-height;
       }
 
@@ -171,16 +181,16 @@ $hy-steps-icon-border: var(--hy-steps-icon-border, #{$hy-border-line}) !default;
     /* 线条样式 */
     @include e(line) {
       position: absolute;
-      background: $hy-background--line;
+      background: $hy-steps-background--line;
 
       &.finish {
-        background-color: $hy-primary;
+        background-color: $hy-steps-primary;
       }
       &.process {
-        background-color: $hy-primary;
+        background-color: $hy-steps-primary;
       }
       &.error {
-        background-color: $hy-error;
+        background-color: $hy-steps-error;
       }
       //&.wait {
       //  background: $hy-background--track;

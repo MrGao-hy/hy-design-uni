@@ -15,15 +15,19 @@ $hy-loading-dots-gap: var(--hy-loading-dots-gap, 6px) !default;
 $hy-loading-bars-gap: var(--hy-loading-bars-gap, 3px) !default;
 /* 垂直排列文字颜色，默认跟随全局灰度文字 token */
 $hy-loading-vertical-text-color: var(--hy-loading-vertical-text-color, #{$hy-text-color--grey}) !default;
+/* hy-loading 主题色，默认跟随全局主题色 token */
+$hy-loading-primary: var(--hy-loading-primary, #{$hy-primary}) !default;
+/* hy-loading 基础间距，默认跟随全局 token */
+$hy-loading-margin-padding-base: var(--hy-loading-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
 
 
 @include b(loading-icon) {
   align-items: center;
   justify-content: center;
-  color: $hy-primary;
+  color: $hy-loading-primary;
 
   @include e(text) {
-    color: $hy-primary;
+    color: $hy-loading-primary;
     font-size: $hy-loading-text-font-size;
     line-height: $hy-loading-text-line-height;
   }
@@ -78,7 +82,7 @@ $hy-loading-vertical-text-color: var(--hy-loading-vertical-text-color, #{$hy-tex
     @include flex(row);
 
     @include m(text) {
-      margin-left: $hy-border-margin-padding-base;
+      margin-left: $hy-loading-margin-padding-base;
     }
   }
 
@@ -86,7 +90,7 @@ $hy-loading-vertical-text-color: var(--hy-loading-vertical-text-color, #{$hy-tex
     @include flex(column);
 
     @include m(text) {
-      margin-top: $hy-border-margin-padding-base;
+      margin-top: $hy-loading-margin-padding-base;
     }
   }
 }

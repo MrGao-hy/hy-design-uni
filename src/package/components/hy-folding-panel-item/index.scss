@@ -15,6 +15,16 @@ $hy-folding-panel-font-size-small: var(--hy-folding-panel-font-size-small, #{$hy
 $hy-folding-panel-border: var(--hy-folding-panel-border, #{$hy-border-line}) !default;
 /* 右侧值文字颜色，默认跟随全局灰度文字 token */
 $hy-folding-panel-value-color: var(--hy-folding-panel-value-color, #{$hy-text-color--grey}) !default;
+/* hy-folding-panel 大间距，默认跟随全局 token */
+$hy-folding-panel-padding-lg: var(--hy-folding-panel-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* hy-folding-panel 基础间距，默认跟随全局 token */
+$hy-folding-panel-padding-base: var(--hy-folding-panel-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-folding-panel 小间距，默认跟随全局 token */
+$hy-folding-panel-padding-sm: var(--hy-folding-panel-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* hy-folding-panel 容器背景色，默认跟随全局 token */
+$hy-folding-panel-header-background: var(--hy-folding-panel-header-background, #{$hy-background--container}) !default;
+/* hy-folding-panel 点击状态背景色，默认跟随全局 token */
+$hy-folding-panel-active: var(--hy-folding-panel-active, #{$hy-background--hover}) !default;
 
 @include b(folding-panel-item) {
     position: relative;
@@ -30,17 +40,17 @@ $hy-folding-panel-value-color: var(--hy-folding-panel-value-color, #{$hy-text-co
     }
 
     @include m(large) {
-        padding: $hy-border-margin-padding-lg;
+        padding: $hy-folding-panel-padding-lg;
         font-size: $hy-folding-panel-font-size-large;
     }
 
     @include m(medium) {
-        padding: $hy-border-margin-padding-base;
+        padding: $hy-folding-panel-padding-base;
         font-size: $hy-folding-panel-font-size-medium;
     }
 
     @include m(small) {
-        padding: $hy-border-margin-padding-sm;
+        padding: $hy-folding-panel-padding-sm;
         font-size: $hy-folding-panel-font-size-small;
     }
 
@@ -49,10 +59,10 @@ $hy-folding-panel-value-color: var(--hy-folding-panel-value-color, #{$hy-text-co
         justify-content: space-between;
         align-items: center;
         transition: background-color 0.2s;
-        background: $hy-background--container;
+        background: $hy-folding-panel-header-background;
 
         @include pseudo(active) {
-            background-color: $hy-background--hover;
+            background-color: $hy-folding-panel-active;
         }
     }
 

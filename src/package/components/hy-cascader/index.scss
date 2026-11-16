@@ -15,6 +15,18 @@ $hy-cascader-item-font-size: var(--hy-cascader-item-font-size, #{$hy-font-size-b
 $hy-cascader-item-color: var(--hy-cascader-item-color, #{$hy-text-color}) !default;
 /* 标题栏底部分隔线，默认跟随全局边框线 token */
 $hy-cascader-border: var(--hy-cascader-border, #{$hy-border-line}) !default;
+/* hy-cascader 基础间距，默认跟随全局 token */
+$hy-cascader-margin-padding-base: var(--hy-cascader-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-cascader 粗体字重，默认跟随全局 token */
+$hy-cascader-font-weight-bold: var(--hy-cascader-font-weight-bold, #{$hy-font-weight-bold}) !default;
+/* hy-cascader 大间距，默认跟随全局 token */
+$hy-cascader-margin-padding-lg: var(--hy-cascader-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* hy-cascader 主题色，默认跟随全局主题色 token */
+$hy-cascader-primary: var(--hy-cascader-primary, #{$hy-primary}) !default;
+/* hy-cascader 点击状态背景色，默认跟随全局 token */
+$hy-cascader-background--hover: var(--hy-cascader-background--hover, #{$hy-background--hover}) !default;
+/* hy-cascader 大边框宽度，默认跟随全局 token */
+$hy-cascader-border-width-lg: var(--hy-cascader-border-width-lg, #{$hy-border-width-lg}) !default;
 
 @include b(cascader) {
   position: relative;
@@ -38,13 +50,13 @@ $hy-cascader-border: var(--hy-cascader-border, #{$hy-border-line}) !default;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $hy-border-margin-padding-base;
+    padding: $hy-cascader-margin-padding-base;
     border-bottom: $hy-cascader-border;
   }
 
   @include e(header-title) {
     font-size: $hy-cascader-title-font-size;
-    font-weight: $hy-font-weight-bold;
+    font-weight: $hy-cascader-font-weight-bold;
     color: $hy-cascader-title-color;
   }
 
@@ -67,16 +79,16 @@ $hy-cascader-border: var(--hy-cascader-border, #{$hy-border-line}) !default;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $hy-border-margin-padding-lg $hy-border-margin-padding-base;
+    padding: $hy-cascader-margin-padding-lg $hy-cascader-margin-padding-base;
     font-size: $hy-cascader-item-font-size;
     color: $hy-cascader-item-color;
     position: relative;
 
     @include m(active) {
-      color: $hy-primary;
-      font-weight: $hy-font-weight-bold;
-      background: $hy-background--hover;
-      border-left: $hy-border-width-lg solid $hy-primary;
+      color: $hy-cascader-primary;
+      font-weight: $hy-cascader-font-weight-bold;
+      background: $hy-cascader-background--hover;
+      border-left: $hy-cascader-border-width-lg solid $hy-cascader-primary;
     }
   }
 

@@ -19,22 +19,28 @@ $hy-card-sub-color: var(--hy-card-sub-color, #{$hy-text-color--grey}) !default;
 $hy-card-sub-font-size: var(--hy-card-sub-font-size, #{$hy-font-size-sm}) !default;
 /* 头部右侧文字颜色，默认跟随全局灰度文字 token */
 $hy-card-right-color: var(--hy-card-right-color, #{$hy-text-color--grey}) !default;
+/* hy-card 容器背景色，默认跟随全局 token */
+$hy-card-background--container: var(--hy-card-background--container, #{$hy-background--container}) !default;
+/* hy-card 基础间距，默认跟随全局 token */
+$hy-card-margin-padding-base: var(--hy-card-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-card 小间距，默认跟随全局 token */
+$hy-card-margin-padding-sm: var(--hy-card-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(card) {
     position: relative;
     font-size: $hy-card-font-size;
-    background-color: $hy-background--container;
+    background-color: $hy-card-background--container;
     box-sizing: border-box;
     overflow: hidden;
 
     @include edeep(thumb) {
-        margin-right: $hy-border-margin-padding-base;
+        margin-right: $hy-card-margin-padding-base;
         flex-shrink: 0;
     }
 
     @include e(full) {
-        margin-left: $hy-border-margin-padding-base !important;
-        margin-right: $hy-border-margin-padding-base !important;
+        margin-left: $hy-card-margin-padding-base !important;
+        margin-right: $hy-card-margin-padding-base !important;
     }
 
     @include m(border) {
@@ -72,7 +78,7 @@ $hy-card-right-color: var(--hy-card-right-color, #{$hy-text-color--grey}) !defau
 
         @include m(right) {
             color: $hy-card-right-color;
-            margin-left: $hy-border-margin-padding-sm;
+            margin-left: $hy-card-margin-padding-sm;
 
             @include e(text) {
                 white-space: nowrap;

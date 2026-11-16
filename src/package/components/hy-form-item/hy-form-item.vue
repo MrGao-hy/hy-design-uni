@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-form-item" :class="[`hy-form-item--${labelPos}`]">
+    <view class="hy-form-item" :class="[`hy-form-item--${labelPos}`, customClass]" :style="customStyle">
         <view v-if="label" class="hy-form-item__label" :style="labelStyle">
             <text v-if="isRequired" class="hy-form-item__label--required">*</text>
             {{ label }}

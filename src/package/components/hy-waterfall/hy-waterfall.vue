@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-waterfall">
+    <view class="hy-waterfall" :class="customClass" :style="customStyle">
         <view ref="hy-waterfall__left" id="hy-waterfall__left--column" class="hy-waterfall__column">
             <slot name="left" :leftList="leftList"></slot>
         </view>

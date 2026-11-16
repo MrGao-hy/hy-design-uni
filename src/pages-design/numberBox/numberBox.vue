@@ -9,14 +9,38 @@
         <hy-number-step v-model="value" :step="3"></hy-number-step>
     </view>
 
+    <view class="hy-title">{{ t('decimalSection') }}</view>
+    <view class="hy-container">
+        <hy-number-step v-model="value" :step="0.1" :decimalLength="1"></hy-number-step>
+    </view>
+
     <view class="hy-title">{{ t('disabled') }}</view>
     <view class="hy-container">
         <hy-number-step v-model="value" disabled></hy-number-step>
     </view>
 
+    <view class="hy-title">{{ t('disabledInput') }}</view>
+    <view class="hy-container">
+        <hy-number-step v-model="value" :disabledInput="true"></hy-number-step>
+    </view>
+
+    <view class="hy-title">{{ t('disablePlus') }}</view>
+    <view class="hy-container">
+        <hy-number-step v-model="value" :disablePlus="true"></hy-number-step>
+    </view>
+
     <view class="hy-title">{{ t('rangeSection') }}</view>
     <view class="hy-container">
         <hy-number-step v-model="value" :min="10" :max="20"></hy-number-step>
+    </view>
+
+    <view class="hy-title">{{ t('asyncSection') }}</view>
+    <view class="hy-container">
+        <hy-number-step
+            v-model="asyncValue"
+            :asyncChange="true"
+            @change="onAsyncChange"
+        ></hy-number-step>
     </view>
 
     <view class="hy-title">{{ t('hideMinus') }}</view>
@@ -28,6 +52,28 @@
             input-bg-color="transparent"
             :plusIcon="{ color: '#ffffff' }"
             button-radius="50%"
+        ></hy-number-step>
+    </view>
+
+    <view class="hy-title">{{ t('customAppearance') }}</view>
+    <view class="hy-container">
+        <hy-number-step
+            v-model="value"
+            button-size="36"
+            button-width="44"
+            input-width="60"
+            button-radius="8px"
+            color="#f56c6c"
+            bg-color="#fef0f0"
+        ></hy-number-step>
+    </view>
+
+    <view class="hy-title">{{ t('customIcon') }}</view>
+    <view class="hy-container">
+        <hy-number-step
+            v-model="value"
+            :minusIcon="{ name: IconConfig.DELETE, size: 14 }"
+            :plusIcon="{ name: IconConfig.SHOPPING_CART_ADD, size: 14 }"
         ></hy-number-step>
     </view>
 
@@ -53,7 +99,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { IconConfig } from '@/package'
+import { IconConfig, useToast } from '@/package'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({
@@ -67,6 +113,22 @@ usePageTitle('numberBox')
 
 const value = ref(10)
 const value2 = ref(0)
+// 异步变更演示值
+const asyncValue = ref(5)
+const toast = useToast()
+
+/**
+ * 异步变更：开启 asyncChange 后组件内部不会更新值，
+ * 需在 change 事件中请求接口完成后手动更新 v-model
+ */
+const onAsyncChange = (value: number | string) => {
+    toast.loading(t('asyncLoading'))
+    // 模拟接口请求，完成后更新值
+    setTimeout(() => {
+        asyncValue.value = Number(value)
+        toast.close()
+    }, 500)
+}
 
 useShareButton()
 </script>

@@ -9,7 +9,7 @@
         safe-area-inset-bottom
         :closeOnClickOverlay="closeOnClickOverlay"
     >
-        <view class="hy-calendar">
+        <view class="hy-calendar" :class="customClass" :style="customStyle">
             <hy-header
                 :title="title"
                 :subtitle="subtitle"

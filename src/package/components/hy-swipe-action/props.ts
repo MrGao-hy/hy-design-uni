@@ -1,5 +1,5 @@
 import type { SwipeActionOptionsVo, SwipeActionReason, SwipeActionStatus } from './typing'
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 
 const swipeActionProps = {
     /**
@@ -41,7 +41,11 @@ const swipeActionProps = {
         default: 300
     },
     /** 关闭滑动按钮前的钩子函数 */
-    beforeClose: Function
+    beforeClose: Function,
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default swipeActionProps

@@ -58,6 +58,11 @@ const tagProps = {
         type: String,
         default: ''
     },
+    /** 关闭按钮图标的尺寸 */
+    closeSize: {
+        type: [String, Number],
+        default: ''
+    },
     /** 镂空时是否填充背景色 */
     plainFill: {
         type: Boolean,

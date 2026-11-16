@@ -7,6 +7,10 @@ $hy-line-progress-text-font-size: var(--hy-line-progress-text-font-size, 10px) !
 $hy-line-progress-radius: var(--hy-line-progress-radius, #{$hy-radius-semicircle}) !default;
 /* 进度文字颜色 */
 $hy-line-progress-text-color: var(--hy-line-progress-text-color, #ffffff) !default;
+/* hy-line-progress 空数据背景色，默认跟随全局 token */
+$hy-line-progress-background--empty: var(--hy-line-progress-background--empty, #{$hy-background--empty}) !default;
+/* hy-line-progress 主题色，默认跟随全局主题色 token */
+$hy-line-progress-primary: var(--hy-line-progress-primary, #{$hy-primary}) !default;
 
 @include b(line-progress) {
   align-items: stretch;
@@ -18,7 +22,7 @@ $hy-line-progress-text-color: var(--hy-line-progress-text-color, #ffffff) !defau
   border-radius: $hy-line-progress-radius;
 
   @include e(background) {
-    background-color: $hy-background--empty;
+    background-color: $hy-line-progress-background--empty;
     border-radius: $hy-line-progress-radius;
     flex: 1;
   }
@@ -34,7 +38,7 @@ $hy-line-progress-text-color: var(--hy-line-progress-text-color, #ffffff) !defau
     border-radius: $hy-line-progress-radius;
     transition: width 0.5s ease;
     justify-content: flex-end;
-    background-color: $hy-primary;
+    background-color: $hy-line-progress-primary;
   }
 
   @include e(text) {

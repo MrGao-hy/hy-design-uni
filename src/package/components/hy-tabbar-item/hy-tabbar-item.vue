@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-tabbar-item" @click="handleClick">
+    <view class="hy-tabbar-item" :class="customClass" :style="customStyle" @click="handleClick">
         <view class="hy-tabbar-item__body">
             <hy-badge
                 :value="value"

@@ -1,10 +1,9 @@
 <template>
     <view
-        class="hy-swiper"
+        :class="['hy-swiper', customClass]"
         :style="{
-            backgroundColor: bgColor,
-            height: addUnit(height),
-            borderRadius: addUnit(radius)
+            ...rootStyle,
+            ...customStyle
         }"
     >
         <view class="hy-swiper__loading" v-if="loading">
@@ -13,19 +12,16 @@
         <swiper
             v-else
             class="hy-swiper__wrapper"
-            :style="{
-                flex: '1',
-                height: addUnit(height)
-            }"
+            :style="swiperStyle"
             @change="change"
             :circular="circular"
             :interval="interval"
             :duration="duration"
             :autoplay="autoplay"
-            :current="current"
+            :current="currentIndex"
             :currentItemId="currentItemId"
-            :previousMargin="addUnit(previousMargin)"
-            :nextMargin="addUnit(nextMargin)"
+            :previousMargin="margins.previous"
+            :nextMargin="margins.next"
             :acceleration="acceleration"
             :displayMultipleItems="list.length > 0 ? displayMultipleItems : 0"
             :easingFunction="easingFunction"
@@ -33,8 +29,9 @@
             <swiper-item
                 class="hy-swiper__wrapper--item"
                 v-for="(item, index) in list"
-                :key="index"
+                :key="getItemKey(item, index)"
             >
+                <!-- 注意：小程序端父级若用 v-if 动态控制插槽内容，$slots 仍恒为 true，会导致默认渲染分支失效 -->
                 <slot v-if="$slots.default" :record="asRecord(item)" :index="index"> </slot>
                 <view v-else class="hy-swiper__wrapper--item__wrapper" :style="[itemStyle(index)]">
                     <!-- 在nvue中，image图片的宽度默认为屏幕宽度，需要通过flex:1撑开，另外必须设置高度才能显示图片 -->
@@ -44,10 +41,7 @@
                         :src="getSource(item)"
                         :mode="imgMode"
                         @tap="clickHandler(index)"
-                        :style="{
-                            height: addUnit(height),
-                            borderRadius: addUnit(radius)
-                        }"
+                        :style="mediaStyle"
                     ></image>
                     <video
                         class="hy-swiper__wrapper--item__wrapper--video"
@@ -56,10 +50,8 @@
                         :enable-progress-gesture="false"
                         :src="getSource(item)"
                         :poster="getPoster(item)"
-                        :title="showTitle && hasTitle(item)"
-                        :style="{
-                            height: addUnit(height)
-                        }"
+                        :title="showTitle ? hasTitle(item) : ''"
+                        :style="videoStyle"
                         controls
                         @tap="clickHandler(index)"
                     ></video>
@@ -73,6 +65,7 @@
             </swiper-item>
         </swiper>
         <view class="hy-swiper__indicator" :style="[indicatorStyle]">
+            <!-- 注意：同默认插槽，小程序端 v-if 包裹的指示器插槽仍会被识别为存在 -->
             <slot
                 v-if="$slots.indicator"
                 name="indicator"
@@ -130,8 +123,62 @@ watch(
     () => props.current,
     (newVal) => {
         currentIndex.value = newVal
-    }
+    },
+    // immediate 保证外部传入初始 current 时同步到内部状态，swiper 与指示器始终同源
+    { immediate: true }
 )
+
+/**
+ * 根节点样式：高度与圆角（customStyle 在模板中后展开，可覆盖默认值）
+ * */
+const rootStyle = computed<CSSProperties>(() => ({
+    height: addUnit(props.height),
+    borderRadius: addUnit(props.radius)
+}))
+
+/**
+ * swiper 容器样式
+ * */
+const swiperStyle = computed<CSSProperties>(() => ({
+    flex: '1',
+    height: addUnit(props.height),
+    backgroundColor: props.bgColor
+}))
+
+/**
+ * 图片媒体样式
+ * */
+const mediaStyle = computed<CSSProperties>(() => ({
+    height: addUnit(props.height),
+    borderRadius: addUnit(props.radius)
+}))
+
+/**
+ * 视频样式
+ * */
+const videoStyle = computed<CSSProperties>(() => ({
+    height: addUnit(props.height)
+}))
+
+/**
+ * 前后边距（露出前后项的留白），转换为带单位值
+ * */
+const margins = computed(() => ({
+    previous: addUnit(props.previousMargin),
+    next: addUnit(props.nextMargin)
+}))
+
+/**
+ * 列表项 key：优先取对象项 id/url 或字符串值，避免刷新时索引复用错乱
+ * */
+const getItemKey = (item: string | SwiperList, index: number): string | number => {
+    if (typeof item === 'object') {
+        if (item.id != null) return item.id
+        if (item.url) return item.url
+        return index
+    }
+    return item || index
+}
 
 const hasTitle = computed(() => {
     return (item: string | Record<string, any>) => {

@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-check-button">
+    <view class="hy-check-button" :class="customClass" :style="customStyle">
         <template v-for="(item, i) in columns" :key="i">
             <view
                 :class="getItemClass(item)"

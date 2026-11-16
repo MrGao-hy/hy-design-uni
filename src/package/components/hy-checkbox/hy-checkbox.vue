@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-checkbox--group" :class="bemClass">
+    <view class="hy-checkbox--group" :class="[bemClass, customClass]">
         <template v-for="(item, i) in columns_1" :key="i">
             <view
                 class="hy-checkbox cursor-pointer"

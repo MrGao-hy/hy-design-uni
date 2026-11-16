@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-upload" :style="[customStyle]">
+    <view class="hy-upload" :class="customClass" :style="[customStyle]">
         <view class="hy-upload__wrap">
             <template v-if="previewImage">
                 <view class="hy-upload__wrap--preview" v-for="(item, index) in lists" :key="index">

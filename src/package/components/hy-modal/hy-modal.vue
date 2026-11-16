@@ -6,7 +6,8 @@
         :round="modalOptions.round || round"
         :customStyle="{
             overflow: 'hidden',
-            marginTop: `-${addUnit(modalOptions.negativeTop || negativeTop)}`
+            marginTop: `-${addUnit(modalOptions.negativeTop || negativeTop)}`,
+            ...customStyle
         }"
         :closeOnClickOverlay="modalOptions.closeOnClickOverlay || closeOnClickOverlay"
         :safeAreaInsetBottom="false"
@@ -15,6 +16,7 @@
     >
         <view
             class="hy-modal"
+            :class="customClass"
             :style="{
                 width: addUnit(modalOptions.width || width)
             }"

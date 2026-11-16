@@ -11,6 +11,8 @@ $hy-notice-bar-font-size: var(--hy-notice-bar-font-size, 14px) !default;
 $hy-notice-bar-swiper-height: var(--hy-notice-bar-swiper-height, 16px) !default;
 /* 通知栏圆角，默认跟随全局小圆角 token */
 $hy-notice-bar-radius: var(--hy-notice-bar-radius, #{$hy-radius-sm}) !default;
+/* hy-notice-bar 警告色，默认跟随全局警告色 token */
+$hy-notice-bar-warning: var(--hy-notice-bar-warning, #{$hy-warning}) !default;
 
 @include b(notice) {
   @include flex;
@@ -22,7 +24,7 @@ $hy-notice-bar-radius: var(--hy-notice-bar-radius, #{$hy-radius-sm}) !default;
     padding: $hy-notice-bar-padding;
     flex: 1;
     background-color: $hy-notice-bar-bg;
-    color: $hy-warning;
+    color: $hy-notice-bar-warning;
     border-radius: $hy-notice-bar-radius;
   }
 
@@ -30,7 +32,7 @@ $hy-notice-bar-radius: var(--hy-notice-bar-radius, #{$hy-radius-sm}) !default;
     align-items: center;
     margin-right: 5px;
     :deep(.hy-icon) {
-      color: $hy-warning;
+      color: $hy-notice-bar-warning;
     }
   }
 
@@ -48,7 +50,7 @@ $hy-notice-bar-radius: var(--hy-notice-bar-radius, #{$hy-radius-sm}) !default;
 
     @include m(text) {
       font-size: $hy-notice-bar-font-size;
-      color: $hy-warning;
+      color: $hy-notice-bar-warning;
       /* #ifndef APP-NVUE */
       // 这一句很重要，为了能让滚动左右连接起来
       padding-left: 100%;
@@ -75,7 +77,7 @@ $hy-notice-bar-radius: var(--hy-notice-bar-radius, #{$hy-radius-sm}) !default;
 
       @include e(text) {
         font-size: $hy-notice-bar-font-size;
-        color: $hy-warning;
+        color: $hy-notice-bar-warning;
         /* 行高与滚动区域高度保持一致，避免微信小程序原生swiper将文字上下裁剪 */
         line-height: $hy-notice-bar-swiper-height;
       }

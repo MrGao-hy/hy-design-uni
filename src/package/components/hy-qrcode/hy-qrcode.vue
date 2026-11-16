@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-qrcode" @longpress="onLongPress">
+    <view class="hy-qrcode" :class="customClass" :style="customStyle" @longpress="onLongPress">
         <view class="hy-qrcode__content">
             <!-- #ifndef APP-NVUE -->
             <hy-image :src="result" :width="size" :height="size" @click="preview"></hy-image>

@@ -7,18 +7,22 @@ $hy-float-button-radius: var(--hy-float-button-radius, #{$hy-radius-sm}) !defaul
 $hy-float-button-menus-max-height: var(--hy-float-button-menus-max-height, 250px) !default;
 /* 菜单项字号，默认跟随全局基础字号 */
 $hy-float-button-menu-font-size: var(--hy-float-button-menu-font-size, #{$hy-font-size-base}) !default;
+/* hy-float-button 主题色，默认跟随全局主题色 token */
+$hy-float-button-primary: var(--hy-float-button-primary, #{$hy-primary}) !default;
+/* hy-float-button 基础阴影，默认跟随全局 token */
+$hy-float-button-shadow-base: var(--hy-float-button-shadow-base, #{$hy-shadow-base}) !default;
 
 
 @include b(float-button) {
   position: relative;
-  background-color: $hy-primary;
+  background-color: $hy-float-button-primary;
   color: #FFFFFF;
 
   @include borderRadio(circle);
   @include borderRadio(square, $hy-float-button-radius);
 
   @include e(shadow) {
-    box-shadow: $hy-shadow-base;
+    box-shadow: $hy-float-button-shadow-base;
   }
 
   //@include e(animation) {
@@ -42,7 +46,7 @@ $hy-float-button-menu-font-size: var(--hy-float-button-menu-font-size, #{$hy-fon
     justify-content: center;
     align-items: center;
     transition: 0.4s ease;
-    background-color: $hy-primary;
+    background-color: $hy-float-button-primary;
     :deep(.hy-icon) {
       color: #FFFFFF;
     }
@@ -54,7 +58,7 @@ $hy-float-button-menu-font-size: var(--hy-float-button-menu-font-size, #{$hy-fon
     overflow: hidden;
     max-height: $hy-float-button-menus-max-height;
     box-sizing: border-box;
-    background-color: $hy-primary;
+    background-color: $hy-float-button-primary;
     @include m(item) {
       font-size: $hy-float-button-menu-font-size;
       box-sizing: border-box;

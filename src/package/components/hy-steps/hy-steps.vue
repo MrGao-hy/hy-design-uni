@@ -1,5 +1,5 @@
 <template>
-    <view :class="[`hy-steps--${direction}`, 'hy-steps']">
+    <view :class="[`hy-steps--${direction}`, 'hy-steps', customClass]" :style="customStyle">
         <template v-for="(item, i) in list" :key="i">
             <view ref="hy-steps-item" :class="[`hy-steps-item--${direction}`, 'hy-steps-item']">
                 <!--	线条	-->

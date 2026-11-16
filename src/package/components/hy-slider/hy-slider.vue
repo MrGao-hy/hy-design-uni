@@ -176,12 +176,14 @@ const sliderRect = ref<UniNamespace.NodeInfo>({
     left: 0,
     width: 0
 })
+/* inner 左内边距（实测值），用于补偿按钮定位参照系与轨道起点的差值 */
+const paddingLeft = ref(0)
 const instance = getCurrentInstance()
 
 const blockLeft = computed(() => {
     return (slideWidth: string | number | undefined, blockWidth: string | number): string => {
         if (slideWidth) {
-            return addUnit(getPx(slideWidth) + getPx(blockWidth) / 2)
+            return addUnit(paddingLeft.value + getPx(slideWidth) - getPx(blockWidth) / 2)
         }
         return '0px'
     }
@@ -213,9 +215,15 @@ watch(
 const getSliderRect = async (): Promise<void> => {
     // #ifndef APP-NVUE
     const rect = (await getRect('.hy-slider__base', false, instance)) as UniNamespace.NodeInfo
+    const innerRect = (await getRect('.hy-slider__inner', false, instance)) as UniNamespace.NodeInfo
 
     if (rect && rect.width) {
         sliderRect.value = rect
+    }
+    // 按钮left相对inner的padding box定位，而进度宽度相对轨道（content box）计算，
+    // 两者相差一个左内边距，测量差值供blockLeft补偿
+    if (innerRect?.left != null && rect?.left != null) {
+        paddingLeft.value = Math.max(0, innerRect.left - rect.left)
     }
     // #endif
 }
@@ -275,10 +283,7 @@ const onTouchStart = async (e: any, index = 1) => {
     if (props.disabled) return
     // 弹窗等场景下，每次触摸前重新测量，确保 left/width 为布局完成后的最新值
     // 避免弹窗动画（缩放/平移）期间测量到错误的位置，导致点击/拖动值跳变
-    const rect = (await getRect('.hy-slider__base', false, instance)) as UniNamespace.NodeInfo
-    if (rect?.width) {
-        sliderRect.value = rect
-    }
+    await getSliderRect()
     if (!sliderRect.value.width) return
     // 尺寸就绪后，同步一次滑块展示位置
     init()
@@ -336,10 +341,7 @@ const onClick = async (e: any) => {
     // #ifndef APP-NVUE
 
     // 弹窗等场景下，点击时重新测量，确保使用布局完成后的最新位置，避免值跳变为0
-    const rect = (await getRect('.hy-slider__base', false, instance)) as UniNamespace.NodeInfo
-    if (rect?.width) {
-        sliderRect.value = rect
-    }
+    await getSliderRect()
     // 弹窗等场景下尺寸尚未就绪时不处理点击，避免除零
     if (!sliderRect.value.width) return
     let x

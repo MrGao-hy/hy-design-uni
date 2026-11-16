@@ -6,7 +6,7 @@
                 <hy-icon
                     v-else-if="icon?.name"
                     :name="icon?.name"
-                    :color="hyIconColor"
+                    :color="icon?.color"
                     :size="hyIconSize"
                     :bold="icon?.bold"
                     :customPrefix="icon?.customPrefix"
@@ -27,9 +27,12 @@
                     :class="['hy-tag__close', `hy-tag__close--${size}`]"
                     v-if="closable"
                     @tap.stop="closeHandler"
-                    :style="{ backgroundColor: closeColor }"
                 >
-                    <hy-icon :name="IconConfig.CLOSE" :size="closeSize" color="#ffffff"></hy-icon>
+                    <hy-icon
+                        :name="IconConfig.CLOSE"
+                        :size="closeSize || size"
+                        :color="closeColor"
+                    ></hy-icon>
                 </view>
             </view>
         </view>
@@ -139,13 +142,6 @@ const textClass = computed((): string[] => {
 })
 
 /**
- * 关闭图标icon大小
- */
-const closeSize = computed(() => {
-    const sizeMap: Record<string, number> = { large: 14, medium: 12, small: 10, mini: 8 }
-    return sizeMap[props.size] || 12
-})
-/**
  * 图标大小
  * */
 const hyIconSize = computed(() => {
@@ -154,12 +150,6 @@ const hyIconSize = computed(() => {
     }
     const sizeMap: Record<string, number> = { large: 18, medium: 14, small: 12, mini: 10 }
     return sizeMap[props.size] || 14
-})
-/**
- * 图标颜色
- * */
-const hyIconColor = computed(() => {
-    return props.icon?.color ? props.icon.color : props.plain ? props.type : '#ffffff'
 })
 
 /**

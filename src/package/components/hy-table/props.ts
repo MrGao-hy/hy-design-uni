@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 import type { ITableColumn } from './typing'
 
 const tableProps = {
@@ -56,7 +56,11 @@ const tableProps = {
     emptyDes: {
         type: String,
         default: ''
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default tableProps

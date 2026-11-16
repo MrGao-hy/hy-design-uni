@@ -1,6 +1,9 @@
 @use '../../libs/css/theme' as *;
 @use '../../libs/css/mixin' as *;
 
+/* hy-list 基础间距，默认跟随全局 token */
+$hy-list-margin-padding-base: var(--hy-list-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+
 @include b(virtual-container) {
     box-sizing: border-box;
     position: relative;
@@ -26,7 +29,7 @@
         }
 
         @include m(left) {
-            margin-right: $hy-border-margin-padding-base;
+            margin-right: $hy-list-margin-padding-base;
         }
         @include m(box) {
             box-sizing: border-box;

@@ -1179,9 +1179,16 @@ export default {
         // ===== Demo content =====
         basicUsage: 'Basic Usage',
         stepSection: 'Step',
+        decimalSection: 'Decimal Length',
         disabled: 'Disabled',
+        disabledInput: 'Disable Input',
+        disablePlus: 'Disable Plus',
         rangeSection: 'Range',
+        asyncSection: 'Async Change',
+        asyncLoading: 'Updating...',
         hideMinus: 'Hide Minus',
+        customAppearance: 'Custom Appearance',
+        customIcon: 'Custom Icon',
         customStyle: 'Custom Style'
     },
 

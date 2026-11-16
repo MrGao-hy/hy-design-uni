@@ -15,6 +15,14 @@ $hy-radio-font-size: var(--hy-radio-font-size, #{$hy-font-size-base}) !default;
 $hy-radio-disabled-color: var(--hy-radio-disabled-color, #{$hy-text-color--disabled}) !default;
 /* 圆点框边框，默认跟随全局边框线 token */
 $hy-radio-border: var(--hy-radio-border, #{$hy-border-line}) !default;
+/* hy-radio 大间距，默认跟随全局 token */
+$hy-radio-margin-padding-lg: var(--hy-radio-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* hy-radio 小间距，默认跟随全局 token */
+$hy-radio-margin-padding-sm: var(--hy-radio-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* hy-radio 主题色，默认跟随全局主题色 token */
+$hy-radio-primary: var(--hy-radio-primary, #{$hy-primary}) !default;
+/* hy-radio 禁用背景色，默认跟随全局 token */
+$hy-radio-background--disabled: var(--hy-radio-background--disabled, #{$hy-background--disabled}) !default;
 
 
 @include b(radio) {
@@ -34,7 +42,7 @@ $hy-radio-border: var(--hy-radio-border, #{$hy-border-line}) !default;
     }
 
     &--column {
-      margin: $hy-border-margin-padding-lg 0;
+      margin: $hy-radio-margin-padding-lg 0;
       @include flex(column);
     }
   }
@@ -57,7 +65,7 @@ $hy-radio-border: var(--hy-radio-border, #{$hy-border-line}) !default;
 
       color: $hy-radio-label-color;
       font-size: $hy-radio-font-size;
-      margin-right: $hy-border-margin-padding-sm;
+      margin-right: $hy-radio-margin-padding-sm;
 
       @include m(disabled) {
         color: $hy-radio-disabled-color;
@@ -78,7 +86,7 @@ $hy-radio-border: var(--hy-radio-border, #{$hy-border-line}) !default;
     justify-content: center;
     color: transparent;
     text-align: center;
-    margin-right: $hy-border-margin-padding-sm;
+    margin-right: $hy-radio-margin-padding-sm;
     border: $hy-radio-border;
 
     /* #ifdef MP-TOUTIAO */
@@ -99,20 +107,20 @@ $hy-radio-border: var(--hy-radio-border, #{$hy-border-line}) !default;
 
     @include m(checked) {
       color: #FFFFFF;
-      background-color: $hy-primary;
-      border-color: $hy-primary;
+      background-color: $hy-radio-primary;
+      border-color: $hy-radio-primary;
     }
 
     @include m(disabled) {
-      background-color: $hy-background--disabled;
+      background-color: $hy-radio-background--disabled;
       :deep(.hy-icon) {
         display: none;
       }
     }
 
     @include m(disabled--checked) {
-      background-color: $hy-primary;
-      border-color: $hy-primary;
+      background-color: $hy-radio-primary;
+      border-color: $hy-radio-primary;
       opacity: $hy-radio-disabled-checked-opacity;
       :deep(.hy-icon) {
         display: block;

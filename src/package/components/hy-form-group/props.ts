@@ -9,7 +9,7 @@ import {
     HyCheckButtonProps,
     HyInputProps
 } from '../../libs'
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 
 const formGroupProps = {
     /**
@@ -103,7 +103,11 @@ const formGroupProps = {
      * */
     formData: {
         type: Object as PropType<Record<string, any>>
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default formGroupProps

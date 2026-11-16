@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-folding-panel">
+    <view class="hy-folding-panel" :class="customClass" :style="customStyle">
         <slot></slot>
     </view>
 </template>

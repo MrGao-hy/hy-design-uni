@@ -1,5 +1,5 @@
 import type { TopBottomType, HyInputProps, PickerColumnVo } from '../../libs'
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 import { useTranslate } from '../../libs'
 
 const { t } = useTranslate('picker')
@@ -118,7 +118,11 @@ const pickerProps = {
     toolbarRightSlot: {
         type: Boolean,
         default: false
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default pickerProps

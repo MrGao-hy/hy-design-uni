@@ -19,8 +19,18 @@ $hy-swiper-title-color: var(--hy-swiper-title-color, #ffffff) !default;
 $hy-swiper-indicator-bar-radius: var(--hy-swiper-indicator-bar-radius, #{$hy-radius-semicircle}) !default;
 /* 线型指示器滑块背景色 */
 $hy-swiper-indicator-bar-bg: var(--hy-swiper-indicator-bar-bg, #ffffff) !default;
-/* 点型指示器圆角，默认跟随全局半圆角 token */
+/* 点型指示器圆角 */
 $hy-swiper-dot-radius: var(--hy-swiper-dot-radius, #{$hy-radius-semicircle}) !default;
+/* 轮播图背景色 */
+$hy-swiper-background: var(--hy-swiper-background, #{$hy-background}) !default;
+/* 标题上下边距 */
+$hy-swiper-title-margin-tb: var(--hy-swiper-title-margin-tb, #{$hy-border-margin-padding-sm}) !default;
+/* 标题左右边距 */
+$hy-swiper-title-margin-lr: var(--hy-swiper-title-margin-lr, #{$hy-border-margin-padding-lg}) !default;
+/* 指示器下边距 */
+$hy-swiper-indicator-bottom: var(--hy-swiper-indicator-bottom, #{$hy-border-margin-padding-sm}) !default;
+/* 点型指示器间距 */
+$hy-swiper-dot-margin: var(--hy-swiper-dot-margin, #{$hy-border-margin-padding-sm}) !default;
 
 
 @include b(swiper) {
@@ -32,7 +42,7 @@ $hy-swiper-dot-radius: var(--hy-swiper-dot-radius, #{$hy-radius-semicircle}) !de
 
   @include e(wrapper) {
     flex: 1;
-    background-color: $hy-background;
+    background-color: $hy-swiper-background;
 
     @include m(item) {
       flex: 1;
@@ -56,7 +66,7 @@ $hy-swiper-dot-radius: var(--hy-swiper-dot-radius, #{$hy-radius-semicircle}) !de
           left: 0;
           right: 0;
           font-size: $hy-swiper-title-font-size;
-          padding: $hy-border-margin-padding-sm $hy-border-margin-padding-lg;
+          padding: $hy-swiper-title-margin-tb $hy-swiper-title-margin-lr;
           color: $hy-swiper-title-color;
           flex: 1;
         }
@@ -66,7 +76,7 @@ $hy-swiper-dot-radius: var(--hy-swiper-dot-radius, #{$hy-radius-semicircle}) !de
 
   @include e(indicator) {
     position: absolute;
-    bottom: $hy-border-margin-padding-sm;
+    bottom: $hy-swiper-indicator-bottom;
   }
 }
 
@@ -92,7 +102,7 @@ $hy-swiper-dot-radius: var(--hy-swiper-dot-radius, #{$hy-radius-semicircle}) !de
       width: $hy-swiper-dot-size;
       height: $hy-swiper-dot-size;
       border-radius: $hy-swiper-dot-radius;
-      margin: 0 $hy-border-margin-padding-sm;
+      margin: 0 $hy-swiper-dot-margin;
 
       @include e(active) {
         width: $hy-swiper-dot-active-width;

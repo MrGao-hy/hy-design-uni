@@ -1,5 +1,9 @@
 <template>
-    <view class="hy-table" :style="{ height: addUnit(height) }">
+    <view
+        class="hy-table"
+        :class="customClass"
+        :style="{ height: addUnit(height), ...customStyle }"
+    >
         <!-- 列头：位于纵向滚动容器之外天然吸顶。
              中间列头自身为 scroll-x 容器，与主体横向滚动双向联动：
              拖动表头可滚动表格，拖动表格表头同步跟随，全平台（含支付宝小程序）一致 -->

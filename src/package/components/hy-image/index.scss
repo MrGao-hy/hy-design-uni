@@ -7,6 +7,8 @@ $hy-image-width: var(--hy-image-width, 250px) !default;
 $hy-image-height: var(--hy-image-height, 200px) !default;
 /* 加载/失败占位文字颜色，默认跟随全局灰度文字 token */
 $hy-image-placeholder-color: var(--hy-image-placeholder-color, #{$hy-text-color--grey}) !default;
+/* hy-image 空数据背景色，默认跟随全局 token */
+$hy-image-background--empty: var(--hy-image-background--empty, #{$hy-background--empty}) !default;
 
 @include b(image) {
   position: relative;
@@ -44,7 +46,7 @@ $hy-image-placeholder-color: var(--hy-image-placeholder-color, #{$hy-text-color-
     @include flex;
     align-items: center;
     justify-content: center;
-    background-color: $hy-background--empty;
+    background-color: $hy-image-background--empty;
     color: $hy-image-placeholder-color;
   }
 }

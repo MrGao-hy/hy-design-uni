@@ -23,13 +23,23 @@ $hy-input-disabled-color: var(--hy-input-disabled-color, #{$hy-text-color--disab
 $hy-input-clear-radius: var(--hy-input-clear-radius, #{$hy-radius-semicircle}) !default;
 /* 边框，默认跟随全局边框线 token */
 $hy-input-border: var(--hy-input-border, #{$hy-border-line}) !default;
+/* hy-input 文字颜色，默认跟随全局基础文字 token */
+$hy-input-text-color: var(--hy-input-text-color, #{$hy-text-color}) !default;
+/* hy-input 禁用背景色，默认跟随全局 token */
+$hy-input-background--disabled: var(--hy-input-background--disabled, #{$hy-background--disabled}) !default;
+/* hy-input 基础间距，默认跟随全局 token */
+$hy-input-margin-padding-base: var(--hy-input-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* hy-input 轨道背景色，默认跟随全局 token */
+$hy-input-background--track: var(--hy-input-background--track, #{$hy-background--track}) !default;
+/* hy-input 小间距，默认跟随全局 token */
+$hy-input-margin-padding-sm: var(--hy-input-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(input) {
   @include flex(row);
   align-items: center;
   justify-content: space-between;
   flex: 1;
-  color: $hy-text-color;
+  color: $hy-input-text-color;
   
   @include e(border) {
   	border: $hy-input-border;
@@ -40,7 +50,7 @@ $hy-input-border: var(--hy-input-border, #{$hy-border-line}) !default;
   }
 
   @include e(disabled) {
-    background-color: $hy-background--disabled;
+    background-color: $hy-input-background--disabled;
     color: $hy-input-disabled-color;
     :deep(.hy-icon) {
       color: $hy-input-disabled-color;
@@ -69,7 +79,7 @@ $hy-input-border: var(--hy-input-border, #{$hy-border-line}) !default;
       position: relative;
       @include flex(row);
       flex: 1;
-      margin-right: $hy-border-margin-padding-base;
+      margin-right: $hy-input-margin-padding-base;
 
       @include e(field) {
         background: transparent;
@@ -91,7 +101,7 @@ $hy-input-border: var(--hy-input-border, #{$hy-border-line}) !default;
       width: $hy-input-clear-size;
       height: $hy-input-clear-size;
       border-radius: $hy-input-clear-radius;
-      background-color: $hy-background--track;
+      background-color: $hy-input-background--track;
       @include flex(row);
       align-items: center;
       justify-content: center;
@@ -99,11 +109,11 @@ $hy-input-border: var(--hy-input-border, #{$hy-border-line}) !default;
     }
 
     @include m(subfix-icon) {
-      margin-left: $hy-border-margin-padding-sm;
+      margin-left: $hy-input-margin-padding-sm;
     }
 
     @include m(prefix-icon) {
-      margin-right: $hy-border-margin-padding-sm;
+      margin-right: $hy-input-margin-padding-sm;
     }
   }
 }

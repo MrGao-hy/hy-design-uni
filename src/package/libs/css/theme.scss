@@ -62,7 +62,7 @@ $hy-background--2: var(--hy-background--2, #ffffff) !default; // 弹窗背景色
 $hy-background--3: var(--hy-background--3, rgb(238, 238, 239)) !default; // 弹窗背景色
 $hy-background--container: var(--hy-background--container, #ffffff) !default; // 容器背景色
 $hy-background--disabled: var(--hy-background--disabled, rgba(0, 0, 0, 0.04)); // 禁用背景色
-$hy-background--track: var(--hy-background--track, #F6F6F6) !default; // 轨道背景色
+$hy-background--track: var(--hy-background--track, #F3F3F6) !default; // 轨道背景色
 $hy-background--empty: var(--hy-background--empty, #F3F3F3) !default; // 空状态、搜索背景色
 $hy-background--skeleton: var(--hy-background--skeleton, #eee) !default; // 骨架屏背景色
 $hy-background--hover: var(--hy-background--hover, rgba(0,0,0,0.05)) !default; // 点击状态
@@ -70,6 +70,7 @@ $hy-background--mask: var(--hy-background--mask, rgba(0, 0, 0, 0.5)) !default; /
 $hy-background--active: var(--hy-background--active, #FFFFFF) !default; // 选中背景色
 $hy-background--close: var(--hy-background--close, #f0f0f0) !default; // 关闭背景色
 $hy-background--box: var(--hy-background--box, #FFFFFF) !default; // 盒子背景色
+$hy-background--block: var(--hy-background--block, rgb(238, 238, 239)) !default; // 块背景色
 $hy-background--line: var(--hy-background--line, rgba(0, 0, 0, 0.15)) !default; // 细线背景色
 $hy-background--table-header: var(--hy-background--table-header, #FAFAFA) !default; // 表头背景色
 $hy-background-image--mask--two-flanks: var(--hy-background-image--mask--two-flanks, linear-gradient(180deg, hsla(0, 0%, 100%, 0.95), hsla(0, 0%, 100%, 0.6)),

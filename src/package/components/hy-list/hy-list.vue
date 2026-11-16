@@ -6,6 +6,8 @@
         :lower-threshold="lowerThreshold"
         :scroll-y="true"
         class="hy-virtual-container"
+        :class="customClass"
+        :style="customStyle"
     >
         <view class="hy-virtual-container__phantom" :style="{ height: totalHeight + 'px' }">
             <view

@@ -129,7 +129,9 @@ const uploadProps = {
     /** 定义需要用到的外部样式 */
     customStyle: {
         type: Object as PropType<CSSProperties>
-    }
+    },
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default uploadProps

@@ -7,12 +7,16 @@ $hy-text-price-font-size: var(--hy-text-price-font-size, 14px) !default;
 $hy-text-font-size: var(--hy-text-font-size, #{$hy-font-size-base}) !default;
 /* 价格文字颜色，默认跟随全局灰度文字 token */
 $hy-text-price-color: var(--hy-text-price-color, #{$hy-text-color--grey}) !default;
+/* hy-text 文字颜色，默认跟随全局基础文字 token */
+$hy-text-main-color: var(--hy-text-main-color, #{$hy-text-color}) !default;
+/* hy-text 主题色，默认跟随全局主题色 token */
+$hy-text-primary: var(--hy-text-primary, #{$hy-primary}) !default;
 
 @include b(text) {
     @include flex(row);
     align-items: center;
     flex-wrap: nowrap;
-    color: $hy-text-color;
+    color: $hy-text-main-color;
 
     @include e(price) {
         font-size: $hy-text-price-font-size;
@@ -30,7 +34,7 @@ $hy-text-price-color: var(--hy-text-price-color, #{$hy-text-color--grey}) !defau
         /*链接*/
         @include m(link) {
             text-decoration: underline;
-            color: $hy-primary;
+            color: $hy-text-primary;
         }
 
         @include themeColor(primary, '', transparent, $hy-primary);

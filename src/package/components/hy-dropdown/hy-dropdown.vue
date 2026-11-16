@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-dropdown" :style="dropdownStyle">
+    <view class="hy-dropdown" :class="customClass" :style="dropdownStyle">
         <slot></slot>
     </view>
 </template>

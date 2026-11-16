@@ -83,7 +83,6 @@ const props = defineProps(transitionProps)
 const emit = defineEmits<ITransitionEmits>()
 
 const hasInit = ref<boolean>(false) // 是否渲染组件
-const viewStyle = ref<CSSProperties>({}) // 组件内部的样式
 const status = ref<string>('') // 记录组件动画的状态
 const transitionEnded = ref<boolean>(false) // 组件是否结束的标记
 const classes = ref<string>('') // 应用的类名
@@ -342,10 +341,7 @@ watch(
 )
 
 const mergeStyle = computed(() => {
-    const baseStyle = {
-        ...props.customStyle,
-        ...viewStyle.value
-    }
+    const baseStyle = { ...props.customStyle }
 
     // #ifndef APP-NVUE
     return {

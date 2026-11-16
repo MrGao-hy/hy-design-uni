@@ -43,6 +43,12 @@ $hy-calendar-day-selected-color: var(--hy-calendar-day-selected-color, #ffffff) 
 $hy-calendar-day-disabled-color: var(--hy-calendar-day-disabled-color, #{$hy-text-color--disabled}) !default;
 /* 日期底部信息文字颜色，默认跟随全局次级文字 token */
 $hy-calendar-day-bottom-info-color: var(--hy-calendar-day-bottom-info-color, #{$hy-text-color--2}) !default;
+/* hy-calendar 主题色，默认跟随全局主题色 token */
+$hy-calendar-primary: var(--hy-calendar-primary, #{$hy-primary}) !default;
+/* hy-calendar 主题色浅色，默认跟随全局主题色浅色 token */
+$hy-calendar-primary-light: var(--hy-calendar-primary-light, #{$hy-primary-light}) !default;
+/* hy-calendar 危险色，默认跟随全局危险色 token */
+$hy-calendar-error: var(--hy-calendar-error, #{$hy-error}) !default;
 
 
 /* 主样式 */
@@ -144,7 +150,7 @@ $hy-calendar-day-bottom-info-color: var(--hy-calendar-day-bottom-info-color, #{$
             justify-content: center;
             position: relative;
             @include m(selected) {
-              background-color: $hy-primary;
+              background-color: $hy-calendar-primary;
               @include flex;
               justify-content: center;
               align-items: center;
@@ -152,8 +158,8 @@ $hy-calendar-day-bottom-info-color: var(--hy-calendar-day-bottom-info-color, #{$
               border-radius: $hy-calendar-day-selected-radius;
               @include m(center) {
                 border-radius: 0;
-                background-color: $hy-primary-light;
-                color: $hy-primary;
+                background-color: $hy-calendar-primary-light;
+                color: $hy-calendar-primary;
               }
             }
 
@@ -161,7 +167,7 @@ $hy-calendar-day-bottom-info-color: var(--hy-calendar-day-bottom-info-color, #{$
               width: $hy-calendar-day-dot-size;
               height: $hy-calendar-day-dot-size;
               border-radius: 100px;
-              background-color: $hy-error;
+              background-color: $hy-calendar-error;
               position: absolute;
               top: 6px;
               right: 6px;
@@ -197,7 +203,7 @@ $hy-calendar-day-bottom-info-color: var(--hy-calendar-day-bottom-info-color, #{$
 
               @include m(selected) {
                 color: $hy-calendar-day-selected-color;
-                background-color: $hy-primary;
+                background-color: $hy-calendar-primary;
               }
 
               @include m(disabled) {

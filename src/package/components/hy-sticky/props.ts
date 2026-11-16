@@ -1,3 +1,5 @@
+import type { CSSProperties, PropType } from 'vue'
+
 const stickyProps = {
     /** 吸顶时距离顶部的偏移量（单位：px） */
     zIndex: {
@@ -18,7 +20,11 @@ const stickyProps = {
     scrollSelector: {
         type: String,
         default: ''
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default stickyProps

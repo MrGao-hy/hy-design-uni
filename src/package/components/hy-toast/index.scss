@@ -29,6 +29,16 @@ $hy-toast-icon-radius: var(--hy-toast-icon-radius, #{$hy-radius-semicircle}) !de
 $hy-toast-text-color: var(--hy-toast-text-color, #ffffff) !default;
 /* 文字字号，默认跟随全局基础字体 token */
 $hy-toast-text-font-size: var(--hy-toast-text-font-size, #{$hy-font-size-base}) !default;
+/* hy-toast 信息色，默认跟随全局信息色 token */
+$hy-toast-info: var(--hy-toast-info, #{$hy-info}) !default;
+/* hy-toast 主题色，默认跟随全局主题色 token */
+$hy-toast-primary: var(--hy-toast-primary, #{$hy-primary}) !default;
+/* hy-toast 成功色，默认跟随全局成功色 token */
+$hy-toast-success: var(--hy-toast-success, #{$hy-success}) !default;
+/* hy-toast 危险色，默认跟随全局危险色 token */
+$hy-toast-error: var(--hy-toast-error, #{$hy-error}) !default;
+/* hy-toast 警告色，默认跟随全局警告色 token */
+$hy-toast-warning: var(--hy-toast-warning, #{$hy-warning}) !default;
 
 @include b(toast) {
   @include e(content) {
@@ -64,23 +74,23 @@ $hy-toast-text-font-size: var(--hy-toast-text-font-size, #{$hy-font-size-base}) 
       flex-shrink: 0;
 
       @include e(info) {
-        background: $hy-info;
+        background: $hy-toast-info;
       }
 
       @include e(primary) {
-        background: $hy-primary;
+        background: $hy-toast-primary;
       }
 
       @include e(success) {
-        background: $hy-success;
+        background: $hy-toast-success;
       }
 
       @include e(error) {
-        background: $hy-error;
+        background: $hy-toast-error;
       }
 
       @include e(warning) {
-        background: $hy-warning;
+        background: $hy-toast-warning;
       }
     }
 
@@ -92,23 +102,23 @@ $hy-toast-text-font-size: var(--hy-toast-text-font-size, #{$hy-font-size-base}) 
       word-break: break-all;
 
       @include e(info) {
-        color: $hy-info;
+        color: $hy-toast-info;
       }
 
       @include e(error) {
-        color: $hy-error;
+        color: $hy-toast-error;
       }
 
       @include e(primary) {
-        color: $hy-primary;
+        color: $hy-toast-primary;
       }
 
       @include e(success) {
-        color: $hy-success;
+        color: $hy-toast-success;
       }
 
       @include e(warning) {
-        color: $hy-warning;
+        color: $hy-toast-warning;
       }
     }
   }

@@ -6,7 +6,7 @@ import type {
     SizeType,
     ThemeType
 } from '../../libs'
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 
 const checkButtonProps = {
     /** 选中得值，selectTypeW为radio是字符串，为checkbox是数组 */
@@ -75,7 +75,11 @@ const checkButtonProps = {
     shape: {
         type: String as PropType<ShapeType>,
         default: 'square'
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default checkButtonProps

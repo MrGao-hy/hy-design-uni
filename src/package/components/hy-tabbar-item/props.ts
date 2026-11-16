@@ -1,3 +1,5 @@
+import type { CSSProperties, PropType } from 'vue'
+
 const tabBarItemProps = {
     /** 图标 */
     icon: {
@@ -18,7 +20,11 @@ const tabBarItemProps = {
     value: {
         type: [String, Number],
         default: ''
-    }
+    },
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default tabBarItemProps

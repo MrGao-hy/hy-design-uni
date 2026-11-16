@@ -1,4 +1,4 @@
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 
 const formItemProps = {
     /**
@@ -19,7 +19,11 @@ const formItemProps = {
     /**
      * 验证规则
      */
-    rules: Object as PropType<any>
+    rules: Object as PropType<any>,
+    /** 定义需要用到的外部样式 */
+    customStyle: Object as PropType<CSSProperties>,
+    /** 自定义外部类名 */
+    customClass: String
 }
 
 export default formItemProps

@@ -2,6 +2,8 @@
     <hy-form
         ref="hyFormRef"
         :model="formData"
+        :customStyle="customStyle"
+        :customClass="customClass"
         :rules="extractRules(columns)"
         :label-position="labelPosition"
         :label-align="labelAlign"
