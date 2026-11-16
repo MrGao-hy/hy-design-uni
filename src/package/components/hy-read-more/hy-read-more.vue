@@ -1,12 +1,13 @@
 <template>
-    <view class="hy-read-more">
+    <view class="hy-read-more" :class="customClass" :style="customStyle">
         <view
             class="hy-read-more__content"
             :style="{
-                height:
-                    isLongContent && status === 'close'
-                        ? addUnit(showHeight)
-                        : addUnit(contentHeight),
+                height: !isLongContent
+                    ? 'auto'
+                    : status === 'close'
+                      ? addUnit(showHeight)
+                      : addUnit(contentHeight),
                 textIndent: textIndent
             }"
         >
@@ -62,7 +63,7 @@ export default {
 import { computed, ref, onMounted, getCurrentInstance } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { IReadMoreEmits } from './typing'
-import { getRect, guid, sleep, addUnit, IconConfig } from '../../libs'
+import { getPx, getRect, guid, sleep, addUnit, IconConfig } from '../../libs'
 import readMoreProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -104,7 +105,7 @@ const getContentHeight = async () => {
     getRect('.' + elId.value, false, instance).then((res: any) => {
         contentHeight.value = res.height || 0
         // 判断高度，如果真实内容高度大于占位高度，则显示收起与展开的控制按钮
-        if (res.height && res.height > props.showHeight / 2) {
+        if (res.height && res.height > getPx(props.showHeight)) {
             isLongContent.value = true
             status.value = 'close'
         } else {
