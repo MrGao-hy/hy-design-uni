@@ -7,16 +7,23 @@ const indexBarProps = {
      * 当前激活的索引
      */
     modelValue: {
-        type: String,
+        type: [String, Number] as PropType<string | number>,
         default: '',
         required: true
     },
     /**
-     * 索引列表数据
+     * 索引列表数据；未传时自动收集插槽内 hy-index-anchor 的索引值
      */
     indexList: {
         type: Array as PropType<IIndexItem[]>,
         default: () => []
+    },
+    /**
+     * 锚点是否自动吸顶，吸顶时锚点固定于滚动容器顶部
+     */
+    sticky: {
+        type: Boolean,
+        default: true
     },
     /**
      * 索引栏位置
@@ -69,14 +76,14 @@ const indexBarProps = {
         default: 12
     },
     /**
-     * 索引栏高度，单位px
+     * 组件容器高度，单位px，默认撑满父级
      */
     height: {
         type: [Number, String],
         default: '100%'
     },
     /**
-     * 索引栏宽度，单位px
+     * 索引项宽高，单位px
      */
     width: {
         type: [Number, String],

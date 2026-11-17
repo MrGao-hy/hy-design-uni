@@ -1,0 +1,38 @@
+@use "../../libs/css/mixin" as *;
+@use "../../libs/css/theme" as *;
+
+/* hy-index-anchor 索引文字颜色，默认跟随全局基础文字 token */
+$hy-index-anchor-text-color: var(--hy-index-anchor-text-color, #{$hy-text-color}) !default;
+/* hy-index-anchor 索引背景色，默认跟随全局容器背景 token */
+$hy-index-anchor-background: var(--hy-index-anchor-background, #{$hy-background--container}) !default;
+/* hy-index-anchor 激活索引文字颜色，默认跟随全局主题色 token */
+$hy-index-anchor-primary: var(--hy-index-anchor-primary, #{$hy-primary}) !default;
+/* hy-index-anchor 索引字号，默认跟随全局小号字体 token */
+$hy-index-anchor-font-size: var(--hy-index-anchor-font-size, #{$hy-font-size-sm}) !default;
+/* hy-index-anchor 索引字重，默认跟随全局中等字重 token */
+$hy-index-anchor-font-weight: var(--hy-index-anchor-font-weight, #{$hy-font-weight-medium}) !default;
+/* hy-index-anchor 纵向内边距，默认跟随全局小间距 token */
+$hy-index-anchor-padding-y: var(--hy-index-anchor-padding-y, #{$hy-border-margin-padding-sm}) !default;
+/* hy-index-anchor 横向内边距，默认跟随全局基础间距 token */
+$hy-index-anchor-padding-x: var(--hy-index-anchor-padding-x, #{$hy-border-margin-padding-base}) !default;
+/* hy-index-anchor 吸顶层级 */
+$hy-index-anchor-z-index: var(--hy-index-anchor-z-index, 1) !default;
+
+@include b(index-anchor) {
+  color: $hy-index-anchor-text-color;
+  background-color: $hy-index-anchor-background;
+  padding: $hy-index-anchor-padding-y $hy-index-anchor-padding-x;
+  font-size: $hy-index-anchor-font-size;
+  font-weight: $hy-index-anchor-font-weight;
+
+  @include is(active) {
+    color: $hy-index-anchor-primary;
+  }
+
+  @include is(sticky) {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: $hy-index-anchor-z-index;
+  }
+}
