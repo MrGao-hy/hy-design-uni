@@ -26,7 +26,7 @@ const toastProps = {
         type: [Boolean, String, Object] as PropType<boolean | string | HyIconProps>,
         default: false
     },
-    /** 是否防止触摸穿透 */
+    /** 是否触摸穿透 */
     overlay: {
         type: Boolean,
         default: true
@@ -48,6 +48,11 @@ const toastProps = {
     loadMode: {
         type: String as PropType<LoadingMode>,
         default: 'circle'
+    },
+    /** zIndex 层级 */
+    zIndex: {
+        type: Number,
+        default: 110000
     },
     /** 展示时长，-1时不自动关闭，单位ms */
     duration: {

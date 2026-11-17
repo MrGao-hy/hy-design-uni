@@ -13,33 +13,47 @@ $hy-index-bar-index-radius: var(--hy-index-bar-index-radius, #{$hy-radius-sm}) !
 $hy-index-bar-toast-color: var(--hy-index-bar-toast-color, #ffffff) !default;
 /* 提示气泡文字字号，默认跟随全局大号字体 token */
 $hy-index-bar-toast-font-size: var(--hy-index-bar-toast-font-size, #{$hy-font-size-lg}) !default;
-/* hy-index-bar 基础间距，默认跟随全局 token */
-$hy-index-bar-margin-padding-base: var(--hy-index-bar-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 索引列表右外边距，默认跟随全局基础间距 token */
+$hy-index-bar-list-margin: var(--hy-index-bar-list-margin, #{$hy-border-margin-padding-base}) !default;
 /* hy-index-bar 主题色，默认跟随全局主题色 token */
 $hy-index-bar-primary: var(--hy-index-bar-primary, #{$hy-primary}) !default;
-/* hy-index-bar 点击状态背景色，默认跟随全局 token */
-$hy-index-bar-background--hover: var(--hy-index-bar-background--hover, #{$hy-background--hover}) !default;
-/* hy-index-bar 空数据背景色，默认跟随全局 token */
-$hy-index-bar-background--empty: var(--hy-index-bar-background--empty, #{$hy-background--empty}) !default;
+/* 索引项选中态背景色，默认跟随全局点击状态背景 token */
+$hy-index-bar-index-active-background: var(--hy-index-bar-index-active-background, #{$hy-background--hover}) !default;
+/* 提示气泡背景色，默认跟随全局空数据背景 token */
+$hy-index-bar-toast-background: var(--hy-index-bar-toast-background, #{$hy-background--empty}) !default;
 
+/* 注意：e()混入按当前父选择器拼接类名，索引列表与气泡样式必须平铺在块级，
+   不能嵌套进 e(sidebar)，否则生成 .hy-index-bar__sidebar__index--list 错误类名 */
 @include b(index-bar) {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: $hy-index-bar-z-index;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+  position: relative;
+  width: 100%;
 
-  @include m(left) {
-    left: 0;
+  /* 滚动容器 */
+  @include e(content) {
+    width: 100%;
+    height: 100%;
   }
 
-  @include m(right) {
-    right: 0;
+  /* 侧边索引栏 */
+  @include e(sidebar) {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: $hy-index-bar-z-index;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+
+    @include m(left) {
+      left: 0;
+    }
+
+    @include m(right) {
+      right: 0;
+    }
   }
 
   @include e(index) {
@@ -47,7 +61,7 @@ $hy-index-bar-background--empty: var(--hy-index-bar-background--empty, #{$hy-bac
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-right: $hy-index-bar-margin-padding-base;
+      margin-right: $hy-index-bar-list-margin;
 
       @include e(item) {
         display: flex;
@@ -60,7 +74,7 @@ $hy-index-bar-background--empty: var(--hy-index-bar-background--empty, #{$hy-bac
         @include is(active) {
           position: relative;
           color: $hy-index-bar-primary;
-          background: $hy-index-bar-background--hover;
+          background: $hy-index-bar-index-active-background;
         }
       }
     }
@@ -72,7 +86,7 @@ $hy-index-bar-background--empty: var(--hy-index-bar-background--empty, #{$hy-bac
     border-radius: 100px 100px 0 100px;
     text-align: center;
     color: $hy-index-bar-toast-color;
-    background-color: $hy-index-bar-background--empty;
+    background-color: $hy-index-bar-toast-background;
     transform: rotate(-45deg);
     display: flex;
     justify-content: center;

@@ -127,6 +127,7 @@ export default {
     badge: {
         title: '徽标数',
         // ===== 演示内容 =====
+        slotSection: '插槽用法',
         shapeSection: '边角形状',
         displaySection: '显示方式',
         dotSection: '显示圆点',
@@ -1776,6 +1777,13 @@ export default {
         icon: '显示图标',
         address: '地址',
         viewMore: '查看更多',
+        decoration: '文字装饰',
+        underline: '下划线',
+        lineThrough: '删除线',
+        overline: '顶划线',
+        slot: '前后插槽',
+        phoneTag: '手机',
+        maskedTag: '已脱敏',
         twoLines: '超出两行隐藏',
         uviewIntro:
             '关于uview-plus的取名来由，首字母u来自于uni-app首字母，plus参考element-plus起名让大家容易理解这是Vue3版本，uni-app是基于Vue.js，Vue和View(延伸为UI、视图之意)同音，同时view组件uni-app中 最基础，最重要的组件，故取名uview-plus，表达源于uni-app和Vue之意，同时在此也对它们表示感谢。',

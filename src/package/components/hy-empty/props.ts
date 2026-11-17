@@ -1,5 +1,5 @@
 import type { EmptyModeType, HyButtonProps } from '../../libs'
-import { CSSProperties, PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
 
 const emptyProps = {
     /** 是否显示空状态 */

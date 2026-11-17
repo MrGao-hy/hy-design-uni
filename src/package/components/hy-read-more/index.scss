@@ -7,10 +7,12 @@ $hy-read-more-font-size: var(--hy-read-more-font-size, 15px) !default;
 $hy-read-more-mask-height: var(--hy-read-more-mask-height, 100px) !default;
 /* 展开按钮行高 */
 $hy-read-more-line-height: var(--hy-read-more-line-height, 30px) !default;
-/* hy-read-more 容器背景色，默认跟随全局 token */
-$hy-read-more-background--container: var(--hy-read-more-background--container, #{$hy-background--container}) !default;
-/* hy-read-more 小间距，默认跟随全局 token */
-$hy-read-more-margin-padding-sm: var(--hy-read-more-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 展开遮罩渐变背景色（自透明渐变至该色），默认跟随全局容器背景 token */
+$hy-read-more-mask-background: var(--hy-read-more-mask-background, #{$hy-background--container}) !default;
+/* 展开按钮上下外边距，默认跟随全局小间距 token */
+$hy-read-more-toggle-margin: var(--hy-read-more-toggle-margin, #{$hy-border-margin-padding-sm}) !default;
+/* 展开文字右外边距，默认跟随全局小间距 token */
+$hy-read-more-text-margin: var(--hy-read-more-text-margin, #{$hy-border-margin-padding-sm}) !default;
 /* hy-read-more 主题色，默认跟随全局主题色 token */
 $hy-read-more-primary: var(--hy-read-more-primary, #{$hy-primary}) !default;
 
@@ -29,7 +31,7 @@ $hy-read-more-primary: var(--hy-read-more-primary, #{$hy-primary}) !default;
 
     @include m(mask) {
       background-image:
-              linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, $hy-read-more-background--container 80%);
+              linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, $hy-read-more-mask-background 80%);
       padding-top: $hy-read-more-mask-height;
       margin-top: calc(-1 * #{$hy-read-more-mask-height});
     }
@@ -38,12 +40,12 @@ $hy-read-more-primary: var(--hy-read-more-primary, #{$hy-primary}) !default;
       @include flex;
       align-items: center;
       justify-content: center;
-      margin: $hy-read-more-margin-padding-sm 0;
+      margin: $hy-read-more-toggle-margin 0;
       line-height: $hy-read-more-line-height;
 
       @include e(text) {
         color: $hy-read-more-primary;
-        margin-right: $hy-read-more-margin-padding-sm;
+        margin-right: $hy-read-more-text-margin;
       }
 
       :deep(.hy-icon) {

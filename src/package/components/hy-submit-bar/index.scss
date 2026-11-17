@@ -7,18 +7,22 @@ $hy-submit-bar-left-font-size: var(--hy-submit-bar-left-font-size, 20rpx) !defau
 $hy-submit-bar-right-font-size: var(--hy-submit-bar-right-font-size, 26rpx) !default;
 /* 右侧内容宽度 */
 $hy-submit-bar-right-width: var(--hy-submit-bar-right-width, 400rpx) !default;
-/* hy-submit-bar 容器背景色，默认跟随全局 token */
-$hy-submit-bar-background--container: var(--hy-submit-bar-background--container, #{$hy-background--container}) !default;
-/* hy-submit-bar 基础间距，默认跟随全局 token */
-$hy-submit-bar-margin-padding-base: var(--hy-submit-bar-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
-/* hy-submit-bar 大间距，默认跟随全局 token */
-$hy-submit-bar-margin-padding-lg: var(--hy-submit-bar-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* 底栏背景色，默认跟随全局容器背景 token */
+$hy-submit-bar-background: var(--hy-submit-bar-background, #{$hy-background--container}) !default;
+/* 底栏整体内边距，默认跟随全局基础间距 token */
+$hy-submit-bar-padding: var(--hy-submit-bar-padding, #{$hy-border-margin-padding-base}) !default;
+/* 左侧项左右外边距，默认跟随全局基础间距 token */
+$hy-submit-bar-left-item-margin: var(--hy-submit-bar-left-item-margin, #{$hy-border-margin-padding-base}) !default;
+/* 提交按钮上下内边距，默认跟随全局基础间距 token */
+$hy-submit-bar-button-padding-y: var(--hy-submit-bar-button-padding-y, #{$hy-border-margin-padding-base}) !default;
+/* 提交按钮左右内边距，默认跟随全局大间距 token */
+$hy-submit-bar-button-padding-x: var(--hy-submit-bar-button-padding-x, #{$hy-border-margin-padding-lg}) !default;
 
 
 @include b(submit-bar) {
   display: flex;
-  background-color: $hy-submit-bar-background--container;
-  padding: $hy-submit-bar-margin-padding-base;
+  background-color: $hy-submit-bar-background;
+  padding: $hy-submit-bar-padding;
   width: 100%;
   box-sizing: border-box;
 
@@ -28,7 +32,7 @@ $hy-submit-bar-margin-padding-lg: var(--hy-submit-bar-margin-padding-lg, #{$hy-b
     font-size: $hy-submit-bar-left-font-size;
     flex: 1;
     @include m(item) {
-      margin: 0 $hy-submit-bar-margin-padding-base;
+      margin: 0 $hy-submit-bar-left-item-margin;
       position: relative;
     }
   }
@@ -41,7 +45,7 @@ $hy-submit-bar-margin-padding-lg: var(--hy-submit-bar-margin-padding-lg, #{$hy-b
     align-items: center;
     width: $hy-submit-bar-right-width;
     @include m(button) {
-      padding: $hy-submit-bar-margin-padding-base $hy-submit-bar-margin-padding-lg;
+      padding: $hy-submit-bar-button-padding-y $hy-submit-bar-button-padding-x;
       color: #ffffff;
       display: flex;
       justify-content: center;

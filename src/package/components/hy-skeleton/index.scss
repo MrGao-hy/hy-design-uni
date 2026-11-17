@@ -11,10 +11,10 @@ $hy-skeleton-radius: var(--hy-skeleton-radius, #{$hy-radius-sm}) !default;
 $hy-skeleton-rect-radius: var(--hy-skeleton-rect-radius, #{$hy-radius-base}) !default;
 /* 圆形骨架圆角，默认跟随全局圆形 token */
 $hy-skeleton-circle-radius: var(--hy-skeleton-circle-radius, #{$hy-radius-circle}) !default;
-/* hy-skeleton 基础间距，默认跟随全局 token */
-$hy-skeleton-margin-padding-base: var(--hy-skeleton-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
-/* hy-skeleton 骨架屏背景色，默认跟随全局 token */
-$hy-skeleton-background--skeleton: var(--hy-skeleton-background--skeleton, #{$hy-background--skeleton}) !default;
+/* 骨架行下外边距，默认跟随全局基础间距 token */
+$hy-skeleton-row-margin: var(--hy-skeleton-row-margin, #{$hy-border-margin-padding-base}) !default;
+/* 骨架块背景色，默认跟随全局骨架屏 token */
+$hy-skeleton-background: var(--hy-skeleton-background, #{$hy-background--skeleton}) !default;
 
 @include b(theme--dark) {
   .hy-skeleton--animation-gradient {
@@ -39,7 +39,7 @@ $hy-skeleton-background--skeleton: var(--hy-skeleton-background--skeleton, #{$hy
 
   @include e(row) {
     justify-content: space-between;
-    margin-bottom: $hy-skeleton-margin-padding-base;
+    margin-bottom: $hy-skeleton-row-margin;
     display: flex;
     align-items: center;
 
@@ -50,7 +50,7 @@ $hy-skeleton-background--skeleton: var(--hy-skeleton-background--skeleton, #{$hy
   }
   @include e(col) {
     border-radius: $hy-skeleton-radius;
-    background-color: $hy-skeleton-background--skeleton;
+    background-color: $hy-skeleton-background;
     display: flex;
     align-items: center;
     justify-content: center;

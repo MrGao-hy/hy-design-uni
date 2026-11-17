@@ -15,8 +15,8 @@ $hy-warn-radius: var(--hy-warn-radius, #{$hy-radius-sm}) !default;
 $hy-warn-text-color: var(--hy-warn-text-color, #fff) !default;
 /* hy-warn 主题色，默认跟随全局主题色 token */
 $hy-warn-primary: var(--hy-warn-primary, #{$hy-primary}) !default;
-/* hy-warn 基础间距，默认跟随全局 token */
-$hy-warn-margin-padding-base: var(--hy-warn-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 警告条整体内边距，默认跟随全局基础间距 token */
+$hy-warn-padding: var(--hy-warn-padding, #{$hy-border-margin-padding-base}) !default;
 /* hy-warn 主题色浅色，默认跟随全局主题色浅色 token */
 $hy-warn-primary-light: var(--hy-warn-primary-light, #{$hy-primary-light}) !default;
 /* hy-warn 危险色，默认跟随全局危险色 token */
@@ -35,13 +35,13 @@ $hy-warn-warning-light: var(--hy-warn-warning-light, #{$hy-warning-light}) !defa
 $hy-warn-info: var(--hy-warn-info, #{$hy-info}) !default;
 /* hy-warn 信息色浅色，默认跟随全局信息色浅色 token */
 $hy-warn-info-light: var(--hy-warn-info-light, #{$hy-info-light}) !default;
-/* hy-warn 小间距，默认跟随全局 token */
-$hy-warn-margin-padding-sm: var(--hy-warn-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 图标右外边距，默认跟随全局小间距 token */
+$hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(warn) {
   position: relative;
   background-color: $hy-warn-primary;
-  padding: $hy-warn-margin-padding-base;
+  padding: $hy-warn-padding;
   @include flex(row);
   align-items: center;
   border-radius: $hy-warn-radius;
@@ -127,7 +127,7 @@ $hy-warn-margin-padding-sm: var(--hy-warn-margin-padding-sm, #{$hy-border-margin
   }
 
   @include e(icon) {
-    margin-right: $hy-warn-margin-padding-sm;
+    margin-right: $hy-warn-icon-margin;
   }
 
   @include e(content) {

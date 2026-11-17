@@ -40,8 +40,28 @@
         <hy-text
             :suffixIcon="IconConfig.ARROW_RIGHTWARD"
             :iconStyle="{ fontSize: '15px' }"
+            align="right"
             :text="t('viewMore')"
         ></hy-text>
+    </view>
+
+    <view class="hy-title">{{ t('decoration') }}</view>
+    <view class="hy-flex">
+        <hy-text :text="t('underline')" decoration="underline"></hy-text>
+        <hy-text :text="t('lineThrough')" decoration="line-through" type="error"></hy-text>
+        <hy-text :text="t('overline')" decoration="overline" type="primary"></hy-text>
+    </view>
+
+    <view class="hy-title">{{ t('slot') }}</view>
+    <view class="hy-flex">
+        <hy-text text="19807123294" mode="phone" format="encrypt" type="primary">
+            <template #prefix>
+                <hy-tag>{{ t('phoneTag') }}</hy-tag>
+            </template>
+            <template #suffix>
+                <hy-tag type="error">{{ t('maskedTag') }}</hy-tag>
+            </template>
+        </hy-text>
     </view>
 
     <view class="hy-title">{{ t('twoLines') }}</view>

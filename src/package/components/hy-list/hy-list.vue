@@ -91,7 +91,7 @@ export default {
 <script lang="ts" setup>
 import { computed, getCurrentInstance, nextTick, onMounted, ref, useSlots, watch } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, getPx, getRect, getWindowInfo, IListExpose, IListSlots } from '../../libs'
+import { addUnit, getPx, getRect, getWindowInfo, type IListExpose, type IListSlots } from '../../libs'
 import type { IListEmits } from './typing'
 import listProps from './props'
 import HyDivider from '../hy-divider/hy-divider.vue'

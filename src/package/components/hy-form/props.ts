@@ -1,6 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import type { FieldRuleMap } from './typing'
-import { LabelPosition, RowCenterType } from '../../libs'
+import type { LabelPosition, RowCenterType } from '../../libs'
 
 const formProps = {
     /** 表单数据对象 */

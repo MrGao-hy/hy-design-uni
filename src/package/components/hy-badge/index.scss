@@ -13,8 +13,8 @@ $hy-badge-padding: var(--hy-badge-padding, 2px 5px) !default;
 $hy-badge-inverted-font-size: var(--hy-badge-inverted-font-size, 13px) !default;
 /* 白边（border 模式）宽度 */
 $hy-badge-border-width: var(--hy-badge-border-width, 2px) !default;
-/* hy-badge 弹窗背景色，默认跟随全局 token */
-$hy-badge-background--2: var(--hy-badge-background--2, #{$hy-background--2}) !default;
+/* hy-badge 白边颜色 */
+$hy-badge-border-color: var(--hy-badge-border-color, #{$hy-background--2}) !default;
 
 @include b(badge) {
     border-radius: $hy-badge-radius;
@@ -22,6 +22,20 @@ $hy-badge-background--2: var(--hy-badge-background--2, #{$hy-background--2}) !de
     line-height: $hy-badge-text-font-size;
     text-align: center;
     font-size: $hy-badge-text-font-size;
+
+    /* 插槽包裹容器，角标以其为定位基准 */
+    @include e(wrapper) {
+        position: relative;
+        display: inline-flex;
+    }
+
+    /* 插槽模式下角标骑缝于内容右上角，可配合offset微调 */
+    @include m(locate) {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(50%, -50%);
+    }
 
     @include m(dot) {
         height: $hy-badge-dot-size;
@@ -42,7 +56,7 @@ $hy-badge-background--2: var(--hy-badge-background--2, #{$hy-background--2}) !de
 
     /* 白边，使用box-shadow实现，不影响布局尺寸 */
     @include m(border) {
-        box-shadow: 0 0 0 $hy-badge-border-width $hy-badge-background--2;
+        box-shadow: 0 0 0 $hy-badge-border-width $hy-badge-border-color;
     }
 
     /* 主题色 */

@@ -105,7 +105,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, CSSProperties, nextTick, ref, watch } from 'vue'
+import { computed, type CSSProperties, nextTick, ref, watch } from 'vue'
 import type { ISearchEmits } from './typing'
 import { addUnit, IconConfig, isBoolean } from '../../libs'
 import type {

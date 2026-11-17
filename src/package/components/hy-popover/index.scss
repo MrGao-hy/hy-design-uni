@@ -19,10 +19,12 @@ $hy-popover-radius: var(--hy-popover-radius, #{$hy-radius-sm}) !default;
 $hy-popover-border: var(--hy-popover-border, #{$hy-border-line}) !default;
 
 $z-index: $hy-popover-z-index;
-/* hy-popover 基础间距，默认跟随全局 token */
-$hy-popover-margin-padding-base: var(--hy-popover-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
-/* hy-popover 盒子背景色，默认跟随全局 token */
-$hy-popover-background--box: var(--hy-popover-background--box, #{$hy-background--box}) !default;
+/* 菜单气泡左右内边距，默认跟随全局基础间距 token */
+$hy-popover-menu-padding-x: var(--hy-popover-menu-padding-x, #{$hy-border-margin-padding-base}) !default;
+/* 自定义内容区内边距，默认跟随全局基础间距 token */
+$hy-popover-inner-padding: var(--hy-popover-inner-padding, #{$hy-border-margin-padding-base}) !default;
+/* 弹出气泡背景色，默认跟随全局盒子背景 token */
+$hy-popover-background: var(--hy-popover-background, #{$hy-background--box}) !default;
 /* hy-popover 基础阴影，默认跟随全局 token */
 $hy-popover-shadow-base: var(--hy-popover-shadow-base, #{$hy-shadow-base}) !default;
 
@@ -50,11 +52,11 @@ $hy-popover-shadow-base: var(--hy-popover-shadow-base, #{$hy-shadow-base}) !defa
 
   @include e(menu) {
     display: inline-block;
-    padding: 0 $hy-popover-margin-padding-base;
+    padding: 0 $hy-popover-menu-padding-x;
     white-space: nowrap;
     z-index: $z-index;
     position: relative;
-    background-color: $hy-popover-background--box;
+    background-color: $hy-popover-background;
     border-radius: $hy-popover-radius;
   }
 
@@ -83,10 +85,10 @@ $hy-popover-shadow-base: var(--hy-popover-shadow-base, #{$hy-shadow-base}) !defa
 
   @include e(inner) {
     position: relative;
-    padding: $hy-popover-margin-padding-base;
+    padding: $hy-popover-inner-padding;
     line-height: $hy-popover-line-height;
     z-index: $z-index;
-    background-color: $hy-popover-background--box;
+    background-color: $hy-popover-background;
     border-radius: $hy-popover-radius;
     box-sizing: content-box;
     width: $hy-popover-width;
@@ -102,5 +104,5 @@ $hy-popover-shadow-base: var(--hy-popover-shadow-base, #{$hy-shadow-base}) !defa
     z-index: $z-index;
   }
 
-  @include squareArrow(6px, $hy-popover-background--box, $z-index, $hy-popover-shadow-base);
+  @include squareArrow(6px, $hy-popover-background, $z-index, $hy-popover-shadow-base);
 }

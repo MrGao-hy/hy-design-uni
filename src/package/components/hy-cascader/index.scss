@@ -15,16 +15,18 @@ $hy-cascader-item-font-size: var(--hy-cascader-item-font-size, #{$hy-font-size-b
 $hy-cascader-item-color: var(--hy-cascader-item-color, #{$hy-text-color}) !default;
 /* 标题栏底部分隔线，默认跟随全局边框线 token */
 $hy-cascader-border: var(--hy-cascader-border, #{$hy-border-line}) !default;
-/* hy-cascader 基础间距，默认跟随全局 token */
-$hy-cascader-margin-padding-base: var(--hy-cascader-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 头部内边距，默认跟随全局基础间距 token */
+$hy-cascader-header-padding: var(--hy-cascader-header-padding, #{$hy-border-margin-padding-base}) !default;
 /* hy-cascader 粗体字重，默认跟随全局 token */
 $hy-cascader-font-weight-bold: var(--hy-cascader-font-weight-bold, #{$hy-font-weight-bold}) !default;
-/* hy-cascader 大间距，默认跟随全局 token */
-$hy-cascader-margin-padding-lg: var(--hy-cascader-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* 选项上下内边距，默认跟随全局大间距 token */
+$hy-cascader-item-padding-y: var(--hy-cascader-item-padding-y, #{$hy-border-margin-padding-lg}) !default;
+/* 选项左右内边距，默认跟随全局基础间距 token */
+$hy-cascader-item-padding-x: var(--hy-cascader-item-padding-x, #{$hy-border-margin-padding-base}) !default;
 /* hy-cascader 主题色，默认跟随全局主题色 token */
 $hy-cascader-primary: var(--hy-cascader-primary, #{$hy-primary}) !default;
-/* hy-cascader 点击状态背景色，默认跟随全局 token */
-$hy-cascader-background--hover: var(--hy-cascader-background--hover, #{$hy-background--hover}) !default;
+/* 选项选中态背景色，默认跟随全局点击状态背景 token */
+$hy-cascader-item-active-background: var(--hy-cascader-item-active-background, #{$hy-background--hover}) !default;
 /* hy-cascader 大边框宽度，默认跟随全局 token */
 $hy-cascader-border-width-lg: var(--hy-cascader-border-width-lg, #{$hy-border-width-lg}) !default;
 
@@ -50,7 +52,7 @@ $hy-cascader-border-width-lg: var(--hy-cascader-border-width-lg, #{$hy-border-wi
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: $hy-cascader-margin-padding-base;
+    padding: $hy-cascader-header-padding;
     border-bottom: $hy-cascader-border;
   }
 
@@ -79,7 +81,7 @@ $hy-cascader-border-width-lg: var(--hy-cascader-border-width-lg, #{$hy-border-wi
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $hy-cascader-margin-padding-lg $hy-cascader-margin-padding-base;
+    padding: $hy-cascader-item-padding-y $hy-cascader-item-padding-x;
     font-size: $hy-cascader-item-font-size;
     color: $hy-cascader-item-color;
     position: relative;
@@ -87,7 +89,7 @@ $hy-cascader-border-width-lg: var(--hy-cascader-border-width-lg, #{$hy-border-wi
     @include m(active) {
       color: $hy-cascader-primary;
       font-weight: $hy-cascader-font-weight-bold;
-      background: $hy-cascader-background--hover;
+      background: $hy-cascader-item-active-background;
       border-left: $hy-cascader-border-width-lg solid $hy-cascader-primary;
     }
   }

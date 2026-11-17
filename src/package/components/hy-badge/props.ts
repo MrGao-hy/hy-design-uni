@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { BadgeNumberType, BadgeShapeType, ThemeType } from '../../libs'
+import type { BadgeNumberType, BadgeShapeType, ThemeType } from '../../libs'
 
 const badgeProps = {
     /** 是否显示圆点 */
@@ -65,14 +65,18 @@ const badgeProps = {
         type: String as PropType<BadgeNumberType>,
         default: 'overflow'
     },
-    /** 设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，单位px，absolute为true时有效 */
+    /**
+     * 设置badge的位置偏移，格式为 [x, y]，单位px：
+     * 插槽模式下为top和right的值，用于微调骑缝位置；
+     * 独立模式下为top和left的值（absolute为true时有效）
+     * */
     offset: Array,
     /** 是否反转背景和字体颜色 */
     inverted: {
         type: Boolean,
         default: false
     },
-    /** 是否绝对定位 */
+    /** 是否绝对定位，仅独立使用（未传入默认插槽）时生效，插槽模式下角标自动定位于内容右上角 */
     absolute: {
         type: Boolean,
         default: false

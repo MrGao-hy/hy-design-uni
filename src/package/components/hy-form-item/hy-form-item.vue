@@ -28,7 +28,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, inject, onMounted, onUnmounted, provide, ref } from 'vue'
-import { IFormItemEmits, IFormContext, IFormItemExpose, FormValidateTrigger } from './typing'
+import type { IFormItemEmits, IFormContext, IFormItemExpose, FormValidateTrigger } from './typing'
 import { addUnit } from '../../libs'
 import formItemProps from './props'
 

@@ -7,7 +7,9 @@
         >
             ￥
         </text>
-        <view class="hy-text__prefix-icon" v-if="prefixIcon">
+        <!-- @slot 前置内容插槽 -->
+        <slot v-if="$slots.prefix" name="prefix"></slot>
+        <view class="hy-text__prefix-icon" v-else-if="prefixIcon">
             <hy-icon
                 :name="prefixIcon"
                 :color="color"
@@ -16,6 +18,7 @@
                 :customStyle="iconStyle"
             ></hy-icon>
         </view>
+
         <template v-if="openType && isMp">
             <button
                 class="hy-reset-button hy-text__value"
@@ -37,7 +40,9 @@
         >
             {{ value }}
         </text>
-        <view class="hy-text__suffix-icon" v-if="suffixIcon">
+        <!-- @slot 后置内容插槽 -->
+        <slot v-if="$slots.suffix" name="suffix"></slot>
+        <view class="hy-text__suffix-icon" v-else-if="suffixIcon">
             <hy-icon
                 :name="suffixIcon"
                 :color="color"
@@ -72,7 +77,6 @@ import {
     priceFormat,
     useTranslate
 } from '../../libs'
-import type { InputOnConfirmEvent } from '@uni-helper/uni-types'
 import textProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -110,7 +114,7 @@ const valueStyle = computed(() => {
         fontSize: addUnit(props.size)
     }
     !props.type && (style.color = props.color)
-    props.lineHeight && (style.lineHeight = addUnit(props.lineHeight))
+    props.lineHeight && (style.lineHeight = props.lineHeight)
     props.block && (style.display = 'block')
     return Object.assign(style, props.customStyle)
 })
@@ -154,12 +158,15 @@ const value = computed(() => {
                 return props.format(props.text)
             }
             if (props.format === 'encrypt') {
-                // 如果format为encrypt，则将手机号进行星号加密处理
-                return `${props.text.toString().substring(0, 3)}****${props.text.toString().substring(7)}`
+                // 如果format为encrypt，则将手机号进行星号加密处理，非11位时原样返回
+                const phone = props.text.toString()
+                return phone.length === 11
+                    ? `${phone.substring(0, 3)}****${phone.substring(7)}`
+                    : phone
             }
             return props.text
         case 'name':
-            // 判断是否合法的字符粗
+            // 判断是否合法的字符串
             if (typeof props.text !== 'string') {
                 error('姓名模式下，text参数需要为字符串格式')
             } else {
@@ -188,7 +195,7 @@ const isMp = computed(() => {
     return mp
 })
 
-const clickHandler = (e: InputOnConfirmEvent) => {
+const clickHandler = (e: Event) => {
     // 如果为手机号模式，拨打电话
     if (props.call && props.mode === 'phone') {
         uni.makePhoneCall({

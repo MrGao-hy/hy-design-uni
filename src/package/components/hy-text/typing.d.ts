@@ -34,8 +34,9 @@ export type TextWrapType = 'normal' | 'break-word' | 'anywhere'
  * none-无装饰
  * underline-下划线
  * line-through-删除线（中划线）
+ * overline-顶划线
  */
-export type TextDecorationType = 'none' | 'underline' | 'line-through'
+export type TextDecorationType = 'none' | 'underline' | 'line-through' | 'overline'
 
 export interface ITextEmits {
     /** 点击触发 */

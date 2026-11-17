@@ -5,10 +5,10 @@
 $hy-signature-radius: var(--hy-signature-radius, #{$hy-radius-base}) !default;
 /* 画布区域边框，默认跟随全局边框线 token */
 $hy-signature-border: var(--hy-signature-border, #{$hy-border-line}) !default;
-/* hy-signature 深色弹窗背景色，默认跟随全局 token */
-$hy-signature-background--3: var(--hy-signature-background--3, #{$hy-background--3}) !default;
-/* hy-signature 基础间距，默认跟随全局 token */
-$hy-signature-margin-padding-base: var(--hy-signature-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 画布区域背景色，默认跟随全局深色背景 token */
+$hy-signature-content-background: var(--hy-signature-content-background, #{$hy-background--3}) !default;
+/* 底部操作栏上外边距，默认跟随全局基础间距 token */
+$hy-signature-footer-margin-top: var(--hy-signature-footer-margin-top, #{$hy-border-margin-padding-base}) !default;
 
 @include b(signature) {
   @include e(content) {
@@ -16,7 +16,7 @@ $hy-signature-margin-padding-base: var(--hy-signature-margin-padding-base, #{$hy
     align-items: center;
     display: flex;
     overflow: hidden;
-    background: $hy-signature-background--3;
+    background: $hy-signature-content-background;
     border-radius: $hy-signature-radius;
     border: $hy-signature-border;
   }
@@ -27,7 +27,7 @@ $hy-signature-margin-padding-base: var(--hy-signature-margin-padding-base, #{$hy
 
 
   @include e(footer) {
-    margin-top: $hy-signature-margin-padding-base;
+    margin-top: $hy-signature-footer-margin-top;
     justify-content: flex-end;
     display: flex;
   }

@@ -1,4 +1,4 @@
-import {
+import type {
     FormColumnsType,
     LabelPosition,
     RowCenterType,

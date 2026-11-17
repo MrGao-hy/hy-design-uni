@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { TextareaConfirmType } from '@uni-helper/uni-app-types'
+import type { TextareaConfirmType } from '@uni-helper/uni-app-types'
 import type { BorderType } from '../../libs'
 
 const textareaProps = {

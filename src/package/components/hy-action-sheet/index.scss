@@ -37,14 +37,20 @@ $hy-action-sheet-close-radius: var(--hy-action-sheet-close-radius, #{$hy-radius-
 $hy-action-sheet-panel-img-radius: var(--hy-action-sheet-panel-img-radius, #{$hy-radius-base}) !default;
 /* 面板标题字号，默认跟随全局小号字体 token */
 $hy-action-sheet-panel-title-font-size: var(--hy-action-sheet-panel-title-font-size, #{$hy-font-size-sm}) !default;
-/* hy-action-sheet 基础间距，默认跟随全局 token */
-$hy-action-sheet-margin-padding-base: var(--hy-action-sheet-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
-/* hy-action-sheet 轨道背景色，默认跟随全局 token */
-$hy-action-sheet-background--track: var(--hy-action-sheet-background--track, #{$hy-background--track}) !default;
-/* hy-action-sheet 小间距，默认跟随全局 token */
-$hy-action-sheet-margin-padding-sm: var(--hy-action-sheet-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
-/* hy-action-sheet 图标尺寸，默认跟随全局图片尺寸 token */
-$hy-action-sheet-img-size-base: var(--hy-action-sheet-img-size-base, #{$hy-img-size-base}) !default;
+/* 头部左右及上方内边距，默认跟随全局基础间距 token */
+$hy-action-sheet-header-padding: var(--hy-action-sheet-header-padding, #{$hy-border-margin-padding-base}) !default;
+/* 选项区上下内边距，默认跟随全局基础间距 token */
+$hy-action-sheet-actions-padding-y: var(--hy-action-sheet-actions-padding-y, #{$hy-border-margin-padding-base}) !default;
+/* 面板项上下内边距，默认跟随全局小间距 token */
+$hy-action-sheet-panel-padding-y: var(--hy-action-sheet-panel-padding-y, #{$hy-border-margin-padding-sm}) !default;
+/* 面板项左右内边距，默认跟随全局基础间距 token */
+$hy-action-sheet-panel-padding-x: var(--hy-action-sheet-panel-padding-x, #{$hy-border-margin-padding-base}) !default;
+/* 面板图片尺寸，默认跟随全局图片尺寸 token */
+$hy-action-sheet-panel-img-size: var(--hy-action-sheet-panel-img-size, #{$hy-img-size-base}) !default;
+/* 取消按钮背景色，默认跟随全局轨道背景 token */
+$hy-action-sheet-cancel-background: var(--hy-action-sheet-cancel-background, #{$hy-background--track}) !default;
+/* 关闭按钮内边距，默认跟随全局小间距 token */
+$hy-action-sheet-close-padding: var(--hy-action-sheet-close-padding, #{$hy-border-margin-padding-sm}) !default;
 
 
 @include b(action-sheet) {
@@ -54,7 +60,7 @@ $hy-action-sheet-img-size-base: var(--hy-action-sheet-img-size-base, #{$hy-img-s
 
 
   @include e(actions) {
-    padding: $hy-action-sheet-margin-padding-base 0;
+    padding: $hy-action-sheet-actions-padding-y 0;
     max-height: 50vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -102,7 +108,7 @@ $hy-action-sheet-img-size-base: var(--hy-action-sheet-img-size-base, #{$hy-img-s
   @include edeep(cancel) {
     color: $hy-action-sheet-cancel-color;
     width: $hy-action-sheet-cancel-width;
-    background: $hy-action-sheet-background--track;
+    background: $hy-action-sheet-cancel-background;
     margin: $hy-action-sheet-cancel-margin;
     border: none;
   }
@@ -112,7 +118,7 @@ $hy-action-sheet-img-size-base: var(--hy-action-sheet-img-size-base, #{$hy-img-s
     position: relative;
     line-height: $hy-action-sheet-header-line-height;
     font-weight: 700;
-    padding: $hy-action-sheet-margin-padding-base $hy-action-sheet-margin-padding-base 0;
+    padding: $hy-action-sheet-header-padding $hy-action-sheet-header-padding 0;
   }
 
   @include edeep(close) {
@@ -121,7 +127,7 @@ $hy-action-sheet-img-size-base: var(--hy-action-sheet-img-size-base, #{$hy-img-s
     right: $hy-action-sheet-close-right;
     background-color: rgba(128, 128, 128, 0.25);
     border-radius: $hy-action-sheet-close-radius;
-    padding: $hy-action-sheet-margin-padding-sm;
+    padding: $hy-action-sheet-close-padding;
   }
 
   /* 面板样式 */
@@ -149,13 +155,13 @@ $hy-action-sheet-img-size-base: var(--hy-action-sheet-img-size-base, #{$hy-img-s
     width: $hy-action-sheet-panel-width;
     flex: 0 0 auto;
     display: inline-block;
-    padding: $hy-action-sheet-margin-padding-sm $hy-action-sheet-margin-padding-base;
+    padding: $hy-action-sheet-panel-padding-y $hy-action-sheet-panel-padding-x;
   }
 
   @include e(panel-img) {
     display: block;
-    width: $hy-action-sheet-img-size-base;
-    height: $hy-action-sheet-img-size-base;
+    width: $hy-action-sheet-panel-img-size;
+    height: $hy-action-sheet-panel-img-size;
     margin: 0 auto 7px;
     border-radius: $hy-action-sheet-panel-img-radius;
   }

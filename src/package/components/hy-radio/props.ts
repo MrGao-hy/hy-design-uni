@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import {
+import type {
     CheckboxColumnsVo,
     DirectionType,
     IFieldNames,

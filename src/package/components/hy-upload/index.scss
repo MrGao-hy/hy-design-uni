@@ -21,10 +21,10 @@ $hy-upload-primary: var(--hy-upload-primary, #{$hy-primary}) !default;
 $hy-upload-success: var(--hy-upload-success, #{$hy-success}) !default;
 /* hy-upload 危险色，默认跟随全局危险色 token */
 $hy-upload-error: var(--hy-upload-error, #{$hy-error}) !default;
-/* hy-upload 空数据背景色，默认跟随全局 token */
-$hy-upload-background--empty: var(--hy-upload-background--empty, #{$hy-background--empty}) !default;
-/* hy-upload 点击状态背景色，默认跟随全局 token */
-$hy-upload-background--hover: var(--hy-upload-background--hover, #{$hy-background--hover}) !default;
+/* 上传按钮背景色，默认跟随全局空数据背景 token */
+$hy-upload-button-background: var(--hy-upload-button-background, #{$hy-background--empty}) !default;
+/* 上传按钮点击态背景色，默认跟随全局点击状态背景 token */
+$hy-upload-button-hover-background: var(--hy-upload-button-hover-background, #{$hy-background--hover}) !default;
 
 
 @include b(upload) {
@@ -148,7 +148,7 @@ $hy-upload-background--hover: var(--hy-upload-background--hover, #{$hy-backgroun
     justify-content: center;
     width: $hy-upload-image-width;
     height: $hy-upload-image-width;
-    background-color: $hy-upload-background--empty;
+    background-color: $hy-upload-button-background;
     border-radius: $hy-upload-radius;
     margin: $hy-upload-item-margin;
     /* #ifndef APP-NVUE */
@@ -162,7 +162,7 @@ $hy-upload-background--hover: var(--hy-upload-background--hover, #{$hy-backgroun
     }
 
     @include m(hover) {
-      background-color: $hy-upload-background--hover;
+      background-color: $hy-upload-button-hover-background;
     }
 
     @include m(disabled) {

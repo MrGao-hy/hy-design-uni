@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { ButtonFormType, ButtonLang, ButtonOpenType } from '@uni-helper/uni-types'
+import type { ButtonFormType, ButtonLang, ButtonOpenType } from '@uni-helper/uni-types'
 import type {
     ThemeType,
     HyIconProps,

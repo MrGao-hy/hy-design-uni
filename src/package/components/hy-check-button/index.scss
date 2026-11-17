@@ -23,8 +23,8 @@ $hy-check-button-disabled-color: var(--hy-check-button-disabled-color, #{$hy-tex
 $hy-check-button-disabled-border-color: var(--hy-check-button-disabled-border-color, #{$hy-background--disabled}) !default;
 /* hy-check-button 标准过渡曲线，默认跟随全局 token */
 $hy-check-button-transition-ease: var(--hy-check-button-transition-ease, #{$hy-transition-ease}) !default;
-/* hy-check-button 禁用背景色，默认跟随全局 token */
-$hy-check-button-background--disabled: var(--hy-check-button-background--disabled, #{$hy-background--disabled}) !default;
+/* 按钮禁用态背景色，默认跟随全局禁用背景 token */
+$hy-check-button-disabled-background: var(--hy-check-button-disabled-background, #{$hy-background--disabled}) !default;
 /* hy-check-button 禁用态透明度，默认跟随全局 token */
 $hy-check-button-opacity-disabled: var(--hy-check-button-opacity-disabled, #{$hy-opacity-disabled}) !default;
 /* hy-check-button 主题色，默认跟随全局主题色 token */
@@ -82,7 +82,7 @@ $hy-check-button-info: var(--hy-check-button-info, #{$hy-info}) !default;
         }
 
         @include m(disabled) {
-            background-color: $hy-check-button-background--disabled;
+            background-color: $hy-check-button-disabled-background;
             border-color: $hy-check-button-disabled-border-color;
             color: $hy-check-button-disabled-color;
             cursor: not-allowed;

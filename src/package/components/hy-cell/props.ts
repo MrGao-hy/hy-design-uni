@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { ArrowDirectionType, RowCenterType, SizeType } from '../../libs'
+import type { ArrowDirectionType, RowCenterType, SizeType } from '../../libs'
 
 const cellProps = {
     /** 是否显示cell下边框 */

@@ -17,8 +17,10 @@ $hy-loading-bars-gap: var(--hy-loading-bars-gap, 3px) !default;
 $hy-loading-vertical-text-color: var(--hy-loading-vertical-text-color, #{$hy-text-color--grey}) !default;
 /* hy-loading 主题色，默认跟随全局主题色 token */
 $hy-loading-primary: var(--hy-loading-primary, #{$hy-primary}) !default;
-/* hy-loading 基础间距，默认跟随全局 token */
-$hy-loading-margin-padding-base: var(--hy-loading-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 水平排列文字左外边距，默认跟随全局基础间距 token */
+$hy-loading-row-text-margin: var(--hy-loading-row-text-margin, #{$hy-border-margin-padding-base}) !default;
+/* 垂直排列文字上外边距，默认跟随全局基础间距 token */
+$hy-loading-column-text-margin: var(--hy-loading-column-text-margin, #{$hy-border-margin-padding-base}) !default;
 
 
 @include b(loading-icon) {
@@ -82,7 +84,7 @@ $hy-loading-margin-padding-base: var(--hy-loading-margin-padding-base, #{$hy-bor
     @include flex(row);
 
     @include m(text) {
-      margin-left: $hy-loading-margin-padding-base;
+      margin-left: $hy-loading-row-text-margin;
     }
   }
 
@@ -90,7 +92,7 @@ $hy-loading-margin-padding-base: var(--hy-loading-margin-padding-base, #{$hy-bor
     @include flex(column);
 
     @include m(text) {
-      margin-top: $hy-loading-margin-padding-base;
+      margin-top: $hy-loading-column-text-margin;
     }
   }
 }

@@ -11,14 +11,14 @@ $hy-picker-title-font-size: var(--hy-picker-title-font-size, #{$hy-font-size-bas
 $hy-picker-title-color: var(--hy-picker-title-color, #{$hy-text-color--grey}) !default;
 /* 选项文字颜色 */
 $hy-picker-item-color: var(--hy-picker-item-color, #{$hy-text-color}) !default;
-/* hy-picker 大间距，默认跟随全局 token */
-$hy-picker-margin-padding-lg: var(--hy-picker-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* 标题栏内边距，默认跟随全局大间距 token */
+$hy-picker-title-padding: var(--hy-picker-title-padding, #{$hy-border-margin-padding-lg}) !default;
 /* hy-picker 主题色，默认跟随全局主题色 token */
 $hy-picker-primary: var(--hy-picker-primary, #{$hy-primary}) !default;
-/* hy-picker 点击状态背景色，默认跟随全局 token */
-$hy-picker-background--hover: var(--hy-picker-background--hover, #{$hy-background--hover}) !default;
-/* hy-picker 两翼雾化遮罩背景，默认跟随全局 token */
-$hy-picker-background-image--mask--two-flanks: var(--hy-picker-background-image--mask--two-flanks, #{$hy-background-image--mask--two-flanks}) !default;
+/* 选中指示区背景色，默认跟随全局点击状态背景 token */
+$hy-picker-indicator-background: var(--hy-picker-indicator-background, #{$hy-background--hover}) !default;
+/* 选项列表两翼雾化遮罩背景，默认跟随全局两翼雾化遮罩 token */
+$hy-picker-mask-background-image: var(--hy-picker-mask-background-image, #{$hy-background-image--mask--two-flanks}) !default;
 
 @include b(picker) {
     position: relative;
@@ -38,7 +38,7 @@ $hy-picker-background-image--mask--two-flanks: var(--hy-picker-background-image-
     @include e(title) {
         @include flex();
         justify-content: space-between;
-        padding: $hy-picker-margin-padding-lg;
+        padding: $hy-picker-title-padding;
         @include m(center) {
             font-size: $hy-picker-title-font-size;
             color: $hy-picker-title-color;
@@ -57,7 +57,7 @@ $hy-picker-background-image--mask--two-flanks: var(--hy-picker-background-image-
             text-align: center;
 
             :deep(.uni-picker-view-indicator) {
-                background: $hy-picker-background--hover;
+                background: $hy-picker-indicator-background;
             }
 
             @include e(item) {
@@ -83,6 +83,6 @@ $hy-picker-background-image--mask--two-flanks: var(--hy-picker-background-image-
     }
 
     @include edeep(mask) {
-        background-image: $hy-picker-background-image--mask--two-flanks;
+        background-image: $hy-picker-mask-background-image;
     }
 }

@@ -23,21 +23,21 @@ $hy-textarea-radius: var(--hy-textarea-radius, #{$hy-radius-sm}) !default;
 $hy-textarea-count-radius: var(--hy-textarea-count-radius, #{$hy-radius-sm}) !default;
 /* 边框，默认跟随全局边框线 token */
 $hy-textarea-border: var(--hy-textarea-border, #{$hy-border-line}) !default;
-/* hy-textarea 小间距，默认跟随全局 token */
-$hy-textarea-margin-padding-sm: var(--hy-textarea-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 输入框整体内边距，默认跟随全局小间距 token */
+$hy-textarea-padding: var(--hy-textarea-padding, #{$hy-border-margin-padding-sm}) !default;
 /* hy-textarea 无圆角，默认跟随全局 token */
 $hy-textarea-radius-no: var(--hy-textarea-radius-no, #{$hy-radius-no}) !default;
-/* hy-textarea 禁用背景色，默认跟随全局 token */
-$hy-textarea-background--disabled: var(--hy-textarea-background--disabled, #{$hy-background--disabled}) !default;
-/* hy-textarea 深色弹窗背景色，默认跟随全局 token */
-$hy-textarea-background--3: var(--hy-textarea-background--3, #{$hy-background--3}) !default;
+/* 禁用态背景色，默认跟随全局禁用背景 token */
+$hy-textarea-disabled-background: var(--hy-textarea-disabled-background, #{$hy-background--disabled}) !default;
+/* 字数统计背景色，默认跟随全局深色背景 token */
+$hy-textarea-count-background: var(--hy-textarea-count-background, #{$hy-background--3}) !default;
 
 @include b(textarea) {
     border-radius: $hy-textarea-radius;
     position: relative;
     @include flex;
     flex: 1;
-    padding: $hy-textarea-margin-padding-sm;
+    padding: $hy-textarea-padding;
 
     @include e(border) {
         border: $hy-textarea-border;
@@ -52,7 +52,7 @@ $hy-textarea-background--3: var(--hy-textarea-background--3, #{$hy-background--3
     }
 
     @include e(disabled) {
-        background-color: $hy-textarea-background--disabled;
+        background-color: $hy-textarea-disabled-background;
         color: $hy-textarea-disabled-color !important;
 
         @include m(text) {
@@ -78,7 +78,7 @@ $hy-textarea-background--3: var(--hy-textarea-background--3, #{$hy-background--3
         right: 5px;
         bottom: 2px;
         font-size: $hy-textarea-count-font-size;
-        background-color: $hy-textarea-background--3;
+        background-color: $hy-textarea-count-background;
         padding: 1px 4px;
         border-radius: $hy-textarea-count-radius;
     }

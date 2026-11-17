@@ -25,14 +25,16 @@ $hy-input-clear-radius: var(--hy-input-clear-radius, #{$hy-radius-semicircle}) !
 $hy-input-border: var(--hy-input-border, #{$hy-border-line}) !default;
 /* hy-input 文字颜色，默认跟随全局基础文字 token */
 $hy-input-text-color: var(--hy-input-text-color, #{$hy-text-color}) !default;
-/* hy-input 禁用背景色，默认跟随全局 token */
-$hy-input-background--disabled: var(--hy-input-background--disabled, #{$hy-background--disabled}) !default;
-/* hy-input 基础间距，默认跟随全局 token */
-$hy-input-margin-padding-base: var(--hy-input-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
-/* hy-input 轨道背景色，默认跟随全局 token */
-$hy-input-background--track: var(--hy-input-background--track, #{$hy-background--track}) !default;
-/* hy-input 小间距，默认跟随全局 token */
-$hy-input-margin-padding-sm: var(--hy-input-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 输入框禁用态背景色，默认跟随全局禁用背景 token */
+$hy-input-disabled-background: var(--hy-input-disabled-background, #{$hy-background--disabled}) !default;
+/* 输入区域右外边距，默认跟随全局基础间距 token */
+$hy-input-field-margin: var(--hy-input-field-margin, #{$hy-border-margin-padding-base}) !default;
+/* 清除按钮背景色，默认跟随全局轨道背景 token */
+$hy-input-clear-background: var(--hy-input-clear-background, #{$hy-background--track}) !default;
+/* 前置图标右外边距，默认跟随全局小间距 token */
+$hy-input-prefix-icon-margin: var(--hy-input-prefix-icon-margin, #{$hy-border-margin-padding-sm}) !default;
+/* 后置图标左外边距，默认跟随全局小间距 token */
+$hy-input-subfix-icon-margin: var(--hy-input-subfix-icon-margin, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(input) {
   @include flex(row);
@@ -50,7 +52,7 @@ $hy-input-margin-padding-sm: var(--hy-input-margin-padding-sm, #{$hy-border-marg
   }
 
   @include e(disabled) {
-    background-color: $hy-input-background--disabled;
+    background-color: $hy-input-disabled-background;
     color: $hy-input-disabled-color;
     :deep(.hy-icon) {
       color: $hy-input-disabled-color;
@@ -79,7 +81,7 @@ $hy-input-margin-padding-sm: var(--hy-input-margin-padding-sm, #{$hy-border-marg
       position: relative;
       @include flex(row);
       flex: 1;
-      margin-right: $hy-input-margin-padding-base;
+      margin-right: $hy-input-field-margin;
 
       @include e(field) {
         background: transparent;
@@ -101,7 +103,7 @@ $hy-input-margin-padding-sm: var(--hy-input-margin-padding-sm, #{$hy-border-marg
       width: $hy-input-clear-size;
       height: $hy-input-clear-size;
       border-radius: $hy-input-clear-radius;
-      background-color: $hy-input-background--track;
+      background-color: $hy-input-clear-background;
       @include flex(row);
       align-items: center;
       justify-content: center;
@@ -109,11 +111,11 @@ $hy-input-margin-padding-sm: var(--hy-input-margin-padding-sm, #{$hy-border-marg
     }
 
     @include m(subfix-icon) {
-      margin-left: $hy-input-margin-padding-sm;
+      margin-left: $hy-input-subfix-icon-margin;
     }
 
     @include m(prefix-icon) {
-      margin-right: $hy-input-margin-padding-sm;
+      margin-right: $hy-input-prefix-icon-margin;
     }
   }
 }

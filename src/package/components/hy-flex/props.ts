@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { AlignType, JustifyContentType, FlexWrapType } from '../../libs'
+import type { AlignType, JustifyContentType, FlexWrapType } from '../../libs'
 
 const flexProps = {
     /** flex 主轴的方向是否垂直，使用 flex-direction: column */

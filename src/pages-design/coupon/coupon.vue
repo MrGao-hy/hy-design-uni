@@ -102,7 +102,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
-import { CouponButtonModeType, CouponType } from '@/package'
+import type { CouponButtonModeType, CouponType } from '@/package'
 
 definePage({
     style: {

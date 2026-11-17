@@ -159,8 +159,8 @@
     <view class="hy-title">{{ t('touchThrough') }}</view>
     <view class="hy-container">
         <hy-cell>
-            <hy-cell-item :title="t('allowThrough')" @click="handleOverlay(false)"></hy-cell-item>
-            <hy-cell-item :title="t('forbidThrough')" @click="handleOverlay(true)"></hy-cell-item>
+            <hy-cell-item :title="t('allowThrough')" @click="handleOverlay(true)"></hy-cell-item>
+            <hy-cell-item :title="t('forbidThrough')" @click="handleOverlay(false)"></hy-cell-item>
             <hy-cell-item :title="t('showCover')" @click="handleCover(true)"></hy-cell-item>
         </hy-cell>
     </view>
@@ -286,7 +286,7 @@ const handleCallback = () => {
 
 // 触摸穿透
 const handleOverlay = (overlay: boolean) => {
-    toast.info(overlay ? t('forbidTouchThrough') : t('allowTouchThrough'), {
+    toast.info(overlay ? t('allowTouchThrough') : t('forbidTouchThrough'), {
         overlay,
         position: position.value as any
     })

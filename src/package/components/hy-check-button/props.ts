@@ -42,7 +42,7 @@ const checkButtonProps = {
         type: Boolean,
         default: false
     },
-    /** 每行几列，每列等宽 */
+    /** 设置子元素列排序，参考css属性值grid-template-columns */
     col: {
         type: String,
         default: 'repeat(3, 1fr)'

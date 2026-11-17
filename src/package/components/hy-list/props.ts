@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { LoadMoreStatus } from '../../libs'
+import type { LoadMoreStatus } from '../../libs'
 
 const listProps = {
     /** 数据列表 */

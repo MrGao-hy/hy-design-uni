@@ -31,10 +31,10 @@ $hy-steps-primary: var(--hy-steps-primary, #{$hy-primary}) !default;
 $hy-steps-info: var(--hy-steps-info, #{$hy-info}) !default;
 /* hy-steps 危险色，默认跟随全局危险色 token */
 $hy-steps-error: var(--hy-steps-error, #{$hy-error}) !default;
-/* hy-steps 小间距，默认跟随全局 token */
-$hy-steps-margin-padding-sm: var(--hy-steps-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
-/* hy-steps 细线背景色，默认跟随全局 token */
-$hy-steps-background--line: var(--hy-steps-background--line, #{$hy-background--line}) !default;
+/* 纵向步骤内容左外边距，默认跟随全局小间距 token */
+$hy-steps-content-margin: var(--hy-steps-content-margin, #{$hy-border-margin-padding-sm}) !default;
+/* 连接线背景色，默认跟随全局细线背景 token */
+$hy-steps-line-background: var(--hy-steps-line-background, #{$hy-background--line}) !default;
 
 @include b(steps) {
   @include flex;
@@ -168,7 +168,7 @@ $hy-steps-background--line: var(--hy-steps-background--line, #{$hy-background--l
       @include m(column) {
         flex-direction: column;
         justify-content: flex-start;
-        margin-left: $hy-steps-margin-padding-sm;
+        margin-left: $hy-steps-content-margin;
         min-height: $hy-steps-content-min-height;
       }
 
@@ -181,7 +181,7 @@ $hy-steps-background--line: var(--hy-steps-background--line, #{$hy-background--l
     /* 线条样式 */
     @include e(line) {
       position: absolute;
-      background: $hy-steps-background--line;
+      background: $hy-steps-line-background;
 
       &.finish {
         background-color: $hy-steps-primary;

@@ -180,7 +180,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
-import { SwipeActionStatus } from '@/package'
+import type { SwipeActionStatus } from '@/package'
 
 definePage({
     style: {

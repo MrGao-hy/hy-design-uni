@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { MonthModeType, useTranslate } from '../../libs'
+import { type MonthModeType, useTranslate } from '../../libs'
 
 const { t } = useTranslate('calendar')
 

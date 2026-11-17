@@ -13,12 +13,14 @@ $hy-checkbox-font-size: var(--hy-checkbox-font-size, #{$hy-font-size-base}) !def
 $hy-checkbox-disabled-color: var(--hy-checkbox-disabled-color, #{$hy-text-color--disabled}) !default;
 /* 勾选框边框，默认跟随全局边框线 token */
 $hy-checkbox-border: var(--hy-checkbox-border, #{$hy-border-line}) !default;
-/* hy-checkbox 小间距，默认跟随全局 token */
-$hy-checkbox-margin-padding-sm: var(--hy-checkbox-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 选项文字右外边距，默认跟随全局小间距 token */
+$hy-checkbox-label-margin: var(--hy-checkbox-label-margin, #{$hy-border-margin-padding-sm}) !default;
+/* 勾选框图标右外边距，默认跟随全局小间距 token */
+$hy-checkbox-icon-margin: var(--hy-checkbox-icon-margin, #{$hy-border-margin-padding-sm}) !default;
 /* hy-checkbox 主题色，默认跟随全局主题色 token */
 $hy-checkbox-primary: var(--hy-checkbox-primary, #{$hy-primary}) !default;
-/* hy-checkbox 禁用背景色，默认跟随全局 token */
-$hy-checkbox-background--disabled: var(--hy-checkbox-background--disabled, #{$hy-background--disabled}) !default;
+/* 勾选框禁用态背景色，默认跟随全局禁用背景 token */
+$hy-checkbox-icon-disabled-background: var(--hy-checkbox-icon-disabled-background, #{$hy-background--disabled}) !default;
 
 @include b(checkbox) {
   /* #ifndef APP-NVUE */
@@ -57,7 +59,7 @@ $hy-checkbox-background--disabled: var(--hy-checkbox-background--disabled, #{$hy
       word-wrap: break-word;
       /* #endif */
       font-size: $hy-checkbox-font-size;
-      margin-right: $hy-checkbox-margin-padding-sm;
+      margin-right: $hy-checkbox-label-margin;
 
       @include m(disabled) {
         color: $hy-checkbox-disabled-color;
@@ -77,7 +79,7 @@ $hy-checkbox-background--disabled: var(--hy-checkbox-background--disabled, #{$hy
     justify-content: center;
     color: transparent;
     text-align: center;
-    margin-right: $hy-checkbox-margin-padding-sm;
+    margin-right: $hy-checkbox-icon-margin;
     border: $hy-checkbox-border;
 
     /* #ifdef MP-TOUTIAO */
@@ -103,7 +105,7 @@ $hy-checkbox-background--disabled: var(--hy-checkbox-background--disabled, #{$hy
     }
 
     @include m(disabled) {
-      background-color: $hy-checkbox-background--disabled;
+      background-color: $hy-checkbox-icon-disabled-background;
       :deep(.hy-icon) {
         display: none;
       }

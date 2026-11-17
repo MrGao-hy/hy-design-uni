@@ -35,10 +35,10 @@ $hy-cell-item-line-height-base: var(--hy-cell-item-line-height-base, #{$hy-line-
 $hy-cell-item-padding-sm: var(--hy-cell-item-padding-sm, #{$hy-border-margin-padding-sm}) !default;
 /* 小行高 */
 $hy-cell-item-line-height-sm: var(--hy-cell-item-line-height-sm, #{$hy-line-height-sm}) !default;
-/* 点击状态背景色 */
-$hy-cell-item-background--hover: var(--hy-cell-item-background--hover, #{$hy-background--hover}) !default;
-/* 禁用背景色 */
-$hy-cell-item-background--disabled: var(--hy-cell-item-background--disabled, #{$hy-background--disabled}) !default;
+/* 单元格点击态背景色，默认跟随全局点击状态背景 token */
+$hy-cell-item-clickable-background: var(--hy-cell-item-clickable-background, #{$hy-background--hover}) !default;
+/* 单元格禁用态背景色，默认跟随全局禁用背景 token */
+$hy-cell-item-disabled-background: var(--hy-cell-item-disabled-background, #{$hy-background--disabled}) !default;
 /* 标题间距 */
 $hy-cell-item-title-margin: var(--hy-cell-item-title-margin, #{$hy-border-margin-padding-sm}) !default;
 /* 值间距 */
@@ -74,7 +74,7 @@ $hy-cell-item-value-margin: var(--hy-cell-item-value-margin, #{$hy-border-margin
 
     /*点击状态*/
     @include e(clickable) {
-        background-color: $hy-cell-item-background--hover;
+        background-color: $hy-cell-item-clickable-background;
     }
 
     @include e(left) {
@@ -134,7 +134,7 @@ $hy-cell-item-value-margin: var(--hy-cell-item-value-margin, #{$hy-border-margin
 
     @include e(disabled) {
         color: $hy-cell-item-disabled-color;
-        background: $hy-cell-item-background--disabled;
+        background: $hy-cell-item-disabled-background;
         /* #ifndef APP-NVUE */
         cursor: not-allowed;
         /* #endif */

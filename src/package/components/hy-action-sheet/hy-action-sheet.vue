@@ -117,7 +117,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { watch, ref, computed, CSSProperties } from 'vue'
+import { watch, ref, computed, type CSSProperties } from 'vue'
 import { isArray } from '../../libs'
 import type { IActionSheetPanel, IActionSheetEmits } from './typing'
 import actionSheetProps from './props'

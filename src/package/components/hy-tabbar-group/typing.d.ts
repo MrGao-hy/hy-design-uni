@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, ToRefs } from 'vue'
 import type tabbarGroupProps from './props'
-import { ShapeType } from '@/package'
+import type { ShapeType } from '../../libs'
 
 export type TabBarGroupProps = ToRefs<ExtractPropTypes<typeof tabbarGroupProps>>
 

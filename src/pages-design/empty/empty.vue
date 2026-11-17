@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 import { computed, ref } from 'vue'
-import { EmptyModeType } from '@/package'
+import type { EmptyModeType } from '@/package'
 
 definePage({
     style: {

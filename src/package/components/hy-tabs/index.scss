@@ -17,8 +17,8 @@ $hy-tabs-text-color: var(--hy-tabs-text-color, #{$hy-text-color}) !default;
 $hy-tabs-text-active-color: var(--hy-tabs-text-active-color, #{$hy-text-color}) !default;
 /* 下划线圆角，默认跟随全局半圆角 token */
 $hy-tabs-line-radius: var(--hy-tabs-line-radius, #{$hy-radius-semicircle}) !default;
-/* hy-tabs 禁用背景色，默认跟随全局 token */
-$hy-tabs-background--disabled: var(--hy-tabs-background--disabled, #{$hy-background--disabled}) !default;
+/* 标签禁用态文字颜色，默认跟随全局禁用背景 token */
+$hy-tabs-text-disabled-color: var(--hy-tabs-text-disabled-color, #{$hy-background--disabled}) !default;
 /* hy-tabs 主题色，默认跟随全局主题色 token */
 $hy-tabs-primary: var(--hy-tabs-primary, #{$hy-primary}) !default;
 
@@ -72,7 +72,7 @@ $hy-tabs-primary: var(--hy-tabs-primary, #{$hy-primary}) !default;
           white-space: nowrap;
 
           @include e(disabled) {
-            color: $hy-tabs-background--disabled !important;
+            color: $hy-tabs-text-disabled-color !important;
           }
         }
       }

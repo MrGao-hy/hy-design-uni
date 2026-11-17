@@ -25,10 +25,10 @@ $hy-table-fixed-right-shadow: var(
 ) !default;
 /* 表格边框，默认跟随全局边框线 token */
 $hy-table-border: var(--hy-table-border, #{$hy-border-line}) !default;
-/* hy-table 表头背景色，默认跟随全局 token */
-$hy-table-background--table-header: var(--hy-table-background--table-header, #{$hy-background--table-header}) !default;
-/* hy-table 容器背景色，默认跟随全局 token */
-$hy-table-background--container: var(--hy-table-background--container, #{$hy-background--container}) !default;
+/* 表头背景色，默认跟随全局表头背景 token */
+$hy-table-header-background: var(--hy-table-header-background, #{$hy-background--table-header}) !default;
+/* 表格背景色（数据行与加载遮罩），默认跟随全局容器背景 token */
+$hy-table-background: var(--hy-table-background, #{$hy-background--container}) !default;
 /* hy-table 主题色，默认跟随全局主题色 token */
 $hy-table-primary: var(--hy-table-primary, #{$hy-primary}) !default;
 
@@ -47,7 +47,7 @@ $hy-table-primary: var(--hy-table-primary, #{$hy-primary}) !default;
         flex-shrink: 0;
         width: 100%;
         height: $hy-table-header-height;
-        background-color: $hy-table-background--table-header;
+        background-color: $hy-table-header-background;
         border-bottom: $hy-table-border;
 
         /* 列头中间滚动容器：自身可横向拖动，与主体横向滚动双向联动 */
@@ -134,7 +134,7 @@ $hy-table-primary: var(--hy-table-primary, #{$hy-primary}) !default;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: $hy-table-background--container;
+            background: $hy-table-background;
         }
 
         /* 空状态 */
@@ -156,7 +156,7 @@ $hy-table-primary: var(--hy-table-primary, #{$hy-primary}) !default;
         width: 100%;
         border-bottom: $hy-table-border;
         box-sizing: border-box;
-        background-color: $hy-table-background--container;
+        background-color: $hy-table-background;
 
         @include is(stripe) {
             background: $stripe-bg;

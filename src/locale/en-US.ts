@@ -126,6 +126,7 @@ export default {
     badge: {
         title: 'Badge',
         // ===== Demo content =====
+        slotSection: 'Slot Usage',
         shapeSection: 'Corner Shape',
         displaySection: 'Display Mode',
         dotSection: 'Dot',
@@ -1772,6 +1773,13 @@ export default {
         icon: 'With Icon',
         address: 'Address',
         viewMore: 'View More',
+        decoration: 'Decoration',
+        underline: 'Underline',
+        lineThrough: 'Line Through',
+        overline: 'Overline',
+        slot: 'Prefix & Suffix Slots',
+        phoneTag: 'Phone',
+        maskedTag: 'Masked',
         twoLines: 'Hide Over Two Lines',
         uviewIntro:
             'The name uview-plus comes from: the initial letter u comes from uni-app, and plus refers to element-plus to make it easy to understand that this is the Vue3 version. uni-app is based on Vue.js; Vue and View (extended to mean UI) are homophonic. The view component is the most basic and important component in uni-app, hence the name uview-plus, expressing that it originates from uni-app and Vue, with gratitude to them.',

@@ -2,7 +2,7 @@
 export * from './modules/form'
 export * from './modules/enum'
 
-// 缁勪欢绫诲瀷
+
 export * from '../../components/hy-action-sheet/typing.d'
 export * from '../../components/hy-address-picker/typing.d'
 export * from '../../components/hy-avatar/typing.d'
@@ -32,6 +32,7 @@ export * from '../../components/hy-folding-panel/typing.d'
 export * from '../../components/hy-folding-panel-item/typing.d'
 export * from '../../components/hy-form/typing.d'
 export * from '../../components/hy-form-item/typing.d'
+export * from '../../components/hy-form-group/typing.d'
 export * from '../../components/hy-grid/typing.d'
 export * from '../../components/hy-icon/typing.d'
 export * from '../../components/hy-image/typing.d'

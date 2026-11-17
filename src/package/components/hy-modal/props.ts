@@ -1,4 +1,4 @@
-import { RowCenterType, useTranslate } from '../../libs'
+import { type RowCenterType, useTranslate } from '../../libs'
 import type { ShapeType } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 

@@ -9,19 +9,19 @@ $hy-switch-node-box-shadow: var(--hy-switch-node-box-shadow, 1px 1px 1px 0 rgba(
 $hy-switch-disabled-opacity: var(--hy-switch-disabled-opacity, 0.6) !default;
 /* 开关圆角（含圆点/背景），默认跟随全局半圆 token */
 $hy-switch-radius: var(--hy-switch-radius, #{$hy-radius-semicircle}) !default;
-/* hy-switch 深色弹窗背景色，默认跟随全局 token */
-$hy-switch-background--3: var(--hy-switch-background--3, #{$hy-background--3}) !default;
+/* 关闭态背景色，默认跟随全局深色背景 token */
+$hy-switch-inactive-background: var(--hy-switch-inactive-background, #{$hy-background--3}) !default;
 /* hy-switch 主题色，默认跟随全局主题色 token */
 $hy-switch-primary: var(--hy-switch-primary, #{$hy-primary}) !default;
-/* hy-switch 容器背景色，默认跟随全局 token */
-$hy-switch-background--container: var(--hy-switch-background--container, #{$hy-background--container}) !default;
+/* 滑块背景色，默认跟随全局容器背景 token */
+$hy-switch-node-background: var(--hy-switch-node-background, #{$hy-background--container}) !default;
 
 @include b(switch) {
   @include flex(row);
   /* #ifndef APP-NVUE */
   box-sizing: border-box;
   /* #endif */
-  background-color: $hy-switch-background--3;
+  background-color: $hy-switch-inactive-background;
   position: relative;
   border-radius: $hy-switch-radius;
   transition: background-color 0.4s;
@@ -39,7 +39,7 @@ $hy-switch-background--container: var(--hy-switch-background--container, #{$hy-b
     @include flex(row);
     align-items: center;
     justify-content: center;
-    background-color: $hy-switch-background--container;
+    background-color: $hy-switch-node-background;
     border-radius: $hy-switch-radius;
     box-shadow: $hy-switch-node-box-shadow;
     transition-property: transform;
@@ -50,7 +50,7 @@ $hy-switch-background--container: var(--hy-switch-background--container, #{$hy-b
   @include e(bg) {
     position: absolute;
     border-radius: $hy-switch-radius;
-    background-color: $hy-switch-background--3;
+    background-color: $hy-switch-inactive-background;
     transition-property: transform;
     transition-duration: 0.4s;
     transition-timing-function: ease;

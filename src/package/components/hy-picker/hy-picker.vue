@@ -122,8 +122,8 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { addUnit, isArray, PickerValue, useTranslate } from '../../libs'
-import type { IPickerEmits, IPickerExpose, PickerColumnVo } from './typing'
+import { addUnit, isArray, useTranslate } from '../../libs'
+import type { IPickerEmits, IPickerExpose, PickerColumnVo, PickerValue } from './typing'
 import pickerProps from './props'
 // 组件
 import HyInput from '../hy-input/hy-input.vue'

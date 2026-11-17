@@ -15,13 +15,15 @@ $hy-keyboard-key-gap: var(--hy-keyboard-key-gap, #{$hy-border-margin-padding-sm}
 $hy-keyboard-sidebar-width: var(--hy-keyboard-sidebar-width, 160rpx) !default;
 /* 头部分隔线，默认跟随全局边框线 token */
 $hy-keyboard-border: var(--hy-keyboard-border, #{$hy-border-line}) !default;
-/* hy-keyboard 轨道背景色，默认跟随全局 token */
-$hy-keyboard-background--track: var(--hy-keyboard-background--track, #{$hy-background--track}) !default;
-/* hy-keyboard 小间距，默认跟随全局 token */
-$hy-keyboard-margin-padding-sm: var(--hy-keyboard-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 键盘整体背景色，默认跟随全局轨道背景 token */
+$hy-keyboard-background: var(--hy-keyboard-background, #{$hy-background--track}) !default;
+/* 头部背景色，默认跟随全局轨道背景 token */
+$hy-keyboard-header-background: var(--hy-keyboard-header-background, #{$hy-background--track}) !default;
+/* 按键区内边距，默认跟随全局小间距 token */
+$hy-keyboard-body-padding: var(--hy-keyboard-body-padding, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(keyboard) {
-    background: $hy-keyboard-background--track;
+    background: $hy-keyboard-background;
     overflow: hidden;
     box-sizing: border-box;
 
@@ -31,7 +33,7 @@ $hy-keyboard-margin-padding-sm: var(--hy-keyboard-margin-padding-sm, #{$hy-borde
         justify-content: space-between;
         height: $hy-keyboard-header-height;
         padding: $hy-keyboard-header-padding;
-        background: $hy-keyboard-background--track;
+        background: $hy-keyboard-header-background;
         border-bottom: $hy-keyboard-border;
         width: 100%;
         box-sizing: border-box;
@@ -55,7 +57,7 @@ $hy-keyboard-margin-padding-sm: var(--hy-keyboard-margin-padding-sm, #{$hy-borde
         display: flex;
         gap: $hy-keyboard-key-gap;
         width: 100%;
-        padding: $hy-keyboard-margin-padding-sm;
+        padding: $hy-keyboard-body-padding;
         box-sizing: border-box;
     }
 

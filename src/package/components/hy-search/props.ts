@@ -1,7 +1,7 @@
 import type { CSSProperties, PropType } from 'vue'
-import { IconConfig, ShapeType, useTranslate } from '../../libs'
+import { IconConfig, type ShapeType, useTranslate } from '../../libs'
 import type { HyIconProps } from '../hy-icon/typing'
-import { InputConfirmType } from '@uni-helper/uni-types'
+import type { InputConfirmType } from '@uni-helper/uni-types'
 
 const { t } = useTranslate('search')
 

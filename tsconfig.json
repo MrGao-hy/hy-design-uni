@@ -1,7 +1,7 @@
 {
     "extends": "@vue/tsconfig/tsconfig.json",
     "compilerOptions": {
-        "verbatimModuleSyntax": false,
+        "verbatimModuleSyntax": true,
         "ignoreDeprecations": "5.0",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "paths": {

@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
-import { DirectionType, type FloatPositionType, ShapeType, SizeType } from '@/package'
+import type { DirectionType, FloatPositionType, ShapeType, SizeType } from '@/package'
 
 definePage({
     style: {

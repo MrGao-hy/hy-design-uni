@@ -13,10 +13,10 @@ $hy-subsection-font-size: var(--hy-subsection-font-size, 12px) !default;
 $hy-subsection-line-height: var(--hy-subsection-line-height, 14px) !default;
 /* 整体圆角，默认跟随全局小圆角 token */
 $hy-subsection-radius: var(--hy-subsection-radius, #{$hy-radius-sm}) !default;
-/* hy-subsection 深色弹窗背景色，默认跟随全局 token */
-$hy-subsection-background--3: var(--hy-subsection-background--3, #{$hy-background--3}) !default;
-/* hy-subsection 容器背景色，默认跟随全局 token */
-$hy-subsection-background--container: var(--hy-subsection-background--container, #{$hy-background--container}) !default;
+/* 按钮模式底槽背景色，默认跟随全局深色背景 token */
+$hy-subsection-button-background: var(--hy-subsection-button-background, #{$hy-background--3}) !default;
+/* 滑块背景色，默认跟随全局容器背景 token */
+$hy-subsection-bar-background: var(--hy-subsection-bar-background, #{$hy-background--container}) !default;
 /* hy-subsection 主题色，默认跟随全局主题色 token */
 $hy-subsection-primary: var(--hy-subsection-primary, #{$hy-primary}) !default;
 
@@ -32,13 +32,13 @@ $hy-subsection-primary: var(--hy-subsection-primary, #{$hy-primary}) !default;
 
   @include e(button) {
     height: $hy-subsection-height;
-    background-color: $hy-subsection-background--3;
+    background-color: $hy-subsection-button-background;
     padding: $hy-subsection-padding;
     border-radius: $hy-subsection-radius;
     align-items: stretch;
 
     @include m(bar) {
-      background-color: $hy-subsection-background--container !important;
+      background-color: $hy-subsection-bar-background !important;
       border-radius: $hy-subsection-radius;
     }
   }

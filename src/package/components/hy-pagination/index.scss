@@ -9,8 +9,8 @@ $hy-pagination-nav-active-color: var(--hy-pagination-nav-active-color, rgba(0, 0
 $hy-pagination-nav-disabled-color: var(--hy-pagination-nav-disabled-color, rgba(0, 0, 0, 0.15)) !default;
 /* 信息文字字号，默认跟随全局小号字体 token */
 $hy-pagination-font-size: var(--hy-pagination-font-size, #{$hy-font-size-sm}) !default;
-/* hy-pagination 基础间距，默认跟随全局 token */
-$hy-pagination-margin-padding-base: var(--hy-pagination-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 内容区内边距，默认跟随全局基础间距 token */
+$hy-pagination-content-padding: var(--hy-pagination-content-padding, #{$hy-border-margin-padding-base}) !default;
 /* hy-pagination 主题色，默认跟随全局主题色 token */
 $hy-pagination-primary: var(--hy-pagination-primary, #{$hy-primary}) !default;
 
@@ -26,7 +26,7 @@ $hy-pagination-primary: var(--hy-pagination-primary, #{$hy-primary}) !default;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: $hy-pagination-margin-padding-base;
+    padding: $hy-pagination-content-padding;
   }
 
   @include e(message) {

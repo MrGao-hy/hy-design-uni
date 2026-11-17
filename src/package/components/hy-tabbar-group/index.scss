@@ -9,10 +9,10 @@ $hy-tabbar-group-z-index: var(--hy-tabbar-group-z-index, 500) !default;
 $hy-tabbar-group-radius: var(--hy-tabbar-group-radius, #{$hy-radius-semicircle}) !default;
 /* 顶部边框，默认跟随全局边框线 token */
 $hy-tabbar-group-border: var(--hy-tabbar-group-border, #{$hy-border-line}) !default;
-/* hy-tabbar-group 容器背景色，默认跟随全局 token */
-$hy-tabbar-group-background--container: var(--hy-tabbar-group-background--container, #{$hy-background--container}) !default;
-/* hy-tabbar-group 大间距，默认跟随全局 token */
-$hy-tabbar-group-margin-padding-lg: var(--hy-tabbar-group-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
+/* 底部栏背景色，默认跟随全局容器背景 token */
+$hy-tabbar-group-background: var(--hy-tabbar-group-background, #{$hy-background--container}) !default;
+/* 胶囊模式左右外边距，默认跟随全局大间距 token */
+$hy-tabbar-group-circle-margin: var(--hy-tabbar-group-circle-margin, #{$hy-border-margin-padding-lg}) !default;
 /* hy-tabbar-group 基础阴影，默认跟随全局 token */
 $hy-tabbar-group-shadow-base: var(--hy-tabbar-group-shadow-base, #{$hy-shadow-base}) !default;
 
@@ -21,7 +21,7 @@ $hy-tabbar-group-shadow-base: var(--hy-tabbar-group-shadow-base, #{$hy-shadow-ba
   align-items: center;
   flex-wrap: nowrap;
   position: relative;
-  background: $hy-tabbar-group-background--container;
+  background: $hy-tabbar-group-background;
   height: $hy-tabbar-group-height;
 
   @include e(placeholder) {
@@ -32,8 +32,8 @@ $hy-tabbar-group-shadow-base: var(--hy-tabbar-group-shadow-base, #{$hy-shadow-ba
   }
 
   @include m(circle) {
-    margin-left: $hy-tabbar-group-margin-padding-lg;
-    margin-right: $hy-tabbar-group-margin-padding-lg;
+    margin-left: $hy-tabbar-group-circle-margin;
+    margin-right: $hy-tabbar-group-circle-margin;
     border-radius: $hy-tabbar-group-radius;
     box-shadow: $hy-tabbar-group-shadow-base;
 

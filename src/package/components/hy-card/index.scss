@@ -19,28 +19,30 @@ $hy-card-sub-color: var(--hy-card-sub-color, #{$hy-text-color--grey}) !default;
 $hy-card-sub-font-size: var(--hy-card-sub-font-size, #{$hy-font-size-sm}) !default;
 /* 头部右侧文字颜色，默认跟随全局灰度文字 token */
 $hy-card-right-color: var(--hy-card-right-color, #{$hy-text-color--grey}) !default;
-/* hy-card 容器背景色，默认跟随全局 token */
-$hy-card-background--container: var(--hy-card-background--container, #{$hy-background--container}) !default;
-/* hy-card 基础间距，默认跟随全局 token */
-$hy-card-margin-padding-base: var(--hy-card-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
-/* hy-card 小间距，默认跟随全局 token */
-$hy-card-margin-padding-sm: var(--hy-card-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 卡片背景色，默认跟随全局容器背景 token */
+$hy-card-background: var(--hy-card-background, #{$hy-background--container}) !default;
+/* 缩略图右外边距，默认跟随全局基础间距 token */
+$hy-card-thumb-margin: var(--hy-card-thumb-margin, #{$hy-border-margin-padding-base}) !default;
+/* 通栏模式左右外边距，默认跟随全局基础间距 token */
+$hy-card-full-margin: var(--hy-card-full-margin, #{$hy-border-margin-padding-base}) !default;
+/* 头部右侧左外边距，默认跟随全局小间距 token */
+$hy-card-right-margin: var(--hy-card-right-margin, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(card) {
     position: relative;
     font-size: $hy-card-font-size;
-    background-color: $hy-card-background--container;
+    background-color: $hy-card-background;
     box-sizing: border-box;
     overflow: hidden;
 
     @include edeep(thumb) {
-        margin-right: $hy-card-margin-padding-base;
+        margin-right: $hy-card-thumb-margin;
         flex-shrink: 0;
     }
 
     @include e(full) {
-        margin-left: $hy-card-margin-padding-base !important;
-        margin-right: $hy-card-margin-padding-base !important;
+        margin-left: $hy-card-full-margin !important;
+        margin-right: $hy-card-full-margin !important;
     }
 
     @include m(border) {
@@ -78,7 +80,7 @@ $hy-card-margin-padding-sm: var(--hy-card-margin-padding-sm, #{$hy-border-margin
 
         @include m(right) {
             color: $hy-card-right-color;
-            margin-left: $hy-card-margin-padding-sm;
+            margin-left: $hy-card-right-margin;
 
             @include e(text) {
                 white-space: nowrap;

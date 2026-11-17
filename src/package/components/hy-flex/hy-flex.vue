@@ -16,7 +16,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, CSSProperties } from 'vue'
+import { computed, type CSSProperties } from 'vue'
 import { addUnit, isArray } from '../../libs'
 import flexProps from './props'
 

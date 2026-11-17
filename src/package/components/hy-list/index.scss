@@ -1,8 +1,8 @@
 @use '../../libs/css/theme' as *;
 @use '../../libs/css/mixin' as *;
 
-/* hy-list 基础间距，默认跟随全局 token */
-$hy-list-margin-padding-base: var(--hy-list-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 左列容器右外边距，默认跟随全局基础间距 token */
+$hy-list-left-margin: var(--hy-list-left-margin, #{$hy-border-margin-padding-base}) !default;
 
 @include b(virtual-container) {
     box-sizing: border-box;
@@ -29,7 +29,7 @@ $hy-list-margin-padding-base: var(--hy-list-margin-padding-base, #{$hy-border-ma
         }
 
         @include m(left) {
-            margin-right: $hy-list-margin-padding-base;
+            margin-right: $hy-list-left-margin;
         }
         @include m(box) {
             box-sizing: border-box;

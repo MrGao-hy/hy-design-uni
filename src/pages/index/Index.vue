@@ -18,7 +18,6 @@ import { useThemeStore } from '@/store'
 import { useShakeService } from '@/package'
 import { onHide, onShow } from '@dcloudio/uni-app'
 import { storeToRefs } from 'pinia'
-import TheRootPage from '@/components/the-root-page.vue'
 const themeStore = useThemeStore()
 const { startShakeListener, stopShakeListener } = useShakeService()
 

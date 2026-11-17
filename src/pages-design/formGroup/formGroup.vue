@@ -27,8 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import { FormTypeEnum, IFormExpose, useToast } from '@/package'
-import type { FormColumnsType } from '@/package'
+import { useToast } from '@/package'
+import type { FormColumnsType, IFormExpose } from '@/package'
+import { FormTypeEnum } from '@/package'
 import HyFormGroup from '@/package/components/hy-form-group/hy-form-group.vue'
 import { reactive, ref, computed } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'

@@ -1,6 +1,6 @@
 import type { DateModeEnum } from './enum'
 import type { CheckboxColumnsVo } from '../../../components/hy-check-button/typing'
-import {
+import type {
     HyInputProps,
     HyTextareaProps,
     HySwitchProps,
@@ -9,7 +9,7 @@ import {
     HyCheckButtonProps,
     FormRule
 } from '../../index'
-import { HyInputInstance } from '@/package/components/hy-form-group/typing'
+import type { HyInputInstance } from '@/package/components/hy-form-group/typing'
 
 /**
  * 类型

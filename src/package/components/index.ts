@@ -1,4 +1,4 @@
-import HyTabbar from '@/package/components/hy-tabbar/hy-tabbar.vue'
+import HyTabbar from './hy-tabbar/hy-tabbar.vue'
 // 组件库
 import HyAddressPicker from './hy-address-picker/hy-address-picker.vue'
 import HyAvatar from './hy-avatar/hy-avatar.vue'

@@ -7,8 +7,10 @@ $hy-divider-min-height: var(--hy-divider-min-height, 35px) !default;
 $hy-divider-text-color: var(--hy-divider-text-color, #{$hy-text-color--3}) !default;
 /* 圆点字号，默认跟随全局小号字体 token */
 $hy-divider-dot-font-size: var(--hy-divider-dot-font-size, #{$hy-font-size-sm}) !default;
-/* hy-divider 小间距，默认跟随全局 token */
-$hy-divider-margin-padding-sm: var(--hy-divider-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 文字左右外边距，默认跟随全局小间距 token */
+$hy-divider-text-margin: var(--hy-divider-text-margin, #{$hy-border-margin-padding-sm}) !default;
+/* 圆点左右外边距，默认跟随全局小间距 token */
+$hy-divider-dot-margin: var(--hy-divider-dot-margin, #{$hy-border-margin-padding-sm}) !default;
 
 @include b(divider) {
   @include flex;
@@ -25,12 +27,12 @@ $hy-divider-margin-padding-sm: var(--hy-divider-margin-padding-sm, #{$hy-border-
 
   @include e(text) {
     color: $hy-divider-text-color;
-    margin: 0 $hy-divider-margin-padding-sm;
+    margin: 0 $hy-divider-text-margin;
   }
 
   @include e(dot) {
     font-size: $hy-divider-dot-font-size;
-    margin: 0 $hy-divider-margin-padding-sm;
+    margin: 0 $hy-divider-dot-margin;
     color: $hy-divider-text-color;
   }
 }

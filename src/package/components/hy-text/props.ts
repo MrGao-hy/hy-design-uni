@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { ButtonOpenType } from '@uni-helper/uni-types'
+import type { ButtonOpenType } from '@uni-helper/uni-types'
 import type {
     RowCenterType,
     TextMode,
@@ -9,7 +9,7 @@ import type {
 } from '../../libs'
 
 const textProps = {
-    /** 显示的值 */
+    /** 显示的值, mode为date时，text接收默认为时间戳（数字类型） */
     text: {
         type: [String, Number],
         default: '',
@@ -31,7 +31,7 @@ const textProps = {
     suffixIcon: String,
     /**
      * 文本处理的匹配模式
-     * @values test,price,phone,name,date,link
+     * @values text,price,phone,name,date,link
      * */
     mode: {
         type: String as PropType<TextMode>,
@@ -82,7 +82,7 @@ const textProps = {
     },
     /**
      * 文字装饰，下划线，中划线等，可选值
-     * @values none,underline,line-through
+     * @values none,underline,line-through,overline
      * */
     decoration: String as PropType<TextDecorationType>,
     /** 外边距，对象、字符串，数值形式均可 */

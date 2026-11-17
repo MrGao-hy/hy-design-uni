@@ -1,8 +1,9 @@
 <template>
     <hy-overlay
         :show="isShow"
-        :lock-scroll="!tmpConfig.overlay"
+        :pass-through="tmpConfig.overlay"
         :opacity="tmpConfig.cover ? 0.5 : 0"
+        :zIndex="zIndex"
         :custom-style="overlayStyle"
     >
         <view :style="[contentStyle, customStyle]" :class="[contentClass, customClass]">

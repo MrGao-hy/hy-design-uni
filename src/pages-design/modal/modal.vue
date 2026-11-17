@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { FormColumnsType, FormTypeEnum } from '@/package'
+import { type FormColumnsType, FormTypeEnum } from '@/package'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
 
 definePage({

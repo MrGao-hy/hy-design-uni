@@ -26,6 +26,11 @@ const overlayProps = {
         type: Boolean,
         default: false
     },
+    /** 是否允许触摸穿透遮罩（穿透时背景可点击，插槽内容仍可交互） */
+    passThrough: {
+        type: Boolean,
+        default: false
+    },
     /** 定义需要用到的外部样式 */
     customStyle: {
         type: Object as PropType<CSSProperties>,

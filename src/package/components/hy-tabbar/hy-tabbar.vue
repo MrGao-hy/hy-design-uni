@@ -65,12 +65,12 @@ export default {
 <script setup lang="ts">
 import { computed, getCurrentInstance, nextTick, onMounted, ref, watch } from 'vue'
 import tabBarProps from './props'
+import { getRect } from '../../libs'
 import type { ITabBarEmits } from './typing'
 
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
 import HyBadge from '../hy-badge/hy-badge.vue'
-import { getRect } from '@/package'
 
 /**
  * 底部导航栏，用于在不同页面之间进行切换。

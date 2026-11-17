@@ -75,7 +75,7 @@ import { onMounted, ref, toRefs } from 'vue'
 import type { IAddressPickerEmits } from './typing'
 import address from '../../libs/utils/address.json'
 import addressPickerProps from './props'
-import { isObject, SelectValueVo, useTranslate } from '../../libs'
+import { isObject, type SelectValueVo, useTranslate } from '../../libs'
 // 组件
 import HyInput from '../hy-input/hy-input.vue'
 import HyPicker from '../hy-picker/hy-picker.vue'

@@ -7,8 +7,8 @@ $hy-empty-description-width: var(--hy-empty-description-width, 70%) !default;
 $hy-empty-button-margin-top: var(--hy-empty-button-margin-top, 100rpx) !default;
 /* 描述文字颜色，默认跟随全局灰度文字 token */
 $hy-empty-description-color: var(--hy-empty-description-color, #{$hy-text-color--grey}) !default;
-/* hy-empty 基础间距，默认跟随全局 token */
-$hy-empty-margin-padding-base: var(--hy-empty-margin-padding-base, #{$hy-border-margin-padding-base}) !default;
+/* 描述文字上外边距，默认跟随全局基础间距 token */
+$hy-empty-description-margin-top: var(--hy-empty-description-margin-top, #{$hy-border-margin-padding-base}) !default;
 
 
 @include b(empty) {
@@ -23,7 +23,7 @@ $hy-empty-margin-padding-base: var(--hy-empty-margin-padding-base, #{$hy-border-
   @include m(description) {
     width: $hy-empty-description-width;
     text-align: center;
-    margin-top: $hy-empty-margin-padding-base;
+    margin-top: $hy-empty-description-margin-top;
     color: $hy-empty-description-color;
   }
 

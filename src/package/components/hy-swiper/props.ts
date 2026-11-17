@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue'
-import { SwiperEasingFunction } from '@uni-helper/uni-types'
+import type { SwiperEasingFunction } from '@uni-helper/uni-types'
 import type { IndicatorMode, SwiperList, ImageMode } from '../../libs'
 
 const swiperProps = {

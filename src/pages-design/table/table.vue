@@ -39,7 +39,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
-import { ITableColumn } from '@/package'
+import type { ITableColumn } from '@/package'
 
 definePage({
     style: {

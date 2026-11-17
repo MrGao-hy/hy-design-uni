@@ -13,8 +13,8 @@ $hy-tabbar-item-width: var(--hy-tabbar-item-width, 60px) !default;
 $hy-tabbar-indicator-size: var(--hy-tabbar-indicator-size, 50px) !default;
 /* 凸起圆形尺寸 */
 $hy-tabbar-circle-size: var(--hy-tabbar-circle-size, 40px) !default;
-/* hy-tabbar 容器背景色，默认跟随全局 token */
-$hy-tabbar-background--container: var(--hy-tabbar-background--container, #{$hy-background--container}) !default;
+/* 底部栏背景色，默认跟随全局容器背景 token */
+$hy-tabbar-background: var(--hy-tabbar-background, #{$hy-background--container}) !default;
 /* hy-tabbar 主题色，默认跟随全局主题色 token */
 $hy-tabbar-primary: var(--hy-tabbar-primary, #{$hy-primary}) !default;
 
@@ -44,7 +44,7 @@ $hy-tabbar-primary: var(--hy-tabbar-primary, #{$hy-primary}) !default;
         /* #ifndef APP-PLUS-NVUE */
         box-sizing: border-box;
         /* #endif */
-        background-color: $hy-tabbar-background--container;
+        background-color: $hy-tabbar-background;
     }
     @include m(container) {
         width: 100%;

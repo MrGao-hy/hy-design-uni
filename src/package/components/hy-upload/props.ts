@@ -1,4 +1,4 @@
-import { CameraType, IconConfig } from '../../libs'
+import { type CameraType, IconConfig } from '../../libs'
 import type { CSSProperties, PropType } from 'vue'
 import type { ImageMode, FileType, FileVo, ReadFunctionVo } from '../../libs'
 

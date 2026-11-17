@@ -1,6 +1,6 @@
 {
     "name": "@hy-app/ui",
-    "version": "1.0.4",
+    "version": "1.1.2",
     "type": "module",
     "engines": {
         "node": "22.x"
@@ -98,6 +98,6 @@
         "vite": "5.4.21",
         "vue-docgen-api": "^4.79.2",
         "vue-docgen-cli": "^4.79.0",
-        "vue-tsc": "^3.3.7"
+        "vue-tsc": "^3.3.13"
     }
 }

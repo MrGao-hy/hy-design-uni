@@ -15,14 +15,16 @@ $hy-radio-font-size: var(--hy-radio-font-size, #{$hy-font-size-base}) !default;
 $hy-radio-disabled-color: var(--hy-radio-disabled-color, #{$hy-text-color--disabled}) !default;
 /* 圆点框边框，默认跟随全局边框线 token */
 $hy-radio-border: var(--hy-radio-border, #{$hy-border-line}) !default;
-/* hy-radio 大间距，默认跟随全局 token */
-$hy-radio-margin-padding-lg: var(--hy-radio-margin-padding-lg, #{$hy-border-margin-padding-lg}) !default;
-/* hy-radio 小间距，默认跟随全局 token */
-$hy-radio-margin-padding-sm: var(--hy-radio-margin-padding-sm, #{$hy-border-margin-padding-sm}) !default;
+/* 纵向分组上下外边距，默认跟随全局大间距 token */
+$hy-radio-group-margin-y: var(--hy-radio-group-margin-y, #{$hy-border-margin-padding-lg}) !default;
+/* 选项文字右外边距，默认跟随全局小间距 token */
+$hy-radio-label-margin: var(--hy-radio-label-margin, #{$hy-border-margin-padding-sm}) !default;
+/* 图标右外边距，默认跟随全局小间距 token */
+$hy-radio-icon-margin: var(--hy-radio-icon-margin, #{$hy-border-margin-padding-sm}) !default;
 /* hy-radio 主题色，默认跟随全局主题色 token */
 $hy-radio-primary: var(--hy-radio-primary, #{$hy-primary}) !default;
-/* hy-radio 禁用背景色，默认跟随全局 token */
-$hy-radio-background--disabled: var(--hy-radio-background--disabled, #{$hy-background--disabled}) !default;
+/* 圆点框禁用态背景色，默认跟随全局禁用背景 token */
+$hy-radio-icon-disabled-background: var(--hy-radio-icon-disabled-background, #{$hy-background--disabled}) !default;
 
 
 @include b(radio) {
@@ -42,7 +44,7 @@ $hy-radio-background--disabled: var(--hy-radio-background--disabled, #{$hy-backg
     }
 
     &--column {
-      margin: $hy-radio-margin-padding-lg 0;
+      margin: $hy-radio-group-margin-y 0;
       @include flex(column);
     }
   }
@@ -65,7 +67,7 @@ $hy-radio-background--disabled: var(--hy-radio-background--disabled, #{$hy-backg
 
       color: $hy-radio-label-color;
       font-size: $hy-radio-font-size;
-      margin-right: $hy-radio-margin-padding-sm;
+      margin-right: $hy-radio-label-margin;
 
       @include m(disabled) {
         color: $hy-radio-disabled-color;
@@ -86,7 +88,7 @@ $hy-radio-background--disabled: var(--hy-radio-background--disabled, #{$hy-backg
     justify-content: center;
     color: transparent;
     text-align: center;
-    margin-right: $hy-radio-margin-padding-sm;
+    margin-right: $hy-radio-icon-margin;
     border: $hy-radio-border;
 
     /* #ifdef MP-TOUTIAO */
@@ -112,7 +114,7 @@ $hy-radio-background--disabled: var(--hy-radio-background--disabled, #{$hy-backg
     }
 
     @include m(disabled) {
-      background-color: $hy-radio-background--disabled;
+      background-color: $hy-radio-icon-disabled-background;
       :deep(.hy-icon) {
         display: none;
       }

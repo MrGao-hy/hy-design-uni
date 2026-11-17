@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, ToRefs } from 'vue'
 import type cellProps from '../hy-cell/props'
-import { HyIconProps } from '../../'
 
 export interface ICellContext extends ToRefs<ExtractPropTypes<typeof cellProps>> {
     /** 点击事件 */
