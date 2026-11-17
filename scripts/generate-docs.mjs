@@ -64,7 +64,12 @@ const REGEX = {
     
     // 属性文件提取
     PROPS_OBJECT_DEF: /(?:export\s+)?const\s+\w+\s*=\s*\{/g,
-    PROP_DEFINITION: /(\/\*\*[\s\S]*?\*\/)?\s*(\w+)\s*:\s*((?:\{[\s\S]*?\})|(?:[^,;\r\n]+))\s*(?:,|$)/g
+    PROP_DEFINITION: /(\/\*\*[\s\S]*?\*\/)?\s*(\w+)\s*:\s*((?:\{[\s\S]*?\})|(?:[^,;\r\n]+))\s*(?:,|$)/g,
+
+    // Expose 提取
+    EXPOSE_INTERFACE: /export\s+(?:interface|type)\s+(\w*Expose)\b/,
+    DEFINE_EXPOSE_GENERIC: /defineExpose\s*<\s*(\w+)\s*>/,
+    DEFINE_EXPOSE_OBJECT: /defineExpose\s*(?:<[^>]+>)?\s*\(\s*\{([\s\S]*?)\}\s*\)/
 }
 
 // =========================== 全局配置 ===========================
@@ -515,7 +520,8 @@ function extractAllPropsFromPropsFile(propsFilePath, componentName, specialConfi
             // 查找default:关键字
             const defaultMatch = /default:\s*/.exec(propContent);
             if (!defaultMatch) {
-                return propContent.includes('type: String') ? "''" : "''";
+                // 外层已保证存在 default: 才调用，此处兑底返回空串（文档层显示 -）
+                return '';
             }
             
             // 从default:后面开始提取默认值
@@ -667,13 +673,9 @@ function extractAllPropsFromPropsFile(propsFilePath, componentName, specialConfi
                     propObj.type = processType(simpleTypeStr) || 'unknown'
                 }
                 
-                // 提取默认值
+                // 提取默认值（未声明 default 时保持空串，文档层统一显示 -，与 Values 列占位符一致）
                 if (propContent.includes('default:')) {
                     propObj.default = extractDefaultValue(propContent)
-                } else if (propContent.includes('type: String')) {
-                    propObj.default = "''"
-                } else {
-                    propObj.default = "''"
                 }
             }
             
@@ -1001,6 +1003,157 @@ function extractSlotsFromVueFile(vueFilePath, componentName) {
   }));
 }
 
+// 合并 JSDoc 注释行为 expose 描述（主描述 + @param/@returns 说明）
+function buildExposeDoc(lines) {
+    const desc = []
+    const params = []
+    let returns = ''
+
+    for (const raw of lines) {
+        const paramMatch = raw.match(/^@param\s+(?:\{[^}]*\}\s*)?(\S+)\s*-?\s*(.*)$/)
+        if (paramMatch) {
+            params.push(`${paramMatch[1]}：${paramMatch[2]}`)
+            continue
+        }
+        const returnMatch = raw.match(/^@returns?\s+(.*)$/)
+        if (returnMatch) {
+            returns = returnMatch[1]
+            continue
+        }
+        if (!raw.startsWith('@')) desc.push(raw)
+    }
+
+    let description = desc.join(' ').replace(/\s+/g, ' ').trim()
+    if (params.length) description += `${description ? '。' : ''}参数 ${params.join('，')}`
+    if (returns) description += `${description ? '。' : ''}返回 ${returns}`
+    return description
+}
+
+// 解析 IxxxExpose 接口体，逐成员提取名称、类型签名与 JSDoc 描述
+function parseExposeInterface(interfaceBody, exposes) {
+    let pendingDesc = []
+
+    for (const line of interfaceBody.split(/\r?\n/)) {
+        const trimmed = line.trim()
+        // 成员声明：name?: type（函数签名或属性类型，单行为主）
+        const memberMatch = trimmed.match(
+            /^(?:'([^']+)'|"([^"]+)"|([A-Za-z_$][\w$]*))(\?)?\s*:\s*(.+?);?\s*$/
+        )
+        if (memberMatch) {
+            const name = memberMatch[1] || memberMatch[2] || memberMatch[3]
+            const type = memberMatch[5].replace(/;\s*$/, '').trim()
+            if (name && !exposes.has(name)) {
+                exposes.set(name, {
+                    name,
+                    type,
+                    description: buildExposeDoc(pendingDesc)
+                })
+            }
+            pendingDesc = []
+        } else if (trimmed.startsWith('*') && !trimmed.startsWith('*/')) {
+            pendingDesc.push(trimmed.replace(/^\*\s?/, ''))
+        } else if (trimmed.startsWith('/**') || trimmed === '*' || trimmed.startsWith('//')) {
+            // 注释边界，保持挂起描述
+        }
+    }
+}
+
+// 从 Vue 文件与 typing.d.ts 中提取 defineExpose 暴露的方法和属性
+function extractExposesFromVueFile(vueFilePath, componentName) {
+    try {
+        const content = readFileContent(vueFilePath)
+        if (!content || !/defineExpose/.test(content)) {
+            return []
+        }
+
+        const exposes = new Map() // name -> { name, type, description }
+        const componentDir = join(vueFilePath, '..')
+        const typingFilePath = getComponentFilePath(componentDir, CONFIG.FILE_NAMING.typingFileName)
+        const typingContent = readFileContent(typingFilePath)
+
+        // 1. 优先从 typing.d.ts 的 IxxxExpose 接口提取（带 JSDoc 描述与完整类型签名）
+        if (typingContent) {
+            let interfaceName = null
+            // 1.1 defineExpose<IXxxExpose> 泛型显式指定的接口
+            const genericMatch = content.match(REGEX.DEFINE_EXPOSE_GENERIC)
+            if (
+                genericMatch &&
+                new RegExp(`export\\s+(?:interface|type)\\s+${genericMatch[1]}\\b`).test(typingContent)
+            ) {
+                interfaceName = genericMatch[1]
+            } else {
+                // 1.2 未显式指定（或接口不在本组件 typing.d.ts）时，取首个 *Expose 声明兜底
+                const firstExpose = typingContent.match(REGEX.EXPOSE_INTERFACE)
+                if (firstExpose) interfaceName = firstExpose[1]
+            }
+
+            if (interfaceName) {
+                const interfaceStart = typingContent.search(
+                    new RegExp(`export\\s+(?:interface|type)\\s+${interfaceName}\\b`)
+                )
+                if (interfaceStart !== -1) {
+                    // 大括号配对截取接口完整内容
+                    const openBrace = typingContent.indexOf('{', interfaceStart)
+                    let braceCount = 0
+                    let interfaceEnd = openBrace
+                    for (let i = openBrace; i < typingContent.length; i++) {
+                        if (typingContent[i] === '{') braceCount++
+                        if (typingContent[i] === '}') braceCount--
+                        if (braceCount === 0) {
+                            interfaceEnd = i
+                            break
+                        }
+                    }
+                    const interfaceBody = typingContent.substring(openBrace + 1, interfaceEnd)
+                    parseExposeInterface(interfaceBody, exposes)
+                }
+            }
+        }
+
+        // 2. 兑底解析 defineExpose({...}) 对象成员（简写/key-value），补充接口遗漏或无接口的成员
+        const objMatch = content.match(REGEX.DEFINE_EXPOSE_OBJECT)
+        if (objMatch) {
+            let pendingComment = ''
+            let depth = 0
+            for (const line of objMatch[1].split(/\r?\n/)) {
+                const trimmed = line.trim()
+                const commentMatch = trimmed.match(/^\/\/\s*(.*)$/)
+                if (commentMatch && depth === 0) {
+                    pendingComment = commentMatch[1]
+                    continue
+                }
+                // 仅在对象顶层深度识别成员，避免把成员函数体内的语句（如 return）误识别为成员
+                if (depth === 0) {
+                    const memberMatch = trimmed.match(
+                        /^(?:'([^']+)'|"([^"]+)"|([A-Za-z_$][\w$]*))\s*(?::|,|$)/
+                    )
+                    if (memberMatch) {
+                        const name = memberMatch[1] || memberMatch[2] || memberMatch[3]
+                        if (name && !exposes.has(name)) {
+                            exposes.set(name, { name, type: '', description: pendingComment })
+                        }
+                        pendingComment = ''
+                    } else if (trimmed) {
+                        pendingComment = ''
+                    }
+                }
+                // 统计括号深度，用于区分顶层成员与函数体内容
+                for (const ch of line) {
+                    if (ch === '{' || ch === '[' || ch === '(') depth++
+                    else if (ch === '}' || ch === ']' || ch === ')') depth--
+                }
+            }
+        }
+
+        const result = Array.from(exposes.values())
+        console.log(`从 ${vueFilePath} 提取到 ${result.length} 个 expose`)
+        return result
+    } catch (error) {
+        console.error('解析 expose 失败:', error)
+        return []
+    }
+}
+
 // 提取注释辅助函数
 function extractComment(content, position) {
     // 提取位置前的所有内容
@@ -1170,10 +1323,10 @@ function generateMarkdown(componentConfig) {
             const values = prop.values.length > 0 ? prop.values.join(', ') : '-'
             // 对类型字符串中的特殊字符进行转义（含 |，避免联合类型破坏表格列）
             const escapedType = prop.type.replace(/[\(\)\[\]\{\}\|]/g, '\\$&')
-            // 确保默认值存在，如果不存在或为 undefined 则设置为单引号空字符串
+            // 无默认值时统一显示 -（与 Values 列占位符一致；显式声明的 default: '' 仍显示为 ''）
             let defaultValue = prop.default
-            if (defaultValue === undefined || defaultValue === 'undefined') {
-                defaultValue = "''"
+            if (!defaultValue || defaultValue === 'undefined') {
+                defaultValue = '-'
             } else {
                 // 对默认值进行转义，确保特殊字符不会破坏Markdown表格格式
                 // 特别是对竖线字符(|)进行转义，它是Markdown表格的分隔符
@@ -1208,6 +1361,22 @@ function generateMarkdown(componentConfig) {
 
         slots.forEach((slot) => {
             markdown += `| ${slot.name} | ${escapeCell(slot.description)} |\n`
+        })
+
+        markdown += '\n'
+    }
+
+    // 提取并添加 Exposes 信息（defineExpose 暴露的实例方法/属性）
+    const exposes = extractExposesFromVueFile(vuePath, componentName)
+    if (exposes.length > 0) {
+        markdown += '## Exposes\n\n'
+        markdown += '| Method | Type | Description |\n'
+        markdown += '| ------ | ---- | ----------- |\n'
+
+        exposes.forEach((expose) => {
+            // 函数签名中的联合类型 | 会破坏表格列，需转义
+            const escapedType = expose.type ? expose.type.replace(/\|/g, '\\|') : '-'
+            markdown += `| ${expose.name} | ${escapedType} | ${escapeCell(expose.description)} |\n`
         })
 
         markdown += '\n'

@@ -101,6 +101,54 @@ function extractEmitsFromTyping(content) {
   return events
 }
 
+/** 从 typing.d.ts 提取 I*Expose 接口成员名（可限定单一接口） */
+function extractExposesFromTyping(content, onlyInterface) {
+  const names = new Set()
+  const declRe = new RegExp(
+    `export\\s+(?:interface|type)\\s+(${onlyInterface || '\\w*Expose'})\\s*(?:=\\s*)?\\{`,
+    'g'
+  )
+  let m
+  while ((m = declRe.exec(content)) !== null) {
+    let depth = 1
+    let i = m.index + m[0].length
+    while (i < content.length && depth > 0) {
+      if (content[i] === '{') depth++
+      else if (content[i] === '}') depth--
+      i++
+    }
+    const body = content.slice(m.index + m[0].length, i - 1)
+    for (const line of body.split(/\r?\n/)) {
+      const mm = line.trim().match(/^(?:'([^']+)'|"([^"]+)"|([A-Za-z_$][\w$]*))\s*\??\s*:/)
+      if (mm) names.add(mm[1] || mm[2] || mm[3])
+    }
+  }
+  return names
+}
+
+/** 从 .vue 文件提取 defineExpose（泛型接口引用 + 对象成员名） */
+function extractExposesFromVue(content) {
+  const names = new Set()
+  const generic = (content.match(/defineExpose\s*<\s*(\w+)\s*>/) || [])[1] || null
+  const objMatch = content.match(/defineExpose\s*(?:<[^>]+>)?\s*\(\s*\{([\s\S]*?)\}\s*\)/)
+  if (objMatch) {
+    let depth = 0
+    for (const line of objMatch[1].split(/\r?\n/)) {
+      const trimmed = line.trim()
+      // 仅在对象顶层深度识别成员，避免把成员函数体内的语句（如 return）误识别为成员
+      if (depth === 0) {
+        const m = trimmed.match(/^(?:'([^']+)'|"([^"]+)"|([A-Za-z_$][\w$]*))\s*(?::|,|$)/)
+        if (m) names.add(m[1] || m[2] || m[3])
+      }
+      for (const ch of line) {
+        if (ch === '{' || ch === '[' || ch === '(') depth++
+        else if (ch === '}' || ch === ']' || ch === ')') depth--
+      }
+    }
+  }
+  return { generic, names }
+}
+
 /** 从 .vue 文件提取 defineEmits（数组/对象/泛型引用） */
 function extractEmitsFromVue(content) {
   const events = new Map()
@@ -137,7 +185,7 @@ const compDirs = fs.readdirSync(compDir).filter((d) => {
 const sourceInfo = {}
 for (const dir of compDirs) {
   const full = path.join(compDir, dir)
-  const info = { props: new Map(), events: new Map(), notes: [] }
+  const info = { props: new Map(), events: new Map(), exposes: new Set(), notes: [] }
   const propsFile = path.join(full, 'props.ts')
   if (fs.existsSync(propsFile)) {
     const content = fs.readFileSync(propsFile, 'utf-8')
@@ -170,6 +218,18 @@ for (const dir of compDirs) {
       if (all.size > 0 && events.size === 0) {
         for (const [k, v] of all) info.events.set(k, v)
       }
+    }
+  }
+  // exposes：typing.d.ts 的 I*Expose 接口成员 + defineExpose 对象成员并集
+  const typingFile2 = path.join(full, 'typing.d.ts')
+  const typingContent2 = fs.existsSync(typingFile2) ? fs.readFileSync(typingFile2, 'utf-8') : null
+  if (vueContent.includes('defineExpose')) {
+    const { generic, names } = extractExposesFromVue(vueContent)
+    for (const n of names) info.exposes.add(n)
+    if (typingContent2) {
+      // 泛型指定接口时仅取该接口成员；否则全量合并（接口可能在其它组件目录，如 hy-form-group）
+      const only = generic && new RegExp(`export\\s+(?:interface|type)\\s+${generic}\\b`).test(typingContent2) ? generic : null
+      for (const n of extractExposesFromTyping(typingContent2, only)) info.exposes.add(n)
     }
   }
   sourceInfo[dir] = info
@@ -236,7 +296,20 @@ for (const comp of webComponents) {
     }
   }
 
-  // 4. props 类型可疑（截断的泛型类型）
+  // 4. exposes 对比（js.properties）
+  const webExposes = new Map(((comp.js && comp.js.properties) || []).map((p) => [p.name, p]))
+  for (const name of src.exposes) {
+    if (!webExposes.has(name)) {
+      issues.push(`${comp.name}: exposes 缺失 "${name}"`)
+    }
+  }
+  for (const name of webExposes.keys()) {
+    if (!src.exposes.has(name)) {
+      issues.push(`${comp.name}: exposes 多余 "${name}"（源码中不存在）`)
+    }
+  }
+
+  // 5. props 类型可疑（截断的泛型类型）
   for (const [name, wp] of webProps) {
     for (const t of wp.type || []) {
       if (typeof t === 'object' && t.name && /[<=]/.test(t.name)) {
