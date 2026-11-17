@@ -6,10 +6,26 @@ import type {
     NormalizeData,
     Options,
     ParseData,
-    ParseTable
+    ParseTable,
+    WebTypes
 } from 'components-helper'
 
-const config: Config = {
+// components-helper 原生仅支持 props/events/slots/directives 四类表格，
+// 本地扩展 exposes 分类用于解析 ## Exposes 章节
+interface HyConfig extends Config {
+    exposes: string
+    exposesName: string
+    exposesType: string
+    exposesDescription: string
+}
+
+type HyOptions = Omit<Options, keyof HyConfig> & HyConfig
+
+interface HyNormalizeData extends NormalizeData {
+    exposes?: ParseTable
+}
+
+const config: HyConfig = {
     tags: 'tags.json',
     attributes: 'attributes.json',
     webTypes: 'web-types.json',
@@ -34,11 +50,15 @@ const config: Config = {
     directives: 'directives',
     directivesName: 'Name',
     directivesType: 'Type',
-    directivesDescription: 'Description'
+    directivesDescription: 'Description',
+    exposes: 'Exposes',
+    exposesName: 'Method',
+    exposesType: 'Type',
+    exposesDescription: 'Description'
 }
 
-function normalize(options: Options, data: ParseData, path: string): NormalizeData {
-    const { fileNameRegExp, props, events, slots, directives } = options
+function normalize(options: HyOptions, data: ParseData, path: string): HyNormalizeData {
+    const { fileNameRegExp, props, events, slots, directives, exposes } = options
     const _fileNameRegExp = isString(fileNameRegExp) ? new RegExp(fileNameRegExp) : fileNameRegExp
     const _path = path.match(_fileNameRegExp)
     const fileName = _path ? _path[1] : ''
@@ -47,6 +67,7 @@ function normalize(options: Options, data: ParseData, path: string): NormalizeDa
     const _events = new RegExp(events, 'i')
     const _slots = new RegExp(slots, 'i')
     const _directives = new RegExp(directives, 'i')
+    const _exposes = new RegExp(exposes, 'i')
 
     if (!_data.table || !_data.table.length) return _data
 
@@ -95,6 +116,16 @@ function normalize(options: Options, data: ParseData, path: string): NormalizeDa
                 key: 'directives',
                 regExp: _directives
             })
+        } else if (_exposes.test(title)) {
+            setData({
+                data: _data,
+                item,
+                path,
+                fileName,
+                title,
+                key: 'exposes',
+                regExp: _exposes
+            })
         }
     }
     return _data
@@ -109,8 +140,8 @@ function setData({
     fileName,
     regExp
 }: {
-    data: NormalizeData
-    key: 'props' | 'events' | 'slots' | 'directives'
+    data: HyNormalizeData
+    key: 'props' | 'events' | 'slots' | 'directives' | 'exposes'
     item: ParseTable
     title: string
     path: string
@@ -132,7 +163,8 @@ function setData({
         if (!data.children) {
             data.children = [childItem]
         } else {
-            const child = data.children.find((item) => item.title === childTitle)
+            // 子项继承 HyNormalizeData，使其支持 exposes 索引（components-helper 原生 NormalizeData 无该字段）
+            const child: HyNormalizeData | undefined = data.children.find((item) => item.title === childTitle)
 
             if (child) {
                 child[key] = item
@@ -151,9 +183,9 @@ export function generateWebTypes(options = {} as InstallOptions) {
     if (!options.name) console.warn('missing property "name"')
     if (!options.version) console.warn('missing property "version"')
 
-    const _options: Options = Object.assign(config, options)
+    const _options: HyOptions = Object.assign(config, options)
     const files: string[] = fg.sync(_options.entry, _options.fastGlobConfig)
-    const data = files.map((path) => {
+    const data: HyNormalizeData[] = files.map((path) => {
         const fileContent = read(path)
         const parseContent = parse(_options, fileContent)
         const content = normalize(_options, parseContent, path)
@@ -162,8 +194,10 @@ export function generateWebTypes(options = {} as InstallOptions) {
             content.props.content = content?.props.content.map((item) => {
                 // 去除多余标点符号
                 item.Values = item.Values?.replace(/`|(?<![a-zA-Z0-9])-(?![a-zA-Z0-9])/g, '')
-                item.Default = item.Default?.replace(/'/g, '')
-                if (!item.Default) {
+                const rawDefault = item.Default
+                item.Default = rawDefault?.replace(/'/g, '')
+                // 无默认值占位符（裸 -）不写入产物，真实默认值 '-'（带引号）保留
+                if (!item.Default || (item.Default === '-' && rawDefault !== "'-'")) {
                     delete item.Default
                 }
                 return item
@@ -173,10 +207,41 @@ export function generateWebTypes(options = {} as InstallOptions) {
     })
     const { tags, attributes } = vetur(_options, data)
     const webTypesData = webTypes(_options, data)
+    // 将 ## Exposes 表格注入 js.properties（components-helper 原生仅生成 js.events）
+    injectExposes(webTypesData, _options, data)
 
     write(_options, 'tags', tags)
     write(_options, 'attributes', attributes)
     write(_options, 'webTypes', webTypesData)
+}
+
+/**
+ * 将 Exposes 表格注入 web-types 的 js.properties 节点
+ * 实例暴露的方法按 web-types 规范挂在组件 js.properties 下，与 js.events 平级
+ */
+function injectExposes(webTypesData: WebTypes, options: HyOptions, list: HyNormalizeData[]) {
+    const exposesMap = new Map<string, ParseTable>()
+    for (const item of list) {
+        if (item.exposes) exposesMap.set(item.fileName, item.exposes)
+    }
+    if (!exposesMap.size) return
+
+    const components = webTypesData.contributions?.html?.['vue-components'] || []
+    for (const component of components) {
+        const table = exposesMap.get(component.name || '')
+        if (!table) continue
+
+        const properties = table.content
+            .map((item) => ({
+                name: item[options.exposesName],
+                description: item[options.exposesDescription]
+            }))
+            .filter((property) => property.name)
+
+        if (!properties.length) continue
+        if (!component.js) component.js = {}
+        component.js.properties = properties
+    }
 }
 
 generateWebTypes({
