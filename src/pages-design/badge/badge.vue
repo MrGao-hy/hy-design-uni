@@ -1,4 +1,14 @@
 <template>
+    <view class="hy-title">{{ t('slotSection') }}</view>
+    <view class="hy-flex hy-container">
+        <hy-badge :value="8" border>
+            <hy-avatar size="large" shape="square" :src="config.avatar"></hy-avatar>
+        </hy-badge>
+        <hy-badge is-dot border>
+            <hy-avatar size="large" shape="circle" :src="config.avatar"></hy-avatar>
+        </hy-badge>
+    </view>
+
     <view class="hy-title">{{ t('shapeSection') }}</view>
     <view class="hy-flex hy-container">
         <hy-badge :value="123" shape="circle"></hy-badge>
