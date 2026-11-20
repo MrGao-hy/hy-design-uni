@@ -27,7 +27,6 @@ $hy-dropdown-item-primary: var(--hy-dropdown-item-primary, #{$hy-primary}) !defa
     white-space: nowrap;
     text-align: center;
     position: relative;
-    z-index: 999;
     background-color: $hy-dropdown-item-header-background;
     color: $hy-dropdown-item-icon-color;
 
@@ -36,6 +35,11 @@ $hy-dropdown-item-primary: var(--hy-dropdown-item-primary, #{$hy-primary}) !defa
       :deep(.hy-icon) {
         color: $hy-dropdown-item-primary;
       }
+    }
+
+    /* 禁用态：文字/箭头颜色由内联var(--hy-dropdown-item-disabled-color)链控制，这里处理鼠标形态 */
+    @include is(disabled) {
+      cursor: not-allowed;
     }
   }
 

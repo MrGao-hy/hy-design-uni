@@ -86,10 +86,6 @@ const signatureProps = {
         type: Number,
         default: 1
     },
-    /** 撤回按钮的文本 */
-    undoText: String,
-    /** 恢复按钮的文本 */
-    redoText: String,
     /** 是否启用压感模式 */
     pressure: {
         type: Boolean,

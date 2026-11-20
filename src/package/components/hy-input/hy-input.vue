@@ -143,7 +143,10 @@ const focused = ref<boolean>(false)
 const firstChange = ref<boolean>(true)
 // value绑定值的变化是由内部还是外部引起的
 const changeFromInner = ref<boolean>(false)
-const innerFormatter = (value: string) => value
+// 格式化输入值：优先使用外部传入的 formatter，未传入则原样返回
+const innerFormatter = (value: string) => {
+    return props.formatter ? props.formatter(value) : value
+}
 
 watch(
     () => props.modelValue,

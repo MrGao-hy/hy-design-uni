@@ -63,11 +63,6 @@ const floatButtonProps = {
         type: String as PropType<ShapeType>,
         default: 'circle'
     },
-    /** 按钮的透明度 */
-    opacity: {
-        type: Number,
-        default: 1
-    },
     /** 是否显示阴影 */
     shadow: {
         type: Boolean,

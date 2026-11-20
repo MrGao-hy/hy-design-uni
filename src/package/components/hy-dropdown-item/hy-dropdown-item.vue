@@ -1,7 +1,12 @@
 <template>
     <!-- 标题栏 -->
     <view
-        :class="['hy-dropdown-item__header', isOpen && 'is-active', customClass]"
+        :class="[
+            'hy-dropdown-item__header',
+            isOpen && 'is-active',
+            disabled && 'is-disabled',
+            customClass
+        ]"
         :style="customStyle"
         @click="handleClick"
     >
@@ -100,8 +105,11 @@ const dropdownProps: HyDropdownProps | undefined = inject('dropdownProps')
 const { titleSize, menuIcon, menuIconSize, inactiveColor } = dropdownProps as HyDropdownProps
 //当前打开的dropItem项（标签名）
 const currentDropItem: any = inject('currentDropItem')
-//当前文字/箭头颜色
+//当前文字/箭头颜色：禁用态优先展示禁用色（跟随全局禁用token，可通过组件级变量覆盖）
 const currentColor = computed(() => {
+    if (props.disabled) {
+        return 'var(--hy-dropdown-item-disabled-color, var(--hy-text-color--disabled, #FFFFFF3F))'
+    }
     return isOpen.value ? dropdownProps?.activeColor : inactiveColor
 })
 //是否打开
@@ -184,7 +192,9 @@ const onSelect = (item: DropdownMenuItem, index: number) => {
 /**
  * @description 打开或关闭
  * */
-const handleClick = () =>
+const handleClick = () => {
+    //禁用态直接拦截，不展开下拉弹窗
+    if (props.disabled) return
     throttle(() => {
         //节流处理，防止点击过快动画未结束又切换导致显示bug
         isOpen.value = !isOpen.value
@@ -194,6 +204,7 @@ const handleClick = () =>
             getDropPopupTop()
         }
     })
+}
 
 /**
  * @description 点击遮罩框关闭弹窗

@@ -1,6 +1,10 @@
 <template>
-    <hy-transition mode="fade" :customStyle="backTopStyle" :show="show">
-        <view class="hy-back-top" :style="contentStyle" @click="backToTop">
+    <hy-transition mode="fade" :customStyle="customStyle" :show="show">
+        <view
+            :class="['hy-back-top', `hy-back-top--${props.mode}`]"
+            :style="backTopStyle"
+            @click="backToTop"
+        >
             <!-- @slot 默认插槽 -->
             <slot v-if="$slots.default"></slot>
             <template v-else>
@@ -59,18 +63,10 @@ const backTopStyle = computed<CSSProperties>(() => {
     return {
         bottom: addUnit(props.bottom),
         right: addUnit(props.right),
-        width: '40px',
-        height: '40px',
-        position: 'fixed',
         zIndex: props.zIndex
     }
 })
-const contentStyle = computed<CSSProperties>(() => {
-    const style: CSSProperties = {
-        borderRadius: props.mode === 'circle' ? '50%' : '4px'
-    }
-    return Object.assign(style, props.customStyle)
-})
+
 const show = computed<boolean>(() => {
     return getPx(props.scrollTop) > getPx(props.top)
 })

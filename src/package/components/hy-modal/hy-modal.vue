@@ -54,40 +54,25 @@
                             modalOptions.buttonReverse || buttonReverse ? 'row-reverse' : 'row'
                     }"
                 >
-                    <view
-                        class="hy-modal__button--group__wrapper first hy-modal__button--group__wrapper--cancel"
-                        :hover-stay-time="150"
-                        hover-class="hy-modal__button--group__wrapper--hover"
+                    <hy-button
                         v-if="modalOptions.showCancelButton || showCancelButton"
-                        @tap.stop="cancelHandler"
-                    >
-                        <text
-                            class="hy-modal__button--group__wrapper--text hy-modal__button--group__wrapper--cancel__text"
-                            :style="{
-                                color: modalOptions.cancelColor || cancelColor
-                            }"
-                        >
-                            {{ modalOptions.cancelText || cancelText }}
-                        </text>
-                    </view>
-                    <view
-                        class="hy-modal__button--group__wrapper last hy-modal__button--group__wrapper--confirm"
-                        :hover-stay-time="150"
-                        hover-class="hy-modal__button--group__wrapper--hover"
+                        :text="modalOptions.cancelText || cancelText"
+                        shape="circle"
+                        :border="false"
+                        custom-class="hy-modal__button--group__wrapper hy-modal__button--group__wrapper--cancel"
+                        :custom-style="{ color: modalOptions.cancelColor || cancelColor }"
+                        @click="cancelHandler"
+                    ></hy-button>
+                    <hy-button
                         v-if="modalOptions.showConfirmButton || showConfirmButton"
-                        @tap="confirmHandler"
-                    >
-                        <hy-loading v-if="modalLoading" mode="circle"></hy-loading>
-                        <text
-                            v-else
-                            class="hy-modal__button--group__wrapper--text hy-modal__button--group__wrapper--confirm__text"
-                            :style="{
-                                color: modalOptions.confirmColor || confirmColor
-                            }"
-                        >
-                            {{ modalOptions.confirmText || confirmText }}
-                        </text>
-                    </view>
+                        :text="modalOptions.confirmText || confirmText"
+                        :loading="modalLoading"
+                        shape="circle"
+                        :border="false"
+                        custom-class="hy-modal__button--group__wrapper hy-modal__button--group__wrapper--confirm"
+                        :custom-style="{ color: modalOptions.confirmColor || confirmColor }"
+                        @click="confirmHandler"
+                    ></hy-button>
                 </view>
             </template>
         </view>
@@ -112,7 +97,7 @@ import { addUnit, sleep, useMessageInject } from '../../libs'
 import modalProps from './props'
 // 组件
 import HyPopup from '../hy-popup/hy-popup.vue'
-import HyLoading from '../hy-loading/hy-loading.vue'
+import HyButton from '../hy-button/hy-button.vue'
 
 /**
  * 弹出模态框，常用于消息提示、消息确认、在当前页面内完成特定的交互操作。

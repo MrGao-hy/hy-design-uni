@@ -33,8 +33,6 @@ export interface HyModalProps {
     negativeTop?: number
     /** modal宽度 */
     width?: string | number
-    /** 确认按钮的样式 */
-    confirmButtonShape?: 'circle' | 'square'
     /** 文案对齐方式 */
     contentTextAlign?: 'left' | 'center' | 'right'
 }
@@ -48,5 +46,4 @@ export interface IModalEmits {
     close: []
     /** 更新值触发 */
     'update:modelValue': [show: boolean]
-    'update:loading': [show: boolean]
 }

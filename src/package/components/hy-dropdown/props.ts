@@ -38,6 +38,11 @@ const dropdownProps = {
         type: [String, Number],
         default: 14
     },
+    /** 层级 */
+    zIndex: {
+        type: Number,
+        default: 999
+    },
     /** 定义需要用到的外部样式 */
     customStyle: {
         type: Object as PropType<CSSProperties>

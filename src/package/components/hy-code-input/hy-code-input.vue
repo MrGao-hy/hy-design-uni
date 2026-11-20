@@ -1,5 +1,5 @@
 <template>
-    <view :class="['hy-code-input', customClass]" @click="handleClick">
+    <view :class="['hy-code-input', customClass]" :style="customStyle" @click="handleClick">
         <view
             :class="itemClass(index)"
             :style="[itemStyle(index)]"

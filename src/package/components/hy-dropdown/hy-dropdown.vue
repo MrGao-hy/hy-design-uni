@@ -44,6 +44,7 @@ const dropdownStyle = computed(() => {
     if (props.sticky) style.top = '0px'
     // #endif
     style.height = addUnit(props.height)
+    style.zIndex = props.zIndex
     if (props.borderBottom) style.borderBottom = '1px solid #dadbde'
 
     return Object.assign(style, props.customStyle)

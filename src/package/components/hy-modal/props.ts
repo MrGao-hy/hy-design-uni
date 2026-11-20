@@ -86,11 +86,6 @@ const modalProps = {
         default: '550rpx'
     },
     /**
-     * 确认按钮的样式,如设置，将不会显示取消按钮
-     * @values circle,square
-     * */
-    confirmButtonShape: String as PropType<ShapeType>,
-    /**
      * 文案对齐方式
      * @values left,center,right
      * */

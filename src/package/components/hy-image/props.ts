@@ -75,11 +75,6 @@ const imageProps = {
         type: Boolean,
         default: true
     },
-    /** 只支持网络资源，只对微信小程序有效 */
-    webp: {
-        type: Boolean,
-        default: false
-    },
     /** 搭配fade参数的过渡时间，单位ms */
     duration: {
         type: Number,

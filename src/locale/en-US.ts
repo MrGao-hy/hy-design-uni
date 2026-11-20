@@ -489,7 +489,9 @@ export default {
         china: 'China',
         japan: 'Japan',
         korea: 'Korea',
-        usa: 'USA'
+        usa: 'USA',
+        containerSection: 'In Small Container',
+        disabled: 'Disabled'
     },
 
     empty: {

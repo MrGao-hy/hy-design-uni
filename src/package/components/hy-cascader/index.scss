@@ -94,7 +94,7 @@ $hy-cascader-border-width-lg: var(--hy-cascader-border-width-lg, #{$hy-border-wi
     }
 
     @include mdeep(icon) {
-      color: currentColor;
+      color: inherit;
     }
   }
 

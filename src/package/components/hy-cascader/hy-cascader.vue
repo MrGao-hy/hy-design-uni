@@ -27,7 +27,7 @@
             :zIndex="zIndex"
             :round="10"
             :closeOnClickOverlay="closeOnClickOverlay"
-            @close="cancel"
+            @close="close"
             @open="onOpen"
         >
             <view class="hy-cascader">
@@ -463,18 +463,26 @@ const onShowByClickInput = () => {
 }
 
 /**
- * 取消选择，关闭弹窗
+ * 点击取消按钮
  */
 const cancel = () => {
+    emit('cancel')
+    close()
+}
+
+/**
+ * 关闭弹窗
+ * */
+const close = () => {
     if (props.hasInput) {
         showByClickInput.value = false
     }
     emit('update:show', false)
-    emit('cancel')
+    emit('close')
 }
 
 /**
- * 确认选择，关闭弹窗并发射选中值
+ * 点击确认按钮触发，关闭弹窗并发射选中值
  */
 const onConfirm = () => {
     const emitValue = getEmitValue()
@@ -488,6 +496,7 @@ const onConfirm = () => {
     }
     emit('update:show', false)
     emit('confirm', emitValue)
+    emit('close')
 }
 
 /**

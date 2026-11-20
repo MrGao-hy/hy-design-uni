@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-tabbar" :style="tabBarStyle">
+    <view :class="['hy-tabbar', customClass]" :style="tabBarStyle">
         <view v-if="placeholder" class="hy-tabbar--placeholder"></view>
 
         <view class="hy-tabbar--box" :style="{ background: bgColor }">

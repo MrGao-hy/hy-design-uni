@@ -14,9 +14,7 @@ $hy-modal-button-group-padding: var(--hy-modal-button-group-padding, 20px) !defa
 /* 自定义确认按钮内边距 */
 $hy-modal-confirm-button-padding: var(--hy-modal-confirm-button-padding, 0 25px 15px) !default;
 /* 底部按钮高度 */
-$hy-modal-button-height: var(--hy-modal-button-height, 43px) !default;
-/* 底部按钮圆角，默认跟随全局半圆圆角 */
-$hy-modal-button-radius: var(--hy-modal-button-radius, #{$hy-radius-semicircle}) !default;
+$hy-modal-button-height: var(--hy-modal-button-height, 48px) !default;
 /* 底部按钮字号 */
 $hy-modal-button-font-size: var(--hy-modal-button-font-size, 16px) !default;
 /* 标题字号，默认跟随全局基础字体 token */
@@ -72,18 +70,17 @@ $hy-modal-button-cancel-background: var(--hy-modal-button-cancel-background, #{$
 
   /* 底部按钮 */
   @include e(button) {
-    /* 两个按钮的样式 */
+    /* 双按钮间距：默认取消在左留间距，反转时确认留间距 */
     @include m(exact) {
-      .first {
+      > .hy-modal__button--group__wrapper--cancel {
         margin-right: $hy-modal-button-gap;
       }
       @include m(reverse) {
-        .last {
+        > .hy-modal__button--group__wrapper--confirm {
           margin-right: $hy-modal-button-gap;
         }
       }
     }
-
 
     @include m(group) {
       @include flex;
@@ -95,42 +92,26 @@ $hy-modal-button-cancel-background: var(--hy-modal-button-cancel-background, #{$
         padding: $hy-modal-confirm-button-padding;
       }
 
-
       @include e(wrapper) {
         flex: 1;
-        @include flex;
-        justify-content: center;
-        align-items: center;
+        font-size: $hy-modal-button-font-size;
         height: $hy-modal-button-height;
-        border-radius: $hy-modal-button-radius;
 
-        /* 确认 */
-        @include m(confirm) {
-          background-color: $hy-modal-primary;
-          @include e(text) {
-            color: $hy-modal-button-confirm-color;
-          }
-        }
-
-        /* 取消 */
-        @include m(cancel) {
-          //background-color: $hy-background--empty;
+        /* 取消按钮：灰底灰字 */
+        @include mdeep(cancel) {
           background-color: $hy-modal-button-cancel-background;
-
-          @include e(text) {
-            color: $hy-modal-button-cancel-color;
-          }
+          color: $hy-modal-button-cancel-color;
         }
 
-        @include m(hover) {
-          opacity: 0.7;
+        /* 确认按钮：主题色底白字 */
+        @include mdeep(confirm) {
+          background-color: $hy-modal-primary;
+          color: $hy-modal-button-confirm-color;
         }
 
-        @include m(text) {
-          font-size: $hy-modal-button-font-size;
-          text-align: center;
-        }
       }
+
+
     }
   }
 }

@@ -25,9 +25,6 @@ $hy-step-item-icon-error-color: var(--hy-step-item-icon-error-color, #{$hy-error
 /* 点状指示器状态色 */
 $hy-step-item-dot-wait-bg: var(--hy-step-item-dot-wait-bg, #{$hy-background--3}) !default; // 等待状态背景色
 $hy-step-item-dot-process-bg: var(--hy-step-item-dot-process-bg, #{$hy-primary}) !default; // 进行中状态背景色
-$hy-step-item-dot-process-ring-color: var(--hy-step-item-dot-process-ring-color, #{$hy-primary-disabled}) !default; // 进行中状态描边颜色
-$hy-step-item-dot-finished-bg: var(--hy-step-item-dot-finished-bg, #{$hy-primary-light}) !default; // 已完成状态背景色
-$hy-step-item-dot-finished-ring-color: var(--hy-step-item-dot-finished-ring-color, #{$hy-primary}) !default; // 已完成状态描边颜色
 $hy-step-item-dot-error-bg: var(--hy-step-item-dot-error-bg, #{$hy-error}) !default; // 失败状态背景色
 
 /* 连接线 */

@@ -16,11 +16,6 @@ const inputProps = {
         type: String as PropType<InputType>,
         default: 'text'
     },
-    /** 如果 textarea 是在一个 position:fixed 的区域，需要显示指定属性 fixed 为 true，兼容性：微信小程序、百度小程序、字节跳动小程序、QQ小程序 */
-    fixed: {
-        type: Boolean,
-        default: false
-    },
     /** 是否禁用输入框 */
     disabled: {
         type: Boolean,
@@ -58,11 +53,6 @@ const inputProps = {
         type: Object as PropType<CSSProperties>,
         default: () => ({})
     },
-    /** 是否显示输入字数统计，只在 type ="test"或type ="textarea"时有效 */
-    showWordLimit: {
-        type: Boolean,
-        default: false
-    },
     /** 设置右下角按钮的文字，兼容性详见uni-app文档 */
     confirmType: {
         type: String as PropType<InputConfirmType>,
@@ -85,11 +75,6 @@ const inputProps = {
     },
     /** 键盘收起时，是否自动失去焦点，目前仅App3.0.0+有效 */
     autoBlur: {
-        type: Boolean,
-        default: false
-    },
-    /** 是否去掉 iOS 下的默认内边距，仅微信小程序，且type=textarea时有效 */
-    disableDefaultPadding: {
         type: Boolean,
         default: false
     },
@@ -172,8 +157,11 @@ const inputProps = {
         type: Boolean,
         default: false
     },
-    /** 内容格式化函数 */
-    formatter: Function,
+    /** 内容格式化函数，输入时对内容进行处理并回显到输入框 */
+    formatter: {
+        type: Function as PropType<(value: string) => string>,
+        default: null
+    },
     /** 定义需要用到的外部样式 */
     customStyle: {
         type: Object as PropType<CSSProperties>,

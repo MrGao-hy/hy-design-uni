@@ -1,16 +1,10 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
-/* 弹出层层级 */
-$hy-tooltip-z-index: var(--hy-tooltip-z-index, 998) !default;
 /* 弹出层背景色 */
 $hy-tooltip-bg: var(--hy-tooltip-bg, rgb(50, 50, 51)) !default;
 /* 弹出层最小高度 */
 $hy-tooltip-min-height: var(--hy-tooltip-min-height, 36px) !default;
-/* 弹出层宽度 */
-$hy-tooltip-width: var(--hy-tooltip-width, 200px) !default;
-/* 弹出层行高 */
-$hy-tooltip-line-height: var(--hy-tooltip-line-height, 22px) !default;
 /* 按钮字号 */
 $hy-tooltip-btn-font-size: var(--hy-tooltip-btn-font-size, 13px) !default;
 /* 气泡圆角，默认跟随全局小圆角 token */
@@ -18,12 +12,8 @@ $hy-tooltip-radius: var(--hy-tooltip-radius, #{$hy-radius-sm}) !default;
 /* 按钮文字颜色 */
 $hy-tooltip-btn-color: var(--hy-tooltip-btn-color, #ffffff) !default;
 
-$hy-tooltip--z-index: $hy-tooltip-z-index;
-$hy-tooltip--background-color: $hy-tooltip-bg;
 /* hy-tooltip 基础阴影，默认跟随全局 token */
 $hy-tooltip-shadow-base: var(--hy-tooltip-shadow-base, #{$hy-shadow-base}) !default;
-/* 气泡内容内边距，默认跟随全局基础间距 token */
-$hy-tooltip-inner-padding: var(--hy-tooltip-inner-padding, #{$hy-border-margin-padding-base}) !default;
 /* 操作按钮内边距，默认跟随全局基础间距 token */
 $hy-tooltip-btn-padding: var(--hy-tooltip-btn-padding, #{$hy-border-margin-padding-base}) !default;
 /* 操作按钮点击态背景色，默认跟随全局点击状态背景 token */
@@ -33,7 +23,7 @@ $hy-tooltip-btn-hover-background: var(--hy-tooltip-btn-hover-background, #{$hy-b
   position: relative;
   @include flex;
 
-  @include squareArrow(6px, $hy-tooltip--background-color, -1, $hy-tooltip-shadow-base);
+  @include squareArrow(6px, $hy-tooltip-bg, -1, $hy-tooltip-shadow-base);
 
   @include edeep(popup) {
     position: absolute;
@@ -52,21 +42,6 @@ $hy-tooltip-btn-hover-background: var(--hy-tooltip-btn-hover-background, #{$hy-b
     visibility: hidden;
   }
 
-  @include e(container) {
-    position: relative;
-    border-radius: $hy-tooltip-radius;
-  }
-
-  @include e(inner) {
-    position: relative;
-    padding: $hy-tooltip-inner-padding;
-    line-height: $hy-tooltip-line-height;
-    z-index: $hy-tooltip--z-index;
-    border-radius: $hy-tooltip-radius;
-    box-sizing: content-box;
-    width: $hy-tooltip-width;
-  }
-
   @include e(content) {
     //@include flex;
     //justify-content: center;
@@ -76,11 +51,13 @@ $hy-tooltip-btn-hover-background: var(--hy-tooltip-btn-hover-background, #{$hy-b
   }
 
   @include e(container) {
+    position: relative;
+    border-radius: $hy-tooltip-radius;
     @include flex;
     justify-content: center;
 
     @include m(list) {
-      background-color: $hy-tooltip--background-color;
+      background-color: $hy-tooltip-bg;
       position: relative;
       flex: 1;
       border-radius: $hy-tooltip-radius;

@@ -5,7 +5,12 @@
             @tap.stop="clickHandler"
             :style="customStyle"
         >
-            <hy-icon :name="iconName(type)" :size="21" custom-class="hy-warn__icon-left"></hy-icon>
+            <hy-icon
+                v-if="showIcon"
+                :name="iconName(type)"
+                :size="21"
+                custom-class="hy-warn__icon-left"
+            ></hy-icon>
             <view
                 class="hy-warn__content"
                 :style="[

@@ -98,7 +98,6 @@ export function useMessage(): UseMessageReturn {
                 closeOnClickOverlay: undefined,
                 negativeTop: undefined,
                 width: undefined,
-                confirmButtonShape: undefined,
                 contentTextAlign: undefined,
                 confirm: undefined,
                 cancel: undefined,

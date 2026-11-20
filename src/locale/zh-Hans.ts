@@ -488,7 +488,9 @@ export default {
         china: '中国',
         japan: '日本',
         korea: '韩国',
-        usa: '美国'
+        usa: '美国',
+        containerSection: '小容器内使用',
+        disabled: '禁用'
     },
 
     empty: {

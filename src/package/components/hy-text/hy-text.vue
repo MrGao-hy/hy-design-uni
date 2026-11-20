@@ -116,6 +116,8 @@ const valueStyle = computed(() => {
     !props.type && (style.color = props.color)
     props.lineHeight && (style.lineHeight = props.lineHeight)
     props.block && (style.display = 'block')
+    // 文字换行处理，长单词或连续字符（如链接、手机号）是否允许断行
+    props.wordWrap !== 'normal' && (style.overflowWrap = props.wordWrap)
     return Object.assign(style, props.customStyle)
 })
 

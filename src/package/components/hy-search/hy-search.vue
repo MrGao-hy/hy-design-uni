@@ -1,6 +1,6 @@
 <template>
     <view
-        :class="['hy-search', customStyle]"
+        :class="['hy-search', customClass]"
         @tap="clickHandler"
         :style="[
             {

@@ -19,6 +19,26 @@
             @change="handleChange"
         ></hy-dropdown-item>
     </hy-dropdown>
+
+    <!-- 小容器内使用：与上个示例间隔一段距离，验证弹层定位随实际位置计算 -->
+    <!--    <view class="hy-title">{{ t('containerSection') }}</view>-->
+    <view class="small-container">
+        <hy-dropdown :sticky="false">
+            <hy-dropdown-item
+                :title="t('all')"
+                :menus="options1"
+                v-model="value1"
+                @change="handleChange"
+            ></hy-dropdown-item>
+            <!-- 禁用态：标题变灰且点击不展开 -->
+            <hy-dropdown-item
+                :title="t('disabled')"
+                :menus="options_3"
+                v-model="value_4"
+                disabled
+            ></hy-dropdown-item>
+        </hy-dropdown>
+    </view>
 </template>
 
 <script setup lang="ts">
@@ -37,6 +57,7 @@ usePageTitle('dropdown')
 const value1 = ref()
 const value_2 = ref()
 const value_3 = ref()
+const value_4 = ref()
 const options1 = computed(() => [
     {
         label: t('allGoods'),
@@ -96,4 +117,8 @@ const handleChange = () => {}
 useShareButton()
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.small-container {
+    padding-top: 200px;
+}
+</style>

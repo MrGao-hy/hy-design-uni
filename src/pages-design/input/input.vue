@@ -14,12 +14,13 @@
 
     <view class="hy-title">{{ t('amountFormatSection') }}</view>
     <view class="hy-container">
+        <!-- formatter：输入时实时过滤并回显，无需手动回写 -->
         <hy-input
             v-model="value3"
             type="digit"
             :maxlength="999"
             clearable
-            @change="onChange"
+            :formatter="amountFormatter"
         ></hy-input>
     </view>
 
@@ -69,7 +70,7 @@
 
 <script setup lang="ts">
 import type { ShapeType, BorderType } from '@/package/libs/typing'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { IconConfig } from '@/package'
 import type { InputType } from '@uni-helper/uni-types'
 import { usePageTitle, useShareButton, useTranslate } from '@/composables'
@@ -110,28 +111,20 @@ const list_3 = computed(() => [
     { name: t('borderNone'), value: 'none' }
 ])
 
-// 实时过滤
-const onChange = (e: string) => {
+// 金额输入格式化：只保留数字和小数点，最多 2 位小数
+const amountFormatter = (value: string) => {
     // 1. 只保留数字和小数点
-    let filtered = e.replace(/[^\d.]/g, '')
+    let filtered = value.replace(/[^\d.]/g, '')
     // 2. 保证只有一个小数点
     filtered = filtered.replace(/\.{2,}/g, '.')
     // 3. 去掉开头的小数点
     filtered = filtered.replace(/^\./g, '')
     // 4. 保留 2 位小数
-    filtered = filtered.replace(/^\d+\.\d{2}.*/, (match) => match.slice(0, match.indexOf('.') + 3))
+    filtered = filtered.replace(/^(\d+\.\d{2}).*/, '$1')
     // 5. 防止 00、01 这类开头
     filtered = filtered.replace(/^0(\d+)/, '$1')
-
-    // 7. 回写
-    value3.value = filtered
+    return filtered
 }
-
-watch(
-    () => value3.value,
-    (newValue) => {},
-    { immediate: true }
-)
 
 useShareButton()
 </script>

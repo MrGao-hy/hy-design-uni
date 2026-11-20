@@ -1,8 +1,12 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
 
+/* 返回顶部容器大小 */
+$hy-back-top-size: var(--hy-back-top-size, 40px) !default;
+/* 返回顶部容器圆角 */
+$hy-back-top-square-radius: var(--hy-back-top-square-radius, #{$hy-radius-sm}) !default;
 /* 提示文字字号 */
-$hy-back-top-tips-font-size: var(--hy-back-top-tips-font-size, 12px) !default;
+$hy-back-top-tips-font-size: var(--hy-back-top-tips-font-size, 24rpx) !default;
 /* 返回顶部按钮背景色，默认跟随全局深色背景 token */
 $hy-back-top-background: var(--hy-back-top-background, #{$hy-background--3}) !default;
 
@@ -11,12 +15,22 @@ $hy-back-top-background: var(--hy-back-top-background, #{$hy-background--3}) !de
   flex-direction: column;
   align-items: center;
   flex: 1;
-  height: 100%;
   justify-content: center;
   background-color: $hy-back-top-background;
+  width: $hy-back-top-size;
+  height: $hy-back-top-size;
+  position: fixed;
 
-  @include e(tips) {
+  @include m(circle) {
+    border-radius: $hy-radius-circle;
+  }
+
+  @include m(square) {
+    border-radius: $hy-back-top-square-radius;
+  }
+
+  @include e(text) {
     font-size: $hy-back-top-tips-font-size;
-    transform: scale(0.8);
+    //transform: scale(0.8);
   }
 }

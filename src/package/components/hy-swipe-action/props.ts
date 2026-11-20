@@ -35,11 +35,6 @@ const swipeActionProps = {
             }
         ]
     },
-    /** 动画过渡时间，单位ms */
-    duration: {
-        type: Number,
-        default: 300
-    },
     /** 关闭滑动按钮前的钩子函数 */
     beforeClose: Function,
     /** 定义需要用到的外部样式 */

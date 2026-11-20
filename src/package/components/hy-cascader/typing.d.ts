@@ -31,8 +31,6 @@ export interface ICascaderEmits {
     cancel: []
     /** 确认选择时触发（选中叶子节点） */
     confirm: [params: CascaderEmitValue]
-    /** 选择项变化时触发 */
-    change: [params: CascaderEmitValue]
     /** 更新弹窗显示状态 */
     'update:show': [show: boolean]
     /** 更新选中值 */

@@ -16,7 +16,8 @@
                     :top="icon?.top"
                     :stop="icon?.stop"
                     :round="icon?.round"
-                    :customStyle="Object.assign({ marginRight: '3px' }, icon?.customStyle)"
+                    custom-class="hy-tag__icon"
+                    :custom-style="icon?.customStyle"
                 ></hy-icon>
                 <view :class="textClass" :style="textStyle">
                     <slot v-if="$slots.default"></slot>

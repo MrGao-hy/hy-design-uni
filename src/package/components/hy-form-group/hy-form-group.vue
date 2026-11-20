@@ -15,6 +15,7 @@
             :key="item.field"
             :label="item.label"
             :prop="item.field"
+            :right="right || item.right"
             :required="item.required"
         >
             <template v-if="isInput(item.type)">
@@ -30,7 +31,6 @@
                     :placeholder="item?.input?.placeholder"
                     :placeholderClass="item?.input?.placeholderClass || input?.placeholderClass"
                     :placeholderStyle="item?.input?.placeholderStyle || input?.placeholderStyle"
-                    :showWordLimit="item?.input?.showWordLimit || input?.showWordLimit"
                     :confirmType="item?.input?.confirmType || input?.confirmType"
                     :confirmHold="item?.input?.confirmHold || input?.confirmHold"
                     :holdKeyboard="item?.input?.holdKeyboard || input?.holdKeyboard"

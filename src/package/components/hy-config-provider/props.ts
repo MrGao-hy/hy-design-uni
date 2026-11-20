@@ -16,8 +16,6 @@ const configProviderProps = {
         type: String,
         default: ColorConfig.primary
     },
-    /** 页面高度，单位px */
-    height: [String, Number],
     /** 内边距，单位px */
     padding: [String, Number],
     /** 定义需要用到的主题类名 */

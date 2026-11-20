@@ -21,7 +21,7 @@ $hy-tag-close-size-large: var(--hy-tag-close-size-large, 22px) !default;
 /* hy-tag 标准过渡曲线，默认跟随全局 token */
 $hy-tag-transition-ease: var(--hy-tag-transition-ease, #{$hy-transition-ease}) !default;
 /* hy-tag 图标右边间距 */
-$hy-tag-icon-margin: var(--hy-tag-icon-margin, #{$hy-border-margin-padding-sm}) !default;
+$hy-tag-icon-margin: var(--hy-tag-icon-margin, 4rpx) !default;
 /* hy-tag 清除按钮左边间距 */
 $hy-tag-close-margin: var(--hy-tag-close-margin, #{$hy-border-margin-padding-sm}) !default;
 /* hy-tag 文字字重 */

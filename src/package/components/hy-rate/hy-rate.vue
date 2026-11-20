@@ -1,5 +1,5 @@
 <template>
-    <view class="hy-rate" :id="elId" ref="hy-rate" :style="[customStyle]">
+    <view :class="['hy-rate', customClass]" :id="elId" ref="hy-rate" :style="[customStyle]">
         <view class="hy-rate__content" @touchmove.stop="touchMove" @touchend.stop="touchEnd">
             <view
                 class="hy-rate__content--item cursor-pointer"
