@@ -1,0 +1,259 @@
+@use '../../libs/css/mixin' as *;
+@use '../../libs/css/theme' as *;
+
+/* 指示器尺寸与圆角 */
+$hy-step-item-indicator-size: var(--hy-step-item-indicator-size, 18px) !default; // 圆形指示器宽高
+$hy-step-item-dot-size: var(--hy-step-item-dot-size, 10px) !default; // 点状指示器宽高
+$hy-step-item-circle-radius: var(--hy-step-item-circle-radius, #{$hy-radius-circle}) !default; // 圆形指示器圆角
+
+/* 指示器背景色（已完成/失败状态由实心圆图标自带圆底，背景透明） */
+$hy-step-item-circle-bg: var(--hy-step-item-circle-bg, #{$hy-background--3}) !default; // 等待状态
+$hy-step-item-circle-process-bg: var(--hy-step-item-circle-process-bg, #{$hy-primary}) !default; // 进行中状态
+
+/* 指示器文字 */
+$hy-step-item-circle-text-color: var(--hy-step-item-circle-text-color, #{$hy-text-color--grey}) !default; // 等待状态文字颜色
+$hy-step-item-circle-text-process-color: var(--hy-step-item-circle-text-process-color, #ffffff) !default; // 进行中状态文字颜色
+$hy-step-item-circle-text-finished-color: var(--hy-step-item-circle-text-finished-color, #{$hy-primary}) !default; // 已完成状态图标颜色
+$hy-step-item-circle-text-font-size: var(--hy-step-item-circle-text-font-size, 12px) !default; // 指示器文字字号
+
+/* 指示器图标（状态图标尺寸由模板内联 var(--hy-step-item-indicator-size) 驱动） */
+$hy-step-item-icon-size: var(--hy-step-item-icon-size, 18px) !default; // 自定义图标大小
+$hy-step-item-icon-color: var(--hy-step-item-icon-color, #{$hy-text-color--grey}) !default; // 等待状态图标颜色
+$hy-step-item-icon-active-color: var(--hy-step-item-icon-active-color, #{$hy-primary}) !default; // 激活状态图标颜色
+$hy-step-item-icon-error-color: var(--hy-step-item-icon-error-color, #{$hy-error}) !default; // 失败状态图标颜色
+
+/* 点状指示器状态色 */
+$hy-step-item-dot-wait-bg: var(--hy-step-item-dot-wait-bg, #{$hy-background--3}) !default; // 等待状态背景色
+$hy-step-item-dot-process-bg: var(--hy-step-item-dot-process-bg, #{$hy-primary}) !default; // 进行中状态背景色
+$hy-step-item-dot-process-ring-color: var(--hy-step-item-dot-process-ring-color, #{$hy-primary-disabled}) !default; // 进行中状态描边颜色
+$hy-step-item-dot-finished-bg: var(--hy-step-item-dot-finished-bg, #{$hy-primary-light}) !default; // 已完成状态背景色
+$hy-step-item-dot-finished-ring-color: var(--hy-step-item-dot-finished-ring-color, #{$hy-primary}) !default; // 已完成状态描边颜色
+$hy-step-item-dot-error-bg: var(--hy-step-item-dot-error-bg, #{$hy-error}) !default; // 失败状态背景色
+
+/* 连接线 */
+$hy-step-item-line-spacing: var(--hy-step-item-line-spacing, 4px) !default; // 连接线与指示器间距
+$hy-step-item-line-height: var(--hy-step-item-line-height, 1px) !default; // 连接线粗细
+$hy-step-item-line-color: var(--hy-step-item-line-color, #{$hy-background--3}) !default; // 连接线默认颜色
+$hy-step-item-line-active-color: var(--hy-step-item-line-active-color, #{$hy-primary}) !default; // 已完成连接线颜色
+
+/* 内容区 */
+$hy-step-item-content-margin-top: var(--hy-step-item-content-margin-top, 8px) !default; // 内容区距头部间距
+$hy-step-item-vertical-content-margin-left: var(--hy-step-item-vertical-content-margin-left, 32px) !default; // 垂直布局内容区左边距
+$hy-step-item-vertical-content-padding-bottom: var(--hy-step-item-vertical-content-padding-bottom, 20px) !default; // 垂直布局内容区下边距
+$hy-step-item-vertical-header-dot-top: var(--hy-step-item-vertical-header-dot-top, 6px) !default; // 垂直布局点状指示器顶部偏移
+
+/* 标题与描述 */
+$hy-step-item-title-font-size: var(--hy-step-item-title-font-size, #{$hy-font-size-base}) !default; // 标题字号
+$hy-step-item-title-font-weight: var(--hy-step-item-title-font-weight, #{$hy-font-weight-medium}) !default; // 标题字重
+$hy-step-item-title-color: var(--hy-step-item-title-color, #{$hy-text-color--2}) !default; // 标题默认颜色
+$hy-step-item-title-active-color: var(--hy-step-item-title-active-color, #{$hy-primary}) !default; // 标题激活颜色
+$hy-step-item-title-error-color: var(--hy-step-item-title-error-color, #{$hy-error}) !default; // 标题失败颜色
+$hy-step-item-description-font-size: var(--hy-step-item-description-font-size, #{$hy-font-size-sm}) !default; // 描述字号
+$hy-step-item-description-color: var(--hy-step-item-description-color, #{$hy-text-color--grey}) !default; // 描述颜色
+$hy-step-item-description-margin-top: var(--hy-step-item-description-margin-top, 4px) !default; // 描述距标题间距
+
+@include b(step-item) {
+    position: relative;
+    display: inline-block;
+
+    @include e(header) {
+        position: relative;
+        font-size: 0;
+
+        // 点状指示器时连接线贴合圆点定位
+        &.is-dot {
+            .hy-step-item__line {
+                width: calc(100% - 2 * #{$hy-step-item-line-spacing} - #{$hy-step-item-dot-size});
+                left: calc(#{$hy-step-item-line-spacing} + #{$hy-step-item-dot-size});
+            }
+        }
+    }
+
+    @include e(indicator) {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    @include e(circle) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $hy-step-item-indicator-size;
+        height: $hy-step-item-indicator-size;
+        border-radius: $hy-step-item-circle-radius;
+    }
+
+    // 状态类挂在根节点，通过后代选择器控制指示器、连接线、标题样式
+    @each $status in (finished, process, error, wait) {
+        @include m($status) {
+            .hy-step-item__circle {
+                @if $status == finished {
+                    // 实心圆图标自带圆底，背景透明让镂空符号透出页面底色
+                    background-color: transparent;
+                    :deep(.hy-step-item__finished-icon) {
+                        color: $hy-step-item-circle-text-finished-color;
+                    }
+                } @else if $status == process {
+                    background-color: $hy-step-item-circle-process-bg;
+                    color: $hy-step-item-circle-text-process-color;
+                } @else if $status == error {
+                    // 实心圆图标自带圆底，背景透明让镂空符号透出页面底色
+                    background-color: transparent;
+                    :deep(.hy-step-item__error-icon) {
+                        color: $hy-step-item-icon-error-color;
+                    }
+                } @else {
+                    background-color: $hy-step-item-circle-bg;
+                    color: $hy-step-item-circle-text-color;
+                }
+            }
+
+            .hy-step-item__dot {
+                @if $status == finished {
+                    background-color: $hy-step-item-dot-process-bg;
+                } @else if $status == process {
+                    background-color: $hy-step-item-dot-process-bg;
+                } @else if $status == error {
+                    background-color: $hy-step-item-dot-error-bg;
+                } @else {
+                    background-color: $hy-step-item-dot-wait-bg;
+                }
+            }
+
+            .hy-step-item__line {
+                @if $status == finished {
+                    background-color: $hy-step-item-line-active-color;
+                }
+            }
+
+            :deep(.hy-step-item__icon) {
+                @if $status == error {
+                    color: $hy-step-item-icon-error-color;
+                } @else if $status == wait {
+                    color: $hy-step-item-icon-color;
+                } @else {
+                    color: $hy-step-item-icon-active-color;
+                }
+            }
+
+            .hy-step-item__title {
+                @if $status == process {
+                    color: $hy-step-item-title-active-color;
+                } @else if $status == error {
+                    color: $hy-step-item-title-error-color;
+                } @else {
+                    color: $hy-step-item-title-color;
+                }
+            }
+        }
+    }
+
+    :deep(.hy-step-item__icon) {
+        font-size: $hy-step-item-icon-size;
+    }
+
+    @include e(circle-text) {
+        font-size: $hy-step-item-circle-text-font-size;
+        font-weight: $hy-step-item-title-font-weight;
+    }
+
+    @include e(line) {
+        position: absolute;
+        width: calc(100% - 2 * #{$hy-step-item-line-spacing} - #{$hy-step-item-indicator-size});
+        height: $hy-step-item-line-height;
+        background-color: $hy-step-item-line-color;
+        top: 50%;
+        left: calc(#{$hy-step-item-line-spacing} + #{$hy-step-item-indicator-size});
+    }
+
+    @include e(dot) {
+        position: relative;
+        display: block;
+        width: $hy-step-item-dot-size;
+        height: $hy-step-item-dot-size;
+        border-radius: $hy-step-item-circle-radius;
+        background-color: $hy-step-item-line-color;
+        box-sizing: border-box;
+    }
+
+    @include e(content) {
+        margin-top: $hy-step-item-content-margin-top;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @include e(title) {
+        color: $hy-step-item-title-color;
+        font-weight: $hy-step-item-title-font-weight;
+        font-size: $hy-step-item-title-font-size;
+        line-height: $hy-line-height-base;
+    }
+
+    @include e(description) {
+        margin-top: $hy-step-item-description-margin-top;
+        color: $hy-step-item-description-color;
+        font-size: $hy-step-item-description-font-size;
+        line-height: $hy-line-height-base;
+    }
+
+    // 居中对齐：连接线从指示器中心向右延伸
+    @include is(center) {
+        text-align: center;
+
+        .hy-step-item__line {
+            left: calc(50% + #{$hy-step-item-line-spacing} + #{$hy-step-item-indicator-size} / 2);
+        }
+
+        .hy-step-item__header.is-dot {
+            .hy-step-item__line {
+                left: calc(50% + #{$hy-step-item-line-spacing} + #{$hy-step-item-dot-size} / 2);
+            }
+        }
+    }
+
+    // 垂直布局：头部绝对定位在左侧，连接线纵向绘制
+    @include is(vertical) {
+        display: block;
+
+        .hy-step-item__header {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+
+            @include is(dot) {
+                top: $hy-step-item-vertical-header-dot-top;
+
+                .hy-step-item__line {
+                    left: 50%;
+                    // 连接线从圆点底部起算（圆点仅 10px，覆盖默认按圆形指示器尺寸的定位）
+                    top: calc(#{$hy-step-item-dot-size} + #{$hy-step-item-line-spacing});
+                    height: calc(100% - #{$hy-step-item-dot-size} - 2 * #{$hy-step-item-line-spacing});
+                }
+
+                .hy-step-item__indicator {
+                    // 与圆形指示器同宽，保证圆点沿左缘对齐
+                    width: $hy-step-item-indicator-size;
+                }
+            }
+        }
+
+        .hy-step-item__content {
+            margin-left: $hy-step-item-vertical-content-margin-left;
+            margin-top: 0;
+            padding-bottom: $hy-step-item-vertical-content-padding-bottom;
+            min-height: $hy-step-item-indicator-size;
+        }
+
+        .hy-step-item__line {
+            top: calc(#{$hy-step-item-indicator-size} + #{$hy-step-item-line-spacing});
+            left: 50%;
+            width: $hy-step-item-line-height;
+            height: calc(100% - #{$hy-step-item-indicator-size} - 2 * #{$hy-step-item-line-spacing});
+            transform: scaleX(0.5);
+        }
+    }
+}

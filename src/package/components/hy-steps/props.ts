@@ -21,29 +21,30 @@ const stepsProps = {
         type: String as PropType<DirectionType>,
         default: 'row'
     },
-    /** 激活状态颜色 */
+    /** 激活状态颜色，映射为 hy-step-item 的进行中/已完成相关 CSS 变量 */
     activeColor: {
         type: String,
         default: ''
     },
-    /** 未激活状态颜色 */
+    /** 未激活状态颜色，映射为 hy-step-item 的等待态文字与连接线 CSS 变量 */
     inactiveColor: {
         type: String,
         default: ''
     },
-    /** 激活状态的图标 */
-    activeIcon: String,
-    /** 未激活状态图标 */
-    inactiveIcon: String,
     /** 是否显示点类型 */
     dot: {
         type: Boolean,
         default: false
     },
-    /** 图标大小 */
+    /** 是否将步骤条水平居中显示，只对横向步骤条有效 */
+    alignCenter: {
+        type: Boolean,
+        default: false
+    },
+    /** 指示器大小，映射为 hy-step-item 的指示器尺寸 CSS 变量 */
     iconSize: {
         type: [String, Number],
-        default: 17
+        default: ''
     },
     /** 定义需要用到的外部样式 */
     customStyle: Object as PropType<CSSProperties>,

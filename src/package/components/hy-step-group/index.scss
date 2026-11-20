@@ -1,0 +1,13 @@
+@use '../../libs/css/mixin' as *;
+@use '../../libs/css/theme' as *;
+
+@include b(step-group) {
+    @include flex;
+    /* 在 flex 容器（如 hy-steps）内嵌套时保证占满主轴，避免收缩为内容宽度 */
+    width: 100%;
+
+    // 垂直方向时切换为块级布局，子项纵向排列
+    @include is(vertical) {
+        display: block;
+    }
+}
