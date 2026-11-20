@@ -1,5 +1,5 @@
 <template>
-    <view :class="`hy-icon ${customClass} hy-icon--${labelPos}`" @tap="clickHandler">
+    <view :class="`hy-icon hy-icon__warp ${customClass} hy-icon--${labelPos}`" @tap="clickHandler">
         <image
             class="hy-icon__img"
             v-if="isImg"

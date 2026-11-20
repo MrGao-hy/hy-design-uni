@@ -67,32 +67,27 @@
                     </view>
                     <!-- 删除图片图标 -->
 
-                    <!-- 上传成功图标 -->
+                    <!-- 上传状态角标（成功/失败） -->
                     <view
-                        class="hy-upload__status hy-upload__success"
-                        v-if="item.status === 'success'"
+                        class="hy-upload__status"
+                        :class="
+                            item.status === 'success' ? 'hy-upload__success' : 'hy-upload__error'
+                        "
+                        v-if="item.status === 'success' || item.status === 'failed'"
                     >
-                        <view class="hy-upload__success--icon">
+                        <view class="hy-upload__status--icon">
                             <hy-icon
-                                :name="IconConfig.CHECK_MASK"
+                                :name="
+                                    item.status === 'success'
+                                        ? IconConfig.CHECK
+                                        : IconConfig.ATTENTION
+                                "
                                 color="#ffffff"
                                 size="12"
                             ></hy-icon>
                         </view>
                     </view>
-                    <view
-                        class="hy-upload__status hy-upload__error"
-                        v-if="item.status === 'failed'"
-                    >
-                        <view class="hy-upload__success--icon">
-                            <hy-icon
-                                :name="IconConfig.CLOSE_CIRCLE"
-                                color="#ffffff"
-                                size="12"
-                            ></hy-icon>
-                        </view>
-                    </view>
-                    <!-- 上传成功图标 -->
+                    <!-- 上传状态角标（成功/失败） -->
                 </view>
             </template>
 

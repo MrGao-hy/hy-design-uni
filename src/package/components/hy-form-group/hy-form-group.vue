@@ -126,7 +126,6 @@
                     :activeColor="item?.radio?.activeColor || radio?.activeColor"
                     :inactiveColor="item?.radio?.inactiveColor || radio?.inactiveColor"
                     :iconSize="item?.radio?.iconSize || radio?.iconSize"
-                    :iconColor="item?.radio?.iconColor || radio?.iconColor"
                     :labelDisabled="item?.radio?.disabled || radio?.labelDisabled"
                     :placement="item?.radio?.placement || radio?.placement"
                 ></hy-radio>

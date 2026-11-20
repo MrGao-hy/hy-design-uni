@@ -167,7 +167,7 @@ const serviceFeatures = ref([
         badge: '3',
         route: '/pages/orders/index'
     },
-    { key: 'address', icon: IconConfig.MAP, iconBg: '#48bb78', route: '/pages/address/index' },
+    { key: 'address', icon: IconConfig.LOCATION, iconBg: '#48bb78', route: '/pages/address/index' },
     {
         key: 'messages',
         icon: IconConfig.MESSAGE,
@@ -188,13 +188,13 @@ const settingFeatures = ref([
     },
     {
         key: 'help',
-        icon: IconConfig.CUSTOMER_SERVICE,
+        icon: IconConfig.HEADSET,
         iconBg: '#4299e1',
         route: '/pages/help/index'
     },
     {
         key: 'about',
-        icon: IconConfig.MINE,
+        icon: IconConfig.USER,
         iconBg: '#9f7aea',
         version: 'v1.0.0',
         route: '/pages/about/index'

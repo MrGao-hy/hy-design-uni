@@ -30,7 +30,7 @@ const noticeBarProps = {
     /** 是否显示左侧的音量图标 */
     icon: {
         type: [String, Object] as PropType<string | Partial<HyIconProps>>,
-        default: IconConfig.NOTIFICATION_FILL
+        default: IconConfig.REMIND
     },
     /**
      * 通告模式，link-显示右箭头，closable-显示右侧关闭图标

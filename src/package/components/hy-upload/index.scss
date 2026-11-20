@@ -119,10 +119,6 @@ $hy-upload-button-hover-background: var(--hy-upload-button-hover-background, #{$
     align-items: center;
     justify-content: center;
     /* #endif */
-  }
-
-  @include e(success) {
-    border-color: transparent $hy-upload-success $hy-upload-success transparent;
 
     @include m(icon) {
       /* #ifndef APP-NVUE */
@@ -136,6 +132,10 @@ $hy-upload-button-hover-background: var(--hy-upload-button-hover-background, #{$
       height: 16px;
       /* #endif */
     }
+  }
+
+  @include e(success) {
+    border-color: transparent $hy-upload-success $hy-upload-success transparent;
   }
 
   @include e(error) {

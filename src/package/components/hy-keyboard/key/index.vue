@@ -21,7 +21,7 @@
             <view class="hy-keyboard__delete-line hy-keyboard__delete-line--left">
                 <hy-icon
                     v-if="type === 'delete'"
-                    :name="IconConfig.CLEAR"
+                    :name="IconConfig.DELETE"
                     class="hy-keyboard__key-icon"
                     color="#fff"
                     size="28"
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { IconConfig } from '@/package/libs'
+import { IconConfig } from '../../../libs'
 import type { NumberKeyType } from './types'
 
 const props = defineProps({

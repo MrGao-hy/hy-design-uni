@@ -1,4 +1,3 @@
-import { IconConfig } from '../../libs/config'
 import type { CSSProperties, PropType } from 'vue'
 import { useTranslate } from '../../libs'
 import type { RowCenterType } from '../../libs'
@@ -43,10 +42,10 @@ const dividerProps = {
     textColor: String,
     /** 线条颜色 */
     lineColor: String,
-    /** 加载图标 */
+    /** 加载图标（默认空，hy-loading 自带 spinner 动画） */
     loadingIcon: {
         type: String,
-        default: IconConfig.LOADING
+        default: ''
     },
     /** 加载前的提示语 */
     loadMoreText: {

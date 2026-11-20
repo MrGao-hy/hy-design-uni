@@ -1,6 +1,6 @@
 @use "../../libs/css/mixin" as *;
 @use "../../libs/css/theme" as *;
-@use "../../libs/css/iconfont" as *;
+@use "../../libs/css/iconfont.css" as *;
 
 /* 图标文字标签最大宽度 */
 $hy-icon-label-max-width: var(--hy-icon-label-max-width, 150rpx) !default;
@@ -26,7 +26,10 @@ $hy-icon-info: var(--hy-icon-info, #{$hy-info}) !default;
   display: flex;
   /* #endif */
   align-items: center;
-  color: $hy-icon-icon-color;
+
+  @include e(warp) {
+    color: $hy-icon-icon-color;
+  }
 
   @include m(left) {
     flex-direction: row-reverse;

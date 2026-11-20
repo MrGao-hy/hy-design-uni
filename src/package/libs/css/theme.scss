@@ -30,7 +30,7 @@ $hy-text-color: var(--hy-text-color, #3c3c43) !default; // 一般用于基础文
 $hy-text-color--2: var(--hy-text-color--2, #67676c) !default; // 一般用于提示
 $hy-text-color--3: var(--hy-text-color--3, #929295) !default; // 一般用于浅色提示
 $hy-text-color--4: var(--hy-text-color--4, rgba(0, 0, 0, 0.1)) !default; // 一般用于浅色
-$hy-icon-color: var(--hy-icon-color, #606266) !default; // 一般用于icon
+$hy-icon-color: var(--hy-icon-color, #999) !default; // 一般用于icon
 $hy-text-color--grey: var(--hy-text-color--grey, #999) !default; // 辅助灰色，如加载更多的提示信息
 $hy-text-color--placeholder: var(--hy-text-color--placeholder, #909399) !default; // 输入框提示颜色
 $hy-text-color--disabled: var(--hy-text-color--disabled, #FFFFFF3F) !default; // 禁用文字颜色

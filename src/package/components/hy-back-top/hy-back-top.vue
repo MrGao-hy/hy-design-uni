@@ -5,7 +5,7 @@
             <slot v-if="$slots.default"></slot>
             <template v-else>
                 <hy-icon
-                    :name="icon?.name || IconConfig.DOWNLOAD"
+                    :name="icon?.name || IconConfig.TO_TOP"
                     :color="icon?.color"
                     :size="icon?.size"
                     :bold="icon?.bold"
@@ -16,6 +16,7 @@
                     :top="icon?.top"
                     :stop="icon?.stop"
                     :round="icon?.round"
+                    :customClass="icon?.customClass"
                     :customStyle="icon?.customStyle"
                 ></hy-icon>
                 <text v-if="text" class="hy-back-top__text">{{ text }}</text>

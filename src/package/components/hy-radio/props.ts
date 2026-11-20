@@ -52,18 +52,13 @@ const radioProps = {
     },
     /** 选中状态下的颜色 */
     activeColor: String,
-    /** 未选中的颜色 */
-    inactiveColor: {
-        type: String,
-        default: '#c8c9cc'
-    },
+    /** 未选中的颜色，未设置时跟随CSS变量 --hy-radio-icon-color */
+    inactiveColor: String,
     /** 图标的大小，单位px */
     iconSize: {
         type: [String, Number],
         default: '20'
     },
-    /** 图标颜色 */
-    iconColor: String,
     /**
      * 勾选图标的对齐方式
      * @values left,right

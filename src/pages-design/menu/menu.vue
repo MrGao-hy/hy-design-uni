@@ -58,7 +58,7 @@ const current = ref<string | number>(1)
 const execute = ref(false) // 防止点击change事件时候执行onScroll事件
 // 菜单分类（computed 保证语言切换时响应）
 const list = computed<MenuParamsVo[]>(() => [
-    { id: 1, title: t('catRice'), value: 'buttonReverse', icon: IconConfig.PHOTO },
+    { id: 1, title: t('catRice'), value: 'buttonReverse', icon: IconConfig.CAMERA },
     { id: 2, title: t('catStirFry'), value: 'title', disabled: true },
     { id: 3, title: t('catNoodle'), value: 'showCancelButton', badge: 6 },
     { id: 4, title: t('catBurger'), value: 'buttonReverse' },

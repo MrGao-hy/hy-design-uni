@@ -5,26 +5,26 @@
 $hy-radio-margin: var(--hy-radio-margin, 5px) !default;
 /* 方形图标圆角 */
 $hy-radio-radius-square: var(--hy-radio-radius-square, 3px) !default;
-/* 禁用选中透明度 */
-$hy-radio-disabled-checked-opacity: var(--hy-radio-disabled-checked-opacity, 0.5) !default;
+/* 禁用态透明度 */
+$hy-radio-disabled-opacity: var(--hy-radio-disabled-opacity, 0.5) !default;
 /* 选项文字颜色 */
 $hy-radio-label-color: var(--hy-radio-label-color, #{$hy-text-color}) !default;
 /* 选项文字字号，默认跟随全局基础字体 token */
 $hy-radio-font-size: var(--hy-radio-font-size, #{$hy-font-size-base}) !default;
 /* 选项禁用文字颜色 */
 $hy-radio-disabled-color: var(--hy-radio-disabled-color, #{$hy-text-color--disabled}) !default;
-/* 圆点框边框，默认跟随全局边框线 token */
-$hy-radio-border: var(--hy-radio-border, #{$hy-border-line}) !default;
 /* 纵向分组上下外边距，默认跟随全局大间距 token */
 $hy-radio-group-margin-y: var(--hy-radio-group-margin-y, #{$hy-border-margin-padding-lg}) !default;
 /* 选项文字右外边距，默认跟随全局小间距 token */
 $hy-radio-label-margin: var(--hy-radio-label-margin, #{$hy-border-margin-padding-sm}) !default;
+/* 选项文字行高，收缩行盒使文字与图标盒中心对齐 */
+$hy-radio-label-line-height: var(--hy-radio-label-line-height, 1.2) !default;
 /* 图标右外边距，默认跟随全局小间距 token */
 $hy-radio-icon-margin: var(--hy-radio-icon-margin, #{$hy-border-margin-padding-sm}) !default;
-/* hy-radio 主题色，默认跟随全局主题色 token */
-$hy-radio-primary: var(--hy-radio-primary, #{$hy-primary}) !default;
-/* 圆点框禁用态背景色，默认跟随全局禁用背景 token */
-$hy-radio-icon-disabled-background: var(--hy-radio-icon-disabled-background, #{$hy-background--disabled}) !default;
+/* hy-radio 选中颜色 */
+$hy-radio-icon-checked-color: var(--hy-radio-icon-checked-color, #{$hy-primary}) !default;
+/* 未选中图标颜色 */
+$hy-radio-icon-color: var(--hy-radio-icon-color, #c8c9cc) !default;
 
 
 @include b(radio) {
@@ -63,10 +63,14 @@ $hy-radio-icon-disabled-background: var(--hy-radio-icon-disabled-background, #{$
     @include m(wrap) {
       /* #ifndef APP-NVUE */
       word-wrap: break-word;
+      display: flex;
+      align-items: center;
       /* #endif */
 
       color: $hy-radio-label-color;
       font-size: $hy-radio-font-size;
+      // 显式行高收缩行盒，避免浏览器默认行高导致文字与图标盒中心错位
+      line-height: $hy-radio-label-line-height;
       margin-right: $hy-radio-label-margin;
 
       @include m(disabled) {
@@ -79,54 +83,33 @@ $hy-radio-icon-disabled-background: var(--hy-radio-icon-disabled-background, #{$
   @include e(icon-wrap) {
     /* #ifndef APP-NVUE */
     box-sizing: border-box;
-    // nvue下，border-color过渡有问题
-    transition-property: border-color, background-color, color;
+    // 形状与颜色由图标自身呈现，容器仅保留颜色过渡
+    transition-property: color;
     transition-duration: 0.2s;
     /* #endif */
     @include flex;
     align-items: center;
     justify-content: center;
-    color: transparent;
+    color: $hy-radio-icon-color;
     text-align: center;
     margin-right: $hy-radio-icon-margin;
-    border: $hy-radio-border;
 
     /* #ifdef MP-TOUTIAO */
     // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
     @include e(icon) {
       line-height: 0;
     }
-
     /* #endif */
 
-    @include m(circle) {
-      border-radius: 50%;
+    @include is(checked) {
+      .hy-radio__icon {
+        color: $hy-radio-icon-checked-color;
+      }
     }
 
-    @include m(square) {
-      border-radius: $hy-radio-radius-square;
-    }
-
-    @include m(checked) {
-      color: #FFFFFF;
-      background-color: $hy-radio-primary;
-      border-color: $hy-radio-primary;
-    }
 
     @include m(disabled) {
-      background-color: $hy-radio-icon-disabled-background;
-      :deep(.hy-icon) {
-        display: none;
-      }
-    }
-
-    @include m(disabled--checked) {
-      background-color: $hy-radio-primary;
-      border-color: $hy-radio-primary;
-      opacity: $hy-radio-disabled-checked-opacity;
-      :deep(.hy-icon) {
-        display: block;
-      }
+      opacity: $hy-radio-disabled-opacity;
     }
   }
 }

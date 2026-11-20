@@ -102,6 +102,12 @@ export default {
         addToCart: 'Add to Cart',
         buyNow: 'Buy Now'
     },
+    stepItem: {
+        finished: 'Finished',
+        failed: 'Failed',
+        process: 'In Progress',
+        wait: 'Waiting'
+    },
     tooltip: {
         copy: 'Copy',
         copySuccess: 'Copied',

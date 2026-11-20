@@ -8,7 +8,7 @@
                         v-else
                         class="hy-menu__item__icon"
                         :name="item.icon"
-                        :color="current === i ? color || 'var(--hy-theme-color)' : ''"
+                        :color="current === i + 1 ? color || 'var(--hy-theme-color)' : ''"
                         :size="icon?.size || 16"
                         :bold="icon?.bold"
                         :customPrefix="icon?.customPrefix"

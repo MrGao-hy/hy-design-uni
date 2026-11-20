@@ -17,10 +17,10 @@
     <!-- 图标头像 -->
     <view class="hy-title">{{ t('iconAvatar') }}</view>
     <view class="hy-flex hy-container">
-        <hy-avatar :icon="IconConfig.MINE_FILL" bg-color="#448aca" />
-        <hy-avatar :icon="IconConfig.PHOTO" bg-color="#f18080" />
+        <hy-avatar :icon="IconConfig.USER" bg-color="#448aca" />
+        <hy-avatar :icon="IconConfig.CAMERA" bg-color="#f18080" />
         <hy-avatar :icon="IconConfig.STAR" bg-color="#ffb34b" />
-        <hy-avatar :icon="IconConfig.CUSTOMER_SERVICE" bg-color="#89c152" />
+        <hy-avatar :icon="IconConfig.HEADSET" bg-color="#89c152" />
     </view>
 
     <!-- 不同大小 -->

@@ -21,9 +21,9 @@
     <view class="hy-title">{{ t('customIcon') }}</view>
     <hy-switch
         v-model="value"
-        icon-color="red"
-        :active-icon="IconConfig.SUCCESS"
-        :inactive-icon="IconConfig.CLOSE"
+        :icon="{ color: 'red' }"
+        :active-icon="IconConfig.SUN"
+        :inactive-icon="IconConfig.MOON"
     ></hy-switch>
 
     <view class="hy-title">{{ t('customSlot') }}</view>

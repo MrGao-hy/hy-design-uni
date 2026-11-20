@@ -3,31 +3,23 @@
         class="hy-checkbox cursor-pointer"
         @tap.stop="wrapperClickHandler"
         :style="[checkboxStyle, customStyle]"
-        :class="[
-            `hy-checkbox--label__${checkboxGroup?.iconPlacement?.value}`,
-            checkboxGroup?.borderBottom?.value &&
-                checkboxGroup?.placement?.value === 'column' &&
-                'hy-border__bottom',
-            customClass
-        ]"
+        :class="[checkboxClasses, customClass]"
     >
         <view @tap.stop="iconClickHandler" :class="iconClasses" :style="iconWrapStyle">
-            <template v-if="isChecked">
-                <slot v-if="$slots.icon" name="icon"></slot>
-                <hy-icon
-                    v-else
-                    class="hy-checkbox--icon-wrap__icon"
-                    :name="IconConfig.CHECK_MASK"
-                    :size="
-                        addUnit(
-                            checkboxGroup?.size
-                                ? sizeType[checkboxGroup.size.value]
-                                : checkboxGroup?.iconSize?.value
-                        )
-                    "
-                    :color="checkboxGroup?.iconColor?.value || '#ffffff'"
-                />
-            </template>
+            <slot v-if="$slots.icon" name="icon" :isChecked="isChecked"></slot>
+            <hy-icon
+                v-else
+                :name="iconNameCom"
+                :size="
+                    addUnit(
+                        checkboxGroup?.size
+                            ? sizeType[checkboxGroup.size.value]
+                            : checkboxGroup?.iconSize?.value
+                    )
+                "
+                :color="iconColorCom"
+                custom-class="hy-checkbox__icon"
+            />
         </view>
         <view
             :class="[
@@ -115,6 +107,18 @@ watch(
 
 const isDisabled = (): boolean => checkboxGroup?.disabled?.value || props.disabled
 
+/**
+ * @description 复选框根节点的类名：图标方位与纵向下划线
+ * */
+const checkboxClasses = computed(() => {
+    return [
+        `hy-checkbox--label__${checkboxGroup?.iconPlacement?.value}`,
+        checkboxGroup?.borderBottom?.value &&
+            checkboxGroup?.placement?.value === 'column' &&
+            'hy-border__bottom'
+    ]
+})
+
 const checkboxStyle = computed(() => {
     const style: CSSProperties = {}
     if (checkboxGroup?.borderBottom?.value && checkboxGroup?.placement?.value === 'row') {
@@ -129,36 +133,47 @@ const checkboxStyle = computed(() => {
     return Object.assign(style, checkboxGroup?.customStyle?.value)
 })
 /**
+ * @description 根据形状与选中态计算图标名称：circle默认CIRCLE、选中CHECK_CIRCLE_FILL；square默认SQUARE、选中CHECK_SQUARE_FILL
+ *              （SQUARE/CIRCLE 字形待 iconfont 平台补充，补充前未选中态显示空白）
+ * */
+const iconNameCom = computed(() => {
+    // 默认跟随checkbox-group的square形状
+    if (checkboxGroup?.shape?.value === 'circle') {
+        return isChecked.value ? IconConfig.CHECK_CIRCLE_FILL : IconConfig.CIRCLE
+    }
+    return isChecked.value ? IconConfig.CHECK_SQUARE_FILL : IconConfig.SQUARE
+})
+
+/**
+ * @description icon颜色：选中时使用activeColor，未选中时使用inactiveColor；
+ *              未设置时返回undefined交由CSS主题token控制，禁用态由透明度弱化
+ * */
+const iconColorCom = computed(() => {
+    return isChecked.value ? checkboxGroup?.activeColor?.value : checkboxGroup?.inactiveColor?.value
+})
+
+/**
  * @description 定义icon的Class类名
  * */
 const iconClasses = computed(() => {
     let classes: string[] = ['hy-checkbox--icon-wrap', 'cursor-pointer']
-    // 组件的形状
-    classes.push('hy-checkbox--icon-wrap--' + checkboxGroup?.shape?.value)
     if (isDisabled()) {
         classes.push('hy-checkbox--icon-wrap--disabled')
     }
     if (isChecked.value) {
-        classes.push('hy-checkbox--icon-wrap--checked')
+        classes.push('is-checked')
         if (isDisabled()) {
-            classes.push('hy-checkbox--icon-wrap--disabled--checked')
+            classes.push('hy-checkbox--icon-wrap--disabled')
         }
     }
     return classes
 })
 
 /**
- * @description 定义icon的样式
+ * @description 定义icon容器的样式：仅控制尺寸，形状与颜色由图标自身呈现
  * */
 const iconWrapStyle = computed(() => {
-    // checkbox的整体样式
     const style: CSSProperties = {}
-    style.backgroundColor =
-        isChecked.value && !isDisabled() ? checkboxGroup?.activeColor?.value : ''
-    style.borderColor =
-        isChecked.value && !isDisabled()
-            ? checkboxGroup?.activeColor?.value
-            : checkboxGroup?.inactiveColor?.value
     if (checkboxGroup?.size?.value) {
         style.width = addUnit(sizeType[checkboxGroup.size.value] || checkboxGroup.size.value)
         style.height = addUnit(sizeType[checkboxGroup.size.value] || checkboxGroup.size.value)

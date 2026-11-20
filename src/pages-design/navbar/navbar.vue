@@ -67,7 +67,7 @@
                                 class="icon-gap"
                             ></hy-icon>
                             <hy-icon
-                                :name="IconConfig.ELLIPSIS"
+                                :name="IconConfig.MORE_VERTICAL"
                                 size="18"
                                 class="icon-gap"
                             ></hy-icon>
@@ -85,7 +85,7 @@
                     <template #title>
                         <view class="custom-title-slot">
                             <hy-icon
-                                :name="IconConfig.SHOPPING_CART_FILL"
+                                :name="IconConfig.SHOPPING_CART_ADD_FILL"
                                 size="16"
                                 color="#2979ff"
                             ></hy-icon>
@@ -119,14 +119,14 @@
                             <hy-avatar :size="28" :src="config.avatar"></hy-avatar>
                             <text class="user-name">{{ t('userName') }}</text>
                             <hy-icon
-                                :name="IconConfig.ARROW_DOUBLE_LEFT"
+                                :name="IconConfig.ARROW_RIGHT"
                                 size="12"
                                 color="#999"
                             ></hy-icon>
                         </view>
                     </template>
                     <template #right>
-                        <hy-icon :name="IconConfig.ELLIPSIS" size="18"></hy-icon>
+                        <hy-icon :name="IconConfig.MORE_VERTICAL" size="18"></hy-icon>
                     </template>
                 </hy-navbar>
                 <view class="demo-desc">{{ t('userDesc') }}</view>

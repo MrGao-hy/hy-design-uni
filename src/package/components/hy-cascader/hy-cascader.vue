@@ -70,7 +70,7 @@
                                             !item[childrenKey]?.length &&
                                             !item[isLeafKey]
                                         "
-                                        :name="IconConfig.CHECK_MASK"
+                                        :name="IconConfig.CHECK_SQUARE"
                                         :color="ColorConfig.primary"
                                     />
                                 </view>

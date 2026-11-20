@@ -47,6 +47,8 @@ import HyScrollList from './hy-scroll-list/hy-scroll-list.vue'
 import HySearch from './hy-search/hy-search.vue'
 import HySlider from './hy-slider/hy-slider.vue'
 import HyStatusBar from './hy-status-bar/hy-status-bar.vue'
+import HyStepGroup from './hy-step-group/hy-step-group.vue'
+import HyStepItem from './hy-step-item/hy-step-item.vue'
 import HySteps from './hy-steps/hy-steps.vue'
 import HySubsection from './hy-subsection/hy-subsection.vue'
 import HySwiper from './hy-swiper/hy-swiper.vue'
@@ -109,6 +111,8 @@ const install = (Vue: any) => {
     Vue.component('HySearch', HySearch)
     Vue.component('HySlider', HySlider)
     Vue.component('HyStatusBar', HyStatusBar)
+    Vue.component('HyStepGroup', HyStepGroup)
+    Vue.component('HyStepItem', HyStepItem)
     Vue.component('HySteps', HySteps)
     Vue.component('HySubsection', HySubsection)
     Vue.component('HySwiper', HySwiper)
@@ -172,6 +176,8 @@ export {
     HySearch,
     HySlider,
     HyStatusBar,
+    HyStepGroup,
+    HyStepItem,
     HySteps,
     HySubsection,
     HySwiper,

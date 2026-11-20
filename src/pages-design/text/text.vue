@@ -36,9 +36,9 @@
 
     <view class="hy-title">{{ t('icon') }}</view>
     <view class="hy-flex">
-        <hy-text :prefixIcon="IconConfig.MAP" :text="t('address')"></hy-text>
+        <hy-text :prefixIcon="IconConfig.LOCATION" :text="t('address')"></hy-text>
         <hy-text
-            :suffixIcon="IconConfig.ARROW_RIGHTWARD"
+            :suffixIcon="IconConfig.ARROW_RIGHT"
             :iconStyle="{ fontSize: '15px' }"
             align="right"
             :text="t('viewMore')"

@@ -25,7 +25,7 @@
             </view>
             <view class="code-block__copy" @click="handleCopy">
                 <hy-icon
-                    :name="copied ? IconConfig.CHECK_MASK : IconConfig.COPY"
+                    :name="copied ? IconConfig.CHECK_CIRCLE_FILL : IconConfig.COPY"
                     :size="13"
                     :color="copied ? '#52c41a' : '#8a8f98'"
                 />

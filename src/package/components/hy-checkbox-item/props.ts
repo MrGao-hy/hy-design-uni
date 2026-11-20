@@ -3,7 +3,7 @@ import type { CSSProperties, PropType } from 'vue'
 const checkboxItemProps = {
     /** checkbox的名称 */
     value: {
-        type: String,
+        type: [String, Number],
         default: ''
     },
     /** 是否默认选中 */

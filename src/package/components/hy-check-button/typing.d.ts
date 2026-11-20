@@ -49,7 +49,7 @@ export interface IFieldNames {
 }
 
 export type FieldNamesType = {
-    [key in keyof IFieldNames as IFieldNames[key]]?: string | number | boolean
+    [key in keyof IFieldNames as IFieldNames[key]]?: string | number
 }
 
 export interface ICheckButtonEmits {

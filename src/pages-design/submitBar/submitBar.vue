@@ -32,9 +32,9 @@ usePageTitle('submitBar')
 // 图标菜单文案（computed 包裹以响应语言切换）
 const menus = computed(() => [
     { icon: IconConfig.HOME, text: t('home') },
-    { icon: IconConfig.CUSTOMER_SERVICE, text: t('service') },
+    { icon: IconConfig.HEADSET, text: t('service') },
     {
-        icon: IconConfig.SHOPPING_CART,
+        icon: IconConfig.SHOPPING_CART_ADD,
         text: t('cart'),
         badge: { value: 10 }
     }

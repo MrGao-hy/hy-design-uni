@@ -5,7 +5,7 @@
                 <view class="header">
                     <view class="hy-title">{{ t('basicUsage') }}</view>
                     <hy-popover v-model="show" :content="t('tipContent')" placement="bottom-end">
-                        <hy-icon :name="IconConfig.HELP_CIRCLE"></hy-icon>
+                        <hy-icon :name="IconConfig.HELP"></hy-icon>
                     </hy-popover>
                 </view>
             </template>
@@ -118,7 +118,7 @@ const menus = computed(() => [
         content: t('menuSubscribe')
     },
     {
-        icon: IconConfig.NOTICE,
+        icon: IconConfig.ATTENTION,
         content: t('menuAnomaly')
     }
 ])

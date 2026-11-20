@@ -29,7 +29,7 @@
                     <text v-else class="hy-table__cell--text">{{ col.title }}</text>
                     <view v-if="col.sortable" class="hy-table__cell--sortable">
                         <hy-icon
-                            :name="IconConfig.ARROW_UP_FILL"
+                            :name="IconConfig.UP_FILL"
                             size="12"
                             :custom-class="
                                 sortField === col.key && sortOrder === 'asc' ? 'is-active' : ''
@@ -37,7 +37,7 @@
                             @click.stop="handleSort(col, 'asc')"
                         ></hy-icon>
                         <hy-icon
-                            :name="IconConfig.ARROW_DOWN_FILL"
+                            :name="IconConfig.DOWN_FILL"
                             size="12"
                             :custom-class="
                                 sortField === col.key && sortOrder === 'desc' ? 'is-active' : ''
@@ -70,7 +70,7 @@
                         <text v-else class="hy-table__cell--text">{{ col.title }}</text>
                         <view v-if="col.sortable" class="hy-table__cell--sortable">
                             <hy-icon
-                                :name="IconConfig.ARROW_UP_FILL"
+                                :name="IconConfig.UP_FILL"
                                 size="12"
                                 :custom-class="
                                     sortField === col.key && sortOrder === 'asc' ? 'is-active' : ''
@@ -78,7 +78,7 @@
                                 @click.stop="handleSort(col, 'asc')"
                             ></hy-icon>
                             <hy-icon
-                                :name="IconConfig.ARROW_DOWN_FILL"
+                                :name="IconConfig.DOWN_FILL"
                                 size="12"
                                 :custom-class="
                                     sortField === col.key && sortOrder === 'desc' ? 'is-active' : ''
@@ -111,7 +111,7 @@
                     <text v-else class="hy-table__cell--text">{{ col.title }}</text>
                     <view v-if="col.sortable" class="hy-table__cell--sortable">
                         <hy-icon
-                            :name="IconConfig.ARROW_UP_FILL"
+                            :name="IconConfig.UP_FILL"
                             size="12"
                             :custom-class="
                                 sortField === col.key && sortOrder === 'asc' ? 'is-active' : ''
@@ -119,7 +119,7 @@
                             @click.stop="handleSort(col, 'asc')"
                         ></hy-icon>
                         <hy-icon
-                            :name="IconConfig.ARROW_DOWN_FILL"
+                            :name="IconConfig.DOWN_FILL"
                             size="12"
                             :custom-class="
                                 sortField === col.key && sortOrder === 'desc' ? 'is-active' : ''

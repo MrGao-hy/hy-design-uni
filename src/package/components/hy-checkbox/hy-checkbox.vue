@@ -1,59 +1,38 @@
 <template>
-    <view class="hy-checkbox--group" :class="[bemClass, customClass]">
-        <template v-for="(item, i) in columns_1" :key="i">
-            <view
-                class="hy-checkbox cursor-pointer"
-                @tap.stop="wrapperClickHandler($event, item)"
-                :style="checkboxStyle"
-                :class="[
-                    `hy-checkbox--label__${iconPlacement}`,
-                    borderBottom && placement === 'column' && 'hy-border__bottom'
-                ]"
-            >
-                <view
-                    @tap.stop="iconClickHandler($event, item)"
-                    :class="iconClasses(item)"
-                    :style="iconWrapStyle(item)"
-                >
-                    <template v-if="item[fieldNames.checked]">
-                        <slot
-                            v-if="$slots.icon"
-                            name="icon"
-                            :iconColor="iconColor"
-                            :iconSize="addUnit(iconSize)"
-                        >
-                        </slot>
-                        <hy-icon
-                            v-else
-                            class="hy-checkbox--icon-wrap__icon"
-                            :name="IconConfig.CHECK_MASK"
-                            :size="addUnit(sizeType[size] || iconSize)"
-                            :color="iconColor || '#ffffff'"
-                        />
-                    </template>
-                </view>
-                <view
-                    :class="[
-                        'hy-checkbox--label__wrap',
-                        'cursor-pointer',
-                        disabled && 'hy-checkbox--label__wrap--disabled'
-                    ]"
-                    @tap.stop="labelClickHandler($event, item)"
-                >
-                    <slot name="label" :record="item">
-                        <text
-                            :style="{
-                                color: labelColor,
-                                fontSize: addUnit(sizeType[size] || labelSize)
-                            }"
-                        >
-                            {{ item[fieldNames.label] }}
-                        </text>
-                    </slot>
-                </view>
-            </view>
-        </template>
-    </view>
+    <hy-checkbox-group
+        v-model="innerValue"
+        :shape="shape"
+        :size="size"
+        :disabled="disabled"
+        :activeColor="activeColor"
+        :inactiveColor="inactiveColor"
+        :iconSize="iconSize"
+        :iconPlacement="iconPlacement"
+        :borderBottom="borderBottom"
+        :labelSize="labelSize"
+        :labelColor="labelColor"
+        :labelDisabled="labelDisabled"
+        :placement="placement"
+        :customStyle="customStyle"
+        :customClass="customClass"
+        @change="groupChangeHandler"
+    >
+        <hy-checkbox-item
+            v-for="(item, i) in columns"
+            :key="i"
+            :value="item[fieldNames.value]"
+            :label="item[fieldNames.label] as string"
+            :disabled="item.disabled"
+            :checked="!!item[fieldNames.checked]"
+        >
+            <template v-if="$slots.icon" #icon="{ isChecked }">
+                <slot name="icon" :isChecked="isChecked" :iconSize="addUnit(iconSize)"></slot>
+            </template>
+            <template v-if="$slots.label" #label>
+                <slot name="label" :record="item"></slot>
+            </template>
+        </hy-checkbox-item>
+    </hy-checkbox-group>
 </template>
 
 <script lang="ts">
@@ -68,17 +47,17 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, ref, reactive } from 'vue'
-import type { CSSProperties } from 'vue'
-import { IconConfig, addUnit, bem, error } from '../../libs'
+import { computed } from 'vue'
+import { addUnit } from '../../libs'
 import type { ICheckBoxEmits } from './typing'
 import type { CheckboxColumnsVo } from '../hy-check-button/typing'
 import checkboxProps from './props'
 // 组件
-import HyIcon from '../hy-icon/hy-icon.vue'
+import HyCheckboxGroup from '../hy-checkbox-group/hy-checkbox-group.vue'
+import HyCheckboxItem from '../hy-checkbox-item/hy-checkbox-item.vue'
 
 /**
- * 复选框组件一般用于需要多个选择的场景，该组件功能完整，使用方便
+ * 复选框组件一般用于需要多个选择的场景，基于 hy-checkbox-group 与 hy-checkbox-item 组合实现的便捷封装
  * @displayName hy-checkbox
  */
 defineOptions({})
@@ -86,142 +65,41 @@ defineOptions({})
 const props = defineProps(checkboxProps)
 const emit = defineEmits<ICheckBoxEmits>()
 
-const columns_1 = ref()
-const sizeType: AnyObject = reactive({
-    small: 14,
-    medium: 18,
-    large: 24
-})
-
-watch(
-    () => props.modelValue,
-    (newValue) => {
-        // 判断数组长度为1可以传true/false
-        if (props.columns?.length === 1 && typeof newValue === 'boolean') {
-            props.columns[0][props.fieldNames.checked] = newValue
-            columns_1.value = props.columns
-        } else if (Array.isArray(newValue)) {
-            columns_1.value = props.columns.map((item) => {
-                item[props.fieldNames.checked] = newValue.includes(
-                    item[props.fieldNames.value] as string
-                )
-                return item
-            })
-        } else {
-            error('传入值不是数组，请传数组值')
-        }
+/**
+ * @description group 的双向绑定值恒为数组，与外部 boolean（单列）/数组（多列）自动转换
+ * */
+const innerValue = computed<(string | number)[]>({
+    get: () => {
+        if (Array.isArray(props.modelValue)) return props.modelValue
+        // 单列时支持 boolean
+        const first = props.columns?.[0]
+        return props.modelValue && first ? [first[props.fieldNames.value]] : []
     },
-    { immediate: true }
-)
-
-const isDisabled = (disabledVal?: boolean): boolean => props.disabled || !!disabledVal
-
-const checkboxStyle = computed(() => {
-    const style: CSSProperties = {}
-    if (props.borderBottom && props.placement === 'row') {
-        error(
-            '检测到您将borderBottom设置为true，需要同时将u-checkbox-group的placement设置为column才有效'
-        )
-    }
-    // 当父组件设置了显示下边框并且排列形式为纵向时，给内容和边框之间加上一定间隔
-    if (props.borderBottom && props.placement === 'column') {
-        style.paddingBottom = '8px'
-    }
-    return Object.assign(style, props.customStyle)
-})
-const bemClass = computed(() => {
-    return bem('checkbox-group', props, ['placement'])
-})
-
-/**
- * @description 定义icon的Class类名
- * */
-const iconClasses = computed(() => {
-    return (temp: CheckboxColumnsVo): string[] => {
-        let classes: string[] = ['hy-checkbox--icon-wrap', 'cursor-pointer']
-        // 组件的形状
-        classes.push('hy-checkbox--icon-wrap--' + props.shape)
-        if (isDisabled(temp?.disabled)) {
-            classes.push('hy-checkbox--icon-wrap--disabled')
+    set: (arr) => {
+        if (props.columns?.length === 1) {
+            emit(
+                'update:modelValue',
+                arr.includes(props.columns[0][props.fieldNames.value] as string)
+            )
+        } else {
+            emit('update:modelValue', arr)
         }
-        if (temp[props.fieldNames.checked]) {
-            classes.push('hy-checkbox--icon-wrap--checked')
-            if (isDisabled(temp?.disabled)) {
-                classes.push('hy-checkbox--icon-wrap--disabled--checked')
-            }
-        }
-        return classes
     }
 })
 
 /**
- * @description 定义icon的样式
+ * @description group 的 change 仅携带数组，对比变化值回查 columns，保持原有 change(temp) 事件语义
  * */
-const iconWrapStyle = computed(() => {
-    return (temp: CheckboxColumnsVo): CSSProperties => {
-        // checkbox的整体样式
-        const style: CSSProperties = {}
-        style.backgroundColor =
-            temp[props.fieldNames.checked] && !isDisabled(temp?.disabled) ? props.activeColor : ''
-        style.borderColor =
-            temp[props.fieldNames.checked] && !isDisabled(temp?.disabled)
-                ? props.activeColor
-                : props.inactiveColor
-        style.width = addUnit(sizeType[props.size] || props.size)
-        style.height = addUnit(sizeType[props.size] || props.size)
-        return style
-    }
-})
-
-/**
- * @description 点击图标
- * */
-const iconClickHandler = (e: Event, temp: CheckboxColumnsVo) => {
-    e.stopPropagation()
-    if (!isDisabled(temp?.disabled)) {
-        setRadioCheckedStatus(temp)
-    }
-}
-/**
- * @description 点击整行
- * */
-const wrapperClickHandler = (e: Event, temp: CheckboxColumnsVo) => {
-    e.stopPropagation()
-    if (props.labelDisabled || isDisabled(temp?.disabled)) return
-    setRadioCheckedStatus(temp)
-}
-/**
- * @description 点击label
- * */
-const labelClickHandler = (e: Event, temp: CheckboxColumnsVo) => {
-    e.stopPropagation()
-    if (props.labelDisabled || isDisabled(temp?.disabled)) return
-    setRadioCheckedStatus(temp)
-}
-
-/**
- * @description 执行函数改变状态传给父值
- * */
-const setRadioCheckedStatus = (temp: CheckboxColumnsVo) => {
-    // 将本组件标记为与原来相反的状态
-    columns_1.value = columns_1.value.map((item: CheckboxColumnsVo) => {
-        if (temp[props.fieldNames.value] === item[props.fieldNames.value]) {
-            item[props.fieldNames.checked] = !item[props.fieldNames.checked]
-        }
-        return item
-    })
-    emit(
-        'update:modelValue',
-        columns_1.value.length === 1
-            ? columns_1.value[0].checked
-            : columns_1.value
-                  .filter((item: CheckboxColumnsVo) => item[props.fieldNames.checked])
-                  .map((item: CheckboxColumnsVo) => item[props.fieldNames.value])
-    )
-    emit('change', temp)
+const groupChangeHandler = (arr: (string | number)[]) => {
+    // 事件时序上此刻 props.modelValue 仍为变化前的值
+    const prev = Array.isArray(props.modelValue)
+        ? props.modelValue
+        : props.modelValue && props.columns?.[0]
+          ? [props.columns[0][props.fieldNames.value]]
+          : []
+    const changedValue =
+        arr.find((item) => !prev.includes(item)) ?? prev.find((item) => !arr.includes(item))
+    const temp = props.columns?.find((item) => item[props.fieldNames.value] === changedValue)
+    emit('change', (temp ?? arr) as CheckboxColumnsVo)
 }
 </script>
-
-<style lang="scss">
-@use './index.scss';
-</style>

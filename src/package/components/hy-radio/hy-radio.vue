@@ -14,24 +14,22 @@
                     class="hy-radio__icon-wrap cursor-pointer"
                     @tap.stop="iconClickHandler($event, item)"
                     :class="iconClasses(item)"
-                    :style="iconWrapStyle(item)"
+                    :style="iconWrapStyle()"
                 >
-                    <template v-if="item[fieldNames.checked]">
-                        <slot
-                            v-if="$slots.icon"
-                            name="icon"
-                            :iconColor="iconColor"
-                            :iconSize="addUnit(sizeType[size] || iconSize)"
-                        >
-                        </slot>
-                        <hy-icon
-                            v-else
-                            class="hy-radio__icon-wrap__icon"
-                            :name="IconConfig.CHECK_MASK"
-                            :size="addUnit(sizeType[size] || iconSize)"
-                            :color="iconColorCom(item.checked)"
-                        />
-                    </template>
+                    <slot
+                        v-if="$slots.icon"
+                        name="icon"
+                        :iconSize="addUnit(sizeType[size] || iconSize)"
+                        :isChecked="!!item[fieldNames.checked]"
+                    >
+                    </slot>
+                    <hy-icon
+                        v-else
+                        :name="iconNameCom(item)"
+                        :size="addUnit(sizeType[size] || iconSize)"
+                        :color="iconColorCom(!!item[fieldNames.checked])"
+                        custom-class="hy-radio__icon"
+                    />
                 </view>
                 <view
                     class="hy-radio__label--wrap cursor-pointer"
@@ -105,19 +103,29 @@ watch(
 const isDisabled = (disabledVal?: boolean): boolean => props.disabled || !!disabledVal
 
 /**
- * @description icon颜色
+ * @description 根据形状与选中态计算图标名称：circle默认CIRCLE、选中CHECK_CIRCLE_FILL；square默认SQUARE、选中CHECK_SQUARE_FILL
+ *              （SQUARE/CIRCLE 字形待 iconfont 平台补充，补充前未选中态显示空白）
+ * */
+const iconNameCom = computed(() => {
+    return (temp: CheckboxColumnsVo): string => {
+        const checked = !!temp[props.fieldNames.checked]
+        if (props.shape === 'square') {
+            return checked ? IconConfig.CHECK_SQUARE_FILL : IconConfig.SQUARE
+        }
+        return checked ? IconConfig.CHECK_CIRCLE_FILL : IconConfig.CIRCLE
+    }
+})
+
+/**
+ * @description icon颜色：选中时使用activeColor，未选中时使用inactiveColor；
+ *              未设置时返回undefined交由CSS主题token控制，禁用态由透明度弱化
  * */
 const iconColorCom = computed(() => {
-    return (check?: boolean) => {
-        if (props.disabled) {
-            if (check) {
-                return '#c8c9cc'
-            } else {
-                return '#F5F5F5'
-            }
-        } else {
-            return props.iconColor || '#ffffff'
+    return (check?: boolean): string | undefined => {
+        if (check) {
+            return props.activeColor
         }
+        return props.inactiveColor
     }
 })
 /**
@@ -146,15 +154,13 @@ const bemClass = computed(() => {
 const iconClasses = computed(() => {
     return (temp: CheckboxColumnsVo): string[] => {
         let classes: string[] = []
-        // 组件的形状
-        classes.push('hy-radio__icon-wrap--' + props.shape)
         if (isDisabled(temp?.disabled)) {
             classes.push('hy-radio__icon-wrap--disabled')
         }
         if (temp[props.fieldNames.checked]) {
-            classes.push('hy-radio__icon-wrap--checked')
+            classes.push('is-checked')
             if (isDisabled(temp?.disabled)) {
-                classes.push('hy-radio__icon-wrap--disabled--checked')
+                classes.push('hy-radio__icon-wrap--disabled')
             }
         }
         return classes
@@ -162,18 +168,11 @@ const iconClasses = computed(() => {
 })
 
 /**
- * @description 定义icon的样式
+ * @description 定义icon容器的样式：仅控制尺寸，形状与颜色由图标自身呈现
  * */
 const iconWrapStyle = computed(() => {
-    return (temp: CheckboxColumnsVo): CSSProperties => {
-        // checkbox的整体样式
+    return (): CSSProperties => {
         const style: CSSProperties = {}
-        style.backgroundColor =
-            temp[props.fieldNames.checked] && !isDisabled(temp?.disabled) ? props.activeColor : ''
-        style.borderColor =
-            temp[props.fieldNames.checked] && !isDisabled(temp?.disabled)
-                ? props.activeColor
-                : props.inactiveColor
         style.width = addUnit(sizeType[props.size] || props.size)
         style.height = addUnit(sizeType[props.size] || props.size)
         return style

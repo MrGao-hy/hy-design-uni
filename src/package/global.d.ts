@@ -70,6 +70,8 @@ declare module 'vue' {
         HySkeleton: (typeof import('./components/hy-skeleton/hy-skeleton.vue'))['default']
         HySlider: (typeof import('./components/hy-slider/hy-slider.vue'))['default']
         HyStatusBar: (typeof import('./components/hy-status-bar/hy-status-bar.vue'))['default']
+        HyStepGroup: (typeof import('./components/hy-step-group/hy-step-group.vue'))['default']
+        HyStepItem: (typeof import('./components/hy-step-item/hy-step-item.vue'))['default']
         HySteps: (typeof import('./components/hy-steps/hy-steps.vue'))['default']
         HySticky: (typeof import('./components/hy-sticky/hy-sticky.vue'))['default']
         HySubmitBar: (typeof import('./components/hy-submit-bar/hy-submit-bar.vue'))['default']

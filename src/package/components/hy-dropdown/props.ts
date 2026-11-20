@@ -31,7 +31,7 @@ const dropdownProps = {
     /** 图标名称 */
     menuIcon: {
         type: String,
-        default: IconConfig.ARROW_DOWN_FILL
+        default: IconConfig.DOWN_FILL
     },
     /** 图标大小，单位px */
     menuIconSize: {

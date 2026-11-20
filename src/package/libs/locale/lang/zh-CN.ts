@@ -105,6 +105,12 @@ export default {
         addToCart: '加入购物车',
         buyNow: '立即购买'
     },
+    stepItem: {
+        finished: '已完成',
+        failed: '失败',
+        process: '进行中',
+        wait: '未开始'
+    },
     tooltip: {
         copy: '复制',
         copySuccess: '复制成功',

@@ -55,10 +55,10 @@
 
     <view class="hy-title">{{ t('size') }}</view>
     <view class="hy-flex hy-container">
-        <hy-tag :icon="{ name: IconConfig.MAP }" :label="t('label')" size="large"></hy-tag>
-        <hy-tag :icon="{ name: IconConfig.MAP }" :label="t('label')" size="medium"></hy-tag>
-        <hy-tag :icon="{ name: IconConfig.MAP }" :label="t('label')" size="small"></hy-tag>
-        <hy-tag :icon="{ name: IconConfig.MAP }" :label="t('label')" size="mini"></hy-tag>
+        <hy-tag :icon="{ name: IconConfig.LOCATION }" :label="t('label')" size="large"></hy-tag>
+        <hy-tag :icon="{ name: IconConfig.LOCATION }" :label="t('label')" size="medium"></hy-tag>
+        <hy-tag :icon="{ name: IconConfig.LOCATION }" :label="t('label')" size="small"></hy-tag>
+        <hy-tag :icon="{ name: IconConfig.LOCATION }" :label="t('label')" size="mini"></hy-tag>
     </view>
 
     <view class="hy-title">{{ t('shape') }}</view>
@@ -70,7 +70,7 @@
 
     <view class="hy-title">{{ t('withIcon') }}</view>
     <view class="hy-flex hy-container">
-        <hy-tag :label="t('address')" :icon="{ name: IconConfig.MAP }" plain></hy-tag>
+        <hy-tag :label="t('address')" :icon="{ name: IconConfig.LOCATION }" plain></hy-tag>
     </view>
 
     <view class="hy-title">{{ t('closable') }}</view>

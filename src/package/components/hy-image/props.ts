@@ -50,15 +50,15 @@ const imageProps = {
         type: Boolean,
         default: true
     },
-    /** 加载中的图标，或者小图片 */
+    /** 加载中的图标，或者小图片（默认空，hy-loading 自带 spinner 动画） */
     loadingIcon: {
         type: String,
-        default: IconConfig.LOADING
+        default: ''
     },
     /** 加载失败的图标，或者小图片 */
     errorIcon: {
         type: String,
-        default: IconConfig.NOTICE
+        default: IconConfig.ATTENTION
     },
     /** 是否显示加载中的图标或者自定义的slot */
     showLoading: {

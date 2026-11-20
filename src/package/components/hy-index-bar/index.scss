@@ -36,7 +36,7 @@ $hy-index-bar-toast-background: var(--hy-index-bar-toast-background, #{$hy-backg
 
   /* 侧边索引栏 */
   @include e(sidebar) {
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
     display: flex;

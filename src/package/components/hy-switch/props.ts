@@ -42,7 +42,7 @@ const switchProps = {
     /** 关闭选择器时图标 */
     inactiveIcon: String,
     /** 图标 */
-    icon: Object as PropType<HyIconProps>,
+    icon: Object as PropType<Partial<HyIconProps>>,
     /** 是否开启异步变更，开启后需要手动控制输入值 */
     asyncChange: {
         type: Boolean,

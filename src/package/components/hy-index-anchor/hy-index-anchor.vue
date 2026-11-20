@@ -52,7 +52,7 @@ const instance = getCurrentInstance()
 const indexBar = inject<IIndexBarContext>('hy-index-bar')
 
 // 以组件实例uid作为注册标识
-const uid = instance?.uid ?? -1
+const uid = instance?.uid
 
 // 锚点距离视口顶部的位置，供索引栏做滚动联动计算
 const top = ref<number>(0)
