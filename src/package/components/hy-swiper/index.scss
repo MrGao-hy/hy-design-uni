@@ -42,10 +42,11 @@ $hy-swiper-dot-margin: var(--hy-swiper-dot-margin, #{$hy-border-margin-padding-s
 
   @include e(wrapper) {
     flex: 1;
-    background-color: $hy-swiper-background;
 
     @include m(item) {
       flex: 1;
+      height: 100%;
+      background-color: $hy-swiper-background;
 
       @include e(wrapper){
         @include flex;

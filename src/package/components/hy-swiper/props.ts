@@ -106,7 +106,7 @@ const swiperProps = {
     /** 背景颜色 */
     bgColor: {
         type: String,
-        default: '#f3f4f6'
+        default: ''
     },
     /** 组件圆角，数值或带单位的字符串 */
     radius: {

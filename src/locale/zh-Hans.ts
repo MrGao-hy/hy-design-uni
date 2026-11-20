@@ -1818,6 +1818,7 @@ export default {
         duration: '轮播图切换时间',
         interval: '轮播图自动切换间隔',
         customIndicator: '自定义指示器',
+        customSlot: '自定义插槽内容',
         poem1: '昨夜星辰昨夜风，画楼西畔桂堂东',
         poem2: '身无彩凤双飞翼，心有灵犀一点通',
         poem3: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳',

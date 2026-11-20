@@ -1815,6 +1815,7 @@ export default {
         duration: 'Switch Duration',
         interval: 'Auto-play Interval',
         customIndicator: 'Custom Indicator',
+        customSlot: 'Custom Slot Content',
         poem1: 'Last night, stars and breeze, east of the painted chamber',
         poem2: 'No phoenix wings to fly to you, yet our hearts beat as one',
         poem3: 'Alone in the cold west wind, yellow leaves by the window, lost in memories at sunset',

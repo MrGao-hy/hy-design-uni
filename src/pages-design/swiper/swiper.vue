@@ -20,7 +20,6 @@
             previousMargin="30"
             nextMargin="30"
             radius="5"
-            bgColor="#ffffff"
             showTitle
             circular
         ></hy-swiper>
@@ -39,6 +38,16 @@
         <view class="hy-title">{{ t('interval') }}</view>
         <hy-slider v-model="interval" :min="1000" :max="5000"></hy-slider>
     </view>
+
+    <view class="hy-title">{{ t('customSlot') }}</view>
+    <hy-swiper :list="list_3" :autoplay="false" height="200" bgColor="#764ba2">
+        <template #default="{ record, index }">
+            <view class="slot-content">
+                <text class="slot-content__index">{{ index + 1 }}</text>
+                <text class="slot-content__text">{{ record.content }}</text>
+            </view>
+        </template>
+    </hy-swiper>
 
     <view class="hy-title">{{ t('customIndicator') }}</view>
     <hy-swiper :list="list" :autoplay="false" height="300">
@@ -76,7 +85,6 @@ const list_2 = computed<SwiperList[]>(() => [
         type: 'video'
     },
     {
-        url: config.swiper1,
         title: t('poem2')
     },
     {
@@ -85,6 +93,12 @@ const list_2 = computed<SwiperList[]>(() => [
     }
 ])
 const mode = ref<IndicatorMode>('line')
+// 自定义插槽文本内容（computed 包裹以响应语言切换）
+const list_3 = computed<SwiperList[]>(() => [
+    { content: t('poem1') },
+    { content: t('poem2') },
+    { content: t('poem3') }
+])
 const height = ref<number>(200)
 const duration = ref<number>(300)
 const interval = ref<number>(3000)
@@ -106,5 +120,29 @@ useShareButton()
     background: rgba(128, 128, 128, 0.7);
     border-radius: $hy-radius-semicircle;
     color: #fff;
+}
+
+/* 布局样式，背景色由 bgColor prop 提供 */
+.slot-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20rpx;
+    height: 100%;
+    padding: 0 40rpx;
+    color: #fff;
+
+    &__index {
+        font-size: 48rpx;
+        font-weight: bold;
+        opacity: 0.6;
+    }
+
+    &__text {
+        font-size: 30rpx;
+        line-height: 1.6;
+        text-align: center;
+    }
 }
 </style>

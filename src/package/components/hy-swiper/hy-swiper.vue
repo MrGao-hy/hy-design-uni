@@ -30,6 +30,9 @@
                 class="hy-swiper__wrapper--item"
                 v-for="(item, index) in list"
                 :key="getItemKey(item, index)"
+                :style="{
+                    backgroundColor: bgColor
+                }"
             >
                 <!-- 注意：小程序端父级若用 v-if 动态控制插槽内容，$slots 仍恒为 true，会导致默认渲染分支失效 -->
                 <slot v-if="$slots.default" :record="asRecord(item)" :index="index"> </slot>
@@ -141,8 +144,7 @@ const rootStyle = computed<CSSProperties>(() => ({
  * */
 const swiperStyle = computed<CSSProperties>(() => ({
     flex: '1',
-    height: addUnit(props.height),
-    backgroundColor: props.bgColor
+    height: addUnit(props.height)
 }))
 
 /**
