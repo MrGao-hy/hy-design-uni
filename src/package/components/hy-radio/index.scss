@@ -90,7 +90,6 @@ $hy-radio-icon-color: var(--hy-radio-icon-color, #c8c9cc) !default;
     @include flex;
     align-items: center;
     justify-content: center;
-    color: $hy-radio-icon-color;
     text-align: center;
     margin-right: $hy-radio-icon-margin;
 
@@ -100,6 +99,10 @@ $hy-radio-icon-color: var(--hy-radio-icon-color, #c8c9cc) !default;
       line-height: 0;
     }
     /* #endif */
+
+    .hy-radio__icon {
+      color: $hy-radio-icon-color;
+    }
 
     @include is(checked) {
       .hy-radio__icon {

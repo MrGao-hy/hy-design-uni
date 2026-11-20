@@ -52,7 +52,7 @@ const checkboxProps = {
     },
     /** 选中状态下的颜色 */
     activeColor: String,
-    /** 未选中的颜色，未设置时跟随CSS变量 --hy-checkbox-icon-color */
+    /** 未选中的颜色 */
     inactiveColor: String,
     /** 图标的大小，单位px */
     iconSize: {

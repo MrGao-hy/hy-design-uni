@@ -6,37 +6,38 @@
         :class="[checkboxClasses, customClass]"
     >
         <view @tap.stop="iconClickHandler" :class="iconClasses" :style="iconWrapStyle">
-            <slot v-if="$slots.icon" name="icon" :isChecked="isChecked"></slot>
-            <hy-icon
-                v-else
-                :name="iconNameCom"
-                :size="
-                    addUnit(
-                        checkboxGroup?.size
-                            ? sizeType[checkboxGroup.size.value]
-                            : checkboxGroup?.iconSize?.value
-                    )
-                "
-                :color="iconColorCom"
-                custom-class="hy-checkbox__icon"
-            />
+            <slot name="icon" :isChecked="isChecked">
+                <hy-icon
+                    :name="iconNameCom"
+                    :size="
+                        addUnit(
+                            checkboxGroup?.props.size
+                                ? sizeType[checkboxGroup.props.size]
+                                : checkboxGroup?.props.iconSize
+                        )
+                    "
+                    :color="iconColorCom"
+                    custom-class="hy-checkbox__icon"
+                />
+            </slot>
         </view>
         <view
             :class="[
                 'hy-checkbox--label__wrap',
                 'cursor-pointer',
-                disabled && 'hy-checkbox--label__wrap--disabled'
+                (disabled || checkboxGroup?.props.labelDisabled || checkboxGroup?.props.disabled) &&
+                    'hy-checkbox--label__wrap--disabled'
             ]"
             @tap.stop="labelClickHandler"
         >
             <slot name="label">
                 <text
                     :style="{
-                        color: checkboxGroup?.labelColor?.value,
+                        color: checkboxGroup?.props.labelColor,
                         fontSize: addUnit(
-                            checkboxGroup?.size
-                                ? sizeType[checkboxGroup.size.value]
-                                : checkboxGroup?.labelSize?.value
+                            checkboxGroup?.props.size
+                                ? sizeType[checkboxGroup.props.size]
+                                : checkboxGroup?.props.labelSize
                         )
                     }"
                 >
@@ -49,7 +50,7 @@
 
 <script lang="ts">
 export default {
-    name: 'hy-checkbox',
+    name: 'hy-checkbox-item',
     options: {
         addGlobalClass: true,
         virtualHost: true,
@@ -59,10 +60,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, watch, ref, reactive, inject } from 'vue'
+import { computed, watch, ref, reactive } from 'vue'
 import type { CSSProperties } from 'vue'
-import { IconConfig, addUnit, error } from '../../libs'
-import type { ICheckboxGroupContext } from './typing'
+import { IconConfig, addUnit, error, useParent } from '../../libs'
+import type { ICheckboxGroupContext } from '../hy-checkbox-group/typing'
+import { CHECKBOX_GROUP_KEY } from '../hy-checkbox-group/checkbox'
 import checkboxItemProps from './props'
 // 组件
 import HyIcon from '../hy-icon/hy-icon.vue'
@@ -75,8 +77,8 @@ defineOptions({})
 
 const props = defineProps(checkboxItemProps)
 
-// 注入表单上下文
-const checkboxGroup = inject<ICheckboxGroupContext>('hy-checkbox-group')
+// 注入复选框组上下文
+const { parent: checkboxGroup } = useParent<ICheckboxGroupContext>(CHECKBOX_GROUP_KEY)
 const isChecked = ref(false)
 const sizeType: AnyObject = reactive({
     small: 14,
@@ -88,16 +90,16 @@ watch(
     () => props.checked,
     (newValue) => {
         isChecked.value = newValue
-        if (props.checked) checkboxGroup?.setCheckedStatus(props.value)
+        if (props.checked) checkboxGroup.value?.setCheckedStatus(props.value)
     },
     { immediate: true }
 )
 
 watch(
-    () => checkboxGroup?.modelValue,
+    () => checkboxGroup.value?.props.modelValue,
     (newVal) => {
-        if (newVal?.value?.length) {
-            isChecked.value = newVal.value.includes(props.value)
+        if (newVal?.length) {
+            isChecked.value = newVal.includes(props.value)
         } else {
             isChecked.value = false
         }
@@ -105,32 +107,35 @@ watch(
     { immediate: true }
 )
 
-const isDisabled = (): boolean => checkboxGroup?.disabled?.value || props.disabled
+const isDisabled = (): boolean => checkboxGroup.value?.props.disabled || props.disabled
 
 /**
  * @description 复选框根节点的类名：图标方位与纵向下划线
  * */
 const checkboxClasses = computed(() => {
     return [
-        `hy-checkbox--label__${checkboxGroup?.iconPlacement?.value}`,
-        checkboxGroup?.borderBottom?.value &&
-            checkboxGroup?.placement?.value === 'column' &&
+        `hy-checkbox--label__${checkboxGroup.value?.props.iconPlacement}`,
+        checkboxGroup.value?.props.borderBottom &&
+            checkboxGroup.value?.props.placement === 'column' &&
             'hy-border__bottom'
     ]
 })
 
 const checkboxStyle = computed(() => {
     const style: CSSProperties = {}
-    if (checkboxGroup?.borderBottom?.value && checkboxGroup?.placement?.value === 'row') {
+    if (checkboxGroup.value?.props.borderBottom && checkboxGroup.value?.props.placement === 'row') {
         error(
             '检测到您将borderBottom设置为true，需要同时将hy-checkbox-group的placement设置为column才有效'
         )
     }
     // 当父组件设置了显示下边框并且排列形式为纵向时，给内容和边框之间加上一定间隔
-    if (checkboxGroup?.borderBottom?.value && checkboxGroup?.placement?.value === 'column') {
+    if (
+        checkboxGroup.value?.props.borderBottom &&
+        checkboxGroup.value?.props.placement === 'column'
+    ) {
         style.paddingBottom = '8px'
     }
-    return Object.assign(style, checkboxGroup?.customStyle?.value)
+    return Object.assign(style, checkboxGroup.value?.props.customStyle)
 })
 /**
  * @description 根据形状与选中态计算图标名称：circle默认CIRCLE、选中CHECK_CIRCLE_FILL；square默认SQUARE、选中CHECK_SQUARE_FILL
@@ -138,7 +143,7 @@ const checkboxStyle = computed(() => {
  * */
 const iconNameCom = computed(() => {
     // 默认跟随checkbox-group的square形状
-    if (checkboxGroup?.shape?.value === 'circle') {
+    if (checkboxGroup.value?.props.shape === 'circle') {
         return isChecked.value ? IconConfig.CHECK_CIRCLE_FILL : IconConfig.CIRCLE
     }
     return isChecked.value ? IconConfig.CHECK_SQUARE_FILL : IconConfig.SQUARE
@@ -149,7 +154,9 @@ const iconNameCom = computed(() => {
  *              未设置时返回undefined交由CSS主题token控制，禁用态由透明度弱化
  * */
 const iconColorCom = computed(() => {
-    return isChecked.value ? checkboxGroup?.activeColor?.value : checkboxGroup?.inactiveColor?.value
+    return isChecked.value
+        ? checkboxGroup.value?.props.activeColor
+        : checkboxGroup.value?.props.inactiveColor
 })
 
 /**
@@ -174,9 +181,13 @@ const iconClasses = computed(() => {
  * */
 const iconWrapStyle = computed(() => {
     const style: CSSProperties = {}
-    if (checkboxGroup?.size?.value) {
-        style.width = addUnit(sizeType[checkboxGroup.size.value] || checkboxGroup.size.value)
-        style.height = addUnit(sizeType[checkboxGroup.size.value] || checkboxGroup.size.value)
+    if (checkboxGroup.value?.props.size) {
+        style.width = addUnit(
+            sizeType[checkboxGroup.value.props.size] || checkboxGroup.value.props.size
+        )
+        style.height = addUnit(
+            sizeType[checkboxGroup.value.props.size] || checkboxGroup.value.props.size
+        )
     }
     return style
 })
@@ -195,7 +206,7 @@ const iconClickHandler = (e: Event) => {
  * */
 const wrapperClickHandler = (e: Event) => {
     e.stopPropagation()
-    if (checkboxGroup?.labelDisabled?.value || isDisabled()) return
+    if (checkboxGroup.value?.props.labelDisabled || isDisabled()) return
     setCheckedStatus()
 }
 /**
@@ -203,14 +214,14 @@ const wrapperClickHandler = (e: Event) => {
  * */
 const labelClickHandler = (e: Event) => {
     e.stopPropagation()
-    if (checkboxGroup?.labelDisabled?.value || isDisabled()) return
+    if (checkboxGroup.value?.props.labelDisabled || isDisabled()) return
     setCheckedStatus()
 }
 
 const setCheckedStatus = () => {
     // 将本组件标记为与原来相反的状态
     isChecked.value = !isChecked.value
-    checkboxGroup?.setCheckedStatus(props.value)
+    checkboxGroup.value?.setCheckedStatus(props.value)
 }
 </script>
 

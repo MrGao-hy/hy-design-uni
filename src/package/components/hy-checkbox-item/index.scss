@@ -68,17 +68,20 @@ $hy-checkbox-icon-color: var(--hy-checkbox-icon-color, #c8c9cc) !default;
     @include flex;
     align-items: center;
     justify-content: center;
-    color: $hy-checkbox-icon-color;
     text-align: center;
     margin-right: $hy-checkbox-icon-margin;
+
 
     /* #ifdef MP-TOUTIAO */
     // 头条小程序兼容性问题，需要设置行高为0，否则图标偏下
     @include e(icon) {
       line-height: 0;
     }
-
     /* #endif */
+
+    .hy-checkbox__icon {
+      color: $hy-checkbox-icon-color;
+    }
 
     @include is(checked) {
       .hy-checkbox__icon {

@@ -17,21 +17,29 @@
         :customClass="customClass"
         @change="groupChangeHandler"
     >
-        <hy-checkbox-item
-            v-for="(item, i) in columns"
-            :key="i"
-            :value="item[fieldNames.value]"
-            :label="item[fieldNames.label] as string"
-            :disabled="item.disabled"
-            :checked="!!item[fieldNames.checked]"
-        >
-            <template v-if="$slots.icon" #icon="{ isChecked }">
-                <slot name="icon" :isChecked="isChecked" :iconSize="addUnit(iconSize)"></slot>
-            </template>
-            <template v-if="$slots.label" #label>
-                <slot name="label" :record="item"></slot>
-            </template>
-        </hy-checkbox-item>
+        <template v-for="(item, i) in columns" :key="i">
+            <!-- 小程序端 u-s 按组件节点静态收集插槽名（无视 v-if），必须拆互斥节点控制是否传插槽 -->
+            <hy-checkbox-item v-if="$slots.icon && $slots.label" v-bind="itemBindings(item)">
+                <template #icon="{ isChecked }">
+                    <slot name="icon" :isChecked="isChecked" :iconSize="addUnit(iconSize)"></slot>
+                </template>
+                <template #label>
+                    <slot name="label" :record="item"></slot>
+                </template>
+            </hy-checkbox-item>
+            <hy-checkbox-item v-else-if="$slots.icon" v-bind="itemBindings(item)">
+                <template #icon="{ isChecked }">
+                    <slot name="icon" :isChecked="isChecked" :iconSize="addUnit(iconSize)"></slot>
+                </template>
+            </hy-checkbox-item>
+            <hy-checkbox-item v-else-if="$slots.label" v-bind="itemBindings(item)">
+                <template #label>
+                    <slot name="label" :record="item"></slot>
+                </template>
+            </hy-checkbox-item>
+            <!-- 均未传插槽：走 hy-checkbox-item 原生默认渲染 -->
+            <hy-checkbox-item v-else v-bind="itemBindings(item)" />
+        </template>
     </hy-checkbox-group>
 </template>
 
@@ -64,6 +72,16 @@ defineOptions({})
 
 const props = defineProps(checkboxProps)
 const emit = defineEmits<ICheckBoxEmits>()
+
+/**
+ * @description 提取列表项传递给 hy-checkbox-item 的属性，供四个互斥分支节点复用
+ * */
+const itemBindings = (item: CheckboxColumnsVo) => ({
+    value: item[props.fieldNames.value],
+    label: item[props.fieldNames.label] as string,
+    disabled: item.disabled,
+    checked: !!item[props.fieldNames.checked]
+})
 
 /**
  * @description group 的双向绑定值恒为数组，与外部 boolean（单列）/数组（多列）自动转换

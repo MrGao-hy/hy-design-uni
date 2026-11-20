@@ -5,9 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide, toRefs } from 'vue'
-import { bem } from '../../libs'
+import { computed } from 'vue'
+import { bem, useChildren } from '../../libs'
 import type { ICheckBoxGroupEmits } from './typing'
+import { CHECKBOX_GROUP_KEY } from './checkbox'
 import checkboxGroupProps from './props'
 
 /**
@@ -23,21 +24,22 @@ const bemClass = computed(() => {
     return bem('checkbox-group', props, ['placement'])
 })
 
-const context = {
-    ...toRefs(props),
-    setCheckedStatus(value: string | number) {
-        let arr = props.modelValue ? [...props.modelValue] : []
-        if (props.modelValue?.includes(value)) {
-            arr = props.modelValue?.filter((item) => item !== value)
-        } else {
-            arr.push(value)
-        }
-        emit('update:modelValue', arr)
-        emit('change', arr)
+const { linkChildren } = useChildren(CHECKBOX_GROUP_KEY)
+
+/** 切换某项选中状态并同步双向绑定值 */
+const setCheckedStatus = (value: string | number) => {
+    let arr = props.modelValue ? [...props.modelValue] : []
+    if (props.modelValue?.includes(value)) {
+        arr = props.modelValue?.filter((item) => item !== value)
+    } else {
+        arr.push(value)
     }
+    emit('update:modelValue', arr)
+    emit('change', arr)
 }
 
-provide('hy-checkbox-group', context)
+// 向子组件注入 props 代理与切换方法，子组件读取时保持响应性
+linkChildren({ props, setCheckedStatus })
 </script>
 
 <style lang="scss">

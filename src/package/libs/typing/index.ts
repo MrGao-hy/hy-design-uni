@@ -1,4 +1,4 @@
-﻿export * from './modules/common'
+export * from './modules/common'
 export * from './modules/form'
 export * from './modules/enum'
 
@@ -17,7 +17,6 @@ export * from '../../components/hy-cell-item/typing.d'
 export * from '../../components/hy-check-button/typing.d'
 export * from '../../components/hy-checkbox/typing.d'
 export * from '../../components/hy-checkbox-group/typing.d'
-export * from '../../components/hy-checkbox-item/typing.d'
 export * from '../../components/hy-code-input/typing.d'
 export * from '../../components/hy-count-down/typing.d'
 export * from '../../components/hy-count-to/typing.d'
