@@ -6,16 +6,13 @@
         >
             <hy-status-bar v-if="tmpConfig?.safeAreaInsetTop"></hy-status-bar>
             <view class="hy-notify__wrapper">
-                <template v-if="['success', 'warning', 'error'].includes(tmpConfig.type)">
-                    <slot v-if="$slots.icon" name="icon"></slot>
-                    <hy-icon
-                        v-else
-                        :name="tmpConfig?.icon || icon"
-                        :color="tmpConfig?.color"
-                        :size="getPx(tmpConfig?.fontSize|| 15) * 1.4"
-                        :customStyle="{ marginRight: '8px' }"
-                    ></hy-icon>
-                </template>
+                <slot v-if="$slots.icon" name="icon"></slot>
+                <hy-icon
+                    v-else
+                    :name="tmpConfig?.icon || iconName(tmpConfig?.type)"
+                    :color="tmpConfig?.color"
+                    :size="getPx(tmpConfig?.fontSize || 15) * 1.3"
+                ></hy-icon>
                 <text
                     class="hy-notify__wrapper--text"
                     :style="{
@@ -45,7 +42,7 @@ export default {
 import type { NotifyOptions, INotifyExpose } from './typing'
 import { computed, ref } from 'vue'
 import type { CSSProperties } from 'vue'
-import { addUnit, IconConfig, getPx } from '../../libs'
+import { addUnit, getPx, iconName } from '../../libs'
 import notifyProps from './props'
 // 组件
 import HyTransition from '../hy-transition/hy-transition.vue'
@@ -114,22 +111,6 @@ const backgroundColor = computed(() => {
         style.backgroundColor = tmpConfig.value.bgColor
     }
     return style
-})
-
-/**
- * 默认主题下的图标
- * */
-const icon = computed(() => {
-    switch (tmpConfig.value.type) {
-        case 'success':
-            return IconConfig.SUCCESS
-        case 'error':
-            return IconConfig.CLOSE_CIRCLE
-        case 'warning':
-            return IconConfig.ATTENTION_FILL
-        default:
-            return ''
-    }
 })
 
 const show = (options: NotifyOptions) => {

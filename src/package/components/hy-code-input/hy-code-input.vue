@@ -24,7 +24,7 @@
             </text>
         </view>
         <input
-            :disabled="disabledKeyboard"
+            v-if="!disabledKeyboard"
             type="number"
             :focus="focus"
             :value="inputValue"
@@ -215,8 +215,10 @@ const handleFocus = () => {
 
 /**
  * 点击组件时触发
- * 禁用原生键盘时 input 处于 disabled 状态不会触发 focus 事件，
+ * 禁用原生键盘时不渲染 input，点击直接落到格子节点冒泡到根节点，
  * 此处通过点击模拟 focus，供外部唤起自定义键盘
+ * （不能使用 disabled：H5 端 disabled 表单控件不分发也不冒泡鼠标事件，
+ * 会吞掉点击导致自定义键盘无法唤起）
  * */
 const handleClick = () => {
     if (props.disabledKeyboard) {

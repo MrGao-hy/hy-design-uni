@@ -51,8 +51,8 @@ const instance = getCurrentInstance()
 // 注入索引栏上下文；未处于hy-index-bar插槽内时为独立使用模式
 const indexBar = inject<IIndexBarContext>('hy-index-bar')
 
-// 以组件实例uid作为注册标识
-const uid = instance?.uid
+// 以组件实例uid作为注册标识（setup内实例必然存在，非空断言收窄类型）
+const uid = instance!.uid
 
 // 锚点距离视口顶部的位置，供索引栏做滚动联动计算
 const top = ref<number>(0)
@@ -80,18 +80,22 @@ const anchorStyle = computed<CSSProperties>(() => {
 })
 
 /**
- * 测量锚点节点位置并上报给索引栏
+ * 测量锚点节点位置并上报给索引栏。
+ * 小程序端组件挂载时首帧布局尚未完成，直接测量会拿到失真坐标，
+ * 需延迟等待布局稳定后再测，否则索引栏定位与滚动联动全部失效
  * */
 const init = () => {
     nextTick(() => {
-        getRect(`#hy-index-anchor-${props.index}`, false, instance)
-            .then((rect) => {
-                top.value = Math.floor(rect.top || 0)
-                indexBar?.reportTop(uid, top.value)
-            })
-            .catch(() => {
-                // 节点未就绪时静默跳过，不影响标题渲染
-            })
+        setTimeout(() => {
+            getRect(`#hy-index-anchor-${props.index}`, false, instance)
+                .then((rect) => {
+                    top.value = Math.floor(rect.top || 0)
+                    indexBar?.reportTop(uid, top.value)
+                })
+                .catch(() => {
+                    // 节点未就绪时静默跳过，不影响标题渲染
+                })
+        }, 50)
     })
 }
 

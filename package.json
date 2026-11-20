@@ -10,6 +10,7 @@
         "doc": "node scripts/generate-docs.mjs",
         "gen:web-types": "tsx scripts/component-helper.ts",
         "check:web-types": "node scripts/check-web-types.mjs",
+        "audit:components": "node scripts/audit-components.mjs",
         "gen:all": "npm run doc && npm run gen:web-types && npm run check:web-types",
         "dev:custom": "uni -p",
         "dev:h5": "uni",

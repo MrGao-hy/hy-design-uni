@@ -21,7 +21,7 @@
             <view class="hy-keyboard__delete-line hy-keyboard__delete-line--left">
                 <hy-icon
                     v-if="type === 'delete'"
-                    :name="IconConfig.DELETE"
+                    :name="IconConfig.DEL"
                     class="hy-keyboard__key-icon"
                     color="#fff"
                     size="28"

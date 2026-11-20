@@ -10,7 +10,7 @@
                     :shape="input?.shape"
                     :border="input?.border"
                     :prefixIcon="input?.prefixIcon"
-                    :suffixIcon="input?.suffixIcon"
+                    :suffixIcon="input?.suffixIcon || { name: IconConfig.DOWN }"
                     :color="input?.color"
                     :fontSize="input?.fontSize"
                     :inputAlign="input?.inputAlign"
@@ -70,8 +70,8 @@
                                             !item[childrenKey]?.length &&
                                             !item[isLeafKey]
                                         "
-                                        :name="IconConfig.CHECK_SQUARE"
-                                        :color="ColorConfig.primary"
+                                        :name="IconConfig.CHECK"
+                                        custom-class="hy-cascader__item--icon"
                                     />
                                 </view>
                             </scroll-view>

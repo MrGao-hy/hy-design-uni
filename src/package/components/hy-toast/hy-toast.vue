@@ -21,10 +21,9 @@
             >
                 <hy-icon
                     :name="iconNameCom"
-                    :size="(typeof tmpConfig.icon === 'object' && tmpConfig.icon?.size) || 17"
-                    :color="
-                        (typeof tmpConfig.icon === 'object' && tmpConfig.icon?.color) || '#FFFFFF'
-                    "
+                    :size="iconPropsCom.size"
+                    :color="iconPropsCom.color"
+                    custom-class="hy-toast__icon"
                 ></hy-icon>
             </view>
             <text
@@ -56,7 +55,7 @@ export default {
 import { computed, onMounted, onUnmounted, reactive, ref } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { IToastExpose, ToastOptions } from './typing'
-import { ColorConfig, iconName, getWindowInfo, hexToRgb } from '../../libs'
+import { ColorConfig, iconFillName, getWindowInfo, hexToRgb } from '../../libs'
 import toastProps from './props'
 // 组件
 import HyOverlay from '../hy-overlay/hy-overlay.vue'
@@ -101,23 +100,27 @@ const overlayStyle = computed(() => {
 })
 
 const iconNameCom = computed(() => {
+    const { icon, type } = tmpConfig.value
     // 只有不为none，并且type为error|warning|succes|info时候，才显示图标
-    if (!tmpConfig.value.icon || !tmpConfig.value.type) {
+    if (!icon || !type) {
         return ''
     }
-    if (tmpConfig.value.icon === true) {
-        if (isThemeType(tmpConfig.value.type)) {
-            return iconName(tmpConfig.value.type)
-        } else {
-            return ''
-        }
-    } else {
-        const icon = tmpConfig.value.icon
-        if (typeof icon === 'string') {
-            return icon
-        }
-        return icon?.name
+    if (icon === true) {
+        return isThemeType(type) ? iconFillName(type) : ''
     }
+    return typeof icon === 'string' ? icon : icon?.name
+})
+
+/** 图标尺寸与颜色：icon 传对象配置时读取其值，否则使用默认值 */
+const iconPropsCom = computed(() => {
+    const icon = tmpConfig.value.icon || props.icon
+    if (typeof icon === 'object' && icon !== null) {
+        return {
+            size: icon.size || 21,
+            color: icon.color
+        }
+    }
+    return { size: 21, color: '' }
 })
 
 /**

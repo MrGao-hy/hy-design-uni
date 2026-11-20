@@ -10,7 +10,7 @@
                     :shape="input?.shape"
                     :border="input?.border"
                     :prefixIcon="input?.prefixIcon"
-                    :suffixIcon="input?.suffixIcon"
+                    :suffixIcon="input?.suffixIcon || { name: IconConfig.DOWN }"
                     :color="input?.color"
                     :fontSize="input?.fontSize"
                     :inputAlign="input?.inputAlign"
@@ -68,7 +68,7 @@ export default {
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import dayjs from 'dayjs/esm'
-import { error, padZero, DateModeEnum, useTranslate } from '../../libs'
+import { error, padZero, DateModeEnum, useTranslate, IconConfig } from '../../libs'
 import type { IDatetimePickerEmits } from './typing'
 import datetimePickerProps from './props'
 // 组件

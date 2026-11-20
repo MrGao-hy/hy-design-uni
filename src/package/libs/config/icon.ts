@@ -1055,16 +1055,36 @@ export const IconConfig = {
 export const iconName = (type: string) => {
     switch (type) {
         case 'success':
-            return IconConfig.CHECK_CIRCLE_FILL
+            return IconConfig.CHECK_CIRCLE
         case 'error':
-            return IconConfig.CLOSE
+            return IconConfig.CLOSE_CIRCLE
         case 'warning':
             return IconConfig.ATTENTION
         case 'info':
             return IconConfig.HELP
         case 'primary':
-            return IconConfig.MESSAGE_FILL
+            return IconConfig.COMMENT
         default:
-            return IconConfig.CLOSE
+            return IconConfig.CLOSE_CIRCLE
+    }
+}
+
+/**
+ * 提示主次
+ * */
+export const iconFillName = (type: string) => {
+    switch (type) {
+        case 'success':
+            return IconConfig.CHECK_CIRCLE_FILL
+        case 'error':
+            return IconConfig.CLOSE_CIRCLE_FILL
+        case 'warning':
+            return IconConfig.ATTENTION_FILL
+        case 'info':
+            return IconConfig.HELP_FILL
+        case 'primary':
+            return IconConfig.EMOTION_HAPPY_FILL
+        default:
+            return IconConfig.CLOSE_CIRCLE_FILL
     }
 }

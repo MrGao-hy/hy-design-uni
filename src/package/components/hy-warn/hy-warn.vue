@@ -5,9 +5,7 @@
             @tap.stop="clickHandler"
             :style="customStyle"
         >
-            <view class="hy-warn__icon--left tips" v-if="showIcon">
-                <hy-icon :name="iconName(type)" size="21" :color="iconColor"></hy-icon>
-            </view>
+            <hy-icon :name="iconName(type)" :size="21" custom-class="hy-warn__icon-left"></hy-icon>
             <view
                 class="hy-warn__content"
                 :style="[
@@ -50,9 +48,14 @@
             <view class="hy-warn__right" v-if="$slots.right">
                 <slot name="right"></slot>
             </view>
-            <view class="hy-warn__close" v-if="closable" @tap.stop="closeHandler">
-                <hy-icon :name="IconConfig.CLOSE" :color="iconColor" size="15"></hy-icon>
-            </view>
+
+            <hy-icon
+                v-if="closable"
+                :name="IconConfig.CLOSE"
+                size="18"
+                custom-class="hy-warn__close"
+                @tap.stop="closeHandler"
+            ></hy-icon>
         </view>
     </hy-transition>
 </template>
@@ -87,13 +90,6 @@ const props = defineProps(warnProps)
 const emit = defineEmits<IWarnEmits>()
 
 const show = ref<boolean>(true)
-
-/**
- * @description icon颜色
- * */
-const iconColor = computed(() => {
-    return props.theme === 'light' ? props.type : '#fff'
-})
 
 /**
  * @description 点击内容

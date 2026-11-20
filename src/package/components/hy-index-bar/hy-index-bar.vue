@@ -3,7 +3,7 @@
         <scroll-view
             class="hy-index-bar__content"
             scroll-y
-            :scroll-into-view="scrollIntoViewId"
+            :scroll-top="scrollTopValue"
             @scroll="handleScroll"
         >
             <slot></slot>
@@ -19,8 +19,9 @@
                     :style="getIndexItemStyle(indexValue(item))"
                     @click="handleIndexClick(indexValue(item), $event)"
                     @touchstart="handleTouchStart($event)"
-                    @touchmove="handleTouchMove($event)"
+                    @touchmove.stop="handleTouchMove($event)"
                     @touchend="handleTouchEnd"
+                    @touchcancel="handleTouchEnd"
                 >
                     {{ indexValue(item) }}
                 </view>
@@ -53,7 +54,6 @@ import {
     reactive,
     ref,
     watch,
-    onMounted,
     onBeforeUnmount,
     getCurrentInstance,
     nextTick,
@@ -101,8 +101,8 @@ const toastStyle = ref<CSSProperties>({
 // 缓存索引栏高度和索引项高度
 const indexBarRect = ref<UniNamespace.NodeInfo>()
 const itemHeight = ref<number>(0)
-// scroll-into-view 锚点id，用于点击/滑动索引时定位到对应分组
-const scrollIntoViewId = ref<string>('')
+// 滚动容器目标偏移，点击/滑动索引时以scrollTop数值驱动定位（跨端行为确定）
+const scrollTopValue = ref<number>(0)
 // 程序化滚动期间锁定scroll事件驱动的激活计算，避免索引抖动
 let touchLock = false
 let lockTimer: ReturnType<typeof setTimeout> | null = null
@@ -213,16 +213,17 @@ const startToastTimer = () => {
 }
 
 /**
- * 滚动到指定索引锚点
+ * 滚动到指定索引锚点。
+ * 用scrollTop数值驱动而非scroll-into-view：小程序端对插槽内深层节点按id定位不可靠；
+ * 锚点视口坐标减去容器视口偏移即为容器内滚动偏移
  * */
-const scrollToAnchor = async (index: string | number) => {
-    const id = `hy-index-anchor-${index}`
-    // scroll-into-view 重复设置相同值不会触发滚动，先重置再定位
-    if (scrollIntoViewId.value === id) {
-        scrollIntoViewId.value = ''
-        await nextTick()
-    }
-    scrollIntoViewId.value = id
+const scrollToAnchor = (index: string | number) => {
+    const anchor = anchors.find((item) => item.index === index)
+    const top = anchor ? anchorTops.get(anchor.uid) : undefined
+    if (top === undefined) return
+    const target = top - contentOffsetTop
+    // scroll-top重复设置相同值不会触发滚动，微调偏移强制生效
+    scrollTopValue.value = scrollTopValue.value === target ? target + 0.5 : target
     lockScroll()
 }
 
@@ -234,9 +235,10 @@ const lockScroll = () => {
     if (lockTimer) {
         clearTimeout(lockTimer)
     }
+    // 时长需覆盖小程序scroll-into-view平滑滚动动画，过短会导致动画尾段高亮回跳
     lockTimer = setTimeout(() => {
         touchLock = false
-    }, 200)
+    }, 400)
 }
 
 const handleIndexClick = (index: string | number, event: any) => {
@@ -255,7 +257,7 @@ const handleTouchStart = (event: any) => {
     handleTouchMove(event)
 }
 
-// 触摸移动事件处理
+// 触摸移动事件处理；模板中绑定.stop，在小程序端编译为catchtouchmove，防止页面滚动打断触摸流
 const handleTouchMove = (event: any) => {
     // 获取触摸点坐标
     const touch = event.touches ? event.touches[0] : event
@@ -270,7 +272,8 @@ const handleTouchMove = (event: any) => {
     const clickedIndex = isObject(renderList.value[index])
         ? renderList.value[index].index
         : renderList.value[index]
-    if (clickedIndex) {
+    // 索引可能为数字0，不能直接用真值判断
+    if (clickedIndex !== undefined) {
         // 只有当索引发生变化时才更新activeIndex
         if (clickedIndex !== props.modelValue) {
             emit('update:modelValue', clickedIndex)
@@ -293,6 +296,7 @@ const handleTouchMove = (event: any) => {
     }
 }
 
+// 触摸结束或被系统打断（touchcancel）时启动提示隐藏
 const handleTouchEnd = () => {
     startToastTimer()
 }
@@ -318,31 +322,41 @@ const handleScroll = (e: any) => {
 }
 
 /**
- * 获取列表元素属性值
+ * 测量侧边索引栏与滚动容器位置。
+ * 小程序端插槽内锚点注册与渲染层布局均晚于组件挂载，
+ * 因此延迟等待布局稳定后再测量，避免首测拿到空列表高度
  * */
 const init = () => {
     nextTick(() => {
-        getRect('.hy-index-bar__index--list', false, instance)
-            .then((rect) => {
-                indexBarRect.value = rect
-                itemHeight.value = rect.height! / (renderList.value.length || 1)
-            })
-            .catch(() => {
-                // 节点未就绪时静默跳过，触摸交互降级为点击
-            })
-        getRect('.hy-index-bar__content', false, instance)
-            .then((rect) => {
-                contentOffsetTop = rect.top || 0
-            })
-            .catch(() => {
-                // 节点未就绪时静默跳过，滚动同步延迟到锚点上报后仍可用
-            })
+        setTimeout(() => {
+            if (!renderList.value.length) return
+            getRect('.hy-index-bar__index--list', false, instance)
+                .then((rect) => {
+                    indexBarRect.value = rect
+                    itemHeight.value = rect.height! / renderList.value.length
+                })
+                .catch(() => {
+                    // 节点未就绪时静默跳过，触摸交互降级为点击
+                })
+            getRect('.hy-index-bar__content', false, instance)
+                .then((rect) => {
+                    contentOffsetTop = rect.top || 0
+                })
+                .catch(() => {
+                    // 节点未就绪时静默跳过，滚动同步延迟到锚点上报后仍可用
+                })
+        }, 50)
     })
 }
 
-onMounted(() => {
-    init()
-})
+// 索引项数量变化（锚点注册、外部传值）后重测，规避小程序端组件挂载时锚点尚未注册导致的首测落空
+watch(
+    () => renderList.value.length,
+    () => {
+        init()
+    },
+    { immediate: true }
+)
 
 onBeforeUnmount(() => {
     resetToastTimer()

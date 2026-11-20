@@ -10,7 +10,7 @@
                     :shape="input?.shape"
                     :border="input?.border"
                     :prefixIcon="input?.prefixIcon"
-                    :suffixIcon="input?.suffixIcon"
+                    :suffixIcon="input?.suffixIcon || { name: IconConfig.DOWN }"
                     :color="input?.color"
                     :fontSize="input?.fontSize"
                     :inputAlign="input?.inputAlign"
@@ -122,7 +122,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { addUnit, isArray, useTranslate } from '../../libs'
+import { addUnit, isArray, useTranslate, IconConfig } from '../../libs'
 import type { IPickerEmits, IPickerExpose, PickerColumnVo, PickerValue } from './typing'
 import pickerProps from './props'
 // 组件

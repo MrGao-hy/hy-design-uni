@@ -5,8 +5,8 @@
 $hy-warn-title-font-size: var(--hy-warn-title-font-size, 14px) !default;
 /* 描述字号 */
 $hy-warn-desc-font-size: var(--hy-warn-desc-font-size, 14px) !default;
-/* 关闭按钮上偏移 */
-$hy-warn-close-top: var(--hy-warn-close-top, 11px) !default;
+/* 标题/描述行高，与左侧图标尺寸（模板 :size="21"）一致，保证首行文字与图标居中对齐 */
+$hy-warn-line-height: var(--hy-warn-line-height, 21px) !default;
 /* 关闭按钮右偏移 */
 $hy-warn-close-right: var(--hy-warn-close-right, 10px) !default;
 /* 容器圆角，默认跟随全局小圆角 token */
@@ -43,8 +43,16 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
   background-color: $hy-warn-primary;
   padding: $hy-warn-padding;
   @include flex(row);
-  align-items: center;
+  /* 图标对齐内容最上方（多行文字时顶部对齐，单行时与首行基本居中对齐） */
+  align-items: flex-start;
   border-radius: $hy-warn-radius;
+
+  /* 使用 edeep 叠加 .hy-warn 父级前缀，保证特异性能覆盖 hy-icon 内部的默认图标色；
+     dark 模式下图标跟随文字颜色，light 模式由下方各主题 light 修饰器覆盖 */
+  @include edeep(icon-left) {
+    margin-right: $hy-warn-icon-margin;
+    color: $hy-warn-text-color;
+  }
 
   @include e(primary) {
 
@@ -54,10 +62,9 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
 
     @include m(light) {
       background-color: $hy-warn-primary-light;
-      .tips {
-        :deep(.hy-icon) {
-          color: $hy-warn-primary;
-        }
+
+      .hy-warn__icon-left {
+        color: $hy-warn-primary;
       }
     }
 
@@ -71,10 +78,9 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
 
     @include m(light) {
       background-color: $hy-warn-error-light;
-      .tips {
-        :deep(.hy-icon) {
-          color: $hy-warn-error;
-        }
+
+      .hy-warn__icon-left {
+        color: $hy-warn-error;
       }
     }
   }
@@ -86,10 +92,9 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
 
     @include m(light) {
       background-color: $hy-warn-success-light;
-      .tips {
-        :deep(.hy-icon) {
-          color: $hy-warn-success;
-        }
+
+      .hy-warn__icon-left {
+        color: $hy-warn-success;
       }
     }
   }
@@ -102,10 +107,9 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
 
     @include m(light) {
       background-color: $hy-warn-warning-light;
-      .tips {
-        :deep(.hy-icon) {
-          color: $hy-warn-warning;
-        }
+
+      .hy-warn__icon-left {
+        color: $hy-warn-warning;
       }
     }
   }
@@ -118,16 +122,11 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
 
     @include m(light) {
       background-color: $hy-warn-info-light;
-      .tips {
-        :deep(.hy-icon) {
-          color: $hy-warn-info;
-        }
+
+      .hy-warn__icon-left {
+        color: $hy-warn-info;
       }
     }
-  }
-
-  @include e(icon) {
-    margin-right: $hy-warn-icon-margin;
   }
 
   @include e(content) {
@@ -136,6 +135,8 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
 
     @include m(title) {
       font-size: $hy-warn-title-font-size;
+      /* 行高与图标同高，首行文字与图标中心对齐 */
+      line-height: $hy-warn-line-height;
       font-weight: bold;
       color: $hy-warn-text-color;
       margin-bottom: 2px;
@@ -143,6 +144,8 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
 
     @include m(desc) {
       font-size: $hy-warn-desc-font-size;
+      /* 行高与图标同高，仅传描述时首行同样与图标对齐 */
+      line-height: $hy-warn-line-height;
       flex-wrap: wrap;
       color: $hy-warn-text-color;
     }
@@ -171,9 +174,10 @@ $hy-warn-icon-margin: var(--hy-warn-icon-margin, #{$hy-border-margin-padding-sm}
     }
   }
 
-  @include e(close) {
+  @include edeep(close) {
     position: absolute;
-    top: $hy-warn-close-top;
     right: $hy-warn-close-right;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }

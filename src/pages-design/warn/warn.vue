@@ -66,7 +66,7 @@ usePageTitle('warn')
 
 const theme = ref<ThemeModeType>('light')
 const closable = ref(false)
-const showIcon = ref(false)
+const showIcon = ref(true)
 
 // 主题切换选项（computed 包裹以响应语言切换）
 const list_1 = computed(() => [

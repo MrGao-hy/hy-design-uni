@@ -4,7 +4,7 @@
 /* hy-index-anchor 索引文字颜色，默认跟随全局基础文字 token */
 $hy-index-anchor-text-color: var(--hy-index-anchor-text-color, #{$hy-text-color}) !default;
 /* hy-index-anchor 索引背景色，默认跟随全局容器背景 token */
-$hy-index-anchor-background: var(--hy-index-anchor-background, #{$hy-background--container}) !default;
+$hy-index-anchor-background: var(--hy-index-anchor-background, #{$hy-background}) !default;
 /* hy-index-anchor 激活索引文字颜色，默认跟随全局主题色 token */
 $hy-index-anchor-primary: var(--hy-index-anchor-primary, #{$hy-primary}) !default;
 /* hy-index-anchor 索引字号，默认跟随全局小号字体 token */

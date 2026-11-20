@@ -16,7 +16,7 @@ $hy-toast-box-shadow: var(--hy-toast-box-shadow, 0 8rpx 24rpx rgba(0, 0, 0, 0.15
 /* loading 模式内边距 */
 $hy-toast-loading-padding: var(--hy-toast-loading-padding, 40rpx) !default;
 /* 状态图标尺寸 */
-$hy-toast-icon-size: var(--hy-toast-icon-size, 40rpx) !default;
+$hy-toast-icon-size: var(--hy-toast-icon-size, 20px) !default;
 /* 状态图标与文字间距 */
 $hy-toast-icon-margin-right: var(--hy-toast-icon-margin-right, 16rpx) !default;
 /* 文本最大宽度 */
@@ -72,25 +72,41 @@ $hy-toast-warning: var(--hy-toast-warning, #{$hy-warning}) !default;
       justify-content: center;
       align-items: center;
       flex-shrink: 0;
+      background: #FFFFFF;
+      padding: 0;
+
+      :deep(.hy-toast__icon) {
+        transform: scale(1.1);
+      }
 
       @include e(info) {
-        background: $hy-toast-info;
+        :deep(.hy-toast__icon) {
+          color: $hy-toast-info;
+        }
       }
 
       @include e(primary) {
-        background: $hy-toast-primary;
+        :deep(.hy-toast__icon) {
+          color: $hy-toast-primary;
+        }
       }
 
       @include e(success) {
-        background: $hy-toast-success;
+        :deep(.hy-toast__icon) {
+          color: $hy-toast-success;
+        }
       }
 
       @include e(error) {
-        background: $hy-toast-error;
+        :deep(.hy-toast__icon) {
+          color: $hy-toast-error;
+        }
       }
 
       @include e(warning) {
-        background: $hy-toast-warning;
+        :deep(.hy-toast__icon) {
+          color: $hy-toast-warning;
+        }
       }
     }
 

@@ -16,8 +16,9 @@ $hy-notify-padding: var(--hy-notify-padding, #{$hy-border-margin-padding-base}) 
 
     @include m(text) {
       font-size: $hy-notify-font-size;
-      line-height: 1;
+      line-height: 1.3;
       text-align: center;
+      padding-left: $hy-border-margin-padding-sm;
     }
   }
 

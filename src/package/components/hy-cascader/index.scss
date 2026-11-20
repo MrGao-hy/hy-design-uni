@@ -92,6 +92,10 @@ $hy-cascader-border-width-lg: var(--hy-cascader-border-width-lg, #{$hy-border-wi
       background: $hy-cascader-item-active-background;
       border-left: $hy-cascader-border-width-lg solid $hy-cascader-primary;
     }
+
+    @include mdeep(icon) {
+      color: currentColor;
+    }
   }
 
   @include e(panel) {

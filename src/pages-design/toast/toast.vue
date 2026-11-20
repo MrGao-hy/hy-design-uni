@@ -219,7 +219,7 @@ const positionList = computed(() => [
 const handleToast = (type: string) => {
     const options = {
         icon: type !== 'show' ? icon.value : '',
-        position: position.value as any
+        position: position.value
     }
     ;(toast as any)[type]?.(t('defaultTip', type), options)
 }

@@ -52,7 +52,7 @@
                         <hy-icon
                             v-if="currentIndex === index"
                             :color="currentColor"
-                            :name="IconConfig.CHECK_SQUARE"
+                            :name="IconConfig.CHECK"
                         ></hy-icon>
                     </view>
                 </view>

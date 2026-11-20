@@ -26,7 +26,9 @@ $B: null;
     }
 }
 
-/* 定义状态（m） */
+/* 定义状态（m）并穿透子组件样式。修饰符类名由调用处父选择器拼接，不受 @at-root 影响；
+   外层叠加 .块 父级选择器：小程序端编译会剥离 :deep()，叠加父级可保证
+   后代选择器优先级（0,2,0）高于子组件内部的单类样式（0,1,0） */
 @mixin mdeep($modifier...) {
     $selectors: '';
 
@@ -35,9 +37,11 @@ $B: null;
     }
 
     @at-root {
-        :deep() {
-            #{$selectors} {
-                @content;
+        .#{$B} {
+            :deep() {
+                #{$selectors} {
+                    @content;
+                }
             }
         }
     }

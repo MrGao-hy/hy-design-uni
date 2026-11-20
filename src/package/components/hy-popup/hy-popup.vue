@@ -32,7 +32,7 @@
                     hover-class="hy-popup__content__close--hover"
                     :hover-stay-time="150"
                 >
-                    <hy-icon :name="IconConfig.CLOSE" color="#909399" size="28"></hy-icon>
+                    <hy-icon :name="IconConfig.CLOSE" color="#909399" size="20"></hy-icon>
                 </view>
                 <hy-safe-bottom v-if="safeAreaInsetBottom"></hy-safe-bottom>
             </view>
