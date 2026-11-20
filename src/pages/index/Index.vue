@@ -1,11 +1,13 @@
 <template>
     <the-cell title="基础组件" :list="list_1" :showRate="true"></the-cell>
-    <the-cell title="表单组件" :list="list_2" :showRate="true"></the-cell>
-    <the-cell title="布局组件" :list="list_3" :showRate="true"></the-cell>
-    <the-cell title="反馈组件" :list="list_4" :showRate="true"></the-cell>
-    <the-cell title="导航组件" :list="list_5" :showRate="true"></the-cell>
-    <the-cell title="其他组件" :list="list_6" :showRate="true"></the-cell>
-    <the-cell title="业务组件" :list="list_7" :showRate="true"></the-cell>
+    <the-cell title="页面布局" :list="list_2" :showRate="true"></the-cell>
+    <the-cell title="列表与内容" :list="list_3" :showRate="true"></the-cell>
+    <the-cell title="数据与状态" :list="list_4" :showRate="true"></the-cell>
+    <the-cell title="表单录入" :list="list_5" :showRate="true"></the-cell>
+    <the-cell title="数据选择" :list="list_6" :showRate="true"></the-cell>
+    <the-cell title="弹层与反馈" :list="list_7" :showRate="true"></the-cell>
+    <the-cell title="导航与操作" :list="list_8" :showRate="true"></the-cell>
+    <the-cell title="业务组件" :list="list_9" :showRate="true"></the-cell>
 
     <hy-modal v-model="showHint" title="摇一摇更换主题色"></hy-modal>
 </template>
@@ -13,7 +15,7 @@
 <script setup lang="ts">
 import TheCell from '@/components/the-cell.vue'
 import HyModal from '@/package/components/hy-modal/hy-modal.vue'
-import { list_1, list_2, list_3, list_4, list_5, list_6, list_7 } from './index1'
+import { list_1, list_2, list_3, list_4, list_5, list_6, list_7, list_8, list_9 } from './index1'
 import { useThemeStore } from '@/store'
 import { useShakeService } from '@/package'
 import { onHide, onShow } from '@dcloudio/uni-app'
