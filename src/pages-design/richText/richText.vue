@@ -5,6 +5,7 @@
             :content="parseContent"
             :tag-style="tagStyle"
             selectable
+            use-anchor
         ></hy-rich-text>
     </view>
 </template>

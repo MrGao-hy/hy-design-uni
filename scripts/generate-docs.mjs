@@ -127,9 +127,11 @@ const CONFIG = {
     EMITS_INTERFACE_PATTERNS: [
         // 1. 自定义接口名称（来自组件配置）
         (componentName, customName) => customName,
-        // 2. 去掉前缀后的驼峰命名 (如 hy-button -> IButtonEmits)
+        // 2. 去掉前缀后的驼峰命名 (如 hy-button -> IButtonEmits, hy-rich-text -> IRichTextEmits)
         (componentName) => {
-            const baseName = componentName.replace(/^[a-z]+-/, '')
+            const baseName = componentName
+                .replace(/^[a-z]+-/, '')
+                .replace(/-([a-z])/g, (g) => g[1].toUpperCase())
             return `I${baseName.charAt(0).toUpperCase() + baseName.slice(1)}Emits`
         },
         // 3. 完整组件名的驼峰命名 (如 hy-button -> IHyButtonEmits)

@@ -185,6 +185,19 @@ export default `<title>富文本示例</title>
   </section>
   <section style="text-align: center; margin: 0px auto; margin-top: 2em">
     <section style="border-radius: 4px; border: 1px solid #757576; display: inline-block; padding: 5px 20px;">
+      <span style="font-size: 18px; color: #595959;">视频</span>
+    </section>
+  </section>
+  <section style="margin-top: 1.5em; text-align: center;">
+    <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 100%;"></video>
+    <div style="font-size: 12px; color: gray; margin-top: 5px;">视频播放，播放时自动暂停其他视频</div>
+  </section>
+  <section style="margin-top: 1.5em; text-align: center;">
+    <audio src="https://www.w3schools.com/html/horse.ogg" controls style="width: 100%;"></audio>
+    <div style="font-size: 12px; color: gray; margin-top: 5px;">音频播放（H5 及小程序支持 audio 标签时生效）</div>
+  </section>
+  <section style="text-align: center; margin: 0px auto; margin-top: 2em">
+    <section style="border-radius: 4px; border: 1px solid #757576; display: inline-block; padding: 5px 20px;">
       <span style="font-size: 18px; color: #595959;">图片</span>
     </section>
   </section>

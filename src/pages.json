@@ -742,7 +742,7 @@
                         }
                     }
                 },
-                // #ifdef APP || APP-HARMONY || H5 || MP-ALIPAY || MP-TOUTIAO
+                // #ifdef APP || APP-HARMONY || MP-ALIPAY || MP-TOUTIAO
                 {
                     "path": "parse/parse",
                     "type": "page",
@@ -1353,7 +1353,7 @@
                         }
                     }
                 },
-                // #ifdef MP-WEIXIN
+                // #ifdef H5 || MP-WEIXIN
                 {
                     "path": "richText/richText",
                     "type": "page",

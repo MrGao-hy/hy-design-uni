@@ -116,6 +116,11 @@ export default {
     text: {
         linkCopied: 'Link copied, please open it in your browser'
     },
+    richText: {
+        saveImage: 'Save Image',
+        saveSuccess: 'Saved successfully',
+        linkCopied: 'Link copied, please open it in your browser'
+    },
     mine: {
         vip: 'VIP',
         bio: 'This person is lazy and left nothing',
