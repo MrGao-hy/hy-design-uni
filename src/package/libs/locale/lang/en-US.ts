@@ -116,11 +116,6 @@ export default {
     text: {
         linkCopied: 'Link copied, please open it in your browser'
     },
-    parse: {
-        saveImage: 'Save Image',
-        saveSuccess: 'Saved',
-        linkCopied: 'Link copied'
-    },
     mine: {
         vip: 'VIP',
         bio: 'This person is lazy and left nothing',

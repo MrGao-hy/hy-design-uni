@@ -35,6 +35,7 @@ import HyNavbar from './hy-navbar/hy-navbar.vue'
 import HyNoticeBar from './hy-notice-bar/hy-notice-bar.vue'
 import HyNumberStep from './hy-number-step/hy-number-step.vue'
 import HyOverlay from './hy-overlay/hy-overlay.vue'
+import HyRichText from './hy-rich-text/hy-rich-text.vue'
 import YkPrice from './hy-price/hy-price.vue'
 import HyPicker from './hy-picker/hy-picker.vue'
 import HyPopup from './hy-popup/hy-popup.vue'
@@ -100,6 +101,7 @@ const install = (Vue: any) => {
     Vue.component('HyNoticeBar', HyNoticeBar)
     Vue.component('HyNumberStep', HyNumberStep)
     Vue.component('HyOverlay', HyOverlay)
+    Vue.component('HyRichText', HyRichText)
     Vue.component('YkPrice', YkPrice)
     Vue.component('HyPicker', HyPicker)
     Vue.component('HyPopup', HyPopup)
@@ -165,6 +167,7 @@ export {
     HyNoticeBar,
     HyNumberStep,
     HyOverlay,
+    HyRichText,
     YkPrice,
     HyPicker,
     HyPopup,

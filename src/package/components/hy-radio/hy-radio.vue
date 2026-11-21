@@ -211,7 +211,7 @@ const labelClickHandler = (e: Event, temp: CheckboxColumnsVo) => {
 const setRadioCheckedStatus = (temp: CheckboxColumnsVo) => {
     // 将本组件标记为与原来相反的状态
     columns_1.value = columns_1.value?.map((item) => {
-        item[props.fieldNames.checked] =
+        ;(item as Record<string, unknown>)[props.fieldNames.checked] =
             temp[props.fieldNames.value] === item[props.fieldNames.value]
         return item
     })

@@ -742,6 +742,7 @@
                         }
                     }
                 },
+                // #ifdef APP || APP-HARMONY || H5 || MP-ALIPAY || MP-TOUTIAO
                 {
                     "path": "parse/parse",
                     "type": "page",
@@ -758,6 +759,7 @@
                         }
                     }
                 },
+                // #endif
                 {
                     "path": "picker/picker",
                     "type": "page",
@@ -1350,7 +1352,25 @@
                             }
                         }
                     }
+                },
+                // #ifdef MP-WEIXIN
+                {
+                    "path": "richText/richText",
+                    "type": "page",
+                    "style": {
+                        "navigationBarTitleText": "富文本",
+                        "h5": {
+                            "titleNView": {
+                                "buttons": [
+                                    {
+                                        "type": "share"
+                                    }
+                                ]
+                            }
+                        }
+                    }
                 }
+                // #endif
             ]
         }
     ],

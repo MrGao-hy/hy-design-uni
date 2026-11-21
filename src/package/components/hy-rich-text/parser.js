@@ -79,17 +79,24 @@ const config = {
         viewbox: 'viewBox',
         attributename: 'attributeName',
         repeatcount: 'repeatCount',
-        repeatdur: 'repeatDur'
+        repeatdur: 'repeatDur',
+        foreignobject: 'foreignObject'
     }
 }
 const tagSelector = {}
-// #ifdef APP || H5 || MP-WEIXIN
-const { windowWidth } = uni.getWindowInfo()
-const { system } = uni.getDeviceInfo()
+let windowWidth, system
+// #ifdef MP-WEIXIN
+// 微信新基础库使用新 API，老基础库回退 getSystemInfoSync
+if (uni.canIUse('getWindowInfo')) {
+    windowWidth = uni.getWindowInfo().windowWidth
+    system = uni.getDeviceInfo().system
+} else {
 // #endif
-// #ifndef APP || H5 || MP-WEIXIN
-// 其他小程序基础库暂不支持 getWindowInfo/getDeviceInfo，继续使用 getSystemInfoSync 保证兼容
-const { windowWidth, system } = uni.getSystemInfoSync()
+const systemInfo = uni.getSystemInfoSync()
+windowWidth = systemInfo.windowWidth
+// #ifdef MP-WEIXIN
+system = systemInfo.system
+}
 // #endif
 const blankChar = makeMap(' ,\r,\n,\t,\f')
 let idIndex = 0
@@ -621,6 +628,14 @@ Parser.prototype.onOpenTag = function (selfClose) {
             ) {
                 node.h = 'T'
             }
+            // 同时设置宽高时将 object-fit 转为 image 的 mode
+            if (node.w && node.h && styleObj['object-fit']) {
+                if (styleObj['object-fit'] === 'contain') {
+                    node.m = 'aspectFit'
+                } else if (styleObj['object-fit'] === 'cover') {
+                    node.m = 'aspectFill'
+                }
+            }
         } else if (node.name === 'svg') {
             siblings.push(node)
             this.stack.push(node)
@@ -756,11 +771,20 @@ Parser.prototype.popNode = function () {
                 return
             }
             const name = config.svgDict[node.name] || node.name
+            if (name === 'foreignObject') {
+                // foreignObject 内嵌 html 标签需要补充 xhtml 命名空间
+                for (const child of node.children || []) {
+                    if (child.attrs && !child.attrs.xmlns) {
+                        child.attrs.xmlns = 'http://www.w3.org/1999/xhtml'
+                        break
+                    }
+                }
+            }
             src += '<' + name
             for (const item in node.attrs) {
                 const val = node.attrs[item]
                 if (val) {
-                    src += ` ${config.svgDict[item] || item}="${val}"`
+                    src += ` ${config.svgDict[item] || item}="${val.replace(/"/g, '')}"`
                 }
             }
             if (!node.children) {
@@ -782,6 +806,8 @@ Parser.prototype.popNode = function () {
         node.children = undefined
         // #endif
         this.xml = false
+        // svg 内部的 style 标签解析完后不再信任，避免影响后续内容
+        config.ignoreTags.style = true
         return
     }
 
@@ -861,9 +887,9 @@ Parser.prototype.popNode = function () {
 
     if (
         node.name === 'a' ||
-        node.name === 'ad' ||
+        node.name === 'ad'
         // #ifdef H5 || APP-PLUS
-        node.name === 'iframe' // eslint-disable-line
+        || node.name === 'iframe' // eslint-disable-line
         // #endif
     ) {
         this.expose()
@@ -929,6 +955,11 @@ Parser.prototype.popNode = function () {
         if (node.flag && node.c) {
             // 有 colspan 或 rowspan 且含有链接的表格通过 grid 布局实现
             styleObj.display = 'grid'
+            if (styleObj['border-collapse'] === 'collapse') {
+                // 合并边框时取消间隔
+                styleObj['border-collapse'] = undefined
+                spacing = 0
+            }
             if (spacing) {
                 styleObj['grid-gap'] = spacing + 'px'
                 styleObj.padding = spacing + 'px'
@@ -1146,16 +1177,16 @@ Parser.prototype.popNode = function () {
         }
     }
     // flex 布局时部分样式需要提取到 rich-text 外层
+    // 注意：条件编译块夹在表达式中，&& 必须前置，否则部分平台预处理后会残留悬空运算符
     const flex =
         parent &&
-        ((parent.attrs.style || '').includes('flex') ||
-            (parent.attrs.style || '').includes('grid')) &&
-        // #ifdef MP-WEIXIN
-        // 检查基础库版本 virtualHost 是否可用
-        !(node.c && wx.getNFCAdapter) && // eslint-disable-line
-        // #endif
-        // #ifndef MP-WEIXIN || MP-QQ || MP-BAIDU || MP-TOUTIAO
-        !node.c // eslint-disable-line
+        ((parent.attrs.style || '').includes('flex') || (parent.attrs.style || '').includes('grid'))
+            // #ifdef MP-WEIXIN
+            // 检查基础库版本 virtualHost 是否可用
+            && !(node.c && wx.getNFCAdapter) // eslint-disable-line
+            // #endif
+            // #ifndef MP-WEIXIN || MP-QQ || MP-BAIDU || MP-TOUTIAO
+            && !node.c // eslint-disable-line
     // #endif
     if (flex) {
         node.f = ';max-width:100%'

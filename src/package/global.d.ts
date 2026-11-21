@@ -53,7 +53,7 @@ declare module 'vue' {
         HyNumberStep: (typeof import('./components/hy-number-step/hy-number-step.vue'))['default']
         HyOverlay: (typeof import('./components/hy-overlay/hy-overlay.vue'))['default']
         HyPagination: (typeof import('./components/hy-pagination/hy-pagination.vue'))['default']
-        HyParse: (typeof import('./components/hy-parse/hy-parse.vue'))['default']
+        HyRichText: (typeof import('./components/hy-rich-text/hy-rich-text.vue'))['default']
         HyPicker: (typeof import('./components/hy-picker/hy-picker.vue'))['default']
         HyPopover: (typeof import('./components/hy-popover/hy-popover.vue'))['default']
         HyPopup: (typeof import('./components/hy-popup/hy-popup.vue'))['default']

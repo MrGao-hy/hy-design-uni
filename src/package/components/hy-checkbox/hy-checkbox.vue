@@ -90,9 +90,7 @@ const toValueArray = (): (string | number)[] => {
     if (Array.isArray(props.modelValue)) return props.modelValue
     // 单列时支持 boolean
     const first = props.columns?.[0]
-    return props.modelValue && first
-        ? [first[props.fieldNames.value] as string | number]
-        : []
+    return props.modelValue && first ? [first[props.fieldNames.value] as string | number] : []
 }
 
 /**
@@ -119,8 +117,8 @@ const groupChangeHandler = (arr: (string | number)[]) => {
     // 事件时序上此刻 props.modelValue 仍为变化前的值
     const prev = toValueArray()
     const changedValue =
-        arr.find((item) => !prev.includes(item)) ?? prev.find((item) => !arr.includes(item))
+        arr.find((item) => !prev.includes(item)) || prev.find((item) => !arr.includes(item))
     const temp = props.columns?.find((item) => item[props.fieldNames.value] === changedValue)
-    emit('change', (temp ?? arr) as CheckboxColumnsVo)
+    emit('change', (temp || arr) as CheckboxColumnsVo)
 }
 </script>

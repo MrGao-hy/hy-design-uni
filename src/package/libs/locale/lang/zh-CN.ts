@@ -119,11 +119,6 @@ export default {
     text: {
         linkCopied: '链接已复制，请在浏览器打开'
     },
-    parse: {
-        saveImage: '保存图片',
-        saveSuccess: '保存成功',
-        linkCopied: '链接已复制'
-    },
     mine: {
         vip: '会员',
         bio: '这个人很懒，什么都没有留下',

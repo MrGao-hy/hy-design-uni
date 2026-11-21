@@ -27,14 +27,14 @@ function decryptData(encryptedVal: string): Record<string, any> {
 
 // const decrypt = (sessionKey: string, encryptedData: string, iv: string) => {
 //     console.log(CryptoJS)
-//     let key = CryptoJS.enc.Base64.parse(sessionKey)
-//     let ivv = CryptoJS.enc.Base64.parse(iv)
+//     let key = CryptoJS.enc.Base64.richText(sessionKey)
+//     let ivv = CryptoJS.enc.Base64.richText(iv)
 //     let decrypt = CryptoJS.AES.decrypt(encryptedData, key,  {
 //         iv: ivv,
 //         mode: CryptoJS.mode.CBC,
 //         padding: CryptoJS.pad.Pkcs7
 //     })
-//     return JSON.parse(base64.decode(CryptoJS.enc.Base64.stringify(decrypt)))
+//     return JSON.richText(base64.decode(CryptoJS.enc.Base64.stringify(decrypt)))
 // }
 
 /**

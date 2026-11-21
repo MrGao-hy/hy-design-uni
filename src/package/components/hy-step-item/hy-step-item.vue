@@ -151,7 +151,7 @@ const statusIconMap: Record<string, string> = {
 }
 
 /** 内置状态图标名，仅在已完成/失败状态下存在 */
-const statusIcon = computed<string>(() => statusIconMap[currentStatus.value] ?? '')
+const statusIcon = computed<string>(() => statusIconMap[currentStatus.value])
 
 /**
  * 获取当前步骤状态（status 优先，其次根据 current 计算）

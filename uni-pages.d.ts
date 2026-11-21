@@ -52,7 +52,6 @@ type _LocationUrl =
   "/pages-design/numberBox/numberBox" |
   "/pages-design/overlay/overlay" |
   "/pages-design/pagination/pagination" |
-  "/pages-design/parse/parse" |
   "/pages-design/picker/picker" |
   "/pages-design/popover/popover" |
   "/pages-design/popup/popup" |
@@ -61,6 +60,7 @@ type _LocationUrl =
   "/pages-design/radio/radio" |
   "/pages-design/rate/rate" |
   "/pages-design/readMore/readMore" |
+  "/pages-design/richText/richText" |
   "/pages-design/rollingNum/rollingNum" |
   "/pages-design/scrollList/scrollList" |
   "/pages-design/search/search" |

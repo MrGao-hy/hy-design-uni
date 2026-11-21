@@ -82,8 +82,8 @@ export const list_3 = [
         url: '/pages-design/list/list'
     },
     {
-        title: 'Parse 富文本',
-        url: '/pages-design/parse/parse'
+        title: 'RichText 富文本',
+        url: '/pages-design/richText/richText'
     },
     {
         title: 'Qrcode 二维码',
