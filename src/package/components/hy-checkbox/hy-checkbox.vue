@@ -84,15 +84,22 @@ const itemBindings = (item: CheckboxColumnsVo) => ({
 })
 
 /**
+ * @description 将外部 boolean（单列）/数组（多列）统一转换为值数组，供 group 消费
+ * */
+const toValueArray = (): (string | number)[] => {
+    if (Array.isArray(props.modelValue)) return props.modelValue
+    // 单列时支持 boolean
+    const first = props.columns?.[0]
+    return props.modelValue && first
+        ? [first[props.fieldNames.value] as string | number]
+        : []
+}
+
+/**
  * @description group 的双向绑定值恒为数组，与外部 boolean（单列）/数组（多列）自动转换
  * */
 const innerValue = computed<(string | number)[]>({
-    get: () => {
-        if (Array.isArray(props.modelValue)) return props.modelValue
-        // 单列时支持 boolean
-        const first = props.columns?.[0]
-        return props.modelValue && first ? [first[props.fieldNames.value]] : []
-    },
+    get: () => toValueArray(),
     set: (arr) => {
         if (props.columns?.length === 1) {
             emit(
@@ -110,11 +117,7 @@ const innerValue = computed<(string | number)[]>({
  * */
 const groupChangeHandler = (arr: (string | number)[]) => {
     // 事件时序上此刻 props.modelValue 仍为变化前的值
-    const prev = Array.isArray(props.modelValue)
-        ? props.modelValue
-        : props.modelValue && props.columns?.[0]
-          ? [props.columns[0][props.fieldNames.value]]
-          : []
+    const prev = toValueArray()
     const changedValue =
         arr.find((item) => !prev.includes(item)) ?? prev.find((item) => !arr.includes(item))
     const temp = props.columns?.find((item) => item[props.fieldNames.value] === changedValue)

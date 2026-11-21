@@ -9,7 +9,7 @@ import type {
     HyCheckButtonProps,
     FormRule
 } from '../../index'
-import type { HyInputInstance } from '@/package/components/hy-form-group/typing'
+import type { HyInputInstance } from '../../../components/hy-form-group/typing'
 
 /**
  * 类型

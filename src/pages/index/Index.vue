@@ -1,13 +1,13 @@
 <template>
-    <the-cell title="基础组件" :list="list_1" :showRate="true"></the-cell>
-    <the-cell title="页面布局" :list="list_2" :showRate="true"></the-cell>
-    <the-cell title="列表与内容" :list="list_3" :showRate="true"></the-cell>
-    <the-cell title="数据与状态" :list="list_4" :showRate="true"></the-cell>
-    <the-cell title="表单录入" :list="list_5" :showRate="true"></the-cell>
-    <the-cell title="数据选择" :list="list_6" :showRate="true"></the-cell>
-    <the-cell title="弹层与反馈" :list="list_7" :showRate="true"></the-cell>
-    <the-cell title="导航与操作" :list="list_8" :showRate="true"></the-cell>
-    <the-cell title="业务组件" :list="list_9" :showRate="true"></the-cell>
+    <the-cell title="基础组件" :list="list_1"></the-cell>
+    <the-cell title="页面布局" :list="list_2"></the-cell>
+    <the-cell title="列表与内容" :list="list_3"></the-cell>
+    <the-cell title="数据与状态" :list="list_4"></the-cell>
+    <the-cell title="表单录入" :list="list_5"></the-cell>
+    <the-cell title="数据选择" :list="list_6"></the-cell>
+    <the-cell title="弹层与反馈" :list="list_7"></the-cell>
+    <the-cell title="导航与操作" :list="list_8"></the-cell>
+    <the-cell title="业务组件" :list="list_9"></the-cell>
 
     <hy-modal v-model="showHint" title="摇一摇更换主题色"></hy-modal>
 </template>
