@@ -58,6 +58,8 @@ $hy-index-bar-toast-background: var(--hy-index-bar-toast-background, #{$hy-backg
 
   @include e(index) {
     @include m(list) {
+      /* 作为气泡的定位祖先，气泡 top 相对列表顶部计算，与页面滚动/视口位置无关 */
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;

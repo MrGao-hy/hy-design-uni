@@ -61,12 +61,7 @@ import {
     toRefs
 } from 'vue'
 import type { CSSProperties } from 'vue'
-import type {
-    IIndexBarContext,
-    IIndexBarEmits,
-    IIndexAnchorRecord,
-    IIndexItem
-} from './typing'
+import type { IIndexBarContext, IIndexBarEmits, IIndexAnchorRecord, IIndexItem } from './typing'
 import { addUnit, getRect, isObject } from '../../libs'
 import indexBarProps from './props'
 
@@ -175,18 +170,15 @@ const indexItemStyles = computed(() => {
     } as CSSProperties
 
     // 为每个索引项创建样式对象并缓存
-    return renderList.value.reduce(
-        (styles: Record<string, CSSProperties>, item: IIndexItem) => {
-            const isActive = props.modelValue === indexValue.value(item)
-            styles[indexValue.value(item)] = {
-                ...commonStyle,
-                color: isActive ? props.activeIndexColor : props.indexColor,
-                backgroundColor: isActive ? props.activeIndexBgColor : props.indexBgColor
-            }
-            return styles
-        },
-        {}
-    )
+    return renderList.value.reduce((styles: Record<string, CSSProperties>, item: IIndexItem) => {
+        const isActive = props.modelValue === indexValue.value(item)
+        styles[indexValue.value(item)] = {
+            ...commonStyle,
+            color: isActive ? props.activeIndexColor : props.indexColor,
+            backgroundColor: isActive ? props.activeIndexBgColor : props.indexBgColor
+        }
+        return styles
+    }, {})
 })
 
 // 获取索引项样式的便捷方法
@@ -247,6 +239,11 @@ const handleIndexClick = (index: string | number, event: any) => {
     isTouching.value = true
     emit('update:modelValue', index)
     emit('click', index, event)
+    // 点击同样对齐气泡位置（点击路径不经过touchmove的索引变化分支）
+    const idx = renderList.value.findIndex((item) => indexValue.value(item) === index)
+    if (idx > -1) {
+        updateToastTop(idx)
+    }
     scrollToAnchor(index)
     startToastTimer()
 }
@@ -254,6 +251,11 @@ const handleIndexClick = (index: string | number, event: any) => {
 const handleTouchStart = (event: any) => {
     resetToastTimer()
     isTouching.value = true
+    // 页面级滚动会改变索引列表的视口位置，触摸开始时重测，
+    // 避免用挂载时的过期缓存换算导致字母错位
+    getRect('.hy-index-bar__index--list', false, instance).then((rect) => {
+        indexBarRect.value = rect
+    })
     handleTouchMove(event)
 }
 
@@ -284,16 +286,19 @@ const handleTouchMove = (event: any) => {
         // 只有当索引发生变化时才更新toast
         if (clickedIndex !== lastIndex.value) {
             lastIndex.value = clickedIndex
-
-            // 计算Toast的位置 - 使其与当前索引项对齐
-            let toastTop =
-                indexBarRect.value?.top! + index * itemHeight.value - 25 + itemHeight.value / 2
-            // #ifdef H5
-            toastTop = toastTop + 44 // h5需要加上导航栏高度
-            // #endif
-            toastStyle.value.top = addUnit(toastTop)
+            updateToastTop(index)
         }
     }
+}
+
+/**
+ * 更新提示气泡的垂直位置，使其与当前索引项对齐。
+ * 气泡挂在索引列表内部且列表为定位祖先，top 相对列表顶部计算，
+ * 不含视口坐标，与导航栏高度、页面滚动无关，各端统一
+ * */
+const updateToastTop = (index: number) => {
+    // 25 为气泡尺寸（50px）的一半，使气泡垂直居中于索引项
+    toastStyle.value.top = addUnit(index * itemHeight.value - 25 + itemHeight.value / 2)
 }
 
 // 触摸结束或被系统打断（touchcancel）时启动提示隐藏
