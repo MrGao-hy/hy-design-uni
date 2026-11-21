@@ -2,6 +2,7 @@
 import { useThemeStore } from '@/store'
 import { storeToRefs } from 'pinia'
 import { provide } from 'vue'
+import type { CSSProperties } from 'vue'
 
 const themeStore = useThemeStore()
 const { color, darkMode } = storeToRefs(themeStore)
@@ -21,7 +22,12 @@ const providerStyle = {
     height: 'auto',
     minHeight: '100vh',
     overflow: 'visible'
-}
+} as CSSProperties
+// #ifdef H5
+// H5 原生导航栏为 fixed 定位，由文档流内 44px 占位块顶开内容，最小高度需扣除该占位，
+// 否则页面文档比视口高 44px，内部滚动容器（如 hy-index-bar）滚到底后页面还能再滚一段
+providerStyle.minHeight = 'calc(100vh - 44px)'
+// #endif
 </script>
 
 <template>
