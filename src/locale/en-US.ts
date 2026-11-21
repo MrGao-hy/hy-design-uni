@@ -1369,8 +1369,11 @@ export default {
     pagination: {
         title: 'Pagination',
         // ===== Demo content =====
-        basicUsage: 'Basic Example',
-        iconSection: 'Icon',
+        basicUsage: 'Basic Usage',
+        simpleSection: 'Simple Mode',
+        ellipsisSection: 'Show Ellipsis',
+        iconSection: 'Custom Buttons',
+        slotSection: 'Custom Slots',
         textTip: 'Show Text Message'
     },
 

@@ -1,64 +1,126 @@
 @use "../../libs/css/theme" as *;
 @use "../../libs/css/mixin" as *;
 
-/* 导航按钮最小宽度 */
-$hy-pagination-nav-min-width: var(--hy-pagination-nav-min-width, 60px) !default;
-/* 导航可用颜色 */
-$hy-pagination-nav-active-color: var(--hy-pagination-nav-active-color, rgba(0, 0, 0, 0.65)) !default;
-/* 导航禁用颜色 */
-$hy-pagination-nav-disabled-color: var(--hy-pagination-nav-disabled-color, rgba(0, 0, 0, 0.15)) !default;
-/* 信息文字字号，默认跟随全局小号字体 token */
-$hy-pagination-font-size: var(--hy-pagination-font-size, #{$hy-font-size-sm}) !default;
+/* 单元格高度：88rpx = 44px，满足移动端最小触控区域 */
+$hy-pagination-item-height: var(--hy-pagination-item-height, 88rpx) !default;
+/* 页码单元格最小宽度 */
+$hy-pagination-item-width: var(--hy-pagination-item-width, 72rpx) !default;
+/* 上一页、下一页最小宽度：与单元格等高，图标/插槽按钮呈正方形；文本按钮按内容自动加宽 */
+$hy-pagination-nav-width: var(--hy-pagination-nav-width, 88rpx) !default;
+/* 单元格间距：16rpx = 8px，保证相邻触控目标不粘连 */
+$hy-pagination-gap: var(--hy-pagination-gap, 16rpx) !default;
+/* 单元格圆角 */
+$hy-pagination-radius: var(--hy-pagination-radius, 12rpx) !default;
+/* 字号，默认跟随全局基础字体 token */
+$hy-pagination-font-size: var(--hy-pagination-font-size, #{$hy-font-size-base}) !default;
 /* 内容区内边距，默认跟随全局基础间距 token */
 $hy-pagination-content-padding: var(--hy-pagination-content-padding, #{$hy-border-margin-padding-base}) !default;
-/* hy-pagination 主题色，默认跟随全局主题色 token */
+/* 主题色 */
 $hy-pagination-primary: var(--hy-pagination-primary, #{$hy-primary}) !default;
-
+/* 单元格背景：浅色轨道底，保证点击区域可辨识 */
+$hy-pagination-background: var(--hy-pagination-background, #{$hy-background--track}) !default;
+/* 页码文字颜色：中性灰，浅色/暗黑主题下都有足够对比度 */
+$hy-pagination-text-color: var(--hy-pagination-text-color, #{$hy-text-color--grey}) !default;
+/* 上一页、下一页文字颜色 */
+$hy-pagination-nav-color: var(--hy-pagination-nav-color, #{$hy-text-color}) !default;
+/* 禁用文字颜色 */
+$hy-pagination-disabled-color: var(--hy-pagination-disabled-color, #{$hy-text-color--disabled}) !default;
+/* 禁用背景色 */
+$hy-pagination-disabled-background: var(--hy-pagination-disabled-background, #{$hy-background--disabled}) !default;
+/* 省略号颜色 */
+$hy-pagination-ellipsis-color: var(--hy-pagination-ellipsis-color, #{$hy-text-color--3}) !default;
+/* 信息文字颜色 */
+$hy-pagination-message-color: var(--hy-pagination-message-color, #{$hy-text-color--3}) !default;
 
 @include b(pagination) {
+  display: block;
   user-select: none;
 
-  //@include edeep(icon) {
-  //  font-size: $-pagination-icon-size;
-  //}
-
+  /* 内容区：单元格所在行 */
   @include e(content) {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     padding: $hy-pagination-content-padding;
   }
 
-  @include e(message) {
-    text-align: center;
+  /* 单元格：页码、上一页、下一页共用 */
+  @include e(item) {
+    display: flex;
+    flex: 1 1 $hy-pagination-item-width;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 0;
+    height: $hy-pagination-item-height;
+    margin-right: $hy-pagination-gap;
+    border-radius: $hy-pagination-radius;
     font-size: $hy-pagination-font-size;
-    padding: 1px 0 16px 0;
+    color: $hy-pagination-text-color;
+    background-color: $hy-pagination-background;
+    transition: background-color 150ms ease, color 150ms ease;
+
+    /* 末尾单元格不再追加间距 */
+    &:last-child {
+      margin-right: 0;
+    }
+
+    /* 选中页码：主题色实底白字 */
+    @include m(active) {
+      color: #ffffff;
+      font-weight: 600;
+      background-color: $hy-pagination-primary;
+    }
+
+    /* 禁用：上一页、下一页到达边界 */
+    @include mdeep(disabled) {
+      color: $hy-pagination-disabled-color;
+      background-color: $hy-pagination-disabled-background;
+
+      .hy-pagination__icon {
+        color: $hy-pagination-disabled-color;
+      }
+    }
+
+    /* 省略号：弱化显示，不参与视觉焦点 */
+    @include m(ellipsis) {
+      color: $hy-pagination-ellipsis-color;
+    }
+
+    /* 上一页、下一页：文本单元格 */
+    @include m(nav) {
+      flex: 0 0 auto;
+      min-width: $hy-pagination-nav-width;
+      padding: 0 20rpx;
+      color: $hy-pagination-nav-color;
+      white-space: nowrap;
+    }
   }
 
-  @include e(nav) {
-    min-width: $hy-pagination-nav-min-width;
-    @include m(active){
-      color: $hy-pagination-nav-active-color
-    }
-    @include m(disabled){
-      color: $hy-pagination-nav-disabled-color
-    }
-  }
-
-  @include e(size){
+  /* 简单模式：中间为当前页/总页数 */
+  @include e(simple) {
     flex: 1;
+    font-size: 30rpx;
+    color: $hy-text-color;
     text-align: center;
-    font-size: $hy-pagination-font-size;
   }
 
-  @include e(separator){
-    padding:  0 4px;
-  }
-
-  @include e(left) {
-    display: inline-block;
-  }
-  @include e(current){
+  /* 当前页：主题色加重 */
+  @include e(current) {
     color: $hy-pagination-primary;
+    font-weight: 600;
+  }
+
+  /* 分隔符：弱化处理，拉开层级 */
+  @include e(separator) {
+    padding: 0 8rpx;
+    color: $hy-text-color--3;
+  }
+
+  /* 底部文字信息 */
+  @include e(message) {
+    padding: 8rpx 0 0;
+    font-size: $hy-font-size-sm;
+    color: $hy-pagination-message-color;
+    text-align: center;
   }
 }

@@ -1,5 +1,6 @@
 import type { CSSProperties, PropType } from 'vue'
 import { useTranslate } from '../../libs'
+import type { PaginationMode } from './typing'
 
 const { t } = useTranslate('pagination')
 
@@ -9,12 +10,25 @@ const paginationProps = {
         type: Number,
         default: 1
     },
+    /**
+     * 分页模式
+     * @values simple,multi
+     * */
+    mode: {
+        type: String as PropType<PaginationMode>,
+        default: 'multi'
+    },
     /** 总页数，如果有total，则优先使用total计算页数 */
     totalPage: {
         type: Number,
         default: 1
     },
-    /** 是否展示分页为Icon图标 */
+    /** 页码区域最多展示的项数（含省略号，不含上一页、下一页），最少 3 项 */
+    pageCount: {
+        type: Number,
+        default: 5
+    },
+    /** 上一页、下一页是否使用图标 */
     showIcon: {
         type: Boolean,
         default: false
@@ -43,6 +57,11 @@ const paginationProps = {
     nextText: {
         type: String,
         default: () => t('next')
+    },
+    /** 省略号文本 */
+    ellipsisText: {
+        type: String,
+        default: '...'
     },
     /** 总页数只有一页时是否隐藏 */
     hideIfOnePage: {

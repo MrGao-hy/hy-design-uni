@@ -1369,8 +1369,11 @@ export default {
     pagination: {
         title: '分页',
         // ===== 演示内容 =====
-        basicUsage: '基础示例',
-        iconSection: 'icon',
+        basicUsage: '基础用法',
+        simpleSection: '简单模式',
+        ellipsisSection: '显示省略号',
+        iconSection: '自定义按钮',
+        slotSection: '自定义插槽',
         textTip: '显示文本信息'
     },
 
