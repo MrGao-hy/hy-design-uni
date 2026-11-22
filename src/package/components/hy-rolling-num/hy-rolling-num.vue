@@ -54,7 +54,7 @@ import { addUnit } from '../../libs'
 import rollingNumProps from './props'
 
 /**
- * 滚动数字组件，用于实现数字从初始值（全0）平滑滚动到目标值的动画效果。
+ * 翻牌数字组件，用于实现数字从初始值（全0）平滑滚动到目标值的动画效果。
  * @displayName hy-rolling-num
  */
 defineOptions({})
